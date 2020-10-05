@@ -245,13 +245,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
        LobbyPanel.SetActive(false);
-        RoomPanel.SetActive(true);
-        RoomRenewal();
-        ChatInput.text = "";
-        for (int i = chatTr.childCount; i >  0; i--)
-        {
-           Destroy(chatTr.GetChild(i));
-        }
+       RoomPanel.SetActive(true);
+       RoomRenewal();
+       ChatInput.text = "";
+       for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); } 
@@ -260,15 +257,16 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-       PV.RPC("ChatRPC", RpcTarget.All, newPlayer.NickName + "님이 방에 들어왔습니다.");
        RoomRenewal();
+       PV.RPC("ChatRPC", RpcTarget.All, "<color=green>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-       PV.RPC("ChatRPC", RpcTarget.All, otherPlayer.NickName + "님이 방에서 나갔습니다.");
        RoomRenewal();
+       PV.RPC("ChatRPC", RpcTarget.All, "<color=red>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
     }
+
 
     void RoomRenewal()
     {
