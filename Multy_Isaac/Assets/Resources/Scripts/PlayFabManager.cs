@@ -16,7 +16,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    public InputField EmailInput, PasswordInput, UsernameInput;
    public GameObject LoadingPanel, LoginPanel;
    public string NickName;
-
+   private string EamilKey = "EmailKey";
+   private string NameKey = "NameKey";
 
    [Header("LobbyPanel")] 
    public GameObject LobbyPanel;
@@ -32,8 +33,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public Text RoomInfoText;
     public Text[] ChatText;
     public InputField ChatInput;
-    public Transform chatTr;
     public Scrollbar charBar;
+    
     [Header("ETC")]
     public PhotonView PV;
 
@@ -43,6 +44,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    private void Awake()
    {
       Screen.SetResolution(960, 540, false);
+      EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
+      UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
    }
    
    private void Update()
@@ -65,6 +68,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
                EmailInput.ActivateInputField();
             }
          }  
+         
+         //엔터키로 로그인
+         if(Input.GetKeyDown(KeyCode.Return))
+            LogIn();
       }
 
       if (LobbyPanel.activeSelf)
@@ -83,6 +90,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
             }
          }
       }
+      
+      if(Input.GetKeyDown(KeyCode.Escape))
+         Disconnect();
    }
    
 
@@ -117,6 +127,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    {
       print("로그인 성공! (팝업띄우기)");
       
+      PlayerPrefs.SetString(EamilKey,EmailInput.text);
+      PlayerPrefs.SetString(NameKey,UsernameInput.text);
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
@@ -134,6 +146,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
    {
       print("회원가입 성공! (팝업띄우기)");
+      
+      PlayerPrefs.SetString(EamilKey,EmailInput.text);
+      PlayerPrefs.SetString(NameKey,UsernameInput.text);
       
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
@@ -186,6 +201,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       print("연결 끊어짐...");
       LobbyPanel.SetActive(false);
       RoomPanel.SetActive(false);
+      LoginPanel.SetActive(true);
    }
    #endregion
 
@@ -289,7 +305,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
           string msg = PhotonNetwork.NickName + " : " + ChatInput.text;
           PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
           ChatInput.text = "";
-          ChatInput.ActivateInputField();  
+          ChatInput.ActivateInputField();
+          charBar.value = 0;
        }
     }
 
