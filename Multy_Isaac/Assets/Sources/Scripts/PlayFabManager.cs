@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.Mathematics;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
@@ -81,6 +82,31 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
       if (RoomPanel.activeSelf)
       {
+         if (ChatInput.isFocused)
+         {
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (Player p in players)
+            {
+               if (p.pv.IsMine)
+               {
+                  p.canMove = false;
+                  break;
+               }
+            }  
+         }
+         else
+         {
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (Player p in players)
+            {
+               if (p.pv.IsMine)
+               {
+                  p.canMove = true;
+                  break;
+               }
+            }
+         }
+
          if (Input.GetKeyDown(KeyCode.Return))
          {
             if (!ChatInput.isFocused)
@@ -260,6 +286,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+       Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
        RoomRenewal();
@@ -326,4 +353,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        }
     }
     #endregion
+
+    public void Spawn()
+    {
+       PhotonNetwork.Instantiate("Player", Vector3.zero, quaternion.identity);
+    }
 }
