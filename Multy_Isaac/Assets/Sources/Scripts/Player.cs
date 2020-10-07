@@ -156,6 +156,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(transform.localScale);
                 stream.SendNext(canvasLocalScaleX);
                 stream.SendNext(canvasRect.localScale);
+                stream.SendNext(canMove);
             }
             else
             {
@@ -168,6 +169,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.localScale = (Vector3) stream.ReceiveNext();
                 canvasLocalScaleX = (float)stream.ReceiveNext();
                 canvasRect.localScale = (Vector3) stream.ReceiveNext();
+                canMove = (bool) stream.ReceiveNext();
             }
         }
 
