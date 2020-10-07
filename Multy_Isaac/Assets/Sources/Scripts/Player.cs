@@ -63,12 +63,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
                 {
                     transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z); 
-                    canvasRect.localScale=new Vector3(canvasLocalScaleX*-1,canvasRect.localScale.y,canvasRect.localScale.z);
+                    canvasRect.localScale=new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                 }
                 else
                 {
                     transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
-                    canvasRect.localScale=new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                    canvasRect.localScale=new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                 }
 
 
