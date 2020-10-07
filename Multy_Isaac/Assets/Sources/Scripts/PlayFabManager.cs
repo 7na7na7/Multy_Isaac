@@ -112,10 +112,14 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
          if (Input.GetKeyDown(KeyCode.Return))
          {
-            if (!ChatInput.isFocused)
+            if (!ChatInput.gameObject.activeSelf)
             {
-               ChatInput.Select();
-               Send();
+               ChatInput.gameObject.SetActive(true);
+               ChatInput.ActivateInputField();
+            }
+            else
+            {
+               Send();  
             }
          }
       }
@@ -333,6 +337,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        if (ChatInput.text == "" || ChatInput.text == null)
        {
           ChatInput.Select();
+          ChatInput.gameObject.SetActive(false);
        }
        else
        {
@@ -348,7 +353,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
              }
           }  
           ChatInput.text = "";
+          //ChatInput.ActivateInputField();
           StartCoroutine(delayScrollDown());
+          ChatInput.gameObject.SetActive(false);
        }
     }
 
