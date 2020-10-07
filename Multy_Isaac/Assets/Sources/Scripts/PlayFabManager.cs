@@ -348,7 +348,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
              }
           }  
           ChatInput.text = "";
-          ChatInput.ActivateInputField();
           StartCoroutine(delayScrollDown());
        }
     }
