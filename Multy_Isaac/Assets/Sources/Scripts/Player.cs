@@ -161,6 +161,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 other.GetComponent<Bullet>().pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
                 
                 hp.value -= 10; //hp감소
+                if (hp.value <= 0)
+                    hp.value = hp.maxValue;
             }
         } 
     

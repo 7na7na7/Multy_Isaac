@@ -217,7 +217,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       RoomPanel.SetActive(false);
       PhotonNetwork.LocalPlayer.NickName = NickName;
       myList.Clear();
-      StartCoroutine(DestroyBullet());
    }
    IEnumerator DestroyBullet() //리스폰할 때 모든 총알 제거
    {
@@ -294,6 +293,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+       StartCoroutine(DestroyBullet());
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
