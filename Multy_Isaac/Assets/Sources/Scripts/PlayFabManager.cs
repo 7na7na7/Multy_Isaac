@@ -288,7 +288,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-       foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
+       StartCoroutine(delayDestroy());
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
@@ -297,6 +297,12 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
     }
 
+    IEnumerator delayDestroy()
+    {
+       yield return new WaitForSeconds(0.05f);
+       foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
+    }
+   
     public override void OnCreateRoomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }
    
     
