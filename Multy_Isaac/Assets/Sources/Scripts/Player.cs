@@ -26,6 +26,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
     public Text ChatBaloon; //말풍선
     public ChatBox chatbox; //챗박스
+    public Transform bulletTr; //총알이 나가는 위치
+    public float CoolTime = 0.2f;
+    private float time = 0;
+    
     //회전부분함수
     public GameObject gun;
     private Vector3 MousePosition; //총 회전을 위한 변수
@@ -51,6 +55,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
+                if(time>0) 
+                    time -= Time.deltaTime;
+                if (canMove)
+                {
+                    if (Input.GetMouseButton(0))
+                    {
+                        if (time <= 0)
+                        {
+                            time = CoolTime;
+                            PhotonNetwork.Instantiate("Bullet", bulletTr.position,bulletTr.rotation);      
+                        }
+                    }
+                }
+                
                 //커서에 따른 애니메이션변화
                 if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < -0.2f) //마우스커서가 위에있으면
                 {
@@ -65,11 +83,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
                     canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+
+                    gun.transform.localScale=new Vector3(1,1,1);
                 }
                 else
                 {
                     transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
                     canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                    
+                    gun.transform.localScale=new Vector3(-1,1,1);
                 }
 
 
@@ -78,9 +100,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             
                 //총 회전
                 MousePosition = Input.mousePosition;
-                Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
+                Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
                 //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
-                MousePosition2.y -= 0.25f; //오차조정을 위한 코드
+                //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
                 angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
             
             
@@ -92,11 +114,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
                 }
-
-                if (transform.localScale.x == localScaleX)
-                    pv.RPC("FlipXRPC",RpcTarget.AllBuffered,false);
-                else
-                    pv.RPC("FlipXRPC",RpcTarget.AllBuffered,true); 
             }
             //IsMine이 아닌 것들은 부드럽게 위치 동기화
             else if ((transform.position - curPos).sqrMagnitude >= 100)
@@ -134,6 +151,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                rb.velocity=Vector2.zero;
             }
         }
+        
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            //if (other.CompareTag("Bullet") && !pv.IsMine) //적이 자신의 총알과 부딪혔을 때
+                
+            if (other.CompareTag("Bullet") && !other.GetComponent<Bullet>().pv.IsMine&&pv.IsMine) //총알과 부딪혔고, 그 총알이 적의 총알이고, 자기 자신이라면
+            {
+                other.GetComponent<Bullet>().pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
+                
+                hp.value -= 10; //hp감소
+            }
+        } 
+    
 
         void GetMove()
         {
@@ -159,6 +189,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(canvasLocalScaleX);
                 stream.SendNext(canvasRect.localScale);
                 stream.SendNext(canMove);
+                stream.SendNext(gun.transform.localScale);
             }
             else
             {
@@ -172,16 +203,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 canvasLocalScaleX = (float)stream.ReceiveNext();
                 canvasRect.localScale = (Vector3) stream.ReceiveNext();
                 canMove = (bool) stream.ReceiveNext();
+                gun.transform.localScale = (Vector3) stream.ReceiveNext();
             }
         }
 
 
-        [PunRPC]
-        void FlipXRPC(bool isFlip)
-        {
-            gun.GetComponent<SpriteRenderer>().flipX = isFlip;
-        }
-
+    
         [PunRPC]
         public void ChatBaloonRPC(string txt)
         {

@@ -217,8 +217,13 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       RoomPanel.SetActive(false);
       PhotonNetwork.LocalPlayer.NickName = NickName;
       myList.Clear();
+      StartCoroutine(DestroyBullet());
    }
-
+   IEnumerator DestroyBullet() //리스폰할 때 모든 총알 제거
+   {
+      yield return new WaitForSeconds(0.01f);
+      foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
+   }
    public void Disconnect() //연결 끊기
    {
       PhotonNetwork.Disconnect();  
