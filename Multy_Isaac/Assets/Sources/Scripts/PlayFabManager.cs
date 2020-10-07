@@ -331,7 +331,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
           PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
           ChatInput.text = "";
           ChatInput.ActivateInputField();
-          charBar.value = 0;
+          StartCoroutine(delayScrollDown());
        }
     }
 
@@ -354,6 +354,11 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
+    IEnumerator delayScrollDown()
+    {
+       yield return new WaitForSeconds(0.01f);
+       charBar.value = 0;
+    }
     public void Spawn()
     {
        PhotonNetwork.Instantiate("Player", Vector3.zero, quaternion.identity);
