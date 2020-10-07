@@ -218,11 +218,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.LocalPlayer.NickName = NickName;
       myList.Clear();
    }
-   IEnumerator DestroyBullet() //리스폰할 때 모든 총알 제거
-   {
-      yield return new WaitForSeconds(0.01f);
-      foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
-   }
    public void Disconnect() //연결 끊기
    {
       PhotonNetwork.Disconnect();  
@@ -293,7 +288,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-       StartCoroutine(DestroyBullet());
+       foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
