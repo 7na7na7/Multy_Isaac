@@ -151,7 +151,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnLoginSuccess(LoginResult result)
    {
-      print("로그인 성공! (팝업띄우기)");
+      PopUpManager.instance.PopUp("로그인 성공", Color.green);
       
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
       PlayerPrefs.SetString(NameKey,UsernameInput.text);
@@ -163,7 +163,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnLoginFailure(PlayFabError error)
    {
-      print("로그인 실패... (팝업띄우기)");
+      PopUpManager.instance.PopUp("로그인 실패", Color.red);
       
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
@@ -171,7 +171,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
    {
-      print("회원가입 성공! (팝업띄우기)");
+      PopUpManager.instance.PopUp("회원가입 성공", Color.green);
       
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
       PlayerPrefs.SetString(NameKey,UsernameInput.text);
@@ -186,7 +186,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnRegisterFailure(PlayFabError error)
    {
-      print("회원가입 실패... (팝업띄우기)");
+      PopUpManager.instance.PopUp("회원가입 실패", Color.red);
       
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
@@ -203,13 +203,12 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public override void OnConnectedToMaster() //연결되었을때 
    {
-      print("연결 성공!");
+      PopUpManager.instance.PopUp("서버 연결됨", Color.green);
       PhotonNetwork.JoinLobby();
    }
 
    public override void OnJoinedLobby() //로비 들어왔을때
    {
-      print("로비 들어옴!");
       LoadingPanel.SetActive(false);
       LobbyPanel.SetActive(true);
       RoomPanel.SetActive(false);
@@ -224,9 +223,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {
-      print("연결 끊어짐...");
+      PopUpManager.instance.PopUp("연결 끊어짐", Color.red);
       LobbyPanel.SetActive(false);
       RoomPanel.SetActive(false);
+      LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
    }
    #endregion
