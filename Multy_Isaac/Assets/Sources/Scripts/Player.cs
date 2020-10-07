@@ -16,7 +16,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float localScaleX;
     private Vector3 curPos;
     private float canvasLocalScaleX;
-    private Vector3 canvasLoalScale;
     public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
     public Text nickname; //닉네임
@@ -62,15 +61,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                 if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
                 {
-                    transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z); 
-                    canvasLoalScale=new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-                    canvasRect.localScale = canvasLoalScale;
+                    transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
+                    canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                 }
                 else
                 {
                     transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
-                    canvasLoalScale=new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-                    canvasRect.localScale = canvasLoalScale;
+                    canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                 }
 
 
@@ -158,7 +155,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(moveDirection);
                 stream.SendNext(transform.localScale);
                 stream.SendNext(canvasLocalScaleX);
-                stream.SendNext(canvasLoalScale);
+                stream.SendNext(canvasRect.localScale);
             }
             else
             {
@@ -170,7 +167,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 moveDirection = (Vector2) stream.ReceiveNext();
                 transform.localScale = (Vector3) stream.ReceiveNext();
                 canvasLocalScaleX = (float)stream.ReceiveNext();
-                canvasLoalScale = (Vector3) stream.ReceiveNext();
+                canvasRect.localScale = (Vector3) stream.ReceiveNext();
             }
         }
 
