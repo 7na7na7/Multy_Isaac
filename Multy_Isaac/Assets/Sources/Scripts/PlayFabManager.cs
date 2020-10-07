@@ -47,6 +47,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       Screen.SetResolution(960, 540, false);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
       UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
+      PhotonNetwork.SendRate = 60;
+      PhotonNetwork.SerializationRate = 30;
+      //동기화 빠르게
    }
    
    private void Update()
