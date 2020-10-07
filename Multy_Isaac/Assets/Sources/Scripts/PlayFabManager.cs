@@ -51,7 +51,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SerializationRate = 30;
       //동기화 빠르게
    }
-   
+  
    private void Update()
    {
       if (LoginPanel.activeSelf)
@@ -332,6 +332,15 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        {
           string msg = PhotonNetwork.NickName + " : " + ChatInput.text;
           PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+          Player[] players = FindObjectsOfType<Player>();
+          foreach (Player p in players)
+          {
+             if (p.pv.IsMine)
+             {
+                p.pv.RPC("ChatBaloonRPC",RpcTarget.AllBuffered,ChatInput.text);
+                break;
+             }
+          }  
           ChatInput.text = "";
           ChatInput.ActivateInputField();
           StartCoroutine(delayScrollDown());

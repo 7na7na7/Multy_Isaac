@@ -24,6 +24,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public Slider hp; //체력
     public Slider mp; //기력
     public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
+    public Text ChatBaloon; //말풍선
+    public ChatBox chatbox; //챗박스
     //회전부분함수
     public GameObject gun;
     private Vector3 MousePosition; //총 회전을 위한 변수
@@ -178,5 +180,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         void FlipXRPC(bool isFlip)
         {
             gun.GetComponent<SpriteRenderer>().flipX = isFlip;
+        }
+
+        [PunRPC]
+        public void ChatBaloonRPC(string txt)
+        {
+            chatbox.gameObject.SetActive(true);
+            chatbox.SetTime();
+            ChatBaloon.text = txt;
         }
 }
