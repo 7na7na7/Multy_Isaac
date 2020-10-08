@@ -70,13 +70,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 
                 //커서에 따른 애니메이션변화
-                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < -0.25f) //마우스커서가 위에있으면
+                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < -0.35f) //마우스커서가 위에있으면
                 {
-                    headAnim.SetBool("IsGoDown",false);
+                    headAnim.SetInteger("Dir",1);
                 }
-                else //아래에있으면
+                else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0.35f) //아래면
                 {
-                    headAnim.SetBool("IsGoDown",true);
+                    headAnim.SetInteger("Dir",-1);
+                }
+                else //중간정도면
+                {
+                    headAnim.SetInteger("Dir",0);
                 }
 
                 if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
