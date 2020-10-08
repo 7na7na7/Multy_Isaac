@@ -68,22 +68,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         }
                     }
                 }
-                
+                //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
                 //커서에 따른 애니메이션변화
-                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < -0.35f) //마우스커서가 위에있으면
-                {
+                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
+                    Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
                     headAnim.SetInteger("Dir",1);
-                }
-                else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0.35f) //아래면
-                {
+                else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0&&
+                         Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*0.5f)) //마우스커서가 위에있으면
                     headAnim.SetInteger("Dir",-1);
-                }
                 else //중간정도면
-                {
                     headAnim.SetInteger("Dir",0);
-                }
 
-                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
                 {
                     transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
                     canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
@@ -156,20 +152,26 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
         
-        private void OnTriggerEnter2D(Collider2D other)
+//        private void OnTriggerEnter2D(Collider2D other)
+//        {
+//            //if (other.CompareTag("Bullet") && !pv.IsMine) //적이 자신의 총알과 부딪혔을 때
+//                
+//            if (other.CompareTag("Bullet") && !other.GetComponent<Bullet>().pv.IsMine&&pv.IsMine) //총알과 부딪혔고, 그 총알이 적의 총알이고, 자기 자신이라면
+//            {
+//                other.GetComponent<Bullet>().pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
+//                Hit();
+//            }
+//        }
+
+        public void Hit()
         {
-            //if (other.CompareTag("Bullet") && !pv.IsMine) //적이 자신의 총알과 부딪혔을 때
-                
-            if (other.CompareTag("Bullet") && !other.GetComponent<Bullet>().pv.IsMine&&pv.IsMine) //총알과 부딪혔고, 그 총알이 적의 총알이고, 자기 자신이라면
+            hp.value -= 10;
+            if (hp.value <= 0)
             {
-                other.GetComponent<Bullet>().pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
-                
-                hp.value -= 10; //hp감소
-                if (hp.value <= 0)
-                    hp.value = hp.maxValue;
+                hp.value = hp.maxValue;
+                transform.position=Vector3.zero;
             }
-        } 
-    
+        }
 
         void GetMove()
         {

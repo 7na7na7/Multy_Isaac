@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -22,7 +23,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    private string EamilKey = "EmailKey";
    private string NameKey = "NameKey";
 
-   [Header("LobbyPanel")] 
+   [Header("LobbyPanel")]
+   public Text pingSpeed;
    public GameObject LobbyPanel;
     public InputField RoomInput;
     public Button[] CellBtn;
@@ -57,6 +59,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
   
    private void Update()
    {
+     if(PhotonNetwork.IsConnected) 
+        pingSpeed.text = "Ping : "+PhotonNetwork.GetPing().ToString();
       if (LoginPanel.activeSelf)
       {
          //탭키 전환
