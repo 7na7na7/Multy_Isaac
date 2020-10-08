@@ -7,13 +7,15 @@ using PlayFab.ClientModels;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
 using Unity.Mathematics;
+using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
    private Text txt;
-   
+   //public string GameVersion = "0.1";
    public InputField EmailInput, PasswordInput, UsernameInput;
    public GameObject LoadingPanel, LoginPanel;
    public string NickName;
@@ -28,7 +30,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public Button NextBtn;
     public Text LobbyInfoText;
 
-    [Header("RoomPanel")]
+    [Header("RoomPanel")] 
+    public GameObject StartBtn;
     public GameObject RoomPanel;
     public Text ListText;
     public Text RoomInfoText;
@@ -80,11 +83,17 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
       if (LobbyPanel.activeSelf)
       {
+         if(Input.GetKeyDown(KeyCode.Escape)) 
+            Disconnect();
+         
          LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ PhotonNetwork.CountOfPlayersInRooms) + "명";
       }
 
       if (RoomPanel.activeSelf)
       {
+         if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
+            PhotonNetwork.LeaveRoom();
+         
          if (ChatInput.isFocused)
          {
             Player[] players = FindObjectsOfType<Player>();
@@ -123,9 +132,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
             }
          }
       }
-      
-      if(Input.GetKeyDown(KeyCode.Escape))
-         Disconnect();
    }
    
 
@@ -165,6 +171,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
+      
       Connect();
    }
 
@@ -205,6 +212,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public void Connect() //연결
    {
+      //PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = "editor";
+      //PhotonNetwork.GameVersion = GameVersion;
+      PhotonNetwork.AutomaticallySyncScene = true; //씬동기화
       PhotonNetwork.ConnectUsingSettings();  
    }
 
@@ -284,15 +294,27 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    
    
     #region 방
-    public void CreateRoom() => PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + UnityEngine.Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 8 }); //방만들기
+    public void CreateRoom()
+    {
+       RoomOptions roomOpton=new RoomOptions();
+       roomOpton.MaxPlayers = 10;
+       PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + UnityEngine.Random.Range(0, 100) : RoomInput.text, roomOpton); //방만들기     
+    }
 
-    public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom(); //랜덤룸 입장
+    public void JoinRandomRoom()
+    {
+       PhotonNetwork.JoinRandomRoom(); //랜덤룸 입장
+    }
 
     public void LeaveRoom() => PhotonNetwork.LeaveRoom(); //방떠나기
 
     public override void OnJoinedRoom()
     {
        StartCoroutine(delayDestroy());
+       if (PhotonNetwork.IsMasterClient) //방주인이면
+          StartBtn.SetActive(true);
+       else
+          StartBtn.SetActive(false);
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
@@ -327,7 +349,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
         ListText.text = "";
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
-        RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " - " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
+        RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " - " + PhotonNetwork.CountOfRooms+ " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
     #endregion
 
@@ -386,5 +408,15 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public void Spawn()
     {
        PhotonNetwork.Instantiate("Player", Vector3.zero, quaternion.identity);
+    }
+
+    public void GameStart()
+    {
+       if (PhotonNetwork.IsMasterClient) //방주인이면
+       {
+          PhotonNetwork.CurrentRoom.IsOpen = false; //더이상 플레이어 못들어오게함
+          PhotonNetwork.CurrentRoom.IsVisible = false; //방목록에서 안보이게함
+          PhotonNetwork.LoadLevel(1); //Build Settng에서 1번째 인덱스의 씬 호출  
+       }
     }
 }

@@ -7,11 +7,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviourPunCallbacks
 {
     public float speed = 5;
+    public float DestroyTime = 1;
     private int dir;
     public PhotonView pv;
     void Start()
     {
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject,DestroyTime);
     }
     
     void Update()

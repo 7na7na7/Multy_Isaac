@@ -70,7 +70,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 
                 //커서에 따른 애니메이션변화
-                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < -0.2f) //마우스커서가 위에있으면
+                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < -0.25f) //마우스커서가 위에있으면
                 {
                     headAnim.SetBool("IsGoDown",false);
                 }
