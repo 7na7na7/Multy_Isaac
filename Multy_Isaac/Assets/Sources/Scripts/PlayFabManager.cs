@@ -59,8 +59,20 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
   
    private void Update()
    {
-     if(PhotonNetwork.IsConnected) 
-        pingSpeed.text = "Ping : "+PhotonNetwork.GetPing().ToString();
+      if (PhotonNetwork.IsConnected)
+      {
+         if(PhotonNetwork.GetPing()<50)
+            pingSpeed.color=Color.green;
+         else if(PhotonNetwork.GetPing()<100)
+            pingSpeed.color=Color.yellow;
+         else
+            pingSpeed.color=Color.red;
+         pingSpeed.text = "Ping : "+PhotonNetwork.GetPing().ToString();
+      }
+      else
+      {
+         pingSpeed.text = "DisConnected";
+      }
       if (LoginPanel.activeSelf)
       {
          //탭키 전환

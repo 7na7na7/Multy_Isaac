@@ -14,6 +14,10 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   public bool isOffline;
+   
+   public static InGameNetwork instance; //싱글톤
+   
    [Header("Chat")]
    public Text[] ChatText;
    public InputField ChatInput;
@@ -25,7 +29,16 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    private void Awake()
    {
       Screen.SetResolution(1920, 1080, true);
-      Spawn();
+      instance = this;
+      if (isOffline)
+      {
+         PhotonNetwork.OfflineMode = true;
+         OnConnectedToMaster();
+      }
+      else
+      {
+         Spawn();
+      }
    }
   
    private void Update()

@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public GameObject offLineBullet;
     public bool canMove = true;
-    
     private Animator anim;
     private Vector2 moveDirection; 
     private Rigidbody2D rb;
@@ -35,15 +35,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 MousePosition; //총 회전을 위한 변수
     private Camera camera;
     private float angle;
-
-    private void Awake()
-    {
-        nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
-        nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
-    }
+    
 
     private void Start()
     {
+        nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
+        nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
+        
         anim = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             camera=Camera.main;
@@ -64,7 +62,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         if (time <= 0)
                         {
                             time = CoolTime;
-                            PhotonNetwork.Instantiate("Bullet", bulletTr.position,bulletTr.rotation);      
+                            if (InGameNetwork.instance.isOffline)
+                                Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                            else
+                                PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);
                         }
                     }
                 }
