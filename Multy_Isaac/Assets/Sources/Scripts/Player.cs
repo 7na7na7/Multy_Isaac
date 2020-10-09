@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
@@ -62,10 +63,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         if (time <= 0)
                         {
                             time = CoolTime;
-                            if (InGameNetwork.instance.isOffline)
-                                Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                            if (SceneManager.GetActiveScene().name == "Play")
+                            {
+                                if (InGameNetwork.instance.isOffline)
+                                    Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                                else
+                                    PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);   
+                            }
                             else
+                            {
                                 PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);
+                            }
                         }
                     }
                 }
