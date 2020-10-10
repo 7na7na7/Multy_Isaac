@@ -34,6 +34,13 @@ public class Bullet : MonoBehaviourPunCallbacks
                 StartCoroutine(delayDestroy());
             }
         }
+        else if (other.CompareTag("Wall"))
+        {
+            if(InGameNetwork.instance.isOffline)
+                Destroy(gameObject);
+            else
+                pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
+        }
     }
 
     IEnumerator delayDestroy()
