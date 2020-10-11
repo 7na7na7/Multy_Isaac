@@ -173,12 +173,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //        }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Teleport"))
+        if (pv.IsMine)
         {
-            transform.position = GameObject.Find(other.name+"_T").transform.position;
+            if (other.CompareTag("Teleport"))
+            {
+                FindObjectOfType<Fade>().Teleport(gameObject,GameObject.Find(other.name + "_T").transform.position);
+            }   
         }
     }
-
+    
     public void Hit()
         {
             hp.value -= 10;

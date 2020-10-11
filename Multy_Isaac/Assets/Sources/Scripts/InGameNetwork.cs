@@ -28,7 +28,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
 
    private void Awake()
    {
-      Screen.SetResolution(1920, 1080, true);
+      //Screen.SetResolution(1920, 1080, true);
       instance = this;
       if (isOffline)
       {

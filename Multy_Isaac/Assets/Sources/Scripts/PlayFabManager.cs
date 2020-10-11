@@ -107,6 +107,11 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
       if (RoomPanel.activeSelf)
       {
+         if (PhotonNetwork.IsMasterClient) //방주인이면
+            StartBtn.SetActive(true);
+         else
+            StartBtn.SetActive(false);
+         
          if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
             PhotonNetwork.LeaveRoom();
          
@@ -327,10 +332,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
        StartCoroutine(delayDestroy());
-       if (PhotonNetwork.IsMasterClient) //방주인이면
-          StartBtn.SetActive(true);
-       else
-          StartBtn.SetActive(false);
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
