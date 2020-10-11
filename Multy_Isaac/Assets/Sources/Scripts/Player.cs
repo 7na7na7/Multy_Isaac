@@ -171,8 +171,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //                Hit();
 //            }
 //        }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Teleport"))
+        {
+            transform.position = GameObject.Find(other.name+"_T").transform.position;
+        }
+    }
 
-        public void Hit()
+    public void Hit()
         {
             hp.value -= 10;
             if (hp.value <= 0)
