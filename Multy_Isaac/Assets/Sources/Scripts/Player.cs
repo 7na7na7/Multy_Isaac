@@ -44,8 +44,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float rollDistance;
     private bool canRoll = true;
     public float rollStun;
-    private int layerMask;
-    
+
     //회전부분함수
     public GameObject gun;
     private Vector3 MousePosition; //총 회전을 위한 변수
@@ -63,7 +62,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         camera=Camera.main;
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
-        layerMask=1 << LayerMask.NameToLayer("Wall");  // Wall 레이어만 충돌 체크함
         col = GetComponent<CapsuleCollider2D>();
     }
 
@@ -79,14 +77,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator rollCor(Vector2 dir, float distance)
     {
         rb.velocity=Vector2.zero;
-        anim.Play("Roll");
-        headAnim.Play("None"); 
+        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Roll");
+        pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
         yield return new WaitForSeconds(rollStun);
-        anim.Play("Idle");
-        headAnim.Play("GoDown");
-          canMove = true;
+        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+        pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
+        canMove = true;
         canRoll = true;
     }
     private void Update()
@@ -223,8 +221,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         DOTween.KillAll();
         canRoll = true;
         canMove = true;
-        anim.Play("Idle");
-        headAnim.Play("GoDown");
+        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+        pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -290,7 +288,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-
+        [PunRPC]
+        public void SetAnimRPC(bool isHead, string animName)
+        {
+            if(isHead)
+                headAnim.Play(animName);
+            else
+                anim.Play(animName);
+        }
     
         [PunRPC]
         public void ChatBaloonRPC(string txt)
