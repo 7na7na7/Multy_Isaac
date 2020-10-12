@@ -33,9 +33,7 @@ public class Fade : MonoBehaviour
 
     IEnumerator TeleportCor(Player player, Vector3 tr)
     {
-        print("A");
         player.canMove = false;
-        print(player.canMove);
         fadecolor = img.color;
         while (fadecolor.a<1)
         {

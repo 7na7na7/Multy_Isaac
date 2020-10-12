@@ -2167,7 +2167,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1102194663
+  m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1fab8bb2704006146bacea7a7a06ca3c, type: 3}
@@ -2214,12 +2214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fa8870c491b8540baa96fc290726ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offLineBullet: {fileID: 6637044811040539379, guid: bc9ba9c2ed454424faabbb939108cf62,
-    type: 3}
   canMove: 1
   headAnim: {fileID: 939601911}
   speed: 5
-  nickname: {fileID: 414261059191707831}
   pv: {fileID: 2802312692116456170}
   PlayerCanvas: {fileID: 414261059322700866}
   hp: {fileID: 414261059590023242}
@@ -2227,8 +2224,15 @@ MonoBehaviour:
   canvasRect: {fileID: 414261059322700877}
   ChatBaloon: {fileID: 188097551}
   chatbox: {fileID: 3164323140557546084}
+  nickname: {fileID: 414261059191707831}
   bulletTr: {fileID: 8128798673975958430}
   CoolTime: 0.2
+  offLineBullet: {fileID: 6637044811040539379, guid: bc9ba9c2ed454424faabbb939108cf62,
+    type: 3}
+  easeMode: 2
+  rollTime: 0.5
+  rollDistance: 2
+  rollStun: 0.1
   gun: {fileID: 355019577}
 --- !u!70 &2802312692116456169
 CapsuleCollider2D:

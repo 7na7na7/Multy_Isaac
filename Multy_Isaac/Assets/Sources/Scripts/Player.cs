@@ -10,27 +10,34 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public GameObject offLineBullet;
+    
+
+//이동, 애니메이션
+    private CapsuleCollider2D col;
     public bool canMove = true;
     private Animator anim;
     private Vector2 moveDirection; 
     private Rigidbody2D rb;
     private float localScaleX;
     private Vector3 curPos;
-    private float canvasLocalScaleX;
     public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
-    public Text nickname; //닉네임
     public PhotonView pv; //포톤뷰
-    public GameObject PlayerCanvas;
-    public Slider hp; //체력
-    public Slider mp; //기력
-    public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
-    public Text ChatBaloon; //말풍선
-    public ChatBox chatbox; //챗박스
+   //캔버스
+   public GameObject PlayerCanvas;
+   public Slider hp; //체력
+   public Slider mp; //기력
+   public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
+   private float canvasLocalScaleX; //캔버스 로컬스케일반전을 위해
+   public Text ChatBaloon; //말풍선
+   public ChatBox chatbox; //챗박스
+   public Text nickname; //닉네임
+   
+    //총쏘기
     public Transform bulletTr; //총알이 나가는 위치
-    public float CoolTime = 0.2f;
-    private float time = 0;
+    public float CoolTime = 0.2f; //총 쏘는 쿨타임
+    private float time = 0; //쿨타임 계산을 위한 시간변수
+    public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
     
     //구르기
     public Ease easeMode;
@@ -38,6 +45,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float rollDistance;
     private bool canRoll = true;
     public float rollStun;
+    private int layerMask;
+    
     //회전부분함수
     public GameObject gun;
     private Vector3 MousePosition; //총 회전을 위한 변수
@@ -51,10 +60,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
         
         anim = GetComponent<Animator>();
-            rb = GetComponent<Rigidbody2D>();
-            camera=Camera.main;
-            localScaleX = transform.localScale.x;
-            canvasLocalScaleX = canvasRect.localScale.x;
+        rb = GetComponent<Rigidbody2D>();
+        camera=Camera.main;
+        localScaleX = transform.localScale.x;
+        canvasLocalScaleX = canvasRect.localScale.x;
+        layerMask=1 << LayerMask.NameToLayer("Wall");  // Wall 레이어만 충돌 체크함
+        col = GetComponent<CapsuleCollider2D>();
     }
 
     void roll(Vector2 dir)
@@ -63,13 +74,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             canMove = false;
             canRoll = false;
-            StartCoroutine(rollCor(dir));
+            StartCoroutine(rollCor(dir,rollDistance));
         }
     }
-    IEnumerator rollCor(Vector2 dir)
+    IEnumerator rollCor(Vector2 dir, float distance)
     {
         rb.velocity=Vector2.zero;
-        transform.DOMove(transform.position + new Vector3(dir.x*rollDistance,dir.y*rollDistance),rollTime).SetEase(easeMode);
+        rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
         yield return new WaitForSeconds(rollStun);
           canMove = true;
