@@ -519,7 +519,7 @@ MonoBehaviour:
   m_UpscaleRT: 0
   m_PixelSnapping: 1
   m_CropFrameX: 0
-  m_CropFrameY: 0
+  m_CropFrameY: 1
   m_StretchFill: 0
 --- !u!1 &667220155
 GameObject:
@@ -29622,15 +29622,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 233795721, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 233795721, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145510460, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145510460, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 414261060178988698, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414261060178988698, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414261060178988698, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
@@ -29709,29 +29725,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2802312692116456085, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
-      propertyPath: offLineBullet
-      value: 
-      objectReference: {fileID: 6637044811040539379, guid: bc9ba9c2ed454424faabbb939108cf62,
-        type: 3}
-    - target: {fileID: 2802312692116456085, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
-        type: 3}
-      propertyPath: isOffline
-      value: 1
+      propertyPath: easeMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2802312692116456085, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
-      propertyPath: canMove
-      value: 1
+      propertyPath: rollTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802312692116456085, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
+        type: 3}
+      propertyPath: rollDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802312692116456085, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
+        type: 3}
+      propertyPath: rollStun
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802312692116456087, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2802312692116456170, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: viewIdField
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4504235606082339758, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: viewIdField
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7021169850208369852, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}

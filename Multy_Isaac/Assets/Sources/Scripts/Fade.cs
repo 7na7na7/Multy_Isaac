@@ -25,15 +25,17 @@ public class Fade : MonoBehaviour
         StartCoroutine(UnFadeCor());
     }
 
-    public void Teleport(GameObject player, Vector3 tr)
+    public void Teleport(Player player, Vector3 tr)
     {
         if(fadecolor.a==0) 
             StartCoroutine(TeleportCor(player, tr));
     }
 
-    IEnumerator TeleportCor(GameObject player, Vector3 tr)
+    IEnumerator TeleportCor(Player player, Vector3 tr)
     {
-       player.GetComponent<Player>().canMove = false;
+        print("A");
+        player.canMove = false;
+        print(player.canMove);
         fadecolor = img.color;
         while (fadecolor.a<1)
         {
@@ -51,7 +53,7 @@ public class Fade : MonoBehaviour
             img.color = fadecolor;
         }
 
-        player.GetComponent<Player>().canMove = true;
+        player.canMove = true;
         fadecolor.a = 0;
         img.color = fadecolor;
     }

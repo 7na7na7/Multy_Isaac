@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -31,6 +32,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float CoolTime = 0.2f;
     private float time = 0;
     
+    //구르기
+    public Ease easeMode;
+    public float rollTime;
+    public float rollDistance;
+    private bool canRoll = true;
+    public float rollStun;
     //회전부분함수
     public GameObject gun;
     private Vector3 MousePosition; //총 회전을 위한 변수
@@ -50,7 +57,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             canvasLocalScaleX = canvasRect.localScale.x;
     }
 
-        private void Update()
+    void roll(Vector2 dir)
+    {
+        if (canRoll)
+        {
+            canMove = false;
+            canRoll = false;
+            StartCoroutine(rollCor(dir));
+        }
+    }
+    IEnumerator rollCor(Vector2 dir)
+    {
+        rb.velocity=Vector2.zero;
+        transform.DOMove(transform.position + new Vector3(dir.x*rollDistance,dir.y*rollDistance),rollTime).SetEase(easeMode);
+        yield return new WaitForSeconds(rollTime);
+        yield return new WaitForSeconds(rollStun);
+          canMove = true;
+        canRoll = true;
+    }
+    private void Update()
         {
             if (pv.IsMine)
             {
@@ -75,6 +100,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);
                             }
                         }
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                    {
+                        Vector2 dir;
+                        dir=new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+                        roll(dir);
                     }
                 }
                 //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
@@ -177,11 +209,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (other.CompareTag("Teleport"))
             {
-                FindObjectOfType<Fade>().Teleport(gameObject,GameObject.Find(other.name + "_T").transform.position);
+                FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }   
         }
     }
-    
     public void Hit()
         {
             hp.value -= 10;

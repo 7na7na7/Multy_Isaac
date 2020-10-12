@@ -127,18 +127,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
                }
             }  
          }
-         else
-         {
-            Player[] players = FindObjectsOfType<Player>();
-            foreach (Player p in players)
-            {
-               if (p.pv.IsMine)
-               {
-                  p.canMove = true;
-                  break;
-               }
-            }
-         }
 
          if (Input.GetKeyDown(KeyCode.Return))
          {
@@ -150,6 +138,15 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
             else
             {
                Send();  
+               Player[] players = FindObjectsOfType<Player>();
+               foreach (Player p in players)
+               {
+                  if (p.pv.IsMine)
+                  {
+                     p.canMove = true;
+                     break;
+                  }
+               }
             }
          }
       }

@@ -44,22 +44,31 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    private void Update()
    {
       if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
-            Disconnect();
-
+         PhotonNetwork.LeaveRoom();
+         
       if (ChatInput.isFocused)
+      {
+         Player[] players = FindObjectsOfType<Player>();
+         foreach (Player p in players)
          {
-            Player[] players = FindObjectsOfType<Player>();
-            foreach (Player p in players)
+            if (p.pv.IsMine)
             {
-               if (p.pv.IsMine)
-               {
-                  p.canMove = false;
-                  break;
-               }
-            }  
+               p.canMove = false;
+               break;
+            }
+         }  
+      }
+
+      if (Input.GetKeyDown(KeyCode.Return))
+      {
+         if (!ChatInput.gameObject.activeSelf)
+         {
+            ChatInput.gameObject.SetActive(true);
+            ChatInput.ActivateInputField();
          }
          else
          {
+            Send();  
             Player[] players = FindObjectsOfType<Player>();
             foreach (Player p in players)
             {
@@ -70,19 +79,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
                }
             }
          }
-
-         if (Input.GetKeyDown(KeyCode.Return))
-         {
-            if (!ChatInput.gameObject.activeSelf)
-            {
-               ChatInput.gameObject.SetActive(true);
-               ChatInput.ActivateInputField();
-            }
-            else
-            {
-               Send();  
-            }
-         }
+      }
       
    }
    
