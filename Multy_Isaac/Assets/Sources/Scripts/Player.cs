@@ -24,7 +24,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float speed;
     public PhotonView pv; //포톤뷰
    //캔버스
-   public GameObject PlayerCanvas;
    public Slider hp; //체력
    public Slider mp; //기력
    public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
@@ -80,9 +79,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator rollCor(Vector2 dir, float distance)
     {
         rb.velocity=Vector2.zero;
+        anim.Play("Roll");
+        headAnim.Play("None"); 
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
         yield return new WaitForSeconds(rollStun);
+        anim.Play("Idle");
+        headAnim.Play("GoDown");
           canMove = true;
         canRoll = true;
     }
@@ -90,6 +93,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
+                
                 if(time>0) 
                     time -= Time.deltaTime;
                 if (canMove)
@@ -117,55 +121,54 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         Vector2 dir;
                         dir=new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
-                        roll(dir);
+                        roll(new Vector2(dir.x,dir.y).normalized);
                     }
                 }
                 //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
                 //커서에 따른 애니메이션변화
-                if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
-                    Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
-                    headAnim.SetInteger("Dir",1);
-                else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0&&
-                         Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*0.5f)) //마우스커서가 위에있으면
-                    headAnim.SetInteger("Dir",-1);
-                else //중간정도면
-                    headAnim.SetInteger("Dir",0);
-
-                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                if (canMove)
                 {
-                    transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
-                    canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-
-                    gun.transform.localScale=new Vector3(1,1,1);
-                }
-                else
-                {
-                    transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
-                    canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
+                        Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
+                        headAnim.SetInteger("Dir",1);
+                    else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0&&
+                             Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*0.5f)) //마우스커서가 위에있으면
+                        headAnim.SetInteger("Dir",-1);
+                    else //중간정도면
+                        headAnim.SetInteger("Dir",0);   
                     
-                    gun.transform.localScale=new Vector3(-1,1,1);
+                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                    {
+                        transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
+                        canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+
+                        gun.transform.localScale=new Vector3(1,1,1);
+                    }
+                    else
+                    {
+                        transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
+                        canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                    
+                        gun.transform.localScale=new Vector3(-1,1,1);
+                    }
+                    
+                    //총 회전
+                    MousePosition = Input.mousePosition;
+                    Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
+                    //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
+                    //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
+                    angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
+                    if (Mathf.Abs(angle) > 90)
+                    {
+                        gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
+                    }
+                    else
+                    {
+                        gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
+                    }
                 }
-
-
-                PlayerCanvas.transform.position = transform.position;
+                
                 GetMove();
-            
-                //총 회전
-                MousePosition = Input.mousePosition;
-                Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
-                //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
-                //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
-                angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
-            
-            
-                if (Mathf.Abs(angle) > 90)
-                {
-                    gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
-                }
-                else
-                {
-                    gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
-                }
             }
             //IsMine이 아닌 것들은 부드럽게 위치 동기화
             else if ((transform.position - curPos).sqrMagnitude >= 100)
@@ -214,12 +217,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //                Hit();
 //            }
 //        }
+
+    void StopDotween()
+    {
+        DOTween.KillAll();
+        canRoll = true;
+        canMove = true;
+        anim.Play("Idle");
+        headAnim.Play("GoDown");
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (pv.IsMine)
         {
             if (other.CompareTag("Teleport"))
             {
+                StopAllCoroutines();
+                StopDotween();
                 FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }   
         }
