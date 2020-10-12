@@ -33,6 +33,7 @@ public class Fade : MonoBehaviour
 
     IEnumerator TeleportCor(GameObject player, Vector3 tr)
     {
+       player.GetComponent<Player>().canMove = false;
         fadecolor = img.color;
         while (fadecolor.a<1)
         {
@@ -50,6 +51,7 @@ public class Fade : MonoBehaviour
             img.color = fadecolor;
         }
 
+        player.GetComponent<Player>().canMove = true;
         fadecolor.a = 0;
         img.color = fadecolor;
     }
