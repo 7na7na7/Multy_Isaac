@@ -29624,19 +29624,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233795721, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 233795721, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2145510460, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2145510460, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414261060178988698, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
@@ -29701,27 +29701,32 @@ PrefabInstance:
     - target: {fileID: 414261060178988702, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 414261060885474293, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414261060885474293, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 414261060885474293, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
-        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1192210430805388033, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1192210430805388033, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802312692116456085, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
+        type: 3}
+      propertyPath: easeMode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2802312692116456170, guid: b8fa6c5e6ecf0e046bd84b3becf68557,
         type: 3}
@@ -29738,7 +29743,8 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2802312692116456169, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b8fa6c5e6ecf0e046bd84b3becf68557, type: 3}
 --- !u!1 &1355878494
 GameObject:
@@ -39675,7 +39681,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -42306,6 +42312,32 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1334192473}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1866179192
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866179191}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.011229768, y: -0.5465544}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.42204586, y: 0.16892374}
+  m_EdgeRadius: 0
 --- !u!1 &1879996349
 GameObject:
   m_ObjectHideFlags: 0
@@ -42459,7 +42491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d75edc39dc29e4f9942a947b6e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOffline: 0
+  isOffline: 1
   ChatText:
   - {fileID: 2472824490594548650}
   - {fileID: 2472824491317682257}
@@ -43067,7 +43099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.2, y: 0.00008408916}
+  m_AnchoredPosition: {x: 5.2, y: -0.0000017000228}
   m_SizeDelta: {x: -348.70685, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2472824489907924801

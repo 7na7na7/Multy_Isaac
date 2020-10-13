@@ -53,7 +53,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
 
     private void Start()
-    {
+    { 
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
         
@@ -77,13 +77,30 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator rollCor(Vector2 dir, float distance)
     {
         rb.velocity=Vector2.zero;
-        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Roll");
-        pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
+        if (InGameNetwork.instance.isOffline)
+        {
+            SetAnimRPC(false,"Roll");
+            SetAnimRPC(true,"None");
+        }
+        else
+        {
+            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Roll");
+            pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");   
+        }
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
         yield return new WaitForSeconds(rollStun);
-        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-        pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
+        if (InGameNetwork.instance.isOffline)
+        {
+            SetAnimRPC(false,"Idle");
+            SetAnimRPC(true,"GoDown");
+        }
+        else
+        {
+            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+            pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");       
+        }
+     
         canMove = true;
         canRoll = true;
     }
@@ -221,6 +238,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         DOTween.KillAll();
         canRoll = true;
         canMove = true;
+        if (InGameNetwork.instance.isOffline)
+        {
+            SetAnimRPC(false,"Idle");
+            SetAnimRPC(true,"GoDown");
+        }
         pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
         pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
     }
@@ -233,9 +255,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 StopAllCoroutines();
                 StopDotween();
                 FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
-            }   
+            }
         }
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            DOTween.KillAll();
+        }
+    }
+
     public void Hit()
         {
             hp.value -= 10;
