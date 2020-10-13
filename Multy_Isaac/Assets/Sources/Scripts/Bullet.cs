@@ -27,16 +27,23 @@ public class Bullet : MonoBehaviourPunCallbacks
             if (other.GetComponent<Player>().pv.IsMine && !pv.IsMine)
             {
                 other.GetComponent<Player>().Hit();
-                pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
+                Destroy(gameObject);
+               // pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
             else if(!other.GetComponent<Player>().pv.IsMine && pv.IsMine)
             {
-                StartCoroutine(delayDestroy());
+                //other.GetComponent<Player>().Hit();
+                Destroy(gameObject);
+              //  pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            
         }
         else if (other.CompareTag("Wall"))
         {
-            if(InGameNetwork.instance.isOffline)
+            if (PhotonNetwork.OfflineMode)
                 Destroy(gameObject);
             else
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   

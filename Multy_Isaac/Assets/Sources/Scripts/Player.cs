@@ -78,7 +78,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator rollCor(Vector2 dir, float distance)
     {
         rb.velocity=Vector2.zero;
-        if (InGameNetwork.instance.isOffline)
+        if (PhotonNetwork.OfflineMode)
         {
             SetAnimRPC(false,"Roll");
             SetAnimRPC(true,"None");
@@ -91,7 +91,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
         yield return new WaitForSeconds(rollStun);
-        if (InGameNetwork.instance.isOffline)
+        if (PhotonNetwork.OfflineMode)
         {
             SetAnimRPC(false,"Idle");
             SetAnimRPC(true,"GoDown");
@@ -121,7 +121,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             time = CoolTime;
                             if (SceneManager.GetActiveScene().name == "Play")
                             {
-                                if (InGameNetwork.instance.isOffline)
+                                if (PhotonNetwork.OfflineMode)
                                     Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
                                 else
                                     PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);   
@@ -137,7 +137,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         Vector2 dir;
                         dir=new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
-                        roll(new Vector2(dir.x,dir.y).normalized);
+                        if(dir!=Vector2.zero) 
+                            roll(new Vector2(dir.x,dir.y).normalized);
                     }
                 }
                 //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
@@ -239,7 +240,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         DOTween.KillAll();
         canRoll = true;
         canMove = true;
-        if (InGameNetwork.instance.isOffline)
+        if (PhotonNetwork.OfflineMode)
         {
             SetAnimRPC(false,"Idle");
             SetAnimRPC(true,"GoDown");

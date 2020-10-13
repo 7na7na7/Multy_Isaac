@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -20,7 +21,7 @@ public class CameraManager : MonoBehaviour
         maxBound = bound.bounds.max;
         halfHeight = theCamera.orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height; //카메라 반너비 공식
-        if (!InGameNetwork.instance.isOffline)
+        if (!PhotonNetwork.OfflineMode)
         {
             Player[] players = FindObjectsOfType<Player>();
             foreach (Player p in players)
