@@ -28,18 +28,31 @@ public class Bullet : MonoBehaviourPunCallbacks
             {
                 other.GetComponent<Player>().Hit();
                 Destroy(gameObject);
-               // pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
             else if(!other.GetComponent<Player>().pv.IsMine && pv.IsMine)
             {
-                //other.GetComponent<Player>().Hit();
                 Destroy(gameObject);
-              //  pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
         }
         else if (other.CompareTag("Enemy"))
         {
-            
+            if (PhotonNetwork.OfflineMode)
+            {
+                other.GetComponent<Enemy>().HitRPC(10);
+                Destroy(gameObject);
+            }
+            else
+            {
+                if (pv.IsMine)
+                {
+                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, 10);
+                    pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
+                }
+                else
+                {
+                    pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
+                }
+            }
         }
         else if (other.CompareTag("Wall"))
         {
@@ -49,12 +62,7 @@ public class Bullet : MonoBehaviourPunCallbacks
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
         }
     }
-
-    IEnumerator delayDestroy()
-    {
-        yield return new WaitForSeconds(0.05f);
-        pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
-    }
+    
 
     [PunRPC]
     public void DestroyRPC()

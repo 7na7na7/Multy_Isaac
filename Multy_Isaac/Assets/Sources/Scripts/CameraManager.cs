@@ -21,18 +21,6 @@ public class CameraManager : MonoBehaviour
         maxBound = bound.bounds.max;
         halfHeight = theCamera.orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height; //카메라 반너비 공식
-        if (!PhotonNetwork.OfflineMode)
-        {
-            Player[] players = FindObjectsOfType<Player>();
-            foreach (Player p in players)
-            {
-                if (p.pv.IsMine)
-                {
-                    target = p.gameObject;
-                    break;
-                }
-            }  
-        } //오프라인 모드가 아니면 플레이어 중 자신을 찾아 따라다님
     }
 
     void Update()
@@ -41,7 +29,9 @@ public class CameraManager : MonoBehaviour
         {
             if (speed == 0)
             {
-                transform.position=new Vector3(target.transform.position.x,target.transform.position.y,this.transform.position.z);
+                float clampedX = Mathf.Clamp(target.transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);
+                float clampedY = Mathf.Clamp(target.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
+                transform.position=new Vector3(clampedX,clampedY,this.transform.position.z);
             }
             else
             {

@@ -24,7 +24,10 @@ public class HP2 : MonoBehaviour
 
     void Update()
     {
-        if(player!=null) 
+        if (player != null)
+        {
             hp.value = player.hp.value;
+            mp.value = player.mp.value;
+        }
     }
 }

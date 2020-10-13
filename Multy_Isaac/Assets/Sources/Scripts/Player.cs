@@ -32,7 +32,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    public Text ChatBaloon; //말풍선
    public ChatBox chatbox; //챗박스
    public Text nickname; //닉네임
-   
+   public float MpHealSpeed = 5;
     //총쏘기
     public Transform bulletTr; //총알이 나가는 위치
     public float CoolTime = 0.2f; //총 쏘는 쿨타임
@@ -45,14 +45,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float rollDistance;
     private bool canRoll = true;
     public float rollStun;
+    public int rollMp = 20;
 
     //회전부분함수
     public GameObject gun;
     private Vector3 MousePosition; //총 회전을 위한 변수
     private Camera camera;
     private float angle;
-    
 
+   
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -64,15 +65,35 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
         col = GetComponent<CapsuleCollider2D>();
+        
+        if (!PhotonNetwork.OfflineMode)
+        {
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (Player p in players)
+            {
+                if (p.pv.IsMine)
+                {
+                    FindObjectOfType<CameraManager>().target = p.gameObject;
+                    break;
+                }
+            }  
+        } //오프라인 모드가 아니면 플레이어 중 자신을 찾아 따라다님
     }
 
     void roll(Vector2 dir)
     {
-        if (canRoll)
+        if (LoseMp(rollMp))
         {
-            canMove = false;
-            canRoll = false;
-            StartCoroutine(rollCor(dir,rollDistance));
+            if (canRoll)
+            {
+                canMove = false;
+                canRoll = false;
+                StartCoroutine(rollCor(dir,rollDistance));
+            }   
+        }
+        else
+        {
+            print("Mp부족!");
         }
     }
     IEnumerator rollCor(Vector2 dir, float distance)
@@ -109,11 +130,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
-                
                 if(time>0) 
                     time -= Time.deltaTime;
                 if (canMove)
                 {
+                    mp.value += Time.deltaTime * MpHealSpeed;
+                              
                     if (Input.GetMouseButton(0))
                     {
                         if (time <= 0)
@@ -248,6 +270,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
         pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
     }
+    public bool LoseMp(int value) //마나 잃음
+    {
+        if (mp.value >= value)
+        {
+            mp.value -= value;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (pv.IsMine)
@@ -265,7 +300,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(other.gameObject.tag=="Wall")
         {
-            print("A");
             DOTween.KillAll();
         }
     }

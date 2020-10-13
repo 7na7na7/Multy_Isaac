@@ -107,6 +107,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
       if (RoomPanel.activeSelf)
       {
+         RoomRenewal();
          if (PhotonNetwork.IsMasterClient) //방주인이면
             StartBtn.SetActive(true);
          else
@@ -332,14 +333,14 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
-       RoomRenewal();
+       //RoomRenewal();
        ChatInput.text = "";
        for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
     }
 
     IEnumerator delayDestroy()
     {
-       yield return new WaitForSeconds(0.05f);
+       yield return new WaitForSeconds(0.01f);
        foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
     }
    
@@ -348,13 +349,13 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-       RoomRenewal();
+       //RoomRenewal();
        ChatRPC("<color=green>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-       RoomRenewal();
+       //RoomRenewal();
        ChatRPC("<color=red>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
     }
 
@@ -362,7 +363,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     {
         ListText.text = "";
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-            ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
+            ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+" - "+PhotonNetwork.GetPing()+"ms"+"\n";
         RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " - " + PhotonNetwork.CountOfRooms+ " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
     #endregion

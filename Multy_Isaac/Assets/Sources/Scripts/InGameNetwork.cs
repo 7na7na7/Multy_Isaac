@@ -22,8 +22,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public Text[] ChatText;
    public InputField ChatInput;
    public Scrollbar charBar;
-    
+
    [Header("ETC")]
+   public Text pingSpeed;
    public PhotonView PV;
 
    private void Awake()
@@ -43,9 +44,27 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
   
    private void Update()
    {
+      if (PhotonNetwork.IsConnected)
+      {
+         if(PhotonNetwork.GetPing()<50)
+            pingSpeed.color=Color.green;
+         else if(PhotonNetwork.GetPing()<100)
+            pingSpeed.color=Color.yellow;
+         else
+            pingSpeed.color=Color.red;
+         pingSpeed.text = "Ping : "+PhotonNetwork.GetPing().ToString();
+      }
+      else
+      {
+         pingSpeed.text = "DisConnected";
+      }
+      
       if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
+      {
          PhotonNetwork.LeaveRoom();
-         
+         Disconnect();
+      }
+
       if (ChatInput.isFocused)
       {
          Player[] players = FindObjectsOfType<Player>();
@@ -106,12 +125,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       SceneManager.LoadScene("Main");
    }
 
-   IEnumerator delayDestroy()
-    {
-       yield return new WaitForSeconds(0.05f);
-       foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
-    }
-   
+
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
        //RoomRenewal();
