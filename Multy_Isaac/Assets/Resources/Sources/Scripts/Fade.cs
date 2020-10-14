@@ -49,9 +49,9 @@ public class Fade : MonoBehaviour
             fadecolor.a -= speed;
             yield return new WaitForSeconds(0.01f);
             img.color = fadecolor;
-        }
-
-        player.canMove = true;
+        } 
+        if(!player.isSleeping)  //잠 안자고있으면 이동 가능하게 해줌
+            player.canMove = true;
         fadecolor.a = 0;
         img.color = fadecolor;
     }

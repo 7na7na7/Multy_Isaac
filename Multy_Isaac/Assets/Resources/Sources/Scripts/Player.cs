@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     //수면
-    bool isSleeping; //자고있는가?
+    public bool isSleeping; //자고있는가?
     public float sleepHealSpeed = 5; //자는동안 회복속도
     //아이템
     private List<Item> ItemList = new List<Item>();
@@ -229,28 +229,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             {
                              anim.Play("Sleep");
                              headAnim.Play("None");
+                             gun.SetActive(false);
                             }
                             else
                             {
-                                SetAnimRPC(false,"Sleep");
-                                SetAnimRPC(true,"None");
+                                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Sleep");
+                                pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
+                                pv.RPC("SetActive",RpcTarget.All,false);
                             }
-                            gun.SetActive(false);
                         }
                         else
                         {
-                            isSleeping = false;
-                            if (PhotonNetwork.OfflineMode)
-                            {
-                                anim.Play("Idle");
-                                headAnim.Play("GoDown");
-                            }
-                            else
-                            {
-                                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-                                pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
-                            }
-                            gun.SetActive(true);
+                           WakeUp();
                         }
                     }
                 }
@@ -312,19 +302,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //            }
 //        }
 
-    void StopDotween()
-    {
-        DOTween.KillAll();
-        canRoll = true;
-        canMove = true;
-        if (PhotonNetwork.OfflineMode)
-        {
-            SetAnimRPC(false,"Idle");
-            SetAnimRPC(true,"GoDown");
-        }
-        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-        pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
-    }
+   
     public bool LoseMp(int value) //마나 잃음
     {
         if (mp.value >= value)
@@ -345,8 +323,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (other.CompareTag("Teleport"))
             {
                 StopAllCoroutines();
-                StopDotween();
-                FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
+                
+                    if (!isSleeping)
+                    {
+                        DOTween.KillAll();
+                        canRoll = true;
+                        canMove = true;
+                        if (PhotonNetwork.OfflineMode)
+                        {
+                            SetAnimRPC(false,"Idle");
+                            SetAnimRPC(true,"GoDown");
+                        }
+                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                        pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");   
+                    }
+
+                    FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
         }
     }
@@ -407,6 +399,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(canvasRect.localScale);
                 stream.SendNext(canMove);
                 stream.SendNext(gun.transform.localScale);
+                stream.SendNext(isSleeping);
             }
             else
             {
@@ -421,9 +414,31 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 canvasRect.localScale = (Vector3) stream.ReceiveNext();
                 canMove = (bool) stream.ReceiveNext();
                 gun.transform.localScale = (Vector3) stream.ReceiveNext();
+                isSleeping = (bool) stream.ReceiveNext();
             }
         }
 
+        public void WakeUp()
+        {
+            isSleeping = false;
+            if (PhotonNetwork.OfflineMode)
+            {
+                anim.Play("Idle");
+                headAnim.Play("GoDown");
+                gun.SetActive(true);
+            }
+            else
+            {
+                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
+                pv.RPC("SetActive",RpcTarget.All,true);
+            }
+        }
+        [PunRPC]
+        public void SetActive( bool b)
+        {
+            gun.SetActive(b);
+        }
         [PunRPC]
         public void SetAnimRPC(bool isHead, string animName)
         {
