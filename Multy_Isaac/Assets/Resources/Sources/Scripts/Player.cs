@@ -52,8 +52,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 MousePosition; //총 회전을 위한 변수
     private Camera camera;
     private float angle;
-
-   
+    
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -109,9 +108,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             pv.RPC("SetAnimRPC",RpcTarget.All,false,"Roll");
             pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");   
         }
+
+        Vector2 originalSize = col.size;
+        col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
         yield return new WaitForSeconds(rollStun);
+        col.size = originalSize; //원래 크기로 돌려줌
         if (PhotonNetwork.OfflineMode)
         {
             SetAnimRPC(false,"Idle");
@@ -132,6 +135,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if(time>0) 
                     time -= Time.deltaTime;
+              
                 if (canMove)
                 {
                     mp.value += Time.deltaTime * MpHealSpeed;
@@ -298,9 +302,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if(other.gameObject.tag=="Wall")
+        if (other.gameObject.tag == "Wall")
         {
-            DOTween.KillAll();
+            if (!canRoll)
+            {
+                DOTween.KillAll();
+            }
         }
     }
     
