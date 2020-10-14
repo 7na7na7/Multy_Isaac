@@ -29,7 +29,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
 
    private void Awake()
    {
-      //Screen.SetResolution(1920, 1080, true);
+      StartCoroutine(delayDestroy());
+      
+      Screen.SetResolution(1920, 1080, true);
       instance = this;
       if (isOffline)
       {
@@ -186,7 +188,11 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
        }
     }
     #endregion
-
+    IEnumerator delayDestroy()
+    {
+       yield return new WaitForSeconds(0.2f);
+       foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
+    }
     IEnumerator delayScrollDown()
     {
        yield return new WaitForSeconds(0.01f);

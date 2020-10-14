@@ -9,9 +9,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-
+    bool isSleeping; //자고있는가?
+    //아이템
+    private List<Item> ItemList = new List<Item>();
+    public Image[] ItemBoxes;
     bool isSuper = false; //무적인가?
     //이동, 애니메이션
     private CapsuleCollider2D col;
@@ -64,6 +68,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
         col = GetComponent<CapsuleCollider2D>();
+        
         
         if (!PhotonNetwork.OfflineMode)
         {
@@ -135,6 +140,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
+                for (int i = 0; i < ItemList.Count; i++)
+                {
+                    if(ItemList[i].ItemSprite!=null) 
+                        ItemBoxes[i].sprite = ItemList[i].ItemSprite;
+                }
                 if(time>0) 
                     time -= Time.deltaTime;
               
@@ -301,6 +311,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
+    
 
     private void OnCollisionStay2D(Collision2D other)
     {
@@ -312,7 +323,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
-    
+
+    public void GetItem(Item item)
+    {
+        if(ItemList.Count<6)
+            ItemList.Add(item);
+    }
 
     public void Hit()
         {

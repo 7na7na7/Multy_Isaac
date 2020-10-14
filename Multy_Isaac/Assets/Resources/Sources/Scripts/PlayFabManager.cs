@@ -340,7 +340,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     IEnumerator delayDestroy()
     {
-       yield return new WaitForSeconds(0.01f);
+       yield return new WaitForSeconds(0.2f);
        foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyRPC", RpcTarget.All);
     }
    
