@@ -12,7 +12,9 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    //수면
     bool isSleeping; //자고있는가?
+    public float sleepHealSpeed = 5; //자는동안 회복속도
     //아이템
     private List<Item> ItemList = new List<Item>();
     public Image[] ItemBoxes;
@@ -151,38 +153,48 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if (canMove)
                 {
                     mp.value += Time.deltaTime * MpHealSpeed;
-                              
-                    if (Input.GetMouseButton(0))
+                    if (!isSleeping)
                     {
-                        if (time <= 0)
+                        if (Input.GetMouseButton(0))
                         {
-                            time = CoolTime;
-                            if (SceneManager.GetActiveScene().name == "Play")
+                            if (time <= 0)
                             {
-                                if (PhotonNetwork.OfflineMode)
-                                    Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                                time = CoolTime;
+                                if (SceneManager.GetActiveScene().name == "Play")
+                                {
+                                    if (PhotonNetwork.OfflineMode)
+                                        Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                                    else
+                                        PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);   
+                                }
                                 else
-                                    PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);   
-                            }
-                            else
-                            {
-                                PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);
+                                {
+                                    PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);
+                                }
                             }
                         }
-                    }
+                        if (Input.GetKeyDown(KeyCode.LeftShift))
+                        {
+                            Vector2 dir;
+                            dir=new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+                            if(dir!=Vector2.zero) 
+                                roll(new Vector2(dir.x,dir.y).normalized);
+                        }   
+                        if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                        {
+                            transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
+                            canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
 
-                    if (Input.GetKeyDown(KeyCode.LeftShift))
-                    {
-                        Vector2 dir;
-                        dir=new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
-                        if(dir!=Vector2.zero) 
-                            roll(new Vector2(dir.x,dir.y).normalized);
+                            gun.transform.localScale=new Vector3(1,1,1);
+                        }
+                        else
+                        {
+                            transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
+                            canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                    
+                            gun.transform.localScale=new Vector3(-1,1,1);
+                        }
                     }
-                }
-                //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
-                //커서에 따른 애니메이션변화
-                if (canMove)
-                {
                     if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
                         Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
                         headAnim.SetInteger("Dir",1);
@@ -192,20 +204,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     else //중간정도면
                         headAnim.SetInteger("Dir",0);   
                     
-                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
-                    {
-                        transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
-                        canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-
-                        gun.transform.localScale=new Vector3(1,1,1);
-                    }
-                    else
-                    {
-                        transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
-                        canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-                    
-                        gun.transform.localScale=new Vector3(-1,1,1);
-                    }
                     
                     //총 회전
                     MousePosition = Input.mousePosition;
@@ -221,8 +219,49 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
                     }
+                    
+                    if (Input.GetKeyDown(KeyCode.LeftControl))
+                    {
+                        if (!isSleeping)
+                        {
+                            isSleeping = true;
+                            if (PhotonNetwork.OfflineMode)
+                            {
+                             anim.Play("Sleep");
+                             headAnim.Play("None");
+                            }
+                            else
+                            {
+                                SetAnimRPC(false,"Sleep");
+                                SetAnimRPC(true,"None");
+                            }
+                            gun.SetActive(false);
+                        }
+                        else
+                        {
+                            isSleeping = false;
+                            if (PhotonNetwork.OfflineMode)
+                            {
+                                anim.Play("Idle");
+                                headAnim.Play("GoDown");
+                            }
+                            else
+                            {
+                                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                                pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
+                            }
+                            gun.SetActive(true);
+                        }
+                    }
                 }
-                
+
+                if (isSleeping)
+                {
+                    hp.value += Time.deltaTime * sleepHealSpeed;
+                }
+                //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
+                //커서에 따른 애니메이션변화
+
                 GetMove();
             }
             //IsMine이 아닌 것들은 부드럽게 위치 동기화
@@ -243,7 +282,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         void FixedUpdate()
         {
-            if (canMove)
+            if (canMove&&!isSleeping)
             {
                 if (moveDirection == Vector2.zero)
                 {
