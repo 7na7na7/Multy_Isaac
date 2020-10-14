@@ -15,8 +15,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        if(PhotonNetwork.IsMasterClient) 
-            StartCoroutine(spawn());
+        StartCoroutine(spawn());
     }
 
     IEnumerator spawn()
@@ -24,10 +23,17 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minDelay,maxDelay));
-            if (PhotonNetwork.OfflineMode)
-                Instantiate(offlineMonster,new Vector3(Random.Range(bound.bounds.min.x,bound.bounds.max.x),Random.Range(bound.bounds.min.y,bound.bounds.max.y)),quaternion.identity);
-            else
-                PhotonNetwork.Instantiate(monster,new Vector3(Random.Range(bound.bounds.min.x,bound.bounds.max.x),Random.Range(bound.bounds.min.y,bound.bounds.max.y)),quaternion.identity);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(offlineMonster,
+                        new Vector3(Random.Range(bound.bounds.min.x, bound.bounds.max.x),
+                            Random.Range(bound.bounds.min.y, bound.bounds.max.y)), quaternion.identity);
+                else
+                    PhotonNetwork.InstantiateSceneObject("Pencil",
+                        new Vector3(Random.Range(bound.bounds.min.x, bound.bounds.max.x),
+                            Random.Range(bound.bounds.min.y, bound.bounds.max.y)), quaternion.identity);
+            }
         }
     }
 }
