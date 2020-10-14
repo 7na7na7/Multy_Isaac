@@ -11,9 +11,9 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-    
 
-//이동, 애니메이션
+    bool isSuper = false; //무적인가?
+    //이동, 애니메이션
     private CapsuleCollider2D col;
     public bool canMove = true;
     private Animator anim;
@@ -109,10 +109,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");   
         }
 
+        isSuper = true; //무적 ON
         Vector2 originalSize = col.size;
         col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
         yield return new WaitForSeconds(rollTime);
+        isSuper = false; //무적 OFF
         yield return new WaitForSeconds(rollStun);
         col.size = originalSize; //원래 크기로 돌려줌
         if (PhotonNetwork.OfflineMode)
@@ -314,11 +316,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Hit()
         {
-            hp.value -= 10;
-            if (hp.value <= 0)
+            if (!isSuper)
             {
-                hp.value = hp.maxValue;
-                transform.position=Vector3.zero;
+                hp.value -= 10;
+                if (hp.value <= 0)
+                {
+                    hp.value = hp.maxValue;
+                    transform.position=Vector3.zero;
+                }   
             }
         }
 
