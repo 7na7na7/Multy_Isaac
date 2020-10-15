@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
-
-public enum itemType { Weapon, Guard, Food, item}
-public class Item : MonoBehaviour
+[System.Serializable]
+public class tem
 {
-    private PhotonView pv;
     public string ItemName=null;
     public Sprite ItemSprite=null;
     public itemType type = itemType.item;
+}
+public enum itemType { Weapon, Guard, Food, item}
+public class Item : MonoBehaviour
+{
+    public tem item;
+    private PhotonView pv;
     public Material outlineMat;
     private Material defaultMat;
     private SpriteRenderer spr;

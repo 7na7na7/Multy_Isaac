@@ -58,7 +58,6 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        print(other.gameObject.name);
         if (other.gameObject.tag=="Wall")
         {
             if (PhotonNetwork.OfflineMode)

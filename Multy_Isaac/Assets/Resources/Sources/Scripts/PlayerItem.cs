@@ -9,7 +9,7 @@ public class PlayerItem : MonoBehaviour
     //아이템
     public float itemRadious;
     public LayerMask itemLayer;
-    private List<Item> ItemList = new List<Item>();
+    private List<tem> ItemList = new List<tem>();
     public Image[] ItemBoxes;
     public GameObject[] btns;
     private Player player;
@@ -54,7 +54,7 @@ public class PlayerItem : MonoBehaviour
                         {
                             if (ItemList.Count < 6)
                             {
-                                GetItem(item.GetComponent<Item>());
+                                GetItem(item.GetComponent<Item>().item);
                                 item.GetComponent<Item>().Destroy();   
                             }
                             else
@@ -72,7 +72,7 @@ public class PlayerItem : MonoBehaviour
     {
         ItemList.RemoveAt(index);
     }
-    public bool GetItem(Item item)
+    public bool GetItem(tem item)
     {
         if (ItemList.Count < 6)
         {
