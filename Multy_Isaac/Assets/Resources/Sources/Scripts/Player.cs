@@ -15,11 +15,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //수면
     public bool isSleeping; //자고있는가?
     public float sleepHealSpeed = 5; //자는동안 회복속도
-    //아이템
-    public float itemRadious;
-    public LayerMask itemLayer;
-    private List<Item> ItemList = new List<Item>();
-    public Image[] ItemBoxes;
+    
     bool isSuper = false; //무적인가?
     //이동, 애니메이션
     private CapsuleCollider2D col;
@@ -144,37 +140,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
-                for (int i = 0; i < ItemList.Count; i++)
-                {
-                    if(ItemList[i].ItemSprite!=null) 
-                        ItemBoxes[i].sprite = ItemList[i].ItemSprite;
-                }
+             
                 if(time>0) 
                     time -= Time.deltaTime;
               
                 if (canMove)
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        Collider2D item = Physics2D.OverlapCircle(transform.position, itemRadious, itemLayer);
-                        if (item != null)
-                        {
-                            if (item.GetComponent<Item>().canGet())
-                            {
-                                if (ItemList.Count < 6)
-                                {
-                                    GetItem(item.GetComponent<Item>());
-                                    item.GetComponent<Item>().Destroy();   
-                                }
-                                else
-                                {
-                                    PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
-                                }
-                            }
-                        }   
-                    }
-
-
                     mp.value += Time.deltaTime * MpHealSpeed;
                     if (!isSleeping)
                     {
@@ -378,18 +349,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public bool GetItem(Item item)
-    {
-        if (ItemList.Count < 6)
-        {
-            ItemList.Add(item);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+ 
 
     public void Hit(PhotonView view)
         {
