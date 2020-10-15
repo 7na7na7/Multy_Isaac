@@ -54,7 +54,12 @@ public class Bullet : MonoBehaviourPunCallbacks
                 }
             }
         }
-        else if (other.CompareTag("Wall"))
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        print(other.gameObject.name);
+        if (other.gameObject.tag=="Wall")
         {
             if (PhotonNetwork.OfflineMode)
                 Destroy(gameObject);
@@ -62,7 +67,6 @@ public class Bullet : MonoBehaviourPunCallbacks
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
         }
     }
-    
 
     [PunRPC]
     public void DestroyRPC()
