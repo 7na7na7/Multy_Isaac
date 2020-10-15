@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = Unity.Mathematics.Random;
 
 public class PlayerItem : MonoBehaviour
 {
     //아이템
     public float itemRadious;
     public LayerMask itemLayer;
-    private List<tem> ItemList = new List<tem>();
+    public List<tem> ItemList = new List<tem>();
     public Image[] ItemBoxes;
     public GameObject[] btns;
     private Player player;
     public Sprite NullSprite;
+    public GameObject OfflineItemPrefab;
     private void Start()
     {
         player = GetComponent<Player>();
@@ -70,6 +74,8 @@ public class PlayerItem : MonoBehaviour
 
     public void DiscardItem(int index)
     {
+        GameObject itemPrefab=PhotonNetwork.InstantiateRoomObject("ItemPrefab", transform.position, quaternion.identity);
+        itemPrefab.GetComponent<Item>().item = ItemList[index];
         ItemList.RemoveAt(index);
     }
     public bool GetItem(tem item)

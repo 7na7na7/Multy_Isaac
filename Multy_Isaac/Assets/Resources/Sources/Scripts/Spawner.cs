@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
                         new Vector3(Random.Range(bound.bounds.min.x, bound.bounds.max.x),
                             Random.Range(bound.bounds.min.y, bound.bounds.max.y)), quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateSceneObject("Pencil",
+                    PhotonNetwork.InstantiateRoomObject("Pencil",
                         new Vector3(Random.Range(bound.bounds.min.x, bound.bounds.max.x),
                             Random.Range(bound.bounds.min.y, bound.bounds.max.y)), quaternion.identity);
             }

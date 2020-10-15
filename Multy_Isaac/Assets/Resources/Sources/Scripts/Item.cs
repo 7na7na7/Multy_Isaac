@@ -27,6 +27,7 @@ public class Item : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         defaultMat = spr.material;
         StartCoroutine(YuraYura());
+        spr.sprite = item.ItemSprite;
     }
 
     public void Destroy()
