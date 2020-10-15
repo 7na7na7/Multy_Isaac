@@ -16,6 +16,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public bool isSleeping; //자고있는가?
     public float sleepHealSpeed = 5; //자는동안 회복속도
     //아이템
+    public float itemRadious;
+    public LayerMask itemLayer;
     private List<Item> ItemList = new List<Item>();
     public Image[] ItemBoxes;
     bool isSuper = false; //무적인가?
@@ -152,6 +154,27 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
               
                 if (canMove)
                 {
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        Collider2D item = Physics2D.OverlapCircle(transform.position, itemRadious, itemLayer);
+                        if (item != null)
+                        {
+                            if (item.GetComponent<Item>().canGet())
+                            {
+                                if (ItemList.Count < 6)
+                                {
+                                    GetItem(item.GetComponent<Item>());
+                                    item.GetComponent<Item>().Destroy();   
+                                }
+                                else
+                                {
+                                    PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
+                                }
+                            }
+                        }   
+                    }
+
+
                     mp.value += Time.deltaTime * MpHealSpeed;
                     if (!isSleeping)
                     {
@@ -355,19 +378,31 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void GetItem(Item item)
+    public bool GetItem(Item item)
     {
-        if(ItemList.Count<6)
+        if (ItemList.Count < 6)
+        {
             ItemList.Add(item);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public void Hit()
+    public void Hit(PhotonView view)
         {
             if (!isSuper)
             {
                 hp.value -= 10;
                 if (hp.value <= 0)
                 {
+                    if (SceneManager.GetActiveScene().name == "Play")
+                    {
+                        InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
+                            view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);   
+                    }
                     hp.value = hp.maxValue;
                     transform.position=Vector3.zero;
                 }   

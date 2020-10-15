@@ -31,7 +31,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    {
       StartCoroutine(delayDestroy());
       
-      Screen.SetResolution(1920, 1080, true);
+      //Screen.SetResolution(1920, 1080, true);
       instance = this;
       if (isOffline)
       {

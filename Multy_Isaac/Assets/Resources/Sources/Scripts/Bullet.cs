@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (other.GetComponent<Player>().pv.IsMine && !pv.IsMine)
             {
-                other.GetComponent<Player>().Hit();
+                other.GetComponent<Player>().Hit(pv);
                 Destroy(gameObject);
             }
             else if(!other.GetComponent<Player>().pv.IsMine && pv.IsMine)
