@@ -15,8 +15,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //수면
     public bool isSleeping; //자고있는가?
     public float sleepHealSpeed = 5; //자는동안 회복속도
-    
-    bool isSuper = false; //무적인가?
     //이동, 애니메이션
     private CapsuleCollider2D col;
     public bool canMove = true;
@@ -44,6 +42,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
     
     //구르기
+    public bool isSuper = false; //무적인가?
     public Ease easeMode;
     public float rollTime;
     public float rollDistance;

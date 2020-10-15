@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     {
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponent<Player>().pv.IsMine && !pv.IsMine)
+            if (other.GetComponent<Player>().pv.IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
                 other.GetComponent<Player>().Hit(pv);
                 Destroy(gameObject);
