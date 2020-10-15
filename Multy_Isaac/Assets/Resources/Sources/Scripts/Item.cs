@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
 
@@ -15,11 +16,13 @@ public class Item : MonoBehaviour
     private Material defaultMat;
     private SpriteRenderer spr;
     public bool isGet = false;
+    public Ease ease;
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         spr = GetComponent<SpriteRenderer>();
         defaultMat = spr.material;
+        StartCoroutine(YuraYura());
     }
 
     public void Destroy()
@@ -55,6 +58,19 @@ public class Item : MonoBehaviour
         {
             spr.material = defaultMat;
             isGet = false;
+        }
+    }
+
+    IEnumerator YuraYura()
+    {
+        Vector3 pos1 = transform.position + new Vector3(0, 0.1f, 0);
+        Vector3 pos2 = transform.position + new Vector3(0, -0.1f, 0);
+        while (true)
+        {
+            transform.DOMove(pos1,2f).SetEase(ease);
+            yield return new WaitForSeconds(2f);
+            transform.DOMove(pos2,2f).SetEase(ease);
+            yield return new WaitForSeconds(2f);
         }
     }
 }
