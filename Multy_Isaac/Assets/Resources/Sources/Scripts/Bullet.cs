@@ -10,9 +10,11 @@ public class Bullet : MonoBehaviourPunCallbacks
     public float DestroyTime = 1;
     private int dir;
     public PhotonView pv;
+    private SpriteRenderer spr;
     void Start()
     {
         Destroy(gameObject,DestroyTime);
+        spr = GetComponent<SpriteRenderer>();
     }
     
     void Update()
@@ -27,7 +29,13 @@ public class Bullet : MonoBehaviourPunCallbacks
             if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
                 other.GetComponent<Player>().Hit(pv);
+                spr.sprite = null;
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
+            }
+            else
+            {
+                if(!other.GetComponent<Player>().isSuper) 
+                    spr.sprite = null;
             }
         }
         else if (other.CompareTag("Enemy"))
