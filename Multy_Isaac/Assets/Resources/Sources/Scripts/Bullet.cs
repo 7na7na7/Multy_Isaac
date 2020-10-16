@@ -24,12 +24,12 @@ public class Bullet : MonoBehaviourPunCallbacks
     {
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponent<Player>().pv.IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
+            if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
                 other.GetComponent<Player>().Hit(pv);
                 Destroy(gameObject);
             }
-            else if(!other.GetComponent<Player>().pv.IsMine && pv.IsMine)
+            else if(!other.GetComponent<PhotonView>().IsMine && pv.IsMine)
             {
                 Destroy(gameObject);
             }
