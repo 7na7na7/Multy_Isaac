@@ -27,11 +27,7 @@ public class Bullet : MonoBehaviourPunCallbacks
             if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
                 other.GetComponent<Player>().Hit(pv);
-                Destroy(gameObject);
-            }
-            else if(!other.GetComponent<PhotonView>().IsMine && pv.IsMine)
-            {
-                Destroy(gameObject);
+                pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
         }
         else if (other.CompareTag("Enemy"))
@@ -54,11 +50,7 @@ public class Bullet : MonoBehaviourPunCallbacks
                 }
             }
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag=="Wall")
+        else if (other.gameObject.tag=="Wall")
         {
             if (PhotonNetwork.OfflineMode)
                 Destroy(gameObject);
@@ -66,6 +58,7 @@ public class Bullet : MonoBehaviourPunCallbacks
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
         }
     }
+    
 
     [PunRPC]
     public void DestroyRPC()
