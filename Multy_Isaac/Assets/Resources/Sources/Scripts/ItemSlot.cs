@@ -50,7 +50,7 @@ public class ItemSlot : MonoBehaviour
 
     public void Discard()
     {
-        player.DiscardItem(index);
+        player.DiscardItem(index,player.ItemList[index].index);
         Btns.SetActive(false);
     }
     public void Up()

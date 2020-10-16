@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public int index;
     public string ItemName=null;
     public Sprite ItemSprite=null;
     public itemType type = itemType.item;

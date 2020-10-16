@@ -72,11 +72,16 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void DiscardItem(int index)
+    public void DiscardItem(int index, int itemIndex)
     {
-        GameObject itemPrefab=PhotonNetwork.InstantiateRoomObject("ItemPrefab", transform.position, quaternion.identity);
-        itemPrefab.GetComponent<Item>().item = ItemList[index];
         ItemList.RemoveAt(index);
+        player.pv.RPC("discardRPC",RpcTarget.All,"item"+itemIndex);
+    }
+
+    [PunRPC]
+    void discardRPC(string itemName)
+    {
+        PhotonNetwork.InstantiateRoomObject(itemName, transform.position, quaternion.identity);
     }
     public bool GetItem(tem item)
     {
