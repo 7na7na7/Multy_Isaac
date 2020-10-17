@@ -17,7 +17,8 @@ public class PlayerItem : MonoBehaviour
     public GameObject[] btns;
     private Player player;
     public Sprite NullSprite;
-    public GameObject OfflineItemPrefab;
+    public ItemSlot[] slots;
+    
     private void Start()
     {
         player = GetComponent<Player>();
@@ -74,14 +75,40 @@ public class PlayerItem : MonoBehaviour
 
     public void DiscardItem(int index, int itemIndex)
     {
-        ItemList.RemoveAt(index);
-        player.pv.RPC("discardRPC",RpcTarget.All,"item"+itemIndex);
+        if (ItemList[index] != null)
+        {
+            ItemList.RemoveAt(index);
+            player.pv.RPC("discardRPC",RpcTarget.All,"item"+itemIndex);   
+        }
     }
 
+    public void DeadDiscard(int index)
+    {
+        if (ItemList[index] != null)
+        {
+            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,"item"+ItemList[index].index);      
+        }
+    }
+    public void Dead()
+    {
+        for (int i = 0; i < ItemList.Count; i++)
+        {
+            DeadDiscard(i);
+        }
+
+      ItemList.Clear();
+    }
     [PunRPC]
     void discardRPC(string itemName)
     {
         PhotonNetwork.InstantiateRoomObject(itemName, transform.position, quaternion.identity);
+    }
+    
+    [PunRPC]
+    void DeadDiscardRPC(string itemName)
+    {
+        PhotonNetwork.InstantiateRoomObject(itemName, 
+            new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity);
     }
     public bool GetItem(tem item)
     {

@@ -348,6 +348,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    public void Die(PhotonView view)
+    {
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
+                view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);   
+            GetComponent<PlayerItem>().Dead();
+        }
+        hp.value = hp.maxValue;
+        transform.position=Vector3.zero;
+    }
  
 
     public void Hit(PhotonView view)
@@ -357,13 +368,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 hp.value -= 10;
                 if (hp.value <= 0)
                 {
-                    if (SceneManager.GetActiveScene().name == "Play")
-                    {
-                        InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                            view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);   
-                    }
-                    hp.value = hp.maxValue;
-                    transform.position=Vector3.zero;
+                   Die(view);
                 }   
             }
         }

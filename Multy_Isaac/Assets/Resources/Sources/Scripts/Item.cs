@@ -69,8 +69,8 @@ public class Item : MonoBehaviour
 
     IEnumerator YuraYura()
     {
-        Vector3 pos1 = transform.position + new Vector3(0, 0.1f, 0);
-        Vector3 pos2 = transform.position + new Vector3(0, -0.1f, 0);
+        Vector3 pos1 = transform.position + new Vector3(0, 0.12f, 0);
+        Vector3 pos2 = transform.position + new Vector3(0, -0.12f, 0);
         while (true)
         {
             transform.DOMove(pos1,2f).SetEase(ease);
