@@ -88,12 +88,9 @@ public class PlayerItem : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
-            if (ItemList[i] != null)
-            {
-                DiscardItem(i,ItemList[i].index);
-                ItemList[i].Clear();   
+            DiscardItem(i,ItemList[i].index);
+            
             }
-        }
     }
     [PunRPC]
     void discardRPC(string itemName)
