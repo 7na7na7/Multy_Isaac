@@ -84,12 +84,21 @@ public class PlayerItem : MonoBehaviour
         }
     }
     
+    public void DeadDiscardItem(int index, int itemIndex) //랜덤으로 떨어짐
+    {
+        if (ItemList[index] != null)
+        {
+            ItemList[index].Clear();
+            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,"item"+itemIndex);   
+        }
+    }
+
     public void Dead()
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
             if(ItemList[i].index!=0) 
-                DiscardItem(i,ItemList[i].index);
+                DeadDiscardItem(i,ItemList[i].index);
         }
     }
     [PunRPC]
