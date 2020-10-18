@@ -39,12 +39,12 @@ public class ItemSlot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (player.ItemList.Count>index)
-            {
-                if(!Btns.activeSelf)
-                    player.OtherBtnSetFalse(index);
-                Btns.SetActive(!Btns.activeSelf);   
-            }
+            if (player.ItemList[index].ItemName != "")
+                {
+                    if(!Btns.activeSelf)
+                        player.OtherBtnSetFalse(index);
+                    Btns.SetActive(!Btns.activeSelf);   
+                }
         }
     }
 

@@ -7,10 +7,18 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
-    public int index;
-    public string ItemName=null;
+    public int index=0;
+    public string ItemName="";
     public Sprite ItemSprite=null;
     public itemType type = itemType.item;
+
+    public void Clear()
+    {
+        index = 0;
+        ItemName = "";
+        ItemSprite = null;
+        type = itemType.item;
+    }
 }
 public enum itemType { Weapon, Guard, Food, item}
 public class Item : MonoBehaviour

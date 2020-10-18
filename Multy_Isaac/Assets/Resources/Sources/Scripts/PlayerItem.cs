@@ -12,7 +12,7 @@ public class PlayerItem : MonoBehaviour
     //아이템
     public float itemRadious;
     public LayerMask itemLayer;
-    public List<tem> ItemList = new List<tem>();
+    public tem[] ItemList;
     public Image[] ItemBoxes;
     public GameObject[] btns;
     private Player player;
@@ -38,16 +38,13 @@ public class PlayerItem : MonoBehaviour
     {
         if (player.pv.IsMine)
         {
-            for (int i = 0; i < ItemList.Count; i++)
+            for (int i = 0; i < ItemList.Length; i++)
             {
-                ItemBoxes[i].sprite = ItemList[i].ItemSprite;
+                if(ItemList[i].ItemSprite!=null) 
+                    ItemBoxes[i].sprite = ItemList[i].ItemSprite;
+                else
+                    ItemBoxes[i].sprite = NullSprite;
             }
-
-            for (int i = ItemList.Count; i < 6; i++)
-            {
-                ItemBoxes[i].sprite = NullSprite;
-            }
-
             if (player.canMove)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -57,15 +54,20 @@ public class PlayerItem : MonoBehaviour
                     {
                         if (item.GetComponent<Item>().canGet())
                         {
-                            if (ItemList.Count < 6)
+                            bool isGet = false;
+                            for (int i = 0; i < ItemList.Length; i++)
                             {
-                                GetItem(item.GetComponent<Item>().item);
-                                item.GetComponent<Item>().Destroy();   
+                                if (ItemList[i].ItemName == "")
+                                {
+                                    isGet = true;
+                                    ItemList[i]=item.GetComponent<Item>().item;
+                                    item.GetComponent<Item>().Destroy();
+                                    break;
+                                }
                             }
-                            else
-                            {
-                                PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
-                            }
+                            if(!isGet) 
+                             PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
+                            
                         }
                     }   
                 }
@@ -77,26 +79,21 @@ public class PlayerItem : MonoBehaviour
     {
         if (ItemList[index] != null)
         {
-            ItemList.RemoveAt(index);
+            ItemList[index].Clear();
             player.pv.RPC("discardRPC",RpcTarget.All,"item"+itemIndex);   
         }
     }
-
-    public void DeadDiscard(int index)
-    {
-        if (ItemList[index] != null)
-        {
-            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,"item"+ItemList[index].index);      
-        }
-    }
+    
     public void Dead()
     {
-        for (int i = 0; i < ItemList.Count; i++)
+        for (int i = 0; i < ItemList.Length; i++)
         {
-            DeadDiscard(i);
+            if (ItemList[i] != null)
+            {
+                DiscardItem(i,ItemList[i].index);
+                ItemList[i].Clear();   
+            }
         }
-
-      ItemList.Clear();
     }
     [PunRPC]
     void discardRPC(string itemName)
@@ -109,17 +106,5 @@ public class PlayerItem : MonoBehaviour
     {
         PhotonNetwork.InstantiateRoomObject(itemName, 
             new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity);
-    }
-    public bool GetItem(tem item)
-    {
-        if (ItemList.Count < 6)
-        {
-            ItemList.Add(item);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 }
