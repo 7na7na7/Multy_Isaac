@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
+    public Invent invent;
     PlayerItem player;
     public int index;
     private Image img;
@@ -50,8 +51,20 @@ public class ItemSlot : MonoBehaviour
 
     public void Discard()
     {
-        player.DiscardItem(index,player.ItemList[index].index);
-        Btns.SetActive(false);
+       
+            player.DiscardItem(index,player.ItemList[index].index);
+            Btns.SetActive(false);   
+       
+    }
+
+    public void Combine()
+    {
+      
+        
+            invent.gameObject.SetActive(true);
+        invent.Open(player.ItemList[index]);
+        Btns.SetActive(false);   
+        
     }
     public void Up()
     {

@@ -7,17 +7,20 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public tem[] CompleteItem;
     public int index=0;
     public string ItemName="";
     public Sprite ItemSprite=null;
     public itemType type = itemType.item;
-
+    public string ItemDescription = "";
     public void Clear()
     {
+        //CompleteItem=new tem[0];
         index = 0;
         ItemName = "";
         ItemSprite = null;
         type = itemType.item;
+        ItemDescription="";
     }
 }
 public enum itemType { Weapon, Guard, Food, item}
