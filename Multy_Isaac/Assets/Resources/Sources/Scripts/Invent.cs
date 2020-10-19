@@ -17,11 +17,12 @@ public class Invent : MonoBehaviour
     public Text ItemName; //템이름 
     public Text ItemDescription; //템설명
     private ItemData ItemData;
-
+    private Animator anim;
     private void Start()
     {
         ItemData = FindObjectOfType<ItemData>();
         completeTemArray[0] = ItemData.temDatas[2]; //오류 하나 내줘서 첨에 제대로 안나오는거 고침 ㅋ
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -52,14 +53,23 @@ public class Invent : MonoBehaviour
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        anim.Play("InvenClose");
     }
     public void Open(tem item)
     {
+        anim.Play("InvenOpen");
         elementItem = item;
         for (int i = 0; i < item.CompleteItemIndex.Length; i++)
         {
-            completeTemArray[i] = ItemData.temDatas[item.CompleteItemIndex[i]];
+            foreach (tem tem in ItemData.temDatas)
+            {
+                if (tem.index == item.CompleteItemIndex[i])
+                {
+                    completeTemArray[i] = ItemData.temDatas[item.CompleteItemIndex[i]];
+                    break;
+                }
+            }
+           
         }
 
         for (int i = item.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
