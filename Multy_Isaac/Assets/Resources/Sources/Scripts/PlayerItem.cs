@@ -18,9 +18,10 @@ public class PlayerItem : MonoBehaviour
     private Player player;
     public Sprite NullSprite;
     public ItemSlot[] slots;
-    
+   
     private void Start()
     {
+     
         player = GetComponent<Player>();
     }
 
@@ -92,7 +93,6 @@ public class PlayerItem : MonoBehaviour
             player.pv.RPC("DeadDiscardRPC",RpcTarget.All,"item"+itemIndex);   
         }
     }
-
     public void Dead()
     {
         for (int i = 0; i < ItemList.Length; i++)

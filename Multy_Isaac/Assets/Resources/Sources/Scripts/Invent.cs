@@ -16,6 +16,13 @@ public class Invent : MonoBehaviour
     public Image[] completes; //조합템
     public Text ItemName; //템이름 
     public Text ItemDescription; //템설명
+    private ItemData ItemData;
+
+    private void Start()
+    {
+        ItemData = FindObjectOfType<ItemData>();
+        completeTemArray[0] = ItemData.temDatas[2]; //오류 하나 내줘서 첨에 제대로 안나오는거 고침 ㅋ
+    }
 
     private void Update()
     {
@@ -49,15 +56,13 @@ public class Invent : MonoBehaviour
     }
     public void Open(tem item)
     {
-        print(item.index+" "+item.ItemDescription+" "+item.ItemName+" "+item.type);
         elementItem = item;
-        for (int i = 0; i < item.CompleteItem.Length; i++)
+        for (int i = 0; i < item.CompleteItemIndex.Length; i++)
         {
-            completeTemArray[i] = item.CompleteItem[i];
-            completeTemArray[i].index = 1;
+            completeTemArray[i] = ItemData.temDatas[item.CompleteItemIndex[i]];
         }
 
-        for (int i = item.CompleteItem.Length; i < completeTemArray.Length; i++)
+        for (int i = item.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
         {
             completeTemArray[i].index = 0;
         }
