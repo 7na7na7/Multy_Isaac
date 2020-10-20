@@ -10,15 +10,25 @@ public class ItemData : MonoBehaviour
     
     public tem GetItem(int Index)
     {
-        for (int i = 0; i < temDatas.Count; i++)
+        tem tem = temDatas.Find(data => data.index == Index);
+        if (tem != null)
         {
-            if (temDatas[i].index == Index)
-            {
-                tem item = temDatas[i];
-                return item;
-            }
+            return tem;
         }
-        print(Index+"(이)라는 인덱스는 없어용!");
-        return temDatas[0];
+        else
+        {
+            print(Index+"(이)라는 인덱스는 없어용!");
+            return temDatas[0];
+        }
+//        for (int i = 0; i < temDatas.Count; i++)
+//        {
+//            if (temDatas[i].index == Index)
+//            {
+//                tem item = temDatas[i];
+//               
+//            }
+//        }
+//       
+//        return temDatas[0];
     }
 }
