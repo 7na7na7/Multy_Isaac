@@ -20,6 +20,7 @@ public class Invent : MonoBehaviour
     private Animator anim;
     public GameObject Big, Small;
     private tem element;
+    public Button InventBTn;
     private void Start()
     {
         anim = GetComponent<Animator>();
