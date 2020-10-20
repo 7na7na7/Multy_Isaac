@@ -54,7 +54,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          {
             for (int i = 0; i < 20;i++)
             {
-               p.Hit(p.pv);  
+               p.Die(p.pv);
             }
             break;
          }
