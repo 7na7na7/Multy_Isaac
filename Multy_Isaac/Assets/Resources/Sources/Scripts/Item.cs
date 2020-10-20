@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
-    public tem[] CompleteItem;
+    public int[] CompleteItemIndex; //상위템
     public int index=0;
     public string ItemName="";
     public Sprite ItemSprite=null;
@@ -41,7 +41,7 @@ public class Item : MonoBehaviour
         StartCoroutine(YuraYura());
         spr.sprite = item.ItemSprite;
     }
-
+    
     public void Destroy()
     {
         if(InGameNetwork.instance.isOffline)
