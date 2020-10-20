@@ -30,6 +30,6 @@ public class element : MonoBehaviour
 
     public void Open()
     {
-        invent.Open(tem.index);
+        invent.Open(tem);
     }
 }

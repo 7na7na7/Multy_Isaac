@@ -27,23 +27,23 @@ public class Invent : MonoBehaviour
     {
         anim.Play("InvenClose");
     }
-    public void Open(int itemIndex)
+    public void Open(tem item)
     {
         anim.Play("InvenOpen");
-        foreach (tem tem in ItemData.temDatas)
-        {
-            if (tem.index == itemIndex)
-            {
-                elementItem = tem;
-                break;
-            }
-        }
-        
-            for (int i = 0; i < elementItem.CompleteItemIndex.Length; i++)
+        elementItem = item;
+
+
+//        for (int j = 0; j < completes.Length; j++)
+//        {
+//            completes[j].tem.Clear();
+//        }
+
+       
+            for (int i = 0; i < item.CompleteItemIndex.Length; i++)
             {
                 foreach (tem tem in ItemData.temDatas)
                 {
-                    if (tem.index == elementItem.CompleteItemIndex[i])
+                    if (tem.index == item.CompleteItemIndex[i])
                     {
                         completes[i].tem = tem;
                         break;
@@ -70,5 +70,6 @@ public class Invent : MonoBehaviour
                 BigItemImg.sprite = elementItem.ItemSprite;
                 BigItemName.text = elementItem.ItemName;
             }
+
     }
 }
