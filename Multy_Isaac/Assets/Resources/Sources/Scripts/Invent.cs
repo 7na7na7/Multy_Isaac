@@ -20,7 +20,9 @@ public class Invent : MonoBehaviour
     private Animator anim;
     public GameObject Big, Small;
     private tem element;
-    public Button InventBTn;
+    public Button InventBtn;
+    private bool CanCombine = false;
+    public PlayerItem PlayerItem;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -35,6 +37,31 @@ public class Invent : MonoBehaviour
     public void CompleteOpen(int index)
     {
         Open(completeTemArray[index]);
+    }
+
+    private void Update()
+    {
+        if(element!=null)
+        {
+            if (element.SmallItemIndex.Length != 0)
+            {
+                if (PlayerItem.GetItem(element.SmallItemIndex[0]).index != 0 &&PlayerItem.GetItem(element.SmallItemIndex[1]).index != 0)
+                {
+                    InventBtn.interactable = true;
+                    CanCombine = true;
+                }
+                else
+                {
+                    InventBtn.interactable = false;
+                    CanCombine = false;
+                }      
+            }
+            else
+            {
+                InventBtn.interactable = false;
+                CanCombine = false;
+            }
+        }
     }
 
     public void SmallOpen(int index)
@@ -114,6 +141,14 @@ public class Invent : MonoBehaviour
             ItemDescription.text = element.ItemDescription;
           
             WhereGet.text ="획득 경로 : "+ element.WhereGet;
+        }
+    }
+
+    public void Combine()
+    {
+        if (CanCombine)
+        {
+            print("조합성공!");
         }
     }
 }

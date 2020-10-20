@@ -18,17 +18,8 @@ public class ItemData : MonoBehaviour
         else
         {
             print(Index+"(이)라는 인덱스는 없어용!");
-            return temDatas[0];
+            tem.index = 0;
+            return tem;
         }
-//        for (int i = 0; i < temDatas.Count; i++)
-//        {
-//            if (temDatas[i].index == Index)
-//            {
-//                tem item = temDatas[i];
-//               
-//            }
-//        }
-//       
-//        return temDatas[0];
     }
 }

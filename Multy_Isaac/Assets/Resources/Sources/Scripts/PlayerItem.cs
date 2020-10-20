@@ -75,6 +75,30 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    
+    public tem GetItem(int Index)
+    {
+        tem tem = new tem();
+        foreach (tem item in ItemList)
+        {
+            if (item.index == Index)
+            {
+                tem = item;
+                break;
+            }
+        }
+        if (tem != null)
+        {
+            return tem;
+        }
+        else
+        {
+            print(Index+"(이)라는 인덱스는 없어용!");
+            tem.index = 0;
+            return tem;
+        }
+    }
+
     public void DiscardItem(int index, int itemIndex)
     {
         if (ItemList[index] != null)
