@@ -7,12 +7,7 @@ using UnityEngine;
 public class ItemData : MonoBehaviour
 {
     public List<tem> temDatas;
-
-    private void Update()
-    {
-        print(GetItem(3).ItemName);
-    }
-
+    
     public tem GetItem(int Index)
     {
         for (int i = 0; i < temDatas.Count; i++)

@@ -11,6 +11,7 @@ public class Invent : MonoBehaviour
     public Sprite BoxSprite;
     public Image BigItemImg;
     public Text BigItemName;
+    public Text WhereGet;
     public Image[] completeBoxes; //조합템 테두리
     public Image[] completes; //조합템
     public Text ItemName; //템이름 
@@ -36,8 +37,7 @@ public class Invent : MonoBehaviour
     public void Open(tem item)
     {
         anim.Play("InvenOpen");
-
-        print(item.CompleteItemIndex.Length+" "+completeTemArray.Length);
+        
         for (int i = 0; i < item.CompleteItemIndex.Length; i++)
         {
             completeTemArray[i].index = ItemData.GetItem(item.CompleteItemIndex[i]).index;
@@ -46,6 +46,7 @@ public class Invent : MonoBehaviour
             completeTemArray[i].ItemName = ItemData.GetItem(item.CompleteItemIndex[i]).ItemName;
             completeTemArray[i].ItemSprite = ItemData.GetItem(item.CompleteItemIndex[i]).ItemSprite;
             completeTemArray[i].CompleteItemIndex = ItemData.GetItem(item.CompleteItemIndex[i]).CompleteItemIndex;
+            completeTemArray[i].WhereGet = ItemData.GetItem(item.CompleteItemIndex[i]).WhereGet;
         }
 
         for (int i = item.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
@@ -75,6 +76,7 @@ public class Invent : MonoBehaviour
             ItemDescription.text = item.ItemDescription;
             BigItemImg.sprite = item.ItemSprite;
             BigItemName.text = item.ItemName;
+            WhereGet.text ="획득 경로 : "+ item.WhereGet;
         }
     }
 }

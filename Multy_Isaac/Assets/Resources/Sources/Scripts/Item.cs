@@ -13,6 +13,7 @@ public class tem
     public Sprite ItemSprite=null;
     public itemType type = itemType.item;
     public string ItemDescription = "";
+    public string WhereGet = "";
     public void Clear()
     {
         CompleteItemIndex=new int[0];
