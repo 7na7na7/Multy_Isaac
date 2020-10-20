@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
-    public int[] CompleteItemIndex;
+    public tem[] CompleteItem;
     public int index=0;
     public string ItemName="";
     public Sprite ItemSprite=null;
@@ -15,6 +15,7 @@ public class tem
     public string ItemDescription = "";
     public void Clear()
     {
+        //CompleteItem=new tem[0];
         index = 0;
         ItemName = "";
         ItemSprite = null;
@@ -25,7 +26,6 @@ public class tem
 public enum itemType { Weapon, Guard, Food, item}
 public class Item : MonoBehaviour
 {
-    public int index;
     public tem item;
     private PhotonView pv;
     public Material outlineMat;
@@ -40,7 +40,6 @@ public class Item : MonoBehaviour
         defaultMat = spr.material;
         StartCoroutine(YuraYura());
         spr.sprite = item.ItemSprite;
-        item = FindObjectOfType<ItemData>().temDatas[index];
     }
 
     public void Destroy()
