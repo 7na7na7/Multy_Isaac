@@ -352,8 +352,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (SceneManager.GetActiveScene().name == "Play")
         {
-            InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);   
+            if (view == pv)
+            {
+                InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
+                    view.Controller.NickName+"<color=red> Suicided </color>");   
+            }
+            else
+            {
+                InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
+                    view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
+            }
             GetComponent<PlayerItem>().Dead();
         }
         hp.value = hp.maxValue;

@@ -17,7 +17,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public bool isOffline;
    
    public static InGameNetwork instance; //싱글톤
-   
+   private bool isDisconnecting = false;
    [Header("Chat")]
    public Text[] ChatText;
    public InputField ChatInput;
@@ -43,7 +43,26 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          Spawn();
       }
    }
-  
+
+   IEnumerator Disconnecting()
+   {
+      isDisconnecting = true;
+      Player[] players = FindObjectsOfType<Player>();
+      foreach (Player p in players)
+      {
+         if (p.pv.IsMine)
+         {
+            for (int i = 0; i < 20;i++)
+            {
+               p.Hit(p.pv);  
+            }
+            break;
+         }
+      }  
+      yield return new WaitForSeconds(0.5f);
+      PhotonNetwork.LeaveRoom();
+      Disconnect();
+   }
    private void Update()
    {
       if (PhotonNetwork.IsConnected)
@@ -63,8 +82,8 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       
       if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
       {
-         PhotonNetwork.LeaveRoom();
-         Disconnect();
+         if(!isDisconnecting) 
+            StartCoroutine(Disconnecting());
       }
 
       if (ChatInput.isFocused)
