@@ -59,6 +59,9 @@ public class ItemSlot : MonoBehaviour
 
     public void Combine()
     {
+      
+        
+            invent.gameObject.SetActive(true);
         invent.Open(player.ItemList[index]);
         Btns.SetActive(false);   
         
