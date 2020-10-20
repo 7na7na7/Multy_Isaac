@@ -15,7 +15,7 @@ public class tem
     public string ItemDescription = "";
     public void Clear()
     {
-        //CompleteItem=new tem[0];
+        CompleteItemIndex=new int[0];
         index = 0;
         ItemName = "";
         ItemSprite = null;

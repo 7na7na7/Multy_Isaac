@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Invent : MonoBehaviour
 {
     public tem[] completeTemArray;
-    private tem elementItem;
     public Sprite NoneSprite;
     public Sprite BoxSprite;
     public Image BigItemImg;
@@ -29,16 +28,24 @@ public class Invent : MonoBehaviour
     {
         anim.Play("InvenClose");
     }
+
+    public void CompleteOpen(int index)
+    {
+        Open(completeTemArray[index]);
+    }
     public void Open(tem item)
     {
         anim.Play("InvenOpen");
-        print(item.index+" "+item.ItemDescription+" "+item.ItemName+" "+item.type);
-        elementItem = item;
+
+        print(item.CompleteItemIndex.Length+" "+completeTemArray.Length);
         for (int i = 0; i < item.CompleteItemIndex.Length; i++)
         {
-            print(ItemData.GetItem(i).ItemName);
-            completeTemArray[i] = ItemData.GetItem(item.CompleteItemIndex[i]);
-            //completeTemArray[i].index = 1;
+            completeTemArray[i].index = ItemData.GetItem(item.CompleteItemIndex[i]).index;
+            completeTemArray[i].type = ItemData.GetItem(item.CompleteItemIndex[i]).type;
+            completeTemArray[i].ItemDescription = ItemData.GetItem(item.CompleteItemIndex[i]).ItemDescription;
+            completeTemArray[i].ItemName = ItemData.GetItem(item.CompleteItemIndex[i]).ItemName;
+            completeTemArray[i].ItemSprite = ItemData.GetItem(item.CompleteItemIndex[i]).ItemSprite;
+            completeTemArray[i].CompleteItemIndex = ItemData.GetItem(item.CompleteItemIndex[i]).CompleteItemIndex;
         }
 
         for (int i = item.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
@@ -62,12 +69,12 @@ public class Invent : MonoBehaviour
             
         }
 
-        if (elementItem != null)
+        if (item != null)
         {
-            ItemName.text = elementItem.ItemName;
-            ItemDescription.text = elementItem.ItemDescription;
-            BigItemImg.sprite = elementItem.ItemSprite;
-            BigItemName.text = elementItem.ItemName;
+            ItemName.text = item.ItemName;
+            ItemDescription.text = item.ItemDescription;
+            BigItemImg.sprite = item.ItemSprite;
+            BigItemName.text = item.ItemName;
         }
     }
 }
