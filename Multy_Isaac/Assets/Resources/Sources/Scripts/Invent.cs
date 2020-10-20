@@ -11,6 +11,8 @@ public class Invent : MonoBehaviour
     public Sprite BoxSprite;
     public Image BigItemImg;
     public Text BigItemName;
+    public Image SmallItemImg1, SmallItemImg2, BigItemImg2;
+    public Text SmallItemName1, SmallItemName2, BigItemName2;
     public Text WhereGet;
     public Image[] completeBoxes; //조합템 테두리
     public Image[] completes; //조합템
@@ -18,7 +20,7 @@ public class Invent : MonoBehaviour
     public Text ItemDescription; //템설명
     private ItemData ItemData;
     private Animator anim;
-
+    public GameObject Big, Small;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -47,6 +49,7 @@ public class Invent : MonoBehaviour
             completeTemArray[i].ItemSprite = ItemData.GetItem(item.CompleteItemIndex[i]).ItemSprite;
             completeTemArray[i].CompleteItemIndex = ItemData.GetItem(item.CompleteItemIndex[i]).CompleteItemIndex;
             completeTemArray[i].WhereGet = ItemData.GetItem(item.CompleteItemIndex[i]).WhereGet;
+            completeTemArray[i].SmallItemIndex = ItemData.GetItem(item.CompleteItemIndex[i]).SmallItemIndex;
         }
 
         for (int i = item.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
@@ -72,10 +75,27 @@ public class Invent : MonoBehaviour
 
         if (item != null)
         {
+            if (item.SmallItemIndex.Length >= 2)
+            {
+                Big.SetActive(false);
+                Small.SetActive(true);
+                SmallItemImg1.sprite = ItemData.GetItem(item.SmallItemIndex[0]).ItemSprite;
+                SmallItemImg2.sprite = ItemData.GetItem(item.SmallItemIndex[1]).ItemSprite;
+                SmallItemName1.text = ItemData.GetItem(item.SmallItemIndex[0]).ItemName;
+                SmallItemName2.text = ItemData.GetItem(item.SmallItemIndex[1]).ItemName;
+                BigItemImg2.sprite = item.ItemSprite;
+                BigItemName2.text = item.ItemName;
+            }
+            else
+            {
+                Big.SetActive(true);
+                Small.SetActive(false);
+                BigItemImg.sprite = item.ItemSprite;
+                BigItemName.text = item.ItemName;
+            }
             ItemName.text = item.ItemName;
             ItemDescription.text = item.ItemDescription;
-            BigItemImg.sprite = item.ItemSprite;
-            BigItemName.text = item.ItemName;
+          
             WhereGet.text ="획득 경로 : "+ item.WhereGet;
         }
     }

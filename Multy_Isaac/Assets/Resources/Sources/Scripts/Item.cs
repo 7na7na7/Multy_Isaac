@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public int[] SmallItemIndex; //하위템
     public int[] CompleteItemIndex; //상위템
     public int index=0;
     public string ItemName="";
