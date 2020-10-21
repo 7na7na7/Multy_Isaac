@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +20,10 @@ public class PlayerItem : MonoBehaviour
     private Player player;
     public Sprite NullSprite;
     public ItemSlot[] slots;
-    
+    private ItemData itemData;
     private void Start()
     {
+        itemData = FindObjectOfType<ItemData>();
         player = GetComponent<Player>();
     }
 
@@ -75,8 +78,25 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    
-    public tem GetItem(int Index)
+    public void GetItem(tem item)
+    {
+        bool isGet = false;
+        for (int i = 0; i < ItemList.Length; i++)
+        {
+            if (ItemList[i].ItemName == "")
+            {
+                isGet = true;
+                ItemList[i] = item;
+                break;
+            }
+        }
+
+        if (!isGet)
+        {
+            PopUpManager.instance.PopUp("더 이상 만들 수 없습니다!", Color.red);
+        }
+    }
+    public tem GetItemArray(int Index)
     {
         tem tem = new tem();
         foreach (tem item in ItemList)
@@ -104,7 +124,7 @@ public class PlayerItem : MonoBehaviour
         if (ItemList[index] != null)
         {
             ItemList[index].Clear();
-            player.pv.RPC("discardRPC",RpcTarget.All,"item"+itemIndex);   
+            player.pv.RPC("discardRPC",RpcTarget.All,itemIndex);   
         }
     }
     
@@ -113,7 +133,7 @@ public class PlayerItem : MonoBehaviour
         if (ItemList[index] != null)
         {
             ItemList[index].Clear();
-            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,"item"+itemIndex);   
+            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,itemIndex);   
         }
     }
 
@@ -126,15 +146,18 @@ public class PlayerItem : MonoBehaviour
         }
     }
     [PunRPC]
-    void discardRPC(string itemName)
+    void discardRPC(int TemIndex)
     {
-        PhotonNetwork.InstantiateRoomObject(itemName, transform.position, quaternion.identity);
+        Item item= PhotonNetwork.InstantiateRoomObject("Item", transform.position, quaternion.identity).GetComponent<Item>(); 
+        item.item = itemData.GetItemList(TemIndex);
     }
     
     [PunRPC]
-    void DeadDiscardRPC(string itemName)
+    void DeadDiscardRPC(int TemIndex)
     {
-        PhotonNetwork.InstantiateRoomObject(itemName, 
-            new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity);
+        Item item= PhotonNetwork.InstantiateRoomObject("Item", new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity).GetComponent<Item>(); 
+        item.item = itemData.GetItemList(TemIndex);
     }
+    
+   
 }

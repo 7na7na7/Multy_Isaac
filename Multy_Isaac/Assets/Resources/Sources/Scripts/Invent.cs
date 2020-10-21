@@ -19,7 +19,7 @@ public class Invent : MonoBehaviour
     private ItemData ItemData;
     private Animator anim;
     public GameObject Big, Small;
-    private tem element;
+    public tem element;
     public Button InventBtn;
     private bool CanCombine = false;
     public PlayerItem PlayerItem;
@@ -45,7 +45,7 @@ public class Invent : MonoBehaviour
         {
             if (element.SmallItemIndex.Length != 0)
             {
-                if (PlayerItem.GetItem(element.SmallItemIndex[0]).index != 0 &&PlayerItem.GetItem(element.SmallItemIndex[1]).index != 0)
+                if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index != 0 &&PlayerItem.GetItemArray(element.SmallItemIndex[1]).index != 0)
                 {
                     InventBtn.interactable = true;
                     CanCombine = true;
@@ -67,14 +67,8 @@ public class Invent : MonoBehaviour
     public void SmallOpen(int index)
     {
         tem temm=new tem();
-        temm.index = ItemData.GetItem(element.SmallItemIndex[index]).index;
-        temm.type = ItemData.GetItem(element.SmallItemIndex[index]).type;
-        temm.ItemDescription = ItemData.GetItem(element.SmallItemIndex[index]).ItemDescription;
-        temm.ItemName= ItemData.GetItem(element.SmallItemIndex[index]).ItemName;
-        temm.ItemSprite = ItemData.GetItem(element.SmallItemIndex[index]).ItemSprite;
-        temm.CompleteItemIndex = ItemData.GetItem(element.SmallItemIndex[index]).CompleteItemIndex;
-        temm.WhereGet = ItemData.GetItem(element.SmallItemIndex[index]).WhereGet;
-        temm.SmallItemIndex = ItemData.GetItem(element.SmallItemIndex[index]).SmallItemIndex;
+        tem tempTem = ItemData.GetItemList(element.SmallItemIndex[index]);
+        temm.Copy(tempTem);
         Open(temm);
     }
 
@@ -82,28 +76,28 @@ public class Invent : MonoBehaviour
     {
         element = taaaaam;
         anim.Play("InvenOpen");
+        tem tem;
+        
+        for (int i = 0; i < completeTemArray.Length; i++)
+        {
+            completeTemArray[i].canSee =true;
+        }
         
         for (int i = 0; i < element.CompleteItemIndex.Length; i++)
         {
-            completeTemArray[i].index = ItemData.GetItem(element.CompleteItemIndex[i]).index;
-            completeTemArray[i].type = ItemData.GetItem(element.CompleteItemIndex[i]).type;
-            completeTemArray[i].ItemDescription = ItemData.GetItem(element.CompleteItemIndex[i]).ItemDescription;
-            completeTemArray[i].ItemName = ItemData.GetItem(element.CompleteItemIndex[i]).ItemName;
-            completeTemArray[i].ItemSprite = ItemData.GetItem(element.CompleteItemIndex[i]).ItemSprite;
-            completeTemArray[i].CompleteItemIndex = ItemData.GetItem(element.CompleteItemIndex[i]).CompleteItemIndex;
-            completeTemArray[i].WhereGet = ItemData.GetItem(element.CompleteItemIndex[i]).WhereGet;
-            completeTemArray[i].SmallItemIndex = ItemData.GetItem(element.CompleteItemIndex[i]).SmallItemIndex;
+            tem = ItemData.GetItemList(element.CompleteItemIndex[i]);
+            completeTemArray[i].Copy(tem);
         }
 
         for (int i = element.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
         {
-            completeTemArray[i].index = 0;
+            completeTemArray[i].canSee = false;
         }
         
         
         for (int i = 0; i < completeTemArray.Length; i++)
         {
-            if (completeTemArray[i].index != 0)
+            if (completeTemArray[i].canSee)
             {
                 completeBoxes[i].gameObject.SetActive(true);
                 completes[i].gameObject.SetActive(true);
@@ -123,10 +117,10 @@ public class Invent : MonoBehaviour
             {
                 Big.SetActive(false);
                 Small.SetActive(true);
-                SmallItemImg1.sprite = ItemData.GetItem(element.SmallItemIndex[0]).ItemSprite;
-                SmallItemImg2.sprite = ItemData.GetItem(element.SmallItemIndex[1]).ItemSprite;
-                SmallItemName1.text = ItemData.GetItem(element.SmallItemIndex[0]).ItemName;
-                SmallItemName2.text = ItemData.GetItem(element.SmallItemIndex[1]).ItemName;
+                SmallItemImg1.sprite = ItemData.GetItemList(element.SmallItemIndex[0]).ItemSprite;
+                SmallItemImg2.sprite = ItemData.GetItemList(element.SmallItemIndex[1]).ItemSprite;
+                SmallItemName1.text = ItemData.GetItemList(element.SmallItemIndex[0]).ItemName;
+                SmallItemName2.text = ItemData.GetItemList(element.SmallItemIndex[1]).ItemName;
                 BigItemImg2.sprite = element.ItemSprite;
                 BigItemName2.text = element.ItemName;
             }
@@ -148,7 +142,13 @@ public class Invent : MonoBehaviour
     {
         if (CanCombine)
         {
-            print("조합성공!");
+            print("열기전 element : "+element.index);
+            PlayerItem.GetItemArray(element.SmallItemIndex[0]).Clear();
+            PlayerItem.GetItemArray(element.SmallItemIndex[1]).Clear();
+            tem item=new tem();
+            item.Copy(element);
+            PlayerItem.GetItem(item);
+            Open(item);
         }
     }
 }

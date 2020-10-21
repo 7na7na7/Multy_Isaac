@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public bool canSee = true;
     public int[] SmallItemIndex; //하위템
     public int[] CompleteItemIndex; //상위템
     public int index=0;
@@ -23,6 +24,18 @@ public class tem
         ItemSprite = null;
         type = itemType.item;
         ItemDescription="";
+    }
+
+    public void Copy(tem item)
+    {
+        SmallItemIndex = item.SmallItemIndex;
+        CompleteItemIndex = item.CompleteItemIndex;
+        index = item.index;
+        ItemName = item.ItemName;
+        ItemSprite = item.ItemSprite;
+        type = item.type;
+        ItemDescription = item.ItemDescription;
+        WhereGet = item.WhereGet;
     }
 }
 public enum itemType { Weapon, Guard, Food, item}
