@@ -129,7 +129,7 @@ public class PlayerItem : MonoBehaviour
 
     public void DiscardItem(int index)
     {
-        if (ItemList[index] != null)
+        if (ItemList[index].ItemSprite!= null)
         {
             int ind = ItemList[index].index;
             ItemList[index].Clear();
@@ -139,7 +139,7 @@ public class PlayerItem : MonoBehaviour
     
     public void DeadDiscardItem(int index) //랜덤으로 떨어짐
     {
-        if (ItemList[index] != null)
+        if (ItemList[index].ItemSprite!= null)
         {
             int ind = ItemList[index].index;
             ItemList[index].Clear();
@@ -151,8 +151,7 @@ public class PlayerItem : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
-            if(ItemList[i].index!=0) 
-                DeadDiscardItem(i);
+            DeadDiscardItem(i);
         }
     }
     [PunRPC]

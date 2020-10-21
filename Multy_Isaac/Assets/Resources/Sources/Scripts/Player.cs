@@ -55,7 +55,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 MousePosition; //총 회전을 위한 변수
     private Camera camera;
     private float angle;
-    
+
+
+    private PlayerItem playerItem;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -77,6 +79,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if (p.pv.IsMine)
                 {
                     FindObjectOfType<CameraManager>().target = p.gameObject;
+                    playerItem = p.GetComponent<PlayerItem>();
                     break;
                 }
             }  
@@ -352,7 +355,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (SceneManager.GetActiveScene().name == "Play")
         {
-            if (view == pv)
+            if (view.IsMine &&pv.IsMine)
             {
                 InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
                     view.Controller.NickName+"<color=red> Suicided </color>");   
@@ -362,7 +365,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
                     view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
             }
-            GetComponent<PlayerItem>().Dead();
+
+            playerItem.Dead();
         }
         hp.value = hp.maxValue;
         transform.position=Vector3.zero;
