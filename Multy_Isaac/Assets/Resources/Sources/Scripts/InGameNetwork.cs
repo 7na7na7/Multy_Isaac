@@ -52,10 +52,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          if (p.pv.IsMine)
          {
-            for (int i = 0; i < 20;i++)
-            {
-               p.Die(p.pv);
-            }
+            p.Die(p.pv);
             break;
          }
       }  
