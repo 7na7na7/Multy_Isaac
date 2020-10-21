@@ -21,7 +21,7 @@ public class PlayerItem : MonoBehaviour
     public Sprite NullSprite;
     public ItemSlot[] slots;
     public ItemData itemData;
-    private GameObject GO;
+  
     private void Start()
     {
         Player[] players = FindObjectsOfType<Player>();
@@ -127,21 +127,23 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void DiscardItem(int index, int itemIndex)
+    public void DiscardItem(int index)
     {
         if (ItemList[index] != null)
         {
+            int ind = ItemList[index].index;
             ItemList[index].Clear();
-            player.pv.RPC("discardRPC",RpcTarget.All,itemIndex);   
+            player.pv.RPC("discardRPC",RpcTarget.All,ind);   
         }
     }
     
-    public void DeadDiscardItem(int index, int itemIndex) //랜덤으로 떨어짐
+    public void DeadDiscardItem(int index) //랜덤으로 떨어짐
     {
         if (ItemList[index] != null)
         {
+            int ind = ItemList[index].index;
             ItemList[index].Clear();
-            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,itemIndex);   
+            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,ind);   
         }
     }
 
@@ -150,24 +152,22 @@ public class PlayerItem : MonoBehaviour
         for (int i = 0; i < ItemList.Length; i++)
         {
             if(ItemList[i].index!=0) 
-                DeadDiscardItem(i,ItemList[i].index);
+                DeadDiscardItem(i);
         }
     }
     [PunRPC]
     void discardRPC(int TemIndex)
     {
-        GameObject Instantiate = PhotonNetwork.InstantiateRoomObject("Item", transform.position, Quaternion.identity);
-        GO = Instantiate;
-        GO.GetComponent<Item>().item = itemData.GetItemList(TemIndex);
-        //Item item= PhotonNetwork.InstantiateRoomObject("Item", transform.position, quaternion.identity).GetComponent<Item>(); 
+         PhotonNetwork.InstantiateRoomObject("item"+TemIndex, transform.position, Quaternion.identity);
+         
+         //Item item= PhotonNetwork.InstantiateRoomObject("Item", transform.position, quaternion.identity).GetComponent<Item>(); 
         
     }
     
     [PunRPC]
     void DeadDiscardRPC(int TemIndex)
     {
-        Item item= PhotonNetwork.InstantiateRoomObject("Item", new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity).GetComponent<Item>(); 
-        item.item = itemData.GetItemList(TemIndex);
+        PhotonNetwork.InstantiateRoomObject("item"+TemIndex, new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity).GetComponent<Item>();
     }
     
    

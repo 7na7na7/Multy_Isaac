@@ -52,7 +52,7 @@ public class ItemSlot : MonoBehaviour
     public void Discard()
     {
        
-            player.DiscardItem(index,player.ItemList[index].index);
+            player.DiscardItem(index);
             Btns.SetActive(false);   
        
     }
