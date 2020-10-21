@@ -207,15 +207,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
                     //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
                     angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
-                    if (Mathf.Abs(angle) > 90)
-                    {
-                        gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
-                    }
-                    else
-                    {
-                        gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
-                    }
-                    
+
                     if (Input.GetKeyDown(KeyCode.LeftControl))
                     {
                         if (!isSleeping)
@@ -256,7 +248,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
                 transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
         
-            if (Mathf.Abs(angle) > 90)
+            if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1)
             {
                 gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
             }
