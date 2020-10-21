@@ -20,11 +20,19 @@ public class PlayerItem : MonoBehaviour
     private Player player;
     public Sprite NullSprite;
     public ItemSlot[] slots;
-    private ItemData itemData;
+    public ItemData itemData;
+    private GameObject GO;
     private void Start()
     {
-        itemData = FindObjectOfType<ItemData>();
-        player = GetComponent<Player>();
+        Player[] players = FindObjectsOfType<Player>();
+        foreach (Player p in players)
+        {
+            if (p.pv.IsMine)
+            {
+                player = p;
+                break;
+            }
+        }
     }
 
     public void OtherBtnSetFalse(int index)
@@ -148,8 +156,11 @@ public class PlayerItem : MonoBehaviour
     [PunRPC]
     void discardRPC(int TemIndex)
     {
-        Item item= PhotonNetwork.InstantiateRoomObject("Item", transform.position, quaternion.identity).GetComponent<Item>(); 
-        item.item = itemData.GetItemList(TemIndex);
+        GameObject Instantiate = PhotonNetwork.InstantiateRoomObject("Item", transform.position, Quaternion.identity);
+        GO = Instantiate;
+        GO.GetComponent<Item>().item = itemData.GetItemList(TemIndex);
+        //Item item= PhotonNetwork.InstantiateRoomObject("Item", transform.position, quaternion.identity).GetComponent<Item>(); 
+        
     }
     
     [PunRPC]

@@ -32,10 +32,14 @@ public class Bullet : MonoBehaviourPunCallbacks
                 spr.sprite = null;
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
+            else if (other.GetComponent<PhotonView>().IsMine && pv.IsMine)
+            {
+                
+            }
             else
             {
                 if(!other.GetComponent<Player>().isSuper) 
-                    spr.sprite = null;
+                        spr.sprite = null;
             }
         }
         else if (other.CompareTag("Enemy"))

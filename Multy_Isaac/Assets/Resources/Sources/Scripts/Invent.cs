@@ -16,17 +16,25 @@ public class Invent : MonoBehaviour
     public Image[] completes; //조합템
     public Text ItemName; //템이름 
     public Text ItemDescription; //템설명
-    private ItemData ItemData;
+    public ItemData ItemData;
     private Animator anim;
     public GameObject Big, Small;
     public tem element;
     public Button InventBtn;
     private bool CanCombine = false;
-    public PlayerItem PlayerItem;
+    private PlayerItem PlayerItem;
     private void Start()
     {
         anim = GetComponent<Animator>();
-        ItemData = FindObjectOfType<ItemData>();
+        Player[] players = FindObjectsOfType<Player>();
+        foreach (Player p in players)
+        {
+            if (p.pv.IsMine)
+            {
+                PlayerItem = p.GetComponent<PlayerItem>();
+                break;
+            }
+        }  
     }
     
     public void Close()
