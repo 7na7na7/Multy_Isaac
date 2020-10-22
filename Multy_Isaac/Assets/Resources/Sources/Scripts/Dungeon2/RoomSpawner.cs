@@ -51,8 +51,12 @@ public class RoomSpawner : MonoBehaviour
     {
         if (other.CompareTag("SpawnPoint"))
         {
-            print("방겹침, 파괴!");
-            Destroy(gameObject); //방이 겹치면 자신을 파괴   
+            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
+            {
+                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                Destroy(gameObject); //방이 겹치면 자신을 파괴   
+            }
+            spawned = true;
         }
     }
 }
