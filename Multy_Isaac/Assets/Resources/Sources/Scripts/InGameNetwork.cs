@@ -14,6 +14,8 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   public bool isFullScreen;
+   public int ResX, RexY;
    public bool isOffline;
    
    public static InGameNetwork instance; //싱글톤
@@ -31,7 +33,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    {
       StartCoroutine(delayDestroy());
       
-      //Screen.SetResolution(1920, 1080, true);
+      Screen.SetResolution(ResX, RexY, isFullScreen);
       instance = this;
       if (isOffline)
       {
