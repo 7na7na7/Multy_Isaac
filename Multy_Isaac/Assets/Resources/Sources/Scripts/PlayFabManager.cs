@@ -56,7 +56,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SerializationRate = 30;
       //동기화 빠르게
    }
-  
+   
+
    private void Update()
    {
       if (PhotonNetwork.IsConnected)
