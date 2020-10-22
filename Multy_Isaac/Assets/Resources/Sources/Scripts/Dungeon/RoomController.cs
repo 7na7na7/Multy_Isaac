@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,13 +21,15 @@ public class RoomController : MonoBehaviour
     Queue<RoomInfoClass> loadRoomQueue=new Queue<RoomInfoClass>();
     
     public List<Room> loadedRooms=new List<Room>();
-    void Start()
+
+    private bool isLoadingRoom = false;
+    private void Awake()
     {
-        
+        instance = this;
     }
-    
-    void Update()
+
+    public bool DoesRoomExist(int x, int y) //방이 해당 그리드에 있는지 검사
     {
-        
+        return loadedRooms.Find(item => item.X == x && item.Y == y)!= null; 
     }
 }
