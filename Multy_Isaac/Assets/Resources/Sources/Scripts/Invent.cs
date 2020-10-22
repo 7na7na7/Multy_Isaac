@@ -76,7 +76,7 @@ public class Invent : MonoBehaviour
     {
         tem temm=new tem();
         tem tempTem = ItemData.GetItemList(element.SmallItemIndex[index]);
-        temm.Copy(tempTem);
+        temm = tempTem.DeepCopy();
         Open(temm);
     }
 
@@ -94,7 +94,7 @@ public class Invent : MonoBehaviour
         for (int i = 0; i < element.CompleteItemIndex.Length; i++)
         {
             tem = ItemData.GetItemList(element.CompleteItemIndex[i]);
-            completeTemArray[i].Copy(tem);
+            completeTemArray[i] = tem.DeepCopy();
         }
 
         for (int i = element.CompleteItemIndex.Length; i < completeTemArray.Length; i++)
@@ -154,7 +154,8 @@ public class Invent : MonoBehaviour
             PlayerItem.GetItemArray(element.SmallItemIndex[0]).Clear();
             PlayerItem.GetItemArray(element.SmallItemIndex[1]).Clear();
             tem item=new tem();
-            item.Copy(element);
+            item = element.DeepCopy();
+           
             PlayerItem.GetItem(item);
             Open(item);
         }

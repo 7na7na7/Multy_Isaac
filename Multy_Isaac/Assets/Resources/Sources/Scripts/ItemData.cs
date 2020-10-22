@@ -14,7 +14,7 @@ public class ItemData : MonoBehaviour
         tem copyTem=new tem();
         if (tem != null)
         {
-            copyTem.Copy(tem);
+            copyTem = tem.DeepCopy();
             return copyTem;
         }
         else

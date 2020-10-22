@@ -26,17 +26,21 @@ public class tem
         type = itemType.item;
         ItemDescription="";
     }
-
-    public void Copy(tem item)
+    public tem DeepCopy()
     {
-        SmallItemIndex = item.SmallItemIndex;
-        CompleteItemIndex = item.CompleteItemIndex;
-        index = item.index;
-        ItemName = item.ItemName;
-        ItemSprite = item.ItemSprite;
-        type = item.type;
-        ItemDescription = item.ItemDescription;
-        WhereGet = item.WhereGet;
+        tem Copytem = new tem();
+        Copytem.NoneSprite = this.NoneSprite;
+        Copytem.canSee = this.canSee;
+        Copytem.SmallItemIndex = this.SmallItemIndex;
+        Copytem.CompleteItemIndex = this.CompleteItemIndex;
+        Copytem.index = this.index;
+        Copytem.ItemName = this.ItemName;
+        Copytem.ItemSprite = this.ItemSprite;
+        Copytem.type = this.type;
+        Copytem.ItemDescription = this.ItemDescription;
+        Copytem.WhereGet = this.WhereGet;
+
+        return Copytem;
     }
 }
 public enum itemType { Weapon, Guard, Food, item}
