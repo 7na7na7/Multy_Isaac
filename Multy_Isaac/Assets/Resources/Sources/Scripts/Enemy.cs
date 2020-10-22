@@ -10,10 +10,19 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public int hp = 50;
   public PhotonView pv;
   public float CollsionDamage = 20;
-  
+  public float damageDelay = 1f;
+  private float time;
   private void Start()
   {
     flashwhite = GetComponent<FlashWhite>();
+  }
+
+  private void Update()
+  {
+    if (time < damageDelay)
+    {
+      time += Time.deltaTime;
+    }
   }
 
   [PunRPC]
@@ -23,6 +32,30 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     hp -= value;
     if(hp<=0)
       Destroy(gameObject);
+  }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      if (time >= damageDelay)
+      {
+        time = 0;
+        other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+      }
+    }
+  }
+
+  private void OnTriggerStay2D(Collider2D other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      if (time >= damageDelay)
+      {
+          time = 0;
+          other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+        }
+    }
   }
 
 //  public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) //변수 동기화

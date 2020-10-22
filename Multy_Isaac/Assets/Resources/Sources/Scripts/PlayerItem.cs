@@ -34,7 +34,6 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
-
     public void OtherBtnSetFalse(int index)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -49,6 +48,8 @@ public class PlayerItem : MonoBehaviour
     {
         if (player.pv.IsMine)
         {
+           //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
+            
             for (int i = 0; i < ItemList.Length; i++)
             {
                 if(ItemList[i].ItemSprite!=null) 
@@ -129,29 +130,17 @@ public class PlayerItem : MonoBehaviour
 
     public void DiscardItem(int index,bool isDead=false)
     {
-        if (ItemList[index].ItemSprite!= null)
-        {
-            int ind = ItemList[index].index;
-            ItemList[index].Clear();
-            player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);   
-        }
+        int ind = ItemList[index].index;
+        ItemList[index].Clear();
+        player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);
     }
     
-    public void DeadDiscardItem(int index) //랜덤으로 떨어짐
-    {
-        if (ItemList[index].ItemSprite!= null)
-        {
-            int ind = ItemList[index].index;
-            ItemList[index].Clear();
-            player.pv.RPC("DeadDiscardRPC",RpcTarget.All,ind);   
-        }
-    }
-
     public void Dead()
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
-            DiscardItem(i,true);
+            if(ItemList[i].index!=0) 
+                DiscardItem(i,true);
         }
     }
 

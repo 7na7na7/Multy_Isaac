@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public Sprite NoneSprite;
     public bool canSee = true;
     public int[] SmallItemIndex; //하위템
     public int[] CompleteItemIndex; //상위템
@@ -21,7 +22,7 @@ public class tem
         CompleteItemIndex=new int[0];
         index = 0;
         ItemName = "";
-        ItemSprite = null;
+        ItemSprite = NoneSprite;
         type = itemType.item;
         ItemDescription="";
     }

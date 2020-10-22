@@ -260,7 +260,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         void FixedUpdate()
         {
-            if (canMove&&!isSleeping)
+            if (canMove&&!isSleeping&&pv.IsMine)
             {
                 if (moveDirection == Vector2.zero)
                 {
@@ -328,26 +328,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
-
-            if (other.CompareTag("Enemy"))
-            {
-                if (!isSuper)
-                {
-                    Hit(other.GetComponent<Enemy>().CollsionDamage);
-                }
-            }
         }
     }
     
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Wall")
+        if (pv.IsMine)
         {
-            if (!canRoll)
+            if (other.gameObject.tag == "Wall")
             {
-                DOTween.KillAll();
-            }
+                if (!canRoll)
+                {
+                    DOTween.KillAll();
+                }
+            }   
         }
     }
 
@@ -375,7 +370,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Hit(float Damage,string HitName="")
         {
-            if (!isSuper)
+            if (!isSuper&&pv.IsMine)
             {
                 hp.value -= Damage;
                 if (hp.value <= 0)

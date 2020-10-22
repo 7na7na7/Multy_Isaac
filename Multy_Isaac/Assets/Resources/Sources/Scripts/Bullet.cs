@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviourPunCallbacks
 {
+    public Sprite none;
     public float speed = 5;
     public float DestroyTime = 1;
     private int dir;
@@ -29,7 +30,7 @@ public class Bullet : MonoBehaviourPunCallbacks
             if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
                 other.GetComponent<Player>().Hit(10,pv.Controller.NickName);
-                spr.sprite = null;
+                spr.sprite = none;
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
             else if (other.GetComponent<PhotonView>().IsMine && pv.IsMine)
@@ -38,8 +39,8 @@ public class Bullet : MonoBehaviourPunCallbacks
             }
             else
             {
-                if(!other.GetComponent<Player>().isSuper) 
-                        spr.sprite = null;
+                if (!other.GetComponent<Player>().isSuper)
+                    spr.sprite = none;
             }
         }
         else if (other.CompareTag("Enemy"))
