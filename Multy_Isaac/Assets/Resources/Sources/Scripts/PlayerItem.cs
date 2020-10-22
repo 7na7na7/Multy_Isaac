@@ -127,13 +127,13 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void DiscardItem(int index)
+    public void DiscardItem(int index,bool isDead=false)
     {
         if (ItemList[index].ItemSprite!= null)
         {
             int ind = ItemList[index].index;
             ItemList[index].Clear();
-            player.pv.RPC("discardRPC",RpcTarget.All,ind);   
+            player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);   
         }
     }
     
@@ -151,22 +151,35 @@ public class PlayerItem : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
-            DeadDiscardItem(i);
+            DiscardItem(i,true);
         }
     }
+
     [PunRPC]
-    void discardRPC(int TemIndex)
+    void discardRPC(int TemIndex, bool isDead = false)
     {
-         PhotonNetwork.InstantiateRoomObject("item"+TemIndex, transform.position, Quaternion.identity);
-         
-         //Item item= PhotonNetwork.InstantiateRoomObject("Item", transform.position, quaternion.identity).GetComponent<Item>(); 
-        
+        Vector2 pos=new Vector2();
+        if (isDead)
+        {
+            pos=new Vector2(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f));
+        }
+        else
+        {
+            pos = transform.position;
+
+        }
+        PhotonNetwork.InstantiateRoomObject("item"+TemIndex,pos , Quaternion.identity);
+
     }
     
     [PunRPC]
     void DeadDiscardRPC(int TemIndex)
     {
-        PhotonNetwork.InstantiateRoomObject("item"+TemIndex, new Vector3(transform.position.x+UnityEngine.Random.Range(-1f,1f),transform.position.y+UnityEngine.Random.Range(-1f,1f),transform.position.z), quaternion.identity).GetComponent<Item>();
+        PhotonNetwork.InstantiateRoomObject("item" + TemIndex,
+                new Vector3(transform.position.x + UnityEngine.Random.Range(-1f, 1f),
+                    transform.position.y + UnityEngine.Random.Range(-1f, 1f), transform.position.z),
+                quaternion.identity)
+            .GetComponent<Item>();
     }
     
    

@@ -54,7 +54,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          if (p.pv.IsMine)
          {
-            p.Die(p.pv);
+            p.Die(PhotonNetwork.NickName);
             break;
          }
       }  

@@ -328,6 +328,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
+
+            if (other.CompareTag("Enemy"))
+            {
+                if (!isSuper)
+                {
+                    Hit(other.GetComponent<Enemy>().CollsionDamage);
+                }
+            }
         }
     }
     
@@ -343,19 +351,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void Die(PhotonView view)
+    public void Die(string AttackerName)
     {
         if (SceneManager.GetActiveScene().name == "Play")
         {
-            if (view.IsMine &&pv.IsMine)
+            if (AttackerName==PhotonNetwork.NickName)
             {
                 InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                    view.Controller.NickName+"<color=red> Suicided </color>");   
+                    nickname.text+"<color=red> Suicided </color>");   
             }
             else
             {
                 InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                    view.Controller.NickName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
+                    AttackerName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
             }
 
             playerItem.Dead();
@@ -365,14 +373,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
  
 
-    public void Hit(PhotonView view)
+    public void Hit(float Damage,string HitName="")
         {
             if (!isSuper)
             {
-                hp.value -= 10;
+                hp.value -= Damage;
                 if (hp.value <= 0)
                 {
-                   Die(view);
+                   Die(HitName);
                 }   
             }
         }
