@@ -140,7 +140,8 @@ public class PlayerItem : MonoBehaviour
         for (int i = 0; i < ItemList.Length; i++)
         {
             if(ItemList[i].index!=0) 
-                DiscardItem(i,true);
+                player.pv.RPC("discardRPC",RpcTarget.All,ItemList[i].index,true);
+            ItemList[i].Clear();
         }
     }
 
