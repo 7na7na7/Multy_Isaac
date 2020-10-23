@@ -6,11 +6,14 @@ using UnityEngine;
 public class RoomTemplates : MonoBehaviour
 {
    public int minRoomCount = 7;
+   public int maxRoomCount = 50;
+   public int PlayerCount = 4;
    public GameObject[] bottomRooms;
    public GameObject[] topRooms;
    public GameObject[] leftRooms;
    public GameObject[] rightRooms;
-
+   
+   
    public GameObject closedRoom;
 
    public List<GameObject> rooms;

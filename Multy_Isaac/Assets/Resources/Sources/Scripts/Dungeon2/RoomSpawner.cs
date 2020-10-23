@@ -33,7 +33,16 @@ public class RoomSpawner : MonoBehaviour
                     while (true)
                     {
                         rand = Random.Range(0, templates.bottomRooms.Length);
-                        if (rand != 0)
+                        if (rand != 0&&rand != 1&&rand != 2)
+                            break;
+                    }
+                }
+                else if (templates.maxRoomCount<0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.bottomRooms.Length);
+                        if (rand == 0)
                             break;
                     }
                 }
@@ -49,7 +58,16 @@ public class RoomSpawner : MonoBehaviour
                     while (true)
                     {
                         rand = Random.Range(0, templates.topRooms.Length);
-                        if (rand != 0)
+                        if (rand != 0&&rand != 1&&rand != 2)
+                            break;
+                    }
+                }
+                else if (templates.maxRoomCount<0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.topRooms.Length);
+                        if (rand == 0)
                             break;
                     }
                 }
@@ -65,7 +83,16 @@ public class RoomSpawner : MonoBehaviour
                     while (true)
                     {
                         rand = Random.Range(0, templates.leftRooms.Length);
-                        if (rand != 0)
+                        if (rand != 0&&rand != 1&&rand != 2)
+                            break;
+                    }
+                }
+                else if (templates.maxRoomCount<0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.leftRooms.Length);
+                        if (rand == 0)
                             break;
                     }
                 }
@@ -81,7 +108,16 @@ public class RoomSpawner : MonoBehaviour
                     while (true)
                     {
                         rand = Random.Range(0, templates.rightRooms.Length);
-                        if (rand != 0)
+                        if (rand != 0&&rand != 1&&rand != 2)
+                            break;
+                    }
+                }
+                else if (templates.maxRoomCount<0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.rightRooms.Length);
+                        if (rand == 0)
                             break;
                     }
                 }
@@ -93,7 +129,9 @@ public class RoomSpawner : MonoBehaviour
                     templates.rightRooms[rand].transform.rotation);
             }
 
-            templates.minRoomCount--;
+            if(templates.minRoomCount>0) 
+                templates.minRoomCount--;
+            templates.maxRoomCount--;
             spawned = true;
         }
     }
