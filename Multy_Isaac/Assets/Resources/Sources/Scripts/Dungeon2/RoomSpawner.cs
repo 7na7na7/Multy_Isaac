@@ -14,8 +14,11 @@ public class RoomSpawner : MonoBehaviour
     private RoomTemplates templates;
     private int rand;
     private bool spawned = false;
+
+    public float waitTime = 4f;
     private void Start()
     {
+        Destroy(gameObject,waitTime);
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         Invoke("Spawn",0.1f);
     }
@@ -24,25 +27,73 @@ public class RoomSpawner : MonoBehaviour
     {
         if (spawned == false)//생성되지 않았으면
         {
-            print(openingDirection);
             if (openingDirection == 1) {//아래쪽에 문
-                rand = Random.Range(0, templates.bottomRooms.Length);
+                if (templates.minRoomCount > 0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.bottomRooms.Length);
+                        if (rand != 0)
+                            break;
+                    }
+                }
+                else
+                {
+                    rand = Random.Range(0, templates.bottomRooms.Length);
+                }
                 Instantiate(templates.bottomRooms[rand], transform.position,
                     templates.bottomRooms[rand].transform.rotation);
             }else if (openingDirection == 2){//위쪽에 문
-                rand = Random.Range(0, templates.topRooms.Length);
+                if (templates.minRoomCount > 0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.topRooms.Length);
+                        if (rand != 0)
+                            break;
+                    }
+                }
+                else
+                {
+                    rand = Random.Range(0, templates.topRooms.Length);
+                }
                 Instantiate(templates.topRooms[rand], transform.position,
                     templates.topRooms[rand].transform.rotation);
             }else if (openingDirection == 3) {//왼쪽에 문
-                rand = Random.Range(0, templates.leftRooms.Length);
+                if (templates.minRoomCount > 0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.leftRooms.Length);
+                        if (rand != 0)
+                            break;
+                    }
+                }
+                else
+                {
+                    rand = Random.Range(0, templates.leftRooms.Length);
+                }
                 Instantiate(templates.leftRooms[rand], transform.position,
                     templates.leftRooms[rand].transform.rotation);
             } else if (openingDirection == 4) {//오른쪽에 문
-                rand = Random.Range(0, templates.rightRooms.Length);
+                if (templates.minRoomCount > 0)
+                {
+                    while (true)
+                    {
+                        rand = Random.Range(0, templates.rightRooms.Length);
+                        if (rand != 0)
+                            break;
+                    }
+                }
+                else
+                {
+                    rand = Random.Range(0, templates.rightRooms.Length);
+                }
                 Instantiate(templates.rightRooms[rand], transform.position,
                     templates.rightRooms[rand].transform.rotation);
             }
 
+            templates.minRoomCount--;
             spawned = true;
         }
     }
