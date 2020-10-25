@@ -26,6 +26,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
     public PhotonView pv; //포톤뷰
+    public GameObject Arm;
    //캔버스
    public Slider hp; //체력
    public Slider mp; //기력
@@ -109,13 +110,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             SetAnimRPC(false,"Roll");
             SetAnimRPC(true,"None");
+            Arm.SetActive(false);
         }
         else
         {
             pv.RPC("SetAnimRPC",RpcTarget.All,false,"Roll");
             pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");   
+            pv.RPC("SetActive",RpcTarget.All,false);
         }
-
+      
+        
         isSuper = true; //무적 ON
         Vector2 originalSize = col.size;
         col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
@@ -128,13 +132,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             SetAnimRPC(false,"Idle");
             SetAnimRPC(true,"GoDown");
+            Arm.SetActive(true);
         }
         else
         {
             pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-            pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");       
+            pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
+            pv.RPC("SetActive",RpcTarget.All,true);   
         }
-     
+        
+       
         canMove = true;
         canRoll = true;
     }
@@ -217,13 +224,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             {
                              anim.Play("Sleep");
                              headAnim.Play("None");
-                             gun.SetActive(false);
+                             Arm.SetActive(false);
                             }
                             else
                             {
                                 pv.RPC("SetAnimRPC",RpcTarget.All,false,"Sleep");
                                 pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
-                                pv.RPC("SetActive",RpcTarget.All,false);
+                                pv.RPC("SetActive",RpcTarget.All,false);   
                             }
                         }
                         else
@@ -431,19 +438,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 anim.Play("Idle");
                 headAnim.Play("GoDown");
-                gun.SetActive(true);
+                Arm.SetActive(false);
             }
             else
             {
                 pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
                 pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
-                pv.RPC("SetActive",RpcTarget.All,true);
+                pv.RPC("SetActive",RpcTarget.All,true);   
             }
         }
         [PunRPC]
-        public void SetActive( bool b)
+        public void SetActive(bool b)
         {
-            gun.SetActive(b);
+            Arm.SetActive(b);
         }
         [PunRPC]
         public void SetAnimRPC(bool isHead, string animName)
