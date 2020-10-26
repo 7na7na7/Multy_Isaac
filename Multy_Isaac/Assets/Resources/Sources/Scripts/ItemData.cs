@@ -6,8 +6,18 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
-    public List<tem> temDatas;
+    public GameObject[] temPrefabs;
     
+    public List<tem> temDatas;
+
+    private void Awake()
+    {
+        foreach (GameObject item in temPrefabs)
+        {
+            temDatas.Add(item.GetComponent<Item>().item.DeepCopy());
+        }
+    }
+
     public tem GetItemList(int Index)
     {
         tem tem = temDatas.Find(data => data.index == Index);

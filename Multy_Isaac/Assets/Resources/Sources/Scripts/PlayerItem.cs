@@ -155,22 +155,12 @@ public class PlayerItem : MonoBehaviour
         }
         else
         {
-            pos = transform.position;
+            pos = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.2f, 0.2f),
+                transform.position.y-1 + UnityEngine.Random.Range(-0.3f, 0.3f));
 
         }
         PhotonNetwork.InstantiateRoomObject("item"+TemIndex,pos , Quaternion.identity);
 
     }
     
-    [PunRPC]
-    void DeadDiscardRPC(int TemIndex)
-    {
-        PhotonNetwork.InstantiateRoomObject("item" + TemIndex,
-                new Vector3(transform.position.x + UnityEngine.Random.Range(-1f, 1f),
-                    transform.position.y + UnityEngine.Random.Range(-1f, 1f), transform.position.z),
-                quaternion.identity)
-            .GetComponent<Item>();
-    }
-    
-   
 }
