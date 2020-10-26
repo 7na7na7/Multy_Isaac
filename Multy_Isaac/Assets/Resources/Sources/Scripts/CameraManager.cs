@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour
         halfHeight = theCamera.orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height; //카메라 반너비 공식
     }
-
+  
     void Update()
     {
         if (target.gameObject != null)

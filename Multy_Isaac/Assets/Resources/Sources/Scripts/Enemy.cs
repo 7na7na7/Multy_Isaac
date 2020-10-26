@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 
   private void Update()
   {
+
     if (time < damageDelay)
     {
       time += Time.deltaTime;
@@ -37,17 +39,8 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     {
       for (int TemIndex=0;TemIndex<ItemIndex.Length;TemIndex++)
       {
-        int r = Random.Range(0, 100); //1에서 100까지 선택
-        bool[] bools=new bool[100];
-        for (int i = 0; i < 100; i++)
-        {
-          if (i < ItemPercent[TemIndex])
-            bools[i] = true;
-          else
-            bools[i] = false;
-        }
-        if (bools[r]==true)
-          PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.2f,0.2f),transform.position.y+Random.Range(-0.2f,0.2f)) , Quaternion.identity); 
+        if(Random.Range(1,101)<=ItemPercent[TemIndex])
+            PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.2f,0.2f),transform.position.y+Random.Range(-0.2f,0.2f)) , Quaternion.identity);
       }
 
       Destroy(gameObject); 
@@ -78,4 +71,8 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
   }
 
+  
+  
+  
+  
 }
