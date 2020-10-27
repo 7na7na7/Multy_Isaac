@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,8 +20,9 @@ public class RoomSpawner : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject,waitTime);
-        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        Invoke("Spawn",0.1f);
+        templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        if(templates.GetComponent<PhotonView>().IsMine) 
+            Invoke("Spawn",0.1f);
     }
 
     void Spawn()
