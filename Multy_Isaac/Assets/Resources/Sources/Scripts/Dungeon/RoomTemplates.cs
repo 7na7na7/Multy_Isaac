@@ -30,7 +30,7 @@ public class RoomTemplates : MonoBehaviour
    private void Start()
    {
       Invoke("Spawn",waitTime);
-      Invoke("ReLoad",3.5f);
+      //Invoke("ReLoad",3.5f);
    }
 
    void ReLoad()
