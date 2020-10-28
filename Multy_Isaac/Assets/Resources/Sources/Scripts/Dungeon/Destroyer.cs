@@ -11,8 +11,7 @@ public class Destroyer : MonoBehaviour
    private void Start()
    {
       templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-      if(templates.GetComponent<PhotonView>().IsMine) 
-         Invoke("Spawn",templates.waitTime);
+      Invoke("Spawn",templates.waitTime);
    }
 
    private void OnTriggerEnter2D(Collider2D other)
