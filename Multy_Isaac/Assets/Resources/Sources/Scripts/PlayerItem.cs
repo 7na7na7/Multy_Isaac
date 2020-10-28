@@ -21,6 +21,7 @@ public class PlayerItem : MonoBehaviour
     public Sprite NullSprite;
     public ItemSlot[] slots;
     public ItemData itemData;
+  
     private void Start()
     {
         Player[] players = FindObjectsOfType<Player>();
@@ -47,7 +48,7 @@ public class PlayerItem : MonoBehaviour
     {
         if (player.pv.IsMine)
         {
-            //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
+           //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
             
             for (int i = 0; i < ItemList.Length; i++)
             {

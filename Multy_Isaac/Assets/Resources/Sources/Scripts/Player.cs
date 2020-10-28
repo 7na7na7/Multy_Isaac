@@ -149,20 +149,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
-                int x = (int)transform.position.x;
-                while (true)
-                {
-                    if ((transform.position.x + 9) % 18 == 0)
-                    {
-                        camera.transform.position=new Vector3(x+9,camera.transform.position.y,camera.transform.position.z);
-                        break;
-                    }
-                    else
-                    {
-                        x--;
-                    }
-                }
-
+             
                 if(time>0) 
                     time -= Time.deltaTime;
               
