@@ -5,14 +5,24 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
+   public bool canDetect = false;
   public GameObject wall;
 
-  private void OnTriggerEnter2D(Collider2D other)
+  private void Start()
   {
-    if (other.CompareTag("Wall"))
+    Invoke("detect",5f);
+  }
+
+  void detect()
+  {
+    canDetect = true;
+  }
+  private void OnTriggerStay2D(Collider2D other)
+  {
+    if (other.CompareTag("Wall")&&canDetect)
     {
       wall.SetActive(true);
-      Destroy(gameObject);
+        Destroy(gameObject);
     }
   }
 }
