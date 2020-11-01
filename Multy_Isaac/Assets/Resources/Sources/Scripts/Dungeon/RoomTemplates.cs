@@ -44,7 +44,7 @@ public class RoomTemplates : MonoBehaviour
       {
          if (rooms[i].CompareTag("Entry"))
          {
-            Instantiate(player, rooms[i].transform.position, quaternion.identity);
+            //Instantiate(player, rooms[i].transform.position, quaternion.identity);
             PlayerCount--;
          }
       }
