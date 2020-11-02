@@ -51,7 +51,6 @@ public class RoomTemplates : MonoBehaviour
          {
             if (PlayerCount > 0)
             {
-               print(count - PlayerCount+" "+rooms[i].transform.position);
                players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
                Instantiate(player, rooms[i].transform.position, quaternion.identity);
                PlayerCount--;  
