@@ -21,19 +21,7 @@ public class PlayerItem : MonoBehaviour
     public Sprite NullSprite;
     public ItemSlot[] slots;
     public ItemData itemData;
-  
-    private void Start()
-    {
-        Player[] players = FindObjectsOfType<Player>();
-        foreach (Player p in players)
-        {
-            if (p.pv.IsMine)
-            {
-                player = p;
-                break;
-            }
-        }
-    }
+    
     public void OtherBtnSetFalse(int index)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -46,42 +34,57 @@ public class PlayerItem : MonoBehaviour
     }
     private void Update()
     {
-        if (player.pv.IsMine)
+        if (player != null)
         {
-           //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
+            if (player.pv.IsMine)
+            {
+                //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
             
-            for (int i = 0; i < ItemList.Length; i++)
-            {
-                if(ItemList[i].ItemSprite!=null) 
-                    ItemBoxes[i].sprite = ItemList[i].ItemSprite;
-                else
-                    ItemBoxes[i].sprite = NullSprite;
-            }
-            if (player.canMove)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
+                for (int i = 0; i < ItemList.Length; i++)
                 {
-                    Collider2D item = Physics2D.OverlapCircle(transform.position, itemRadious, itemLayer);
-                    if (item != null)
+                    if(ItemList[i].ItemSprite!=null) 
+                        ItemBoxes[i].sprite = ItemList[i].ItemSprite;
+                    else
+                        ItemBoxes[i].sprite = NullSprite;
+                }
+                if (player.canMove)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        if (item.GetComponent<Item>().canGet())
+                        Collider2D item = Physics2D.OverlapCircle(transform.position, itemRadious, itemLayer);
+                        if (item != null)
                         {
-                            bool isGet = false;
-                            for (int i = 0; i < ItemList.Length; i++)
+                            if (item.GetComponent<Item>().canGet())
                             {
-                                if (ItemList[i].ItemName == "")
+                                bool isGet = false;
+                                for (int i = 0; i < ItemList.Length; i++)
                                 {
-                                    isGet = true;
-                                    ItemList[i]=item.GetComponent<Item>().item;
-                                    item.GetComponent<Item>().Destroy();
-                                    break;
+                                    if (ItemList[i].ItemName == "")
+                                    {
+                                        isGet = true;
+                                        ItemList[i]=item.GetComponent<Item>().item;
+                                        item.GetComponent<Item>().Destroy();
+                                        break;
+                                    }
                                 }
-                            }
-                            if(!isGet) 
-                             PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
+                                if(!isGet) 
+                                    PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
                             
-                        }
-                    }   
+                            }
+                        }   
+                    }
+                }
+            }   
+        }
+        else
+        {
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (Player p in players)
+            {
+                if (p.pv.IsMine)
+                {
+                    player = p;
+                    break;
                 }
             }
         }

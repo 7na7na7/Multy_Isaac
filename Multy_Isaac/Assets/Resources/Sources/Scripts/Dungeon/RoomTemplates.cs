@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,10 +24,10 @@ public class RoomTemplates : MonoBehaviour
    public List<GameObject> rooms;
 
    public float waitTime;
+   public float DestroyerWaitTime;
    public GameObject boss;
-   public GameObject player;
-   
 
+   private Vector3 pos;
    private void Start()
    {
       Invoke("Spawn",waitTime);
@@ -39,13 +40,24 @@ public class RoomTemplates : MonoBehaviour
    }
    void Spawn()
    {
+      Player[] players = FindObjectsOfType<Player>();
+      print("A");
+      PlayerCount = players.Length;
+      int count = PlayerCount;
+    
       Instantiate(boss, rooms[rooms.Count-1].transform.position, quaternion.identity);
       for (int i = 0; i < rooms.Count-1; i++)
       {
          if (rooms[i].CompareTag("Entry"))
          {
-            //Instantiate(player, rooms[i].transform.position, quaternion.identity);
-            PlayerCount--;
+            if (PlayerCount <= 0)
+               break;
+            else
+            {
+               players[count - PlayerCount].transform.position = rooms[i].transform.position;
+               //Instantiate(player, rooms[i].transform.position, quaternion.identity);
+               PlayerCount--;  
+            }
          }
       }
       if(PlayerCount>0)
