@@ -198,6 +198,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     
                             gun.transform.localScale=new Vector3(-1,1,1);
                         }
+                        
+                        if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
+                        {
+                            gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
+                        }
+                        else
+                        {
+                            gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
+                        }
                     }
                     if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
                         Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
@@ -255,15 +264,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 transform.position = curPos;
             else
                 transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
-        
-            if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
-            {
-                gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
-            }
-            else
-            {
-                gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
-            }
         }
 
         void FixedUpdate()
@@ -413,6 +413,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(canvasRect.localScale);
                 stream.SendNext(canMove);
                 stream.SendNext(gun.transform.localScale);
+                stream.SendNext(gun.transform.rotation);
                 stream.SendNext(isSleeping);
             }
             else
@@ -428,6 +429,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 canvasRect.localScale = (Vector3) stream.ReceiveNext();
                 canMove = (bool) stream.ReceiveNext();
                 gun.transform.localScale = (Vector3) stream.ReceiveNext();
+                gun.transform.rotation = (Quaternion) stream.ReceiveNext();
                 isSleeping = (bool) stream.ReceiveNext();
             }
         }
