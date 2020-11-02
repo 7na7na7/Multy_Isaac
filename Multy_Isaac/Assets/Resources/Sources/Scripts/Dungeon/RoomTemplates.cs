@@ -52,9 +52,18 @@ public class RoomTemplates : MonoBehaviour
             if (PlayerCount > 0)
             {
                players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
-               Instantiate(player, rooms[i].transform.position, quaternion.identity);
+               PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
                PlayerCount--;  
             }
+         }
+      }
+      Player[] playersxx = FindObjectsOfType<Player>();
+      foreach (Player p in playersxx)
+      {
+         if (p.pv.IsMine)
+         {
+            Camera.main.transform.position=new Vector3(p.transform.position.x,p.transform.position.y,Camera.main.transform.position.z);
+            break;
          }
       }
       if(PlayerCount>0)

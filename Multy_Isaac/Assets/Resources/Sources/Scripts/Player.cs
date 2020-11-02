@@ -475,6 +475,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         public void Move(Vector3 pos)
         {
-            transform.position = pos;  
+            transform.position = pos;
         }
 }
