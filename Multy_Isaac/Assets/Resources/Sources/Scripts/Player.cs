@@ -184,7 +184,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             if(dir!=Vector2.zero) 
                                 roll(new Vector2(dir.x,dir.y).normalized);
                         }   
-/////asdasd
+                        if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                        {
+                            transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
+                            canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+
+                            gun.transform.localScale=new Vector3(1,1,1);
+                        }
+                        else
+                        {
+                            transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
+                            canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                    
+                            gun.transform.localScale=new Vector3(-1,1,1);
+                        }
                     }
                     if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
                         Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
@@ -250,22 +263,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
             {
                 gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
-            }
-            
-            
-            if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
-            {
-                transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
-                canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-
-                gun.transform.localScale=new Vector3(1,1,1);
-            }
-            else
-            {
-                transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
-                canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
-                    
-                gun.transform.localScale=new Vector3(-1,1,1);
             }
         }
 
