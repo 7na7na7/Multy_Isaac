@@ -26,7 +26,8 @@ public class RoomTemplates : MonoBehaviour
    public float waitTime;
    public float DestroyerWaitTime;
    public GameObject boss;
-
+   public GameObject player;
+   
    private Vector3 pos;
    private void Start()
    {
@@ -41,21 +42,18 @@ public class RoomTemplates : MonoBehaviour
    void Spawn()
    {
       Player[] players = FindObjectsOfType<Player>();
-      print("A");
       PlayerCount = players.Length;
       int count = PlayerCount;
-    
       Instantiate(boss, rooms[rooms.Count-1].transform.position, quaternion.identity);
       for (int i = 0; i < rooms.Count-1; i++)
       {
          if (rooms[i].CompareTag("Entry"))
          {
-            if (PlayerCount <= 0)
-               break;
-            else
+            if (PlayerCount > 0)
             {
-               players[count - PlayerCount].transform.position = rooms[i].transform.position;
-               //Instantiate(player, rooms[i].transform.position, quaternion.identity);
+               print(count - PlayerCount+" "+rooms[i].transform.position);
+               players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
+               Instantiate(player, rooms[i].transform.position, quaternion.identity);
                PlayerCount--;  
             }
          }

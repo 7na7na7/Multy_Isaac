@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
@@ -467,5 +468,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             chatbox.gameObject.SetActive(true);
             chatbox.SetTime();
             ChatBaloon.text = txt;
+        }
+
+        [PunRPC]
+        public void Move(Vector3 pos)
+        {
+            transform.position = pos;  
         }
 }
