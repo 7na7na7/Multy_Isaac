@@ -223,7 +223,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             isSleeping = true;
                             if (PhotonNetwork.OfflineMode)
                             {
-                             anim.Play("Sleep");
+                                anim.Play("Sleep");
                              headAnim.Play("None");
                              Arm.SetActive(false);
                             }
@@ -256,7 +256,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
                 transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
         
-            if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1)
+            if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
             {
                 gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
             }
@@ -282,7 +282,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+              //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
                rb.velocity=Vector2.zero;
             }
         }
