@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    private Vector3 spawnPoint;
     //수면
     public bool isSleeping; //자고있는가?
     public float sleepHealSpeed = 5; //자는동안 회복속도
@@ -79,6 +80,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     playerItem = GetComponent<PlayerItem>();
                     Invoke("setCam",3f);
+                    spawnPoint = transform.position;
                 }
        
     }
@@ -376,7 +378,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             playerItem.Dead();
         }
         hp.value = hp.maxValue;
-        transform.position=Vector3.zero;
+        transform.position = spawnPoint;
+        Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
     }
  
 
