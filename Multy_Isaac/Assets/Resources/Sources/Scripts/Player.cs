@@ -78,13 +78,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     playerItem = GetComponent<PlayerItem>();
-                   // Invoke("setCam",3f);
+                    Invoke("setCam",3f);
                 }
        
     }
 
    public void setCam()
-    {
+   {
+       canMove = true;
+        Destroy(GameObject.Find("LoadingPanel"));
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
     }
     void roll(Vector2 dir)
