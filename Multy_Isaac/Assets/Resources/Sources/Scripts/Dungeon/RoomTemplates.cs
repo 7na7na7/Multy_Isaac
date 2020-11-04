@@ -31,7 +31,8 @@ public class RoomTemplates : MonoBehaviour
    private Vector3 pos;
    private void Start()
    {
-      Invoke("Spawn",waitTime);
+      if(PhotonNetwork.IsMasterClient) 
+         Invoke("Spawn",waitTime);
       //Invoke("ReLoad",3.5f);
    }
 
@@ -52,18 +53,10 @@ public class RoomTemplates : MonoBehaviour
             if (PlayerCount > 0)
             {
                players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
+               players[count - PlayerCount].setCam();
                PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
                PlayerCount--;  
             }
-         }
-      }
-      Player[] playersxx = FindObjectsOfType<Player>();
-      foreach (Player p in playersxx)
-      {
-         if (p.pv.IsMine)
-         {
-            Camera.main.transform.position=new Vector3(p.transform.position.x,p.transform.position.y,Camera.main.transform.position.z);
-            break;
          }
       }
       if(PlayerCount>0)

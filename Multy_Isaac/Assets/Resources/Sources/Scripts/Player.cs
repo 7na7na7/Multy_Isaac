@@ -67,27 +67,26 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        camera=Camera.main;
+        camera = FindObjectOfType<Camera>();
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
         col = GetComponent<CapsuleCollider2D>();
         
         
-        if (!PhotonNetwork.OfflineMode)
-        {
-            Player[] players = FindObjectsOfType<Player>();
-            foreach (Player p in players)
-            {
-                if (p.pv.IsMine)
+
+                if (pv.IsMine)
                 {
-                    FindObjectOfType<CameraManager>().target = p.gameObject;
-                    playerItem = p.GetComponent<PlayerItem>();
-                    break;
+                    //FindObjectOfType<CameraManager>().target = p.gameObject;
+                    playerItem = GetComponent<PlayerItem>();
+                   // Invoke("setCam",3f);
                 }
-            }  
-        } //오프라인 모드가 아니면 플레이어 중 자신을 찾아 따라다님
+       
     }
 
+   public void setCam()
+    {
+        Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
+    }
     void roll(Vector2 dir)
     {
         if (LoseMp(rollMp))
@@ -150,6 +149,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
+             if(Input.GetKeyDown(KeyCode.V))
+                 setCam();
+             
              
                 if(time>0) 
                     time -= Time.deltaTime;
