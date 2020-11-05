@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class AddRoom : MonoBehaviour
 {
+  //public Sprite minimapRoom;
   private RoomTemplates templates;
 
   private void Start()
