@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviourPunCallbacks
             }
             else
             {
-                if (!other.GetComponent<Player>().isSuper)
+                if (!other.GetComponent<Player>().isSuper &&pv.IsMine)
                     spr.sprite = none;
             }
         }

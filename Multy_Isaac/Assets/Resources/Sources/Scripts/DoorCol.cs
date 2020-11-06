@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class DoorCol : MonoBehaviour
     {
         if (other.CompareTag("Player")&&other.GetComponent<PhotonView>().IsMine)
         {
-            Camera.main.transform.position=new Vector3(transform.parent.transform.position.x,transform.parent.transform.position.y,-10);
+            DOTween.KillAll();
+            Camera.main.transform.DOMove(new Vector3(transform.parent.transform.position.x,transform.parent.transform.position.y,-10),0.3f);
             Vector2 pos = transform.parent.transform.position;
             print(pos+" "+transform.parent.name.Substring(0, transform.parent.name.IndexOf("("))+"입니당!"); //(Clone) 앞까지 추출
             
@@ -28,7 +30,8 @@ public class DoorCol : MonoBehaviour
                 isInstantiate = true;
             }
 
-            GameObject.FindGameObjectWithTag("Minimap").transform.position = minimapPos;
+            GameObject.FindGameObjectWithTag("Minimap").transform.DOMove(minimapPos,0.1f);
+            GameObject.FindGameObjectWithTag("MinimapHead").transform.DOMove(new Vector3(minimapPos.x,minimapPos.y,0), 0.1f);
         }
     }
 }

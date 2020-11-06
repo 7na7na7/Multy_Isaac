@@ -68,7 +68,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        camera = FindObjectOfType<Camera>();
+        camera = FindObjectOfType<AudioListener>().GetComponent<Camera>();
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
         col = GetComponent<CapsuleCollider2D>();
@@ -79,7 +79,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     playerItem = GetComponent<PlayerItem>();
-                    Invoke("setCam",3f);
+                    Invoke("setCam",1f);
                     spawnPoint = transform.position;
                 }
        
@@ -153,10 +153,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
-             if(Input.GetKeyDown(KeyCode.V))
-                 setCam();
-             
-             
                 if(time>0) 
                     time -= Time.deltaTime;
               
@@ -203,7 +199,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                     
                             gun.transform.localScale=new Vector3(-1,1,1);
-                        }
+                        } //커서가 왼쪽에 있으면
+                        
                         
                         if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
                         {
