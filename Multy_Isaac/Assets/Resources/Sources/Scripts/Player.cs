@@ -80,13 +80,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     playerItem = GetComponent<PlayerItem>();
                     Invoke("setCam",2f);
-                    spawnPoint = transform.position;
                 }
        
     }
 
-   public void setCam()
+   void setCam()
    {
+       spawnPoint = transform.position;
        canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
