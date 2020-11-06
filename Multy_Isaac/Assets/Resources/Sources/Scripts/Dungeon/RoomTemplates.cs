@@ -61,6 +61,6 @@ public class RoomTemplates : MonoBehaviour
          }
       }
       if(PlayerCount>0)
-         ReLoad();
+         print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");
    }
 }

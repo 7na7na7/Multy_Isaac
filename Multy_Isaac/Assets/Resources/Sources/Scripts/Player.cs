@@ -79,7 +79,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     playerItem = GetComponent<PlayerItem>();
-                    Invoke("setCam",1f);
+                    Invoke("setCam",2f);
                     spawnPoint = transform.position;
                 }
        

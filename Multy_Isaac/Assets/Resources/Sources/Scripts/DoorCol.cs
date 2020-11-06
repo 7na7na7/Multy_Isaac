@@ -64,4 +64,5 @@ public class DoorCol : MonoBehaviour
             GameObject.FindGameObjectWithTag("MinimapHead").transform.DOMove(new Vector3(minimapPos.x,minimapPos.y,0), 0.1f);
         }
     }
+    
 }
