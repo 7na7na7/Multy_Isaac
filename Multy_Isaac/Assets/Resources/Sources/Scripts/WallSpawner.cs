@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
+  public int dir;
   public GameObject wall;
   
   private void OnTriggerStay2D(Collider2D other)
