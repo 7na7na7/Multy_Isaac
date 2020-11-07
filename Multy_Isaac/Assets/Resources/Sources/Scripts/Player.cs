@@ -13,6 +13,10 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    //시작시 미니맵표시
+    public LayerMask doorCol;
+    public float radius;
+    
     private Vector3 spawnPoint;
     //수면
     public bool isSleeping; //자고있는가?
@@ -90,7 +94,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
        canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
-    }
+        
+        //도히 기준으로 이내의 반경의 플레이어를 검색
+        Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
+        if (col != null) //플레이어가 비지 않았다면
+        {
+            col.GetComponent<DoorCol>().StartEntry();
+        }
+        else
+        {
+            print("감지 실패!");
+        }
+   }
     void roll(Vector2 dir)
     {
         if (LoseMp(rollMp))
