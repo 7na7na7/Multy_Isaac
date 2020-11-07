@@ -195,7 +195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &27681164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ RectTransform:
   m_Children:
   - {fileID: 917669435}
   m_Father: {fileID: 2472824489652345160}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -278,17 +278,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159395863}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
-  m_Father: {fileID: 2472824489652345160}
-  m_RootOrder: 5
+  m_Father: {fileID: 1179709712}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 981}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -49.620056, y: 50.139954}
+  m_SizeDelta: {x: 125.164215, y: 125.76608}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &159395865
 MonoBehaviour:
@@ -967,6 +967,8 @@ GameObject:
   - component: {fileID: 1179709712}
   - component: {fileID: 1179709714}
   - component: {fileID: 1179709713}
+  - component: {fileID: 1179709716}
+  - component: {fileID: 1179709715}
   m_Layer: 5
   m_Name: MiniMapOutLine
   m_TagString: Untagged
@@ -984,13 +986,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 159395864}
   m_Father: {fileID: 2472824489652345160}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -100.00004}
+  m_AnchoredPosition: {x: -100, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1179709713
@@ -1030,6 +1033,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179709711}
   m_CullTransparentMesh: 0
+--- !u!95 &1179709715
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179709711}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 48cd9231130c0264faed0485ea2f8bd5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1179709716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179709711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f99fd924d51bb747a315c6cac9387a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1179709715}
+  cam: {fileID: 549471472}
 --- !u!1 &1535765867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,8 +1511,8 @@ MonoBehaviour:
   rooms: []
   waitTime: 5
   DestroyerWaitTime: 2
+  ReLoadTime: 9
   boss: {fileID: 6170828556875804045, guid: bf152e0c44698fb4f9d309d719dd42b6, type: 3}
-  player: {fileID: 4169770726997695414, guid: 6f851640b5722dd43bf05352b64623d3, type: 3}
 --- !u!1 &2063720894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,7 +1907,6 @@ RectTransform:
   - {fileID: 2472824489523780584}
   - {fileID: 1853394512}
   - {fileID: 1179709712}
-  - {fileID: 159395864}
   - {fileID: 27681164}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -3220,7 +3255,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
+  m_BackGroundColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3405,7 +3440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8232952586894435235}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 550, y: 550, z: 0}
+  m_LocalPosition: {x: 500, y: 500, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

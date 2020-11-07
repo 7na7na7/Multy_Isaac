@@ -25,16 +25,16 @@ public class RoomTemplates : MonoBehaviour
 
    public float waitTime;
    public float DestroyerWaitTime;
+   public float ReLoadTime;
    public GameObject boss;
-   public GameObject player;
-   
+
    private Vector3 pos;
    private void Start()
    {
       if (PhotonNetwork.OfflineMode)
       {
          Invoke("Spawn",waitTime);
-         Invoke("ReLoad",9);
+         Invoke("ReLoad",ReLoadTime);
       }
       else
       {
