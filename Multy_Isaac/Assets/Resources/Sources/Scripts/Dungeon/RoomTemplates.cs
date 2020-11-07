@@ -31,9 +31,16 @@ public class RoomTemplates : MonoBehaviour
    private Vector3 pos;
    private void Start()
    {
-      if(PhotonNetwork.IsMasterClient) 
+      if (PhotonNetwork.OfflineMode)
+      {
          Invoke("Spawn",waitTime);
-      //Invoke("ReLoad",3.5f);
+         Invoke("ReLoad",9);
+      }
+      else
+      {
+         if(PhotonNetwork.IsMasterClient) 
+            Invoke("Spawn",waitTime);  
+      }
    }
 
    void ReLoad()
@@ -42,25 +49,51 @@ public class RoomTemplates : MonoBehaviour
    }
    void Spawn()
    {
-      Player[] players = FindObjectsOfType<Player>();
-      PlayerCount = players.Length;
-      int count = PlayerCount;
-      PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-      //Instantiate(boss, rooms[rooms.Count-1].transform.position, quaternion.identity);
-      for (int i = 0; i < rooms.Count-1; i++)
+      if (PhotonNetwork.OfflineMode)
       {
-         if (rooms[i].CompareTag("Entry"))
+         Player[] players = FindObjectsOfType<Player>();
+         PlayerCount = players.Length;
+         int count = PlayerCount;
+        Instantiate(boss,  rooms[rooms.Count-1].transform.position, quaternion.identity);
+         //Instantiate(boss, rooms[rooms.Count-1].transform.position, quaternion.identity);
+         for (int i = 0; i < rooms.Count-1; i++)
          {
-            if (PlayerCount > 0)
+            if (rooms[i].CompareTag("Entry"))
             {
-               players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
-               //players[count-PlayerCount].setCam();
-               PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
-               PlayerCount--;  
+               if (PlayerCount > 0)
+               {
+                  players[count - PlayerCount].Move(rooms[i].transform.position);
+                  //players[count-PlayerCount].setCam();
+                 //Instantiate(HowTo, rooms[i].transform.position, quaternion.identity);
+                  PlayerCount--;  
+               }
             }
          }
+         if(PlayerCount>0)
+            print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");
       }
-      if(PlayerCount>0)
-         print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");
+      else
+      {
+         Player[] players = FindObjectsOfType<Player>();
+         PlayerCount = players.Length;
+         int count = PlayerCount;
+         PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
+         //Instantiate(boss, rooms[rooms.Count-1].transform.position, quaternion.identity);
+         for (int i = 0; i < rooms.Count-1; i++)
+         {
+            if (rooms[i].CompareTag("Entry"))
+            {
+               if (PlayerCount > 0)
+               {
+                  players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
+                  //players[count-PlayerCount].setCam();
+                  PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
+                  PlayerCount--;  
+               }
+            }
+         }
+         if(PlayerCount>0)
+            print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");  
+      }
    }
 }

@@ -8,11 +8,19 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
+    public GameObject StartEntryPrefab;
     private void Start()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.OfflineMode)
         {
-            PhotonNetwork.InstantiateRoomObject("StartEntry", transform.position, quaternion.identity);
+          Instantiate(StartEntryPrefab, transform.position, quaternion.identity);
+        }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.InstantiateRoomObject("StartEntry", transform.position, quaternion.identity);
+            }   
         }
     }
     

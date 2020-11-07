@@ -20,10 +20,18 @@ public class RoomSpawner : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject,waitTime);
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.OfflineMode)
         {
             templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
             Invoke("Spawn",0.1f);
+        }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+                Invoke("Spawn",0.1f);
+            }   
         }
     }
 
@@ -72,7 +80,14 @@ public class RoomSpawner : MonoBehaviour
                         rand = Random.Range(0, templates.bottomRooms.Length-1);   
                     }
                 }
-                PhotonNetwork.InstantiateRoomObject(templates.bottomRooms[rand].name, transform.position,templates.bottomRooms[rand].transform.rotation);
+                if (PhotonNetwork.OfflineMode)
+                {
+                    Instantiate(templates.bottomRooms[rand], transform.position,templates.bottomRooms[rand].transform.rotation);
+                }
+                else
+                {
+                    PhotonNetwork.InstantiateRoomObject(templates.bottomRooms[rand].name, transform.position,templates.bottomRooms[rand].transform.rotation);
+                }
             }else if (openingDirection == 2){//위쪽에 문
                 if (templates.minRoomCount > 0)
                 {
@@ -111,7 +126,14 @@ public class RoomSpawner : MonoBehaviour
                         rand = Random.Range(0, templates.bottomRooms.Length-1);   
                     }
                 }
-                PhotonNetwork.InstantiateRoomObject(templates.topRooms[rand].name, transform.position, templates.topRooms[rand].transform.rotation);
+                if (PhotonNetwork.OfflineMode)
+                {
+                    Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+                }
+                else
+                {
+                    PhotonNetwork.InstantiateRoomObject(templates.topRooms[rand].name, transform.position, templates.topRooms[rand].transform.rotation);
+                }
             }else if (openingDirection == 3) {//왼쪽에 문
                 if (templates.minRoomCount > 0)
                 {
@@ -150,7 +172,16 @@ public class RoomSpawner : MonoBehaviour
                         rand = Random.Range(0, templates.bottomRooms.Length-1);   
                     }
                 }
-                PhotonNetwork.InstantiateRoomObject(templates.leftRooms[rand].name, transform.position, templates.leftRooms[rand].transform.rotation);
+
+                if (PhotonNetwork.OfflineMode)
+                {
+                   Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+                }
+                else
+                {
+                    PhotonNetwork.InstantiateRoomObject(templates.leftRooms[rand].name, transform.position, templates.leftRooms[rand].transform.rotation);    
+                }
+                
             } else if (openingDirection == 4) {//오른쪽에 문
                 if (templates.minRoomCount > 0)
                 {
@@ -189,7 +220,16 @@ public class RoomSpawner : MonoBehaviour
                         rand = Random.Range(0, templates.bottomRooms.Length-1);   
                     }
                 }
-                PhotonNetwork.InstantiateRoomObject(templates.rightRooms[rand].name, transform.position, templates.rightRooms[rand].transform.rotation);
+                
+                if (PhotonNetwork.OfflineMode)
+                {
+                   Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);  
+                }
+                else
+                {
+                    PhotonNetwork.InstantiateRoomObject(templates.rightRooms[rand].name, transform.position, templates.rightRooms[rand].transform.rotation);  
+                }
+
             }
 
             if(templates.minRoomCount>0) 
@@ -202,20 +242,39 @@ public class RoomSpawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.OfflineMode)
         {
-        if (other.CompareTag("SpawnPoint"))
-        {
-           
-                if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false
-                ) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
+            if (other.CompareTag("SpawnPoint"))
                 {
-                    PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position,
-                        Quaternion.identity);
-                    Destroy(gameObject); //방이 겹치면 자신을 파괴   
-                }
+           
+                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false
+                    ) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
+                    {
+                       Instantiate(templates.closedRoom, transform.position,
+                            Quaternion.identity);
+                        Destroy(gameObject); //방이 겹치면 자신을 파괴   
+                    }
 
-                spawned = true;
+                    spawned = true;
+                }
+        }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (other.CompareTag("SpawnPoint"))
+                {
+           
+                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false
+                    ) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
+                    {
+                        PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position,
+                            Quaternion.identity);
+                        Destroy(gameObject); //방이 겹치면 자신을 파괴   
+                    }
+
+                    spawned = true;
+                }
             }
         }
     }
