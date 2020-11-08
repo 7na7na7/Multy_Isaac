@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class DoorCol : MonoBehaviour
 {
+    public GameObject r, l, t, b;
     private bool isInstantiate = false;
 
     public GameObject MinimapRoomPrefab;
@@ -65,7 +66,14 @@ public class DoorCol : MonoBehaviour
                        }
                    }
                 }
-                print("위 : "+istop+" 아래 :"+isbottom+" 오른쪽 : "+isright+" 왼쪽 : "+isleft);
+               if(istop)
+                   Instantiate(t, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+               if(isbottom)
+                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+               if(isright)
+                   Instantiate(r, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+               if(isleft)
+                   Instantiate(l, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
                 Instantiate(MinimapRoomPrefab, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
             }
 
