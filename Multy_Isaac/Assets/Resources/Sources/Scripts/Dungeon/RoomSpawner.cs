@@ -37,206 +37,81 @@ public class RoomSpawner : MonoBehaviour
 
     void Spawn()
     {
-        int playerValue = 0;
+        int playerValue = 0; //플레이어 
         if(templates.PlayerCount>0) 
-            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.PlayerCount);
-        if (spawned == false)//생성되지 않았으면
+            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.PlayerCount); // 최대 방수 - 지정값(이 값만큼 보스로부터 떨어짐) / 플레이어 수(4부터 점점 줄어듦)
+        if (spawned == false)//생성되지 않았으면 생성!
         {
-            if (openingDirection == 1) {//아래쪽에 문
-                if (templates.minRoomCount > 0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.bottomRooms.Length-1);
-                        if (rand != 0&&rand != 1&&rand != 2)
-                            break;
-                    }
-                }
-                else if (templates.maxRoomCount<0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.bottomRooms.Length-1);
-                        if (rand == 0)
-                            break;
-                    }
-                }
-                else
-                {
-                    if (templates.PlayerCount > 0)
-                    {
-                        if (templates.rooms.Count + 1 > playerValue)
-                        {
-                            rand = templates.bottomRooms.Length - 1;
-                            templates.PlayerCount--;
-                        }
-                        else
-                        {
-                            rand = Random.Range(0, templates.bottomRooms.Length-1);
-                        }
-                    }
-                    else
-                    {
-                        rand = Random.Range(0, templates.bottomRooms.Length-1);   
-                    }
-                }
-                if (PhotonNetwork.OfflineMode)
-                {
-                    Instantiate(templates.bottomRooms[rand], transform.position,templates.bottomRooms[rand].transform.rotation);
-                }
-                else
-                {
-                    PhotonNetwork.InstantiateRoomObject(templates.bottomRooms[rand].name, transform.position,templates.bottomRooms[rand].transform.rotation);
-                }
-            }else if (openingDirection == 2){//위쪽에 문
-                if (templates.minRoomCount > 0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.topRooms.Length-1);
-                        if (rand != 0&&rand != 1&&rand != 2)
-                            break;
-                    }
-                }
-                else if (templates.maxRoomCount<0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.topRooms.Length-1);
-                        if (rand == 0)
-                            break;
-                    }
-                }
-                else
-                {
-                    if (templates.PlayerCount > 0)
-                    {
-                        if (templates.rooms.Count + 1 > playerValue)
-                        {
-                            rand = templates.bottomRooms.Length - 1;
-                            templates.PlayerCount--;
-                        }
-                        else
-                        {
-                            rand = Random.Range(0, templates.bottomRooms.Length-1);
-                        }
-                    }
-                    else
-                    {
-                        rand = Random.Range(0, templates.bottomRooms.Length-1);   
-                    }
-                }
-                if (PhotonNetwork.OfflineMode)
-                {
-                    Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
-                }
-                else
-                {
-                    PhotonNetwork.InstantiateRoomObject(templates.topRooms[rand].name, transform.position, templates.topRooms[rand].transform.rotation);
-                }
-            }else if (openingDirection == 3) {//왼쪽에 문
-                if (templates.minRoomCount > 0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.leftRooms.Length-1);
-                        if (rand != 0&&rand != 1&&rand != 2)
-                            break;
-                    }
-                }
-                else if (templates.maxRoomCount<0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.leftRooms.Length-1);
-                        if (rand == 0)
-                            break;
-                    }
-                }
-                else
-                {
-                    if (templates.PlayerCount > 0)
-                    {
-                        if (templates.rooms.Count + 1 > playerValue)
-                        {
-                            rand = templates.bottomRooms.Length - 1;
-                            templates.PlayerCount--;
-                        }
-                        else
-                        {
-                            rand = Random.Range(0, templates.bottomRooms.Length-1);
-                        }
-                    }
-                    else
-                    {
-                        rand = Random.Range(0, templates.bottomRooms.Length-1);   
-                    }
-                }
+            GameObject[] rooms = null;
+            switch (openingDirection)
+            {
+                case 1:
+                    rooms = templates.bottomRooms;
+                    break;
+                case 2:
+                    rooms = templates.topRooms;
+                    break;
+                case 3:
+                    rooms = templates.leftRooms;
+                    break;
+                case 4:
+                    rooms = templates.rightRooms;
+                    break;  
+            } //방 위치 정해주기
 
-                if (PhotonNetwork.OfflineMode)
+            
+            if (templates.minRoomCount > 0)//만약 최소방수가 아직 채워지지 않았다면
+            {
+                while (true)
                 {
-                   Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+                    rand = Random.Range(0, rooms.Length-1);
+//                    if (rand != 0&&rand != 1&&rand != 2)
+//                        break;
+                    if (rand == 2 || rand == 3 || rand == 4)
+                        break;
                 }
-                else
+            } 
+            else if (templates.maxRoomCount<0)//최소방수가 채워졌고, 최대방수가 채워지지 않았다면(이게 제일 많이 호출됨)
+            {
+                while (true)
                 {
-                    PhotonNetwork.InstantiateRoomObject(templates.leftRooms[rand].name, transform.position, templates.leftRooms[rand].transform.rotation);    
+                    rand = Random.Range(0, rooms.Length-1);
+                    if (rand == 0)
+                        break;
                 }
-                
-            } else if (openingDirection == 4) {//오른쪽에 문
-                if (templates.minRoomCount > 0)
+            } 
+            else//최소방수가 채워졌고, 최대방수도 채워졌다면
+            {
+                if (templates.PlayerCount > 0)
                 {
-                    while (true)
+                    if (templates.rooms.Count + 1 > playerValue)
                     {
-                        rand = Random.Range(0, templates.rightRooms.Length-1);
-                        if (rand != 0&&rand != 1&&rand != 2)
-                            break;
-                    }
-                }
-                else if (templates.maxRoomCount<0)
-                {
-                    while (true)
-                    {
-                        rand = Random.Range(0, templates.rightRooms.Length-1);
-                        if (rand == 0)
-                            break;
-                    }
-                }
-                else
-                {
-                    if (templates.PlayerCount > 0)
-                    {
-                        if (templates.rooms.Count + 1 > playerValue)
-                        {
-                            rand = templates.bottomRooms.Length - 1;
-                            templates.PlayerCount--;
-                        }
-                        else
-                        {
-                            rand = Random.Range(0, templates.bottomRooms.Length-1);
-                        }
+                        rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
+                        templates.PlayerCount--;
                     }
                     else
                     {
-                        rand = Random.Range(0, templates.bottomRooms.Length-1);   
+                        rand = Random.Range(0, rooms.Length-1);
                     }
-                }
-                
-                if (PhotonNetwork.OfflineMode)
-                {
-                   Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);  
                 }
                 else
                 {
-                    PhotonNetwork.InstantiateRoomObject(templates.rightRooms[rand].name, transform.position, templates.rightRooms[rand].transform.rotation);  
+                    rand = Random.Range(0, rooms.Length-1);   
                 }
-
-            }
-
+            } 
+            
+            
+            if (PhotonNetwork.OfflineMode) //오프라인 모드면
+                Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+            else //온라인 모드면
+                PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+            
+            
             if(templates.minRoomCount>0) 
                 templates.minRoomCount--;
             templates.maxRoomCount--;
             
-            spawned = true;
+            spawned = true; //소환됨으로 바꿈
         }
     }
 
