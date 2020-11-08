@@ -52,18 +52,18 @@ public class RoomTemplates : MonoBehaviour
    {
       if (PhotonNetwork.OfflineMode)
       {
-         Player[] players = FindObjectsOfType<Player>();
-         PlayerCount = players.Length;
-         int count = PlayerCount;
-        Instantiate(boss,  rooms[rooms.Count-1].transform.position, quaternion.identity);
+         Player player = FindObjectOfType<Player>();
+         PlayerCount = 1;
+         maxRoomCount = PlayerCount * maxRoomCount*2;
+         Instantiate(boss,  rooms[rooms.Count-1].transform.position, quaternion.identity);
         for (int i = 0; i < rooms.Count-1; i++)
          {
             if (rooms[i].CompareTag("Entry"))
             {
                if (PlayerCount > 0)
                {
-                  players[count - PlayerCount].Move(rooms[i].transform.position);
-                  PlayerCount--;  
+                  player.Move(rooms[i].transform.position);
+                  PlayerCount--;
                }
             }
          }
@@ -75,6 +75,7 @@ public class RoomTemplates : MonoBehaviour
          Player[] players = FindObjectsOfType<Player>();
          PlayerCount = players.Length;
          int count = PlayerCount;
+         maxRoomCount = count * maxRoomCount;
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
         
          for (int i = 0; i < rooms.Count-1; i++)
