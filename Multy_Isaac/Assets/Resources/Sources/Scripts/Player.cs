@@ -99,7 +99,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
         if (col != null) //플레이어가 비지 않았다면
         {
-            col.GetComponent<DoorCol>().StartEntry();
+            col.GetComponent<DoorCol>().Minimap();
         }
         else
         {

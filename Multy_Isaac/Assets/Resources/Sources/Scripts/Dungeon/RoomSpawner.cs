@@ -35,6 +35,19 @@ public class RoomSpawner : MonoBehaviour
         }
     }
 
+    void SimpleSpawn()
+    {
+        if (templates.StraightCount == 0)
+        {
+            templates.StraightCount = 2;
+            rand = 0;
+        }
+        else
+        {
+            templates.StraightCount--;
+            rand = Random.Range(0, 4);
+        }
+    }
     void Spawn()
     {
         int playerValue = 0; //플레이어 
@@ -58,45 +71,34 @@ public class RoomSpawner : MonoBehaviour
                     rooms = templates.rightRooms;
                     break;  
             } //방 위치 정해주기
-
+            
+           
             
             if (templates.minRoomCount > 0)//만약 최소방수가 아직 채워지지 않았다면
             {
-                while (true)
-                {
-                    rand = Random.Range(0, rooms.Length-1);
-//                    if (rand != 0&&rand != 1&&rand != 2)
-//                        break;
-                    if (rand == 2 || rand == 3 || rand == 4)
-                        break;
-                }
+               SimpleSpawn();
             } 
-            else if (templates.maxRoomCount<0)//최소방수가 채워졌고, 최대방수가 채워지지 않았다면(이게 제일 많이 호출됨)
+            else if (templates.maxRoomCount<0)//최소방수가 채워졌고, 최대방수도 채워졌다면
             {
-                while (true)
-                {
-                    rand = Random.Range(0, rooms.Length-1);
-                    if (rand == 0)
-                        break;
-                }
+                rand = rooms.Length - 2; //막힌방만 생성
             } 
-            else//최소방수가 채워졌고, 최대방수도 채워졌다면
+            else//최소방수가 채워졌고, 최대방수는 채워지지 않았다면(제일많이 호출)
             {
                 if (templates.PlayerCount > 0)
                 {
-                    if (templates.rooms.Count + 1 > playerValue)
+                    if (templates.rooms.Count + 1 > playerValue) //플레이어를 소환할 타이밍이면
                     {
                         rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
                         templates.PlayerCount--;
                     }
                     else
                     {
-                        rand = Random.Range(0, rooms.Length-1);
+                      SimpleSpawn();
                     }
                 }
                 else
                 {
-                    rand = Random.Range(0, rooms.Length-1);   
+                   SimpleSpawn();
                 }
             } 
             

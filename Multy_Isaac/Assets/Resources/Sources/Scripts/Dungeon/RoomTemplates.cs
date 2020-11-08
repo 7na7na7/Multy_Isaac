@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class RoomTemplates : MonoBehaviour
 {
+   public int StraightCount = 0;
    public int minRoomCount = 7;
    public int maxRoomCount = 50;
    public int maxRoomCountSave;
