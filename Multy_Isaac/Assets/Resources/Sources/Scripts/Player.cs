@@ -30,10 +30,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Rigidbody2D rb;
     private float localScaleX;
     private Vector3 curPos;
-    public Animator headAnim; //다리위쪽 애니메이션
+   // public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
+    private float savedSpeed;
+    public float shootingSpeed;
     public PhotonView pv; //포톤뷰
-    public GameObject Arm;
+    //public GameObject Arm;
    //캔버스
    public Slider hp; //체력
    public Slider mp; //기력
@@ -54,6 +56,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public Ease easeMode;
     public float rollTime;
     public float rollDistance;
+    public float rollDelayMultiply;
     private bool canRoll = true;
     public int rollMp = 20;
 
@@ -62,9 +65,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 MousePosition; //총 회전을 위한 변수
     private Camera camera;
     private float angle;
-
-
+    
     private PlayerItem playerItem;
+
+    private float attackTime = 0f;
+    private float attackAnimCool = 0.15f;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -73,11 +78,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         camera = FindObjectOfType<AudioListener>().GetComponent<Camera>();
-        localScaleX = transform.localScale.x;
-        canvasLocalScaleX = canvasRect.localScale.x;
+        localScaleX = transform.localScale.x*-1f;
+        canvasLocalScaleX = canvasRect.localScale.x * -1f;
         col = GetComponent<CapsuleCollider2D>();
-        
-        
+
+        savedSpeed = speed;
 
                 if (pv.IsMine)
                 {
@@ -129,7 +134,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             SetAnimRPC(false,"Roll");
             SetAnimRPC(true,"None");
-            Arm.SetActive(false);
+            //Arm.SetActive(false);
         }
         else
         {
@@ -145,13 +150,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode).SetAs(parms);
         yield return new WaitForSeconds(rollTime);
         isSuper = false; //무적 OFF
-        yield return new WaitForSeconds(rollTime/10f); //스턴시간은 구르는시간의 10분의 1
+        yield return new WaitForSeconds(rollTime*rollDelayMultiply); //스턴시간은 구르는시간의 10분의 1
         col.size = originalSize; //원래 크기로 돌려줌
         if (PhotonNetwork.OfflineMode)
         {
             SetAnimRPC(false,"Idle");
             SetAnimRPC(true,"GoDown");
-            Arm.SetActive(true);
+            //Arm.SetActive(true);
         }
         else
         {
@@ -164,13 +169,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canMove = true;
         canRoll = true;
     }
+    
     private void Update()
         {
             if (pv.IsMine)
             {
                 if(time>0) 
                     time -= Time.deltaTime;
-              
+                if (attackTime > 0)
+                {
+                    attackTime -= Time.deltaTime; 
+                    
+                    if (PhotonNetwork.OfflineMode)
+                        SetAnimRPC(false,"Shoot");
+                    else
+                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Shoot");
+                }
+
                 if (canMove)
                 {
                     mp.value += Time.deltaTime * MpHealSpeed;
@@ -178,8 +193,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         if (Input.GetMouseButton(0))
                         {
+                            speed = shootingSpeed;
                             if (time <= 0)
                             {
+                               attackTime = attackAnimCool;
+
                                 time = CoolTime;
                                 if (SceneManager.GetActiveScene().name == "Play")
                                 {
@@ -194,6 +212,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 }
                             }
                         }
+                        else
+                        {
+                            speed = savedSpeed;
+                        }
                         if (Input.GetKeyDown(KeyCode.LeftShift))
                         {
                             Vector2 dir;
@@ -206,14 +228,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
                             canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
 
-                            gun.transform.localScale=new Vector3(1,1,1);
+                            gun.transform.localScale=new Vector3(-1,1,1);
                         }
                         else
                         {
                             transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
                             canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                     
-                            gun.transform.localScale=new Vector3(-1,1,1);
+                            gun.transform.localScale=new Vector3(1,1,1);
                         } //커서가 왼쪽에 있으면
                         
                         
@@ -226,14 +248,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
                         }
                     }
-                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
-                        Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
-                        headAnim.SetInteger("Dir",1);
-                    else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0&&
-                             Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*0.5f)) //마우스커서가 위에있으면
-                        headAnim.SetInteger("Dir",-1);
-                    else //중간정도면
-                        headAnim.SetInteger("Dir",0);   
+//                    if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y < 0&&
+//                        Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*1f)) //마우스커서가 위에있으면
+//                        headAnim.SetInteger("Dir",1);
+//                    else if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y > 0&&
+//                             Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x) < Mathf.Abs((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y*0.5f)) //마우스커서가 위에있으면
+//                        headAnim.SetInteger("Dir",-1);
+//                    else //중간정도면
+//                        headAnim.SetInteger("Dir",0);   
                     
                     
                     //총 회전
@@ -251,8 +273,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             if (PhotonNetwork.OfflineMode)
                             {
                                 anim.Play("Sleep");
-                             headAnim.Play("None");
-                             Arm.SetActive(false);
+                             //headAnim.Play("None");
+                             //Arm.SetActive(false);
                             }
                             else
                             {
@@ -291,16 +313,29 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if (moveDirection == Vector2.zero)
                 {
                     if(PhotonNetwork.OfflineMode)
-                        SetAnimRPC(false,"Idle");
+                    {
+                        if(attackTime<=0) 
+                            SetAnimRPC(false,"Idle");   
+                    }
                     else
-                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                    {
+                        if(attackTime<=0) 
+                            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                    }
                 }
                 else
                 {
-                    if(PhotonNetwork.OfflineMode)
-                        SetAnimRPC(false,"Walk");
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        if(attackTime<=0) 
+                            SetAnimRPC(false,"Walk");
+                    }
                     else
-                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
+                    {
+                        if(attackTime<=0) 
+                            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
+                    }
+                    
                 }
                 rb.velocity=new Vector2(moveDirection.x*speed,moveDirection.y*speed);
             }
@@ -465,8 +500,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.OfflineMode)
             {
                 anim.Play("Idle");
-                headAnim.Play("GoDown");
-                Arm.SetActive(false);
+                //headAnim.Play("GoDown");
+                //Arm.SetActive(false);
             }
             else
             {
@@ -478,14 +513,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         public void SetActive(bool b)
         {
-            Arm.SetActive(b);
+            //Arm.SetActive(b);
         }
         [PunRPC]
         public void SetAnimRPC(bool isHead, string animName)
         {
-            if(isHead)
-                headAnim.Play(animName);
-            else
+//            if(isHead)
+//                headAnim.Play(animName);
+//            else
                 anim.Play(animName);
         }
     
