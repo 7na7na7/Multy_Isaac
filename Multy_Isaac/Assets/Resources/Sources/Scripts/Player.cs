@@ -290,11 +290,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (moveDirection == Vector2.zero)
                 {
-                    pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                    if(PhotonNetwork.OfflineMode)
+                        SetAnimRPC(false,"Idle");
+                    else
+                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
                 }
                 else
                 {
-                    pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
+                    if(PhotonNetwork.OfflineMode)
+                        SetAnimRPC(false,"Walk");
+                    else
+                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
                 }
                 rb.velocity=new Vector2(moveDirection.x*speed,moveDirection.y*speed);
             }
