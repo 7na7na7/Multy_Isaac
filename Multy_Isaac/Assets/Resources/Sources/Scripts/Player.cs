@@ -55,7 +55,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float rollTime;
     public float rollDistance;
     private bool canRoll = true;
-    public float rollStun;
     public int rollMp = 20;
 
     //회전부분함수
@@ -146,7 +145,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode).SetAs(parms);
         yield return new WaitForSeconds(rollTime);
         isSuper = false; //무적 OFF
-        yield return new WaitForSeconds(rollStun);
+        yield return new WaitForSeconds(rollTime/10f); //스턴시간은 구르는시간의 10분의 1
         col.size = originalSize; //원래 크기로 돌려줌
         if (PhotonNetwork.OfflineMode)
         {
