@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    private TweenParams parms = new TweenParams();
     //시작시 미니맵표시
     public LayerMask doorCol;
     public float radius;
@@ -142,7 +143,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         isSuper = true; //무적 ON
         Vector2 originalSize = col.size;
         col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
-        rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode);
+        rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode).SetAs(parms);
         yield return new WaitForSeconds(rollTime);
         isSuper = false; //무적 OFF
         yield return new WaitForSeconds(rollStun);
@@ -340,7 +341,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                     if (!isSleeping)
                     {
-                        DOTween.KillAll();
+                        DOTween.Kill(parms);
                         canRoll = true;
                         canMove = true;
                         if (PhotonNetwork.OfflineMode)
@@ -366,7 +367,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (!canRoll)
                 {
-                    DOTween.KillAll();
+                    DOTween.Kill(parms);
                 }
             }   
         }

@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class DoorCol : MonoBehaviour
 {
+    private TweenParams parms = new TweenParams();
     public GameObject r, l, t, b;
     private bool isInstantiate = false;
 
@@ -22,10 +23,10 @@ public class DoorCol : MonoBehaviour
     }
 
     public void Minimap()
-    {
- DOTween.KillAll();
+    { 
+        DOTween.Kill(parms);
             Camera.main.transform.DOMove(
-                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y, -10), 0.3f);
+                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y, -10), 0.3f).SetAs(parms);
             Vector2 pos = transform.parent.transform.position;
            // print(pos + " " + transform.parent.name.Substring(0, transform.parent.name.IndexOf("(")) + "입니당!"); //(Clone) 앞까지 추출
 
