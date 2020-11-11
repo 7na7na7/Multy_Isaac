@@ -21,7 +21,9 @@ public class PlayerItem : MonoBehaviour
     public Sprite NullSprite;
     public ItemSlot[] slots;
     public ItemData itemData;
+    public GameObject[] Selected;
     
+    private int selectedIndex = 1;
     public void OtherBtnSetFalse(int index)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -32,6 +34,12 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
+
+    private void Start()
+    {
+        Selected[0].SetActive(true);
+    }
+
     private void Update()
     {
         if (player != null)
@@ -40,16 +48,17 @@ public class PlayerItem : MonoBehaviour
             {
                 //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
             
-                for (int i = 0; i < ItemList.Length; i++)
+                for (int i = 0; i < ItemList.Length; i++) //아이템이미지가 존재한다면 매 프레임마다 박스에 이미지 갱신
                 {
                     if(ItemList[i].ItemSprite!=null) 
                         ItemBoxes[i].sprite = ItemList[i].ItemSprite;
                     else
                         ItemBoxes[i].sprite = NullSprite;
                 }
-                if (player.canMove)
+                
+                if (player.canMove) //움직일 수 있는 상태에서만 입력 가능
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space)) //스페이스바로 줍기
                     {
                         Collider2D item = Physics2D.OverlapCircle(transform.position, itemRadious, itemLayer);
                         if (item != null)
@@ -72,6 +81,38 @@ public class PlayerItem : MonoBehaviour
                             
                             }
                         }   
+                    }
+                    
+                    //1부터 6으로 아이템 선택 가능
+                    if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
+                        Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
+                        Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6))
+                    {
+                        if (Input.GetKeyDown(KeyCode.Alpha1)) //1
+                            selectedIndex = 1;
+                        else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
+                            selectedIndex = 2;
+                        else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
+                            selectedIndex = 3;
+                        else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
+                            selectedIndex = 4;
+                        else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
+                            selectedIndex = 5;
+                        else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
+                            selectedIndex = 6;
+
+                        for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                        {
+                            if (i == selectedIndex - 1)
+                                Selected[i].SetActive(true);
+                            else
+                                Selected[i].SetActive(false); 
+                        }
+
+                        if (ItemList[selectedIndex].type == itemType.Weapon)
+                        {
+                            
+                        }
                     }
                 }
             }   

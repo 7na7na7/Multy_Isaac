@@ -50,6 +50,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float CoolTime = 0.2f; //총 쏘는 쿨타임
     private float time = 0; //쿨타임 계산을 위한 시간변수
     public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
+    public GameObject Arm; //팔
     
     //구르기
     public bool isSuper = false; //무적인가?
@@ -67,9 +68,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float angle;
     
     private PlayerItem playerItem;
-
-    private float attackTime = 0f;
-    private float attackAnimCool = 0.15f;
+    
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -176,15 +175,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if(time>0) 
                     time -= Time.deltaTime;
-                if (attackTime > 0)
-                {
-                    attackTime -= Time.deltaTime; 
-                    
-                    if (PhotonNetwork.OfflineMode)
-                        SetAnimRPC(false,"Shoot");
-                    else
-                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Shoot");
-                }
+
 
                 if (canMove)
                 {
@@ -196,7 +187,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             speed = shootingSpeed;
                             if (time <= 0)
                             {
-                               attackTime = attackAnimCool;
 
                                 time = CoolTime;
                                 if (SceneManager.GetActiveScene().name == "Play")
@@ -269,19 +259,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         if (!isSleeping)
                         {
-                            isSleeping = true;
-                            if (PhotonNetwork.OfflineMode)
-                            {
-                                anim.Play("Sleep");
-                             //headAnim.Play("None");
-                             //Arm.SetActive(false);
-                            }
-                            else
-                            {
-                                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Sleep");
-                                pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
-                                pv.RPC("SetActive",RpcTarget.All,false);   
-                            }
+                            Sleep();
                         }
                         else
                         {
@@ -314,26 +292,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if(PhotonNetwork.OfflineMode)
                     {
-                        if(attackTime<=0) 
-                            SetAnimRPC(false,"Idle");   
+                        SetAnimRPC(false,"Idle");   
                     }
                     else
                     {
-                        if(attackTime<=0) 
-                            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
                     }
                 }
                 else
                 {
                     if (PhotonNetwork.OfflineMode)
                     {
-                        if(attackTime<=0) 
-                            SetAnimRPC(false,"Walk");
+                        SetAnimRPC(false,"Walk");
                     }
                     else
                     {
-                        if(attackTime<=0) 
-                            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
+                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
                     }
                     
                 }
@@ -494,6 +468,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
+        public void Sleep()
+        {
+            isSleeping = true;
+            if (PhotonNetwork.OfflineMode)
+            {
+                anim.Play("Sleep");
+                //headAnim.Play("None");
+                //Arm.SetActive(false);
+            }
+            else
+            {
+                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Sleep");
+                pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
+                pv.RPC("SetActive",RpcTarget.All,false);   
+            }
+            gun.SetActive(false);
+            Arm.SetActive(false);
+        }
         public void WakeUp()
         {
             isSleeping = false;
@@ -509,6 +501,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
                 pv.RPC("SetActive",RpcTarget.All,true);   
             }
+            gun.SetActive(true);
+            Arm.SetActive(true);
         }
         [PunRPC]
         public void SetActive(bool b)
