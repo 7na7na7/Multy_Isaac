@@ -17,7 +17,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //시작시 미니맵표시
     public LayerMask doorCol;
     public float radius;
-    
     private Vector3 spawnPoint;
     //수면
     public bool isSleeping; //자고있는가?
@@ -539,7 +538,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             //gun.transform.position = weapon.tr;
             gunScale = weapon.scale;
             CoolTime = weapon.CoolTime;
-            bulletTr.position = gun.transform.position+(Vector3)weapon.bulletPos;
+            gun.transform.eulerAngles=Vector3.zero;
+            bulletTr.position = gun.transform.position + (Vector3) weapon.bulletPos;
+            print(weapon.weaponIndex);
             bulletName = weapon.BulletName;
         }
         
