@@ -560,7 +560,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 CoolTime = weapon.CoolTime;
                 gun.transform.eulerAngles=Vector3.zero;
                 bulletTr.position = gun.transform.position + (Vector3) weapon.bulletPos;
-                print(weapon.weaponIndex);
                 bulletName = weapon.BulletName;   
             }
         }

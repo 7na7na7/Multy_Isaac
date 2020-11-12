@@ -122,22 +122,18 @@ public class PlayerItem : MonoBehaviour
                                     Selected[i].SetActive(false); 
                             }
 
-                            if (ItemBoxes[selectedIndex].sprite != NullSprite)
-                            {
-                                if (ItemList[selectedIndex].type == itemType.Weapon) 
+                         
+                                if (ItemList[selectedIndex].type == itemType.Weapon && ItemList[selectedIndex].weaponIndex>0) 
                                 {
+                                    print("무기네요!");
                                     player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
                                 }
                                 else
                                 {
+                                    print("무기가 아니네요!");
                                     player.gunSetfalse();
                                 }
                             }
-//                            else
-//                            {
-//                                player.gunSetfalse();
-//                            }
-                    }
                 }
             }   
         }
