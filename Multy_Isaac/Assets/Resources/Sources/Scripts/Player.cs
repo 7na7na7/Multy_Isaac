@@ -556,10 +556,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 print(weapon.weaponIndex);
                 bulletName = weapon.BulletName;   
             }
-            else
-            {
-               gunSetfalse();
-            }
+//            else
+//            {
+//               gunSetfalse();
+//            }
         }
 
         public void gunSetfalse()

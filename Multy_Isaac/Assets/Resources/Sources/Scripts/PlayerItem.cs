@@ -39,7 +39,7 @@ public class PlayerItem : MonoBehaviour
     {
         Selected[0].SetActive(true);
     }
-
+    
     private void Update()
     {
         if (player != null)
@@ -89,41 +89,41 @@ public class PlayerItem : MonoBehaviour
                         Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6))
                     {
                         if (Input.GetKeyDown(KeyCode.Alpha1)) //1
-                            selectedIndex = 1;
-                        else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
-                            selectedIndex = 2;
-                        else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
-                            selectedIndex = 3;
-                        else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
-                            selectedIndex = 4;
-                        else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
-                            selectedIndex = 5;
-                        else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
-                            selectedIndex = 6;
+                                selectedIndex = 1;
+                            else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
+                                selectedIndex = 2;
+                            else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
+                                selectedIndex = 3;
+                            else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
+                                selectedIndex = 4;
+                            else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
+                                selectedIndex = 5;
+                            else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
+                                selectedIndex = 6;
 
-                        for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
-                        {
-                            if (i == selectedIndex - 1)
-                                Selected[i].SetActive(true);
-                            else
-                                Selected[i].SetActive(false); 
-                        }
+                            for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                            {
+                                if (i == selectedIndex - 1)
+                                    Selected[i].SetActive(true);
+                                else
+                                    Selected[i].SetActive(false); 
+                            }
 
-                        if (ItemList[selectedIndex - 1].ItemSprite != NullSprite)
-                        {
-                           if (ItemList[selectedIndex-1].type == itemType.Weapon) 
-                           { 
-                               player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex-1].weaponIndex)); 
-                           }
-                           else
-                           {
-                               player.gunSetfalse();
-                           }
-                        }
-                        else
-                        {
-                            player.gunSetfalse();
-                        }
+                            if (ItemList[selectedIndex - 1].ItemSprite != NullSprite)
+                            {
+                                if (ItemList[selectedIndex-1].type == itemType.Weapon) 
+                                { 
+                                    player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex-1].weaponIndex)); 
+                                }
+                                else
+                                {
+                                    player.gunSetfalse();
+                                }
+                            }
+//                            else
+//                            {
+//                                player.gunSetfalse();
+//                            }
                     }
                 }
             }   
