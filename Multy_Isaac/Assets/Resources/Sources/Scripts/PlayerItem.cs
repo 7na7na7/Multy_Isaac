@@ -109,7 +109,7 @@ public class PlayerItem : MonoBehaviour
                                     Selected[i].SetActive(false); 
                             }
 
-                            if (ItemList[selectedIndex - 1].ItemSprite != NullSprite)
+                            if (ItemBoxes[selectedIndex - 1].sprite != NullSprite)
                             {
                                 if (ItemList[selectedIndex-1].type == itemType.Weapon) 
                                 {
@@ -120,10 +120,10 @@ public class PlayerItem : MonoBehaviour
                                     player.gunSetfalse();
                                 }
                             }
-                            else
-                            {
-                                player.gunSetfalse();
-                            }
+//                            else
+//                            {
+//                                player.gunSetfalse();
+//                            }
                     }
                 }
             }   
