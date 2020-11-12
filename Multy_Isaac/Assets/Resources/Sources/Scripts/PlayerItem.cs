@@ -72,6 +72,19 @@ public class PlayerItem : MonoBehaviour
                                     {
                                         isGet = true;
                                         ItemList[i]=item.GetComponent<Item>().item;
+                                        
+                                        if (i == selectedIndex - 1)
+                                        {
+                                            if (ItemList[selectedIndex-1].type == itemType.Weapon) 
+                                            { 
+                                                player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex-1].weaponIndex)); 
+                                            }
+                                            else
+                                            { 
+                                                player.gunSetfalse();
+                                            }
+                                        }
+                                        
                                         item.GetComponent<Item>().Destroy();
                                         break;
                                     }
