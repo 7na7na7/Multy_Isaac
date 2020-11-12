@@ -112,7 +112,7 @@ public class PlayerItem : MonoBehaviour
                             if (ItemList[selectedIndex - 1].ItemSprite != NullSprite)
                             {
                                 if (ItemList[selectedIndex-1].type == itemType.Weapon) 
-                                { 
+                                {
                                     player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex-1].weaponIndex)); 
                                 }
                                 else
@@ -120,10 +120,10 @@ public class PlayerItem : MonoBehaviour
                                     player.gunSetfalse();
                                 }
                             }
-//                            else
-//                            {
-//                                player.gunSetfalse();
-//                            }
+                            else
+                            {
+                                player.gunSetfalse();
+                            }
                     }
                 }
             }   
