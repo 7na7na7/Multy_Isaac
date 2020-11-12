@@ -23,7 +23,7 @@ public class PlayerItem : MonoBehaviour
     public ItemData itemData;
     public GameObject[] Selected;
     
-    private int selectedIndex = 1;
+    private int selectedIndex = 0;
     public void OtherBtnSetFalse(int index)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -73,11 +73,11 @@ public class PlayerItem : MonoBehaviour
                                         isGet = true;
                                         ItemList[i]=item.GetComponent<Item>().item;
                                         
-                                        if (i == selectedIndex - 1)
+                                        if (i == selectedIndex)
                                         {
-                                            if (ItemList[selectedIndex-1].type == itemType.Weapon) 
+                                            if (ItemList[selectedIndex].type == itemType.Weapon) 
                                             { 
-                                                player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex-1].weaponIndex)); 
+                                                player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
                                             }
                                             else
                                             { 
@@ -102,31 +102,31 @@ public class PlayerItem : MonoBehaviour
                         Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6))
                     {
                         if (Input.GetKeyDown(KeyCode.Alpha1)) //1
-                                selectedIndex = 1;
+                                selectedIndex = 0;
                             else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
-                                selectedIndex = 2;
+                                selectedIndex = 1;
                             else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
-                                selectedIndex = 3;
+                                selectedIndex = 2;
                             else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
-                                selectedIndex = 4;
+                                selectedIndex = 3;
                             else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
-                                selectedIndex = 5;
+                                selectedIndex = 4;
                             else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
-                                selectedIndex = 6;
+                                selectedIndex = 5;
 
                             for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
                             {
-                                if (i == selectedIndex - 1)
+                                if (i == selectedIndex)
                                     Selected[i].SetActive(true);
                                 else
                                     Selected[i].SetActive(false); 
                             }
 
-                            if (ItemBoxes[selectedIndex - 1].sprite != NullSprite)
+                            if (ItemBoxes[selectedIndex].sprite != NullSprite)
                             {
-                                if (ItemList[selectedIndex-1].type == itemType.Weapon) 
+                                if (ItemList[selectedIndex].type == itemType.Weapon) 
                                 {
-                                    player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex-1].weaponIndex)); 
+                                    player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
                                 }
                                 else
                                 {
@@ -199,6 +199,8 @@ public class PlayerItem : MonoBehaviour
     public void DiscardItem(int index,bool isDead=false)
     {
         int ind = ItemList[index].index;
+        if(ItemList[index].weaponIndex>0 && selectedIndex==index)
+            player.gunSetfalse();
         ItemList[index].Clear();
         player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);
     }

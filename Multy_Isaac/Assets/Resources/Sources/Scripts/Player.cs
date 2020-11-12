@@ -99,16 +99,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
        canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
-        
-        //도히 기준으로 이내의 반경의 플레이어를 검색
-        Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
-        if (col != null) //플레이어가 비지 않았다면
+
+
+        if (SceneManager.GetActiveScene().name == "Play")
         {
-            col.GetComponent<DoorCol>().Minimap();
-        }
-        else
-        {
-            print("감지 실패!");
+            //자신 기준으로 이내의 반경의 doorCol검색
+            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
+            if (col != null) //플레이어가 비지 않았다면
+            {
+                col.GetComponent<DoorCol>().Minimap();
+            }
+            else
+            {
+                print("감지 실패!");
+            }   
         }
    }
     void roll(Vector2 dir)
