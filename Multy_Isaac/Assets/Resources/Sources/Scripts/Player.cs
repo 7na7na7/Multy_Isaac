@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
     //시작시 미니맵표시
     public LayerMask doorCol;
@@ -29,13 +30,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Rigidbody2D rb;
     private float localScaleX;
     private Vector3 curPos;
-   // public Animator headAnim; //다리위쪽 애니메이션
+    // public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
     private float savedSpeed;
     public float shootingSpeed;
     public PhotonView pv; //포톤뷰
-    //public GameObject Arm;
-   //캔버스
+    //캔버스
    public Slider hp; //체력
    public Slider mp; //기력
    public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
@@ -52,7 +52,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject Arm; //팔
     private string bulletName;
     private Vector2 gunScale=Vector2.one;
-     
+  
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -132,15 +132,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         rb.velocity=Vector2.zero;
         if (PhotonNetwork.OfflineMode)
         {
-            SetAnimRPC(false,"Roll");
-            SetAnimRPC(true,"None");
-            //Arm.SetActive(false);
+            SetAnimRPC("Roll");
+            SetAnimRPC("None");
         }
         else
         {
-            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Roll");
-            pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");   
-            pv.RPC("SetActive",RpcTarget.All,false);
+            pv.RPC("SetAnimRPC",RpcTarget.All,"Roll");
+            pv.RPC("SetAnimRPC",RpcTarget.All,"None");
         }
       
         
@@ -154,18 +152,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         col.size = originalSize; //원래 크기로 돌려줌
         if (PhotonNetwork.OfflineMode)
         {
-            SetAnimRPC(false,"Idle");
-            SetAnimRPC(true,"GoDown");
-            //Arm.SetActive(true);
+            SetAnimRPC("Idle" + (!isHaveGun ? "2" : null));
+            SetAnimRPC("GoDown");
         }
         else
         {
-            pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-            pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
-            pv.RPC("SetActive",RpcTarget.All,true);   
+            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle" + (!isHaveGun ? "2" : null));
+            pv.RPC("SetAnimRPC", RpcTarget.All, "GoDown");
         }
-        
-       
+
+
         canMove = true;
         canRoll = true;
     }
@@ -176,14 +172,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if(time>0) 
                     time -= Time.deltaTime;
-
-
+                
                 if (canMove)
                 {
                     mp.value += Time.deltaTime * MpHealSpeed;
                     if (!isSleeping)
                     {
-                        if (Input.GetMouseButton(0)&&gun.GetComponent<SpriteRenderer>().sprite!=null)
+                        if (Input.GetMouseButton(0)&&gun.activeSelf) //총쏘기
                         {
                             speed = shootingSpeed;
                             if (time <= 0)
@@ -292,22 +287,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if(PhotonNetwork.OfflineMode)
                     {
-                        SetAnimRPC(false,"Idle");   
+                        SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));   
                     }
                     else
                     {
-                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                        pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : null));
                     }
                 }
                 else
                 {
                     if (PhotonNetwork.OfflineMode)
                     {
-                        SetAnimRPC(false,"Walk");
+                        SetAnimRPC("Walk"+ (!isHaveGun ? "2" : null));
                     }
                     else
                     {
-                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Walk");
+                        pv.RPC("SetAnimRPC",RpcTarget.All,"Walk"+ (!isHaveGun ? "2" : null));
                     }
                     
                 }
@@ -360,11 +355,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         canMove = true;
                         if (PhotonNetwork.OfflineMode)
                         {
-                            SetAnimRPC(false,"Idle");
-                            SetAnimRPC(true,"GoDown");
+                            SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));
+                            SetAnimRPC("GoDown");
                         }
-                        pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-                        pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");   
+                        else
+                        {
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : null));
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"GoDown");      
+                        }
                     }
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
@@ -475,46 +473,59 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 anim.Play("Sleep");
                 //headAnim.Play("None");
+                if (isHaveGun)
+                { 
+                    armgunSetFalse();
+                }
             }
             else
             {
-                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Sleep");
-                pv.RPC("SetAnimRPC",RpcTarget.All,true,"None");
-                pv.RPC("SetActive",RpcTarget.All,false);   
+                pv.RPC("SetAnimRPC",RpcTarget.All,"Sleep");
+                pv.RPC("SetAnimRPC",RpcTarget.All,"None");
+                if (isHaveGun)
+                {
+                    pv.RPC("armgunSetFalse", RpcTarget.All);
+                }
             }
-            gun.SetActive(false);
-            Arm.SetActive(false);
         }
         public void WakeUp()
         {
             isSleeping = false;
             if (PhotonNetwork.OfflineMode)
             {
-                anim.Play("Idle");
+                anim.Play("Idle"+ (!isHaveGun ? "2" : ""));
                 //headAnim.Play("GoDown");
+                if (isHaveGun)
+                { 
+                    armgunSetTrue();
+                }
             }
             else
             {
-                pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-                pv.RPC("SetAnimRPC",RpcTarget.All,true,"GoDown");
-                pv.RPC("SetActive",RpcTarget.All,true);   
+                pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : ""));
+                pv.RPC("SetAnimRPC",RpcTarget.All,"GoDown");
+                if (isHaveGun)
+                {
+                    pv.RPC("armgunSetTrue", RpcTarget.All);
+                }  
             }
-            gun.SetActive(true);
+        }
+        [PunRPC]
+        public void armgunSetFalse()
+        {
+            Arm.SetActive(false);
+            gun.SetActive(false);
+        }
+        [PunRPC]
+        public void armgunSetTrue()
+        {
             Arm.SetActive(true);
+            gun.SetActive(true);
         }
         [PunRPC]
-        public void SetActive(bool b)
+        public void SetAnimRPC(string animName)
         {
-            Arm.SetActive(b);
-            gun.SetActive(b);
-        }
-        [PunRPC]
-        public void SetAnimRPC(bool isHead, string animName)
-        {
-//            if(isHead)
-//                headAnim.Play(animName);
-//            else
-                anim.Play(animName);
+            anim.Play(animName);
         }
     
         [PunRPC]
@@ -533,14 +544,27 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         public void changeWeapon(wep weapon)
         {
-            gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
-            //gun.transform.position = weapon.tr;
-            gunScale = weapon.scale;
-            CoolTime = weapon.CoolTime;
-            gun.transform.eulerAngles=Vector3.zero;
-            bulletTr.position = gun.transform.position + (Vector3) weapon.bulletPos;
-            print(weapon.weaponIndex);
-            bulletName = weapon.BulletName;
+            if (weapon.weaponIndex > 0)
+            {
+                pv.RPC("armgunSetTrue", RpcTarget.All);
+                isHaveGun = true;
+                gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                gunScale = weapon.scale;
+                CoolTime = weapon.CoolTime;
+                gun.transform.eulerAngles=Vector3.zero;
+                bulletTr.position = gun.transform.position + (Vector3) weapon.bulletPos;
+                print(weapon.weaponIndex);
+                bulletName = weapon.BulletName;   
+            }
+            else
+            {
+               gunSetfalse();
+            }
         }
-        
+
+        public void gunSetfalse()
+        {
+            pv.RPC("armgunSetFalse", RpcTarget.All);
+            isHaveGun = false;
+        }
 }
