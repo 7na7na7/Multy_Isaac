@@ -546,7 +546,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (weapon.weaponIndex > 0)
             {
-                pv.RPC("armgunSetTrue", RpcTarget.All);
+                if(PhotonNetwork.OfflineMode)
+                    armgunSetTrue();
+                else
+                    pv.RPC("armgunSetTrue", RpcTarget.All);
                 isHaveGun = true;
                 gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
                 gunScale = weapon.scale;
@@ -560,7 +563,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         public void gunSetfalse()
         {
-            pv.RPC("armgunSetFalse", RpcTarget.All);
+            if (PhotonNetwork.OfflineMode)
+                armgunSetFalse();
+            else
+                pv.RPC("armgunSetFalse", RpcTarget.All);
+            
             isHaveGun = false;
         }
 }
