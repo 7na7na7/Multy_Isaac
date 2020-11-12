@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public int weaponIndex;
     public Sprite NoneSprite;
     public bool canSee = true;
     public int[] SmallItemIndex; //하위템
@@ -19,6 +20,7 @@ public class tem
     public string WhereGet = "";
     public void Clear()
     {
+        weaponIndex = -1;
         CompleteItemIndex=new int[0];
         index = 0;
         ItemName = "";
@@ -29,6 +31,7 @@ public class tem
     public tem DeepCopy()
     {
         tem Copytem = new tem();
+        Copytem.weaponIndex = this.weaponIndex;
         Copytem.NoneSprite = this.NoneSprite;
         Copytem.canSee = this.canSee;
         Copytem.SmallItemIndex = this.SmallItemIndex;

@@ -108,10 +108,11 @@ public class PlayerItem : MonoBehaviour
                             else
                                 Selected[i].SetActive(false); 
                         }
-
-                        if (ItemList[selectedIndex].type == itemType.Weapon)
+                        
+                        
+                        if (ItemList[selectedIndex-1].type == itemType.Weapon)
                         {
-                            
+                            player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex));
                         }
                     }
                 }

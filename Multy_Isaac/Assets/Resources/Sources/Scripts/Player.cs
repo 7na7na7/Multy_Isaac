@@ -51,7 +51,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float time = 0; //쿨타임 계산을 위한 시간변수
     public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
     public GameObject Arm; //팔
-    
+    private string bulletName;
+    private Vector2 gunScale=Vector2.one;
+     
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -182,23 +184,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     mp.value += Time.deltaTime * MpHealSpeed;
                     if (!isSleeping)
                     {
-                        if (Input.GetMouseButton(0))
+                        if (Input.GetMouseButton(0)&&gun.GetComponent<SpriteRenderer>().sprite!=null)
                         {
                             speed = shootingSpeed;
                             if (time <= 0)
                             {
-
                                 time = CoolTime;
                                 if (SceneManager.GetActiveScene().name == "Play")
                                 {
                                     if (PhotonNetwork.OfflineMode)
                                         Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
                                     else
-                                        PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);   
+                                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);   
                                 }
                                 else
                                 {
-                                    PhotonNetwork.Instantiate("Bullet", bulletTr.position, bulletTr.rotation);
+                                    PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);
                                 }
                             }
                         }
@@ -218,14 +219,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
                             canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
 
-                            gun.transform.localScale=new Vector3(-1,1,1);
+                            gun.transform.localScale=new Vector3(gunScale.x*-1,gunScale.y,1);
                         }
                         else
                         {
                             transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
                             canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                     
-                            gun.transform.localScale=new Vector3(1,1,1);
+                            gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
                         } //커서가 왼쪽에 있으면
                         
                         
@@ -531,4 +532,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             transform.position = pos;
         }
+
+        public void changeWeapon(weapon weapon)
+        {
+            gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+            //gun.transform.position = weapon.tr;
+            gunScale = weapon.scale;
+            CoolTime = weapon.CoolTime;
+            bulletTr.position = gun.transform.position+(Vector3)weapon.bulletPos;
+            bulletName = weapon.BulletName;
+        }
+        
 }
