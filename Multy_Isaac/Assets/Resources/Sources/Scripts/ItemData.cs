@@ -8,22 +8,28 @@ public class ItemData : MonoBehaviour
 {
     public GameObject[] temPrefabs;
     public List<tem> temDatas;
-    public List<weapon> weaponList;
+    public List<wep> weaponList;
 
     private void Awake()
     {
-        foreach (GameObject item in temPrefabs)
+        for (int i = 0; i < temPrefabs.Length; i++)
         {
-            temDatas.Add(item.GetComponent<Item>().item.DeepCopy());
-            if(item.GetComponent<Item>().item.type==itemType.Weapon) 
-                weaponList.Add(item.GetComponent<weapon>());
+            tem tem = temPrefabs[i].GetComponent<Item>().item.DeepCopy();
+            temDatas.Add(tem);
+
+            if (tem.weaponIndex > 0)
+            {
+                wep weapon = temPrefabs[i].GetComponent<weapon>().weaponObj.DeepCopy();
+                weaponList.Add(weapon);
+            }
+            
         }
     }
 
-    public weapon GetWeapon(int Index)
+    public wep GetWeapon(int Index)
     {
-       weapon tem = weaponList.Find(data => data.weaponIndex == Index);
-       weapon copyTem=new weapon();
+       wep tem = weaponList.Find(data => data.weaponIndex == Index);
+       wep copyTem=new wep();
         if (tem != null)
         {
             copyTem = tem.DeepCopy();

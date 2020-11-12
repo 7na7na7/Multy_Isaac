@@ -475,7 +475,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 anim.Play("Sleep");
                 //headAnim.Play("None");
-                //Arm.SetActive(false);
             }
             else
             {
@@ -493,7 +492,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 anim.Play("Idle");
                 //headAnim.Play("GoDown");
-                //Arm.SetActive(false);
             }
             else
             {
@@ -507,7 +505,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         public void SetActive(bool b)
         {
-            //Arm.SetActive(b);
+            Arm.SetActive(b);
+            gun.SetActive(b);
         }
         [PunRPC]
         public void SetAnimRPC(bool isHead, string animName)
@@ -532,7 +531,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             transform.position = pos;
         }
 
-        public void changeWeapon(weapon weapon)
+        public void changeWeapon(wep weapon)
         {
             gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
             //gun.transform.position = weapon.tr;
