@@ -91,7 +91,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     playerItem = GetComponent<PlayerItem>();
-                    Invoke("setCam",2f);
+                    if (SceneManager.GetActiveScene().name == "Play")
+                        Invoke("setCam", 2f);
+                    else
+                        canMove = true;
                 }
        
     }
@@ -104,8 +107,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
 
 
-        if (SceneManager.GetActiveScene().name == "Play")
-        {
+       
             //자신 기준으로 이내의 반경의 doorCol검색
             Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
             if (col != null) //플레이어가 비지 않았다면
@@ -116,7 +118,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 print("감지 실패!");
             }   
-        }
+       
    }
     void roll(Vector2 dir)
     {
@@ -578,5 +580,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 pv.RPC("armgunSetFalse", RpcTarget.All);
             
             isHaveGun = false;
+        }
+
+        public void getEXP(int value)
+        {
+            LvMgr.GetExp(value);
         }
 }
