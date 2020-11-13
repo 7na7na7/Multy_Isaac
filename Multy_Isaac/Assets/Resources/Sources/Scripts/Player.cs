@@ -15,6 +15,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
+
+    public Text Lv;
     //시작시 미니맵표시
     public LayerMask doorCol;
     public float radius;
@@ -69,9 +71,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float angle;
     
     private PlayerItem playerItem;
-    
+    private LevelMgr LvMgr;
     private void Start()
     {
+        LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
         
@@ -174,6 +177,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
+                Lv.text = "Lv." + LvMgr.Lv;
+                
                 if(time>0) 
                     time -= Time.deltaTime;
                 
@@ -276,7 +281,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                 GetMove();
             }
-            //IsMine이 아닌 것들은 부드럽게 위치 동기화
             else if ((transform.position - curPos).sqrMagnitude >= 100)
                 transform.position = curPos;
             else
@@ -451,6 +455,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(gun.transform.localScale);
                 stream.SendNext(gun.transform.rotation);
                 stream.SendNext(isSleeping);
+                stream.SendNext(Lv.text);
             }
             else
             {
@@ -467,6 +472,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 gun.transform.localScale = (Vector3) stream.ReceiveNext();
                 gun.transform.rotation = (Quaternion) stream.ReceiveNext();
                 isSleeping = (bool) stream.ReceiveNext();
+                Lv.text = (string) stream.ReceiveNext();
             }
         }
 
