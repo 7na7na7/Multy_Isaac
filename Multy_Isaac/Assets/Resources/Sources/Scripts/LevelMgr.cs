@@ -36,10 +36,6 @@ public class LevelMgr : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-            GetExp(10);
-
-
         currentExpTxt.text = currentValue + " / " + expSlider.maxValue;
         LvText.text = "Lv." + Lv;
     }
