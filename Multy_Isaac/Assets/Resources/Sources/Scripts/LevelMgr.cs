@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,9 +25,9 @@ public class LevelMgr : MonoBehaviour
     public void GetExp(int value)
     {
         currentValue += value;
-        if (currentValue > expValues[Lv-1]) //레벨업할 exp면
+        if (currentValue >= expSlider.maxValue) //레벨업할 exp면
         {
-            currentValue -= expValues[Lv-1];
+            currentValue -= (int)expSlider.maxValue;
             Lv++;
             expSlider.maxValue = expValues[Lv - 1];
         }
