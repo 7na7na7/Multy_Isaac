@@ -25,25 +25,26 @@ public class StatManager : MonoBehaviour
 
     public bool canMove = false;
     public bool isSleeping = false;
+    
     private void Update()
     {
         hpText.text = hpSlider.value + " / " + hpSlider.maxValue;
         if(canMove) 
             manaSlider.value += Time.deltaTime * MpHealSpeed;
         if(isSleeping)
-            hpSlider.value += Time.deltaTime * sleepHealSpeed;
+            hpSlider.value=(int)(hpSlider.value+Time.deltaTime * sleepHealSpeed);
     }
 
     public void SetLevel(int i)
     {
-//        //체력
-//        int healValue;
-//        if (i == 0)
-//            healValue = healths[i] - startHealth;
-//        else
-//            healValue=healths[i] - healths[i - 1];
-//        hpSlider.maxValue += healValue;
-//        hpSlider.value += healValue;
+        //체력
+        int healValue;
+        if (i == 0)
+            healValue = healths[i] - startHealth;
+        else
+            healValue=healths[i] - healths[i - 1];
+        hpSlider.maxValue += healValue;
+        hpSlider.value += healValue;
         
         //마나
         int healValueMana;

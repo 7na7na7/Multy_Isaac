@@ -436,6 +436,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(transform.position);
                 stream.SendNext(hp.value);
                 stream.SendNext(mp.value);
+                stream.SendNext(hp.maxValue);
+                stream.SendNext(mp.maxValue);
                 stream.SendNext(angle);
                 stream.SendNext(MousePosition);
                 stream.SendNext(moveDirection);
@@ -453,6 +455,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 curPos = (Vector3) stream.ReceiveNext();
                 hp.value = (float) stream.ReceiveNext();
                 mp.value = (float) stream.ReceiveNext();
+                hp.maxValue = (float) stream.ReceiveNext();
+                mp.maxValue = (float) stream.ReceiveNext();
                 angle = (float) stream.ReceiveNext();
                 MousePosition = (Vector3) stream.ReceiveNext();
                 moveDirection = (Vector2) stream.ReceiveNext();
