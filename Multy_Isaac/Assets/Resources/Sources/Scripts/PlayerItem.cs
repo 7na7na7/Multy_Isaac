@@ -73,17 +73,7 @@ public class PlayerItem : MonoBehaviour
                                         isGet = true;
                                         ItemList[i]=item.GetComponent<Item>().item;
                                         
-                                        if (i == selectedIndex)
-                                        {
-                                            if (ItemList[selectedIndex].type == itemType.Weapon) 
-                                            { 
-                                                player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
-                                            }
-                                            else
-                                            { 
-                                                player.gunSetfalse();
-                                            }
-                                        }
+                                      check(i);
                                         
                                         item.GetComponent<Item>().Destroy();
                                         break;
@@ -121,19 +111,9 @@ public class PlayerItem : MonoBehaviour
                                 else
                                     Selected[i].SetActive(false); 
                             }
-
-                         
-                                if (ItemList[selectedIndex].type == itemType.Weapon && ItemList[selectedIndex].weaponIndex>0) 
-                                {
-                                    print("무기네요!");
-                                    player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
-                                }
-                                else
-                                {
-                                    print("무기가 아니네요!");
-                                    player.gunSetfalse();
-                                }
-                            }
+                            check(selectedIndex);
+                        
+                    }
                 }
             }   
         }
@@ -160,6 +140,7 @@ public class PlayerItem : MonoBehaviour
             {
                 isGet = true;
                 ItemList[i] = item;
+              check(i);
                 break;
             }
         }
@@ -167,6 +148,18 @@ public class PlayerItem : MonoBehaviour
         if (!isGet)
         {
             PopUpManager.instance.PopUp("더 이상 만들 수 없습니다!", Color.red);
+        }
+    }
+
+    public void check(int i)
+    {
+        if (ItemList[i].type == itemType.Weapon && ItemList[i].weaponIndex>0) 
+        {
+            player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
+        }
+        else
+        {
+            player.gunSetfalse();
         }
     }
     public tem GetItemArray(int Index)

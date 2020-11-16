@@ -150,7 +150,6 @@ public class Invent : MonoBehaviour
     {
         if (CanCombine)
         {
-            print("열기전 element : "+element.index);
             PlayerItem.GetItemArray(element.SmallItemIndex[0]).Clear();
             PlayerItem.GetItemArray(element.SmallItemIndex[1]).Clear();
             tem item=new tem();
