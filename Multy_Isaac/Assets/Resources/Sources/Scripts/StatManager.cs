@@ -36,14 +36,14 @@ public class StatManager : MonoBehaviour
 
     public void SetLevel(int i)
     {
-        //체력
-        int healValue;
-        if (i == 0)
-            healValue = healths[i] - startHealth;
-        else
-            healValue=healths[i] - healths[i - 1];
-        hpSlider.maxValue += healValue;
-        hpSlider.value += healValue;
+//        //체력
+//        int healValue;
+//        if (i == 0)
+//            healValue = healths[i] - startHealth;
+//        else
+//            healValue=healths[i] - healths[i - 1];
+//        hpSlider.maxValue += healValue;
+//        hpSlider.value += healValue;
         
         //마나
         int healValueMana;
@@ -86,7 +86,7 @@ public class StatManager : MonoBehaviour
 
     public bool LoseHp(int value)
     {
-        hpSlider.value -= value;
+        hpSlider.value -= value-(value*(armor*0.01f));
         if (hpSlider.value <= 0)
             return true;
         else

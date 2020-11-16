@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public GameObject canvas;
     private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
 
@@ -99,6 +100,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         statMgr.canMove = true;
                     }
                 }
+                else
+                    Destroy(canvas);
        
     }
 
@@ -399,6 +402,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             playerItem.Dead();
+            gunSetfalse();
         }
       statMgr.Heal(99999);
         transform.position = spawnPoint;
@@ -410,7 +414,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (!isSuper&&pv.IsMine)
             {
-                if(statMgr.LoseHp(Damage-statMgr.armor))
+                if(statMgr.LoseHp(Damage))
                     Die(HitName);
             }
         }
@@ -488,6 +492,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         public void WakeUp()
         {
+            isSleeping = false;
             statMgr.isSleeping = false;
             if (PhotonNetwork.OfflineMode)
             {
@@ -553,7 +558,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 gunScale = weapon.scale;
                 CoolTime = weapon.CoolTime;
                 gun.transform.eulerAngles=Vector3.zero;
-                print(weapon.bulletPos);
                 bulletTr.localPosition =weapon.bulletPos;
                 bulletName = weapon.BulletName;   
             }

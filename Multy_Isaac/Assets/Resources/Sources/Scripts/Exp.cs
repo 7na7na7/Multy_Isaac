@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Photon.Pun;
 using UnityEngine;
 
 public class Exp : MonoBehaviour
@@ -10,10 +11,9 @@ public class Exp : MonoBehaviour
     public int ExpAmount = 1;
     public float radius;
     public LayerMask player;
-    public Ease ease;
 
-   
- 
+
+
     void Update()
     {
         //자신 기준으로 radius반경의 plaeyer탐색
@@ -28,9 +28,17 @@ public class Exp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Player>().getEXP(ExpAmount);
-            Destroy(gameObject);   
+            if (other.GetComponent<PhotonView>().IsMine)
+            {
+                other.GetComponent<Player>().getEXP(ExpAmount);
+                GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);     
+            }
         }
     }
-    
+
+    [PunRPC]
+    void punDestroy()
+    {
+        Destroy(gameObject);
+    }
 }
