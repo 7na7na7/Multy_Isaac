@@ -25,14 +25,18 @@ public class StatManager : MonoBehaviour
 
     public bool canMove = false;
     public bool isSleeping = false;
-    
+
+    public float tempHp = 0;
     private void Update()
     {
         hpText.text = hpSlider.value + " / " + hpSlider.maxValue;
         if(canMove) 
             manaSlider.value += Time.deltaTime * MpHealSpeed;
-        if(isSleeping)
-            hpSlider.value=(int)(hpSlider.value+Time.deltaTime * sleepHealSpeed);
+        if (isSleeping)
+        {
+            tempHp += Time.deltaTime * sleepHealSpeed;
+            hpSlider.value = hpSlider.value+Mathf.CeilToInt(tempHp);
+        }
     }
 
     public void SetLevel(int i)

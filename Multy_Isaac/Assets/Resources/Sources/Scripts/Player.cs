@@ -498,6 +498,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             isSleeping = false;
             statMgr.isSleeping = false;
+            statMgr.tempHp=0;
             if (PhotonNetwork.OfflineMode)
             {
                 anim.Play("Idle"+ (!isHaveGun ? "2" : ""));
