@@ -547,13 +547,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if(PhotonNetwork.OfflineMode)
                     armgunSetTrue();
                 else
-                    pv.RPC("armgunSetTrue", RpcTarget.All);
+                    pv.RPC("armgunSetTrue", RpcTarget.All); 
                 isHaveGun = true;
                 gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
                 gunScale = weapon.scale;
                 CoolTime = weapon.CoolTime;
                 gun.transform.eulerAngles=Vector3.zero;
-                bulletTr.position = gun.transform.position + (Vector3) weapon.bulletPos;
+                print(weapon.bulletPos);
+                bulletTr.localPosition =weapon.bulletPos;
                 bulletName = weapon.BulletName;   
             }
         }
