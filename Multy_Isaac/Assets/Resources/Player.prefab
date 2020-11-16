@@ -3050,6 +3050,7 @@ GameObject:
   - component: {fileID: 9117879782481692759}
   - component: {fileID: 1904135613257854555}
   - component: {fileID: 1218754961405888638}
+  - component: {fileID: 5736749956882861665}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -3176,6 +3177,33 @@ MonoBehaviour:
   Lv: 1
   currentExpTxt: {fileID: 399992561899605047}
   LvText: {fileID: 436298528185392514}
+--- !u!114 &5736749956882861665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815524545763313015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85978ceb16206d1459b3bbdaf973ed74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 100
+  startMana: 100
+  startArmor: 0
+  healths: 4c04000014050000dc050000a4060000d0070000
+  manas: 7800000096000000c8000000fa0000002c010000
+  armors: 0a000000140000001e0000002800000032000000
+  manaRegens: []
+  armor: 0
+  hpSlider: {fileID: 8249542335099230702}
+  manaSlider: {fileID: 8249542335763240512}
+  hpText: {fileID: 5650824751393161767}
+  MpHealSpeed: 5
+  sleepHealSpeed: 1
+  canMove: 0
+  isSleeping: 0
 --- !u!1 &6888835637388767033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3864,18 +3892,16 @@ MonoBehaviour:
     m_Bits: 1024
   radius: 5
   isSleeping: 0
-  sleepHealSpeed: 2.5
   canMove: 0
   speed: 5
   shootingSpeed: 3
   pv: {fileID: 5845764388835472206}
-  hp: {fileID: 8249542335099230702}
-  mp: {fileID: 8249542335763240512}
   canvasRect: {fileID: 8249542334295168489}
   ChatBaloon: {fileID: 9172306893620609551}
   chatbox: {fileID: 6641239446911587264}
   nickname: {fileID: 8249542334432618771}
-  MpHealSpeed: 10
+  hp: {fileID: 8249542335099230702}
+  mp: {fileID: 8249542335763240512}
   bulletTr: {fileID: 1656125519388945703}
   CoolTime: 0.2
   offLineBullet: {fileID: 6637044811040539379, guid: bc9ba9c2ed454424faabbb939108cf62,

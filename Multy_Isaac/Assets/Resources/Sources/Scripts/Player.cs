@@ -23,7 +23,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 spawnPoint;
     //수면
     public bool isSleeping; //자고있는가?
-    public float sleepHealSpeed = 5; //자는동안 회복속도
     //이동, 애니메이션
     private CapsuleCollider2D col;
     public bool canMove = true;
@@ -38,14 +37,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float shootingSpeed;
     public PhotonView pv; //포톤뷰
     //캔버스
-   public Slider hp; //체력
-   public Slider mp; //기력
-   public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
+    public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
    private float canvasLocalScaleX; //캔버스 로컬스케일반전을 위해
    public Text ChatBaloon; //말풍선
    public ChatBox chatbox; //챗박스
    public Text nickname; //닉네임
-   public float MpHealSpeed = 5;
+   public Slider hp;
+   public Slider mp;
     //총쏘기
     public Transform bulletTr; //총알이 나가는 위치
     public float CoolTime = 0.2f; //총 쏘는 쿨타임
@@ -72,9 +70,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
     private PlayerItem playerItem;
     private LevelMgr LvMgr;
+    private StatManager statMgr;
     private void Start()
     {
-        LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
         
@@ -90,11 +88,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if (pv.IsMine)
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
+                    LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
+                    statMgr=transform.GetChild(0).GetComponent<StatManager>();
                     playerItem = GetComponent<PlayerItem>();
                     if (SceneManager.GetActiveScene().name == "Play")
                         Invoke("setCam", 2f);
                     else
+                    {
                         canMove = true;
+                        statMgr.canMove = true;
+                    }
                 }
        
     }
@@ -103,6 +106,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    {
        spawnPoint = transform.position;
        canMove = true;
+       statMgr.canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
 
@@ -122,11 +126,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    }
     void roll(Vector2 dir)
     {
-        if (LoseMp(rollMp))
+        if (statMgr.LoseMp(rollMp))
         {
             if (canRoll)
             {
                 canMove = false;
+                statMgr.canMove = false;
                 canRoll = false;
                 StartCoroutine(rollCor(dir,rollDistance));
             }   
@@ -172,6 +177,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
 
         canMove = true;
+        statMgr.canMove = true;
         canRoll = true;
     }
     
@@ -186,7 +192,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                 if (canMove)
                 {
-                    mp.value += Time.deltaTime * MpHealSpeed;
                     if (!isSleeping)
                     {
                         if (Input.GetMouseButton(0)&&gun.activeSelf) //총쏘기
@@ -273,11 +278,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         }
                     }
                 }
-
-                if (isSleeping)
-                {
-                    hp.value += Time.deltaTime * sleepHealSpeed;
-                }
+                
                 //print((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x+" "+(transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.y);
                 //커서에 따른 애니메이션변화
 
@@ -336,20 +337,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //            }
 //        }
 
-   
-    public bool LoseMp(int value) //마나 잃음
-    {
-        if (mp.value >= value)
-        {
-            mp.value -= value;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (pv.IsMine)
@@ -363,6 +350,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         DOTween.Kill(parms);
                         canRoll = true;
                         canMove = true;
+                        statMgr.canMove = true;
                         if (PhotonNetwork.OfflineMode)
                         {
                             SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));
@@ -412,21 +400,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             playerItem.Dead();
         }
-        hp.value = hp.maxValue;
+      statMgr.Heal(99999);
         transform.position = spawnPoint;
         Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
     }
  
 
-    public void Hit(float Damage,string HitName="")
+    public void Hit(int Damage,string HitName="")
         {
             if (!isSuper&&pv.IsMine)
             {
-                hp.value -= Damage;
-                if (hp.value <= 0)
-                {
-                   Die(HitName);
-                }   
+                if(statMgr.LoseHp(Damage-statMgr.armor))
+                    Die(HitName);
             }
         }
 
@@ -481,6 +466,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         public void Sleep()
         {
             isSleeping = true;
+            statMgr.isSleeping = true;
             if (PhotonNetwork.OfflineMode)
             {
                 anim.Play("Sleep");
@@ -502,7 +488,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         public void WakeUp()
         {
-            isSleeping = false;
+            statMgr.isSleeping = false;
             if (PhotonNetwork.OfflineMode)
             {
                 anim.Play("Idle"+ (!isHaveGun ? "2" : ""));

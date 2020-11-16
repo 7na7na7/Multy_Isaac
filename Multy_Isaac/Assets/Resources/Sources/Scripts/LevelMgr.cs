@@ -18,8 +18,11 @@ public class LevelMgr : MonoBehaviour
 
     public Text currentExpTxt;
     public Text LvText;
+
+    private StatManager statMgr;
     void Start()
     {
+        statMgr = GetComponent<StatManager>();
         expSlider.maxValue = expValues[Lv-1];
     }
     public void GetExp(int value)
@@ -29,6 +32,7 @@ public class LevelMgr : MonoBehaviour
         {
             currentValue -= (int)expSlider.maxValue;
             Lv++;
+            statMgr.SetLevel(Lv-2);
             expSlider.maxValue = expValues[Lv - 1];
         }
         expSlider.value = currentValue;

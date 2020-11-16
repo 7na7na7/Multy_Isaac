@@ -28,6 +28,8 @@ public class HP2 : MonoBehaviour
         {
             hp.value = player.hp.value;
             mp.value = player.mp.value;
+            hp.maxValue = player.hp.maxValue;
+            mp.maxValue = player.mp.maxValue;
         }
     }
 }

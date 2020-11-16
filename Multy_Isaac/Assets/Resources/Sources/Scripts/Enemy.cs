@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   private FlashWhite flashwhite;
   public int hp = 50;
   public PhotonView pv;
-  public float CollsionDamage = 20;
+  public int CollsionDamage = 20;
   public float damageDelay = 1f;
   private float time;
   private void Start()
