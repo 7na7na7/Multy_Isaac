@@ -7,6 +7,8 @@ public class Minimap_Tab : MonoBehaviour
 {
     public Animator anim;
     public Camera cam;
+    public float bigSize;
+    public float smallSize;
     private void Update()
     {
       if(Input.GetKeyDown(KeyCode.Tab))
@@ -19,7 +21,7 @@ public class Minimap_Tab : MonoBehaviour
     void Open()
     {
         anim.Play("Open");
-        cam.orthographicSize = 5;
+        cam.orthographicSize = bigSize;
     }
 
     public void OpenSize()
@@ -33,6 +35,6 @@ public class Minimap_Tab : MonoBehaviour
 
     public void CloseSize()
     {
-        cam.orthographicSize = 2;
+        cam.orthographicSize = smallSize;
     }
 }
