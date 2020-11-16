@@ -72,6 +72,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private PlayerItem playerItem;
     private LevelMgr LvMgr;
     private StatManager statMgr;
+    private ItemData itemData;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -92,6 +93,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
                     statMgr=transform.GetChild(0).GetComponent<StatManager>();
                     playerItem = GetComponent<PlayerItem>();
+                    itemData = transform.GetChild(2).GetComponent<ItemData>();
                     if (SceneManager.GetActiveScene().name == "Play")
                         Invoke("setCam", 2f);
                     else
@@ -554,20 +556,33 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (weapon.weaponIndex > 0)
             {
-                if(PhotonNetwork.OfflineMode)
+                if (PhotonNetwork.OfflineMode)
+                {
                     armgunSetTrue();
+                    gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                }
                 else
+                {
                     pv.RPC("armgunSetTrue", RpcTarget.All); 
+                    gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                    //setSprite(weapon.weaponIndex);
+                    //pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex); 
+                }
+                
                 isHaveGun = true;
-                gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                //gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
                 gunScale = weapon.scale;
                 CoolTime = weapon.CoolTime;
                 gun.transform.eulerAngles=Vector3.zero;
                 bulletTr.localPosition =weapon.bulletPos;
                 bulletName = weapon.BulletName;   
             }
+        } 
+        [PunRPC]
+        void setSprite(int i)
+        {
+            gun.GetComponent<SpriteRenderer>().sprite=itemData.GetWeapon(i).spr;
         }
-
         public void gunSetfalse()
         {
             if (PhotonNetwork.OfflineMode)
