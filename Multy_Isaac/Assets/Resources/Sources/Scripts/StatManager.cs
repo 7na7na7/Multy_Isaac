@@ -10,6 +10,7 @@ public class StatManager : MonoBehaviour
     public int startHealth;
     public int startMana;
     public int startArmor;
+    public float startManaRegen;
     public int[] healths;
     public int[] manas;
     public int[] armors;
@@ -57,6 +58,15 @@ public class StatManager : MonoBehaviour
         else
             healValueMana= manas[i] - (int)manaSlider.maxValue;
 
+        //마나리젠
+        float manaRegenValue;
+        if (i == 0)
+            manaRegenValue = manaRegens[i] - startManaRegen;
+        else
+            manaRegenValue = manaRegens[i] -  manaRegens[i-1];
+
+        MpHealSpeed += manaRegenValue;
+        
         manaSlider.maxValue += healValueMana;
         manaSlider.value += healValueMana;
 
