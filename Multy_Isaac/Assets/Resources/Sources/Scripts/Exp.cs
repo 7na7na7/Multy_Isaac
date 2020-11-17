@@ -31,7 +31,11 @@ public class Exp : MonoBehaviour
             if (other.GetComponent<PhotonView>().IsMine)
             {
                 other.GetComponent<Player>().getEXP(ExpAmount);
-                GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);     
+                
+                if(PhotonNetwork.OfflineMode)
+                    Destroy(gameObject);
+                else
+                    GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);     
             }
         }
     }
