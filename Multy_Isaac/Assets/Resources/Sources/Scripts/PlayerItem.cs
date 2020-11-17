@@ -17,7 +17,7 @@ public class PlayerItem : MonoBehaviour
     public tem[] ItemList;
     public Image[] ItemBoxes;
     public GameObject[] btns;
-    private Player player;
+    public Player player;
     public Sprite NullSprite;
     public ItemSlot[] slots;
     public ItemData itemData;
@@ -34,12 +34,8 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
-
-    private void Start()
-    {
-        Selected[0].SetActive(true);
-    }
     
+
     private void Update()
     {
         if (player != null)

@@ -73,6 +73,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private LevelMgr LvMgr;
     private StatManager statMgr;
     private ItemData itemData;
+    public Sprite[] gunSprites;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -93,7 +94,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
                     statMgr=transform.GetChild(0).GetComponent<StatManager>();
                     playerItem = GetComponent<PlayerItem>();
-                    itemData = transform.GetChild(2).GetComponent<ItemData>();
+                    itemData = transform.GetChild(0).GetComponent<ItemData>();
+                    playerItem.player = this;
                     if (SceneManager.GetActiveScene().name == "Play")
                         Invoke("setCam", 2f);
                     else
@@ -190,6 +192,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
+                if(Input.GetKeyDown(KeyCode.Q))
+                    print(itemData.GetWeapon(1));
                 Lv.text = "Lv." + LvMgr.Lv;
                 
                 if(time>0) 
@@ -559,14 +563,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if (PhotonNetwork.OfflineMode)
                 {
                     armgunSetTrue();
-                    gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                    //gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                    setSprite(weapon.weaponIndex);
                 }
                 else
                 {
                     pv.RPC("armgunSetTrue", RpcTarget.All); 
-                    gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+                    //gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
                     //setSprite(weapon.weaponIndex);
-                    //pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex); 
+                    pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex); 
                 }
                 
                 isHaveGun = true;
@@ -581,7 +586,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         void setSprite(int i)
         {
-            gun.GetComponent<SpriteRenderer>().sprite=itemData.GetWeapon(i).spr;
+            gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
         public void gunSetfalse()
         {
