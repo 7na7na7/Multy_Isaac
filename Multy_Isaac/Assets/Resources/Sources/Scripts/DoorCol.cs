@@ -26,7 +26,7 @@ public class DoorCol : MonoBehaviour
     { 
         DOTween.Kill(parms);
             Camera.main.transform.DOMove(
-                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y, -10), 0.3f).SetAs(parms);
+                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y-0.25f, -10), 0.3f).SetAs(parms);
             Vector2 pos = transform.parent.transform.position;
            // print(pos + " " + transform.parent.name.Substring(0, transform.parent.name.IndexOf("(")) + "입니당!"); //(Clone) 앞까지 추출
 

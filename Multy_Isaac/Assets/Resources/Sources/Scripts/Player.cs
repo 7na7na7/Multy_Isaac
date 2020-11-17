@@ -115,7 +115,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
        canMove = true;
        statMgr.canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
-        Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
+        Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
 
 
        
