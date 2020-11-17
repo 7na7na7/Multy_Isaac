@@ -51,8 +51,8 @@ public class RoomSpawner : MonoBehaviour
     void Spawn()
     {
         int playerValue = 0; //플레이어 
-        if(templates.PlayerCount>0) 
-            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.PlayerCount); // 최대 방수 - 지정값(이 값만큼 보스로부터 떨어짐) / 플레이어 수(4부터 점점 줄어듦)
+        if(templates.publicCount>0) 
+            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.publicCount); // 최대 방수 - 지정값(이 값만큼 보스로부터 떨어짐) / 플레이어 수(4부터 점점 줄어듦)
         if (spawned == false)//생성되지 않았으면 생성!
         {
             GameObject[] rooms = null;
@@ -84,10 +84,10 @@ public class RoomSpawner : MonoBehaviour
             } 
             else//최소방수가 채워졌고, 최대방수는 채워지지 않았다면(제일많이 호출)
             {
-                if (templates.PlayerCount > 0 &&templates.rooms.Count + 1 > playerValue)
+                if (templates.publicCount > 0 &&templates.rooms.Count + 1 > playerValue)
                 {
                     rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
-                    templates.PlayerCount--;
+                    templates.publicCount--;
                 }
                 else
                 {

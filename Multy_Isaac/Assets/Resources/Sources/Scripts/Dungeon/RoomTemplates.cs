@@ -12,7 +12,6 @@ public class RoomTemplates : MonoBehaviour
    public int minRoomCount = 7;
    public int maxRoomCount = 50;
    public int maxRoomCountSave;
-   public int PlayerCount = 4;
    public int PlayerSpawnMinusValue = 3;
    public GameObject[] bottomRooms;
    public GameObject[] topRooms;
@@ -30,6 +29,8 @@ public class RoomTemplates : MonoBehaviour
    public GameObject boss;
 
    private Vector3 pos;
+   private int count;
+   public int publicCount;
    private void Start()
    {
       if (PhotonNetwork.OfflineMode)
@@ -39,8 +40,16 @@ public class RoomTemplates : MonoBehaviour
       }
       else
       {
-         if(PhotonNetwork.IsMasterClient) 
+         if (PhotonNetwork.IsMasterClient)
+         {
+            count = FindObjectOfType<playerCountSave>().playerCount;
+            publicCount = count;
+            print(count);
+            maxRoomCount = count * maxRoomCount;
+            maxRoomCountSave = maxRoomCount;
+          
             Invoke("Spawn",waitTime);  
+         }
       }
    }
 
@@ -52,30 +61,13 @@ public class RoomTemplates : MonoBehaviour
    {
       if (PhotonNetwork.OfflineMode)
       {
-         Player player = FindObjectOfType<Player>();
-         PlayerCount = 1;
-         maxRoomCount = PlayerCount * maxRoomCount*2;
          Instantiate(boss,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-        for (int i = 0; i < rooms.Count-1; i++)
-         {
-            if (rooms[i].CompareTag("Entry"))
-            {
-               if (PlayerCount > 0)
-               {
-                  player.Move(rooms[i].transform.position);
-                  PlayerCount--;
-               }
-            }
-         }
-         if(PlayerCount>0)
-            print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");
       }
       else
       {
+         int PlayerCount = count;
          Player[] players = FindObjectsOfType<Player>();
-         PlayerCount = players.Length;
-         int count = PlayerCount;
-         maxRoomCount = count * maxRoomCount;
+
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
         
          for (int i = 0; i < rooms.Count-1; i++)

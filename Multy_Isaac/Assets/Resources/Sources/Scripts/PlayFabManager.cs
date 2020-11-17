@@ -432,6 +432,13 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        {
           PhotonNetwork.CurrentRoom.IsOpen = false; //더이상 플레이어 못들어오게함
           PhotonNetwork.CurrentRoom.IsVisible = false; //방목록에서 안보이게함
+
+          Player[] players = FindObjectsOfType<Player>();
+          playerCountSave[] ps = FindObjectsOfType<playerCountSave>();
+          foreach (var VARIABLE in ps)
+          {
+             VARIABLE.playerCount = players.Length;
+          }
           PhotonNetwork.LoadLevel(1); //Build Settng에서 1번째 인덱스의 씬 호출  
        }
     }
