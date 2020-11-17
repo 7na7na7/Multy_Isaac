@@ -51,8 +51,11 @@ public class RoomSpawner : MonoBehaviour
     void Spawn()
     {
         int playerValue = 0; //플레이어 
-        if(templates.publicCount>0) 
-            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.publicCount); // 최대 방수 - 지정값(이 값만큼 보스로부터 떨어짐) / 플레이어 수(4부터 점점 줄어듦)
+        if (templates.publicCount > 0)
+        {
+            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.privateCount)*(templates.privateCount-templates.publicCount+1); // 최대 방수 - 지정값(이 값만큼 보스로부터 떨어짐) / 플레이어 수(4부터 점점 줄어듦)
+            print(playerValue);
+        }
         if (spawned == false)//생성되지 않았으면 생성!
         {
             GameObject[] rooms = null;
@@ -72,7 +75,6 @@ public class RoomSpawner : MonoBehaviour
                     break;  
             } //방 위치 정해주기
             
-           
             
             if (templates.minRoomCount > 0)//만약 최소방수가 아직 채워지지 않았다면
             {
@@ -86,21 +88,20 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (templates.publicCount > 0 &&templates.rooms.Count + 1 > playerValue)
                 {
-                    rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
+                    //print(templates.rooms.Count+1+" "+playerValue);
+                        rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
                     templates.publicCount--;
                 }
                 else
                 {
                    SimpleSpawn();
                 }
-            } 
-            
-            
+            }
+
             if (PhotonNetwork.OfflineMode) //오프라인 모드면
                 Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
             else //온라인 모드면
                 PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
-            
             
             if(templates.minRoomCount>0) 
                 templates.minRoomCount--;

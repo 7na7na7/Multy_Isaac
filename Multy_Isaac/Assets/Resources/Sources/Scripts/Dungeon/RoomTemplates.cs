@@ -29,7 +29,7 @@ public class RoomTemplates : MonoBehaviour
    public GameObject boss;
 
    private Vector3 pos;
-   private int count;
+   public int privateCount;
    public int publicCount;
    private void Start()
    {
@@ -42,10 +42,10 @@ public class RoomTemplates : MonoBehaviour
       {
          if (PhotonNetwork.IsMasterClient)
          {
-            count = FindObjectOfType<playerCountSave>().playerCount;
-            publicCount = count;
-            print(count);
-            maxRoomCount = count * maxRoomCount;
+            privateCount = FindObjectOfType<playerCountSave>().playerCount;
+            publicCount = privateCount;
+
+            maxRoomCount = privateCount * maxRoomCount;
             maxRoomCountSave = maxRoomCount;
           
             Invoke("Spawn",waitTime);  
@@ -65,7 +65,7 @@ public class RoomTemplates : MonoBehaviour
       }
       else
       {
-         int PlayerCount = count;
+         int PlayerCount = privateCount;
          Player[] players = FindObjectsOfType<Player>();
 
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
@@ -76,7 +76,7 @@ public class RoomTemplates : MonoBehaviour
             {
                if (PlayerCount > 0)
                {
-                  players[count - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
+                  players[privateCount - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
                   PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
                   PlayerCount--;  
                }
