@@ -108,7 +108,6 @@ public class PlayerItem : MonoBehaviour
                                     Selected[i].SetActive(false); 
                             }
                             check(selectedIndex);
-                        
                     }
                 }
             }   
@@ -155,7 +154,8 @@ public class PlayerItem : MonoBehaviour
         }
         else
         {
-            player.gunSetfalse();
+            if(selectedIndex==i) 
+                player.gunSetfalse();
         }
     }
     public tem GetItemArray(int Index)
