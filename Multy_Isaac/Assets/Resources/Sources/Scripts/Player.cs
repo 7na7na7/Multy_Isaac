@@ -203,25 +203,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         if (Input.GetMouseButton(0)&&gun.activeSelf) //총쏘기
                         {
-                            //ShotGun();
-                            speed = shootingSpeed;
-                            if (time <= 0)
-                            {
-                                if (leftBullet.MinusBullet())
-                                {
-                                    time = CoolTime;
-              
-                                    if (PhotonNetwork.OfflineMode) 
-                                        Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
-                                    else
-                                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);
-                                }
-                                else
-                                {
-                                    print("재장전하기!");
-                                }
-
-                            }
+                            ShotGun();
                         }
                         else
                         {
@@ -338,7 +320,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         void ShotGun()
         {
-            
+            if (time <= 0)
+            {
+                if (leftBullet.MinusBullet())
+                {
+                    speed = shootingSpeed;
+                    time = CoolTime;
+              
+                    if (PhotonNetwork.OfflineMode) 
+                        Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                    else
+                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);
+                }
+                else
+                {
+                    print("재장전하기!");
+                    speed = savedSpeed;
+                }
+            }
         }
         private void OnTriggerEnter2D(Collider2D other)
     {

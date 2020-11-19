@@ -48,8 +48,7 @@ public class LeftBullet : MonoBehaviour
                     bullets[i].SetActive(false);
                 }
             }
-
-            return false;
+            return true;
         }
     }
 
