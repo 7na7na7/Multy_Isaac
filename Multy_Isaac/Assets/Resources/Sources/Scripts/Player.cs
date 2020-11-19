@@ -72,8 +72,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private PlayerItem playerItem;
     private LevelMgr LvMgr;
     private StatManager statMgr;
-    private ItemData itemData;
     public Sprite[] gunSprites;
+    private LeftBullet leftBullet;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -94,7 +94,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
                     statMgr=transform.GetChild(0).GetComponent<StatManager>();
                     playerItem = GetComponent<PlayerItem>();
-                    itemData = transform.GetChild(0).GetComponent<ItemData>();
+                    leftBullet = transform.GetChild(0).transform.GetChild(0).GetComponent<LeftBullet>();
                     playerItem.player = this;
                     if (SceneManager.GetActiveScene().name == "Play")
                         Invoke("setCam", 2f);
@@ -192,8 +192,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (pv.IsMine)
             {
-                if(Input.GetKeyDown(KeyCode.Q))
-                    print(itemData.GetWeapon(1));
                 Lv.text = "Lv." + LvMgr.Lv;
                 
                 if(time>0) 
@@ -205,21 +203,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         if (Input.GetMouseButton(0)&&gun.activeSelf) //총쏘기
                         {
+                            //ShotGun();
                             speed = shootingSpeed;
                             if (time <= 0)
                             {
-                                time = CoolTime;
-                                if (SceneManager.GetActiveScene().name == "Play")
+                                if (leftBullet.MinusBullet())
                                 {
-                                    if (PhotonNetwork.OfflineMode)
+                                    time = CoolTime;
+              
+                                    if (PhotonNetwork.OfflineMode) 
                                         Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
                                     else
-                                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);   
+                                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);
                                 }
                                 else
                                 {
-                                    PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);
+                                    print("재장전하기!");
                                 }
+
                             }
                         }
                         else
@@ -334,19 +335,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                rb.velocity=Vector2.zero;
             }
         }
-        
-//        private void OnTriggerEnter2D(Collider2D other)
-//        {
-//            //if (other.CompareTag("Bullet") && !pv.IsMine) //적이 자신의 총알과 부딪혔을 때
-//                
-//            if (other.CompareTag("Bullet") && !other.GetComponent<Bullet>().pv.IsMine&&pv.IsMine) //총알과 부딪혔고, 그 총알이 적의 총알이고, 자기 자신이라면
-//            {
-//                other.GetComponent<Bullet>().pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
-//                Hit();
-//            }
-//        }
 
-    private void OnTriggerEnter2D(Collider2D other)
+        void ShotGun()
+        {
+            
+        }
+        private void OnTriggerEnter2D(Collider2D other)
     {
         if (pv.IsMine)
         {
@@ -580,7 +574,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 CoolTime = weapon.CoolTime;
                 gun.transform.eulerAngles=Vector3.zero;
                 bulletTr.localPosition =weapon.bulletPos;
-                bulletName = weapon.BulletName;   
+                bulletName = weapon.BulletName;
+                leftBullet.reLoadTime = weapon.reLoadTime;
+                leftBullet.SetBullet(weapon.BulletCount);
             }
         } 
         [PunRPC]

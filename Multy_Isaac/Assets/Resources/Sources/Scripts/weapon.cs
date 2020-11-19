@@ -12,11 +12,13 @@ public class wep
     public Vector2 bulletPos; 
     public string BulletName;
     public int weaponIndex;
-   
-   
+    public float reLoadTime;
+    public int BulletCount;
     public wep DeepCopy()
     {
         wep Copytem = new wep();
+        Copytem.reLoadTime = this.reLoadTime;
+        Copytem.BulletCount = this.BulletCount;
         Copytem.spr = this.spr;
         Copytem.tr = this.tr;
         Copytem.scale = this.scale;
