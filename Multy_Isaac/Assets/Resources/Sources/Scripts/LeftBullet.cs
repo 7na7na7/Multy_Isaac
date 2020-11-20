@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class LeftBullet : MonoBehaviour
 {
     public int bulletCount = 0;
+    public int maxBulletCount = 0;
     public GameObject[] bullets;
     public GameObject[] siluettes;
     public float reLoadTime;
     public void SetBullet(int maxBullet)
     {
-        bulletCount = maxBullet;
+        maxBulletCount = maxBullet;
+        bulletCount = maxBulletCount;
         for (int i = 0; i < bullets.Length; i++)
         {
             if (i < maxBullet)
@@ -52,6 +54,13 @@ public class LeftBullet : MonoBehaviour
         }
     }
 
+    public bool isBulletMax()
+    {
+        if (bulletCount < maxBulletCount)
+            return false;
+        else
+            return true;
+    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Z))

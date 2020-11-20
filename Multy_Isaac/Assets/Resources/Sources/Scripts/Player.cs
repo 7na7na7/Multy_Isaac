@@ -108,7 +108,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     Destroy(canvas);
        
     }
-
+    private bool isReLoading = false;
+    public Ease reLoadEase1;
+    public Ease reLoadEase2;
    void setCam()
    {
        spawnPoint = transform.position;
@@ -187,7 +189,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         statMgr.canMove = true;
         canRoll = true;
     }
-    
+
+
     private void Update()
         {
             if (pv.IsMine)
@@ -201,6 +204,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if (!isSleeping) //잠자고 있지 않다면
                     {
+                        if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
+                            reLoad(0.5f);
                         if (Input.GetMouseButton(0)&&gun.activeSelf) //총쏘기
                             ShotGun();
                         if (Input.GetMouseButtonUp(0)&&gun.activeSelf) //버튼에서 손을 떼면 원래속도로 돌아오기
@@ -228,23 +233,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     
                             gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
                         } //커서가 왼쪽에 있으면
-                        
-                        
-                        if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
+
+                        if (!isReLoading)
                         {
-                            gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
-                        } //총 로컬스케일 플레이어와 맞춰주기
-                        else
-                        {
-                            gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
+                            //총 회전
+                            MousePosition = Input.mousePosition;
+                            Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
+                            //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
+                            //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
+                            angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
+                        
+                            if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
+                            {
+                                gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
+                            } //총 로컬스케일 플레이어와 맞춰주기
+                            else
+                            {
+                                gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
+                            }   
                         }
-                        
-                        //총 회전
-                        MousePosition = Input.mousePosition;
-                        Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
-                        //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
-                        //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
-                        angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
                     }
                     if (Input.GetKeyDown(KeyCode.LeftControl)) //왼쪽컨트롤키를 누르면 잠자기/잠깨기
                     {
@@ -329,6 +336,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         } //총쏘는 함수
+
+        void reLoad(float reloadTime)
+        {
+            Vector3 a = gun.transform.eulerAngles;
+            a.z += 181;
+            isReLoading = true;
+
+            gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
+                Vector3 b = gun.transform.eulerAngles;
+                b.z += 181;
+                gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
+                {
+                    isReLoading = false;
+                });
+            });
+        }
         
         private void OnTriggerEnter2D(Collider2D other) //충돌함수
     {
