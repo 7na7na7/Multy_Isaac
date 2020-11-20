@@ -6,11 +6,19 @@ using UnityEngine.UI;
 
 public class LeftBullet : MonoBehaviour
 {
+    int GetedBullet = 0;
+    public Text GetedBulletText;
+    
     public int bulletCount = 0;
     public int maxBulletCount = 0;
     public GameObject[] bullets;
     public GameObject[] siluettes;
     public float reLoadTime;
+
+    public void GetBullet(int value)
+    {
+        GetedBullet += value;
+    }
     public void SetBullet(int maxBullet)
     {
         maxBulletCount = maxBullet;
@@ -29,7 +37,6 @@ public class LeftBullet : MonoBehaviour
             }
         }
     }
-
     public bool MinusBullet()
     {
         if (bulletCount <= 0)
@@ -63,13 +70,6 @@ public class LeftBullet : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
-            SetBullet(3);
-        if(Input.GetKeyDown(KeyCode.X))
-            SetBullet(5);
-        if(Input.GetKeyDown(KeyCode.C))
-            SetBullet(7);
-        if(Input.GetKeyDown(KeyCode.V))
-            SetBullet(17);
+        GetedBulletText.text = "X " + GetedBullet;
     }
 }
