@@ -5,7 +5,7 @@ using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
 
-public class Exp : MonoBehaviour
+public class pickUpTem : MonoBehaviour
 {
     public float speed;
     public int ExpAmount = 1;
