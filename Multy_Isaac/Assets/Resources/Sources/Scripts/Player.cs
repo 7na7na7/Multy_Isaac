@@ -337,7 +337,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         } //총쏘는 함수
 
-        void reLoad(float reloadTime)
+        void reLoad(float reloadTime) //재장전
         {
             Vector3 a = gun.transform.eulerAngles;
             a.z += 181;
