@@ -5,14 +5,23 @@ using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
 
+
 public class pickUpTem : MonoBehaviour
 {
+    public temType type;
+    
     public float speed;
     public int ExpAmount = 1;
     public float radius;
     public LayerMask player;
 
 
+  
+   public enum temType
+    {
+        exp,
+        bullet
+    };
 
     void Update()
     {
