@@ -15,12 +15,60 @@ public class LeftBullet : MonoBehaviour
     public GameObject[] siluettes;
     public float reLoadTime;
 
+    public GameObject parentGO;
     public void GetBullet(int value)
     {
         GetedBullet += value;
+        GetedBulletText.text = "X " + GetedBullet;
     }
+
+    public void SetFalse()
+    {
+        parentGO.SetActive(false);
+    }
+    public bool canReload()
+    {
+        if (bulletCount < maxBulletCount&& GetedBullet>0)
+            return true;
+        else
+            return false;
+    }
+    public void Reload()
+    {
+        int leftBullet = maxBulletCount - bulletCount; //재장전해야 하는 총알의 수
+        int value1 = bulletCount + leftBullet;
+        if (GetedBullet >= leftBullet) //자신에게 있는 총알의 개수가 재장전해야 하는 총알의 수보다 많으면 재장전 
+        {
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                if (i < value1)
+                    bullets[i].SetActive(true);
+                else
+                    bullets[i].SetActive(false);
+            }
+            bulletCount = maxBulletCount;
+            GetedBullet -= leftBullet;
+        }
+        else //총알이 적으면 그 수만큼 재장전
+        {
+            int value2 = bulletCount + GetedBullet;
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                if (i < value2)
+                    bullets[i].SetActive(true);
+                else
+                    bullets[i].SetActive(false);
+            }
+
+            bulletCount = value2;
+            GetedBullet = 0;
+        }
+        GetedBulletText.text = "X " + GetedBullet;
+    }
+    
     public void SetBullet(int maxBullet)
     {
+        parentGO.SetActive(true);
         maxBulletCount = maxBullet;
         bulletCount = maxBulletCount;
         for (int i = 0; i < bullets.Length; i++)
@@ -67,9 +115,5 @@ public class LeftBullet : MonoBehaviour
             return false;
         else
             return true;
-    }
-    private void Update()
-    {
-        GetedBulletText.text = "X " + GetedBullet;
     }
 }

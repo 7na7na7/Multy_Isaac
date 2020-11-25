@@ -39,12 +39,24 @@ public class pickUpTem : MonoBehaviour
         {
             if (other.GetComponent<PhotonView>().IsMine)
             {
-                other.GetComponent<Player>().getEXP(ExpAmount);
+                if (type == temType.exp)
+                {
+                    other.GetComponent<Player>().getEXP(ExpAmount);
                 
-                if(PhotonNetwork.OfflineMode)
-                    Destroy(gameObject);
-                else
-                    GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);     
+                    if(PhotonNetwork.OfflineMode)
+                        Destroy(gameObject);
+                    else
+                        GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);        
+                }
+                else if (type == temType.bullet)
+                {
+                    other.GetComponent<Player>().GetBullet();
+                
+                    if(PhotonNetwork.OfflineMode)
+                        Destroy(gameObject);
+                    else
+                        GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);        
+                }
             }
         }
     }

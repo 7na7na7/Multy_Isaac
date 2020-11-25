@@ -148,7 +148,7 @@ public class PlayerItem : MonoBehaviour
 
     public void check(int i)
     {
-        if (ItemList[i].type == itemType.Weapon && ItemList[i].weaponIndex>0) 
+        if (ItemList[i].type == itemType.Weapon && ItemList[i].weaponIndex>0 && selectedIndex==i) 
         {
             player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
         }

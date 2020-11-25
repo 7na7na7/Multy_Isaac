@@ -110,8 +110,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
     private bool isReLoading = false;
     public Ease reLoadEase1;
-    public Ease reLoadEase2;
-   void setCam()
+    public Ease reLoadEase2; 
+    
+    void setCam()
    {
        spawnPoint = transform.position;
        canMove = true;
@@ -204,11 +205,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if (!isSleeping) //잠자고 있지 않다면
                     {
+                        
                         if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
                             reLoad(0.5f);
-                        if (Input.GetMouseButton(0)&&gun.activeSelf) //총쏘기
+                        if (Input.GetMouseButton(0)&&gun.activeSelf&&!isReLoading) //총쏘기
                             ShotGun();
-                        if (Input.GetMouseButtonUp(0)&&gun.activeSelf) //버튼에서 손을 떼면 원래속도로 돌아오기
+                        if (Input.GetMouseButtonUp(0)) //버튼에서 손을 떼면 원래속도로 돌아오기
                             speed = savedSpeed;
                         
                         if (Input.GetKeyDown(KeyCode.LeftShift)) //왼쪽쉬프트키 누르면 대쉬
@@ -339,18 +341,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         void reLoad(float reloadTime) //재장전
         {
-            Vector3 a = gun.transform.eulerAngles;
-            a.z += 181;
-            isReLoading = true;
+            if (leftBullet.canReload())
+            {
+                Vector3 a = gun.transform.eulerAngles;
+                a.z += 181;
+                isReLoading = true;
 
-            gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
-                Vector3 b = gun.transform.eulerAngles;
-                b.z += 181;
-                gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
-                {
-                    isReLoading = false;
+                gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
+                    Vector3 b = gun.transform.eulerAngles;
+                    b.z += 181;
+                    gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
+                    {
+                        isReLoading = false;
+                        leftBullet.Reload();
+                    });
                 });
-            });
+
+            }
         }
         
         private void OnTriggerEnter2D(Collider2D other) //충돌함수
@@ -383,8 +390,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
             
         }
-    } 
-    
+    }
+
+    public void GetBullet() 
+    {
+        leftBullet.GetBullet(1);
+    }
 
     private void OnCollisionStay2D(Collision2D other)  //플레이어 강체 충돌판정
     {
@@ -479,8 +490,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             armgunSetFalse();
         else
             pv.RPC("armgunSetFalse", RpcTarget.All);
-            
+        leftBullet.SetFalse();
         isHaveGun = false;
+        speed = savedSpeed; ///////
     }
 
     public void getEXP(int value) //경험치획득
