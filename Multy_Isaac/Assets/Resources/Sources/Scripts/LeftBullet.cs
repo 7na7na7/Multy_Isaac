@@ -22,6 +22,13 @@ public class LeftBullet : MonoBehaviour
         GetedBulletText.text = "X " + GetedBullet;
     }
 
+    public bool canShoot()
+    {
+        if (bulletCount > 0)
+            return true;
+        else
+            return false;
+    }
     public void SetFalse()
     {
         parentGO.SetActive(false);
