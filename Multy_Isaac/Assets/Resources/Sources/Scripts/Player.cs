@@ -214,6 +214,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 ShotGun();
                             else
                             {
+                                speed = savedSpeed;
                                 if(leftBullet.canReload())
                                     reLoad(leftBullet.reLoadTime);
                                 else
