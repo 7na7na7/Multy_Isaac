@@ -23,7 +23,7 @@ public class PlayerItem : MonoBehaviour
     public ItemData itemData;
     public GameObject[] Selected;
     
-    private int selectedIndex = 0;
+    public int selectedIndex = 0;
     public void OtherBtnSetFalse(int index)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -69,7 +69,7 @@ public class PlayerItem : MonoBehaviour
                                         isGet = true;
                                         ItemList[i]=item.GetComponent<Item>().item;
                                         
-                                      check(i);
+                                      check(i,true);
                                         
                                         item.GetComponent<Item>().Destroy();
                                         break;
@@ -107,7 +107,7 @@ public class PlayerItem : MonoBehaviour
                                 else
                                     Selected[i].SetActive(false); 
                             }
-                            check(selectedIndex);
+                            check(selectedIndex,false);
                     }
                 }
             }   
@@ -135,7 +135,7 @@ public class PlayerItem : MonoBehaviour
             {
                 isGet = true;
                 ItemList[i] = item;
-              check(i);
+              check(i,true);
                 break;
             }
         }
@@ -146,11 +146,11 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void check(int i)
+    public void check(int i, bool isFirst)
     {
         if (ItemList[i].type == itemType.Weapon && ItemList[i].weaponIndex>0 && selectedIndex==i) 
         {
-            player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex)); 
+            player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex),isFirst); 
         }
         else
         {

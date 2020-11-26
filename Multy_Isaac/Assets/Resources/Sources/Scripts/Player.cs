@@ -333,7 +333,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (time <= 0)
             {
-                if (leftBullet.MinusBullet())
+                if (leftBullet.MinusBullet(playerItem.selectedIndex))
                 {
                     speed = shootingSpeed;
                     time = CoolTime;
@@ -364,7 +364,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
                     {
                         isReLoading = false;
-                        leftBullet.Reload();
+                        leftBullet.Reload(playerItem.selectedIndex);
                     });
                 });
 
@@ -465,7 +465,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             moveDirection = new Vector2(moveX, moveY).normalized; //대각선 이동 정규화
         }
     
-    public void changeWeapon(wep weapon) //무기바꾸기
+    public void changeWeapon(wep weapon, bool isFirst) //무기바꾸기
     {
         if (weapon.weaponIndex > 0)
         {
@@ -491,7 +491,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             bulletTr.localPosition =weapon.bulletPos;
             bulletName = weapon.BulletName;
             leftBullet.reLoadTime = weapon.reLoadTime;
-            leftBullet.SetBullet(weapon.BulletCount);
+            leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
         }
     } 
 

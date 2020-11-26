@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LeftBullet : MonoBehaviour
 {
+    public int[] leftBullets;
     int GetedBullet = 0;
     public Text GetedBulletText;
     
@@ -16,6 +17,12 @@ public class LeftBullet : MonoBehaviour
     public float reLoadTime;
 
     public GameObject parentGO;
+
+    private void Start()
+    {
+        leftBullets=new int[6];
+    }
+
     public void GetBullet(int value)
     {
         GetedBullet += value;
@@ -40,7 +47,7 @@ public class LeftBullet : MonoBehaviour
         else
             return false;
     }
-    public void Reload()
+    public void Reload(int selectedIndex)
     {
         int leftBullet = maxBulletCount - bulletCount; //재장전해야 하는 총알의 수
         int value1 = bulletCount + leftBullet;
@@ -71,28 +78,43 @@ public class LeftBullet : MonoBehaviour
             GetedBullet = 0;
         }
         GetedBulletText.text = "X " + GetedBullet;
+        leftBullets[selectedIndex]=bulletCount;
     }
     
-    public void SetBullet(int maxBullet)
+    public void SetBullet(int maxBullet, int selectedIndex, bool isFirst)
     {
         parentGO.SetActive(true);
         maxBulletCount = maxBullet;
-        bulletCount = maxBulletCount;
+        if (isFirst)
+        {
+            bulletCount = 0;
+            leftBullets[selectedIndex] = 0;
+        }
+        else
+            bulletCount = leftBullets[selectedIndex];
+        
         for (int i = 0; i < bullets.Length; i++)
         {
             if (i < maxBullet)
             {
                 siluettes[i].SetActive(true);
-                bullets[i].SetActive(true);
             }
             else
             {
                 siluettes[i].SetActive(false);
+            }
+
+            if (i < bulletCount)
+            {
+                bullets[i].SetActive(true);
+            }
+            else
+            {
                 bullets[i].SetActive(false);
             }
         }
     }
-    public bool MinusBullet()
+    public bool MinusBullet(int selectedIndex)
     {
         if (bulletCount <= 0)
         {
@@ -112,6 +134,7 @@ public class LeftBullet : MonoBehaviour
                     bullets[i].SetActive(false);
                 }
             }
+            leftBullets[selectedIndex] = bulletCount;
             return true;
         }
     }
