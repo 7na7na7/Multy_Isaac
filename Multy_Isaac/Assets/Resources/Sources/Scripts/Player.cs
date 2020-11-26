@@ -208,18 +208,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         
                         if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
                             reLoad(leftBullet.reLoadTime);
-                        if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //총쏘기
+
+                        if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading)
                         {
-                            if(leftBullet.canShoot())
-                                ShotGun();
-                            else
+                            if (!leftBullet.canShoot())
                             {
-                                speed = savedSpeed;
                                 if(leftBullet.canReload())
                                     reLoad(leftBullet.reLoadTime);
                                 else
                                     print("총알이 부족합니다!");
                             }
+                        }
+                        if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //총쏘기
+                        {
+                            if (leftBullet.canShoot())
+                                ShotGun();
+                            else
+                                speed = savedSpeed;
                         }
                           
                         if (Input.GetMouseButtonUp(0)) //버튼에서 손을 떼면 원래속도로 돌아오기
