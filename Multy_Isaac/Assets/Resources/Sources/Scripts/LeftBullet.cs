@@ -23,6 +23,11 @@ public class LeftBullet : MonoBehaviour
         leftBullets=new int[6];
     }
 
+    public int getBulletCount()
+    {
+        return bulletCount;
+    }
+    
     public void GetBullet(int value)
     {
         GetedBullet += value;

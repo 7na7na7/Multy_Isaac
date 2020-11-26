@@ -73,7 +73,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private LevelMgr LvMgr;
     private StatManager statMgr;
     public Sprite[] gunSprites;
-    private LeftBullet leftBullet;
+    public LeftBullet leftBullet;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -190,11 +190,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         statMgr.canMove = true;
         canRoll = true;
     }
-
-
+    
+    public RectTransform panel;
     private void Update()
-        {
-            if (pv.IsMine)
+    {
+
+        if (pv.IsMine)
             {
                 Lv.text = "Lv." + LvMgr.Lv; //레벨 표시
                 
@@ -205,27 +206,31 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if (!isSleeping) //잠자고 있지 않다면
                     {
+                        if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)) //클릭불가능영역이 아니면
+                        {
+                            if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading)
+                            {
+                                if (!leftBullet.canShoot())
+                                {
+                                    if(leftBullet.canReload())
+                                        reLoad(leftBullet.reLoadTime);
+                                    else
+                                        print("총알이 부족합니다!");
+                                }
+                            }
+                            if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //총쏘기
+                            {
+                                if (leftBullet.canShoot())
+                                    ShotGun();
+                                else
+                                    speed = savedSpeed;
+                            }
+                        }
                         
                         if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
                             reLoad(leftBullet.reLoadTime);
 
-                        if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading)
-                        {
-                            if (!leftBullet.canShoot())
-                            {
-                                if(leftBullet.canReload())
-                                    reLoad(leftBullet.reLoadTime);
-                                else
-                                    print("총알이 부족합니다!");
-                            }
-                        }
-                        if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //총쏘기
-                        {
-                            if (leftBullet.canShoot())
-                                ShotGun();
-                            else
-                                speed = savedSpeed;
-                        }
+                      
                           
                         if (Input.GetMouseButtonUp(0)) //버튼에서 손을 떼면 원래속도로 돌아오기
                             speed = savedSpeed;

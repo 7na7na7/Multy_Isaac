@@ -184,8 +184,11 @@ public class PlayerItem : MonoBehaviour
     public void DiscardItem(int index,bool isDead=false)
     {
         int ind = ItemList[index].index;
-        if(ItemList[index].weaponIndex>0 && selectedIndex==index)
-            player.gunSetfalse();
+        if (ItemList[index].weaponIndex > 0 && selectedIndex == index)
+        {
+            player.leftBullet.GetBullet(player.leftBullet.getBulletCount());
+            player.gunSetfalse();   
+        }
         ItemList[index].Clear();
         player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);
     }
