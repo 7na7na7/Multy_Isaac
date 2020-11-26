@@ -53,6 +53,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject Arm; //팔
     private string bulletName;
     private Vector2 gunScale=Vector2.one;
+    private Vector2 savedGunPos;
   
     //구르기
     public bool isSuper = false; //무적인가?
@@ -74,6 +75,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private StatManager statMgr;
     public Sprite[] gunSprites;
     public LeftBullet leftBullet;
+    
+    private bool isReLoading = false;
+    public Ease reLoadEase1;
+    public Ease reLoadEase2; 
+    
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -87,7 +93,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         col = GetComponent<CapsuleCollider2D>();
 
         savedSpeed = speed;
-
+        savedGunPos = gun.transform.position;
                 if (pv.IsMine)
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
@@ -108,9 +114,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     Destroy(canvas);
        
     }
-    private bool isReLoading = false;
-    public Ease reLoadEase1;
-    public Ease reLoadEase2; 
+
     
     void setCam()
    {
@@ -494,11 +498,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
                 
             isHaveGun = true;
-            //gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
+            Vector2 new_SavedGunPos=Vector2.zero; 
+            Vector2 new_weapontr=Vector2.zero;
+
+            if (transform.localScale.x != localScaleX)
+            {
+                new_SavedGunPos = new Vector2(savedGunPos.x * -1f, savedGunPos.y);
+                new_weapontr=new Vector2(weapon.tr.x * -1f, weapon.tr.y);
+            }
+            else
+            {
+                new_weapontr = weapon.tr;
+                new_SavedGunPos = savedGunPos;
+            }
+
+            gun.transform.position = (Vector2) transform.position + new_SavedGunPos + new_weapontr;
             gunScale = weapon.scale;
             CoolTime = weapon.CoolTime;
             gun.transform.eulerAngles=Vector3.zero;
-            bulletTr.localPosition =weapon.bulletPos;
+            bulletTr.localPosition =weapon.bulletPos.position;
             bulletName = weapon.BulletName;
             leftBullet.reLoadTime = weapon.reLoadTime;
             leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);

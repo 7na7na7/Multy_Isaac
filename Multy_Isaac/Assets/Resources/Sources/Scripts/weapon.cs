@@ -9,7 +9,7 @@ public class wep
     public Vector2 tr;
     public Vector2 scale;
     public float CoolTime;
-    public Vector2 bulletPos; 
+    public Transform bulletPos; 
     public string BulletName;
     public int weaponIndex;
     public float reLoadTime;
