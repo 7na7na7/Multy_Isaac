@@ -20,7 +20,7 @@ public class pickUpTem : MonoBehaviour
    public enum temType
     {
         exp,
-        bullet
+        bullet,
     };
 
     void FixedUpdate()

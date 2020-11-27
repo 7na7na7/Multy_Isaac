@@ -15,7 +15,7 @@ public class tem
     public int index=0;
     public string ItemName="";
     public Sprite ItemSprite=null;
-    public itemType type = itemType.item;
+    public itemType type = itemType.Item;
     public string ItemDescription = "";
     public string WhereGet = "";
     public void Clear()
@@ -25,7 +25,7 @@ public class tem
         index = 0;
         ItemName = "";
         ItemSprite = NoneSprite;
-        type = itemType.item;
+        type = itemType.Item;
         ItemDescription="";
     }
     public tem DeepCopy()
@@ -46,7 +46,7 @@ public class tem
         return Copytem;
     }
 }
-public enum itemType { Weapon, Guard, Food, item}
+public enum itemType { Weapon,Item,Passive,Usable}
 public class Item : MonoBehaviour
 {
     public tem item;
