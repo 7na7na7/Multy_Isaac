@@ -23,13 +23,14 @@ public class pickUpTem : MonoBehaviour
         bullet
     };
 
-    void Update()
+    void FixedUpdate()
     {
         //자신 기준으로 radius반경의 plaeyer탐색
         Collider2D col = Physics2D.OverlapCircle(transform.position, radius, player);
         if (col != null) //플레이어가 비지 않았다면
         {
-            transform.position=Vector2.Lerp(transform.position, col.transform.position, Time.deltaTime * speed);
+            Vector2 dir = col.transform.position - transform.position;
+            transform.Translate(dir*speed*Time.deltaTime);
         }
     }
 
