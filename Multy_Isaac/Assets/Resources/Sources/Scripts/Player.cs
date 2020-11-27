@@ -216,16 +216,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             {
                                 if (!leftBullet.canShoot())
                                 {
+                                    speed = savedSpeed;
+
                                     if(leftBullet.canReload())
                                         reLoad(leftBullet.reLoadTime);
                                     else
                                         print("총알이 부족합니다!");
                                 }
+                                else
+                                    ShotGun(true);
                             }
                             if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //총쏘기
                             {
                                 if (leftBullet.canShoot())
-                                    ShotGun();
+                                    ShotGun(false);
                                 else
                                     speed = savedSpeed;
                             }
@@ -343,9 +347,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        void ShotGun()
+        void ShotGun(bool isDown) //총쏘는 함수
         {
-            if (time <= 0)
+            bool canShot = false;
+            if (isDown)
+            {
+                if (time <= 0.1f)
+                    canShot = true;
+            }
+            else
+            {
+                if (time <= 0)
+                {
+                    canShot = true;
+                }
+            }
+
+            if (canShot)
             {
                 if (leftBullet.MinusBullet(playerItem.selectedIndex))
                 {
@@ -362,7 +380,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     speed = savedSpeed;
                 }
             }
-        } //총쏘는 함수
+        } 
 
         void reLoad(float reloadTime) //재장전
         {
