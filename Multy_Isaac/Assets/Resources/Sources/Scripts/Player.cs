@@ -54,7 +54,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private string bulletName;
     private Vector2 gunScale=Vector2.one;
     private Vector2 savedGunPos;
-  
+    private float clusterRate = 0;
+    
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -218,7 +219,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 {
                                     speed = savedSpeed;
 
-                                    if(leftBullet.canReload())
+                                    if(leftBullet.canReload() && !isReLoading)
                                         reLoad(leftBullet.reLoadTime);
                                     else
                                         print("총알이 부족합니다!");
@@ -235,7 +236,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             }
                         }
                         
-                        if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
+                        if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false&& !isReLoading) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
                             reLoad(leftBullet.reLoadTime);
 
                       
@@ -369,11 +370,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     speed = shootingSpeed;
                     time = CoolTime;
-              
+                   Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*clusterRate,clusterRate));
                     if (PhotonNetwork.OfflineMode) 
-                        Instantiate(offLineBullet,bulletTr.position,bulletTr.rotation);
+                        Instantiate(offLineBullet,bulletTr.position,q);
                     else
-                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, bulletTr.rotation);
+                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, q);
                 }
                 else
                 {
@@ -537,6 +538,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             bulletTr.localPosition =weapon.bulletPos.position;
             bulletName = weapon.BulletName;
             leftBullet.reLoadTime = weapon.reLoadTime;
+            clusterRate = weapon.ClusterRate;
+            
             leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
         }
     } 

@@ -14,6 +14,7 @@ public class wep
     public int weaponIndex;
     public float reLoadTime;
     public int BulletCount;
+    public float ClusterRate;
     public wep DeepCopy()
     {
         wep Copytem = new wep();
@@ -26,7 +27,8 @@ public class wep
         Copytem.bulletPos = this.bulletPos;
         Copytem.BulletName = this.BulletName;
         Copytem.weaponIndex = this.weaponIndex;
-
+        Copytem.ClusterRate = this.ClusterRate;
+        
         return Copytem;
     }
 }
