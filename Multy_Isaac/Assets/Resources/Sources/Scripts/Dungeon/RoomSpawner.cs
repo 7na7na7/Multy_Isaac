@@ -14,7 +14,7 @@ public class RoomSpawner : MonoBehaviour
     //4 --> need right door
     private RoomTemplates templates;
     private int rand;
-    private bool spawned = false;
+    public bool spawned = false;
 
     public float waitTime = 4f;
     private void Start()
@@ -23,7 +23,7 @@ public class RoomSpawner : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-            Invoke("Spawn",0.1f);
+            Invoke("Spawn",0.5f);
         }
         else
         {
