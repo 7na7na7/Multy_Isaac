@@ -17,8 +17,16 @@ public class RoomSpawner : MonoBehaviour
     public bool spawned = false;
 
     public float waitTime = 4f;
+
+    void set()
+    {
+        transform.parent.GetChild(0).gameObject.SetActive(true);
+        Destroy(gameObject);
+    }
+    
     private void Start()
     {
+        Invoke("set",waitTime);  
         Destroy(gameObject,waitTime);
         if (PhotonNetwork.OfflineMode)
         {

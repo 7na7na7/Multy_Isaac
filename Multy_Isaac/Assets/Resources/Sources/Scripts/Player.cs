@@ -125,11 +125,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
        canMove = true;
        statMgr.canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
-        Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
+        camera.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
+        camera.GetComponent<CameraManager>().target = gameObject;
 
 
-       
-            //자신 기준으로 이내의 반경의 doorCol검색
+        //자신 기준으로 이내의 반경의 doorCol검색
             Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
             if (col != null) //플레이어가 비지 않았다면
             {
@@ -479,7 +479,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
       statMgr.Heal(99999);
         transform.position = spawnPoint;
-        Camera.main.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
+        camera.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
     }
  
 

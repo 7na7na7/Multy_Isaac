@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 2
+  spawned: 0
   waitTime: 4
 --- !u!61 &15218095630280076
 BoxCollider2D:
@@ -3920,6 +3921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 4
+  spawned: 0
   waitTime: 4
 --- !u!61 &4979787124419940490
 BoxCollider2D:
@@ -5210,6 +5212,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3827193722763852878, guid: f73cc66c96db93d489c76d7e8fa7f370,
+        type: 3}
+      propertyPath: MinimapRoomPrefab
+      value: 
+      objectReference: {fileID: 4656240653331588897, guid: 5b197dcc87f798c4393cc0277bb5bdee,
+        type: 3}
     - target: {fileID: 4689617248627694912, guid: f73cc66c96db93d489c76d7e8fa7f370,
         type: 3}
       propertyPath: m_Name
@@ -6282,7 +6290,7 @@ PrefabInstance:
         type: 3}
       propertyPath: MinimapRoomPrefab
       value: 
-      objectReference: {fileID: 4656240653331588897, guid: 0523436a8beea634ebec6ae243455fe8,
+      objectReference: {fileID: 4656240653331588897, guid: 5b197dcc87f798c4393cc0277bb5bdee,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb2edf929ad8424382eee15ca5f7a9b, type: 3}

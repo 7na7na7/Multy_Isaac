@@ -13,7 +13,8 @@ public class DoorCol : MonoBehaviour
     private bool isInstantiate = false;
 
     public GameObject MinimapRoomPrefab;
-    public GameObject MinimapRoomPrefab_2;  
+    //public GameObject MinimapRoomPrefab_2;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
@@ -23,10 +24,22 @@ public class DoorCol : MonoBehaviour
     }
 
     public void Minimap()
-    { 
+    {
+        CameraManager camera= Camera.main.GetComponent<CameraManager>();
+        
+        camera.canMove = false;
+        
         DOTween.Kill(parms);
             Camera.main.transform.DOMove(
-                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y-0.25f, -10), 0.3f).SetAs(parms);
+                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y-0.25f, -10), 0.3f).SetAs(parms).OnComplete(()=>
+                {
+                    if (transform.parent.GetChild(0).name == "Bound")
+                    {
+                        camera.canMove = true;
+                        camera.SetBound(transform.parent.GetChild(0).GetComponent<BoxCollider2D>());   
+                    }
+                });;
+            
             Vector2 pos = transform.parent.transform.position;
            // print(pos + " " + transform.parent.name.Substring(0, transform.parent.name.IndexOf("(")) + "입니당!"); //(Clone) 앞까지 추출
 
@@ -40,41 +53,41 @@ public class DoorCol : MonoBehaviour
             {
                 isInstantiate = true;
 
-                bool isright=false, isleft=false, istop=false, isbottom=false;
-                for (int i = 0; i < transform.parent.childCount; i++)
-                {
-                   if(transform.parent.GetChild(i).CompareTag("WallSpawner"))
-                   {
-                       int c = transform.parent.GetChild(i).GetComponent<WallSpawner>().dir; 
-                       switch (c) 
-                       { 
-                           case 1: //위
-                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+0.55f, 0), quaternion.identity);
-                               istop = true;
-                               break;
-                           case 2 : //아래
-                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-0.55f, 0), quaternion.identity);
-                               isbottom = true;
-                               break; 
-                           case 3: //오른쪽
-                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x+0.9f, minimapPos.y, 0), quaternion.identity);
-                               isright = true;
-                               break; 
-                           case 4: //왼쪽
-                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x-0.9f, minimapPos.y, 0), quaternion.identity);
-                               isleft = true;
-                               break;
-                       }
-                   }
-                }
-               if(istop)
-                   Instantiate(t, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-               if(isbottom)
-                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-               if(isright)
-                   Instantiate(r, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-               if(isleft)
-                   Instantiate(l, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//                bool isright=false, isleft=false, istop=false, isbottom=false;
+//                for (int i = 0; i < transform.parent.childCount; i++)
+//                {
+//                   if(transform.parent.GetChild(i).CompareTag("WallSpawner"))
+//                   {
+//                       int c = transform.parent.GetChild(i).GetComponent<WallSpawner>().dir; 
+//                       switch (c) 
+//                       { 
+//                           case 1: //위
+//                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+0.55f, 0), quaternion.identity);
+//                               istop = true;
+//                               break;
+//                           case 2 : //아래
+//                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-0.55f, 0), quaternion.identity);
+//                               isbottom = true;
+//                               break; 
+//                           case 3: //오른쪽
+//                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x+0.9f, minimapPos.y, 0), quaternion.identity);
+//                               isright = true;
+//                               break; 
+//                           case 4: //왼쪽
+//                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x-0.9f, minimapPos.y, 0), quaternion.identity);
+//                               isleft = true;
+//                               break;
+//                       }
+//                   }
+//                }
+//               if(istop)
+//                   Instantiate(t, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//               if(isbottom)
+//                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//               if(isright)
+//                   Instantiate(r, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//               if(isleft)
+//                   Instantiate(l, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
                 Instantiate(MinimapRoomPrefab, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
             }
 

@@ -3756,6 +3756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 3
+  spawned: 0
   waitTime: 4
 --- !u!61 &5413057599114976019
 BoxCollider2D:
@@ -3850,6 +3851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 1
+  spawned: 0
   waitTime: 4
 --- !u!61 &4583931399157257251
 BoxCollider2D:
@@ -3944,6 +3946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 2
+  spawned: 0
   waitTime: 4
 --- !u!61 &8405546339747478784
 BoxCollider2D:
@@ -4038,6 +4041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 4
+  spawned: 0
   waitTime: 4
 --- !u!61 &1454852234522396834
 BoxCollider2D:
@@ -4097,7 +4101,6 @@ GameObject:
   - component: {fileID: 8625270289857819792}
   - component: {fileID: 1432227973251512194}
   - component: {fileID: 8139547060184756701}
-  - component: {fileID: -4969271849408009500}
   m_Layer: 0
   m_Name: StartEntry
   m_TagString: Entry
@@ -4146,28 +4149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8139547060184756701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8632468859075961836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &-4969271849408009500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4904,6 +4885,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3827193722763852878, guid: f73cc66c96db93d489c76d7e8fa7f370,
+        type: 3}
+      propertyPath: MinimapRoomPrefab
+      value: 
+      objectReference: {fileID: 4656240653331588897, guid: 9313623144cc69b4c906ee81470d70bc,
+        type: 3}
     - target: {fileID: 4689617248627694912, guid: f73cc66c96db93d489c76d7e8fa7f370,
         type: 3}
       propertyPath: m_Name
@@ -4984,6 +4971,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8163211907154040086, guid: 9a4ab5e7cde395949803847c67967540,
+        type: 3}
+      propertyPath: MinimapRoomPrefab
+      value: 
+      objectReference: {fileID: 4656240653331588897, guid: 9313623144cc69b4c906ee81470d70bc,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a4ab5e7cde395949803847c67967540, type: 3}
 --- !u!4 &3569841393254416440 stripped
@@ -5054,6 +5047,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4549569921587634889, guid: 5bb5366441b1280419e8cb7acc385951,
+        type: 3}
+      propertyPath: MinimapRoomPrefab
+      value: 
+      objectReference: {fileID: 4656240653331588897, guid: 9313623144cc69b4c906ee81470d70bc,
+        type: 3}
     - target: {fileID: 5416532784494035911, guid: 5bb5366441b1280419e8cb7acc385951,
         type: 3}
       propertyPath: m_Name
@@ -5134,6 +5133,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537783684030999485, guid: ffb2edf929ad8424382eee15ca5f7a9b,
+        type: 3}
+      propertyPath: MinimapRoomPrefab
+      value: 
+      objectReference: {fileID: 4656240653331588897, guid: 9313623144cc69b4c906ee81470d70bc,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb2edf929ad8424382eee15ca5f7a9b, type: 3}
 --- !u!4 &3569841393498381458 stripped
