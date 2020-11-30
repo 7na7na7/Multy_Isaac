@@ -5,35 +5,23 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-   public static SoundManager instance;
 
-   public AudioClip[] clips;
+    public AudioClip[] clips;
    private AudioSource[] ClipSources;
-   public AudioSource BgmSource;
-
+   public int SourceCount;
    private int index = 0;
    private int length;
    
    private void Awake()
    {
-       if (instance == null)
-       {
-           instance = this;
-           DontDestroyOnLoad(gameObject);
-       }
-       else
-       {
-           Destroy(gameObject);
-       }
-       
-       ClipSources=new AudioSource[clips.Length];
-       for (int i = 0; i < clips.Length; i++)
+       ClipSources = new AudioSource[SourceCount];
+       for (int i = 0; i < SourceCount; i++)
        {
            ClipSources[i] = gameObject.AddComponent<AudioSource>();
            ClipSources[i].Stop();
        }
        
-       for (int j = 0; j < clips.Length; j++)
+       for (int j = 0; j < SourceCount; j++)
        {
            ClipSources[j].loop = false;
            ClipSources[j].playOnAwake = false;

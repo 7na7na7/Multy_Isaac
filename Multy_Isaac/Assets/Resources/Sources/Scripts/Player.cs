@@ -79,8 +79,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
     private bool isReLoading = false;
     public Ease reLoadEase1;
-    public Ease reLoadEase2; 
-    
+    public Ease reLoadEase2;
+
+    private SoundManager sound;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -95,13 +96,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         savedSpeed = speed;
         savedGunPos = gun.transform.position;
-                if (pv.IsMine)
+        if (pv.IsMine)
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
                     statMgr=transform.GetChild(0).GetComponent<StatManager>();
                     playerItem = GetComponent<PlayerItem>();
                     leftBullet = transform.GetChild(0).transform.GetChild(0).GetComponent<LeftBullet>();
+                    sound = GetComponent<SoundManager>();
                     playerItem.player = this;
                     if (SceneManager.GetActiveScene().name == "Play")
                         Invoke("setCam", 2f);
@@ -202,6 +204,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (pv.IsMine)
             {
+                if(Input.GetKeyDown(KeyCode.Q))
+                    sound.Play(0);
                 Lv.text = "Lv." + LvMgr.Lv; //레벨 표시
                 
                 if(time>0)  
