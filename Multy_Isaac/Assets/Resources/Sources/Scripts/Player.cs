@@ -688,5 +688,5 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
-    
+
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-
+    public PhotonView pv;
     public AudioClip[] clips;
    private AudioSource[] ClipSources;
    public int SourceCount;
@@ -31,7 +32,15 @@ public class SoundManager : MonoBehaviour
    }
 
 
-   public void Play( int clipIndex )
+   public void Play(int clipIndex)
+   {
+       pv.RPC("PlayRPC",RpcTarget.All,clipIndex);
+       print("A");
+   }
+  
+   
+   [PunRPC]
+   void PlayRPC( int clipIndex )
    {
        if (index == length)
            index = 0;
@@ -41,5 +50,4 @@ public class SoundManager : MonoBehaviour
           
        index++;
    }
-   
 }
