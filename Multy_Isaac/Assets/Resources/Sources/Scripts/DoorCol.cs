@@ -67,7 +67,8 @@ public class DoorCol : MonoBehaviour
                        switch (c) 
                        { 
                            case 1: //위
-                               if (transform.parent.GetChild(i).transform.position.y - transform.position.y >=36)
+                               print(transform.parent.GetChild(i).transform.position.y +" "+ transform.position.y);
+                               if (transform.parent.GetChild(i).transform.position.y - transform.position.y >=10)
                                {
                                    Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+1.1f, 0), quaternion.identity);
                                    Instantiate(b, new Vector3(minimapPos.x, minimapPos.y+1.1f, 0), quaternion.identity);
@@ -77,10 +78,10 @@ public class DoorCol : MonoBehaviour
                                istop = true;
                                break;
                            case 2 : //아래
-                               if (transform.parent.GetChild(i).transform.position.y - transform.position.y <=-18)
+                               if (transform.parent.GetChild(i).transform.position.y - transform.position.y <=-10)
                                {
                                    Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
-                                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
+                                   Instantiate(t, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
                                }
                                else
                                    Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-0.55f, 0), quaternion.identity);
@@ -97,7 +98,6 @@ public class DoorCol : MonoBehaviour
                                isright = true;
                                break; 
                            case 4: //왼쪽
-                             print(transform.parent.GetChild(i).transform.position.x +" "+ transform.position.x);
                                if (transform.parent.GetChild(i).transform.position.x - transform.position.x <=-18)
                                {
                                  
