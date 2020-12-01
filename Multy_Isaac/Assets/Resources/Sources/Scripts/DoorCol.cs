@@ -67,11 +67,23 @@ public class DoorCol : MonoBehaviour
                        switch (c) 
                        { 
                            case 1: //위
-                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+0.55f, 0), quaternion.identity);
+                               if (transform.parent.GetChild(i).transform.position.y - transform.position.y >=36)
+                               {
+                                   Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+1.1f, 0), quaternion.identity);
+                                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y+1.1f, 0), quaternion.identity);
+                               }
+                               else
+                                   Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+0.55f, 0), quaternion.identity);
                                istop = true;
                                break;
                            case 2 : //아래
-                               Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-0.55f, 0), quaternion.identity);
+                               if (transform.parent.GetChild(i).transform.position.y - transform.position.y <=-18)
+                               {
+                                   Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
+                                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
+                               }
+                               else
+                                   Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-0.55f, 0), quaternion.identity);
                                isbottom = true;
                                break; 
                            case 3: //오른쪽

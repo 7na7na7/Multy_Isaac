@@ -34,8 +34,10 @@ public class SoundManager : MonoBehaviour
 
    public void Play(int clipIndex)
    {
-       pv.RPC("PlayRPC",RpcTarget.All,clipIndex);
-       print("A");
+       if(PhotonNetwork.OfflineMode)
+           PlayRPC(clipIndex);
+       else
+           pv.RPC("PlayRPC",RpcTarget.All,clipIndex);
    }
   
    
