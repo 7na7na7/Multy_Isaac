@@ -31,7 +31,7 @@ public class DoorCol : MonoBehaviour
         
         DOTween.Kill(parms);
         Camera.main.transform.DOMove(
-                new Vector3(transform.position.x, transform.position.y-0.25f, -10), 0.3f).SetAs(parms).OnComplete(()=>
+                new Vector3(transform.position.x, transform.position.y, -10), 0.3f).SetAs(parms).OnComplete(()=>
                 {
                     if (transform.parent.GetChild(0).name == "Bound")
                     {
