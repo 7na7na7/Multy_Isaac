@@ -30,13 +30,17 @@ public class DoorCol : MonoBehaviour
         camera.canMove = false;
         
         DOTween.Kill(parms);
-            Camera.main.transform.DOMove(
-                new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y-0.25f, -10), 0.3f).SetAs(parms).OnComplete(()=>
+        Camera.main.transform.DOMove(
+                new Vector3(transform.position.x, transform.position.y-0.25f, -10), 0.3f).SetAs(parms).OnComplete(()=>
                 {
                     if (transform.parent.GetChild(0).name == "Bound")
                     {
                         camera.canMove = true;
                         camera.SetBound(transform.parent.GetChild(0).GetComponent<BoxCollider2D>());   
+                    }
+                    else
+                    {
+                        camera.canMove = false;
                     }
                 });;
             
