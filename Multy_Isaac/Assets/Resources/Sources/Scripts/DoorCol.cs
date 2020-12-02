@@ -41,8 +41,8 @@ public class DoorCol : MonoBehaviour
                 {
                     if (transform.parent.GetChild(0).name == "Bound")
                     {
-                        camera.canMove = true;
                         camera.SetBound(transform.parent.GetChild(0).GetComponent<BoxCollider2D>());   
+                        camera.canMove = true;
                     }
                     else
                     {
