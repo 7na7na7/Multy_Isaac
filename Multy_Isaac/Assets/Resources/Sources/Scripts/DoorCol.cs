@@ -15,6 +15,14 @@ public class DoorCol : MonoBehaviour
     public GameObject MinimapRoomPrefab;
     public GameObject MinimapRoomPrefab_2;
 
+    private CameraManager camera;
+    private Camera cam;
+    private void Start()
+    {
+        camera=Camera.main.GetComponent<CameraManager>();
+        cam=Camera.main;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
@@ -25,12 +33,10 @@ public class DoorCol : MonoBehaviour
 
     public void Minimap()
     {
-        CameraManager camera= Camera.main.GetComponent<CameraManager>();
-        
         camera.canMove = false;
         
         DOTween.Kill(parms);
-        Camera.main.transform.DOMove(
+        cam.transform.DOMove(
                 new Vector3(transform.position.x, transform.position.y, -10), 0.3f).SetAs(parms).OnComplete(()=>
                 {
                     if (transform.parent.GetChild(0).name == "Bound")
