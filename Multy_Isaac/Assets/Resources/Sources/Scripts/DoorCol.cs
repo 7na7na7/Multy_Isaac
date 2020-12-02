@@ -84,6 +84,7 @@ public class DoorCol : MonoBehaviour
                                istop = true;
                                break;
                            case 2 : //아래
+                               print(transform.parent.GetChild(i).transform.position.y +" "+ transform.position.y);
                                if (transform.parent.GetChild(i).transform.position.y - transform.position.y <=-10)
                                {
                                    Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
@@ -94,7 +95,8 @@ public class DoorCol : MonoBehaviour
                                isbottom = true;
                                break; 
                            case 3: //오른쪽
-                               if (transform.parent.GetChild(i).transform.position.x - transform.position.x >=36)
+                               print(transform.parent.GetChild(i).transform.position.x +" "+ transform.position.x);
+                               if (transform.parent.GetChild(i).transform.position.x - transform.position.x >=18)
                                {
                                    Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x+1.8f, minimapPos.y, 0), quaternion.identity);
                                    Instantiate(l, new Vector3(minimapPos.x+1.8f, minimapPos.y, 0), quaternion.identity);
@@ -104,6 +106,7 @@ public class DoorCol : MonoBehaviour
                                isright = true;
                                break; 
                            case 4: //왼쪽
+                               print(transform.parent.GetChild(i).transform.position.x +" "+ transform.position.x);
                                if (transform.parent.GetChild(i).transform.position.x - transform.position.x <=-18)
                                {
                                  
