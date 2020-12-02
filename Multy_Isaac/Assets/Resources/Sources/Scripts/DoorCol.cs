@@ -19,8 +19,8 @@ public class DoorCol : MonoBehaviour
     private Camera cam;
     private void Start()
     {
+        camera=Camera.main.GetComponent<CameraManager>();
         cam=Camera.main;
-        camera=cam.GetComponent<CameraManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
