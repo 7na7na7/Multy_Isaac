@@ -31,14 +31,14 @@ public class RoomSpawner : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-            Invoke("Spawn",0.05f);
+            Invoke("Spawn",0.1f);
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
                 templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-                Invoke("Spawn",0.05f);
+                Invoke("Spawn",0.1f);
             }   
         }
     }
