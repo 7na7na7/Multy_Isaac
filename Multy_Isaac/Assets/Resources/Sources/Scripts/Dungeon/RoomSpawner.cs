@@ -108,7 +108,27 @@ public class RoomSpawner : MonoBehaviour
             print("ROOM COUNT"+" "+rooms[rand].GetComponent<AddRoom>().isBig);
 
             if (PhotonNetwork.OfflineMode) //오프라인 모드면
-                Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+            {
+                if (rooms[rand].GetComponent<AddRoom>().isBig)
+                {
+                    // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
+                    RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+rooms[rand].GetComponent<AddRoom>().offset,rooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
+
+                    foreach (RaycastHit2D c in hit)
+                    {
+                        if (c.collider.CompareTag("Wall"))
+                        {
+                            print(c.collider.name+" "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name);
+                            rand = rooms.Length - 2;
+                            spawned = true;
+                            break;
+                        }
+                    }
+                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                }
+                else
+                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+            }
             else //온라인 모드면
                 PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
             
