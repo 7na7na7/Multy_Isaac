@@ -105,6 +105,7 @@ public class RoomSpawner : MonoBehaviour
                    SimpleSpawn();
                 }
             }
+            print("ROOM COUNT"+" "+rooms[rand].GetComponent<AddRoom>().isBig);
 
             if (PhotonNetwork.OfflineMode) //오프라인 모드면
                 Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);

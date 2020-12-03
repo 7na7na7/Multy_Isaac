@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class AddRoom : MonoBehaviour
 {
+  public bool isBig = false;
   //public Sprite minimapRoom;
   private RoomTemplates templates;
 
