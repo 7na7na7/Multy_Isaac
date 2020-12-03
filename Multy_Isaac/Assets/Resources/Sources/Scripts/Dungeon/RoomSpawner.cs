@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class RoomSpawner : MonoBehaviour
 {
+    public bool isBig = false;
     public int openingDirection;
     //1 --> need bottom door
     //2 --> need top door
@@ -133,7 +134,12 @@ public class RoomSpawner : MonoBehaviour
                             Quaternion.identity);
                         Destroy(gameObject); //방이 겹치면 자신을 파괴   
                     }
-
+if (other.GetComponent<RoomSpawner>().isBig && isBig)
+{
+    Instantiate(templates.closedRoom, transform.position,
+        Quaternion.identity);
+    Destroy(gameObject); //방이 겹치면 자신을 파괴   
+}
                     spawned = true;
                 }
         }
