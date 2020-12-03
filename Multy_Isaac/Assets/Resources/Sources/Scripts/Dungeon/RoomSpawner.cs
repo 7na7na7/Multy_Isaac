@@ -47,7 +47,7 @@ public class RoomSpawner : MonoBehaviour
     {
         if (templates.StraightCount == 0)
         {
-            templates.StraightCount = 2;
+            templates.StraightCount = 3;
             rand = 0;
         }
         else
