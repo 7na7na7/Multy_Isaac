@@ -13,10 +13,17 @@ public class RoomTemplates : MonoBehaviour
    public int maxRoomCount = 50;
    public int maxRoomCountSave;
    public int PlayerSpawnMinusValue = 3;
+   //한칸짜리 방들
    public GameObject[] bottomRooms;
    public GameObject[] topRooms;
    public GameObject[] leftRooms;
    public GameObject[] rightRooms;
+
+   //큰방들
+   public GameObject[] bottomRooms_B;
+   public GameObject[] topRooms_B;
+   public GameObject[] leftRooms_B;
+   public GameObject[] rightRooms_B;
    
    
    public GameObject closedRoom;
