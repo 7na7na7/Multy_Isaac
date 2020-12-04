@@ -5,6 +5,8 @@ using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class RoomTemplates : MonoBehaviour
 {
@@ -18,7 +20,8 @@ public class RoomTemplates : MonoBehaviour
    public GameObject[] topRooms;
    public GameObject[] leftRooms;
    public GameObject[] rightRooms;
-
+   [Header("큰방이 생성된확률(백분율)")]
+   public int BigRoomPercent;
    //큰방들
    public GameObject[] bottomRooms_B;
    public GameObject[] topRooms_B;
@@ -92,5 +95,15 @@ public class RoomTemplates : MonoBehaviour
          if(PlayerCount>0)
             print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");  
       }
+   }
+
+
+
+   bool PercentReturn(int percent)
+   {
+      if (Random.Range(1, 101) <= percent)
+         return true;
+      else
+         return false;
    }
 }
