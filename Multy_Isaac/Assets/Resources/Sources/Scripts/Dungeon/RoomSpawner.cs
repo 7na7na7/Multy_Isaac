@@ -13,6 +13,7 @@ public class RoomSpawner : MonoBehaviour
     //3 --> need left door
     //4 --> need right door
     private RoomTemplates templates;
+    
     private int rand;
     public bool spawned = false;
 
@@ -67,19 +68,24 @@ public class RoomSpawner : MonoBehaviour
         if (spawned == false)//생성되지 않았으면 생성!
         {
             GameObject[] rooms = null;
+            GameObject[] bigRooms = null;
             switch (openingDirection)
             {
                 case 1:
                     rooms = templates.bottomRooms;
+                    bigRooms = templates.bottomRooms_B;
                     break;
                 case 2:
                     rooms = templates.topRooms;
+                    bigRooms = templates.topRooms_B;
                     break;
                 case 3:
                     rooms = templates.leftRooms;
+                    bigRooms = templates.leftRooms_B;
                     break;
                 case 4:
                     rooms = templates.rightRooms;
+                    bigRooms = templates.rightRooms_B;
                     break;  
             } //방 위치 정해주기
             
@@ -109,25 +115,30 @@ public class RoomSpawner : MonoBehaviour
 
             if (PhotonNetwork.OfflineMode) //오프라인 모드면
             {
-                if (rooms[rand].GetComponent<AddRoom>().isBig)
+                if (PercentReturn(templates.BigRoomPercent) == true) //큰방생성
                 {
-                    // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
-                    RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+rooms[rand].GetComponent<AddRoom>().offset,rooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
-
-                    foreach (RaycastHit2D c in hit)
+                    if (bigRooms[rand].GetComponent<AddRoom>().isBig)
                     {
-                        if (c.collider.CompareTag("Wall"))
+                        // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
+                        RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+rooms[rand].GetComponent<AddRoom>().offset,rooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
+
+                        foreach (RaycastHit2D c in hit)
                         {
-                            print(c.collider.name+" "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name);
-                            rand = rooms.Length - 2;
-                            spawned = true;
-                            break;
+                            if (c.collider.CompareTag("Wall"))
+                            {
+                                print(c.collider.name+" "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name);
+                                rand = rooms.Length - 2;
+                                spawned = true;
+                                break;
+                            }
                         }
+                        Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
                     }
-                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
                 }
                 else
+                {
                     Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                }
             }
             else //온라인 모드면
                 PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
@@ -178,4 +189,14 @@ public class RoomSpawner : MonoBehaviour
             }
         }
     }
+    
+    
+    
+     bool PercentReturn(int percent)
+       {
+          if (Random.Range(1, 101) <= percent)
+             return true;
+          else
+             return false;
+       }
 }

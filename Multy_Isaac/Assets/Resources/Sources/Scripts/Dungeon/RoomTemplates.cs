@@ -96,14 +96,5 @@ public class RoomTemplates : MonoBehaviour
             print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");  
       }
    }
-
-
-
-   bool PercentReturn(int percent)
-   {
-      if (Random.Range(1, 101) <= percent)
-         return true;
-      else
-         return false;
-   }
+   
 }
