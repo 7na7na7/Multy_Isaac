@@ -10,6 +10,12 @@ using Random = UnityEngine.Random;
 
 public class RoomTemplates : MonoBehaviour
 {
+   [System.Serializable]
+   public class Broom
+   {
+      public GameObject[] rooms_B;
+   }
+   
    public int StraightCount = 0;
    public int minRoomCount = 7;
    public int maxRoomCount = 50;
@@ -23,12 +29,12 @@ public class RoomTemplates : MonoBehaviour
    [Header("큰방이 생성된확률(백분율)")]
    public int BigRoomPercent;
    //큰방들
-   public GameObject[] bottomRooms_B;
-   public GameObject[] topRooms_B;
-   public GameObject[] leftRooms_B;
-   public GameObject[] rightRooms_B;
+   public Broom[] bottomRooms_B;
+   public Broom[] topRooms_B;
+   public Broom[] leftRooms_B;
+   public Broom[] rightRooms_B;
    
-   
+   [Header("닫힌문")]
    public GameObject closedRoom;
 
    public List<GameObject> rooms;
