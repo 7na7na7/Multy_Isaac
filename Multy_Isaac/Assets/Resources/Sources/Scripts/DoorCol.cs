@@ -105,7 +105,6 @@ public class DoorCol : MonoBehaviour
                         int xx = (int) wallSpawnerPos.x / 18;
                         int yy = (int) wallSpawnerPos.y / 10;
                         
-                        print(xx+" "+yy);
                         Vector2 newPos=new Vector2(minimapPos.x+xx*0.9f,minimapPos.y+yy*0.55f);
                         
                         mini(c,newPos);
