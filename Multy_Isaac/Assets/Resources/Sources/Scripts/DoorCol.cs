@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class DoorCol : MonoBehaviour
 {
+    public Vector2 doorValue;
     private TweenParams parms = new TweenParams();
     public GameObject r, l, t, b;
     private bool isInstantiate = false;
@@ -33,52 +34,34 @@ public class DoorCol : MonoBehaviour
     bool isright=false, isleft=false, istop=false, isbottom=false;
     
     
-    void top(int i, Vector3 minimapPos)
+    void mini(int i, Vector3 minimapPos)
     {
-        if (transform.parent.GetChild(i).transform.position.y - transform.position.y >=10)
+        GameObject a = null;
+        if (i == 1)
         {
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+1.1f, 0), quaternion.identity);
-            Instantiate(b, new Vector3(minimapPos.x, minimapPos.y+1.1f, 0), quaternion.identity);
+            istop = true;
+            a = b;
+        }
+        else if (i == 2)
+        {
+            isbottom = true;
+            a = t;
+        }
+        else if (i == 3)
+        {
+            isright = true;
+            a = l;
         }
         else
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y+0.55f, 0), quaternion.identity);
+        {
+            isleft = true;
+            a = r;
+        }
+       
+            Instantiate(MinimapRoomPrefab_2, minimapPos, quaternion.identity);
+            Instantiate(a, minimapPos, quaternion.identity);
+
         istop = true;
-    }
-
-    void bottom(int i, Vector3 minimapPos)
-    {
-        if (transform.parent.GetChild(i).transform.position.y - transform.position.y <=-10)
-        {
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
-            Instantiate(t, new Vector3(minimapPos.x, minimapPos.y-1.1f, 0), quaternion.identity);
-        }
-        else
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x, minimapPos.y-0.55f, 0), quaternion.identity);
-        isbottom = true;
-    }
-
-    void right(int i, Vector3 minimapPos)
-    {
-        if (transform.parent.GetChild(i).transform.position.x - transform.position.x >=18)
-        {
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x+1.8f, minimapPos.y, 0), quaternion.identity);
-            Instantiate(l, new Vector3(minimapPos.x+1.8f, minimapPos.y, 0), quaternion.identity);
-        }
-        else
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x+0.9f, minimapPos.y, 0), quaternion.identity);
-        isright = true;
-    }
-
-    void left(int i, Vector3 minimapPos)
-    {
-        if (transform.parent.GetChild(i).transform.position.x - transform.position.x <=-18)
-        {
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x-1.8f, minimapPos.y, 0), quaternion.identity);
-            Instantiate(r, new Vector3(minimapPos.x-1.8f, minimapPos.y, 0), quaternion.identity);
-        }
-        else
-            Instantiate(MinimapRoomPrefab_2, new Vector3(minimapPos.x-0.9f, minimapPos.y, 0), quaternion.identity);
-        isleft = true;
     }
     public void Minimap()
     {
@@ -86,7 +69,7 @@ public class DoorCol : MonoBehaviour
         
         DOTween.Kill(parms);
         cam.transform.DOMove(
-                new Vector3(transform.position.x, transform.position.y, -10), 0.3f).SetAs(parms).OnComplete(()=>
+                new Vector3(transform.position.x+doorValue.x, transform.position.y+doorValue.y, -10), 0.3f).SetAs(parms).OnComplete(()=>
                 {
                     if (transform.parent.GetChild(0).name == "Bound")
                     {
@@ -105,7 +88,7 @@ public class DoorCol : MonoBehaviour
             int x = (int) pos.x / 18;
             int y = (int) pos.y / 10;
             Vector3 minimapPos = new Vector3(500 + x * 0.9f, 500 + y * 0.55f, -10);
-            
+        
             
             if (isInstantiate == false)
             {
@@ -117,39 +100,30 @@ public class DoorCol : MonoBehaviour
                     {
                         int c = transform.parent.GetChild(i).GetComponent<WallSpawner>().dir;
 
-
-                        if (c == 1) //위
-                        {
-                            print(transform.parent.GetChild(i).transform.position.y +" "+ transform.position.y);
-                           top(i,minimapPos);
-                        }
-                        else if (c == 2) //아래
-                        {
-                            print(transform.parent.GetChild(i).transform.position.y +" "+ transform.position.y);
-                           bottom(i,minimapPos);
-                        }
-                        else if (c == 3) //오른쪽
-                        {
-                            print(transform.parent.GetChild(i).transform.position.x +" "+ transform.position.x);
-                           right(i,minimapPos);
-                        }
-                        else //왼쪽
-                        {
-                            print(transform.parent.GetChild(i).transform.position.x +" "+ transform.position.x);
-                          left(i,minimapPos);
-                        }
+                        Vector2 wallSpawnerPos = transform.parent.GetChild(i).transform.localPosition;
+                        
+                        int xx = (int) wallSpawnerPos.x / 18;
+                        int yy = (int) wallSpawnerPos.y / 10;
+                        
+                        print(xx+" "+yy);
+                        Vector2 newPos=new Vector2(minimapPos.x+xx*0.9f,minimapPos.y+yy*0.55f);
+                        
+                        mini(c,newPos);
                     }
                 } 
                 
-                if (istop)
-                    Instantiate(t, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-               if(isbottom)
-                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-               if(isright)
-                   Instantiate(r, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-               if(isleft)
-                   Instantiate(l, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-                Instantiate(MinimapRoomPrefab, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//                if (istop)
+//                    Instantiate(t, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//               if(isbottom)
+//                   Instantiate(b, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//               if(isright)
+//                   Instantiate(r, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+//               if(isleft)
+//                   Instantiate(l, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
+                int dx = (int) doorValue.x / 18;
+                int dy = (int) doorValue.y / 10;
+
+                Instantiate(MinimapRoomPrefab, new Vector3(minimapPos.x+dx*0.9f, minimapPos.y+dy*0.55f, 0), quaternion.identity);
             }
 
         GameObject.FindGameObjectWithTag("Minimap").transform.DOMove(minimapPos,0.1f);
