@@ -117,9 +117,7 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (PercentReturn(templates.BigRoomPercent) == true) //큰방생성
                 {
-                    if (bigRooms[rand].GetComponent<AddRoom>().isBig)
-                    {
-                        // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
+                    // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
                         RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,bigRooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
 
                         foreach (RaycastHit2D c in hit)
@@ -136,11 +134,6 @@ public class RoomSpawner : MonoBehaviour
                             Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
                         else
                             Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
-                    }
-                    else //큰방 생성을 못하면 원래 생성하려 했던 작은방 생성
-                    {
-                        Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
-                    }
                 }
                 else
                 {
