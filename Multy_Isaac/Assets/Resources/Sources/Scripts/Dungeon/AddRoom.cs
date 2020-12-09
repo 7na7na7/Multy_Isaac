@@ -9,7 +9,6 @@ public class AddRoom : MonoBehaviour
 {
   public Vector2 offset;
   public Vector2 BoxSize;
-  public bool isBig = false;
   //public Sprite minimapRoom;
   private RoomTemplates templates;
 

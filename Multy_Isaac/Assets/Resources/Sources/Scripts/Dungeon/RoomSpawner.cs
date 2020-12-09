@@ -111,11 +111,10 @@ public class RoomSpawner : MonoBehaviour
                    SimpleSpawn();
                 }
             }
-            print("ROOM COUNT"+" "+rooms[rand].GetComponent<AddRoom>().isBig);
 
             if (PhotonNetwork.OfflineMode) //오프라인 모드면
             {
-                if (PercentReturn(templates.BigRoomPercent) == true) //큰방생성
+                if (PercentReturn(templates.BigRoomPercent)) //큰방생성
                 {
                     // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
                         RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,bigRooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
