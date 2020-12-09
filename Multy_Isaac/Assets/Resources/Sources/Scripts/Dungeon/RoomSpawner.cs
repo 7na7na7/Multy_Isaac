@@ -54,7 +54,7 @@ public class RoomSpawner : MonoBehaviour
         else
         {
             templates.StraightCount--;
-            rand = Random.Range(0, templates.topRooms.Length-2);
+            rand = Random.Range(0, 4);
         }
     }
     void Spawn()
