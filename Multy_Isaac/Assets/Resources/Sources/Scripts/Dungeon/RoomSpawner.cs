@@ -119,20 +119,22 @@ public class RoomSpawner : MonoBehaviour
                     // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
                         RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,bigRooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
 
+                        bool canSpawn = true;
                         foreach (RaycastHit2D c in hit)
                         {
                             if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
                             {
-                                print(c.collider.name+" "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name);
+                                print(bigRooms[rand].name+"를 생성하려했다가 "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name+"에막혀서 생성안됐어요!");
                                 rand = rooms.Length - 2;
-                                spawned = true;
+                                canSpawn = false;
                                 break;
                             }
                         }
-                        if(spawned)
-                            Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
-                        else
+                        if(canSpawn)
                             Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
+                        else
+                            Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                            
                 }
                 else
                 {
