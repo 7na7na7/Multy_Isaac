@@ -100,7 +100,7 @@ public class RoomSpawner : MonoBehaviour
             } 
             else//최소방수가 채워졌고, 최대방수는 채워지지 않았다면(제일많이 호출)
             {
-                if (templates.publicCount > 0 &&templates.rooms.Count + 1 > playerValue)
+                if (templates.publicCount > 1 &&templates.rooms.Count + 1 > playerValue)
                 {
                     //print(templates.rooms.Count+1+" "+playerValue);
                         rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
@@ -112,8 +112,7 @@ public class RoomSpawner : MonoBehaviour
                 }
             }
 
-            if (PhotonNetwork.OfflineMode) //오프라인 모드면
-            {
+           
                 if (PercentReturn(templates.BigRoomPercent)) //큰방생성
                 {
                     // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
@@ -130,19 +129,32 @@ public class RoomSpawner : MonoBehaviour
                                 break;
                             }
                         }
-                        if(canSpawn)
-                            Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
+
+                        if (canSpawn)
+                        {
+                            if(PhotonNetwork.OfflineMode)
+                                Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
+                            else
+                                PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation);
+                        }
                         else
-                            Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
-                            
+                        {
+                            if(PhotonNetwork.OfflineMode)
+                                Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                            else
+                                PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                        }
+
                 }
                 else
                 {
-                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                    if(PhotonNetwork.OfflineMode)
+                        Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                    else
+                        PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
                 }
-            }
-            else //온라인 모드면
-                PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+
+                
             
             if(templates.minRoomCount>0) 
                 templates.minRoomCount--;
