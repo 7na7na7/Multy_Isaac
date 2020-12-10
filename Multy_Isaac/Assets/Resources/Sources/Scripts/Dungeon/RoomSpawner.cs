@@ -19,6 +19,10 @@ public class RoomSpawner : MonoBehaviour
 
     public float waitTime = 4f;
 
+
+    private bool gizmoOn = false;
+    private Vector2 first, second;
+    
     void set()
     {
         transform.parent.GetChild(0).gameObject.SetActive(true);
@@ -118,11 +122,17 @@ public class RoomSpawner : MonoBehaviour
                     // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
                         RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,bigRooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
 
+                        
                         bool canSpawn = true;
                         foreach (RaycastHit2D c in hit)
                         {
+                            gizmoOn = true;
+                            first = (transform.position + (Vector3) bigRooms[rand].GetComponent<AddRoom>().offset) +
+                                    (transform.forward * c.distance);
+                            second = bigRooms[rand].GetComponent<AddRoom>().BoxSize;
                             if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
                             {
+
                                 print(bigRooms[rand].name+"를 생성하려했다가 "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name+"에막혀서 생성안됐어요!");
                                 rand = rooms.Length - 2;
                                 canSpawn = false;
@@ -131,18 +141,45 @@ public class RoomSpawner : MonoBehaviour
                         }
 
                         if (canSpawn)
-                        {
+                        { //안닿았으면은
                             if(PhotonNetwork.OfflineMode)
                                 Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
                             else
                                 PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation);
                         }
-                        else
+                        else //닿았으면 작은방으로 한번더검사
                         {
-                            if(PhotonNetwork.OfflineMode)
-                                Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
-                            else
-                                PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                            RaycastHit2D[] hit2 = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,templates.oneBox,0,Vector2.down,0);
+
+                        
+                            bool canSpawn2 = true;
+                            foreach (RaycastHit2D c in hit2)
+                            {
+                                gizmoOn = true;
+                                first = (transform.position + (Vector3) bigRooms[rand].GetComponent<AddRoom>().offset) +
+                                        (transform.forward * c.distance);
+                                second = templates.oneBox;
+                                if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
+                                {
+                                    rand = rooms.Length - 2;
+                                    canSpawn2 = false;
+                                    break;
+                                }
+                            }
+                            if (canSpawn2) //작은방 생성이 가능하면
+                            {
+                                if(PhotonNetwork.OfflineMode)
+                                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                                else
+                                    PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                            }
+                            else //작은방 생성이 불가능하면
+                            {
+                                if(PhotonNetwork.OfflineMode)
+                                    Instantiate(templates.closedRoom, transform.position,rooms[rand].transform.rotation);
+                                else
+                                    PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position,rooms[rand].transform.rotation);   
+                            }
                         }
                 }
                 else
@@ -161,6 +198,16 @@ public class RoomSpawner : MonoBehaviour
             
             spawned = true; //소환됨으로 바꿈
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (gizmoOn)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(first,second);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

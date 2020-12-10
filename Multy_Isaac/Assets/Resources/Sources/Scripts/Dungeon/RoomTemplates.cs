@@ -41,6 +41,8 @@ public class RoomTemplates : MonoBehaviour
    private Vector3 pos;
    public int privateCount;
    public int publicCount;
+
+   public Vector2 oneBox;
    private void Start()
    {
       if (PhotonNetwork.OfflineMode)
