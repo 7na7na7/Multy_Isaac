@@ -95,7 +95,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         col = GetComponent<CapsuleCollider2D>();
 
         savedSpeed = speed;
-        savedGunPos = gun.transform.position;
+        savedGunPos = gun.transform.localPosition;
+        
         if (pv.IsMine)
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
@@ -535,7 +536,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 new_SavedGunPos = savedGunPos;
             }
 
-            gun.transform.position = (Vector2) transform.position + new_SavedGunPos + new_weapontr;
+            gun.transform.localPosition = new_SavedGunPos + new_weapontr;
             gunScale = weapon.scale;
             CoolTime = weapon.CoolTime;
             gun.transform.eulerAngles=Vector3.zero;

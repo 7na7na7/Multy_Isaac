@@ -100,7 +100,7 @@ public class RoomSpawner : MonoBehaviour
             } 
             else//최소방수가 채워졌고, 최대방수는 채워지지 않았다면(제일많이 호출)
             {
-                if (templates.publicCount > 0 &&templates.rooms.Count + 1 > playerValue)
+                if (templates.publicCount >1 &&templates.rooms.Count + 1 > playerValue)
                 {
                     //print(templates.rooms.Count+1+" "+playerValue);
                         rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
