@@ -76,12 +76,12 @@ public class RoomTemplates : MonoBehaviour
       else
       {
          int PlayerCount = privateCount;
-         Player[] players = FindObjectsOfType<Player>();
-
+         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+         
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-         foreach (Player p in players)
+         foreach (GameObject p in players)
          {
-            print(p.nickname.text);
+            print(p.GetComponent<Player>().nickname.text);
          }
          for (int i = 0; i < rooms.Count-1; i++)
          {
@@ -89,7 +89,7 @@ public class RoomTemplates : MonoBehaviour
             {
                if (PlayerCount > 0)
                {
-                  players[privateCount - PlayerCount].pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
+                  players[privateCount - PlayerCount].GetComponent<Player>().pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
                   PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
                   PlayerCount--;  
                }
