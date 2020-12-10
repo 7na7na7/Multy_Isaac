@@ -79,7 +79,10 @@ public class RoomTemplates : MonoBehaviour
          Player[] players = FindObjectsOfType<Player>();
 
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-        
+         foreach (Player p in players)
+         {
+            print(p.nickname.text);
+         }
          for (int i = 0; i < rooms.Count-1; i++)
          {
             if (rooms[i].CompareTag("Entry"))
