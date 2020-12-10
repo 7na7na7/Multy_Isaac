@@ -119,10 +119,10 @@ public class DoorCol : MonoBehaviour
 //                   Instantiate(r, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
 //               if(isleft)
 //                   Instantiate(l, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
-                int dx = (int) doorValue.x / 18;
-                int dy = (int) doorValue.y / 10;
+               // int dx = (int) doorValue.x / 18;
+                //int dy = (int) doorValue.y / 10;
 
-                Instantiate(MinimapRoomPrefab, new Vector3(minimapPos.x+dx*0.9f, minimapPos.y+dy*0.55f, 0), quaternion.identity);
+                Instantiate(MinimapRoomPrefab, new Vector3(minimapPos.x, minimapPos.y, 0), quaternion.identity);
             }
 
         GameObject.FindGameObjectWithTag("Minimap").transform.DOMove(minimapPos,0.1f);
