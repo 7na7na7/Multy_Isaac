@@ -525,16 +525,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector2 new_SavedGunPos=Vector2.zero; 
             Vector2 new_weapontr=Vector2.zero;
 
-            if (transform.localScale.x != localScaleX)
-            {
-                new_SavedGunPos = new Vector2(savedGunPos.x * -1f, savedGunPos.y);
-                new_weapontr=new Vector2(weapon.tr.x * -1f, weapon.tr.y);
-            }
-            else
-            {
+
                 new_weapontr = weapon.tr;
                 new_SavedGunPos = savedGunPos;
-            }
+            
 
             gun.transform.localPosition = new_SavedGunPos + new_weapontr;
             gunScale = weapon.scale;
