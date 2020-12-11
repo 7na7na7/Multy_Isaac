@@ -15,9 +15,14 @@ public class pickUpTem : MonoBehaviour
     public float radius;
     public LayerMask player;
 
+    //private Rigidbody2D rigid;
 
-  
-   public enum temType
+    private void Start()
+    {
+        //rigid = GetComponent<Rigidbody2D>();
+    }
+
+    public enum temType
     {
         exp,
         bullet,
@@ -30,6 +35,7 @@ public class pickUpTem : MonoBehaviour
         if (col != null) //플레이어가 비지 않았다면
         {
             Vector2 dir = col.transform.position - transform.position;
+            dir.Normalize();
             transform.Translate(dir*speed*Time.deltaTime);
         }
     }

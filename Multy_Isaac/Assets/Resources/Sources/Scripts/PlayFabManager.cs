@@ -15,6 +15,9 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+   public List<GameObject> Prefabs;
+   
+   
    private Text txt;
    //public string GameVersion = "0.1";
    public InputField EmailInput, PasswordInput, UsernameInput;
@@ -56,8 +59,20 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SerializationRate = 30;
       //동기화 빠르게
    }
-   
 
+   
+   void Start ()
+   {
+      DefaultPool pool = PhotonNetwork.PrefabPool as DefaultPool;
+      if (pool != null && this.Prefabs != null)
+      {
+         foreach (GameObject prefab in this.Prefabs)
+         {
+            pool.ResourceCache.Add(prefab.name, prefab);
+         }
+      }
+   }
+   
    private void Update()
    {
       if (PhotonNetwork.IsConnected)
