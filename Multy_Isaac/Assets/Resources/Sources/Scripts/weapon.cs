@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class wep
 {
+    public bool isMelee = false;
     public Sprite spr;
     public Vector2 tr;
     public Vector2 scale;
@@ -18,6 +19,7 @@ public class wep
     public wep DeepCopy()
     {
         wep Copytem = new wep();
+        Copytem.isMelee = this.isMelee;
         Copytem.reLoadTime = this.reLoadTime;
         Copytem.BulletCount = this.BulletCount;
         Copytem.spr = this.spr;

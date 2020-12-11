@@ -4768,8 +4768,9 @@ GameObject:
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181218}
   - component: {fileID: 3749522341741181245}
+  - component: {fileID: 3835402859275112753}
   m_Layer: 9
-  m_Name: item2
+  m_Name: item7
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4787,6 +4788,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449410984}
+  - {fileID: 4869776060961844962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4829,12 +4831,12 @@ SpriteRenderer:
   m_SortingLayerID: 263690145
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 936345f7fc3934efa8119a8700d904c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8de4b4896c68ba4e892a6a3e6b20232, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.23, y: 0.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4853,18 +4855,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    weaponIndex: 0
+    weaponIndex: 3
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 
-    CompleteItemIndex: 04000000050000000600000007000000
-    index: 2
-    ItemName: "\uD558\uC580 \uAF43"
-    ItemSprite: {fileID: 21300000, guid: 936345f7fc3934efa8119a8700d904c7, type: 3}
-    type: 1
-    ItemDescription: "\uD3C9\uBC94\uD55C \uD558\uC580 \uAF43.  \uC774\uAC78\uB85C
-      \uC774\uC0C1\uD55C \uBB3C\uAC74\uC744 \uB9CC\uB4E4 \uC218 \uC788\uC790\uB294\uB370...?"
-    WhereGet: "\uC794\uB514 \uC9C0\uC5ED"
+    SmallItemIndex: 0200000002000000
+    CompleteItemIndex: 
+    index: 7
+    ItemName: "\uC6A9\uC0AC\uC758 \uAC80"
+    ItemSprite: {fileID: 21300000, guid: a8de4b4896c68ba4e892a6a3e6b20232, type: 3}
+    type: 0
+    ItemDescription: "\uD3C9\uBC94\uD55C \uCE7C\uC774\uB2E4."
+    WhereGet: "\uC81C\uC791\uC73C\uB85C\uB9CC \uD68D\uB4DD \uAC00\uB2A5"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
   isGet: 0
   ease: 7
@@ -4927,3 +4928,57 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3835402859275112753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749522341741181223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3802716f2fd48ff49a31d1b35ba2b514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponObj:
+    isMelee: 1
+    spr: {fileID: 21300000, guid: a8de4b4896c68ba4e892a6a3e6b20232, type: 3}
+    tr: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    CoolTime: 1
+    bulletPos: {fileID: 4869776060961844962}
+    BulletName: Bullet
+    weaponIndex: 3
+    reLoadTime: 1
+    BulletCount: 6
+    ClusterRate: 13
+--- !u!1 &6160867055047779158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4869776060961844962}
+  m_Layer: 9
+  m_Name: bulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4869776060961844962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6160867055047779158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.239, y: 0.064, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3749522341741181216}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
