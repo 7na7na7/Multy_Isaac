@@ -188,9 +188,9 @@ public class RoomSpawner : MonoBehaviour
                             {
                                 print("A");
                                 if(PhotonNetwork.OfflineMode)
-                                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                                    Instantiate(rooms[rand], transform.position+offset,rooms[rand].transform.rotation);
                                 else
-                                    PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                                    PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position+offset,rooms[rand].transform.rotation);
                             }
                             else //작은방 생성이 불가능하면
                             {
