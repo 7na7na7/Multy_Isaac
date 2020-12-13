@@ -186,6 +186,7 @@ public class RoomSpawner : MonoBehaviour
                             }
                             if (canSpawn2) //작은방 생성이 가능하면
                             {
+                                print("A");
                                 if(PhotonNetwork.OfflineMode)
                                     Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
                                 else
@@ -193,6 +194,7 @@ public class RoomSpawner : MonoBehaviour
                             }
                             else //작은방 생성이 불가능하면
                             {
+                                print("B");
                                 if(PhotonNetwork.OfflineMode)
                                     Instantiate(templates.closedRoom, transform.position,rooms[rand].transform.rotation);
                                 else
