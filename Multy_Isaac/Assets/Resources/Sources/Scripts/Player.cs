@@ -685,8 +685,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         void setSprite(int i)
         {
-            gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
-            //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
+            //gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
+            gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
 
 }
