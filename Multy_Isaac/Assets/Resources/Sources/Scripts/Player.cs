@@ -221,8 +221,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)) //클릭불가능영역이 아니면
                         {
-                            if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading)
-                            {
+                            if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading) //연타하면 더빠르게 쏨
+                            { 
+                                //itemData.GetWeapon(playerItem.ItemList[playerItem.selectedIndex].weaponIndex).isMelee
                                 if (!leftBullet.canShoot())
                                 {
                                     speed = savedSpeed;
@@ -235,7 +236,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 else
                                     ShotGun(true);
                             }
-                            if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //총쏘기
+                            if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //그냥 누르고있을경우
                             {
                                 if (leftBullet.canShoot())
                                     ShotGun(false);

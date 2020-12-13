@@ -46,7 +46,7 @@ public class tem
         return Copytem;
     }
 }
-public enum itemType { Weapon,Item,Passive,Usable}
+public enum itemType { Gun,Melee,Item,Passive,Usable}
 public class Item : MonoBehaviour
 {
     public tem item;

@@ -148,9 +148,17 @@ public class PlayerItem : MonoBehaviour
 
     public void check(int i, bool isFirst)
     {
-        if (ItemList[i].type == itemType.Weapon && ItemList[i].weaponIndex>0 && selectedIndex==i) 
+        if (ItemList[i].type == itemType.Gun || ItemList[i].type == itemType.Melee)
         {
-            player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex),isFirst); 
+            if (ItemList[i].weaponIndex>0 && selectedIndex==i) 
+            {
+                player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex),isFirst); 
+            }
+            else
+            {
+                if(selectedIndex==i) 
+                    player.gunSetfalse();
+            }
         }
         else
         {
