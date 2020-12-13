@@ -261,6 +261,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public override void OnJoinedLobby() //로비 들어왔을때
    {
+      LoginPanel.SetActive(false);
       LoadingPanel.SetActive(false);
       LobbyPanel.SetActive(true);
       RoomPanel.SetActive(false);
