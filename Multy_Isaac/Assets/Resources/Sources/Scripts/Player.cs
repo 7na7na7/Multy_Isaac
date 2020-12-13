@@ -74,6 +74,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private PlayerItem playerItem;
     private LevelMgr LvMgr;
     private StatManager statMgr;
+    private ItemData itemData;
+    
     public Sprite[] gunSprites;
     public LeftBullet leftBullet;
     
@@ -100,6 +102,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (pv.IsMine)
                 {
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
+                    itemData = transform.GetChild(0).GetComponent<ItemData>();
                     LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
                     statMgr=transform.GetChild(0).GetComponent<StatManager>();
                     playerItem = GetComponent<PlayerItem>();
@@ -681,7 +684,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         void setSprite(int i)
         {
-            gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
+            gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
+            //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
 
 }
