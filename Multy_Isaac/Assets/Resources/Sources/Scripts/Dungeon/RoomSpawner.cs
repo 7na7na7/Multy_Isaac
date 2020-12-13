@@ -149,14 +149,32 @@ public class RoomSpawner : MonoBehaviour
                         }
                         else //닿았으면 작은방으로 한번더검사
                         {
-                            RaycastHit2D[] hit2 = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,templates.oneBox,0,Vector2.down,0);
+                            Vector3 offset=Vector3.zero;
+                            switch (rooms[rand].transform.GetChild(0).GetComponent<RoomSpawner>().openingDirection) //1위 2아래 3오른 4왼
+                            {
+                                case 1:
+                                    offset.y = -10;
+                                    break;
+                                case 2:
+                                    offset.y = 10;
+                                    break;
+                                case 3:
+                                    offset.x = -18;
+                                    break;
+                                case 4:
+                                    offset.x = 18;
+                                    break;
+                            }
+                            print(offset);
+                            
+                            RaycastHit2D[] hit2 = Physics2D.BoxCastAll(transform.position+offset,templates.oneBox,0,Vector2.down,0);
 
                         
                             bool canSpawn2 = true;
                             foreach (RaycastHit2D c in hit2)
                             {
                                 gizmoOn = true;
-                                first = (transform.position + (Vector3) bigRooms[rand].GetComponent<AddRoom>().offset) +
+                                first = (transform.position + offset) +
                                         (transform.forward * c.distance);
                                 second = templates.oneBox;
                                 if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함

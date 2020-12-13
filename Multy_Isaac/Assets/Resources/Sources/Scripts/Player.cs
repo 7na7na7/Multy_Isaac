@@ -107,7 +107,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     sound = GetComponent<SoundManager>();
                     playerItem.player = this;
                     if (SceneManager.GetActiveScene().name == "Play")
-                        Invoke("setCam", 2f);
+                        Invoke("setCam", 5f);
                     else
                     {
                         canMove = true;

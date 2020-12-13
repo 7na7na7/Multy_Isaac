@@ -78,22 +78,25 @@ public class RoomTemplates : MonoBehaviour
       else
       {
          int PlayerCount = privateCount;
-         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+         Player[] players = FindObjectsOfType<Player>();
          
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-         foreach (GameObject p in players)
-         {
-            print(p.GetComponent<Player>().nickname.text);
-         }
+//         foreach (Player p in players)
+//         {
+//            print(p.nickname.text);
+//         }
+
          for (int i = 0; i < rooms.Count-1; i++)
          {
             if (rooms[i].CompareTag("Entry"))
             {
                if (PlayerCount > 0)
                {
-                  players[privateCount - PlayerCount].GetComponent<Player>().pv.RPC("Move",RpcTarget.All,rooms[i].transform.position);
+                  print(players[privateCount-PlayerCount].nickname.text);
+                  players[privateCount - PlayerCount].GetComponent<Player>().pv.RPC("Move",RpcTarget.AllBuffered,rooms[i].transform.position);
                   PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
-                  PlayerCount--;  
+                  //players[privateCount - PlayerCount].GetComponent<Player>().setCam();
+                  PlayerCount--;
                }
             }
          }
