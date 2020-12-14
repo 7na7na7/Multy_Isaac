@@ -223,25 +223,38 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         {
                             if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading) //연타하면 더빠르게 쏨
                             { 
-                                //itemData.GetWeapon(playerItem.ItemList[playerItem.selectedIndex].weaponIndex).isMelee
-                                if (!leftBullet.canShoot())
+                                if(playerItem.ItemList[playerItem.selectedIndex].type==itemType.Gun)
                                 {
-                                    speed = savedSpeed;
+                                    if (!leftBullet.canShoot())
+                                    {
+                                        speed = savedSpeed;
 
-                                    if(leftBullet.canReload() && !isReLoading)
-                                        reLoad(leftBullet.reLoadTime);
+                                        if(leftBullet.canReload() && !isReLoading)
+                                            reLoad(leftBullet.reLoadTime);
+                                        else
+                                            print("총알이 부족합니다!");
+                                    }
                                     else
-                                        print("총알이 부족합니다!");
+                                        ShotGun(true);
                                 }
-                                else
-                                    ShotGun(true);
+                                else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee)
+                                {
+                                    print("BA");
+                                }
                             }
                             if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //그냥 누르고있을경우
                             {
-                                if (leftBullet.canShoot())
-                                    ShotGun(false);
-                                else
-                                    speed = savedSpeed;
+                                if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Gun)
+                                {
+                                    if (leftBullet.canShoot())
+                                        ShotGun(false);
+                                    else
+                                        speed = savedSpeed;
+                                }
+                                else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee)
+                                {
+                                    print("AS");
+                                }
                             }
                         }
                         
