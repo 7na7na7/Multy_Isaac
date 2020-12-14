@@ -237,9 +237,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                     else
                                         ShotGun(true);
                                 }
-                                else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee)
+                                else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee) //근접공격
                                 {
-                                    print("BA");
+                                    speed = savedSpeed;
+                                    Slash(true);
                                 }
                             }
                             if (Input.GetMouseButton(0) && gun.activeSelf && !isReLoading) //그냥 누르고있을경우
@@ -253,7 +254,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 }
                                 else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee)
                                 {
-                                    print("AS");
+                                    speed = savedSpeed;
+                                    Slash(false);
                                 }
                             }
                         }
@@ -332,6 +334,45 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
+    void Slash(bool isDown)
+    {
+        bool canShot = false;
+        if (isDown)
+        {
+            if (time <= 0.1f)
+                canShot = true;
+        }
+        else
+        {
+            if (time <= 0)
+            {
+                canShot = true;
+            }
+        }
+        
+        if (canShot)
+        {
+            speed = shootingSpeed;
+            time = CoolTime;
+            
+            isReLoading = true;
+            Vector3 a = gun.transform.eulerAngles;
+            Vector3 a2 = a;
+            a.z -=180;
+        
+            gun.transform.DORotate(a, 0.25f).SetEase(reLoadEase1).OnComplete(()=> {
+//            Vector3 b = gun.transform.eulerAngles;
+//            b.z += 181;
+//            gun.transform.DORotate(b, 0.4f).SetEase(reLoadEase2).OnComplete(() =>
+//            {
+//                isReLoading = false;
+//                leftBullet.Reload(playerItem.selectedIndex);
+//            });
+                isReLoading = false;
+                gun.transform.eulerAngles = a2;
+            });   
+        }
+    }
         void FixedUpdate() 
         {
            
