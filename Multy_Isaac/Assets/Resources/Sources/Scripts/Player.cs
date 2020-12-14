@@ -91,16 +91,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        camera = FindObjectOfType<AudioListener>().GetComponent<Camera>();
-        localScaleX = transform.localScale.x*-1f;
-        canvasLocalScaleX = canvasRect.localScale.x * -1f;
+        localScaleX = transform.localScale.x;
+        canvasLocalScaleX = canvasRect.localScale.x;
         col = GetComponent<CapsuleCollider2D>();
 
         savedSpeed = speed;
         savedGunPos = gun.transform.localPosition;
         
         if (pv.IsMine)
-                {
+        {
+            camera = GameObject.Find("Main Camera").GetComponent<Camera>();
                     //FindObjectOfType<CameraManager>().target = p.gameObject;
                     itemData = transform.GetChild(0).GetComponent<ItemData>();
                     LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
@@ -110,7 +110,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     sound = GetComponent<SoundManager>();
                     playerItem.player = this;
                     if (SceneManager.GetActiveScene().name == "Play")
-                        Invoke("setCam", 5f);
+                    {
+                        GetComponent<CapsuleCollider2D>().isTrigger = true;
+                        Invoke("setCam", 2f);
+                    }
                     else
                     {
                         canMove = true;
@@ -121,10 +124,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     Destroy(canvas);
        
     }
-
-    
     void setCam()
-   {
+    {
+        GetComponent<CapsuleCollider2D>().isTrigger = false;
        spawnPoint = transform.position;
        canMove = true;
        statMgr.canMove = true;
@@ -281,14 +283,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
                             canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
 
-                            gun.transform.localScale=new Vector3(gunScale.x*-1,gunScale.y,1);
+                            gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
                         }
                         else
                         {
                             transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
                             canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                     
-                            gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
+                            gun.transform.localScale=new Vector3(gunScale.x*-1,gunScale.y,1);
                         } //커서가 왼쪽에 있으면
 
                         if (!isReLoading)
@@ -299,7 +301,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
                             //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
                             angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
-                        
+                            
                             if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
                             {
                                 gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
@@ -375,39 +377,41 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
         void FixedUpdate() 
         {
-           
-            if (canMove&&!isSleeping&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
+            if (canMove)
             {
-                //이동여부에 따른 애니메이션 조정
-                if (moveDirection == Vector2.zero)
+                if (canMove&&!isSleeping&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
                 {
-                    if(PhotonNetwork.OfflineMode)
+                    //이동여부에 따른 애니메이션 조정
+                    if (moveDirection == Vector2.zero)
                     {
-                        SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));   
-                    }
+                        if(PhotonNetwork.OfflineMode)
+                        {
+                            SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));   
+                        }
+                        else
+                        {
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : null));
+                        }
+                    } 
                     else
                     {
-                        pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : null));
-                    }
-                } 
-                else
-                {
-                    if (PhotonNetwork.OfflineMode)
-                    {
-                        SetAnimRPC("Walk"+ (!isHaveGun ? "2" : null));
-                    }
-                    else
-                    {
-                        pv.RPC("SetAnimRPC",RpcTarget.All,"Walk"+ (!isHaveGun ? "2" : null));
-                    }
+                        if (PhotonNetwork.OfflineMode)
+                        {
+                            SetAnimRPC("Walk"+ (!isHaveGun ? "2" : null));
+                        }
+                        else
+                        {
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"Walk"+ (!isHaveGun ? "2" : null));
+                        }
                     
+                    }
+                    rb.velocity=new Vector2(moveDirection.x*speed,moveDirection.y*speed); //이동
                 }
-                rb.velocity=new Vector2(moveDirection.x*speed,moveDirection.y*speed); //이동
-            }
-            else//그 외는 전부 움직이지 않도록
-            {
-              //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-               rb.velocity=Vector2.zero;
+                else//그 외는 전부 움직이지 않도록
+                {
+                    //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                    rb.velocity=Vector2.zero;
+                }   
             }
         }
 
