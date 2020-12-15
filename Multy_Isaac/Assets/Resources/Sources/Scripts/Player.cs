@@ -366,7 +366,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector3 a2 = a;
             a.z -=180;
             
-            slash.SetActive(true);
+            if (PhotonNetwork.OfflineMode) 
+                Instantiate(slash,gun.transform.position,Quaternion.Euler(a2));
+            else
+                PhotonNetwork.Instantiate(slash.name,gun.transform.position,Quaternion.Euler(a2));
 
             gun.transform.DORotate(a, 0.25f).SetEase(reLoadEase1).OnComplete(()=> {
                 StartCoroutine(swordInitial(a2, 0.1f));
@@ -379,7 +382,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(delay);
         isReLoading = false;
         gun.transform.eulerAngles = a3;
-        slash.SetActive(false);
         speed = savedSpeed;
     }
         void FixedUpdate() 
