@@ -28,6 +28,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //수면
     public bool isSleeping; //자고있는가?
     //이동, 애니메이션
+    private int shotSpeed_p = 100;
+    private int walkSpeed_p = 100;
     private CapsuleCollider2D col;
     public bool canMove = true;
     private Animator anim;
@@ -37,8 +39,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 curPos;
     // public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
-    private float savedSpeed;
-    public float shootingSpeed;
+    public float savedSpeed;
     public PhotonView pv; //포톤뷰
     //캔버스
     public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
@@ -97,10 +98,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
         col = GetComponent<CapsuleCollider2D>();
-
-        savedSpeed = speed;
-        savedGunPos = gun.transform.localPosition;
         
+        savedGunPos = gun.transform.localPosition;
+       
         if (pv.IsMine)
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -244,7 +244,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 }
                                 else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee) //근접공격
                                 {
-                                    speed = savedSpeed;
                                     Slash(true);
                                 }
                             }
@@ -259,7 +258,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 }
                                 else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee)
                                 {
-                                    speed = savedSpeed;
                                     Slash(false);
                                 }
                             }
@@ -359,7 +357,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         if (canShot)
         {
-            speed = shootingSpeed;
+            print(speed+" "+savedSpeed+" "+shotSpeed_p);
+            speed = savedSpeed * shotSpeed_p/100;
             time = CoolTime;
             
             isReLoading = true;
@@ -419,7 +418,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         }
                     
                     }
-                    rb.velocity=new Vector2(moveDirection.x*speed,moveDirection.y*speed); //이동
+                    
+                    rb.velocity=new Vector2(moveDirection.x*speed*walkSpeed_p/100,moveDirection.y*speed*walkSpeed_p/100); //이동
                 }
                 else//그 외는 전부 움직이지 않도록
                 {
@@ -449,7 +449,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (leftBullet.MinusBullet(playerItem.selectedIndex))
                 {
-                    speed = shootingSpeed;
+                    speed = savedSpeed * shotSpeed_p / 100;
                     time = CoolTime;
                    Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*clusterRate,clusterRate));
                     if (PhotonNetwork.OfflineMode) 
@@ -614,7 +614,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             bulletName = weapon.BulletName;
             leftBullet.reLoadTime = weapon.reLoadTime;
             clusterRate = weapon.ClusterRate;
-            
+            shotSpeed_p = weapon.shotSpeed_P;
+            walkSpeed_p = weapon.walkSpeed_P;
             leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
         }
     } 
@@ -627,7 +628,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             pv.RPC("armgunSetFalse", RpcTarget.All);
         leftBullet.SetFalse();
         isHaveGun = false;
-        speed = savedSpeed; ///////
+        speed = savedSpeed;
+        walkSpeed_p = 100;
+        shotSpeed_p = 100;
     }
 
     public void getEXP(int value) //경험치획득

@@ -15,9 +15,14 @@ public class wep
     public float reLoadTime;
     public int BulletCount;
     public float ClusterRate;
+    public int walkSpeed_P;
+    public int shotSpeed_P;
+    
     public wep DeepCopy()
     {
         wep Copytem = new wep();
+        Copytem.walkSpeed_P = this.walkSpeed_P;
+        Copytem.shotSpeed_P = this.shotSpeed_P;
         Copytem.reLoadTime = this.reLoadTime;
         Copytem.BulletCount = this.BulletCount;
         Copytem.spr = this.spr;
