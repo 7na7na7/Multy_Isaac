@@ -100,7 +100,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         col = GetComponent<CapsuleCollider2D>();
         
         savedGunPos = gun.transform.localPosition;
-       
+        speed = savedSpeed;
         if (pv.IsMine)
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -369,13 +369,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             slash.SetActive(true);
 
             gun.transform.DORotate(a, 0.25f).SetEase(reLoadEase1).OnComplete(()=> {
-//            Vector3 b = gun.transform.eulerAngles;
-//            b.z += 181;
-//            gun.transform.DORotate(b, 0.4f).SetEase(reLoadEase2).OnComplete(() =>
-//            {
-//                isReLoading = false;
-//                leftBullet.Reload(playerItem.selectedIndex);
-//            });
                 StartCoroutine(swordInitial(a2, 0.1f));
             });   
         }
@@ -386,7 +379,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(delay);
         isReLoading = false;
         gun.transform.eulerAngles = a3;
-        slash.SetActive(false);
+        //slash.SetActive(false);
         speed = savedSpeed;
     }
         void FixedUpdate() 

@@ -5448,13 +5448,14 @@ GameObject:
   - component: {fileID: 6961029014033460282}
   - component: {fileID: 6120707208581727712}
   - component: {fileID: 1818237973866451947}
+  - component: {fileID: 5276212423183303913}
   m_Layer: 0
   m_Name: Slash
   m_TagString: Slash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6961029014033460282
 Transform:
   m_ObjectHideFlags: 0
@@ -5545,6 +5546,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8639182, y: 0.9131441}
   m_EdgeRadius: 0
+--- !u!114 &5276212423183303913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5217710263675373070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba837ec94948e3d4396fef809f59afb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pv: {fileID: 5845764388835472206}
 --- !u!1 &5295280854828555298
 GameObject:
   m_ObjectHideFlags: 0
@@ -8625,7 +8639,7 @@ MonoBehaviour:
   isSleeping: 0
   canMove: 0
   speed: 7
-  savedSpeed: 7
+  savedSpeed: 14
   pv: {fileID: 5845764388835472206}
   canvasRect: {fileID: 8249542334295168489}
   ChatBaloon: {fileID: 9172306893620609551}
