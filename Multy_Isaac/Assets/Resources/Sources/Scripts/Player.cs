@@ -13,6 +13,9 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public GameObject slash;
+    
+    
     public GameObject canvas;
     private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
@@ -361,7 +364,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector3 a = gun.transform.eulerAngles;
             Vector3 a2 = a;
             a.z -=180;
-        
+            
+            slash.SetActive(true);
+
             gun.transform.DORotate(a, 0.25f).SetEase(reLoadEase1).OnComplete(()=> {
 //            Vector3 b = gun.transform.eulerAngles;
 //            b.z += 181;
@@ -370,10 +375,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //                isReLoading = false;
 //                leftBullet.Reload(playerItem.selectedIndex);
 //            });
-                isReLoading = false;
-                gun.transform.eulerAngles = a2;
+                StartCoroutine(swordInitial(a2, 0.1f));
             });   
         }
+    }
+
+    IEnumerator swordInitial(Vector3 a3,float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isReLoading = false;
+        gun.transform.eulerAngles = a3;
+        slash.SetActive(false);
     }
         void FixedUpdate() 
         {
