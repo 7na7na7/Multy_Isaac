@@ -387,6 +387,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         isReLoading = false;
         gun.transform.eulerAngles = a3;
         slash.SetActive(false);
+        speed = savedSpeed;
     }
         void FixedUpdate() 
         {
