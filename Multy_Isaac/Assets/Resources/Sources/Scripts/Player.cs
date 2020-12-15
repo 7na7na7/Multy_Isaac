@@ -281,23 +281,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 roll(new Vector2(dir.x,dir.y).normalized); //방향 정해준후 대쉬
                         }   
                         
-                        if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                        if (!isReLoading) //재장전중이 아닐때만 총, 플레이어로컬포지션 조정
                         {
-                            transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
-                            canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                            if ((transform.position - camera.ScreenToWorldPoint(MousePosition)).normalized.x < 0) //커서가 오른쪽에 있으면
+                            {
+                                transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
+                                canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
 
-                            gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
-                        }
-                        else
-                        {
-                            transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
-                            canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
+                                gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
+                            }
+                            else
+                            {
+                                transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
+                                canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                     
-                            gun.transform.localScale=new Vector3(gunScale.x*-1,gunScale.y,1);
-                        } //커서가 왼쪽에 있으면
+                                gun.transform.localScale=new Vector3(gunScale.x*-1,gunScale.y,1);
+                            } //커서가 왼쪽에 있으면
 
-                        if (!isReLoading)
-                        {
+                            
+                            
                             //총 회전
                             MousePosition = Input.mousePosition;
                             Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
