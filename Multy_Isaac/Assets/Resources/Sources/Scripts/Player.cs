@@ -379,7 +379,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(delay);
         isReLoading = false;
         gun.transform.eulerAngles = a3;
-        //slash.SetActive(false);
+        slash.SetActive(false);
         speed = savedSpeed;
     }
         void FixedUpdate() 
