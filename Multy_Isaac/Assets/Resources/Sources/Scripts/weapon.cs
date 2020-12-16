@@ -17,10 +17,12 @@ public class wep
     public float ClusterRate;
     public int walkSpeed_P;
     public int shotSpeed_P;
+    public float slashTime;
     
     public wep DeepCopy()
     {
         wep Copytem = new wep();
+        Copytem.slashTime = this.slashTime;
         Copytem.walkSpeed_P = this.walkSpeed_P;
         Copytem.shotSpeed_P = this.shotSpeed_P;
         Copytem.reLoadTime = this.reLoadTime;

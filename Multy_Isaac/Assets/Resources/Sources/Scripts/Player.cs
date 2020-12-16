@@ -13,8 +13,8 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public GameObject slash;
-    
+    public GameObject offlineSlash;
+    private float slashTime;
     
     public GameObject canvas;
     private bool isHaveGun = false;
@@ -357,7 +357,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         if (canShot)
         {
-            print(speed+" "+savedSpeed+" "+shotSpeed_p);
             speed = savedSpeed * shotSpeed_p/100;
             time = CoolTime;
             
@@ -367,12 +366,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             a.z -=180;
             
             if (PhotonNetwork.OfflineMode) 
-                Instantiate(slash,gun.transform.position,Quaternion.Euler(a2));
+                Instantiate(offlineSlash,gun.transform.position,Quaternion.Euler(a2));
             else
-                PhotonNetwork.Instantiate(slash.name,gun.transform.position,Quaternion.Euler(a2));
+                PhotonNetwork.Instantiate(bulletName,gun.transform.position,Quaternion.Euler(a2));
 
-            gun.transform.DORotate(a, 0.25f).SetEase(reLoadEase1).OnComplete(()=> {
-                StartCoroutine(swordInitial(a2, 0.1f));
+            gun.transform.DORotate(a, slashTime).SetEase(Ease.OutBack).OnComplete(()=> {
+                StartCoroutine(swordInitial(a2, 0.05f));
             });   
         }
     }
@@ -612,6 +611,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             clusterRate = weapon.ClusterRate;
             shotSpeed_p = weapon.shotSpeed_P;
             walkSpeed_p = weapon.walkSpeed_P;
+            slashTime = weapon.slashTime;
             leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
         }
     } 
