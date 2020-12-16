@@ -370,7 +370,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
                 PhotonNetwork.Instantiate(bulletName,gun.transform.position,Quaternion.Euler(a2));
 
-            gun.transform.DORotate(a, slashTime).SetEase(Ease.OutBack).OnComplete(()=> {
+            gun.transform.DORotate(a, slashTime).SetEase(Ease.OutCubic).OnComplete(()=> {
                 StartCoroutine(swordInitial(a2, 0.05f));
             });   
         }
