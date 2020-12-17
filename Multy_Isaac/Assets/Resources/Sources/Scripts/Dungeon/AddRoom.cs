@@ -27,29 +27,27 @@ public class AddRoom : MonoBehaviour
       if(templates.GetComponent<PhotonView>().IsMine) 
         templates.rooms.Add(this.gameObject); 
     }
-
-    if (specialvalue == 0)
+    
+    if (specialvalue != -1)
     {
       if (PhotonNetwork.OfflineMode)
       {
-        Instantiate(templates.SpecialRooms[specialvalue], transform.FindChild("EntryGrid").transform);
+        Instantiate(templates.SpecialRooms[specialvalue], transform.position,quaternion.identity);
       }
       else
       {
-        GameObject g=PhotonNetwork.InstantiateRoomObject(templates.SpecialRooms[specialvalue].name, transform.position,quaternion.identity);
-        g.transform.SetParent(transform.FindChild("EntryGrid").transform);
+        PhotonNetwork.InstantiateRoomObject(templates.SpecialRooms[specialvalue].name, transform.position,quaternion.identity);
       }
     }
     else
     {
       if (PhotonNetwork.OfflineMode)
       {
-        Instantiate(templates.RoomProps[Random.Range(0,templates.RoomProps.Length)], transform.FindChild("EntryGrid").transform);
+        Instantiate(templates.RoomProps[Random.Range(0,templates.RoomProps.Length)], transform.position,quaternion.identity);
       }
       else
       {
-        GameObject g=PhotonNetwork.InstantiateRoomObject(templates.RoomProps[Random.Range(0,templates.RoomProps.Length)].name, transform.position,quaternion.identity);
-        g.transform.SetParent(transform.FindChild("EntryGrid").transform);
+        PhotonNetwork.InstantiateRoomObject(templates.RoomProps[Random.Range(0,templates.RoomProps.Length)].name, transform.position,quaternion.identity);
       }
     }
   }

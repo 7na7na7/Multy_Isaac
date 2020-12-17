@@ -149,8 +149,8 @@ public class RoomSpawner : MonoBehaviour
                             }
                             else
                             {
-                                GameObject g=PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation);
-                                g.GetComponent<AddRoom>().SetRoom();
+                                AddRoom pv = PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation).GetComponent<AddRoom>();
+                                pv.SetRoom();
                             }
                         }
                         else
@@ -162,8 +162,8 @@ public class RoomSpawner : MonoBehaviour
                             }
                             else
                             {
-                                GameObject g=PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);   
-                                g.GetComponent<AddRoom>().SetRoom();
+                                AddRoom pv = PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation).GetComponent<AddRoom>();
+                                pv.SetRoom();
                             }
                         }
 //                        else //닿았으면 작은방으로 한번더검사
@@ -222,8 +222,8 @@ public class RoomSpawner : MonoBehaviour
                     }
                     else
                     {
-                        GameObject g= PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
-                        g.GetComponent<AddRoom>().SetRoom();
+                        AddRoom pv = PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position, rooms[rand].transform.rotation).GetComponent<AddRoom>();
+                        pv.SetRoom();
                     }
                 }
 
