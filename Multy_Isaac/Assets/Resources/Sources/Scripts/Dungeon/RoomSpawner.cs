@@ -142,17 +142,29 @@ public class RoomSpawner : MonoBehaviour
 
                         if (canSpawn)
                         { //안닿았으면은
-                            if(PhotonNetwork.OfflineMode)
-                                Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
+                            if (PhotonNetwork.OfflineMode)
+                            {
+                                GameObject g=Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
+                                g.GetComponent<AddRoom>().SetRoom();
+                            }
                             else
-                                PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation);
+                            {
+                                GameObject g=PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation);
+                                g.GetComponent<AddRoom>().SetRoom();
+                            }
                         }
                         else
                         {
-                            if(PhotonNetwork.OfflineMode)
-                                Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                            if (PhotonNetwork.OfflineMode)
+                            {
+                                GameObject g=Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                                g.GetComponent<AddRoom>().SetRoom();
+                            }
                             else
-                                PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                            {
+                                GameObject g=PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);   
+                                g.GetComponent<AddRoom>().SetRoom();
+                            }
                         }
 //                        else //닿았으면 작은방으로 한번더검사
 //                        {
@@ -203,10 +215,16 @@ public class RoomSpawner : MonoBehaviour
                 }
                 else
                 {
-                    if(PhotonNetwork.OfflineMode)
-                        Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        GameObject g= Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
+                        g.GetComponent<AddRoom>().SetRoom();
+                    }
                     else
-                        PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                    {
+                        GameObject g= PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
+                        g.GetComponent<AddRoom>().SetRoom();
+                    }
                 }
 
                 

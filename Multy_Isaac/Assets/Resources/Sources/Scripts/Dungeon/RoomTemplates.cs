@@ -10,6 +10,9 @@ using Random = UnityEngine.Random;
 
 public class RoomTemplates : MonoBehaviour
 {
+   public GameObject[] RoomProps;
+   public GameObject[] SpecialRooms;
+   
    public int StraightCount = 0;
    public int minRoomCount = 7;
    public int maxRoomCount = 50;
