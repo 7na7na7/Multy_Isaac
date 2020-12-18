@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
 
@@ -12,10 +13,15 @@ public class Bullet : MonoBehaviourPunCallbacks
     private int dir;
     public PhotonView pv;
     private SpriteRenderer spr;
+
+    private Vector3 savedLocalScale;
     void Start()
     {
         Destroy(gameObject,DestroyTime);
         spr = GetComponent<SpriteRenderer>();
+        savedLocalScale = transform.localScale;
+        transform.localScale=Vector3.zero;
+        transform.DOScale(savedLocalScale, 0.1f);
     }
     
     void Update()

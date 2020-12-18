@@ -59,7 +59,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector2 gunScale=Vector2.one;
     private Vector2 savedGunPos;
     private float clusterRate = 0;
-    
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -101,6 +100,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         savedGunPos = gun.transform.localPosition;
         speed = savedSpeed;
+        
         if (pv.IsMine)
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -364,8 +364,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Vector3 a = gun.transform.eulerAngles;
             Vector3 a2 = a;
             a.z -=180;
-            if(Mathf.Abs(a2.z)<120)
-                print("A");
+         
             if (PhotonNetwork.OfflineMode) 
                 Instantiate(offlineSlash,gun.transform.position,Quaternion.Euler(a2));
             else
@@ -445,6 +444,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (leftBullet.MinusBullet(playerItem.selectedIndex))
                 {
+                   gun.GetComponent<Animator>().SetTrigger("Attack");
                     speed = savedSpeed * shotSpeed_p / 100;
                     time = CoolTime;
                    Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*clusterRate,clusterRate));
@@ -600,8 +600,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                 new_weapontr = weapon.tr;
                 new_SavedGunPos = savedGunPos;
-            
-
+                
             gun.transform.localPosition = new_SavedGunPos + new_weapontr;
             gunScale = weapon.scale;
             CoolTime = weapon.CoolTime;
@@ -614,6 +613,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             walkSpeed_p = weapon.walkSpeed_P;
             slashTime = weapon.slashTime;
             leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
+
+            if (weapon.gunAnim != null)
+            {
+                print("A");
+                gun.AddComponent<Animator>();
+                gun.GetComponent<Animator>().runtimeAnimatorController = weapon.gunAnim;   
+            }
+            else
+            {
+                print("B");
+                Destroy(gun.GetComponent<Animator>());
+            }
         }
     } 
 
