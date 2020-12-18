@@ -64,6 +64,7 @@ public class RoomTemplates : MonoBehaviour
             maxRoomCountSave = maxRoomCount;
           
             Invoke("Spawn",waitTime);  
+            Invoke("ReLoad",ReLoadTime);
          }
       }
    }

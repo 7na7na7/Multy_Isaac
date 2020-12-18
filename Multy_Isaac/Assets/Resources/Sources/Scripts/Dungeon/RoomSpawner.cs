@@ -132,9 +132,8 @@ public class RoomSpawner : MonoBehaviour
                             second = bigRooms[rand].GetComponent<AddRoom>().BoxSize;
                             if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
                             {
-
                                 print(bigRooms[rand].name+"를 생성하려했다가 "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name+"에막혀서 생성안됐어요!");
-                                rand = rooms.Length - 2;
+                                //rand = rooms.Length - 2; //큰방
                                 canSpawn = false;
                                 break;
                             }
@@ -157,12 +156,12 @@ public class RoomSpawner : MonoBehaviour
                         {
                             if (PhotonNetwork.OfflineMode)
                             {
-                                GameObject g=Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
+                                GameObject g= Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
                                 g.GetComponent<AddRoom>().SetRoom();
                             }
                             else
                             {
-                                AddRoom pv = PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation).GetComponent<AddRoom>();
+                                AddRoom pv = PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position, rooms[rand].transform.rotation).GetComponent<AddRoom>();
                                 pv.SetRoom();
                             }
                         }
