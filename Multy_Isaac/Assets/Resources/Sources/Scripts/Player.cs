@@ -579,6 +579,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weapon.weaponIndex > 0)
         {
+            if (weapon.gunAnim != null)//총이면
+            {
+                if (!gun.GetComponent<Animator>()!=null) //애니메이터가 없으면
+                    gun.AddComponent<Animator>();
+                gun.GetComponent<Animator>().runtimeAnimatorController = weapon.gunAnim;   
+            }
+            else //칼이면
+            {
+                Destroy(gun.GetComponent<Animator>());
+            }
+            
+            
             if (PhotonNetwork.OfflineMode)
             {
                 armgunSetTrue();
@@ -613,18 +625,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             walkSpeed_p = weapon.walkSpeed_P;
             slashTime = weapon.slashTime;
             leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
-
-            if (weapon.gunAnim != null)
-            {
-                print("A");
-                gun.AddComponent<Animator>();
-                gun.GetComponent<Animator>().runtimeAnimatorController = weapon.gunAnim;   
-            }
-            else
-            {
-                print("B");
-                Destroy(gun.GetComponent<Animator>());
-            }
+            
+            if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
+                gun.GetComponent<Animator>().enabled = true;
         }
     } 
 
