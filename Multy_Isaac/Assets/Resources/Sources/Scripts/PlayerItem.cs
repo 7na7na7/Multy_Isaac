@@ -198,15 +198,24 @@ public class PlayerItem : MonoBehaviour
             player.gunSetfalse();   
         }
         ItemList[index].Clear();
-        player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);
+        if(PhotonNetwork.OfflineMode)
+            discardRPC(ind,isDead);
+        else
+            player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);
     }
     
     public void Dead()
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
-            if(ItemList[i].index!=0) 
-                player.pv.RPC("discardRPC",RpcTarget.All,ItemList[i].index,true);
+            if (ItemList[i].index != 0)
+            {
+                if(PhotonNetwork.OfflineMode)
+                    discardRPC(ItemList[i].index,true);
+                else
+                    player.pv.RPC("discardRPC",RpcTarget.All,ItemList[i].index,true);
+            }
+            
             ItemList[i].Clear();
         }
     }
@@ -225,8 +234,10 @@ public class PlayerItem : MonoBehaviour
                 transform.position.y-1 + UnityEngine.Random.Range(-0.3f, 0.3f));
 
         }
-        PhotonNetwork.InstantiateRoomObject("item"+TemIndex,pos , Quaternion.identity);
 
+        if (PhotonNetwork.OfflineMode)
+            Instantiate(itemData.GetItemGameObject(TemIndex), pos, Quaternion.identity);
+        else
+            PhotonNetwork.InstantiateRoomObject("item"+TemIndex,pos , Quaternion.identity);
     }
-    
 }

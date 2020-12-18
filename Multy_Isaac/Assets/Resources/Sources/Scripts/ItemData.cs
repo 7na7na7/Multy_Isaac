@@ -56,4 +56,15 @@ public class ItemData : MonoBehaviour
             return copyTem;
         }
     }
+
+    public GameObject GetItemGameObject(int Index)
+    {
+        for (int i = 0; i < temDatas.Count; i++)
+        {
+            if (temDatas[i].index == Index)
+                return temPrefabs[i];
+        }
+        print(Index + "(이)라는 인덱스는 없어용!");
+        return temPrefabs[0];
+    }
 }
