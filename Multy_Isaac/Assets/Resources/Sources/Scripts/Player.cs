@@ -61,6 +61,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float clusterRate = 0;
     private int CurrentWeaponIndex;
     private Animator gunAnim;
+    private int consumeBullet;
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -446,7 +447,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (canShot)
             {
-                if (leftBullet.MinusBullet(playerItem.selectedIndex))
+                if (leftBullet.MinusBullet(playerItem.selectedIndex,consumeBullet))
                 {
                     if(PhotonNetwork.OfflineMode)
                         gunAnimRPC(CurrentWeaponIndex.ToString(),false);
@@ -626,6 +627,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 new_SavedGunPos = savedGunPos;
 
                 CurrentWeaponIndex = weapon.weaponIndex;
+                consumeBullet = weapon.consumeBullet;
             gun.transform.localPosition = new_SavedGunPos + new_weapontr;
             gunScale = weapon.scale;
             CoolTime = weapon.CoolTime;

@@ -119,7 +119,7 @@ public class LeftBullet : MonoBehaviour
             }
         }
     }
-    public bool MinusBullet(int selectedIndex)
+    public bool MinusBullet(int selectedIndex,int consumeBullet)
     {
         if (bulletCount <= 0)
         {
@@ -127,7 +127,7 @@ public class LeftBullet : MonoBehaviour
         }
         else
         {
-            bulletCount--;
+            bulletCount-=consumeBullet;
             for (int i = 0; i < bullets.Length; i++)
             {
                 if (i <bulletCount)
