@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class wep
 {
-    public RuntimeAnimatorController gunAnim;
     public Sprite spr;
     public Vector2 tr;
     public Vector2 scale;
@@ -23,7 +22,6 @@ public class wep
     public wep DeepCopy()
     {
         wep Copytem = new wep();
-        Copytem.gunAnim = this.gunAnim;
         Copytem.slashTime = this.slashTime;
         Copytem.walkSpeed_P = this.walkSpeed_P;
         Copytem.shotSpeed_P = this.shotSpeed_P;

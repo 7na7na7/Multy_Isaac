@@ -59,6 +59,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector2 gunScale=Vector2.one;
     private Vector2 savedGunPos;
     private float clusterRate = 0;
+    private int CurrentWeaponIndex;
+    private Animator gunAnim;
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -100,6 +102,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         savedGunPos = gun.transform.localPosition;
         speed = savedSpeed;
+
+        gunAnim = gun.GetComponent<Animator>();
         
         if (pv.IsMine)
         {
@@ -444,7 +448,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (leftBullet.MinusBullet(playerItem.selectedIndex))
                 {
-                   gun.GetComponent<Animator>().SetTrigger("Attack");
+                    if(PhotonNetwork.OfflineMode)
+                        gunAnimRPC(CurrentWeaponIndex.ToString(),false);
+                    else
+                        pv.RPC("gunAnimRPC",RpcTarget.All,CurrentWeaponIndex.ToString(),false);
+
+                    
                     speed = savedSpeed * shotSpeed_p / 100;
                     time = CoolTime;
                    Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*clusterRate,clusterRate));
@@ -574,22 +583,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             
             moveDirection = new Vector2(moveX, moveY).normalized; //대각선 이동 정규화
         }
-    
+
+    [PunRPC]
+    void gunAnimRPC(string index, bool isIdle)
+    {
+        if(isIdle) 
+            gunAnim.SetTrigger("Idle"+index);
+        else
+            gunAnim.SetTrigger(index);
+    }
     public void changeWeapon(wep weapon, bool isFirst) //무기바꾸기
     {
         if (weapon.weaponIndex > 0)
         {
-            if (weapon.gunAnim != null)//총이면
-            {
-                if (gun.GetComponent<Animator>()==null) //애니메이터가 없으면
-                    gun.AddComponent<Animator>();
-                gun.GetComponent<Animator>().runtimeAnimatorController = weapon.gunAnim;   
-            }
-            else //칼이면
-            {
-                Destroy(gun.GetComponent<Animator>());
-            }
-            
             
             if (PhotonNetwork.OfflineMode)
             {
@@ -604,7 +610,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 //setSprite(weapon.weaponIndex);
                 pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex); 
             }
-                
+                if(PhotonNetwork.OfflineMode)
+                    gunAnimRPC(weapon.weaponIndex.ToString(),true);
+                else
+                    pv.RPC("gunAnimRPC",RpcTarget.All,weapon.weaponIndex.ToString(),true);
+            
+            
+            
             isHaveGun = true;
             Vector2 new_SavedGunPos=Vector2.zero; 
             Vector2 new_weapontr=Vector2.zero;
@@ -612,7 +624,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                 new_weapontr = weapon.tr;
                 new_SavedGunPos = savedGunPos;
-                
+
+                CurrentWeaponIndex = weapon.weaponIndex;
             gun.transform.localPosition = new_SavedGunPos + new_weapontr;
             gunScale = weapon.scale;
             CoolTime = weapon.CoolTime;

@@ -1232,7 +1232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1656125519388947076}
   - component: {fileID: 1656125519388946568}
-  - component: {fileID: 197922869570166454}
+  - component: {fileID: 112638434888358731}
+  - component: {fileID: 2316534264001469433}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -1305,7 +1306,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &197922869570166454
+--- !u!114 &112638434888358731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1314,19 +1315,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656125519388945597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle2
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle1
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle3
+  - Type: 9
+    SynchronizeType: 1
+    Name: 2
+  - Type: 9
+    SynchronizeType: 1
+    Name: 4
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle4
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+--- !u!95 &2316534264001469433
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656125519388945597}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b4c796311fd73a4a8e094703a4f124e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1656125519388946299
 GameObject:
   m_ObjectHideFlags: 0
@@ -8604,7 +8638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
+  ShowParameterInspector: 0
   m_SynchronizeParameters: []
   m_SynchronizeLayers:
   - SynchronizeType: 0
