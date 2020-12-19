@@ -82,7 +82,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private StatManager statMgr;
     private ItemData itemData;
     
-    public Sprite[] gunSprites;
     public LeftBullet leftBullet;
     
     private bool isReLoading = false;
@@ -786,8 +785,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         void setSprite(int i)
         {
-            //gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
-            gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
+            gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
+            //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
 
 }
