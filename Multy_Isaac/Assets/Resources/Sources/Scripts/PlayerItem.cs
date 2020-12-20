@@ -65,8 +65,7 @@ public class PlayerItem : MonoBehaviour
                         {
                             Collider2D item = items[0];
 
-                            if (item.GetComponent<Item>().canGet())
-                            {
+                            
                                 bool isGet = false;
                                 for (int i = 0; i < ItemList.Length; i++)
                                 {
@@ -84,7 +83,7 @@ public class PlayerItem : MonoBehaviour
                                 if(!isGet) 
                                     PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
                             
-                            }
+                            
                         }   
                     }
                     
