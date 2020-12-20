@@ -207,17 +207,20 @@ public class PlayerItem : MonoBehaviour
 
     public void DiscardItem(bool isDead=false)
     {
-        int ind = ItemList[selectedIndex].index;
-        if (ItemList[selectedIndex].weaponIndex > 0 && selectedIndex == selectedIndex)
+        if (ItemList[selectedIndex].ItemSprite != null) //비어있지않다면
         {
-            player.leftBullet.GetBullet(player.leftBullet.leftBullets[selectedIndex]);
-            player.gunSetfalse();   
+            int ind = ItemList[selectedIndex].index;
+            if (ItemList[selectedIndex].weaponIndex > 0 && selectedIndex == selectedIndex)
+            {
+                player.leftBullet.GetBullet(player.leftBullet.leftBullets[selectedIndex]);
+                player.gunSetfalse();   
+            }
+            ItemList[selectedIndex].Clear();
+            if(PhotonNetwork.OfflineMode)
+                discardRPC(ind,isDead);
+            else
+                player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);   
         }
-        ItemList[selectedIndex].Clear();
-        if(PhotonNetwork.OfflineMode)
-            discardRPC(ind,isDead);
-        else
-            player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);
     }
     
     public void Dead()
