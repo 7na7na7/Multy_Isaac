@@ -54,7 +54,6 @@ public class Item : MonoBehaviour
     public Material outlineMat;
     private Material defaultMat;
     private SpriteRenderer spr;
-    public bool isGet = false;
     public Ease ease;
     private void Start()
     {
@@ -80,7 +79,10 @@ public class Item : MonoBehaviour
 
     public bool canGet()
     {
-        return isGet;
+        if (spr.material == defaultMat)
+            return false;
+        else
+            return true;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -88,7 +90,6 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             spr.material = outlineMat;
-            isGet = true;
         }
     }
 
@@ -97,7 +98,6 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             spr.material = defaultMat;
-            isGet = false;
         }
     }
 

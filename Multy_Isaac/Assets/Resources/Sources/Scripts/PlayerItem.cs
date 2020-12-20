@@ -8,6 +8,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = Unity.Mathematics.Random;
+using System.Linq;
 
 public class PlayerItem : MonoBehaviour
 {
@@ -56,9 +57,14 @@ public class PlayerItem : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Space)) //스페이스바로 줍기
                     {
-                        Collider2D item = Physics2D.OverlapCircle(transform.position, itemRadious, itemLayer);
-                        if (item != null)
+                        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, itemRadious, itemLayer);
+                        items.OrderBy(c => c.transform.position - transform.position);
+                        print(items[0]);
+                        
+                        if (items[0] != null)
                         {
+                            Collider2D item = items[0];
+
                             if (item.GetComponent<Item>().canGet())
                             {
                                 bool isGet = false;
