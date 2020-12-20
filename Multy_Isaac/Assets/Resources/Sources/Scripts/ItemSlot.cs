@@ -10,7 +10,6 @@ public class ItemSlot : MonoBehaviour
     PlayerItem player;
     public int index;
     private Image img;
-    public GameObject Btns;
     private void Start()
     {
         img = GetComponent<Image>();
@@ -28,12 +27,6 @@ public class ItemSlot : MonoBehaviour
     public void Drag()
     {
        img.transform.position = Input.mousePosition;
-//       print(img.transform.position);
-    }
-
-    public void DragEnd()
-    {
-        print(img.transform.position);
     }
 
     public void Down()
@@ -42,29 +35,13 @@ public class ItemSlot : MonoBehaviour
         {
             if (player.ItemList[index].ItemName != "")
                 {
-                    if(!Btns.activeSelf)
-                        player.OtherBtnSetFalse(index);
-                    Btns.SetActive(!Btns.activeSelf);   
+                    Combine();
                 }
         }
-    }
-
-    public void Discard()
-    {
-       
-            player.DiscardItem(index);
-            Btns.SetActive(false);   
-       
     }
 
     public void Combine()
     {
         invent.Open(player.ItemList[index]);
-        Btns.SetActive(false);   
-        
-    }
-    public void Up()
-    {
-        
     }
 }

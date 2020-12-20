@@ -12,6 +12,9 @@ using System.Linq;
 
 public class PlayerItem : MonoBehaviour
 {
+    public float discardTime = 1f;
+    private float time = 0f;
+    
     //아이템
     public float itemRadious;
     public LayerMask itemLayer;
@@ -25,20 +28,11 @@ public class PlayerItem : MonoBehaviour
     public GameObject[] Selected;
     
     public int selectedIndex = 0;
-    public void OtherBtnSetFalse(int index)
-    {
-        for (int i = 0; i < btns.Length; i++)
-        {
-            if (i != index)
-            {
-                btns[i].SetActive(false);
-            }
-        }
-    }
-    
+
 
     private void Update()
     {
+
         if (player != null)
         {
             if (player.pv.IsMine)
@@ -59,8 +53,7 @@ public class PlayerItem : MonoBehaviour
                     {
                         Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, itemRadious, itemLayer);
                         items.OrderBy(c => c.transform.position - transform.position);
-                        print(items[0]);
-                        
+
                         if (items[0] != null)
                         {
                             Collider2D item = items[0];
@@ -113,6 +106,24 @@ public class PlayerItem : MonoBehaviour
                                     Selected[i].SetActive(false); 
                             }
                             check(selectedIndex,false);
+                    }
+
+                    if (Input.GetKey(KeyCode.F)) //F키를 길게 눌러 템 버리기
+                    {
+                        if (time >= discardTime)
+                        {
+                            DiscardItem(false);
+                            time = 0;
+                        }
+                        else
+                        {
+                            time += Time.deltaTime;   
+                        }
+                    }
+
+                    if (Input.GetKeyUp(KeyCode.F)) //떼면 시간 초기화
+                    {
+                        time = 0;
                     }
                 }
             }   
@@ -194,15 +205,15 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void DiscardItem(int index,bool isDead=false)
+    public void DiscardItem(bool isDead=false)
     {
-        int ind = ItemList[index].index;
-        if (ItemList[index].weaponIndex > 0 && selectedIndex == index)
+        int ind = ItemList[selectedIndex].index;
+        if (ItemList[selectedIndex].weaponIndex > 0 && selectedIndex == selectedIndex)
         {
-            player.leftBullet.GetBullet(player.leftBullet.getBulletCount());
+            player.leftBullet.GetBullet(player.leftBullet.leftBullets[selectedIndex]);
             player.gunSetfalse();   
         }
-        ItemList[index].Clear();
+        ItemList[selectedIndex].Clear();
         if(PhotonNetwork.OfflineMode)
             discardRPC(ind,isDead);
         else
