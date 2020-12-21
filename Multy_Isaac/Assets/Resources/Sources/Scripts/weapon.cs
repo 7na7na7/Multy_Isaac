@@ -6,6 +6,7 @@ using UnityEngine;
 public class wep
 {
     public int consumeBullet=1;
+    public int shotBullet = 1;
     public Sprite spr;
     public Vector2 tr;
     public Vector2 scale;
@@ -24,6 +25,7 @@ public class wep
     {
         wep Copytem = new wep();
         Copytem.slashTime = this.slashTime;
+        Copytem.shotBullet = this.shotBullet;
         Copytem.consumeBullet = this.consumeBullet;
         Copytem.walkSpeed_P = this.walkSpeed_P;
         Copytem.shotSpeed_P = this.shotSpeed_P;

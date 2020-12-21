@@ -14,8 +14,7 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     public GameObject offlineSlash;
-    private float slashTime;
-    
+
     public GameObject canvas;
     private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
@@ -28,8 +27,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //수면
     public bool isSleeping; //자고있는가?
     //이동, 애니메이션
-    private int shotSpeed_p = 100;
-    private int walkSpeed_p = 100;
     private CapsuleCollider2D col;
     public bool canMove = true;
     private Animator anim;
@@ -51,17 +48,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    public Slider mp;
     //총쏘기
     public Transform bulletTr; //총알이 나가는 위치
-    public float CoolTime = 0.2f; //총 쏘는 쿨타임
     private float time = 0; //쿨타임 계산을 위한 시간변수
     public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
     public GameObject Arm; //팔
-    private string bulletName;
-    private Vector2 gunScale=Vector2.one;
     private Vector2 savedGunPos;
-    private float clusterRate = 0;
-    private int CurrentWeaponIndex;
     private Animator gunAnim;
-    private int consumeBullet;
+
+    private wep currentWeapon=new wep();
     //구르기
     public bool isSuper = false; //무적인가?
     public Ease easeMode;
@@ -104,7 +97,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         speed = savedSpeed;
 
         gunAnim = gun.GetComponent<Animator>();
-        
+        currentWeapon.walkSpeed_P = 100;
         if (pv.IsMine)
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -290,14 +283,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 transform.localScale=new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);
                                 canvasRect.localScale = new Vector3(canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
 
-                                gun.transform.localScale=new Vector3(gunScale.x,gunScale.y,1);
+                                gun.transform.localScale=new Vector3(currentWeapon.scale.x,currentWeapon.scale.y,1);
                             }
                             else
                             {
                                 transform.localScale=new Vector3(-1*localScaleX,transform.localScale.y,transform.localScale.z);
                                 canvasRect.localScale = new Vector3(-1*canvasLocalScaleX,canvasRect.localScale.y,canvasRect.localScale.z);
                     
-                                gun.transform.localScale=new Vector3(gunScale.x*-1,gunScale.y,1);
+                                gun.transform.localScale=new Vector3(currentWeapon.scale.x*-1,currentWeapon.scale.y,1);
                             } //커서가 왼쪽에 있으면
 
                             
@@ -361,8 +354,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         if (canShot)
         {
-            speed = savedSpeed * shotSpeed_p/100;
-            time = CoolTime;
+            speed = savedSpeed * currentWeapon.shotSpeed_P/100;
+            time = currentWeapon.CoolTime;
             
             isReLoading = true;
             Vector3 a = gun.transform.eulerAngles;
@@ -372,9 +365,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.OfflineMode) 
                 Instantiate(offlineSlash,gun.transform.position,Quaternion.Euler(a2));
             else
-                PhotonNetwork.Instantiate(bulletName,gun.transform.position,Quaternion.Euler(a2));
+                PhotonNetwork.Instantiate(currentWeapon.BulletName,gun.transform.position,Quaternion.Euler(a2));
 
-            gun.transform.DORotate(a, slashTime).SetEase(Ease.OutCubic).OnComplete(()=> {
+            gun.transform.DORotate(a, currentWeapon.slashTime).SetEase(Ease.OutCubic).OnComplete(()=> {
                 StartCoroutine(swordInitial(a2, 0.05f));
             });   
         }
@@ -418,7 +411,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     
                     }
                     
-                    rb.velocity=new Vector2(moveDirection.x*speed*walkSpeed_p/100,moveDirection.y*speed*walkSpeed_p/100); //이동
+                    rb.velocity=new Vector2(moveDirection.x*speed*currentWeapon.walkSpeed_P/100,moveDirection.y*speed*currentWeapon.walkSpeed_P/100); //이동
                 }
                 else//그 외는 전부 움직이지 않도록
                 {
@@ -446,21 +439,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (canShot)
             {
-                if (leftBullet.MinusBullet(playerItem.selectedIndex,consumeBullet))
+                if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet))
                 {
                     if(PhotonNetwork.OfflineMode)
-                        gunAnimRPC(CurrentWeaponIndex.ToString(),false);
+                        gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
                     else
-                        pv.RPC("gunAnimRPC",RpcTarget.All,CurrentWeaponIndex.ToString(),false);
+                        pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),false);
 
                     
-                    speed = savedSpeed * shotSpeed_p / 100;
-                    time = CoolTime;
-                   Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*clusterRate,clusterRate));
-                    if (PhotonNetwork.OfflineMode) 
-                        Instantiate(offLineBullet,bulletTr.position,q);
-                    else
-                        PhotonNetwork.Instantiate(bulletName, bulletTr.position, q);
+                    speed = savedSpeed * currentWeapon.shotSpeed_P / 100;
+                    time = currentWeapon.CoolTime;
+                   
+                   for (int i = 0; i < currentWeapon.shotBullet; i++)
+                   {
+                       Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*currentWeapon.ClusterRate,currentWeapon.ClusterRate));
+                       if (PhotonNetwork.OfflineMode) 
+                           Instantiate(offLineBullet,bulletTr.position,q);
+                       else
+                           PhotonNetwork.Instantiate(currentWeapon.BulletName, bulletTr.position, q);
+                   }
                 }
                 else
                 {
@@ -596,49 +593,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weapon.weaponIndex > 0)
         {
-            
             if (PhotonNetwork.OfflineMode)
             {
                 armgunSetTrue();
-                //gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
                 setSprite(weapon.weaponIndex);
+                gunAnimRPC(weapon.weaponIndex.ToString(),true);
             }
             else
             {
-                pv.RPC("armgunSetTrue", RpcTarget.All); 
-                //gun.GetComponent<SpriteRenderer>().sprite = weapon.spr;
-                //setSprite(weapon.weaponIndex);
-                pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex); 
+                pv.RPC("armgunSetTrue", RpcTarget.All);
+                pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex);
+                pv.RPC("gunAnimRPC",RpcTarget.All,weapon.weaponIndex.ToString(),true);
             }
-                if(PhotonNetwork.OfflineMode)
-                    gunAnimRPC(weapon.weaponIndex.ToString(),true);
-                else
-                    pv.RPC("gunAnimRPC",RpcTarget.All,weapon.weaponIndex.ToString(),true);
-            
-            
-            
             isHaveGun = true;
-            Vector2 new_SavedGunPos=Vector2.zero; 
-            Vector2 new_weapontr=Vector2.zero;
-
-
-                new_weapontr = weapon.tr;
-                new_SavedGunPos = savedGunPos;
-
-                CurrentWeaponIndex = weapon.weaponIndex;
-                consumeBullet = weapon.consumeBullet;
-            gun.transform.localPosition = new_SavedGunPos + new_weapontr;
-            gunScale = weapon.scale;
-            CoolTime = weapon.CoolTime;
+            currentWeapon = weapon.DeepCopy();
+            gun.transform.localPosition = currentWeapon.tr + savedGunPos;
             gun.transform.eulerAngles=Vector3.zero;
-            bulletTr.localPosition =weapon.bulletPos.position;
-            bulletName = weapon.BulletName;
-            leftBullet.reLoadTime = weapon.reLoadTime;
-            clusterRate = weapon.ClusterRate;
-            shotSpeed_p = weapon.shotSpeed_P;
-            walkSpeed_p = weapon.walkSpeed_P;
-            slashTime = weapon.slashTime;
-            leftBullet.SetBullet(weapon.BulletCount,playerItem.selectedIndex, isFirst);
+            bulletTr.localPosition =currentWeapon.bulletPos.position;
+            leftBullet.reLoadTime = currentWeapon.reLoadTime;
+            leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
             
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
@@ -654,8 +627,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         leftBullet.SetFalse();
         isHaveGun = false;
         speed = savedSpeed;
-        walkSpeed_p = 100;
-        shotSpeed_p = 100;
+        currentWeapon.walkSpeed_P = 100;
+        currentWeapon.shotSpeed_P = 100;
     }
 
     public void getEXP(int value) //경험치획득
