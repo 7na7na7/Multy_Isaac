@@ -18,7 +18,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject canvas;
     private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
-
+    
     public Text Lv;
     //시작시 미니맵표시
     public LayerMask doorCol;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject Arm; //팔
     private Vector2 savedGunPos;
     private Animator gunAnim;
-
+    private bool canReload = false;
     private wep currentWeapon=new wep();
     //구르기
     public bool isSuper = false; //무적인가?
@@ -227,7 +227,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             { 
                                 if(playerItem.ItemList[playerItem.selectedIndex].type==itemType.Gun)
                                 {
-                                    if (!leftBullet.canShoot())
+                                    if (leftBullet.bulletCount<currentWeapon.consumeBullet) //쏘는데쏠총알수보다 총알이 적을경우 재장전
                                     {
                                         speed = savedSpeed;
 
@@ -248,7 +248,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             {
                                 if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Gun)
                                 {
-                                    if (leftBullet.canShoot())
+                                    if (leftBullet.bulletCount>=currentWeapon.consumeBullet)
                                         ShotGun(false);
                                     else
                                         speed = savedSpeed;
@@ -265,8 +265,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                       
                           
-                        if (Input.GetMouseButtonUp(0)) //버튼에서 손을 떼면 원래속도로 돌아오기
-                            speed = savedSpeed;
+//                        if (Input.GetMouseButtonUp(0)) //버튼에서 손을 떼면 원래속도로 돌아오기
+//                            speed = savedSpeed;
                         
                         if (Input.GetKeyDown(KeyCode.LeftShift)) //왼쪽쉬프트키 누르면 대쉬
                         {
@@ -437,7 +437,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if (canShot)
+            if (canShot&&leftBullet.bulletCount>=currentWeapon.consumeBullet)
             {
                 if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet))
                 {
@@ -446,8 +446,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     else
                         pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),false);
 
-                    
-                    speed = savedSpeed * currentWeapon.shotSpeed_P / 100;
+
+                    StartCoroutine(speedCor());
                     time = currentWeapon.CoolTime;
                    
                    for (int i = 0; i < currentWeapon.shotBullet; i++)
@@ -464,8 +464,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     speed = savedSpeed;
                 }
             }
-        } 
+        }
 
+        IEnumerator speedCor()
+        {
+            speed = savedSpeed * currentWeapon.shotSpeed_P / 100;
+            yield return new WaitForSeconds(0.1f);
+            speed = savedSpeed;
+        }
         void reLoad(float reloadTime) //재장전
         {
             if (leftBullet.canReload())
@@ -473,20 +479,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 Vector3 a = gun.transform.eulerAngles;
                 a.z += 181;
                 isReLoading = true;
-
+                
+                canReload = true;
                 gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
                     Vector3 b = gun.transform.eulerAngles;
                     b.z += 181;
                     gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
                     {
-                        isReLoading = false;
-                        leftBullet.Reload(playerItem.selectedIndex);
+                        if (canReload)
+                        {
+                            isReLoading = false;
+                            leftBullet.Reload(playerItem.selectedIndex);   
+                        }
                     });
                 });
 
             }
         }
-        
+    
         private void OnTriggerEnter2D(Collider2D other) //충돌함수
     {
         if (pv.IsMine)
@@ -616,10 +626,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
         }
-    } 
+    }
 
+    public void KillReload()
+    {
+        isReLoading = false;
+        canReload = false;
+    }
     public void gunSetfalse() //총내린상태로만들기
     {
+        KillReload();
         if (PhotonNetwork.OfflineMode)
             armgunSetFalse();
         else

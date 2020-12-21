@@ -85,19 +85,23 @@ public class PlayerItem : MonoBehaviour
                         Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
                         Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6))
                     {
+                        int contactIndex = 0;
                         if (Input.GetKeyDown(KeyCode.Alpha1)) //1
-                                selectedIndex = 0;
+                            contactIndex = 0;
                             else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
-                                selectedIndex = 1;
+                            contactIndex = 1;
                             else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
-                                selectedIndex = 2;
+                            contactIndex= 2;
                             else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
-                                selectedIndex = 3;
+                            contactIndex = 3;
                             else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
-                                selectedIndex = 4;
+                            contactIndex= 4;
                             else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
-                                selectedIndex = 5;
+                            contactIndex = 5;
 
+                        if (contactIndex != selectedIndex)
+                        {
+                            selectedIndex = contactIndex;
                             for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
                             {
                                 if (i == selectedIndex)
@@ -105,7 +109,8 @@ public class PlayerItem : MonoBehaviour
                                 else
                                     Selected[i].SetActive(false); 
                             }
-                            check(selectedIndex,false);
+                            check(selectedIndex,false);   
+                        }
                     }
 
                     if (Input.GetKey(KeyCode.F)) //F키를 길게 눌러 템 버리기
@@ -164,6 +169,7 @@ public class PlayerItem : MonoBehaviour
 
     public void check(int i, bool isFirst)
     {
+        player.KillReload();
         if (ItemList[i].type == itemType.Gun || ItemList[i].type == itemType.Melee)
         {
             if (ItemList[i].weaponIndex>0 && selectedIndex==i) 
