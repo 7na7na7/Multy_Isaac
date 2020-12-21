@@ -207,7 +207,7 @@ public class PlayerItem : MonoBehaviour
 
     public void DiscardItem(bool isDead=false)
     {
-        if (ItemList[selectedIndex].ItemSprite != null) //비어있지않다면
+        if (ItemList[selectedIndex].ItemSprite != null&&ItemList[selectedIndex].ItemSprite != NullSprite) //비어있지않다면
         {
             int ind = ItemList[selectedIndex].index;
             if (ItemList[selectedIndex].weaponIndex > 0 && selectedIndex == selectedIndex)
