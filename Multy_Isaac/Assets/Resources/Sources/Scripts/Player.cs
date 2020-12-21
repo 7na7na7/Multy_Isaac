@@ -205,6 +205,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
     
     public RectTransform panel;
+    public RectTransform panel2;
     private void Update()
     {
 
@@ -221,7 +222,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if (!isSleeping) //잠자고 있지 않다면
                     {
-                        if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)) //클릭불가능영역이 아니면
+                        if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)&&!RectTransformUtility.RectangleContainsScreenPoint(panel2, Input.mousePosition)) //클릭불가능영역이 아니면
                         {
                             if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading) //연타하면 더빠르게 쏨
                             { 
