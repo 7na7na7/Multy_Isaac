@@ -355,7 +355,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         if (canShot)
         {
-            speed = savedSpeed * currentWeapon.shotSpeed_P/100;
+            StartCoroutine(speedCor());
             time = currentWeapon.CoolTime;
             
             isReLoading = true;
@@ -379,7 +379,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(delay);
         isReLoading = false;
         gun.transform.eulerAngles = a3;
-        speed = savedSpeed;
     }
         void FixedUpdate() 
         {
