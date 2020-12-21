@@ -256,7 +256,7 @@ public class PlayerItem : MonoBehaviour
         else
         {
             pos = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.2f, 0.2f),
-                transform.position.y-1 + UnityEngine.Random.Range(-0.3f, 0.3f));
+                transform.position.y + UnityEngine.Random.Range(-0.3f, 0.3f));
 
         }
 
