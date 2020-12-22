@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    public RectTransform panel;
+    
+    
     public tem[] completeTemArray;
     public Image BigItemImg;
     public Text BigItemName;
@@ -51,6 +54,8 @@ public class Invent : MonoBehaviour
     {
         if(element!=null)
         {
+            if(Input.GetMouseButtonDown(1) &&RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition) )
+                Close();
             if (element.SmallItemIndex.Length != 0)
             {
                 if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index != 0 &&PlayerItem.GetItemArray(element.SmallItemIndex[1]).index != 0)
@@ -79,7 +84,7 @@ public class Invent : MonoBehaviour
         temm = tempTem.DeepCopy();
         Open(temm);
     }
-
+    
     public void Open(tem taaaaam)
     {
         element = taaaaam;
