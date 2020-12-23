@@ -27,8 +27,8 @@ public class AddRoom : MonoBehaviour
       if(templates.GetComponent<PhotonView>().IsMine) 
         templates.rooms.Add(this.gameObject); 
     }
-
-   SetRoomProps(specialvalue);
+    
+    SetRoomProps(specialvalue);
   }
 
   void SetRoomProps(int specialvalue)
