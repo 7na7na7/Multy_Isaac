@@ -52,11 +52,14 @@ public class PlayerItem : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Space)) //스페이스바로 줍기
                     {
                         Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, itemRadious, itemLayer);
-                        items.OrderBy(c => c.transform.position - transform.position);
 
-                        if (items[0] != null)
+                        try
                         {
-                            Collider2D item = items[0];
+                            if (items[0] != null)
+                            {
+                                items.OrderBy(c => c.transform.position - transform.position);
+                            
+                                Collider2D item = items[0];
 
                             
                                 bool isGet = false;
@@ -67,7 +70,7 @@ public class PlayerItem : MonoBehaviour
                                         isGet = true;
                                         ItemList[i]=item.GetComponent<Item>().item;
                                         
-                                      check(i,true);
+                                        check(i,true);
                                         
                                         item.GetComponent<Item>().Destroy();
                                         break;
@@ -75,9 +78,10 @@ public class PlayerItem : MonoBehaviour
                                 }
                                 if(!isGet) 
                                     PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
-                            
-                            
-                        }   
+                            }   
+                        }
+                        catch (Exception e)
+                        { }
                     }
                     
                     //1부터 6으로 아이템 선택 가능
