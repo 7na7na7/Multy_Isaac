@@ -132,7 +132,6 @@ public class RoomSpawner : MonoBehaviour
                             second = bigRooms[rand].GetComponent<AddRoom>().BoxSize;
                             if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
                             {
-                                print(bigRooms[rand].name+"를 생성하려했다가 "+c.collider.transform.parent.gameObject.transform.parent.gameObject.name+"에막혀서 생성안됐어요!");
                                 //rand = rooms.Length - 2; //큰방
                                 canSpawn = false;
                                 break;
@@ -152,10 +151,12 @@ public class RoomSpawner : MonoBehaviour
                                 pv.SetRoom();
                             }
                         }
-                        else
+                        else //닿았으면
                         {
                             if (PhotonNetwork.OfflineMode)
                             {
+                                print(rand);
+                                print(bigRooms[rand].name+"스폰하려다 "+rooms[rand].name+"소환!"+transform.position);
                                 GameObject g= Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
                                 g.GetComponent<AddRoom>().SetRoom();
                             }
@@ -252,15 +253,17 @@ public class RoomSpawner : MonoBehaviour
         {
             if (other.CompareTag("SpawnPoint"))
                 {
-           
-                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false
-                    ) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
+                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {
                        Instantiate(templates.closedRoom, transform.position,
                             Quaternion.identity);
-                        Destroy(gameObject); //방이 겹치면 자신을 파괴   
+                       other.gameObject.GetComponent<RoomSpawner>().spawned = true;
+                       spawned = true;
                     }
-
+                    else if (other.GetComponent<RoomSpawner>().spawned == true&& spawned == false) 
+                    {
+                      Destroy(gameObject);
+                    }
                     spawned = true;
                 }
         }
