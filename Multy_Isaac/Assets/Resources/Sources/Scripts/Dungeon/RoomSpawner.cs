@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class RoomSpawner : MonoBehaviour
 {
+    public bool isConstant = false;
     public int openingDirection;
     //1 --> need bottom door
     //2 --> need top door
@@ -234,6 +235,7 @@ public class RoomSpawner : MonoBehaviour
             templates.maxRoomCount--;
             
             spawned = true; //소환됨으로 바꿈
+            
         }
     }
 
@@ -251,7 +253,7 @@ public class RoomSpawner : MonoBehaviour
     {
         if (PhotonNetwork.OfflineMode)
         {
-            if (other.CompareTag("SpawnPoint"))
+            if (other.CompareTag("SpawnPoint") && !isConstant)
                 {
                     if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {
@@ -260,30 +262,22 @@ public class RoomSpawner : MonoBehaviour
                        other.gameObject.GetComponent<RoomSpawner>().spawned = true;
                        spawned = true;
                     }
-                    else if (other.GetComponent<RoomSpawner>().spawned == true&& spawned == false) 
-                    {
-                      Destroy(gameObject);
-                    }
                     spawned = true;
                 }
+            else if (other.CompareTag("SpawnPoint") && isConstant)
+            {
+                if (other.GetComponent<RoomSpawner>().isConstant)
+                {
+                    Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                    Destroy(other.gameObject);
+                    Destroy(gameObject);
+                }
+            }
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                if (other.CompareTag("SpawnPoint"))
-                {
-           
-                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false
-                    ) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
-                    {
-                        PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position,
-                            Quaternion.identity);
-                        Destroy(gameObject); //방이 겹치면 자신을 파괴   
-                    }
-
-                    spawned = true;
-                }
             }
         }
     }
