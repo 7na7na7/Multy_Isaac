@@ -359,6 +359,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             time = currentWeapon.CoolTime;
             
             isReLoading = true;
+            
             Vector3 a = gun.transform.eulerAngles;
             Vector3 a2 = a;
             a.z -=180;
@@ -606,13 +607,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.OfflineMode)
             {
                 armgunSetTrue();
-                setSprite(weapon.weaponIndex);
+                //setSprite(weapon.weaponIndex);
                 gunAnimRPC(weapon.weaponIndex.ToString(),true);
             }
             else
             {
                 pv.RPC("armgunSetTrue", RpcTarget.All);
-                pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex);
+                //pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex);
                 pv.RPC("gunAnimRPC",RpcTarget.All,weapon.weaponIndex.ToString(),true);
             }
             isHaveGun = true;
@@ -622,7 +623,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             bulletTr.localPosition =currentWeapon.bulletPos.position;
             leftBullet.reLoadTime = currentWeapon.reLoadTime;
             leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
-            
+
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
         }
@@ -774,6 +775,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         [PunRPC]
         void setSprite(int i)
         {
+            print(itemData.GetWeapon(i).weaponIndex+" "+itemData.GetWeapon(i).spr.name);
             gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
             //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
