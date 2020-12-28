@@ -362,10 +362,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             
             Vector3 a = gun.transform.eulerAngles;
             Vector3 a2 = a;
-            a.z -=180;
+            a.z -=135;
          
             if (PhotonNetwork.OfflineMode) 
-                Instantiate(offlineSlash,gun.transform.position,Quaternion.Euler(a2));
+                Instantiate(offlineSlash,bulletTr.position,Quaternion.Euler(a2));
             else
                 PhotonNetwork.Instantiate(currentWeapon.BulletName,gun.transform.position,Quaternion.Euler(a2));
 

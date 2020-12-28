@@ -6,13 +6,21 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
-    public GameObject[] temPrefabs;
+    private List<GameObject> temPrefabs=new List<GameObject>();
     public List<tem> temDatas;
     public List<wep> weaponList;
 
     private void Awake()
     {
-        for (int i = 0; i < temPrefabs.Length; i++)
+        for (int j = 1; j < 100; j++)
+        {
+            GameObject go = Resources.Load("item" + j) as GameObject;
+            if (go != null)
+            {
+                temPrefabs.Add(go);   
+            }
+        }
+        for (int i = 0; i < temPrefabs.Count; i++)
         {
             tem tem = temPrefabs[i].GetComponent<Item>().item.DeepCopy();
             temDatas.Add(tem);
@@ -22,7 +30,6 @@ public class ItemData : MonoBehaviour
                 wep weapon = temPrefabs[i].GetComponent<weapon>().weaponObj.DeepCopy();
                 weaponList.Add(weapon);
             }
-            
         }
     }
 
