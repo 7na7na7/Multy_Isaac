@@ -39,7 +39,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float savedSpeed;
     public PhotonView pv; //포톤뷰
     //캔버스
-    public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
+    public GameObject photonviewCanvas; //포톤뷰캔벗,
+   public RectTransform canvasRect; //캔버스 로컬스케일반전을 위해
    private float canvasLocalScaleX; //캔버스 로컬스케일반전을 위해
    public Text ChatBaloon; //말풍선
    public ChatBox chatbox; //챗박스
@@ -82,6 +83,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public Ease reLoadEase2;
 
     private SoundManager sound;
+
+    private Vector3 savedCanvasScale;
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -98,6 +101,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         gunAnim = gun.GetComponent<Animator>();
         currentWeapon.walkSpeed_P = 100;
+        savedCanvasScale = photonviewCanvas.transform.localScale;
         if (pv.IsMine)
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -208,11 +212,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public RectTransform panel2;
     private void Update()
     {
-
         if (pv.IsMine)
             {
                 if(Input.GetKeyDown(KeyCode.Q))
                     sound.Play(0);
+
                 Lv.text = "Lv." + LvMgr.Lv; //레벨 표시
                 
                 if(time>0)  
@@ -526,11 +530,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
-            
+
+            if (other.CompareTag("Bush"))
+            {
+                pv.RPC("canvasOff",RpcTarget.All);
+            }
         }
     }
 
-    public void GetBullet() 
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if(other.CompareTag("Bush"))
+                pv.RPC("canvasOn",RpcTarget.All);
+        }
+
+        public void GetBullet() 
     {
         leftBullet.GetBullet(1);
     }
@@ -741,6 +755,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     pv.RPC("armgunSetTrue", RpcTarget.All);
                 }  
             }
+        }
+
+        [PunRPC]
+        void canvasOn()
+        {
+            photonviewCanvas.transform.localScale = savedCanvasScale;
+        }
+        [PunRPC]
+        void canvasOff()
+        {
+            photonviewCanvas.transform.localScale = Vector3.zero;
         }
         
         [PunRPC]

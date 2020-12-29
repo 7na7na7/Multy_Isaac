@@ -278,6 +278,25 @@ public class RoomSpawner : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                if (other.CompareTag("SpawnPoint") && !isConstant)
+                {
+                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
+                    {
+                        PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                        other.gameObject.GetComponent<RoomSpawner>().spawned = true;
+                        spawned = true;
+                    }
+                    spawned = true;
+                }
+                else if (other.CompareTag("SpawnPoint") && isConstant)
+                {
+                    if (other.GetComponent<RoomSpawner>().isConstant)
+                    {
+                        PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                        Destroy(other.gameObject);
+                        Destroy(gameObject);
+                    }
+                }
             }
         }
     }
