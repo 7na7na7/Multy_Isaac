@@ -538,14 +538,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             
             if (other.CompareTag("Bush"))
             {
-                pv.RPC("canvasOff",RpcTarget.All);
+                if(PhotonNetwork.OfflineMode)
+                    canvasOff();
+                else
+                    pv.RPC("canvasOff",RpcTarget.All);
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if(other.CompareTag("Bush"))
-                pv.RPC("canvasOn",RpcTarget.All);
+            if (other.CompareTag("Bush"))
+            {
+                if(PhotonNetwork.OfflineMode)
+                    canvasOff();
+                else
+                    pv.RPC("canvasOn",RpcTarget.All);
+            }
         }
 
         public void GetBullet() 
