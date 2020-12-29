@@ -530,13 +530,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
+        }
+    }
 
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            
             if (other.CompareTag("Bush"))
             {
                 pv.RPC("canvasOff",RpcTarget.All);
             }
         }
-    }
 
         private void OnTriggerExit2D(Collider2D other)
         {
