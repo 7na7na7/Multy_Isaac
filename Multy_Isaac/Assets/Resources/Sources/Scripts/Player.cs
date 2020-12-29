@@ -550,7 +550,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (other.CompareTag("Bush"))
             {
                 if(PhotonNetwork.OfflineMode)
-                    canvasOff();
+                    canvasOn();
                 else
                     pv.RPC("canvasOn",RpcTarget.All);
             }
