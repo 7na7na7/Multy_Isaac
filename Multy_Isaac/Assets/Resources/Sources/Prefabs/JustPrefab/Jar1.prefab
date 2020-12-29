@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 102897356876523930}
   - component: {fileID: 102897356876523931}
   - component: {fileID: 2261315527132365466}
+  - component: {fileID: -2885915116819911904}
+  - component: {fileID: 1118139523121348307}
   m_Layer: 0
   m_Name: Jar1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 263690145
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -1334337443209566604, guid: 5daa8ca8362161141b4a34574a9d1e5b,
     type: 3}
@@ -99,3 +101,37 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0000000038494434, y: -0.032291476}
   m_Size: {x: 0.6250002, y: 0.5815174}
   m_Direction: 1
+--- !u!114 &-2885915116819911904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102897356876523932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0d051ed2e59a4b831711c634557be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: -4374386536168912376, guid: 5daa8ca8362161141b4a34574a9d1e5b, type: 3}
+--- !u!50 &1118139523121348307
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102897356876523932}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
