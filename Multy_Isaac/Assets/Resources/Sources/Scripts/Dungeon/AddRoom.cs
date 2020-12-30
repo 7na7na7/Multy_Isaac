@@ -34,7 +34,7 @@ public class AddRoom : MonoBehaviour
   void SetRoomProps(int specialvalue)
   {
 
-    if (specialvalue != -1) //특별한 방이 아니면
+    if (specialvalue != -1) //특별한 방이면
     {
      
         for (int i = 0; i < transform.childCount; i++)
@@ -52,7 +52,7 @@ public class AddRoom : MonoBehaviour
         } 
    
     }
-    else //특별한 방이면
+    else //특별한 방이 아니면
     {
     
         for (int i = 0; i < transform.childCount; i++)
