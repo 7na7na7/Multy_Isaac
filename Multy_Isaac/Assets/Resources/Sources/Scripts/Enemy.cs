@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 
   private void Update()
   {
-
     if (time < damageDelay)
     {
       time += Time.deltaTime;

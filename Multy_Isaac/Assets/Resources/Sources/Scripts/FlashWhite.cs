@@ -16,12 +16,6 @@ void Start ()
 	defaultMaterial = s [0].material;
 }
 
-private void Update()
-{
-	if(Input.GetKeyDown(KeyCode.Tab))
-		Flash();
-}
-
 public void Flash()
 {
 	foreach (SpriteRenderer SR in s)

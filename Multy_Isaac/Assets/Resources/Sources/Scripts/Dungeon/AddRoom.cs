@@ -54,8 +54,7 @@ public class AddRoom : MonoBehaviour
     }
     else //특별한 방이 아니면
     {
-    
-        for (int i = 0; i < transform.childCount; i++)
+      for (int i = 0; i < transform.childCount; i++)
         {
           if (transform.GetChild(i).GetComponent<RoomSpawner>())
           {
