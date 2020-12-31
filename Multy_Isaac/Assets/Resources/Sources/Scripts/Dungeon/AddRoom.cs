@@ -14,7 +14,7 @@ public class AddRoom : MonoBehaviour
   //public Sprite minimapRoom;
   private RoomTemplates templates;
 
-  public void SetRoom(int specialvalue = -1)
+  public void SetRoom(int specialvalue)
   {
     templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
 
