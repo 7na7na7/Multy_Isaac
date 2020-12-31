@@ -8,9 +8,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+[Serializable]
+public class Area
+{
+   public GameObject[] props;
+}
 public class RoomTemplates : MonoBehaviour
 {
    public GameObject[] RoomProps;
+   public Area[] Areas;
    public GameObject[] SpecialRooms;
    
    public int StraightCount = 0;

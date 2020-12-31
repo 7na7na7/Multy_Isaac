@@ -36,8 +36,7 @@ public class AddRoom : MonoBehaviour
 
     if (specialvalue != -1) //특별한 방이면
     {
-     
-        for (int i = 0; i < transform.childCount; i++)
+      for (int i = 0; i < transform.childCount; i++)
         {
           if (transform.GetChild(i).GetComponent<RoomSpawner>())
           {
@@ -54,6 +53,7 @@ public class AddRoom : MonoBehaviour
     }
     else //특별한 방이 아니면
     {
+      int randomAreaIndex = Random.Range(0, templates.RoomProps.Length);
       for (int i = 0; i < transform.childCount; i++)
         {
           if (transform.GetChild(i).GetComponent<RoomSpawner>())
@@ -61,11 +61,15 @@ public class AddRoom : MonoBehaviour
             if (transform.GetChild(i).GetComponent<RoomSpawner>().spawned)
             {
               if (PhotonNetwork.OfflineMode)
-                Spawn(templates.RoomProps[Random.Range(0, templates.RoomProps.Length)],
-                  transform.GetChild(i).transform.position, quaternion.identity);
+              {
+                Spawn(templates.RoomProps[randomAreaIndex], transform.GetChild(i).transform.position, quaternion.identity);
+                Spawn(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)],transform.GetChild(i).transform.position,quaternion.identity);
+              }
               else
-                Spawn_P(templates.RoomProps[Random.Range(0, templates.RoomProps.Length)].name,
-                  transform.GetChild(i).transform.position, quaternion.identity);
+              {
+                Spawn_P(templates.RoomProps[randomAreaIndex].name, transform.GetChild(i).transform.position, quaternion.identity);
+                Spawn_P(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)].name,transform.GetChild(i).transform.position,quaternion.identity);
+              }
             }
           }
         }
