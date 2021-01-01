@@ -236,8 +236,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                     {
                                         speed = savedSpeed;
 
-                                        if(leftBullet.canReload() && !isReLoading)
-                                            reLoad(leftBullet.reLoadTime);
+                                        if (leftBullet.canReload() && !isReLoading)
+                                        {
+                                            if(PhotonNetwork.OfflineMode)
+                                                reLoad(leftBullet.reLoadTime);
+                                            else
+                                                pv.RPC("reLoad",RpcTarget.All,leftBullet.reLoadTime);
+                                        }
+                                           
                                         else
                                             print("총알이 부족합니다!");
                                     }
@@ -265,8 +271,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             }
                         }
                         
-                        if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false&& !isReLoading) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
-                            reLoad(leftBullet.reLoadTime);
+                        if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false&& !isReLoading&&leftBullet.canReload()) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
+                        {
+                            if(PhotonNetwork.OfflineMode)
+                                    reLoad(leftBullet.reLoadTime);
+                                else
+                                    pv.RPC("reLoad",RpcTarget.All,leftBullet.reLoadTime);
+                        }
 
                       
                           
@@ -477,11 +488,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             yield return new WaitForSeconds(0.1f);
             speed = savedSpeed;
         }
+        
+        [PunRPC]
         void reLoad(float reloadTime) //재장전
         {
-            if (leftBullet.canReload())
-            {
-                Vector3 a = gun.transform.eulerAngles;
+            Vector3 a = gun.transform.eulerAngles;
                 a.z += 181;
                 isReLoading = true;
                 
@@ -498,8 +509,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         }
                     });
                 });
-
-            }
+                
         }
     
         private void OnTriggerEnter2D(Collider2D other) //충돌함수
