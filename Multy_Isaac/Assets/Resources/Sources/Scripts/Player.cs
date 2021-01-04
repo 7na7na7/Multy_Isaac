@@ -34,6 +34,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Rigidbody2D rb;
     private float localScaleX;
     private Vector3 curPos;
+
+    private bool isSwamp = false;
+
+    public int swampMovingSpeed = 40;
     // public Animator headAnim; //다리위쪽 애니메이션
     public float speed;
     public float savedSpeed;
@@ -427,7 +431,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     
                     }
                     
-                    rb.velocity=new Vector2(moveDirection.x*speed*currentWeapon.walkSpeed_P/100,moveDirection.y*speed*currentWeapon.walkSpeed_P/100); //이동
+                    rb.velocity=new Vector2((moveDirection.x*speed*currentWeapon.walkSpeed_P/100)* (isSwamp ? swampMovingSpeed/100f:1f),(moveDirection.y*speed*currentWeapon.walkSpeed_P/100)*(isSwamp ? swampMovingSpeed/100f:1f)); //이동
                 }
                 else//그 외는 전부 움직이지 않도록
                 {
@@ -540,18 +544,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
+
         }
     }
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            
-            if (other.CompareTag("Bush"))
+
+            if (pv.IsMine)
             {
-                if(PhotonNetwork.OfflineMode)
-                    canvasOff();
-                else
-                    pv.RPC("canvasOff",RpcTarget.All);
+                if (other.CompareTag("Bush"))
+                {
+                    if(PhotonNetwork.OfflineMode)
+                        canvasOff();
+                    else
+                        pv.RPC("canvasOff",RpcTarget.All);
+                }   
+                
+                if (other.CompareTag("Swamp")) //늪에 닿으면
+                    isSwamp = true;
             }
         }
 
@@ -564,6 +575,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 else
                     pv.RPC("canvasOn",RpcTarget.All);
             }
+
+            if (other.CompareTag("Swamp")) //늪에 닿으면
+                isSwamp = false;
         }
 
         public void GetBullet() 
