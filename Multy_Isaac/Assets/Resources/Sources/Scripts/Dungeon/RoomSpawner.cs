@@ -268,9 +268,9 @@ public class RoomSpawner : MonoBehaviour
                 }
             else if (other.CompareTag("SpawnPoint") && isConstant)
             {
-                if (other.GetComponent<RoomSpawner>().isConstant)
+                if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
-                    Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                    //Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
                     Destroy(other.gameObject);
                     Destroy(gameObject);
                 }
@@ -294,7 +294,7 @@ public class RoomSpawner : MonoBehaviour
                 {
                     if (other.GetComponent<RoomSpawner>().isConstant)
                     {
-                        PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                        //PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
                         Destroy(other.gameObject);
                         Destroy(gameObject);
                     }
@@ -302,8 +302,6 @@ public class RoomSpawner : MonoBehaviour
             }
         }
     }
-    
-    
     
      bool PercentReturn(int percent)
        {
