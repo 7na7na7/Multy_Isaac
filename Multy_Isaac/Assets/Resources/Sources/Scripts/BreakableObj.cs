@@ -15,6 +15,8 @@ public class BreakableObj : MonoBehaviour
          Color c;
          c.r = 0.85f; c.g = 0.85f; c.b = 0.85f; c.a = 1;
          GetComponent<SpriteRenderer>().color = c;
+         Destroy(GetComponent<Collider2D>());
+         Destroy(GetComponent<Rigidbody2D>());
          Destroy(GetComponent<BreakableObj>());
       }
    }
