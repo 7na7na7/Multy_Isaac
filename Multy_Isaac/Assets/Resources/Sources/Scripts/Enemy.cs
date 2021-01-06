@@ -53,7 +53,10 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       if (time >= damageDelay)
       {
         time = 0;
-        other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+        if(name.Contains("(")) 
+          other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+        else
+          other.GetComponent<Player>().Hit(CollsionDamage, name);
       }
     }
   }
@@ -65,13 +68,11 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       if (time >= damageDelay)
       {
           time = 0;
-          other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+          if(name.Contains("(")) 
+            other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+          else
+            other.GetComponent<Player>().Hit(CollsionDamage, name);
         }
     }
   }
-
-  
-  
-  
-  
 }
