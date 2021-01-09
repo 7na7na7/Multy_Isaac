@@ -178,12 +178,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.OfflineMode)
         {
             SetAnimRPC("Roll");
-            SetAnimRPC("None");
         }
         else
         {
             pv.RPC("SetAnimRPC",RpcTarget.All,"Roll");
-            pv.RPC("SetAnimRPC",RpcTarget.All,"None");
         }
       
         
@@ -197,13 +195,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         col.size = originalSize; //원래 크기로 돌려줌
         if (PhotonNetwork.OfflineMode)
         {
-            SetAnimRPC("Idle" + (!isHaveGun ? "2" : null));
-            SetAnimRPC("GoDown");
+            SetAnimRPC("Idle");
         }
         else
         {
-            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle" + (!isHaveGun ? "2" : null));
-            pv.RPC("SetAnimRPC", RpcTarget.All, "GoDown");
+            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle");
         }
 
 
@@ -411,22 +407,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         if(PhotonNetwork.OfflineMode)
                         {
-                            SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));   
+                            SetAnimRPC("Idle");   
                         }
                         else
                         {
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : null));
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
                         }
                     } 
                     else
                     {
                         if (PhotonNetwork.OfflineMode)
                         {
-                            SetAnimRPC("Walk"+ (!isHaveGun ? "2" : null));
+                            SetAnimRPC("Walk");
                         }
                         else
                         {
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"Walk"+ (!isHaveGun ? "2" : null));
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"Walk");
                         }
                     
                     }
@@ -532,13 +528,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         statMgr.canMove = true;
                         if (PhotonNetwork.OfflineMode)
                         {
-                            SetAnimRPC("Idle"+ (!isHaveGun ? "2" : null));
-                            SetAnimRPC("GoDown");
+                            SetAnimRPC("Idle");
                         }
                         else
                         {
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : null));
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"GoDown");      
+                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
                         }
                     }
 
@@ -761,7 +755,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
             {
                 pv.RPC("SetAnimRPC",RpcTarget.All,"Sleep");
-                pv.RPC("SetAnimRPC",RpcTarget.All,"None");
                 if (isHaveGun)
                 {
                     pv.RPC("armgunSetFalse", RpcTarget.All);
@@ -775,7 +768,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             statMgr.tempHp=0;
             if (PhotonNetwork.OfflineMode)
             {
-                anim.Play("Idle"+ (!isHaveGun ? "2" : ""));
+                anim.Play("Idle");
                 //headAnim.Play("GoDown");
                 if (isHaveGun)
                 { 
@@ -784,8 +777,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                pv.RPC("SetAnimRPC",RpcTarget.All,"Idle"+ (!isHaveGun ? "2" : ""));
-                pv.RPC("SetAnimRPC",RpcTarget.All,"GoDown");
+                pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
                 if (isHaveGun)
                 {
                     pv.RPC("armgunSetTrue", RpcTarget.All);
