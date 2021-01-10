@@ -38,8 +38,13 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     {
       for (int TemIndex=0;TemIndex<ItemIndex.Length;TemIndex++)
       {
-        if(Random.Range(1,101)<=ItemPercent[TemIndex])
-            PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.2f,0.2f),transform.position.y+Random.Range(-0.2f,0.2f)) , Quaternion.identity);
+        if (Random.Range(1, 101) <= ItemPercent[TemIndex])
+        { 
+          if(PhotonNetwork.OfflineMode) 
+            Instantiate(Resources.Load("item"+ItemIndex[TemIndex]),new Vector3(transform.position.x+Random.Range(-0.3f,0.3f),transform.position.y+Random.Range(-0.3f,0.3f)) , Quaternion.identity);
+          else
+            PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.3f,0.3f),transform.position.y+Random.Range(-0.3f,0.3f)) , Quaternion.identity);
+        }
       }
 
       Destroy(gameObject); 
