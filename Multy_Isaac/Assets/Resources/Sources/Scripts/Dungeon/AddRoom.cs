@@ -43,9 +43,9 @@ public class AddRoom : MonoBehaviour
             if (transform.GetChild(i).GetComponent<RoomSpawner>().spawned)
             {
               if (PhotonNetwork.OfflineMode)
-                Spawn(templates.SpecialRooms[specialvalue], transform.GetChild(i).transform.position, quaternion.identity);
+                Spawn(templates.SpecialRooms[specialvalue], transform,transform.GetChild(i).transform.position);
               else
-                Spawn_P(templates.SpecialRooms[specialvalue].name, transform.GetChild(i).transform.position, quaternion.identity); 
+                Spawn_P(templates.SpecialRooms[specialvalue].name,transform, transform.GetChild(i).transform.position); 
             }
           }
         } 
@@ -62,26 +62,28 @@ public class AddRoom : MonoBehaviour
             {
               if (PhotonNetwork.OfflineMode)
               {
-                Spawn(templates.RoomProps[randomAreaIndex], transform.GetChild(i).transform.position, quaternion.identity);
-                Spawn(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)],transform.GetChild(i).transform.position,quaternion.identity);
+                Spawn(templates.RoomProps[randomAreaIndex], transform,transform.GetChild(i).transform.position);
+                Spawn(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)],transform,transform.GetChild(i).transform.position);
               }
               else
               {
-                Spawn_P(templates.RoomProps[randomAreaIndex].name, transform.GetChild(i).transform.position, quaternion.identity);
-                Spawn_P(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)].name,transform.GetChild(i).transform.position,quaternion.identity);
+                Spawn_P(templates.RoomProps[randomAreaIndex].name,transform, transform.GetChild(i).transform.position);
+                Spawn_P(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)].name,transform,transform.GetChild(i).transform.position);
               }
             }
           }
         }
     }
   }
-  void Spawn(GameObject go, Vector3 pos, quaternion q)
+  void Spawn(GameObject go, Transform tr,Vector3 pos)
   {
-    Instantiate(go, pos, q);
+    GameObject GO=Instantiate(go, tr);
+    GO.transform.position = pos;
   }
   
-  void Spawn_P(string go,Vector3 pos,quaternion q)
+  void Spawn_P(string go,Transform tr,Vector3 pos)
   {
-    PhotonNetwork.Instantiate(go, pos, q);
+    GameObject GO=PhotonNetwork.Instantiate(go,pos,quaternion.identity);
+    GO.transform.SetParent(tr);
   }
 }

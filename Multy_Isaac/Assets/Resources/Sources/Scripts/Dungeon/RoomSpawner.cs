@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class RoomSpawner : MonoBehaviour
 {
+    public long spawnedTick = System.DateTime.Now.Ticks;
     public bool isConstant = false;
     public int openingDirection;
     //1 --> need bottom door
@@ -158,8 +160,7 @@ public class RoomSpawner : MonoBehaviour
                         {
                             if (PhotonNetwork.OfflineMode)
                             {
-                                print(rand);
-                                print(bigRooms[rand].name+"스폰하려다 "+rooms[rand].name+"소환!"+transform.position);
+                                //print(bigRooms[rand].name+"스폰하려다 "+rooms[rand].name+"소환!"+transform.position);
                                 GameObject g= Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
                                 g.GetComponent<AddRoom>().SetRoom(specialValue);
                             }
@@ -253,14 +254,15 @@ public class RoomSpawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (PhotonNetwork.OfflineMode)
-        {
+      
             if (other.CompareTag("SpawnPoint") && !isConstant)
                 {
                     if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {
-                       Instantiate(templates.closedRoom, transform.position,
-                            Quaternion.identity);
+                        if(!PhotonNetwork.OfflineMode && PhotonNetwork.IsMasterClient) 
+                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                        else
+                            Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
                        other.gameObject.GetComponent<RoomSpawner>().spawned = true;
                        spawned = true;
                     }
@@ -270,37 +272,14 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
-                    //Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-                    Destroy(other.gameObject);
-                    Destroy(gameObject);
+                    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    
+                    if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
+                        Destroy(other.transform.parent.gameObject); //상대를 파괴
+                    else //아니면
+                         Destroy(gameObject); //나를 파괴
                 }
             }
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                if (other.CompareTag("SpawnPoint") && !isConstant)
-                {
-                    if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
-                    {
-                        PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
-                        other.gameObject.GetComponent<RoomSpawner>().spawned = true;
-                        spawned = true;
-                    }
-                    spawned = true;
-                }
-                else if (other.CompareTag("SpawnPoint") && isConstant)
-                {
-                    if (other.GetComponent<RoomSpawner>().isConstant)
-                    {
-                        //PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
-                        Destroy(other.gameObject);
-                        Destroy(gameObject);
-                    }
-                }
-            }
-        }
     }
     
      bool PercentReturn(int percent)

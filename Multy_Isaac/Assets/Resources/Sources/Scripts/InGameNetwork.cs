@@ -66,7 +66,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
      
       SceneManager.LoadScene("Main");
       PhotonNetwork.JoinLobby();
-      print("B");
       //Disconnect();
    }
    private void Update()

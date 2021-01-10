@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
        
        for (int j = 0; j < SourceCount; j++)
        {
+           ClipSources[j].spatialBlend = 1;
            ClipSources[j].loop = false;
            ClipSources[j].playOnAwake = false;
        }
@@ -32,9 +33,9 @@ public class SoundManager : MonoBehaviour
    }
 
 
-   public void Play(int clipIndex)
+   public void Play(int clipIndex, bool isRPC)
    {
-       if(PhotonNetwork.OfflineMode)
+       if(!isRPC)
            PlayRPC(clipIndex);
        else
            pv.RPC("PlayRPC",RpcTarget.All,clipIndex);
@@ -44,12 +45,14 @@ public class SoundManager : MonoBehaviour
    [PunRPC]
    void PlayRPC( int clipIndex )
    {
-       if (index == length)
-           index = 0;
+       if (!pv.IsMine)
+       {
+           if (index == length)
+               index = 0;
        
-       ClipSources[index].PlayOneShot(clips[clipIndex]);
-       print(index);
-          
-       index++;
+           ClipSources[index].PlayOneShot(clips[clipIndex]);
+    
+           index++;   
+       }
    }
 }
