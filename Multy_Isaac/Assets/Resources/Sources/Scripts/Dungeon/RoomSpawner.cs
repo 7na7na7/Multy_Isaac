@@ -259,12 +259,21 @@ public class RoomSpawner : MonoBehaviour
                 {
                     if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {
-                        if(!PhotonNetwork.OfflineMode && PhotonNetwork.IsMasterClient) 
-                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
-                        else
+                        if (PhotonNetwork.OfflineMode)
+                        {
                             Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-                       other.gameObject.GetComponent<RoomSpawner>().spawned = true;
-                       spawned = true;
+                            other.GetComponent<RoomSpawner>().spawned = true;
+                            spawned = true;    
+                        }
+                        else
+                        {
+                            if (PhotonNetwork.IsMasterClient)
+                            {
+                                PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                                other.GetComponent<RoomSpawner>().spawned = true;
+                                spawned = true;   
+                            }
+                        }
                     }
                     spawned = true;
                 }
@@ -272,12 +281,23 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
-                    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                    
-                    if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
-                        Destroy(other.transform.parent.gameObject); //상대를 파괴
-                    else //아니면
-                         Destroy(gameObject); //나를 파괴
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
+                            Destroy(other.transform.parent.gameObject); //상대를 파괴
+                        else //아니면
+                            Destroy(gameObject); //나를 파괴
+                    }
+                    else
+                    {
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
+                                Destroy(other.transform.parent.gameObject); //상대를 파괴
+                            else //아니면
+                                Destroy(gameObject); //나를 파괴
+                        }
+                    }
                 }
             }
     }

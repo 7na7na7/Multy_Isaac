@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    private int footCount;
     public GameObject offlineSlash;
 
     public GameObject canvas;
@@ -34,7 +35,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Rigidbody2D rb;
     private float localScaleX;
     private Vector3 curPos;
-
+    public int footCountCut = 10;
     private bool isSwamp = false;
 
     public int swampMovingSpeed = 40;
@@ -635,6 +636,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             float moveY = Input.GetAxisRaw("Vertical");
             
             moveDirection = new Vector2(moveX, moveY).normalized; //대각선 이동 정규화
+            if(canMove) 
+                footCount += (int)(Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.y));
+            if (footCount > footCountCut)
+            {
+                sound.Play(Random.Range(3,10),true,0.5f);
+                footCount = 0;
+            }
         }
 
     [PunRPC]

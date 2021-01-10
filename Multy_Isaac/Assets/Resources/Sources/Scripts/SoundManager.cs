@@ -11,8 +11,7 @@ public class SoundManager : MonoBehaviour
    private AudioSource[] ClipSources;
    public int SourceCount;
    private int index = 0;
-   private int length;
-   
+
    private void Awake()
    {
        ClipSources = new AudioSource[SourceCount];
@@ -24,35 +23,37 @@ public class SoundManager : MonoBehaviour
        
        for (int j = 0; j < SourceCount; j++)
        {
-           ClipSources[j].spatialBlend = 1;
+           ClipSources[j].spatialBlend = 1f;
+           ClipSources[j].minDistance = 8;
+           ClipSources[j].maxDistance = 12;
+           ClipSources[j].rolloffMode = AudioRolloffMode.Linear;
            ClipSources[j].loop = false;
            ClipSources[j].playOnAwake = false;
        }
-
-       length = clips.Length;
    }
 
 
-   public void Play(int clipIndex, bool isRPC)
+   public void Play(int clipIndex, bool isRPC, float volume=1f)
    {
        if(!isRPC)
-           PlayRPC(clipIndex);
+           PlayRPC(clipIndex,volume);
        else
-           pv.RPC("PlayRPC",RpcTarget.All,clipIndex);
+       {
+           if(PhotonNetwork.OfflineMode)
+               PlayRPC(clipIndex,volume);
+           else
+               pv.RPC("PlayRPC",RpcTarget.All,clipIndex,volume);
+       }
    }
   
    
    [PunRPC]
-   void PlayRPC( int clipIndex )
+   void PlayRPC( int clipIndex ,float volume)
    {
-       if (!pv.IsMine)
-       {
-           if (index == length)
+       if (index == SourceCount)
                index = 0;
        
-           ClipSources[index].PlayOneShot(clips[clipIndex]);
-    
-           index++;   
-       }
+           ClipSources[index].PlayOneShot(clips[clipIndex],volume);
+           index++;
    }
 }
