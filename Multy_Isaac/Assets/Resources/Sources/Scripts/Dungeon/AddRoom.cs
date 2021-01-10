@@ -21,11 +21,12 @@ public class AddRoom : MonoBehaviour
     if (PhotonNetwork.OfflineMode)
     {
       templates.rooms.Add(this.gameObject);
+      SetRoomProps(specialvalue);
     }
     else
     {
       if(templates.GetComponent<PhotonView>().IsMine) 
-        templates.rooms.Add(this.gameObject); 
+        templates.rooms.Add(this.gameObject);
     }
     
     SetRoomProps(specialvalue);
