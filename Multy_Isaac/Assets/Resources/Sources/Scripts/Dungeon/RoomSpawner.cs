@@ -46,19 +46,8 @@ public class RoomSpawner : MonoBehaviour
     {
         Invoke("set",waitTime);  
         Destroy(gameObject,waitTime);
-        if (PhotonNetwork.OfflineMode)
-        {
-            templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-            Invoke("Spawn",0.1f);
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-                Invoke("Spawn",0.1f);
-            }
-        }
+          templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+                       Invoke("Spawn",0.1f);
     }
 
     void SimpleSpawn()
@@ -263,26 +252,15 @@ public class RoomSpawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      
-            if (other.CompareTag("SpawnPoint") && !isConstant)
+        if (other.CompareTag("SpawnPoint") && !isConstant)
                 {
                     if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {
                         if (PhotonNetwork.OfflineMode)
-                        {
                             Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-                            other.GetComponent<RoomSpawner>().spawned = true;
-                            spawned = true;    
-                        }
                         else
-                        {
-                            if (PhotonNetwork.IsMasterClient)
-                            {
-                                PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
-                                other.GetComponent<RoomSpawner>().spawned = true;
-                                spawned = true;   
-                            }
-                        }
+                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                        other.GetComponent<RoomSpawner>().spawned = true;
                     }
                     spawned = true;
                 }
@@ -290,24 +268,12 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
-                    if (PhotonNetwork.OfflineMode)
-                    {
-                        if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
-                            Destroy(other.transform.parent.gameObject); //상대를 파괴
-                        else //아니면
-                            Destroy(gameObject); //나를 파괴
-                    }
-                    else
-                    {
-                        if (PhotonNetwork.IsMasterClient)
-                        {
-                            if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
-                                Destroy(other.transform.parent.gameObject); //상대를 파괴
-                            else //아니면
-                                Destroy(gameObject); //나를 파괴
-                        }
-                    }
+                    if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
+                        Destroy(other.transform.parent.gameObject); //상대를 파괴
+                    else //아니면
+                        Destroy(gameObject); //나를 파괴
                 }
+                spawned = true;
             }
     }
     

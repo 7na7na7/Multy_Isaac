@@ -17,19 +17,8 @@ public class AddRoom : MonoBehaviour
   public void SetRoom(int specialvalue)
   {
     templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-
-    if (PhotonNetwork.OfflineMode)
-    {
-      templates.rooms.Add(this.gameObject);
-      SetRoomProps(specialvalue);
-    }
-    else
-    {
-      if(templates.GetComponent<PhotonView>().IsMine) 
-        templates.rooms.Add(this.gameObject);
-    }
-    
-    SetRoomProps(specialvalue);
+    templates.rooms.Add(this.gameObject);
+    SetRoomProps(specialvalue); //생성
   }
 
   void SetRoomProps(int specialvalue)
@@ -84,7 +73,7 @@ public class AddRoom : MonoBehaviour
   
   void Spawn_P(string go,Transform tr,Vector3 pos)
   {
-    GameObject GO=PhotonNetwork.Instantiate(go,pos,quaternion.identity);
+    GameObject GO=PhotonNetwork.InstantiateRoomObject(go,pos,quaternion.identity);
     GO.transform.SetParent(tr);
   }
 }
