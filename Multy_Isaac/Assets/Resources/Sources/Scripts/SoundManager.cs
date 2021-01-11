@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
        {
            ClipSources[j].spatialBlend = 1f;
            ClipSources[j].minDistance = 8;
-           ClipSources[j].maxDistance = 12;
+           ClipSources[j].maxDistance = 20;
            ClipSources[j].rolloffMode = AudioRolloffMode.Linear;
            ClipSources[j].loop = false;
            ClipSources[j].playOnAwake = false;
