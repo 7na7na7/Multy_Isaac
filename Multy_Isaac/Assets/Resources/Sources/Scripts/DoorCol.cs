@@ -15,13 +15,11 @@ public class DoorCol : MonoBehaviour
 
     public GameObject MinimapRoomPrefab;
     public GameObject MinimapRoomPrefab_2;
-
-    private CameraManager camera;
+    
     private Camera cam;
     private void Start()
     {
         cam=Camera.main;
-        camera=cam.GetComponent<CameraManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -65,7 +63,7 @@ public class DoorCol : MonoBehaviour
     }
     public void Minimap()
     {
-        camera.canMove = false;
+        cam.GetComponent<CameraManager>().canMove = false;
         
         DOTween.Kill(parms);
         cam.transform.DOMove(
@@ -73,12 +71,13 @@ public class DoorCol : MonoBehaviour
                 {
                     if (transform.parent.GetChild(0).name == "Bound")
                     {
-                        camera.SetBound(transform.parent.GetChild(0).GetComponent<BoxCollider2D>());   
-                        camera.canMove = true;
+                        transform.parent.GetChild(0).gameObject.SetActive(true);
+                        cam.GetComponent<CameraManager>().SetBound(transform.parent.GetChild(0).GetComponent<BoxCollider2D>().bounds.min,transform.parent.GetChild(0).GetComponent<BoxCollider2D>().bounds.max);   
+                        cam.GetComponent<CameraManager>().canMove = true;
                     }
                     else
                     {
-                        camera.canMove = false;
+                        cam.GetComponent<CameraManager>().canMove = false;
                     }
                 });;
             

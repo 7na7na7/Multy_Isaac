@@ -9,17 +9,14 @@ public class CameraManager : MonoBehaviour
     
     public float speed = 2f;
     public GameObject target; //카메라가 따라갈 대상
-    private BoxCollider2D bound; //카메라가 나가지 못하는 영역을 박스 콜라이더로 받음
-    
+
     private Vector3 targetPosition; //대상의 현재 값
     private Vector3 minBound, maxBound; //박스 콜라이더 영역의 최소/최대 xyz값을 지님
     private float halfWidth, halfHeight; //카메라의 반너비, 반높이 값을 지닐 변수
-    private Camera theCamera; //카메라의 반높이값을 구할 속성을 이용하기 위한 변수
 
     private void Start()
     {
-        theCamera = GetComponent<Camera>();
-        halfHeight = theCamera.orthographicSize;
+        halfHeight = Camera.main.orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height; //카메라 반너비 공식
     }
   
@@ -47,10 +44,10 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void SetBound(BoxCollider2D newBound)
+    public void SetBound(Vector3 min, Vector3 max)
     {
-        bound = newBound;
-        minBound = bound.bounds.min; //minbound에 box콜라이더의 영역 최솟값 대입
-        maxBound = bound.bounds.max;
+        print(min+" "+max);
+        minBound =min; //minbound에 box콜라이더의 영역 최솟값 대입
+        maxBound = max;
     }
 }
