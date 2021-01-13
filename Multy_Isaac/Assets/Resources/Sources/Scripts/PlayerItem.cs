@@ -20,7 +20,6 @@ public class PlayerItem : MonoBehaviour
     public LayerMask itemLayer;
     public tem[] ItemList;
     public Image[] ItemBoxes;
-    public GameObject[] btns;
     public Player player;
     public Sprite NullSprite;
     public ItemSlot[] slots;
@@ -49,6 +48,13 @@ public class PlayerItem : MonoBehaviour
                 
                 if (player.canMove) //움직일 수 있는 상태에서만 입력 가능
                 {
+                    if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
+                    {
+                        slots[selectedIndex].itemCount--;
+                        if(slots[selectedIndex].itemCount<=0)
+                            ItemList[selectedIndex].Clear();   
+                    }
+                    
                     if (Input.GetKeyDown(KeyCode.Space)) //스페이스바로 줍기
                     {
                         Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, itemRadious, itemLayer);
@@ -63,19 +69,61 @@ public class PlayerItem : MonoBehaviour
 
                             
                                 bool isGet = false;
-                                for (int i = 0; i < ItemList.Length; i++)
+
+                                if (item.GetComponent<Item>().item.type == itemType.Usable) //소비템이면
                                 {
-                                    if (ItemList[i].ItemName == "")
+                                    bool isHaveUsable = false;
+                                    
+                                    for (int i = 0; i < ItemList.Length; i++) 
                                     {
-                                        isGet = true;
-                                        ItemList[i]=item.GetComponent<Item>().item;
+                                        if (ItemList[i].ItemName == item.GetComponent<Item>().item.ItemName) //이름이 같은 소비템이면
+                                        {
+                                            isHaveUsable = true;
+                                            isGet = true;
+                                            slots[i].itemCount++;
                                         
-                                        check(i,true);
+                                            check(i,true);
                                         
-                                        item.GetComponent<Item>().Destroy();
-                                        break;
+                                            item.GetComponent<Item>().Destroy();
+                                            break;
+                                        }
+                                    }
+
+                                    if (!isHaveUsable) //소비템이 없으면
+                                    {
+                                        for (int i = 0; i < ItemList.Length; i++) 
+                                        {
+                                            if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                            {
+                                                isGet = true;
+                                                ItemList[i]=item.GetComponent<Item>().item;
+                                                slots[i].itemCount++;
+                                        
+                                                check(i,true);
+                                        
+                                                item.GetComponent<Item>().Destroy();
+                                                break;
+                                            }
+                                        }      
                                     }
                                 }
+                                else//소비템이 아니면 
+                                {
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                        {
+                                            isGet = true;
+                                            ItemList[i]=item.GetComponent<Item>().item;
+                                        
+                                            check(i,true);
+                                        
+                                            item.GetComponent<Item>().Destroy();
+                                            break;
+                                        }
+                                    }   
+                                }
+
                                 if(!isGet) 
                                     PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
                             }   
@@ -117,23 +165,24 @@ public class PlayerItem : MonoBehaviour
                         }
                     }
 
-                    if (Input.GetKey(KeyCode.F)) //F키를 길게 눌러 템 버리기
+                    if (Input.GetKeyDown(KeyCode.F)) //F키를 길게 눌러 템 버리기
                     {
-                        if (time >= discardTime)
-                        {
-                            DiscardItem(false);
-                            time = 0;
-                        }
-                        else
-                        {
-                            time += Time.deltaTime;   
-                        }
+                        DiscardItem(false);
+//                        if (time >= discardTime)
+//                        {
+//                            DiscardItem(false);
+//                            time = 0;
+//                        }
+//                        else
+//                        {
+//                            time += Time.deltaTime;   
+//                        }
                     }
 
-                    if (Input.GetKeyUp(KeyCode.F)) //떼면 시간 초기화
-                    {
-                        time = 0;
-                    }
+//                    if (Input.GetKeyUp(KeyCode.F)) //떼면 시간 초기화
+//                    {
+//                        time = 0;
+//                    }
                 }
             }   
         }
@@ -174,7 +223,7 @@ public class PlayerItem : MonoBehaviour
     public void check(int i, bool isFirst)
     {
         player.KillReload();
-        if (ItemList[i].type == itemType.Gun || ItemList[i].type == itemType.Melee)
+        if (ItemList[i].type == itemType.Gun || ItemList[i].type == itemType.Melee) //아이템타입이 총이나 무기면 무기들려줌
         {
             if (ItemList[i].weaponIndex>0 && selectedIndex==i) 
             {
@@ -186,7 +235,7 @@ public class PlayerItem : MonoBehaviour
                     player.gunSetfalse();
             }
         }
-        else
+        else //아니면 무기없앰
         {
             if(selectedIndex==i) 
                 player.gunSetfalse();
@@ -220,12 +269,22 @@ public class PlayerItem : MonoBehaviour
         if (ItemList[selectedIndex].ItemSprite != null&&ItemList[selectedIndex].ItemSprite != NullSprite) //비어있지않다면
         {
             int ind = ItemList[selectedIndex].index;
-            if (ItemList[selectedIndex].weaponIndex > 0 && selectedIndex == selectedIndex)
+
+            if (ItemList[selectedIndex].type == itemType.Usable) //소비템이면
             {
-                player.leftBullet.GetBullet(player.leftBullet.leftBullets[selectedIndex]);
-                player.gunSetfalse();   
+                slots[selectedIndex].itemCount--;
+                if(slots[selectedIndex].itemCount<=0)
+                    ItemList[selectedIndex].Clear();   
             }
-            ItemList[selectedIndex].Clear();
+            else //소비템 아니면
+            {
+                if (ItemList[selectedIndex].weaponIndex > 0) //무기를 버렸으면
+                {
+                    player.leftBullet.GetBullet(player.leftBullet.leftBullets[selectedIndex]);
+                    player.gunSetfalse();   
+                }
+                ItemList[selectedIndex].Clear();   
+            }
             if(PhotonNetwork.OfflineMode)
                 discardRPC(ind,isDead);
             else

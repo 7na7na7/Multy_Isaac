@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
+    public int itemCount = 0;
+    public Text itemCountTxt;
     public Invent invent;
     PlayerItem player;
     public int index;
@@ -22,6 +24,14 @@ public class ItemSlot : MonoBehaviour
                 break;
             }
         }  
+    }
+
+    private void Update()
+    {
+        if (itemCount > 0)
+            itemCountTxt.text = itemCount.ToString();
+        else
+            itemCountTxt.text = "";
     }
 
     public void Drag()
