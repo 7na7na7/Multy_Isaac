@@ -241,9 +241,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                         if (leftBullet.canReload() && !isReLoading)
                                         {
                                             if(PhotonNetwork.OfflineMode)
-                                                reLoad(leftBullet.reLoadTime);
+                                                ReLoad(leftBullet.reLoadTime);
                                             else
-                                                pv.RPC("reLoad",RpcTarget.All,leftBullet.reLoadTime);
+                                                pv.RPC("ReLoad",RpcTarget.All,leftBullet.reLoadTime);
                                         }
                                            
                                         else
@@ -276,9 +276,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false&& !isReLoading&&leftBullet.canReload()) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
                         {
                             if(PhotonNetwork.OfflineMode)
-                                    reLoad(leftBullet.reLoadTime);
+                                    ReLoad(leftBullet.reLoadTime);
                                 else
-                                    pv.RPC("reLoad",RpcTarget.All,leftBullet.reLoadTime);
+                                    pv.RPC("ReLoad",RpcTarget.All,leftBullet.reLoadTime);
                         }
 
                       
@@ -492,8 +492,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
         
         [PunRPC]
-        void reLoad(float reloadTime) //재장전
+        void ReLoad(float reloadTime) //재장전
         {
+            if(PhotonNetwork.OfflineMode)
+                gunAnimRPC(currentWeapon.weaponIndex.ToString(),true);
+            else
+                pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),true);
             Vector3 a = gun.transform.eulerAngles;
                 a.z += 181;
                 isReLoading = true;
@@ -842,4 +846,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
         }
 
+        public void UseItem(int itemIndex)
+        {
+            switch (itemIndex)
+            {
+                case 42:
+                    statMgr.Heal(10);
+                    break;
+            }
+        }
 }

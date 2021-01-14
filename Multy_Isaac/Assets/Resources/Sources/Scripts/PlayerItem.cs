@@ -50,6 +50,7 @@ public class PlayerItem : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
                     {
+                        player.UseItem(ItemList[selectedIndex].index);
                         slots[selectedIndex].itemCount--;
                         if(slots[selectedIndex].itemCount<=0)
                             ItemList[selectedIndex].Clear();   
