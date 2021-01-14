@@ -57,7 +57,7 @@ public class pickUpTem : MonoBehaviour
                 }
                 else if (type == temType.bullet)
                 {
-                    other.GetComponent<Player>().GetBullet();
+                    other.GetComponent<Player>().leftBullet.GetBullet(1); //총알수얻어오기
                 
                     if(PhotonNetwork.OfflineMode)
                         Destroy(gameObject);

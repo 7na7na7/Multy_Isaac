@@ -157,6 +157,7 @@ public class Invent : MonoBehaviour
         {
             PlayerItem.GetItemArray(element.SmallItemIndex[0]).Clear();
             PlayerItem.GetItemArray(element.SmallItemIndex[1]).Clear();
+          
             tem item=new tem();
             item = element.DeepCopy();
            

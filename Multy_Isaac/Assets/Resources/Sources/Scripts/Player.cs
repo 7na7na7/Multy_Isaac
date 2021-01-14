@@ -13,8 +13,12 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public GameObject offlineSlash;
+    #region 변수선언
+     public GameObject offlineSlash;
 
+     public RectTransform panel;
+     public RectTransform panel2;
+     
     public GameObject canvas;
     private bool isHaveGun = false;
     private TweenParams parms = new TweenParams();
@@ -90,6 +94,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private SoundManager sound;
 
     private Vector3 savedCanvasScale;
+    #endregion
+
+    #region 내장함수
     private void Start()
     {
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
@@ -110,107 +117,30 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (pv.IsMine)
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-                    //FindObjectOfType<CameraManager>().target = p.gameObject;
-                    itemData = transform.GetChild(0).GetComponent<ItemData>();
-                    LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
-                    statMgr=transform.GetChild(0).GetComponent<StatManager>();
-                    playerItem = GetComponent<PlayerItem>();
-                    leftBullet = transform.GetChild(0).transform.GetChild(0).GetComponent<LeftBullet>();
-                    sound = GetComponent<SoundManager>();
-                    playerItem.player = this;
-                    if (SceneManager.GetActiveScene().name == "Play")
-                    {
-                        GetComponent<CapsuleCollider2D>().isTrigger = true;
-                        Invoke("setCam", 2f);
-                    }
-                    else
-                    {
-                        canMove = true;
-                        statMgr.canMove = true;
-                    }
-                }
-                else
-                    Destroy(canvas);
-       
-    }
-    void setCam()
-    {
-        GetComponent<CapsuleCollider2D>().isTrigger = false;
-       spawnPoint = transform.position;
-       canMove = true;
-       statMgr.canMove = true;
-        Destroy(GameObject.Find("LoadingPanel"));
-        camera.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
-        camera.GetComponent<CameraManager>().target = gameObject;
-
-
-        //자신 기준으로 이내의 반경의 doorCol검색
-            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
-            if (col != null) //플레이어가 비지 않았다면
+            //FindObjectOfType<CameraManager>().target = p.gameObject;
+            itemData = transform.GetChild(0).GetComponent<ItemData>();
+            LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
+            statMgr=transform.GetChild(0).GetComponent<StatManager>();
+            playerItem = GetComponent<PlayerItem>();
+            leftBullet = transform.GetChild(0).transform.GetChild(0).GetComponent<LeftBullet>();
+            sound = GetComponent<SoundManager>();
+            playerItem.player = this;
+            if (SceneManager.GetActiveScene().name == "Play")
             {
-                col.GetComponent<DoorCol>().Minimap();
+                GetComponent<CapsuleCollider2D>().isTrigger = true;
+                Invoke("setCam", 2f);
             }
             else
             {
-                print("감지 실패!");
-            }   
+                canMove = true;
+                statMgr.canMove = true;
+            }
+        }
+        else
+            Destroy(canvas);
        
-   }
-    void roll(Vector2 dir)
-    {
-        if (statMgr.LoseMp(rollMp))
-        {
-            if (canRoll)
-            {
-                canMove = false;
-                statMgr.canMove = false;
-                canRoll = false;
-                StartCoroutine(rollCor(dir,rollDistance));
-            }   
-        }
-        else
-        {
-            print("Mp부족!");
-        }
-    }
-    IEnumerator rollCor(Vector2 dir, float distance)
-    {
-        rb.velocity=Vector2.zero;
-        if (PhotonNetwork.OfflineMode)
-        {
-            SetAnimRPC("Roll");
-        }
-        else
-        {
-            pv.RPC("SetAnimRPC",RpcTarget.All,"Roll");
-        }
-      
-        
-        isSuper = true; //무적 ON
-        Vector2 originalSize = col.size;
-        col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
-        rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode).SetAs(parms);
-        yield return new WaitForSeconds(rollTime);
-        isSuper = false; //무적 OFF
-        yield return new WaitForSeconds(rollTime*rollDelayMultiply); //스턴시간은 구르는시간의 10분의 1
-        col.size = originalSize; //원래 크기로 돌려줌
-        if (PhotonNetwork.OfflineMode)
-        {
-            SetAnimRPC("Idle");
-        }
-        else
-        {
-            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle");
-        }
-
-
-        canMove = true;
-        statMgr.canMove = true;
-        canRoll = true;
     }
     
-    public RectTransform panel;
-    public RectTransform panel2;
     private void Update()
     {
         if (pv.IsMine)
@@ -353,6 +283,125 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);   
             }
         }
+    
+    void FixedUpdate() 
+    {
+        if (canMove)
+        {
+            if (canMove&&!isSleeping&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
+            {
+                //이동여부에 따른 애니메이션 조정
+                if (moveDirection == Vector2.zero)
+                {
+                    if(PhotonNetwork.OfflineMode)
+                    {
+                        SetAnimRPC("Idle");   
+                    }
+                    else
+                    {
+                        pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
+                    }
+                } 
+                else
+                {
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        SetAnimRPC("Walk");
+                    }
+                    else
+                    {
+                        pv.RPC("SetAnimRPC",RpcTarget.All,"Walk");
+                    }
+                    
+                }
+                    
+                rb.velocity=new Vector2((moveDirection.x*speed*currentWeapon.walkSpeed_P/100)* (isSwamp ? swampMovingSpeed/100f:1f),(moveDirection.y*speed*currentWeapon.walkSpeed_P/100)*(isSwamp ? swampMovingSpeed/100f:1f)); //이동
+            }
+            else//그 외는 전부 움직이지 않도록
+            {
+                //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                rb.velocity=Vector2.zero;
+            }   
+        }
+    }
+    #endregion
+
+    #region 일반함수,코루틴
+    void setCam()
+    {
+        GetComponent<CapsuleCollider2D>().isTrigger = false;
+       spawnPoint = transform.position;
+       canMove = true;
+       statMgr.canMove = true;
+        Destroy(GameObject.Find("LoadingPanel"));
+        camera.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
+        camera.GetComponent<CameraManager>().target = gameObject;
+
+
+        //자신 기준으로 이내의 반경의 doorCol검색
+            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
+            if (col != null) //플레이어가 비지 않았다면
+            {
+                col.GetComponent<DoorCol>().Minimap();
+            }
+            else
+            {
+                print("감지 실패!");
+            }   
+       
+   }
+    void roll(Vector2 dir)
+    {
+        if (statMgr.LoseMp(rollMp))
+        {
+            if (canRoll)
+            {
+                canMove = false;
+                statMgr.canMove = false;
+                canRoll = false;
+                StartCoroutine(rollCor(dir,rollDistance));
+            }   
+        }
+        else
+        {
+            print("Mp부족!");
+        }
+    }
+    IEnumerator rollCor(Vector2 dir, float distance)
+    {
+        rb.velocity=Vector2.zero;
+        if (PhotonNetwork.OfflineMode)
+        {
+            SetAnimRPC("Roll");
+        }
+        else
+        {
+            pv.RPC("SetAnimRPC",RpcTarget.All,"Roll");
+        }
+      
+        
+        isSuper = true; //무적 ON
+        Vector2 originalSize = col.size;
+        col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
+        rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode).SetAs(parms);
+        yield return new WaitForSeconds(rollTime);
+        isSuper = false; //무적 OFF
+        yield return new WaitForSeconds(rollTime*rollDelayMultiply); //스턴시간은 구르는시간의 10분의 1
+        col.size = originalSize; //원래 크기로 돌려줌
+        if (PhotonNetwork.OfflineMode)
+        {
+            SetAnimRPC("Idle");
+        }
+        else
+        {
+            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle");
+        }
+
+
+        canMove = true;
+        statMgr.canMove = true;
+        canRoll = true;
+    }
 
     void Slash(bool isDown)
     {
@@ -398,127 +447,341 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         isReLoading = false;
         gun.transform.eulerAngles = a3;
     }
-        void FixedUpdate() 
+
+    void ShotGun(bool isDown) //총쏘는 함수
+    {
+        bool canShot = false;
+        if (isDown)
         {
-            if (canMove)
+            if (time <= 0.1f)
+                canShot = true;
+        }
+        else
+        {
+            if (time <= 0)
             {
-                if (canMove&&!isSleeping&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
-                {
-                    //이동여부에 따른 애니메이션 조정
-                    if (moveDirection == Vector2.zero)
-                    {
-                        if(PhotonNetwork.OfflineMode)
-                        {
-                            SetAnimRPC("Idle");   
-                        }
-                        else
-                        {
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
-                        }
-                    } 
-                    else
-                    {
-                        if (PhotonNetwork.OfflineMode)
-                        {
-                            SetAnimRPC("Walk");
-                        }
-                        else
-                        {
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"Walk");
-                        }
-                    
-                    }
-                    
-                    rb.velocity=new Vector2((moveDirection.x*speed*currentWeapon.walkSpeed_P/100)* (isSwamp ? swampMovingSpeed/100f:1f),(moveDirection.y*speed*currentWeapon.walkSpeed_P/100)*(isSwamp ? swampMovingSpeed/100f:1f)); //이동
-                }
-                else//그 외는 전부 움직이지 않도록
-                {
-                    //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-                    rb.velocity=Vector2.zero;
-                }   
+                canShot = true;
             }
         }
 
-        void ShotGun(bool isDown) //총쏘는 함수
+        if (canShot&&leftBullet.bulletCount>=currentWeapon.consumeBullet)
         {
-            bool canShot = false;
-            if (isDown)
+            if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet))
             {
-                if (time <= 0.1f)
-                    canShot = true;
-            }
-            else
-            {
-                if (time <= 0)
-                {
-                    canShot = true;
-                }
-            }
-
-            if (canShot&&leftBullet.bulletCount>=currentWeapon.consumeBullet)
-            {
-                if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet))
-                {
-                    if(PhotonNetwork.OfflineMode)
-                        gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
-                    else
-                        pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),false);
-
-
-                    StartCoroutine(speedCor());
-                    time = currentWeapon.CoolTime;
-                   
-                   for (int i = 0; i < currentWeapon.shotBullet; i++)
-                   {
-                       Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*currentWeapon.ClusterRate,currentWeapon.ClusterRate));
-                       if (PhotonNetwork.OfflineMode) 
-                           Instantiate(offLineBullet,bulletTr.position,q);
-                       else
-                           PhotonNetwork.Instantiate(currentWeapon.BulletName, bulletTr.position, q);
-                   }
-                }
+                if(PhotonNetwork.OfflineMode)
+                    gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
                 else
+                    pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),false);
+
+
+                StartCoroutine(speedCor());
+                time = currentWeapon.CoolTime;
+                   
+                for (int i = 0; i < currentWeapon.shotBullet; i++)
                 {
-                    speed = savedSpeed;
+                    Quaternion q=Quaternion.Euler(bulletTr.rotation.eulerAngles.x,bulletTr.rotation.eulerAngles.y,bulletTr.rotation.eulerAngles.z+Random.Range(-1f*currentWeapon.ClusterRate,currentWeapon.ClusterRate));
+                    if (PhotonNetwork.OfflineMode) 
+                        Instantiate(offLineBullet,bulletTr.position,q);
+                    else
+                        PhotonNetwork.Instantiate(currentWeapon.BulletName, bulletTr.position, q);
                 }
             }
-        }
-
-        IEnumerator speedCor()
-        {
-            speed = savedSpeed * currentWeapon.shotSpeed_P / 100;
-            yield return new WaitForSeconds(0.1f);
-            speed = savedSpeed;
-        }
-        
-        [PunRPC]
-        void ReLoad(float reloadTime) //재장전
-        {
-            if(PhotonNetwork.OfflineMode)
-                gunAnimRPC(currentWeapon.weaponIndex.ToString(),true);
             else
-                pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),true);
-            Vector3 a = gun.transform.eulerAngles;
-                a.z += 181;
-                isReLoading = true;
-                
-                canReload = true;
-                gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
-                    Vector3 b = gun.transform.eulerAngles;
-                    b.z += 181;
-                    gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
-                    {
-                        if (canReload)
-                        {
-                            isReLoading = false;
-                            leftBullet.Reload(playerItem.selectedIndex);   
-                        }
-                    });
-                });
-                
+            {
+                speed = savedSpeed;
+            }
         }
+    }
+
+    IEnumerator speedCor()
+    {
+        speed = savedSpeed * currentWeapon.shotSpeed_P / 100;
+        yield return new WaitForSeconds(0.1f);
+        speed = savedSpeed;
+    }
     
-        private void OnTriggerEnter2D(Collider2D other) //충돌함수
+    public void Die(string AttackerName) //죽을때 공격한사람 이름을 받아 로그띄울때 씀
+    {
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            if (AttackerName==PhotonNetwork.NickName)
+            {
+                InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
+                    nickname.text+"<color=red> Suicided </color>");   
+            }
+            else
+            {
+                InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
+                    AttackerName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
+            }
+
+            playerItem.Dead();
+            gunSetfalse();
+        }
+        statMgr.Heal(99999);
+        transform.position = spawnPoint;
+        camera.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
+    }
+
+    public void Hit(int Damage,string HitName="") //공격받을때 공격한사람 이름도 받음
+    {
+        if (!isSuper&&pv.IsMine)
+        {
+            if(statMgr.LoseHp(Damage))
+                Die(HitName);
+        }
+    }
+
+    void GetMove() //이동입력
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+            rb.velocity=Vector2.zero;
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+            
+        moveDirection = new Vector2(moveX, moveY).normalized; //대각선 이동 정규화
+        if (canMove)
+            footCount += rb.velocity.sqrMagnitude/100;
+        if (footCount > footCountCut)
+        {
+            sound.Play(Random.Range(3,10),true,0.5f);
+            footCount = 0;
+        }
+    }
+    
+    public void changeWeapon(wep weapon, bool isFirst) //무기바꾸기
+    {
+        if (weapon.weaponIndex > 0)
+        {
+            if (PhotonNetwork.OfflineMode)
+            {
+                armgunSetTrue();
+                //setSprite(weapon.weaponIndex);
+                gunAnimRPC(weapon.weaponIndex.ToString(),true);
+            }
+            else
+            {
+                pv.RPC("armgunSetTrue", RpcTarget.All);
+                //pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex);
+                pv.RPC("gunAnimRPC",RpcTarget.All,weapon.weaponIndex.ToString(),true);
+            }
+            isHaveGun = true;
+            currentWeapon = weapon.DeepCopy();
+            gun.transform.localPosition = currentWeapon.tr + savedGunPos;
+            gun.transform.eulerAngles=Vector3.zero;
+            bulletTr.localPosition =currentWeapon.bulletPos.position;
+            leftBullet.reLoadTime = currentWeapon.reLoadTime;
+            leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
+
+            if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
+                gun.GetComponent<Animator>().enabled = true;
+        }
+    }
+
+    public void KillReload()
+    {
+        isReLoading = false;
+        canReload = false;
+    }
+    public void gunSetfalse() //총내린상태로만들기
+    {
+        KillReload();
+        if (PhotonNetwork.OfflineMode)
+            armgunSetFalse();
+        else
+            pv.RPC("armgunSetFalse", RpcTarget.All);
+        leftBullet.SetFalse();
+        isHaveGun = false;
+        speed = savedSpeed;
+        currentWeapon.walkSpeed_P = 100;
+        currentWeapon.shotSpeed_P = 100;
+    }
+
+    public void getEXP(int value) //경험치획득
+    {
+        LvMgr.GetExp(value);
+    }
+    
+    public void Sleep() //잠자기
+    {
+        isSleeping = true;
+        statMgr.isSleeping = true;
+        if (PhotonNetwork.OfflineMode)
+        {
+            anim.Play("Sleep");
+            //headAnim.Play("None");
+            if (isHaveGun)
+            { 
+                armgunSetFalse();
+            }
+        }
+        else
+        {
+            pv.RPC("SetAnimRPC",RpcTarget.All,"Sleep");
+            if (isHaveGun)
+            {
+                pv.RPC("armgunSetFalse", RpcTarget.All);
+            }
+        }
+    }
+    public void WakeUp() //잠깨기
+    {
+        isSleeping = false;
+        statMgr.isSleeping = false;
+        statMgr.tempHp=0;
+        if (PhotonNetwork.OfflineMode)
+        {
+            anim.Play("Idle");
+            //headAnim.Play("GoDown");
+            if (isHaveGun)
+            { 
+                armgunSetTrue();
+            }
+        }
+        else
+        {
+            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
+            if (isHaveGun)
+            {
+                pv.RPC("armgunSetTrue", RpcTarget.All);
+            }  
+        }
+    }
+    
+    
+    #endregion
+
+    #region 동기화, RPC함수
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) //변수 동기화
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(hp.value);
+            stream.SendNext(mp.value);
+            stream.SendNext(hp.maxValue); 
+            stream.SendNext(mp.maxValue);
+            stream.SendNext(angle);
+            stream.SendNext(MousePosition);
+            stream.SendNext(moveDirection);
+            stream.SendNext(transform.localScale);
+            stream.SendNext(canvasLocalScaleX);
+            stream.SendNext(canvasRect.localScale);
+            stream.SendNext(canMove);
+            stream.SendNext(gun.transform.localScale);
+            stream.SendNext(gun.transform.rotation);
+            stream.SendNext(isSleeping);
+            stream.SendNext(Lv.text);
+        }
+        else
+        {
+            curPos = (Vector3) stream.ReceiveNext();
+            hp.value = (float) stream.ReceiveNext();
+            mp.value = (float) stream.ReceiveNext();
+            hp.maxValue = (float) stream.ReceiveNext();
+            mp.maxValue = (float) stream.ReceiveNext();
+            angle = (float) stream.ReceiveNext();
+            MousePosition = (Vector3) stream.ReceiveNext();
+            moveDirection = (Vector2) stream.ReceiveNext();
+            transform.localScale = (Vector3) stream.ReceiveNext();
+            canvasLocalScaleX = (float)stream.ReceiveNext();
+            canvasRect.localScale = (Vector3) stream.ReceiveNext();
+            canMove = (bool) stream.ReceiveNext();
+            gun.transform.localScale = (Vector3) stream.ReceiveNext();
+            gun.transform.rotation = (Quaternion) stream.ReceiveNext();
+            isSleeping = (bool) stream.ReceiveNext();
+            Lv.text = (string) stream.ReceiveNext();
+        }
+    }
+    
+    [PunRPC]
+    void canvasOn()
+    {
+        photonviewCanvas.transform.localScale = savedCanvasScale;
+    }
+    [PunRPC]
+    void canvasOff()
+    {
+        photonviewCanvas.transform.localScale = Vector3.zero;
+    }
+    [PunRPC]
+    public void armgunSetFalse()
+    {
+        Arm.SetActive(false);
+        gun.SetActive(false);
+    }
+    [PunRPC]
+    public void armgunSetTrue()
+    {
+        Arm.SetActive(true);
+        gun.SetActive(true);
+    }
+    [PunRPC]
+    public void SetAnimRPC(string animName)
+    {
+        anim.Play(animName);
+    }
+    [PunRPC]
+    public void ChatBaloonRPC(string txt)
+    {
+        chatbox.gameObject.SetActive(true);
+        chatbox.SetTime();
+        ChatBaloon.text = txt;
+    }
+    [PunRPC]
+    public void Move(Vector3 pos)
+    {
+        transform.position = pos;
+    }
+    [PunRPC]
+    void setSprite(int i)
+    {
+        print(itemData.GetWeapon(i).weaponIndex+" "+itemData.GetWeapon(i).spr.name);
+        gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
+        //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
+    }
+
+    [PunRPC]
+    void ReLoad(float reloadTime) //재장전
+    {
+        if(PhotonNetwork.OfflineMode)
+            gunAnimRPC(currentWeapon.weaponIndex.ToString(),true);
+        else
+            pv.RPC("gunAnimRPC",RpcTarget.All,currentWeapon.weaponIndex.ToString(),true);
+        Vector3 a = gun.transform.eulerAngles;
+        a.z += 181;
+        isReLoading = true;
+                
+        canReload = true;
+        gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
+            Vector3 b = gun.transform.eulerAngles;
+            b.z += 181;
+            gun.transform.DORotate(b, reloadTime/2).SetEase(reLoadEase2).OnComplete(() =>
+            {
+                if (canReload)
+                {
+                    isReLoading = false;
+                    leftBullet.Reload(playerItem.selectedIndex);   
+                }
+            });
+        });
+                
+    }
+    
+    [PunRPC]
+    void gunAnimRPC(string index, bool isIdle)
+    {
+        if(isIdle) 
+            gunAnim.SetTrigger("Idle"+index);
+        else
+            gunAnim.SetTrigger(index);
+    }
+    
+    #endregion
+    
+    #region 충돌함수
+    private void OnTriggerEnter2D(Collider2D other) //충돌함수
     {
         if (pv.IsMine)
         {
@@ -580,12 +843,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 isSwamp = false;
         }
 
-        public void GetBullet() 
-    {
-        leftBullet.GetBullet(1);
-    }
-
-    private void OnCollisionStay2D(Collision2D other)  //플레이어 강체 충돌판정
+        private void OnCollisionStay2D(Collision2D other)  //플레이어 강체 충돌판정
     {
         if (pv.IsMine)
         {
@@ -598,261 +856,43 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }   
         }
     }
+    #endregion
 
-    public void Die(string AttackerName) //죽을때 공격한사람 이름을 받아 로그띄울때 씀
+    #region 패시브
+    
+    public void PassiveOn(int itemIndex)
     {
-        if (SceneManager.GetActiveScene().name == "Play")
+        switch (itemIndex)
         {
-            if (AttackerName==PhotonNetwork.NickName)
-            {
-                InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                    nickname.text+"<color=red> Suicided </color>");   
-            }
-            else
-            {
-                InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                    AttackerName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
-            }
-
-            playerItem.Dead();
-            gunSetfalse();
-        }
-      statMgr.Heal(99999);
-        transform.position = spawnPoint;
-        camera.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
-    }
- 
-
-    public void Hit(int Damage,string HitName="") //공격받을때 공격한사람 이름도 받음
-        {
-            if (!isSuper&&pv.IsMine)
-            {
-                if(statMgr.LoseHp(Damage))
-                    Die(HitName);
-            }
-        }
-
-    void GetMove() //이동입력
-        {
-            if(Input.GetKeyDown(KeyCode.Return))
-                rb.velocity=Vector2.zero;
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
-            
-            moveDirection = new Vector2(moveX, moveY).normalized; //대각선 이동 정규화
-            if (canMove)
-                footCount += rb.velocity.sqrMagnitude/100;
-            if (footCount > footCountCut)
-            {
-                sound.Play(Random.Range(3,10),true,0.5f);
-                footCount = 0;
-            }
-        }
-
-    [PunRPC]
-    void gunAnimRPC(string index, bool isIdle)
-    {
-        if(isIdle) 
-            gunAnim.SetTrigger("Idle"+index);
-        else
-            gunAnim.SetTrigger(index);
-    }
-    public void changeWeapon(wep weapon, bool isFirst) //무기바꾸기
-    {
-        if (weapon.weaponIndex > 0)
-        {
-            if (PhotonNetwork.OfflineMode)
-            {
-                armgunSetTrue();
-                //setSprite(weapon.weaponIndex);
-                gunAnimRPC(weapon.weaponIndex.ToString(),true);
-            }
-            else
-            {
-                pv.RPC("armgunSetTrue", RpcTarget.All);
-                //pv.RPC("setSprite", RpcTarget.AllBuffered,weapon.weaponIndex);
-                pv.RPC("gunAnimRPC",RpcTarget.All,weapon.weaponIndex.ToString(),true);
-            }
-            isHaveGun = true;
-            currentWeapon = weapon.DeepCopy();
-            gun.transform.localPosition = currentWeapon.tr + savedGunPos;
-            gun.transform.eulerAngles=Vector3.zero;
-            bulletTr.localPosition =currentWeapon.bulletPos.position;
-            leftBullet.reLoadTime = currentWeapon.reLoadTime;
-            leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
-
-            if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
-                gun.GetComponent<Animator>().enabled = true;
+            case 43:
+                print("패시브 ON");
+                break;
         }
     }
-
-    public void KillReload()
+        
+    public void PassiveOff(int itemIndex)
     {
-        isReLoading = false;
-        canReload = false;
-    }
-    public void gunSetfalse() //총내린상태로만들기
-    {
-        KillReload();
-        if (PhotonNetwork.OfflineMode)
-            armgunSetFalse();
-        else
-            pv.RPC("armgunSetFalse", RpcTarget.All);
-        leftBullet.SetFalse();
-        isHaveGun = false;
-        speed = savedSpeed;
-        currentWeapon.walkSpeed_P = 100;
-        currentWeapon.shotSpeed_P = 100;
-    }
-
-    public void getEXP(int value) //경험치획득
-    {
-        LvMgr.GetExp(value);
+        switch (itemIndex)
+        {
+            case 43:
+                print("패시브 OFF");
+                break;
+        }
     }
     
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) //변수 동기화
+    #endregion
+    
+    #region 소비템
+
+    public void UseItem(int itemIndex)
     {
-        if (stream.IsWriting)
+        switch (itemIndex)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(hp.value);
-            stream.SendNext(mp.value);
-            stream.SendNext(hp.maxValue); 
-            stream.SendNext(mp.maxValue);
-            stream.SendNext(angle);
-            stream.SendNext(MousePosition);
-            stream.SendNext(moveDirection);
-            stream.SendNext(transform.localScale);
-            stream.SendNext(canvasLocalScaleX);
-            stream.SendNext(canvasRect.localScale);
-            stream.SendNext(canMove);
-            stream.SendNext(gun.transform.localScale);
-            stream.SendNext(gun.transform.rotation);
-            stream.SendNext(isSleeping);
-            stream.SendNext(Lv.text);
-            }
-        else
-        {
-            curPos = (Vector3) stream.ReceiveNext();
-            hp.value = (float) stream.ReceiveNext();
-            mp.value = (float) stream.ReceiveNext();
-            hp.maxValue = (float) stream.ReceiveNext();
-            mp.maxValue = (float) stream.ReceiveNext();
-            angle = (float) stream.ReceiveNext();
-            MousePosition = (Vector3) stream.ReceiveNext();
-            moveDirection = (Vector2) stream.ReceiveNext();
-            transform.localScale = (Vector3) stream.ReceiveNext();
-            canvasLocalScaleX = (float)stream.ReceiveNext();
-            canvasRect.localScale = (Vector3) stream.ReceiveNext();
-            canMove = (bool) stream.ReceiveNext();
-            gun.transform.localScale = (Vector3) stream.ReceiveNext();
-            gun.transform.rotation = (Quaternion) stream.ReceiveNext();
-            isSleeping = (bool) stream.ReceiveNext();
-            Lv.text = (string) stream.ReceiveNext();
+            case 42:
+                statMgr.Heal(10);
+                break;
         }
     }
 
-        public void Sleep() //잠자기
-        {
-            isSleeping = true;
-            statMgr.isSleeping = true;
-            if (PhotonNetwork.OfflineMode)
-            {
-                anim.Play("Sleep");
-                //headAnim.Play("None");
-                if (isHaveGun)
-                { 
-                    armgunSetFalse();
-                }
-            }
-            else
-            {
-                pv.RPC("SetAnimRPC",RpcTarget.All,"Sleep");
-                if (isHaveGun)
-                {
-                    pv.RPC("armgunSetFalse", RpcTarget.All);
-                }
-            }
-        }
-        public void WakeUp() //잠깨기
-        {
-            isSleeping = false;
-            statMgr.isSleeping = false;
-            statMgr.tempHp=0;
-            if (PhotonNetwork.OfflineMode)
-            {
-                anim.Play("Idle");
-                //headAnim.Play("GoDown");
-                if (isHaveGun)
-                { 
-                    armgunSetTrue();
-                }
-            }
-            else
-            {
-                pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
-                if (isHaveGun)
-                {
-                    pv.RPC("armgunSetTrue", RpcTarget.All);
-                }  
-            }
-        }
-
-        [PunRPC]
-        void canvasOn()
-        {
-            photonviewCanvas.transform.localScale = savedCanvasScale;
-        }
-        [PunRPC]
-        void canvasOff()
-        {
-            photonviewCanvas.transform.localScale = Vector3.zero;
-        }
-        
-        [PunRPC]
-        public void armgunSetFalse()
-        {
-            Arm.SetActive(false);
-            gun.SetActive(false);
-        }
-        [PunRPC]
-        public void armgunSetTrue()
-        {
-            Arm.SetActive(true);
-            gun.SetActive(true);
-        }
-        [PunRPC]
-        public void SetAnimRPC(string animName)
-        {
-            anim.Play(animName);
-        }
-        [PunRPC]
-        public void ChatBaloonRPC(string txt)
-        {
-            chatbox.gameObject.SetActive(true);
-            chatbox.SetTime();
-            ChatBaloon.text = txt;
-        }
-        [PunRPC]
-        public void Move(Vector3 pos)
-        {
-            transform.position = pos;
-        }
-        [PunRPC]
-        void setSprite(int i)
-        {
-            print(itemData.GetWeapon(i).weaponIndex+" "+itemData.GetWeapon(i).spr.name);
-            gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
-            //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
-        }
-
-        public void UseItem(int itemIndex)
-        {
-            switch (itemIndex)
-            {
-                case 42:
-                    statMgr.Heal(10);
-                    break;
-            }
-        }
+    #endregion
 }

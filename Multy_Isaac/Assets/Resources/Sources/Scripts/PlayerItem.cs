@@ -83,7 +83,7 @@ public class PlayerItem : MonoBehaviour
                                             isGet = true;
                                             slots[i].itemCount++;
                                         
-                                            check(i,true);
+                                            check(i,false);
                                         
                                             item.GetComponent<Item>().Destroy();
                                             break;
@@ -116,7 +116,10 @@ public class PlayerItem : MonoBehaviour
                                         {
                                             isGet = true;
                                             ItemList[i]=item.GetComponent<Item>().item;
-                                        
+                                            
+                                            if(item.GetComponent<Item>().item.type==itemType.Passive) //패시브템이면
+                                                player.PassiveOn(item.GetComponent<Item>().item.index); //패시브 ON
+
                                             check(i,true);
                                         
                                             item.GetComponent<Item>().Destroy();
@@ -203,22 +206,79 @@ public class PlayerItem : MonoBehaviour
 
     public void GetItem(tem item)
     {
-        bool isGet = false;
-        for (int i = 0; i < ItemList.Length; i++)
-        {
-            if (ItemList[i].ItemName == "")
-            {
-                isGet = true;
-                ItemList[i] = item;
-              check(i,true);
-                break;
-            }
-        }
+          bool isGet = false;
+          int select = 0;
+                                if (item.type == itemType.Usable) //소비템이면
+                                {
+                                    bool isHaveUsable = false;
+                                    
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName == item.ItemName) //이름이 같은 소비템이면
+                                        {
+                                            select = i;
+                                            isHaveUsable = true;
+                                            isGet = true;
+                                            slots[i].itemCount++;
+                                        
+                                            check(i,false);
+                                            
+                                            break;
+                                        }
+                                    }
 
-        if (!isGet)
-        {
-            PopUpManager.instance.PopUp("더 이상 만들 수 없습니다!", Color.red);
-        }
+                                    if (!isHaveUsable) //소비템이 없으면
+                                    {
+                                        for (int i = 0; i < ItemList.Length; i++)
+                                        {
+                                            if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                            {
+                                                select = i;
+                                                isGet = true;
+                                                ItemList[i]=item;
+                                                slots[i].itemCount++;
+                                        
+                                                check(i,true);
+                                                
+                                                break;
+                                            }
+                                        }      
+                                    }
+                                }
+                                else//소비템이 아니면 
+                                {
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                        {
+                                            select = i;
+                                            isGet = true;
+                                            ItemList[i]=item;
+                                            
+                                            if(item.type==itemType.Passive) //패시브템이면
+                                                player.PassiveOn(item.index); //패시브 ON
+
+                                            check(i,true);
+                                            
+                                            break;
+                                        }
+                                    }   
+                                }
+                                
+                                if(!isGet) 
+                                    PopUpManager.instance.PopUp("더 이상 제작할 수 없습니다!",Color.red);
+                                else
+                                {
+                                    selectedIndex = select;
+                                    for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                                    {
+                                        if (i == selectedIndex)
+                                            Selected[i].SetActive(true);
+                                        else
+                                            Selected[i].SetActive(false); 
+                                    }
+                                    check(selectedIndex,false);   
+                                }
     }
 
     public void check(int i, bool isFirst)
@@ -284,6 +344,8 @@ public class PlayerItem : MonoBehaviour
                     player.leftBullet.GetBullet(player.leftBullet.leftBullets[selectedIndex]);
                     player.gunSetfalse();   
                 }
+                if(ItemList[selectedIndex].type==itemType.Passive) //패시브 아이템을 버렸으면
+                    player.PassiveOff(ItemList[selectedIndex].index); //패시브 비활성화
                 ItemList[selectedIndex].Clear();   
             }
             if(PhotonNetwork.OfflineMode)
