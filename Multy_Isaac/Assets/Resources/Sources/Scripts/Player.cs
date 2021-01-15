@@ -14,7 +14,8 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
-     public GameObject offlineSlash;
+    //패시브 변수
+    public GameObject offlineSlash;
 
      public RectTransform panel;
      public RectTransform panel2;
@@ -31,6 +32,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //수면
     public bool isSleeping; //자고있는가?
     //이동, 애니메이션
+    private int mobile;
+    private float mobileTime= 0;
+    private int mobilePer=100;
+    public float savedMobileTime=5;
     private CapsuleCollider2D col;
     public bool canMove = true;
     private Animator anim;
@@ -156,6 +161,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                 if (canMove) //움직일 수 있다면
                 {
+                    if (mobileTime < savedMobileTime)
+                        mobileTime += Time.deltaTime;
                     if (!isSleeping) //잠자고 있지 않다면
                     {
                         if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)&&!RectTransformUtility.RectangleContainsScreenPoint(panel2, Input.mousePosition)) //클릭불가능영역이 아니면
@@ -314,8 +321,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     }
                     
                 }
-                    
-                rb.velocity=new Vector2((moveDirection.x*speed*currentWeapon.walkSpeed_P/100)* (isSwamp ? swampMovingSpeed/100f:1f),(moveDirection.y*speed*currentWeapon.walkSpeed_P/100)*(isSwamp ? swampMovingSpeed/100f:1f)); //이동
+                rb.velocity=new Vector2(
+                    (moveDirection.x*speed*currentWeapon.walkSpeed_P/100 * (mobileTime>=savedMobileTime ? mobilePer/100f : 1))* (isSwamp ? swampMovingSpeed/100f:1f), 
+                    (moveDirection.y*speed*currentWeapon.walkSpeed_P/100 * (mobileTime>=savedMobileTime ? mobilePer/100f : 1))* (isSwamp ? swampMovingSpeed/100f:1f)); 
+                
+                //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 
             }
             else//그 외는 전부 움직이지 않도록
             {
@@ -327,6 +337,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region 일반함수,코루틴
+
+    public void isFight() //전투 중
+    {
+        mobileTime = 0;
+    }
     void setCam()
     {
         GetComponent<CapsuleCollider2D>().isTrigger = false;
@@ -421,6 +436,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         
         if (canShot)
         {
+            isFight();
             StartCoroutine(speedCor());
             time = currentWeapon.CoolTime;
             
@@ -466,6 +482,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (canShot&&leftBullet.bulletCount>=currentWeapon.consumeBullet)
         {
+            isFight();
             if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet))
             {
                 if(PhotonNetwork.OfflineMode)
@@ -527,6 +544,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (!isSuper&&pv.IsMine)
         {
+            isFight();
             if(statMgr.LoseHp(Damage))
                 Die(HitName);
         }
@@ -534,8 +552,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     void GetMove() //이동입력
     {
-        if(Input.GetKeyDown(KeyCode.Return))
-            rb.velocity=Vector2.zero;
+//        if(Input.GetKeyDown(KeyCode.Return))
+//            rb.velocity=Vector2.zero;
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
             
@@ -865,7 +883,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         switch (itemIndex)
         {
             case 43:
-                print("패시브 ON");
+                mobilePer += 30;
                 break;
         }
     }
@@ -875,7 +893,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         switch (itemIndex)
         {
             case 43:
-                print("패시브 OFF");
+                mobilePer -= 30;
                 break;
         }
     }
@@ -886,6 +904,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void UseItem(int itemIndex)
     {
+        isFight();
         switch (itemIndex)
         {
             case 42:
