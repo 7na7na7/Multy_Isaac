@@ -168,52 +168,6 @@ public class RoomSpawner : MonoBehaviour
                                 pv.SetRoom(specialValue);
                             }
                         }
-//                        else //닿았으면 작은방으로 한번더검사
-//                        {
-//                            Vector3 offset=Vector3.zero;
-//                            switch (rooms[rand].transform.GetChild(0).GetComponent<RoomSpawner>().openingDirection) //1위 2아래 3오른 4왼
-//                            {
-//                                case 1:
-//                                    offset.y = -10;
-//                                    break;
-//                                case 2:
-//                                    offset.y = 10;
-//                                    break;
-//                                case 3:
-//                                    offset.x = -18;
-//                                    break;
-//                                case 4:
-//                                    offset.x = 18;
-//                                    break;
-//                            }
-//                            print(offset);
-//                            
-//                            RaycastHit2D[] hit2 = Physics2D.BoxCastAll(transform.position+offset,templates.oneBox,0,Vector2.down,0);
-//
-//                        
-//                            bool canSpawn2 = true;
-//                            foreach (RaycastHit2D c in hit2)
-//                            {
-//                                gizmoOn = true;
-//                                first = (transform.position + offset) +
-//                                        (transform.forward * c.distance);
-//                                second = templates.oneBox;
-//                                if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
-//                                {
-//                                    rand = rooms.Length - 2;
-//                                    canSpawn2 = false;
-//                                    break;
-//                                }
-//                            }
-//                            if (canSpawn2) //작은방 생성이 가능하면
-//                            {
-//                                print("A");
-//                                if(PhotonNetwork.OfflineMode)
-//                                    Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation);
-//                                else
-//                                    PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position,rooms[rand].transform.rotation);
-//                            }
-//                        }
                 }
                 else
                 {
@@ -268,10 +222,24 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
-                    if(other.GetComponent<RoomSpawner>().spawnedTick>spawnedTick) //나보다 늦게 생성됐으면
-                        Destroy(other.transform.parent.gameObject); //상대를 파괴
+                    if (other.GetComponent<RoomSpawner>().spawnedTick > spawnedTick) //나보다 늦게 생성됐으면
+                    {
+                        Destroy(other.transform.parent.gameObject); //상대를 파괴   
+//                        //그 후 그자리를 채워줌
+//                        if (PhotonNetwork.OfflineMode)
+//                            Instantiate(templates.closedRoom, other.transform.position, Quaternion.identity);
+//                        else
+//                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, other.transform.position, Quaternion.identity);
+                    }
                     else //아니면
+                    {
+//                        //파괴될 자리를 채워줌
+//                        if (PhotonNetwork.OfflineMode)
+//                            Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+//                        else
+//                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
                         Destroy(gameObject); //나를 파괴
+                    }
                 }
                 spawned = true;
             }
