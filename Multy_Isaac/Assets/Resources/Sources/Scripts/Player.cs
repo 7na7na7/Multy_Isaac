@@ -544,12 +544,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (!isSuper&&pv.IsMine)
         {
+            StartCoroutine(superTick());
             isFight();
             if(statMgr.LoseHp(Damage))
                 Die(HitName);
         }
     }
 
+    IEnumerator superTick()
+    {
+        isSuper = true;
+        yield return new WaitForSeconds(0.1f);
+        isSuper = false;
+    }
     void GetMove() //이동입력
     {
 //        if(Input.GetKeyDown(KeyCode.Return))
