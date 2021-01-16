@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public long spawnedTick = System.DateTime.Now.Ticks;
+    //public long spawnedTick = System.DateTime.Now.Ticks;
     public bool isConstant = false;
     public int openingDirection;
     //1 --> need bottom door
@@ -222,24 +222,12 @@ public class RoomSpawner : MonoBehaviour
             {
                 if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
-                    if (other.GetComponent<RoomSpawner>().spawnedTick > spawnedTick) //나보다 늦게 생성됐으면
-                    {
-                        Destroy(other.transform.parent.gameObject); //상대를 파괴   
-//                        //그 후 그자리를 채워줌
-//                        if (PhotonNetwork.OfflineMode)
-//                            Instantiate(templates.closedRoom, other.transform.position, Quaternion.identity);
-//                        else
-//                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, other.transform.position, Quaternion.identity);
-                    }
-                    else //아니면
-                    {
-//                        //파괴될 자리를 채워줌
-//                        if (PhotonNetwork.OfflineMode)
-//                            Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-//                        else
-//                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
-                        Destroy(gameObject); //나를 파괴
-                    }
+                    print(transform.position);
+                    if(other.transform.parent.GetComponent<AddRoom>().BoxSize==Vector2.zero) //상대가 작은방이면 파괴
+                        Destroy(other.gameObject.transform.parent.gameObject);
+                    else //아니면 나를 파괴
+                        Destroy(gameObject.transform.parent.gameObject);
+                    
                 }
                 spawned = true;
             }
