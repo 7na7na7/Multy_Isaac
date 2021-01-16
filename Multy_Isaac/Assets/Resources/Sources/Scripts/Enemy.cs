@@ -59,9 +59,9 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       {
         time = 0;
         if(name.Contains("(")) 
-          other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+          other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")),transform.position);
         else
-          other.GetComponent<Player>().Hit(CollsionDamage, name);
+          other.GetComponent<Player>().Hit(CollsionDamage, name,transform.position);
       }
     }
   }
@@ -74,9 +74,9 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       {
           time = 0;
           if(name.Contains("(")) 
-            other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")));
+            other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")),transform.position);
           else
-            other.GetComponent<Player>().Hit(CollsionDamage, name);
+            other.GetComponent<Player>().Hit(CollsionDamage, name,transform.position);
         }
     }
   }

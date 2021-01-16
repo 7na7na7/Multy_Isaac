@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
-                other.GetComponent<Player>().Hit(10,pv.Controller.NickName);
+                other.GetComponent<Player>().Hit(10,pv.Controller.NickName,transform.position);
                 spr.sprite = none;
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }

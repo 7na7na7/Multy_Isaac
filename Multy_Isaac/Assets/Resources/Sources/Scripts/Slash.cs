@@ -22,7 +22,7 @@ public class Slash : MonoBehaviourPunCallbacks
             {
                 if (canDmg)
                 {
-                    other.GetComponent<Player>().Hit(30,pv.Controller.NickName);
+                    other.GetComponent<Player>().Hit(30,pv.Controller.NickName,transform.position);
                     canDmg = false;
                 }
             }
