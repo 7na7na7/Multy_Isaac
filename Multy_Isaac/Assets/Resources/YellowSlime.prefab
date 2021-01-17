@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5458050791320017468}
-  - component: {fileID: 5458050791320017446}
   - component: {fileID: 5458050791320017471}
+  - component: {fileID: 5458050791320017446}
   - component: {fileID: 5458050791320017465}
   - component: {fileID: 5458050791320017464}
   - component: {fileID: 5458050791320017467}
@@ -19,8 +19,6 @@ GameObject:
   - component: {fileID: 5458050791320017456}
   - component: {fileID: 5458050791320017462}
   - component: {fileID: 5458050791320017463}
-  - component: {fileID: 4083527027872481428}
-  - component: {fileID: 7869339703471831677}
   m_Layer: 0
   m_Name: YellowSlime
   m_TagString: Enemy
@@ -42,24 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5458050791320017446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe2b362d2750a940865e04e33a78f93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemIndex: 0100000002000000
-  ItemPercent: 1e0000001e000000
-  hp: 20
-  pv: {fileID: 5458050791320017465}
-  CollsionDamage: 20
-  damageDelay: 1
 --- !u!212 &5458050791320017471
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -110,6 +90,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &5458050791320017446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458050791320017457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe2b362d2750a940865e04e33a78f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemIndex: 0100000002000000
+  ItemPercent: 1e0000001e000000
+  hp: 20
+  pv: {fileID: 5458050791320017465}
+  CollsionDamage: 20
+  damageDelay: 1
 --- !u!114 &5458050791320017465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +210,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0013772945, y: -0.33291152}
@@ -231,8 +229,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minMove: 0
-  maxMove: 3
+  maxMove: 2
   speed: 1
+  FinalNodeList: []
+  allowDiagonal: 1
+  dontCrossCorner: 0
 --- !u!95 &5458050791320017463
 Animator:
   serializedVersion: 3
@@ -252,35 +253,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &4083527027872481428
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.35}
-  serializedVersion: 2
-  m_Radius: 3
---- !u!58 &7869339703471831677
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.35}
-  serializedVersion: 2
-  m_Radius: 3
