@@ -22,26 +22,112 @@ public class Node
 public class Slime : MonoBehaviour
 {
     private IEnumerator corr;
+    public float AttackTime;
+    public float minIdleTime=0.5f;
+    public float maxIdleTIme = 2f;
     private bool isFinding = false;
     public float minMove;
     public float maxMove;
     public float speed;
+    private float localX;
     private Rigidbody2D rigid;
     private Vector3 startingPosition;
+    Animator anim;
+    
+    private Vector2Int startPos, targetPos; 
+    private Vector2Int bottomLeft=new Vector2Int(-20,-10); 
+    private Vector2Int topRight=new Vector2Int(20,10); 
+    public List<Node> FinalNodeList; 
+    public bool allowDiagonal, dontCrossCorner;
+    
+    int sizeX, sizeY; 
+    Node[,] NodeArray; 
+    Node StartNode, TargetNode, CurNode; 
+    List<Node> OpenList, ClosedList;
+
+    
+    private void Start()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        startingPosition = transform.position;
+        anim = GetComponent<Animator>();
+        corr = slimeCor();
+        StartCoroutine(corr);
+        localX = transform.localScale.x;
+    }
+    
+    
+    IEnumerator slimeCor()
+    {
+        while (true)
+        {
+            Vector2 roamPos = GetRoamingPosition();
+            //print(roamPos+" + "+Vector2.Distance(transform.position, roamPos));
+            if (Vector2.Distance(transform.position, roamPos) < 1f)
+            {
+                rigid.velocity = Vector2.zero;
+                anim.Play("Idle0");
+                yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
+            }
+            else
+            {
+                anim.Play("Walk");
+                Vector2 dir = (roamPos- (Vector2)transform.position).normalized;
+                rigid.velocity = dir * speed;
+            
+                float reachedPositionDistance = 0.2f;
+                yield return new WaitUntil(() =>Vector2.Distance(transform.position,roamPos)<reachedPositionDistance);      
+            }
+
+//            isFinding = true;
+//            startPos = new Vector2Int((int)transform.position.x,(int)transform.position.y);
+//            Vector2 roamPos = GetRoamingPosition();
+//            targetPos=new Vector2Int((int)roamPos.x,(int)roamPos.y);
+//            PathFinding();
+//            yield return new WaitUntil(() => isFinding ==false);   
+        }
+    }
+    
+   
+   private Vector2 GetRoamingPosition()
+   {
+       float randomMove = Random.Range(minMove, maxMove);
+       return startingPosition + UtilsClass.GetRandomDir() * randomMove;
+   }
 
 
-    private Vector2Int startPos, targetPos;
-   private Vector2Int bottomLeft=new Vector2Int(-20,-10);
-   private Vector2Int topRight=new Vector2Int(20,10);
-   public List<Node> FinalNodeList;
-   public bool allowDiagonal, dontCrossCorner;
+   private void OnTriggerStay2D(Collider2D other)
+   {
+       if (other.CompareTag("Wall")&&rigid.velocity!=Vector2.zero)
+       {
+           StopCoroutine(corr);
+           StartCoroutine(corr);
+       }
+   }
 
-   int sizeX, sizeY;
-   Node[,] NodeArray;
-   Node StartNode, TargetNode, CurNode;
-   List<Node> OpenList, ClosedList;
+   private void OnTriggerEnter2D(Collider2D other)
+   {
+       if (other.CompareTag("Player"))
+       {
+           StopCoroutine(corr);
+           rigid.velocity=Vector2.zero;
+           StartCoroutine(Attack(other.transform.position.x));
+       }
+   }
 
-   public void PathFinding()
+   IEnumerator Attack(float x)
+   {
+       if(x>transform.position.x) //오른쪽에있으면
+           transform.localScale=new Vector3(localX*-1,transform.localScale.y,transform.localScale.z);
+       else
+           transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
+       anim.Play("Attack"); 
+       yield return new WaitForSeconds(AttackTime);
+       StartCoroutine(corr);
+   }
+
+   #region 길찾기
+    public void PathFinding()
     {
         // NodeArray의 크기 정해주고, isWall, x, y 대입
         sizeX = topRight.x - bottomLeft.x;
@@ -115,8 +201,7 @@ public class Slime : MonoBehaviour
             OpenListAdd(CurNode.x - 1, CurNode.y);
         }
     }
-
-    void OpenListAdd(int checkX, int checkY)
+   void OpenListAdd(int checkX, int checkY)
     {
         // 상하좌우 범위를 벗어나지 않고, 벽이 아니면서, 닫힌리스트에 없다면
         if (checkX >= bottomLeft.x && checkX < topRight.x + 1 && checkY >= bottomLeft.y && checkY < topRight.y + 1 && !NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y].isWall && !ClosedList.Contains(NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y]))
@@ -144,14 +229,12 @@ public class Slime : MonoBehaviour
             }
         }
     }
-
-    void OnDrawGizmos()
+   void OnDrawGizmos()
     {
         if(FinalNodeList.Count != 0) for (int i = 0; i < FinalNodeList.Count - 1; i++)
                 Gizmos.DrawLine(new Vector2(FinalNodeList[i].x, FinalNodeList[i].y), new Vector2(FinalNodeList[i + 1].x, FinalNodeList[i + 1].y));
     }
-
-    IEnumerator Move(int count)
+   IEnumerator Move(int count)
     {
         for (int i = 1; i < count; i++)
         {
@@ -163,48 +246,6 @@ public class Slime : MonoBehaviour
         }
         isFinding = false;
     }
-
-    IEnumerator cor()
-    {
-        while (true)
-        {
-            Vector2 roamPos = GetRoamingPosition();
-            Vector2 dir = (roamPos- (Vector2)transform.position).normalized;
-            rigid.velocity = dir * speed;
-            
-            float reachedPositionDistance = 1f;
-            yield return new WaitUntil(() =>Vector2.Distance(transform.position,roamPos)<reachedPositionDistance);   
-            
-//            isFinding = true;
-//            startPos = new Vector2Int((int)transform.position.x,(int)transform.position.y);
-//            Vector2 roamPos = GetRoamingPosition();
-//            targetPos=new Vector2Int((int)roamPos.x,(int)roamPos.y);
-//            PathFinding();
-//            yield return new WaitUntil(() => isFinding ==false);   
-        }
-    }
-   
-   private void Start()
-   {
-       rigid = GetComponent<Rigidbody2D>();
-      startingPosition = transform.position;
-      corr = cor();
-      StartCoroutine(corr);
-   }
-   
-   private Vector2 GetRoamingPosition()
-   {
-       float randomMove = Random.Range(minMove, maxMove);
-       print(randomMove);
-       return startingPosition + UtilsClass.GetRandomDir() * randomMove;
-   }
-
-   private void OnCollisionStay2D(Collision2D other)
-   {
-       if (other.gameObject.CompareTag("Wall"))
-       {
-          StopCoroutine(corr);
-          StartCoroutine(corr);
-       }
-   }
+   #endregion
+  
 }
