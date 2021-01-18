@@ -11,6 +11,7 @@ public class Slash : MonoBehaviourPunCallbacks
     public PhotonView pv;
     void Start()
     {
+        transform.position=new Vector3(transform.position.x,transform.position.y);
         Destroy(gameObject,DestroyTime);
     }
 

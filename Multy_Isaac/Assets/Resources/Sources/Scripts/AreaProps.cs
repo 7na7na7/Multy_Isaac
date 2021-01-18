@@ -20,7 +20,7 @@ public class AreaProps : MonoBehaviour
             for (int i = 0; i < decoCount; i++)
             {
                 GameObject go=Instantiate(decos[Random.Range(0, decos.Length)], transform);
-                go.transform.position = transform.position + new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0); //벽이랑 안겹치게 1씩 떨어뜨려줌
+                go.transform.position = transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 3f), 0); //벽이랑 안겹치게 1씩 떨어뜨려줌
             }
         }
     }
