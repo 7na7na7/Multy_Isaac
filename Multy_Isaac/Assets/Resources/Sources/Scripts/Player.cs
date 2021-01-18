@@ -556,6 +556,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 rb.velocity=Vector2.zero;
                 rb.DOMove(transform.position+dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=> { canMove = true; });   
             }
+            GetComponent<FlashWhite>().Flash();
             isFight();
             if(statMgr.LoseHp(Damage))
                 Die(HitName);
