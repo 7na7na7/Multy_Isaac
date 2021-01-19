@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       }
 
       Spawner.Count++;
+      Spawner.StartSpawnCor();
       Destroy(gameObject); //죽어버리렴 ㅋ
     }
   }

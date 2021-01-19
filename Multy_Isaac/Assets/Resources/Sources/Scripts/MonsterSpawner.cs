@@ -14,7 +14,10 @@ public class MonsterSpawner : MonoBehaviour
     public int Count;
     
     private Vector2 first, second;
+    public float minSpawnTime = 4;
+    public float maxSpawnTime = 8;
 
+    public bool isStartCor = false;
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -25,44 +28,66 @@ public class MonsterSpawner : MonoBehaviour
         Count = Random.Range(minCount, maxCount);
         for (int i = 0; i < Count; i++)
         {
-            Vector3 randomPos = Vector3.zero;
-            bool canSpawn = false;
-             //Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
-            while (true)
-            {
-                randomPos = transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0);
-                RaycastHit2D[] hit = Physics2D.BoxCastAll(randomPos,new Vector2(0.5f,0.5f), 0,Vector2.down,0);
+           Spawn();
+        }
+        
+    }
 
-                bool can = false;
-                foreach (RaycastHit2D c in hit)
+    void Spawn()
+    {
+        Vector3 randomPos = Vector3.zero;
+        bool canSpawn = false;
+        //Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
+        while (true)
+        {
+            randomPos = transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0);
+            RaycastHit2D[] hit = Physics2D.BoxCastAll(randomPos,new Vector2(0.5f,0.5f), 0,Vector2.down,0);
+
+            bool can = false;
+            foreach (RaycastHit2D c in hit)
+            {
+                if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
                 {
-                    if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
-                    {
-                        first = randomPos;
-                        second = new Vector2(0.5f,0.5f);
-                        can = true;
-                        break;
-                    }
-                }
-
-                if (can == false)
+                    first = randomPos;
+                    second = new Vector2(0.5f,0.5f);
+                    can = true;
                     break;
+                }
             }
 
-            int randomMon = Random.Range(0, monsters.Length);
-            if (PhotonNetwork.OfflineMode)
-            {
-                GameObject mon=Instantiate(monsters[randomMon],randomPos, Quaternion.identity);
-                mon.GetComponent<Enemy>().Spawner = this;
-            }
-            else
-            {
-                GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
-                mon.GetComponent<Enemy>().Spawner = this;
-            }
+            if (can == false)
+                break;
+        }
 
-            Count--;
+        int randomMon = Random.Range(0, monsters.Length);
+        if (PhotonNetwork.OfflineMode)
+        {
+            GameObject mon=Instantiate(monsters[randomMon],randomPos, Quaternion.identity);
+            mon.transform.GetChild(0).GetComponent<Enemy>().Spawner = this;
+        }
+        else
+        {
+            GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
+            mon.transform.GetChild(0).GetComponent<Enemy>().Spawner = this;
+        }
+
+        Count--;
+    }
+    IEnumerator spawnCor()
+    {
+        isStartCor = true;
+        
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(minSpawnTime,maxSpawnTime));
+            if(Count>=1) //Count가 1이상이면
+                Spawn();
         }
     }
-    
+
+    public void StartSpawnCor()
+    {
+        if(!isStartCor) 
+            StartCoroutine(spawnCor());
+    }
 }
