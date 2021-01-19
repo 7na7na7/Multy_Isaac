@@ -1,19 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject[] monsters;
-    // Start is called before the first frame update
+
+    public int minCount = 5;
+    public int maxCount = 8;
+
+    public int Count;
+    
+    private Vector2 first, second;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(first,second);
+    }
     void Start()
     {
-        
-    }
+        Count = Random.Range(minCount, maxCount);
+        for (int i = 0; i < Count; i++)
+        {
+            Vector3 randomPos = Vector3.zero;
+            bool canSpawn = false;
+             //Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
+            while (true)
+            {
+                randomPos = transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0);
+                RaycastHit2D[] hit = Physics2D.BoxCastAll(randomPos,new Vector2(0.5f,0.5f), 0,Vector2.down,0);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+                bool can = false;
+                foreach (RaycastHit2D c in hit)
+                {
+                    if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
+                    {
+                        first = randomPos;
+                        second = new Vector2(0.5f,0.5f);
+                        can = true;
+                        break;
+                    }
+                }
+
+                if (can == false)
+                    break;
+            }
+
+            int randomMon = Random.Range(0, monsters.Length);
+            if (PhotonNetwork.OfflineMode)
+            {
+                GameObject mon=Instantiate(monsters[randomMon],randomPos, Quaternion.identity);
+                mon.GetComponent<Enemy>().Spawner = this;
+            }
+            else
+            {
+                GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
+                mon.GetComponent<Enemy>().Spawner = this;
+            }
+
+            Count--;
+        }
     }
+    
 }

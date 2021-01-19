@@ -130,8 +130,7 @@ public class RoomSpawner : MonoBehaviour
                         foreach (RaycastHit2D c in hit)
                         {
                             gizmoOn = true;
-                            first = (transform.position + (Vector3) bigRooms[rand].GetComponent<AddRoom>().offset) +
-                                    (transform.forward * c.distance);
+                            first = (transform.position + (Vector3) bigRooms[rand].GetComponent<AddRoom>().offset) + (transform.forward * c.distance);
                             second = bigRooms[rand].GetComponent<AddRoom>().BoxSize;
                             if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
                             {
@@ -201,7 +200,6 @@ public class RoomSpawner : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(first,second);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

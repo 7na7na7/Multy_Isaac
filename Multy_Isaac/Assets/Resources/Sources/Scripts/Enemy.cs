@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
+  public MonsterSpawner Spawner;
   public int[] ItemIndex;
   public int[] ItemPercent;
   private FlashWhite flashwhite;
@@ -47,7 +48,8 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
         }
       }
 
-      Destroy(gameObject); 
+      Spawner.Count++;
+      Destroy(gameObject); //죽어버리렴 ㅋ
     }
   }
 
