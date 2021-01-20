@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Slash : MonoBehaviourPunCallbacks
 {
+    public int Dmg;
     public float nuckBackDistance;
     private bool canDmg = true;
     public float DestroyTime = 1;
@@ -24,7 +25,7 @@ public class Slash : MonoBehaviourPunCallbacks
             {
                 if (canDmg)
                 {
-                    other.GetComponent<Player>().Hit(30,pv.Controller.NickName,nuckBackDistance,transform.position);
+                    other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position);
                     canDmg = false;
                 }
             }
@@ -33,13 +34,13 @@ public class Slash : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.OfflineMode)
             {
-                other.GetComponent<Enemy>().HitRPC(10,transform.position,nuckBackDistance);
+                other.GetComponent<Enemy>().HitRPC(Dmg,transform.position,nuckBackDistance);
             }
             else
             {
                 if (pv.IsMine)
                 {
-                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, 10,transform.position,nuckBackDistance);
+                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, Dmg,transform.position,nuckBackDistance);
                 }
             }
         }
