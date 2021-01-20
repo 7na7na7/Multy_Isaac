@@ -33,7 +33,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public bool isSleeping; //자고있는가?
     //이동, 애니메이션
     public Ease nuckBackEase;
-    public float nuckBackDistance = 5;
     public float nuckBackTime = 0.2f;
     private int mobile;
     private float mobileTime= 0;
@@ -543,7 +542,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         camera.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
     }
 
-    public void Hit(int Damage,string HitName="",Vector3 pos=default(Vector3)) //공격받을때 공격한사람 이름도 받음
+    public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3)) //공격받을때 공격한사람 이름도 받음
     {
         if (!isSuper&&pv.IsMine)
         {

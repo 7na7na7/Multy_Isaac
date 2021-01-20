@@ -28,7 +28,8 @@ public class MonsterSpawner : MonoBehaviour
         Count = Random.Range(minCount, maxCount);
         for (int i = 0; i < Count; i++)
         {
-           Spawn();
+            Count++;
+            Spawn();
         }
         
     }

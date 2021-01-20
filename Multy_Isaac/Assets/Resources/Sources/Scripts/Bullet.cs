@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviourPunCallbacks
 {
+    public float nuckBackDistance;
     public Sprite none;
     public float speed = 5;
     public float DestroyTime = 1;
@@ -35,7 +36,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
-                other.GetComponent<Player>().Hit(10,pv.Controller.NickName,transform.position);
+                other.GetComponent<Player>().Hit(10,pv.Controller.NickName,nuckBackDistance,transform.position);
                 spr.sprite = none;
                 pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
@@ -53,14 +54,14 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.OfflineMode)
             {
-                other.GetComponent<Enemy>().HitRPC(10);
+                other.GetComponent<Enemy>().HitRPC(10,transform.position, nuckBackDistance);
                 Destroy(gameObject);
             }
             else
             {
                 if (pv.IsMine)
                 {
-                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, 10);
+                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, 10,transform.position,nuckBackDistance);
                     pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
                 }
                 else

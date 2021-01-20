@@ -61,6 +61,7 @@ public class Slime : MonoBehaviour
     {
         while (true)
         {
+            rigid.velocity = Vector2.zero;
             Vector2 roamPos = GetRoamingPosition();
             //print(roamPos+" + "+Vector2.Distance(transform.position, roamPos));
             if (Vector2.Distance(transform.position, roamPos) < 1f)
@@ -96,9 +97,9 @@ public class Slime : MonoBehaviour
    }
 
 
-   private void OnTriggerStay2D(Collider2D other)
+   private void OnCollisionStay2D(Collision2D other)
    {
-       if (other.CompareTag("Wall")&&rigid.velocity!=Vector2.zero)
+       if (other.gameObject.CompareTag("Wall"))
        {
            StopCoroutine(corr);
            StartCoroutine(corr);
