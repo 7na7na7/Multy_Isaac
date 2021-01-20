@@ -25,13 +25,15 @@ public class MonsterSpawner : MonoBehaviour
     }
     void Start()
     {
-        Count = Random.Range(minCount, maxCount);
-        for (int i = 0; i < Count; i++)
+        if (transform.parent.gameObject.tag != "Entry")
         {
-            Count++;
-            Spawn();
+            Count = Random.Range(minCount, maxCount);
+            for (int i = 0; i < Count; i++)
+            {
+                Count++;
+                Spawn();
+            }
         }
-        
     }
 
     void Spawn()
