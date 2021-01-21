@@ -14,8 +14,7 @@ public class DelayDestroy : MonoBehaviour
            destroyRPC();
         else
         {
-            if (PhotonNetwork.IsMasterClient)
-               GetComponent<PhotonView>().RPC("destroyRPC",RpcTarget.All);
+            GetComponent<PhotonView>().RPC("destroyRPC",RpcTarget.All);
         }
     }
 

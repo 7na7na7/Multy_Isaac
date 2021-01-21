@@ -9,6 +9,15 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public GameObject StartEntryPrefab;
+    private void Awake()
+    {
+        if (!PhotonNetwork.OfflineMode)
+        {
+            if(!PhotonNetwork.IsMasterClient)
+                Destroy(gameObject);
+        }
+    }
+    
     private void Start()
     {
         if (PhotonNetwork.OfflineMode)
@@ -17,10 +26,7 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.InstantiateRoomObject("StartEntry", transform.position, quaternion.identity);
-            }   
+            PhotonNetwork.InstantiateRoomObject("StartEntry", transform.position, quaternion.identity);
         }
     }
     

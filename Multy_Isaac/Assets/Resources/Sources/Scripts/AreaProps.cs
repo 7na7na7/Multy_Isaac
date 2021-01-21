@@ -12,19 +12,17 @@ public class AreaProps : MonoBehaviour
     public int minDeco;
     public int maxDeco;
 
+    private void Awake()
+    {
+        if (!PhotonNetwork.OfflineMode)
+        {
+            if(!PhotonNetwork.IsMasterClient)
+                Destroy(gameObject);
+        }
+    }
     private void Start()
     {
-        if (PhotonNetwork.OfflineMode)
-        {
-            setProps();
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                setProps();
-            }
-        }
+        setProps();
     }
 
     void setProps()
@@ -37,13 +35,13 @@ public class AreaProps : MonoBehaviour
             {
                 if (PhotonNetwork.OfflineMode)
                 {
-                    GameObject go=Instantiate(decos[Random.Range(0, decos.Length)], transform);
-                    go.transform.position = transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0); //벽이랑 안겹치게 1씩 떨어뜨려줌
+                    GameObject go=Instantiate(decos[Random.Range(0, decos.Length)], transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0),quaternion.identity);
+                    //go.transform.parent = transform;
                 }
                 else
                 {
-                    GameObject go=PhotonNetwork.InstantiateRoomObject(decos[Random.Range(0, decos.Length)].name, 
-                        transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0),quaternion.identity);
+                    GameObject go=PhotonNetwork.InstantiateRoomObject(decos[Random.Range(0, decos.Length)].name, transform.position + new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 2.5f), 0),quaternion.identity);
+                    //go.transform.parent = transform;
                 }
             }
         }
