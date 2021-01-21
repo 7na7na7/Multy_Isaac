@@ -1,15 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class SpawnEffect : MonoBehaviour
 {
-  public GameObject mon;
+    private void DestroyF()
+    {
+        if(PhotonNetwork.OfflineMode)
+            RPC();
+        else
+            GetComponent<PhotonView>().RPC("RPC",RpcTarget.All);
+    }
 
-  public void Spawn()
-  {
-   mon.SetActive(true);
-   mon.transform.parent = null;
-    Destroy(gameObject);
-  }
+    [PunRPC]
+    void RPC()
+    {
+        Destroy(gameObject);
+    }
 }

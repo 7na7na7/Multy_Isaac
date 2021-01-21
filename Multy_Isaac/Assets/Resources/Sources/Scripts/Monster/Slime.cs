@@ -65,7 +65,6 @@ public class Slime : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                StartCoroutine(corr);
                 StartCoroutine(velocitySync());
             }
                 
@@ -142,14 +141,14 @@ public class Slime : MonoBehaviour
            if(PhotonNetwork.OfflineMode)
            {
                StopCoroutine(corr);
-               StartCoroutine(corr);StartCoroutine(corr);
+               StartCoroutine(corr);
            }
            else
            {
                if(PhotonNetwork.IsMasterClient)
                {
                    StopCoroutine(corr);
-                   StartCoroutine(corr);StartCoroutine(corr);
+                   StartCoroutine(corr);
                }
            }
        }
@@ -161,14 +160,14 @@ public class Slime : MonoBehaviour
            if(PhotonNetwork.OfflineMode)
            {
                StopCoroutine(corr);
-               StartCoroutine(corr);StartCoroutine(corr);
+               StartCoroutine(corr);
            }
            else
            {
                if(PhotonNetwork.IsMasterClient)
                {
                    StopCoroutine(corr);
-                   StartCoroutine(corr);StartCoroutine(corr);
+                   StartCoroutine(corr);
                }
            }
        }
@@ -185,10 +184,10 @@ public class Slime : MonoBehaviour
            }
            else
            {
-               if(PhotonNetwork.IsMasterClient)
+               if (PhotonNetwork.IsMasterClient)
                {
                    StopCoroutine(corr);
-                   rigid.velocity=Vector2.zero;
+                   rigid.velocity = Vector2.zero;
                    StartCoroutine(Attack(other.transform.position.x));
                }
            }

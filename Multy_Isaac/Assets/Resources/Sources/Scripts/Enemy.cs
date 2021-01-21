@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Photon.Pun;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
+  public GameObject effect;
   public float nuckBackDistance;
   public GameObject corpes;
   public float nuckBackTime;
@@ -24,7 +26,14 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   private float time;
   private void Start()
   {
-    flashwhite = GetComponent<FlashWhite>();
+    if (PhotonNetwork.OfflineMode)
+      Instantiate(effect, transform.position, quaternion.identity);
+    else
+    {
+      if(PhotonNetwork.IsMasterClient)
+        PhotonNetwork.InstantiateRoomObject(effect.name, transform.position, quaternion.identity);
+    }
+      flashwhite = GetComponent<FlashWhite>();
   }
 
   private void Update()

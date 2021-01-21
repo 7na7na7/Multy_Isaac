@@ -82,13 +82,10 @@ public class MonsterSpawner : MonoBehaviour
         {
             GameObject mon=Instantiate(monsters[randomMon],transform);
             mon.transform.position = randomPos;
-            mon.GetComponent<Enemy>().Spawner = this;
         }
         else
         {
-            GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
-            mon.transform.parent = transform;
-            mon.GetComponent<Enemy>().Spawner = this;
+           PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
         }
 
         Count--;
