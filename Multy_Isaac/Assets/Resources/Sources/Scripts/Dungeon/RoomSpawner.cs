@@ -35,9 +35,9 @@ public class RoomSpawner : MonoBehaviour
 
     private void Awake()
     {
-       if(!PhotonNetwork.OfflineMode)
+        if (!PhotonNetwork.OfflineMode)
         {
-            if(!PhotonNetwork.IsMasterClient) 
+            if(!PhotonNetwork.IsMasterClient)
                 Destroy(gameObject);
         }
     }
@@ -46,8 +46,8 @@ public class RoomSpawner : MonoBehaviour
     {
         Invoke("set",waitTime);  
         Destroy(gameObject,waitTime);
-          templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-                       Invoke("Spawn",0.1f);
+        templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        Invoke("Spawn",0.1f);
     }
 
     void SimpleSpawn()

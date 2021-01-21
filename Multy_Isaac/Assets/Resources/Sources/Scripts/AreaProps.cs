@@ -12,7 +12,14 @@ public class AreaProps : MonoBehaviour
     public int minDeco;
     public int maxDeco;
 
-
+    private void Awake()
+    {
+        if (!PhotonNetwork.OfflineMode)
+        {
+            if(!PhotonNetwork.IsMasterClient)
+                Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         setProps();
