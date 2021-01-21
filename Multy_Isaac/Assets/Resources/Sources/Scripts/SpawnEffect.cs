@@ -9,14 +9,7 @@ public class SpawnEffect : MonoBehaviour
 {
     public GameObject Effect;
     public Vector3 pos;
-    private void Awake()
-    {
-        if (!PhotonNetwork.OfflineMode)
-        {
-            if(!PhotonNetwork.IsMasterClient)
-                Destroy(gameObject);
-        }
-    }
+
     private void Start()
     {
         if(PhotonNetwork.OfflineMode) 

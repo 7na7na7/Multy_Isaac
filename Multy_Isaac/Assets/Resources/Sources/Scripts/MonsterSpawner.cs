@@ -23,17 +23,6 @@ public class MonsterSpawner : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(first,second);
     }
-
-    
-    private void Awake()
-    {
-        if (!PhotonNetwork.OfflineMode)
-        {
-            if(!PhotonNetwork.IsMasterClient)
-                Destroy(gameObject);
-        }
-    }
-    
     void Start()
     {
         //if (transform.parent.gameObject.tag != "Entry")
@@ -91,14 +80,12 @@ public class MonsterSpawner : MonoBehaviour
         int randomMon = Random.Range(0, monsters.Length);
         if (PhotonNetwork.OfflineMode)
         {
-            GameObject mon=Instantiate(monsters[randomMon],transform);
-            mon.transform.position = randomPos;
+            GameObject mon=Instantiate(monsters[randomMon],randomPos, Quaternion.identity);
             mon.GetComponent<Enemy>().Spawner = this;
         }
         else
         {
             GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
-            mon.transform.parent = transform;
             mon.GetComponent<Enemy>().Spawner = this;
         }
 

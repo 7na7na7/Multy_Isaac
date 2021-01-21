@@ -51,15 +51,7 @@ public class RoomTemplates : MonoBehaviour
    public int privateCount;
    public int publicCount;
 
-   private void Awake()
-   {
-      if (!PhotonNetwork.OfflineMode)
-      {
-         if(!PhotonNetwork.IsMasterClient)
-            Destroy(gameObject);
-      }
-   }
-
+   public Vector2 oneBox;
    private void Start()
    {
       if (PhotonNetwork.OfflineMode)
@@ -69,7 +61,9 @@ public class RoomTemplates : MonoBehaviour
       }
       else
       {
-         privateCount = FindObjectOfType<playerCountSave>().playerCount;
+         if (PhotonNetwork.IsMasterClient)
+         {
+            privateCount = FindObjectOfType<playerCountSave>().playerCount;
             publicCount = privateCount;
 
             maxRoomCount = privateCount * maxRoomCount;
@@ -77,6 +71,7 @@ public class RoomTemplates : MonoBehaviour
           
             Invoke("Spawn",waitTime);  
             //Invoke("ReLoad",ReLoadTime);
+         }
       }
    }
 

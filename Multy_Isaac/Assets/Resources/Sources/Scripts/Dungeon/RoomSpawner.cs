@@ -35,9 +35,9 @@ public class RoomSpawner : MonoBehaviour
 
     private void Awake()
     {
-        if (!PhotonNetwork.OfflineMode)
+       if(!PhotonNetwork.OfflineMode)
         {
-            if(!PhotonNetwork.IsMasterClient)
+            if(!PhotonNetwork.IsMasterClient) 
                 Destroy(gameObject);
         }
     }
@@ -46,8 +46,8 @@ public class RoomSpawner : MonoBehaviour
     {
         Invoke("set",waitTime);  
         Destroy(gameObject,waitTime);
-        templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        Invoke("Spawn",0.1f);
+          templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+                       Invoke("Spawn",0.1f);
     }
 
     void SimpleSpawn()
@@ -221,10 +221,11 @@ public class RoomSpawner : MonoBehaviour
                 if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
                 {
                     print(transform.position);
-                    if (other.transform.parent.GetComponent<AddRoom>().BoxSize == Vector2.zero) //상대가 작은방이면 파괴
+                    if(other.transform.parent.GetComponent<AddRoom>().BoxSize==Vector2.zero) //상대가 작은방이면 파괴
                         Destroy(other.gameObject.transform.parent.gameObject);
                     else //아니면 나를 파괴
                         Destroy(gameObject.transform.parent.gameObject);
+                    
                 }
                 spawned = true;
             }
@@ -237,5 +238,4 @@ public class RoomSpawner : MonoBehaviour
           else
              return false;
        }
-
 }
