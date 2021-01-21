@@ -81,8 +81,21 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 
         Spawner.Count++;
         Spawner.StartSpawnCor();
-        Instantiate(corpes, transform.position, Quaternion.identity);
-        Destroy(gameObject); //죽어버리렴 ㅋ
+        if (PhotonNetwork.OfflineMode)
+        {
+          Instantiate(corpes, transform.position, Quaternion.identity);
+        }
+        else
+        {
+          if(PhotonNetwork.IsMasterClient)
+            PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
+        }
+        
+        
+        if (PhotonNetwork.OfflineMode)
+          destroyRPC();
+        else
+          pv.RPC("destroyRPC",RpcTarget.All);
       }
     }
   }
@@ -115,5 +128,11 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
             other.GetComponent<Player>().Hit(CollsionDamage, name,nuckBackDistance,transform.position);
         }
     }
+  }
+
+  [PunRPC]
+  void destroyRPC()
+  {
+    Destroy(gameObject);
   }
 }
