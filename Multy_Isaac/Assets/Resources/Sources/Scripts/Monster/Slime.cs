@@ -347,7 +347,12 @@ public class Slime : MonoBehaviour
    [PunRPC]
    void animRPC(string animName)
    {
-       anim.Play(animName);
+       try
+       {
+           anim.Play(animName);
+       }
+       catch (Exception e)
+       { }
    }
 
    [PunRPC]
