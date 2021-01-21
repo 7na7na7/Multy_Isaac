@@ -555,13 +555,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 rb.velocity=Vector2.zero;
                 rb.DOMove(transform.position+dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=> { canMove = true; });   
             }
-            GetComponent<FlashWhite>().Flash();
+
+            if (PhotonNetwork.OfflineMode) 
+                flashWhiteRPC();
+            else
+                pv.RPC("flashWhiteRPC",RpcTarget.All); 
+            
             isFight();
             if(statMgr.LoseHp(Damage))
                 Die(HitName);
         }
     }
 
+    [PunRPC]
+    void flashWhiteRPC()
+    {
+        GetComponent<FlashWhite>().Flash();
+    }
     IEnumerator superTick()
     {
         isSuper = true;
@@ -756,7 +766,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void SetAnimRPC(string animName)
     {
+        try
+        {
         anim.Play(animName);
+        }
+        catch (Exception e)
+        { }
     }
     [PunRPC]
     public void ChatBaloonRPC(string txt)
