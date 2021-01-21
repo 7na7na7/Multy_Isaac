@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 using DG.Tweening;
-using Photon.Pun;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
@@ -23,7 +22,6 @@ public class Node
 public class Slime : MonoBehaviour
 {
     private IEnumerator corr;
-    private PhotonView pv;
     public float AttackTime;
     public float minIdleTime=0.5f;
     public float maxIdleTIme = 2f;
@@ -50,42 +48,15 @@ public class Slime : MonoBehaviour
     
     private void Start()
     {
-        pv = GetComponent<PhotonView>();
         rigid = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;
         anim = GetComponent<Animator>();
         corr = slimeCor();
+        StartCoroutine(corr);
         localX = transform.localScale.x;
-
-        if (PhotonNetwork.OfflineMode)
-        {
-         StartCoroutine(corr);
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                StartCoroutine(corr);
-                StartCoroutine(velocitySync());
-            }
-                
-        }
     }
-
-    IEnumerator velocitySync()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            pv.RPC("veloSyncRPC", RpcTarget.All,rigid.position);
-        }
-    }
-
-    [PunRPC]
-    void veloSyncRPC(Vector2 p)
-    {
-        rigid.position = p;
-    }
+    
+    
     IEnumerator slimeCor()
     {
         while (true)
@@ -96,21 +67,12 @@ public class Slime : MonoBehaviour
             if (Vector2.Distance(transform.position, roamPos) < 1f)
             {
                 rigid.velocity = Vector2.zero;
-                
-                if(PhotonNetwork.OfflineMode)
-                    animRPC("Idle0");
-                else
-                    pv.RPC("animRPC",RpcTarget.All,"Idle0");
-                
+                anim.Play("Idle0");
                 yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
             }
             else
             {
-                if(PhotonNetwork.OfflineMode)
-                    animRPC("Walk");
-                else
-                    pv.RPC("animRPC",RpcTarget.All,"Walk");
-                
+                anim.Play("Walk");
                 Vector2 dir = (roamPos- (Vector2)transform.position).normalized;
                 rigid.velocity = dir * speed;
             
@@ -139,84 +101,35 @@ public class Slime : MonoBehaviour
    {
        if (other.gameObject.CompareTag("Wall"))
        {
-           if(PhotonNetwork.OfflineMode)
-           {
-               StopCoroutine(corr);
-               StartCoroutine(corr);StartCoroutine(corr);
-           }
-           else
-           {
-               if(PhotonNetwork.IsMasterClient)
-               {
-                   StopCoroutine(corr);
-                   StartCoroutine(corr);StartCoroutine(corr);
-               }
-           }
+           StopCoroutine(corr);
+           StartCoroutine(corr);
        }
    }
    private void OnCollisionEnter2D(Collision2D other)
    {
        if (other.gameObject.CompareTag("Wall"))
        {
-           if(PhotonNetwork.OfflineMode)
-           {
-               StopCoroutine(corr);
-               StartCoroutine(corr);StartCoroutine(corr);
-           }
-           else
-           {
-               if(PhotonNetwork.IsMasterClient)
-               {
-                   StopCoroutine(corr);
-                   StartCoroutine(corr);StartCoroutine(corr);
-               }
-           }
+           StopCoroutine(corr);
+           StartCoroutine(corr);
        }
    }
    private void OnTriggerEnter2D(Collider2D other)
    {
        if (other.CompareTag("Player"))
        {
-           if(PhotonNetwork.OfflineMode)
-           {
-               StopCoroutine(corr);
-               rigid.velocity=Vector2.zero;
-               StartCoroutine(Attack(other.transform.position.x));
-           }
-           else
-           {
-               if(PhotonNetwork.IsMasterClient)
-               {
-                   StopCoroutine(corr);
-                   rigid.velocity=Vector2.zero;
-                   StartCoroutine(Attack(other.transform.position.x));
-               }
-           }
+           StopCoroutine(corr);
+           rigid.velocity=Vector2.zero;
+           StartCoroutine(Attack(other.transform.position.x));
        }
    }
 
    IEnumerator Attack(float x)
    {
-       if (x > transform.position.x) //오른쪽에있으면
-       {
-           if(PhotonNetwork.OfflineMode)
-               localScaleRPC(localX*-1);
-           else
-               pv.RPC("localScaleRPC",RpcTarget.All,localX*-1);
-       }
+       if(x>transform.position.x) //오른쪽에있으면
+           transform.localScale=new Vector3(localX*-1,transform.localScale.y,transform.localScale.z);
        else
-       {
-           if(PhotonNetwork.OfflineMode)
-               localScaleRPC(localX);
-           else
-               pv.RPC("localScaleRPC",RpcTarget.All,localX);
-       }
-       
-       if(PhotonNetwork.OfflineMode)
-           animRPC("Attack");
-       else
-           pv.RPC("animRPC",RpcTarget.All,"Attack");
-       
+           transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
+       anim.Play("Attack"); 
        yield return new WaitForSeconds(AttackTime);
        StartCoroutine(corr);
    }
@@ -342,17 +255,5 @@ public class Slime : MonoBehaviour
         isFinding = false;
     }
    #endregion
-
-
-   [PunRPC]
-   void animRPC(string animName)
-   {
-       anim.Play(animName);
-   }
-
-   [PunRPC]
-   void localScaleRPC(float x)
-   {
-       transform.localScale=new Vector3(x,transform.localScale.y,transform.localScale.z);
-   }
+  
 }

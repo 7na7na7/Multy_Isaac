@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class SpawnEffect : MonoBehaviour
 {
-    public GameObject Effect;
-    public Vector3 pos;
+  public GameObject mon;
 
-    private void Start()
-    {
-        if(PhotonNetwork.OfflineMode) 
-            Instantiate(Effect, transform.position+pos,quaternion.identity);
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-                PhotonNetwork.InstantiateRoomObject(Effect.name, transform.position+pos, quaternion.identity);
-        }
-    }
+  public void Spawn()
+  {
+   mon.SetActive(true);
+   mon.transform.parent = null;
+    Destroy(gameObject);
+  }
 }
