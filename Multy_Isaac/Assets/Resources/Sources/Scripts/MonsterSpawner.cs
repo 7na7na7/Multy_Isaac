@@ -23,17 +23,6 @@ public class MonsterSpawner : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(first,second);
     }
-
-    
-    private void Awake()
-    {
-        if (!PhotonNetwork.OfflineMode)
-        {
-            if(!PhotonNetwork.IsMasterClient)
-                Destroy(gameObject);
-        }
-    }
-    
     void Start()
     {
         //if (transform.parent.gameObject.tag != "Entry")
