@@ -66,11 +66,26 @@ public class Slime : MonoBehaviour
             if (PhotonNetwork.IsMasterClient)
             {
                 StartCoroutine(corr);
+                StartCoroutine(velocitySync());
             }
                 
         }
     }
-    
+
+    IEnumerator velocitySync()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            pv.RPC("veloSyncRPC", RpcTarget.All,rigid.position);
+        }
+    }
+
+    [PunRPC]
+    void veloSyncRPC(Vector2 p)
+    {
+        rigid.position = p;
+    }
     IEnumerator slimeCor()
     {
         while (true)
