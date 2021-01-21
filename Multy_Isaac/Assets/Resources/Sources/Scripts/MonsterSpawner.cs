@@ -25,23 +25,7 @@ public class MonsterSpawner : MonoBehaviour
     }
     void Start()
     {
-        //if (transform.parent.gameObject.tag != "Entry")
-        if (PhotonNetwork.OfflineMode)
-        {
-            startSpawn();
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                startSpawn();
-            }
-        }
-    }
-
-    void startSpawn()
-    {
-        if (!transform.parent.CompareTag("Entry"))
+        if (transform.parent.gameObject.tag != "Entry")
         {
             Count = Random.Range(minCount, maxCount);
             for (int i = 0; i < Count; i++)
@@ -51,6 +35,7 @@ public class MonsterSpawner : MonoBehaviour
             }
         }
     }
+
     void Spawn()
     {
         Vector3 randomPos = Vector3.zero;
@@ -81,12 +66,12 @@ public class MonsterSpawner : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             GameObject mon=Instantiate(monsters[randomMon],randomPos, Quaternion.identity);
-            mon.GetComponent<Enemy>().Spawner = this;
+            mon.transform.GetChild(0).GetComponent<Enemy>().Spawner = this;
         }
         else
         {
             GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
-            mon.GetComponent<Enemy>().Spawner = this;
+            mon.transform.GetChild(0).GetComponent<Enemy>().Spawner = this;
         }
 
         Count--;

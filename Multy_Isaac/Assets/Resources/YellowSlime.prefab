@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 5458050791320017471}
   - component: {fileID: 5458050791320017446}
   - component: {fileID: 5458050791320017465}
+  - component: {fileID: 5458050791320017464}
   - component: {fileID: 5458050791320017467}
   - component: {fileID: 5458050791320017466}
   - component: {fileID: 1343795421238119719}
   - component: {fileID: 5458050791320017456}
   - component: {fileID: 5458050791320017463}
   - component: {fileID: 6030439151700246094}
-  - component: {fileID: 8411453767699622585}
   m_Layer: 0
   m_Name: YellowSlime
   m_TagString: Enemy
@@ -132,10 +132,29 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
+  - {fileID: 5458050791320017464}
   - {fileID: 5458050791320017466}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &5458050791320017464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458050791320017457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!50 &5458050791320017467
 Rigidbody2D:
   serializedVersion: 4
@@ -164,14 +183,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
+  m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &1343795421238119719
 MonoBehaviour:
@@ -242,17 +261,3 @@ MonoBehaviour:
   FinalNodeList: []
   allowDiagonal: 1
   dontCrossCorner: 0
---- !u!114 &8411453767699622585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73fc3b664154b348b485fc08847396e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Effect: {fileID: 6975551736277749814, guid: 1ff3e3b24f342984aac2b7acae7e63ac, type: 3}
-  pos: {x: 0, y: -0.2, z: 0}

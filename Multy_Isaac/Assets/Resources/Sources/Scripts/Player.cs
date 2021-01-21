@@ -555,23 +555,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 rb.velocity=Vector2.zero;
                 rb.DOMove(transform.position+dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=> { canMove = true; });   
             }
-
-            if (PhotonNetwork.OfflineMode) 
-                flashWhiteRPC();
-            else
-                pv.RPC("flashWhiteRPC",RpcTarget.All); 
-            
+            GetComponent<FlashWhite>().Flash();
             isFight();
             if(statMgr.LoseHp(Damage))
                 Die(HitName);
         }
     }
 
-    [PunRPC]
-    void flashWhiteRPC()
-    {
-        GetComponent<FlashWhite>().Flash();
-    }
     IEnumerator superTick()
     {
         isSuper = true;
