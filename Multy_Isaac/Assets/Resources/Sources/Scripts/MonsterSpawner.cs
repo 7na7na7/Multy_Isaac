@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -80,15 +82,11 @@ public class MonsterSpawner : MonoBehaviour
         int randomMon = Random.Range(0, monsters.Length);
         if (PhotonNetwork.OfflineMode)
         {
-            GameObject mon=Instantiate(monsters[randomMon],transform);
-            mon.transform.position = randomPos;
-            mon.GetComponent<Enemy>().Spawner = this;
+            Instantiate(monsters[randomMon],randomPos,quaternion.identity);
         }
         else
         {
-            GameObject mon=PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
-            mon.transform.parent = transform;
-            mon.GetComponent<Enemy>().Spawner = this;
+            PhotonNetwork.InstantiateRoomObject(monsters[randomMon].name, randomPos, Quaternion.identity);
         }
 
         Count--;
