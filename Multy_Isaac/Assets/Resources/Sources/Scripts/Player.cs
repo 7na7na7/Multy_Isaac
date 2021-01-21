@@ -766,12 +766,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void SetAnimRPC(string animName)
     {
-        try
-        {
         anim.Play(animName);
-        }
-        catch (Exception e)
-        { }
     }
     [PunRPC]
     public void ChatBaloonRPC(string txt)
