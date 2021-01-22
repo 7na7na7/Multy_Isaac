@@ -24,10 +24,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private bool isHaveGun = false;
   
     public Text Lv;
-    //시작시 미니맵표시
-    public LayerMask doorCol;
-    public float radius;
-    private Vector3 spawnPoint;
+    
     //수면
     public bool isSleeping; //자고있는가?
     //이동, 애니메이션
@@ -94,6 +91,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private SoundManager sound;
 
     private Vector3 savedCanvasScale;
+    //죽음
+    private bool isDead;
     #endregion
 
     #region 내장함수
@@ -327,8 +326,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     void setCam()
     {
         GetComponent<CapsuleCollider2D>().isTrigger = false;
-       spawnPoint = transform.position;
-       canMove = true;
+        canMove = true;
        statMgr.canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         camera.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
@@ -452,14 +450,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             playerItem.Dead();
             gunSetfalse();
         }
-        statMgr.Heal(99999);
-        transform.position = spawnPoint;
-        camera.transform.position=new Vector3(transform.position.x,transform.position.y,-10);
+//        statMgr.Heal(99999);
+//        transform.position = spawnPoint;
+        isDead = true;
+        canMove = false;
+        rb.velocity=Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+        print('a');
+        if(PhotonNetwork.OfflineMode) 
+            SetAnimRPC("Die");
+        else
+            pv.RPC("SetAnimRPC",RpcTarget.All,"Die");
     }
 
     public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3)) //공격받을때 공격한사람 이름도 받음
     {
-        if (!isSuper&&pv.IsMine)
+        if (!isSuper&&pv.IsMine && !isDead)
         {
             StartCoroutine(superTick()); //0.1초 무적
 
@@ -468,7 +474,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 Vector3 dir = (transform.position - pos).normalized;
                 canMove = false;
                 rb.velocity=Vector2.zero;
-                rb.DOMove(transform.position+dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=> { canMove = true; });   
+                rb.DOMove(transform.position+dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=> { if(!isDead) canMove = true; });   
             }
 
             if (PhotonNetwork.OfflineMode) 
