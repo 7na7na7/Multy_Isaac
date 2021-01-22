@@ -6,21 +6,13 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
-   private RoomTemplates templates;
-   
    private void Start()
    {
-      templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-      Invoke("Spawn",templates.DestroyerWaitTime);
+      //Destroy(gameObject,10f);
    }
 
    private void OnTriggerEnter2D(Collider2D other)
    {
       Destroy(other.gameObject);
-   }
-
-   void Spawn()
-   {
-      Destroy(gameObject);
    }
 }

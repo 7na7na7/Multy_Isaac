@@ -22,8 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
      
     public GameObject canvas;
     private bool isHaveGun = false;
-    private TweenParams parms = new TweenParams();
-    
+  
     public Text Lv;
     //시작시 미니맵표시
     public LayerMask doorCol;
@@ -74,12 +73,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private wep currentWeapon=new wep();
     //구르기
     public bool isSuper = false; //무적인가?
-    public Ease easeMode;
-    public float rollTime;
-    public float rollDistance;
-    public float rollDelayMultiply;
-    private bool canRoll = true;
-    public int rollMp = 20;
 
     //회전부분함수
     public GameObject gun;
@@ -135,7 +128,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (SceneManager.GetActiveScene().name == "Play")
             {
                 GetComponent<CapsuleCollider2D>().isTrigger = true;
-                Invoke("setCam", 2f);
+                setCam();
             }
             else
             {
@@ -147,7 +140,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Destroy(canvas);
        
     }
-    
+
     private void Update()
     {
         if (pv.IsMine)
@@ -219,19 +212,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 else
                                     pv.RPC("ReLoad",RpcTarget.All,leftBullet.reLoadTime);
                         }
-
-                      
-                          
-//                        if (Input.GetMouseButtonUp(0)) //버튼에서 손을 떼면 원래속도로 돌아오기
-//                            speed = savedSpeed;
-                        
-                        if (Input.GetKeyDown(KeyCode.LeftShift)) //왼쪽쉬프트키 누르면 대쉬
-                        {
-                            Vector2 dir;
-                            dir=new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
-                            if(dir!=Vector2.zero) 
-                                roll(new Vector2(dir.x,dir.y).normalized); //방향 정해준후 대쉬
-                        }   
                         
                         if (!isReLoading) //재장전중이 아닐때만 총, 플레이어로컬포지션 조정
                         {
@@ -353,71 +333,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Destroy(GameObject.Find("LoadingPanel"));
         camera.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
         camera.GetComponent<CameraManager>().target = gameObject;
-
-
-        //자신 기준으로 이내의 반경의 doorCol검색
-            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, doorCol);
-            if (col != null) //플레이어가 비지 않았다면
-            {
-                col.GetComponent<DoorCol>().Minimap();
-            }
-            else
-            {
-                print("감지 실패!");
-            }   
-       
-   }
-    void roll(Vector2 dir)
-    {
-        if (statMgr.LoseMp(rollMp))
-        {
-            if (canRoll)
-            {
-                canMove = false;
-                statMgr.canMove = false;
-                canRoll = false;
-                StartCoroutine(rollCor(dir,rollDistance));
-            }   
-        }
-        else
-        {
-            print("Mp부족!");
-        }
-    }
-    IEnumerator rollCor(Vector2 dir, float distance)
-    {
-        rb.velocity=Vector2.zero;
-        if (PhotonNetwork.OfflineMode)
-        {
-            SetAnimRPC("Roll");
-        }
-        else
-        {
-            pv.RPC("SetAnimRPC",RpcTarget.All,"Roll");
-        }
-      
-        
-        isSuper = true; //무적 ON
-        Vector2 originalSize = col.size;
-        col.size=new Vector2(col.size.x-0.02f,col.size.y-0.02f); //크기 아주조금 줄여서 콜라이더 벽에 닿아서 끊기는거 방지
-        rb.DOMove(transform.position + new Vector3(dir.x*distance,dir.y*distance),rollTime).SetEase(easeMode).SetAs(parms);
-        yield return new WaitForSeconds(rollTime);
-        isSuper = false; //무적 OFF
-        yield return new WaitForSeconds(rollTime*rollDelayMultiply); //스턴시간은 구르는시간의 10분의 1
-        col.size = originalSize; //원래 크기로 돌려줌
-        if (PhotonNetwork.OfflineMode)
-        {
-            SetAnimRPC("Idle");
-        }
-        else
-        {
-            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle");
-        }
-
-
-        canMove = true;
-        statMgr.canMove = true;
-        canRoll = true;
     }
 
     void Slash(bool isDown)
@@ -842,8 +757,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                     if (!isSleeping)
                     {
-                        DOTween.Kill(parms);
-                        canRoll = true;
                         canMove = true;
                         statMgr.canMove = true;
                         if (PhotonNetwork.OfflineMode)
@@ -894,19 +807,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 isSwamp = false;
         }
 
-        private void OnCollisionStay2D(Collision2D other)  //플레이어 강체 충돌판정
-    {
-        if (pv.IsMine)
-        {
-            if (other.gameObject.tag == "Wall") //벽에 닿으면 DOTween취소
-            {
-                if (!canRoll)
-                {
-                    DOTween.Kill(parms);
-                }
-            }   
-        }
-    }
+//        private void OnCollisionStay2D(Collision2D other)  //플레이어 강체 충돌판정
+//    {
+//        if (pv.IsMine)
+//        {
+//            if (other.gameObject.tag == "Wall") //벽에 닿으면 DOTween취소
+//            {
+//               충돌용이었는데.. 
+//            }   
+//        }
+//    }
     #endregion
 
     #region 패시브

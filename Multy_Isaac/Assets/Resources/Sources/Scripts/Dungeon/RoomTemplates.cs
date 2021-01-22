@@ -15,15 +15,10 @@ public class Area
 }
 public class RoomTemplates : MonoBehaviour
 {
+   public int TBLRper = 90;
    public GameObject[] RoomProps;
-   public Area[] Areas;
    public GameObject[] SpecialRooms;
    
-   public int StraightCount = 0;
-   public int minRoomCount = 7;
-   public int maxRoomCount = 50;
-   public int maxRoomCountSave;
-   public int PlayerSpawnMinusValue = 3;
    //한칸짜리 방들
    public GameObject[] bottomRooms;
    public GameObject[] topRooms;
@@ -43,15 +38,11 @@ public class RoomTemplates : MonoBehaviour
    public List<GameObject> rooms;
 
    public float waitTime;
-   public float DestroyerWaitTime;
    public float ReLoadTime;
    public GameObject boss;
 
    private Vector3 pos;
-   public int privateCount;
-   public int publicCount;
 
-   public Vector2 oneBox;
    private void Start()
    {
       if (PhotonNetwork.OfflineMode)
@@ -63,12 +54,7 @@ public class RoomTemplates : MonoBehaviour
       {
          if (PhotonNetwork.IsMasterClient)
          {
-            privateCount = FindObjectOfType<playerCountSave>().playerCount;
-            publicCount = privateCount;
 
-            maxRoomCount = privateCount * maxRoomCount;
-            maxRoomCountSave = maxRoomCount;
-          
             Invoke("Spawn",waitTime);  
             //Invoke("ReLoad",ReLoadTime);
          }
@@ -87,7 +73,6 @@ public class RoomTemplates : MonoBehaviour
       }
       else
       {
-         int PlayerCount = privateCount;
          Player[] players = FindObjectsOfType<Player>();
          
          PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
@@ -96,22 +81,20 @@ public class RoomTemplates : MonoBehaviour
 //            print(p.nickname.text);
 //         }
 
-         for (int i = 0; i < rooms.Count-1; i++)
-         {
-            if (rooms[i].CompareTag("Entry"))
-            {
-               if (PlayerCount > 0)
-               {
-                  print(players[privateCount-PlayerCount].nickname.text);
-                  players[privateCount - PlayerCount].GetComponent<Player>().pv.RPC("Move",RpcTarget.AllBuffered,rooms[i].transform.position);
-                  PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
-                  //players[privateCount - PlayerCount].GetComponent<Player>().setCam();
-                  PlayerCount--;
-               }
-            }
-         }
-         if(PlayerCount>0)
-            print("방 제대로 생성안됐다 시발!!!!!!!!!!!!!!");  
+//         for (int i = 0; i < rooms.Count-1; i++)
+//         {
+//            if (rooms[i].CompareTag("Entry"))
+//            {
+//               if (PlayerCount > 0)
+//               {
+//                  print(players[privateCount-PlayerCount].nickname.text);
+//                  players[privateCount - PlayerCount].GetComponent<Player>().pv.RPC("Move",RpcTarget.AllBuffered,rooms[i].transform.position);
+//                  PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
+//                  //players[privateCount - PlayerCount].GetComponent<Player>().setCam();
+//                  PlayerCount--;
+//               }
+//            }
+//         }
       }
    }
    

@@ -52,25 +52,15 @@ public class RoomSpawner : MonoBehaviour
 
     void SimpleSpawn()
     {
-        if (templates.StraightCount == 0)
-        {
-            templates.StraightCount = 4;
+        if (PercentReturn(templates.TBLRper))
             rand = 0;
-        }
         else
-        {
-            templates.StraightCount--;
-            rand = Random.Range(0, 4);
-        }
+            rand= Random.Range(1, 4);
     }
     void Spawn()
     {
         int playerValue = 0; //플레이어 
-        if (templates.publicCount > 0)
-        {
-            playerValue= ((templates.maxRoomCountSave-templates.PlayerSpawnMinusValue) / templates.privateCount)*(templates.privateCount-templates.publicCount+1); // 최대 방수 - 지정값(이 값만큼 보스로부터 떨어짐) / 플레이어 수(4부터 점점 줄어듦)
-            print(playerValue);
-        }
+
         if (spawned == false)//생성되지 않았으면 생성!
         {
             GameObject[] rooms = null;
@@ -95,29 +85,7 @@ public class RoomSpawner : MonoBehaviour
                     break;  
             } //방 위치 정해주기
             
-            
-            if (templates.minRoomCount > 0)//만약 최소방수가 아직 채워지지 않았다면
-            {
-               SimpleSpawn();
-            } 
-            else if (templates.maxRoomCount<0)//최소방수가 채워졌고, 최대방수도 채워졌다면
-            {
-                rand = rooms.Length - 2; //막힌방만 생성
-            } 
-            else//최소방수가 채워졌고, 최대방수는 채워지지 않았다면(제일많이 호출)
-            {
-                if (templates.publicCount > 1 &&templates.rooms.Count + 1 > playerValue)
-                {
-                    //print(templates.rooms.Count+1+" "+playerValue);
-                        rand = rooms.Length - 1; //배열 마지막에 있는 Entry를 소환하도록 함
-                        specialValue = 0;
-                    templates.publicCount--;
-                }
-                else
-                {
-                   SimpleSpawn();
-                }
-            }
+            SimpleSpawn();
 
            
                 if (PercentReturn(templates.BigRoomPercent)) //큰방생성
@@ -183,11 +151,6 @@ public class RoomSpawner : MonoBehaviour
                 }
 
                 
-            
-            if(templates.minRoomCount>0) 
-                templates.minRoomCount--;
-            templates.maxRoomCount--;
-            
             spawned = true; //소환됨으로 바꿈
             
         }
@@ -229,6 +192,9 @@ public class RoomSpawner : MonoBehaviour
                 }
                 spawned = true;
             }
+        
+        if(other.CompareTag("Space"))
+            Destroy(other.gameObject);
     }
     
      bool PercentReturn(int percent)

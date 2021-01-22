@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public bool canMove = false;
-    
+    public BoxCollider2D bound;
+
     public float speed = 2f;
     public GameObject target; //카메라가 따라갈 대상
 
@@ -16,13 +16,15 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
+        minBound = bound.bounds.min;
+        maxBound = bound.bounds.max;
         halfHeight = Camera.main.orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height; //카메라 반너비 공식
     }
   
     void Update()
     {
-        if (target.gameObject != null && canMove)
+        if (target.gameObject != null)
         {
             if (speed == 0)
             {
@@ -46,7 +48,6 @@ public class CameraManager : MonoBehaviour
 
     public void SetBound(Vector3 min, Vector3 max)
     {
-        print(min+" "+max);
         minBound =min; //minbound에 box콜라이더의 영역 최솟값 대입
         maxBound = max;
     }

@@ -41,11 +41,11 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          PhotonNetwork.OfflineMode = true;
          OnConnectedToMaster();
-         Invoke("Spawn",WaitTime);
+         Spawn();
       }
       else
       {
-         Invoke("Spawn",WaitTime);
+         Spawn();
       }
    }
 

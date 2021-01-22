@@ -38,8 +38,7 @@ public class AddRoom : MonoBehaviour
                 Spawn_P(templates.SpecialRooms[specialvalue].name,transform, transform.GetChild(i).transform.position); 
             }
           }
-        } 
-   
+        }
     }
     else //특별한 방이 아니면
     {
@@ -53,12 +52,10 @@ public class AddRoom : MonoBehaviour
               if (PhotonNetwork.OfflineMode)
               {
                 Spawn(templates.RoomProps[randomAreaIndex], transform,transform.GetChild(i).transform.position);
-                Spawn(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)],transform,transform.GetChild(i).transform.position);
               }
               else
               {
                 Spawn_P(templates.RoomProps[randomAreaIndex].name,transform, transform.GetChild(i).transform.position);
-                Spawn_P(templates.Areas[randomAreaIndex].props[Random.Range(0,templates.Areas[randomAreaIndex].props.Length)].name,transform,transform.GetChild(i).transform.position);
               }
             }
           }
