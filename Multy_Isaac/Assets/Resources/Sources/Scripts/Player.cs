@@ -657,12 +657,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
     
     [PunRPC]
-    void canvasOn()
+    public void canvasOn()
     {
         photonviewCanvas.transform.localScale = savedCanvasScale;
     }
     [PunRPC]
-    void canvasOff()
+    public void canvasOff()
     {
         photonviewCanvas.transform.localScale = Vector3.zero;
     }

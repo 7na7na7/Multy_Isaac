@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     {
         if (PhotonNetwork.OfflineMode)
         {
-          Instantiate(StartEntryPrefab, transform.position, quaternion.identity);
+          Instantiate(StartEntryPrefab, new Vector3(Random.Range(range1, range2)*18,Random.Range(range3, range4)*10,transform.position.z), quaternion.identity);
         }
         else
         {
