@@ -9,46 +9,132 @@ using Random = UnityEngine.Random;
 
 public class AddRoom : MonoBehaviour
 {
-  public Vector2 offset;
-  public Vector2 BoxSize;
-  //public Sprite minimapRoom;
-  private RoomTemplates templates;
+    private RoomTemplates templates;
 
+    private bool gizmoOn = false;
+    private Vector2 first, second;
+
+    public bool isBig = false;
+    int r;
+    private bool canSpawn;
   private void Start()
   {
-    Invoke("SetRoom",5f);
+      templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+      isBig= PercentReturn(templates.BigRoomPercent);
+
+      if (isBig)
+      {
+          Invoke("checkBig",5f);
+          Invoke("SetRoom",5.25f);
+      }
+      else
+      {
+          Invoke("SetRoom",5.5f);   
+      }
   }
 
+  void checkBig()
+  {
+      r = Random.Range(0, templates.RoomProps_Big.Length);
+      RaycastHit2D[] hit = Physics2D.BoxCastAll(
+          (Vector2)transform.position+templates.RoomProps_Big[r].GetComponent<RoomProps>().offset,
+          templates.RoomProps_Big[r].GetComponent<RoomProps>().BoxSize,0,Vector2.down,0);
+
+      bool a = false;
+      foreach (RaycastHit2D c in hit)
+      {
+          if (c.collider.CompareTag("Space"))
+          {
+              if (!c.collider.GetComponent<AddRoom>().isBig)
+              {
+                  a = true;
+                  Destroy(c.collider.gameObject);   
+              }
+          }
+      }
+
+      if (a == false)
+          isBig = false;
+  }
   public void SetRoom()
   {
-    templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-    templates.rooms.Add(this.gameObject);
+      templates.rooms.Add(this.gameObject);
     SetRoomProps(); //생성
   }
 
   void SetRoomProps()
   {
-   
+     if (isBig) //큰방생성
+     {
+         // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
+                       
+         RaycastHit2D[] hit = Physics2D.BoxCastAll(
+             (Vector2)transform.position+templates.RoomProps_Big[r].GetComponent<RoomProps>().offset,
+             templates.RoomProps_Big[r].GetComponent<RoomProps>().BoxSize,0,Vector2.down,0);
+
+                        
+         canSpawn = true;
+         foreach (RaycastHit2D c in hit)
+         {
+             if (c.collider.CompareTag("Space"))
+             {
+                 Destroy(c.collider.gameObject);   
+             }
+             if (c.collider.CompareTag("Wall") || c.collider.CompareTag("SpawnPoint")||c.collider.CompareTag("Destroyer")) //벽과 닿으면 생성못함
+             {
+                 canSpawn = false;
+             }
+         }
+                        if (canSpawn)
+                        { //안닿았으면은
+                            if (PhotonNetwork.OfflineMode)
+                            {
+                                Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
+                            }
+                            else
+                            {
+                                PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position, quaternion.identity);
+                            }
+                        }
+                        else //닿았으면
+                        {
+                            justSpawn();
+                        }
+                }
+     else
+     {
+        justSpawn();
+     }
+
+  }
+
+  void justSpawn()
+  {
       int randomAreaIndex = Random.Range(0, templates.RoomProps.Length);
+      
       if (PhotonNetwork.OfflineMode)
       {
-        Instantiate(templates.RoomProps[randomAreaIndex], transform.position, quaternion.identity);
+          Instantiate(templates.RoomProps[randomAreaIndex], transform.position, quaternion.identity);
       }
       else
       {
-        PhotonNetwork.InstantiateRoomObject(templates.RoomProps[randomAreaIndex].name, transform.position, quaternion.identity);
-      }
-    
+          PhotonNetwork.InstantiateRoomObject(templates.RoomProps[randomAreaIndex].name, transform.position, quaternion.identity);
+      }   
   }
-  void Spawn(GameObject go, Transform tr,Vector3 pos)
+  bool PercentReturn(int percent)
   {
-    GameObject GO=Instantiate(go, tr);
-    GO.transform.position = pos;
+      if (Random.Range(1, 101) <= percent)
+          return true;
+      else
+          return false;
   }
   
-  void Spawn_P(string go,Transform tr,Vector3 pos)
+  private void OnDrawGizmos()
   {
-    GameObject GO=PhotonNetwork.InstantiateRoomObject(go,pos,quaternion.identity);
-    GO.transform.SetParent(tr);
+      if (gizmoOn)
+      {
+          Gizmos.color = Color.red;
+          Gizmos.DrawWireCube(first,second);
+      }
   }
 }

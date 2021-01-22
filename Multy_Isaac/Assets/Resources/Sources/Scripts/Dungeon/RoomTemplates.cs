@@ -17,7 +17,7 @@ public class RoomTemplates : MonoBehaviour
 {
    public int TBLRper = 90;
    public GameObject[] RoomProps;
-   public GameObject[] SpecialRooms;
+   public GameObject[] RoomProps_Big;
    
    //한칸짜리 방들
    public GameObject[] bottomRooms;
@@ -47,7 +47,7 @@ public class RoomTemplates : MonoBehaviour
    {
       if (PhotonNetwork.OfflineMode)
       {
-         Invoke("Spawn",waitTime);
+         //Invoke("Spawn",waitTime);
          Invoke("ReLoad",ReLoadTime);
       }
       else

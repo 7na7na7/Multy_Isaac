@@ -23,15 +23,6 @@ public class RoomSpawner : MonoBehaviour
     public float waitTime = 4f;
 
 
-    private bool gizmoOn = false;
-    private Vector2 first, second;
-    
-    void set()
-    {
-        transform.parent.GetChild(0).gameObject.SetActive(true);
-        Destroy(gameObject);
-    }
-
     private void Awake()
     {
        if(!PhotonNetwork.OfflineMode)
@@ -43,10 +34,10 @@ public class RoomSpawner : MonoBehaviour
 
     private void Start()
     {
-        Invoke("set",waitTime);  
-        Destroy(gameObject,waitTime);
-          templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-                       Invoke("Spawn",0.1f);
+        templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        if(!isConstant) 
+            Destroy(gameObject,waitTime);
+        Invoke("Spawn",0.1f);
     }
 
     void SimpleSpawn()
@@ -85,58 +76,7 @@ public class RoomSpawner : MonoBehaviour
             } //방 위치 정해주기
             
             SimpleSpawn();
-
-           
-                if (PercentReturn(templates.BigRoomPercent)) //큰방생성
-                {
-                    // Physics.BoxCast (레이저를 발사할 위치, 사각형의 각 좌표의 절판 크기, 발사 방향, 충돌 결과, 회전 각도, 최대 거리)
-                        RaycastHit2D[] hit = Physics2D.BoxCastAll((Vector2)transform.position+bigRooms[rand].GetComponent<AddRoom>().offset,bigRooms[rand].GetComponent<AddRoom>().BoxSize,0,Vector2.down,0);
-
-                        
-                        bool canSpawn = true;
-                        foreach (RaycastHit2D c in hit)
-                        {
-                            gizmoOn = true;
-                            first = (transform.position + (Vector3) bigRooms[rand].GetComponent<AddRoom>().offset) + (transform.forward * c.distance);
-                            second = bigRooms[rand].GetComponent<AddRoom>().BoxSize;
-                            if (c.collider.CompareTag("Wall")) //벽과 닿으면 생성못함
-                            {
-                                //rand = rooms.Length - 2; //큰방
-                                canSpawn = false;
-                                break;
-                            }
-                        }
-
-                        if (canSpawn)
-                        { //안닿았으면은
-                            if (PhotonNetwork.OfflineMode)
-                            {
-                                GameObject g=Instantiate(bigRooms[rand], transform.position,bigRooms[rand].transform.rotation);
-                                g.GetComponent<AddRoom>().SetRoom();
-                            }
-                            else
-                            {
-                                AddRoom pv = PhotonNetwork.InstantiateRoomObject(bigRooms[rand].name, transform.position,bigRooms[rand].transform.rotation).GetComponent<AddRoom>();
-                                pv.SetRoom();
-                            }
-                        }
-                        else //닿았으면
-                        {
-                            if (PhotonNetwork.OfflineMode)
-                            {
-                                //print(bigRooms[rand].name+"스폰하려다 "+rooms[rand].name+"소환!"+transform.position);
-                                GameObject g= Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
-                                g.GetComponent<AddRoom>().SetRoom();
-                            }
-                            else
-                            {
-                                AddRoom pv = PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position, rooms[rand].transform.rotation).GetComponent<AddRoom>();
-                                pv.SetRoom();
-                            }
-                        }
-                }
-                else
-                {
+            
                     if (PhotonNetwork.OfflineMode)
                     {
                         Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
@@ -147,23 +87,14 @@ public class RoomSpawner : MonoBehaviour
                          PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position, rooms[rand].transform.rotation).GetComponent<AddRoom>();
                         //pv.SetRoom(specialValue);
                     }
-                }
+                
 
                 
             spawned = true; //소환됨으로 바꿈
             
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if (gizmoOn)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(first,second);
-        }
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SpawnPoint") && !isConstant)
@@ -180,15 +111,6 @@ public class RoomSpawner : MonoBehaviour
                 }
             else if (other.CompareTag("SpawnPoint") && isConstant)
             {
-                if (other.GetComponent<RoomSpawner>().isConstant) //둘다 isConstant면
-                {
-                    print(transform.position);
-                    if(other.transform.parent.GetComponent<AddRoom>().BoxSize==Vector2.zero) //상대가 작은방이면 파괴
-                        Destroy(other.gameObject.transform.parent.gameObject);
-                    else //아니면 나를 파괴
-                        Destroy(gameObject.transform.parent.gameObject);
-                    
-                }
                 spawned = true;
             }
         
