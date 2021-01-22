@@ -139,12 +139,12 @@ public class RoomSpawner : MonoBehaviour
                 {
                     if (PhotonNetwork.OfflineMode)
                     {
-                        GameObject g= Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
+                        Instantiate(rooms[rand], transform.position,rooms[rand].transform.rotation); 
                         //g.GetComponent<AddRoom>().SetRoom(specialValue);
                     }
                     else
                     {
-                        AddRoom pv = PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position, rooms[rand].transform.rotation).GetComponent<AddRoom>();
+                         PhotonNetwork.InstantiateRoomObject(rooms[rand].name, transform.position, rooms[rand].transform.rotation).GetComponent<AddRoom>();
                         //pv.SetRoom(specialValue);
                     }
                 }

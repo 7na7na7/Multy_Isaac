@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
+   public bool IsoutDestroyer = false;
    private void Start()
    {
       //Destroy(gameObject,10f);
@@ -13,6 +14,12 @@ public class Destroyer : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D other)
    {
-      Destroy(other.gameObject);
+      if(IsoutDestroyer) 
+         Destroy(other.gameObject);
+      else
+      {
+         if(other.CompareTag("Wall"))
+            Destroy(gameObject);
+      }
    }
 }

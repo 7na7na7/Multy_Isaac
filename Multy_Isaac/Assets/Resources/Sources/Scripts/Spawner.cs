@@ -12,10 +12,6 @@ public class Spawner : MonoBehaviour
     public GameObject StartEntryPrefab;
     private void Start()
     {
-        int rx = Random.Range(range1, range2);
-        int ry = Random.Range(range3, range4);
-        transform.position = new Vector3(rx * 18, ry * 10);
-            
         if (PhotonNetwork.OfflineMode)
         {
           Instantiate(StartEntryPrefab, transform.position, quaternion.identity);
@@ -24,7 +20,10 @@ public class Spawner : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject("StartEntry", transform.position, quaternion.identity);
+                for (int i = 0; i < playerCountSave.instance.playerCount; i++)
+                {
+                    PhotonNetwork.InstantiateRoomObject("StartEntry",   new Vector3(Random.Range(range1, range2)*18,Random.Range(range3, range4)*10,transform.position.z), quaternion.identity);   
+                }
             }   
         }
     }
