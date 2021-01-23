@@ -329,8 +329,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canMove = true;
        statMgr.canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
-        camera.transform.position=new Vector3(transform.position.x,transform.position.y-0.25f,-10);
         camera.GetComponent<CameraManager>().target = gameObject;
+        FindObjectOfType<MinimapPlayer>().target = gameObject;
     }
 
     void Slash(bool isDown)

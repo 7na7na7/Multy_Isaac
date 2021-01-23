@@ -105,6 +105,7 @@ public class RoomSpawner : MonoBehaviour
                             Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
                         else
                             PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                        
                         other.GetComponent<RoomSpawner>().spawned = true;
                     }
                     spawned = true;
