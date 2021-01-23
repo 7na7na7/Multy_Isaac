@@ -155,8 +155,8 @@ public class Invent : MonoBehaviour
     {
         if (CanCombine)
         {
-            PlayerItem.GetItemArray(element.SmallItemIndex[0]).Clear();
-            PlayerItem.GetItemArray(element.SmallItemIndex[1]).Clear();
+            PlayerItem.DestroyItem(element.SmallItemIndex[0]);
+            PlayerItem.DestroyItem(element.SmallItemIndex[1]);
           
             tem item=new tem();
             item = element.DeepCopy();

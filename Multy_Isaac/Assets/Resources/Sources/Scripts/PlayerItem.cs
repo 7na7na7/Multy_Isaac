@@ -50,10 +50,13 @@ public class PlayerItem : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
                     {
-                        player.UseItem(ItemList[selectedIndex].index);
-                        slots[selectedIndex].itemCount--;
-                        if(slots[selectedIndex].itemCount<=0)
-                            ItemList[selectedIndex].Clear();   
+                        if (ItemList[selectedIndex].type == itemType.Usable)
+                        {
+                            player.UseItem(ItemList[selectedIndex].index);
+                            slots[selectedIndex].itemCount--;
+                            if(slots[selectedIndex].itemCount<=0)
+                                ItemList[selectedIndex].Clear();   
+                        }
                     }
                     
                     if (Input.GetKeyDown(KeyCode.Space)) //스페이스바로 줍기
@@ -71,7 +74,7 @@ public class PlayerItem : MonoBehaviour
                             
                                 bool isGet = false;
 
-                                if (item.GetComponent<Item>().item.type == itemType.Usable) //소비템이면
+                                if (item.GetComponent<Item>().item.type == itemType.Usable || item.GetComponent<Item>().item.type == itemType.Item) //소비템이면
                                 {
                                     bool isHaveUsable = false;
                                     
@@ -208,13 +211,13 @@ public class PlayerItem : MonoBehaviour
     {
           bool isGet = false;
           int select = 0;
-                                if (item.type == itemType.Usable) //소비템이면
+                                if (item.type == itemType.Usable || item.type==itemType.Item) //소비템 또는 재료템이면
                                 {
                                     bool isHaveUsable = false;
                                     
                                     for (int i = 0; i < ItemList.Length; i++) 
                                     {
-                                        if (ItemList[i].ItemName == item.ItemName) //이름이 같은 소비템이면
+                                        if (ItemList[i].ItemName == item.ItemName) //이름이 같으면
                                         {
                                             select = i;
                                             isHaveUsable = true;
@@ -245,7 +248,7 @@ public class PlayerItem : MonoBehaviour
                                         }      
                                     }
                                 }
-                                else//소비템이 아니면 
+                                else//소비템도 재료템도 아니면 
                                 {
                                     for (int i = 0; i < ItemList.Length; i++) 
                                     {
@@ -325,13 +328,45 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    public void DestroyItem(int index)
+    {
+        int inx = 0;
+        for (int i = 0; i < ItemList.Length; i++)
+        {
+            if (ItemList[i].index == index)
+            {
+                inx = i;
+                break;
+            }
+        }
+        
+            if (ItemList[inx].type == itemType.Usable || ItemList[inx].type == itemType.Item) //소비템이면
+            {
+                slots[inx].itemCount--;
+                if (slots[inx].itemCount <= 0)
+                    ItemList[inx].Clear();
+            }
+            else //소비템 아니면
+            {
+                if (ItemList[inx].weaponIndex > 0) //무기를 버렸으면
+                {
+                    player.leftBullet.GetBullet(player.leftBullet.leftBullets[inx]);
+                    player.gunSetfalse();
+                }
+
+                if (ItemList[inx].type == itemType.Passive) //패시브 아이템을 버렸으면
+                    player.PassiveOff(ItemList[inx].index); //패시브 비활성화
+                ItemList[inx].Clear();
+            }
+        
+    }
     public void DiscardItem(bool isDead=false)
     {
         if (ItemList[selectedIndex].ItemSprite != null&&ItemList[selectedIndex].ItemSprite != NullSprite) //비어있지않다면
         {
             int ind = ItemList[selectedIndex].index;
 
-            if (ItemList[selectedIndex].type == itemType.Usable) //소비템이면
+            if (ItemList[selectedIndex].type == itemType.Usable || ItemList[selectedIndex].type==itemType.Item) //소비템이면
             {
                 slots[selectedIndex].itemCount--;
                 if(slots[selectedIndex].itemCount<=0)
