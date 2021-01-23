@@ -20,6 +20,19 @@ public class AddRoom : MonoBehaviour
     private bool canSpawn;
   private void Start()
   {
+      if (PhotonNetwork.OfflineMode)
+      {
+          set();
+      }
+      else
+      {
+          if(PhotonNetwork.IsMasterClient)
+              set();
+      }
+  }
+
+  void set()
+  {
       templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
       isBig= PercentReturn(templates.BigRoomPercent);
 
@@ -33,7 +46,6 @@ public class AddRoom : MonoBehaviour
           Invoke("SetRoom",delay3);   
       }
   }
-
   void checkBig()
   {
       r = Random.Range(0, templates.RoomProps_Big.Length);
