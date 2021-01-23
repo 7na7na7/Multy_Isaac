@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class AddRoom : MonoBehaviour
 {
+    public float delay1, delay2, delay3;
     private RoomTemplates templates;
 
     private bool gizmoOn = false;
@@ -24,12 +25,12 @@ public class AddRoom : MonoBehaviour
 
       if (isBig)
       {
-          Invoke("checkBig",5f);
-          Invoke("SetRoom",5.25f);
+          Invoke("checkBig",delay1);
+          Invoke("SetRoom",delay2);
       }
       else
       {
-          Invoke("SetRoom",5.5f);   
+          Invoke("SetRoom",delay3);   
       }
   }
 
