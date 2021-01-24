@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public GameObject corpes;
   public float nuckBackTime;
   public Ease nuckBackEase;
-  public MonsterSpawner Spawner;
   public int[] ItemIndex;
   public int[] ItemPercent;
   private FlashWhite flashwhite;
@@ -66,12 +65,10 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
               PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.3f,0.3f),transform.position.y+Random.Range(-0.3f,0.3f)) , Quaternion.identity);
           }
         }
-
-        Spawner.Count++;
-        Spawner.StartSpawnCor();
+        
         Instantiate(corpes, transform.position, Quaternion.identity);
         Destroy(gameObject); //죽어버리렴 ㅋ
-      } });   ;
+      } }); 
     }
     else
     {
@@ -87,9 +84,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
               PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.3f,0.3f),transform.position.y+Random.Range(-0.3f,0.3f)) , Quaternion.identity);
           }
         }
-
-        Spawner.Count++;
-        Spawner.StartSpawnCor();
+        
         if (PhotonNetwork.OfflineMode)
         {
           Instantiate(corpes, transform.position, Quaternion.identity);

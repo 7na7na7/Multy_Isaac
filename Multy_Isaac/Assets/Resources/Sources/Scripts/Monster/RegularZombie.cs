@@ -20,7 +20,7 @@ public class Node
     public int F { get { return G + H; } }
 }
 
-public class Slime : MonoBehaviour
+public class RegularZombie : MonoBehaviour
 {
     private IEnumerator corr;
     private PhotonView pv;
@@ -55,7 +55,7 @@ public class Slime : MonoBehaviour
         startingPosition = transform.position;
         anim = GetComponent<Animator>();
         corr = slimeCor();
-        localX = transform.localScale.x;
+        localX = transform.localScale.x*-1;
 
         if (PhotonNetwork.OfflineMode)
         {
@@ -97,18 +97,18 @@ public class Slime : MonoBehaviour
                 rigid.velocity = Vector2.zero;
                 
                 if(PhotonNetwork.OfflineMode)
-                    animRPC("Idle0");
+                    animRPC("RegularZombie_Idle");
                 else
-                    pv.RPC("animRPC",RpcTarget.All,"Idle0");
+                    pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Idle");
                 
                 yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
             }
             else
             {
                 if(PhotonNetwork.OfflineMode)
-                    animRPC("Walk");
+                    animRPC("RegularZombie_Walk");
                 else
-                    pv.RPC("animRPC",RpcTarget.All,"Walk");
+                    pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Walk");
                 
                 Vector2 dir = (roamPos- (Vector2)transform.position).normalized;
                 rigid.velocity = dir * speed;
@@ -212,9 +212,9 @@ public class Slime : MonoBehaviour
        }
        
        if(PhotonNetwork.OfflineMode)
-           animRPC("Attack");
+           animRPC("RegularZombie_Attack");
        else
-           pv.RPC("animRPC",RpcTarget.All,"Attack");
+           pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Attack");
        
        yield return new WaitForSeconds(AttackTime);
        StartCoroutine(corr);
