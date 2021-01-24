@@ -41,6 +41,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float speed; //속도
     public float savedSpeed; //속도 저장변수
     
+    //배고픔
+    public int hungrySpeed;
 
     //기동신
     private int mobile;
@@ -130,7 +132,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
             {
                 canMove = true;
-                statMgr.canMove = true;
             }
         }
         else
@@ -313,7 +314,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         GetComponent<CapsuleCollider2D>().isTrigger = false;
         canMove = true;
-       statMgr.canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         camera.GetComponent<CameraManager>().target = gameObject;
         FindObjectOfType<MinimapPlayer>().target = gameObject;
@@ -697,7 +697,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                    
                         canMove = true;
-                        statMgr.canMove = true;
+                
                         if (PhotonNetwork.OfflineMode)
                         {
                             SetAnimRPC("Idle");

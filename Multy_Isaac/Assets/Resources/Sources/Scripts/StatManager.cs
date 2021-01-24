@@ -15,16 +15,8 @@ public class StatManager : MonoBehaviour
     public int armor;
 
     public Slider hpSlider;
-    public Text hpText;
-    public float MpHealSpeed = 5;
-    public float sleepHealSpeed = 1;
-
-    public bool canMove = false;
-
-    public float tempHp = 0;
     private void Update()
     {
-        hpText.text = hpSlider.value + " / " + hpSlider.maxValue;
         //if(canMove) 
             //
 //        if (isSleeping)
