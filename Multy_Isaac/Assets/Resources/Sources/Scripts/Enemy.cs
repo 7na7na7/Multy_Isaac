@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
+  private Rigidbody2D rigid;
   public float nuckBackDistance;
   public GameObject corpes;
   public float nuckBackTime;
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 //      if(PhotonNetwork.IsMasterClient)
 //        PhotonNetwork.InstantiateRoomObject(effect.name, transform.position, quaternion.identity);
 //    }
+    rigid = GetComponent<Rigidbody2D>();
       flashwhite = GetComponent<FlashWhite>();
   }
 
@@ -53,9 +55,11 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     {
       canMove = false;
       Vector3 dir = (GetComponent<SpriteRenderer>().bounds.center - pos).normalized;
-      GetComponent<Rigidbody2D>().velocity=Vector2.zero;
-      GetComponent<Rigidbody2D>().DOMove(GetComponent<SpriteRenderer>().bounds.center +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=>
+      Vector2 d = GetComponent<Rigidbody2D>().velocity;
+      rigid.velocity=Vector2.zero;
+      rigid.DOMove(GetComponent<SpriteRenderer>().bounds.center +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=>
       {
+        rigid.velocity = d;
         canMove = true;
         if (hp <= 0)
       {
@@ -69,7 +73,6 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
               PhotonNetwork.InstantiateRoomObject("item"+ItemIndex[TemIndex],new Vector3(transform.position.x+Random.Range(-0.3f,0.3f),transform.position.y+Random.Range(-0.3f,0.3f)) , Quaternion.identity);
           }
         }
-        
         Instantiate(corpes, transform.position, Quaternion.identity);
         Destroy(gameObject); //죽어버리렴 ㅋ
       } }); 

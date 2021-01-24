@@ -7,6 +7,7 @@ using Photon.Pun;
 
 public class Roof : MonoBehaviour
 {
+    public float alpha = 0.01f;
     private SpriteRenderer spr;
    
     private void Start()
@@ -18,7 +19,7 @@ public class Roof : MonoBehaviour
     void invisible()
     {
         Color color = spr.color;
-        color.a = 0.01f;
+        color.a = alpha;
         spr.DOColor(color, 1f);
     }
 

@@ -719,13 +719,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             if (pv.IsMine)
             {
-                if (other.CompareTag("Bush"))
-                {
-                    if(PhotonNetwork.OfflineMode)
-                        canvasOff();
-                    else
-                        pv.RPC("canvasOff",RpcTarget.All);
-                }   
+//                if (other.CompareTag("Bush"))
+//                {
+//                    if(PhotonNetwork.OfflineMode)
+//                        canvasOff();
+//                    else
+//                        pv.RPC("canvasOff",RpcTarget.All);
+//                }   
                 
                 if (other.CompareTag("Swamp")) //늪에 닿으면
                     isSwamp = true;
@@ -734,13 +734,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Bush"))
-            {
-                if(PhotonNetwork.OfflineMode)
-                    canvasOn();
-                else
-                    pv.RPC("canvasOn",RpcTarget.All);
-            }
+//            if (other.CompareTag("Bush"))
+//            {
+//                if(PhotonNetwork.OfflineMode)
+//                    canvasOn();
+//                else
+//                    pv.RPC("canvasOn",RpcTarget.All);
+//            }
 
             if (other.CompareTag("Swamp")) //늪에 닿으면
                 isSwamp = false;
