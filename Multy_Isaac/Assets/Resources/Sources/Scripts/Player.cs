@@ -25,30 +25,30 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
   
     public Text Lv;
     
-    //수면
-    public bool isSleeping; //자고있는가?
     //이동, 애니메이션
     public Ease nuckBackEase;
     public float nuckBackTime = 0.2f;
-    private int mobile;
-    private float mobileTime= 0;
-    private int mobilePer=100;
-    public float savedMobileTime=5;
-    private CapsuleCollider2D col;
     public bool canMove = true;
     private Animator anim;
     private Vector2 moveDirection; 
     private Rigidbody2D rb;
     private float localScaleX;
-    private Vector3 curPos;
-    public float footCountCut = 10;
-    private float footCount;
-    private bool isSwamp = false;
+    private Vector3 curPos; 
+    public float footCountCut = 10; //10거리마다 발자국소리 재생
+    private float footCount; //저장변수
+    private bool isSwamp = false; //늪인가?
+    public int swampMovingSpeed = 40; //늪에서의 이동속도
+    public float speed; //속도
+    public float savedSpeed; //속도 저장변수
+    
 
-    public int swampMovingSpeed = 40;
-    // public Animator headAnim; //다리위쪽 애니메이션
-    public float speed;
-    public float savedSpeed;
+    //기동신
+    private int mobile;
+    private float mobileTime= 0;
+    private int mobilePer=100;
+    public float savedMobileTime=5;
+    
+  
     public PhotonView pv; //포톤뷰
     //캔버스
     public GameObject photonviewCanvas; //포톤뷰캔벗,
@@ -58,8 +58,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    public ChatBox chatbox; //챗박스
    public Text nickname; //닉네임
    public Slider hp;
-   public Slider mp;
-    //총쏘기
+   //총쏘기
     public Transform bulletTr; //총알이 나가는 위치
     private float time = 0; //쿨타임 계산을 위한 시간변수
     public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
@@ -105,8 +104,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         rb = GetComponent<Rigidbody2D>();
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
-        col = GetComponent<CapsuleCollider2D>();
-        
+
         savedGunPos = gun.transform.localPosition;
         speed = savedSpeed;
 
@@ -157,8 +155,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if (mobileTime < savedMobileTime)
                         mobileTime += Time.deltaTime;
-                    if (!isSleeping) //잠자고 있지 않다면
-                    {
+                  
                         if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)&&!RectTransformUtility.RectangleContainsScreenPoint(panel2, Input.mousePosition)) //클릭불가능영역이 아니면
                         {
                             if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading) //연타하면 더빠르게 쏨
@@ -247,18 +244,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                 gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
                             }   
                         }
-                    }
-                    if (Input.GetKeyDown(KeyCode.LeftControl)) //왼쪽컨트롤키를 누르면 잠자기/잠깨기
-                    {
-                        if (!isSleeping)
-                        {
-                            Sleep();
-                        }
-                        else
-                        {
-                           WakeUp();
-                        }
-                    }
+                 
                 }
                 
                 GetMove(); //이동
@@ -276,7 +262,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (canMove)
         {
-            if (canMove&&!isSleeping&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
+            if (canMove&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
             {
                 //이동여부에 따른 애니메이션 조정
                 if (moveDirection == Vector2.zero)
@@ -568,54 +554,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         LvMgr.GetExp(value);
     }
-    
-    public void Sleep() //잠자기
-    {
-        isSleeping = true;
-        statMgr.isSleeping = true;
-        if (PhotonNetwork.OfflineMode)
-        {
-            anim.Play("Sleep");
-            //headAnim.Play("None");
-            if (isHaveGun)
-            { 
-                armgunSetFalse();
-            }
-        }
-        else
-        {
-            pv.RPC("SetAnimRPC",RpcTarget.All,"Sleep");
-            if (isHaveGun)
-            {
-                pv.RPC("armgunSetFalse", RpcTarget.All);
-            }
-        }
-    }
-    public void WakeUp() //잠깨기
-    {
-        isSleeping = false;
-        statMgr.isSleeping = false;
-        statMgr.tempHp=0;
-        if (PhotonNetwork.OfflineMode)
-        {
-            anim.Play("Idle");
-            //headAnim.Play("GoDown");
-            if (isHaveGun)
-            { 
-                armgunSetTrue();
-            }
-        }
-        else
-        {
-            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
-            if (isHaveGun)
-            {
-                pv.RPC("armgunSetTrue", RpcTarget.All);
-            }  
-        }
-    }
-    
-    
+
+
     #endregion
 
     #region 동기화, RPC함수
@@ -626,9 +566,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(hp.value);
-            stream.SendNext(mp.value);
-            stream.SendNext(hp.maxValue); 
-            stream.SendNext(mp.maxValue);
+            stream.SendNext(hp.maxValue);
             stream.SendNext(angle);
             stream.SendNext(MousePosition);
             stream.SendNext(moveDirection);
@@ -638,16 +576,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(canMove);
             stream.SendNext(gun.transform.localScale);
             stream.SendNext(gun.transform.rotation);
-            stream.SendNext(isSleeping);
             stream.SendNext(Lv.text);
         }
         else
         {
             curPos = (Vector3) stream.ReceiveNext();
             hp.value = (float) stream.ReceiveNext();
-            mp.value = (float) stream.ReceiveNext();
             hp.maxValue = (float) stream.ReceiveNext();
-            mp.maxValue = (float) stream.ReceiveNext();
             angle = (float) stream.ReceiveNext();
             MousePosition = (Vector3) stream.ReceiveNext();
             moveDirection = (Vector2) stream.ReceiveNext();
@@ -657,7 +592,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             canMove = (bool) stream.ReceiveNext();
             gun.transform.localScale = (Vector3) stream.ReceiveNext();
             gun.transform.rotation = (Quaternion) stream.ReceiveNext();
-            isSleeping = (bool) stream.ReceiveNext();
             Lv.text = (string) stream.ReceiveNext();
         }
     }
@@ -761,8 +695,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 StopAllCoroutines();
                 
-                    if (!isSleeping)
-                    {
+                   
                         canMove = true;
                         statMgr.canMove = true;
                         if (PhotonNetwork.OfflineMode)
@@ -773,7 +706,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         {
                             pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
                         }
-                    }
+                    
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
