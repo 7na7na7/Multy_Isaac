@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public int CollsionDamage = 20;
   public float damageDelay = 1f;
   private float time;
+  public bool canMove = true;
   private void Start()
   {
 //    if (PhotonNetwork.OfflineMode)
@@ -50,9 +51,13 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     
     if (pos != Vector3.zero)
     {
+      canMove = false;
       Vector3 dir = (GetComponent<SpriteRenderer>().bounds.center - pos).normalized;
       GetComponent<Rigidbody2D>().velocity=Vector2.zero;
-      GetComponent<Rigidbody2D>().DOMove(GetComponent<SpriteRenderer>().bounds.center +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=> {   if (hp <= 0)
+      GetComponent<Rigidbody2D>().DOMove(GetComponent<SpriteRenderer>().bounds.center +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=>
+      {
+        canMove = true;
+        if (hp <= 0)
       {
         for (int TemIndex=0;TemIndex<ItemIndex.Length;TemIndex++)
         {

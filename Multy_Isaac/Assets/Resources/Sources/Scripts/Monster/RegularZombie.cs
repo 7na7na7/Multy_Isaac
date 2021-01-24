@@ -34,8 +34,9 @@ public class RegularZombie : MonoBehaviour
     private float localX;
     private Rigidbody2D rigid;
     private Vector3 startingPosition;
+    private Enemy enemy;
     Animator anim;
-    
+
     private Vector2Int startPos, targetPos; 
     private Vector2Int bottomLeft=new Vector2Int(-20,-10); 
     private Vector2Int topRight=new Vector2Int(20,10); 
@@ -56,7 +57,8 @@ public class RegularZombie : MonoBehaviour
         anim = GetComponent<Animator>();
         corr = MoveCor();
         localX = transform.localScale.x*-1;
-
+        enemy = GetComponent<Enemy>();
+        
         if (PhotonNetwork.OfflineMode)
         {
          StartCoroutine(corr);
@@ -143,7 +145,7 @@ public class RegularZombie : MonoBehaviour
 
    private void OnCollisionStay2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall"))
+       if (other.gameObject.CompareTag("Wall") && enemy.canMove)
        {
            if(PhotonNetwork.OfflineMode)
            {
@@ -162,7 +164,7 @@ public class RegularZombie : MonoBehaviour
    }
    private void OnCollisionEnter2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall"))
+       if (other.gameObject.CompareTag("Wall") && enemy.canMove)
        {
            if(PhotonNetwork.OfflineMode)
            {
@@ -181,7 +183,7 @@ public class RegularZombie : MonoBehaviour
    }
    private void OnTriggerEnter2D(Collider2D other)
    {
-       if (other.CompareTag("Player"))
+       if (other.CompareTag("Player") && enemy.canMove)
        {
            if(PhotonNetwork.OfflineMode)
            {
