@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
-  public GameObject effect;
   public float nuckBackDistance;
   public GameObject corpes;
   public float nuckBackTime;
@@ -25,13 +24,13 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   private float time;
   private void Start()
   {
-    if (PhotonNetwork.OfflineMode)
-      Instantiate(effect, transform.position, quaternion.identity);
-    else
-    {
-      if(PhotonNetwork.IsMasterClient)
-        PhotonNetwork.InstantiateRoomObject(effect.name, transform.position, quaternion.identity);
-    }
+//    if (PhotonNetwork.OfflineMode)
+//      Instantiate(effect, transform.position, quaternion.identity);
+//    else
+//    {
+//      if(PhotonNetwork.IsMasterClient)
+//        PhotonNetwork.InstantiateRoomObject(effect.name, transform.position, quaternion.identity);
+//    }
       flashwhite = GetComponent<FlashWhite>();
   }
 

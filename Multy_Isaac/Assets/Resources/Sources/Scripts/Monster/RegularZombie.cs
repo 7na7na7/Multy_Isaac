@@ -54,7 +54,7 @@ public class RegularZombie : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;
         anim = GetComponent<Animator>();
-        corr = slimeCor();
+        corr = MoveCor();
         localX = transform.localScale.x*-1;
 
         if (PhotonNetwork.OfflineMode)
@@ -65,33 +65,40 @@ public class RegularZombie : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                StartCoroutine(velocitySync());
+                //StartCoroutine(velocitySync());
             }
                 
         }
     }
 
-    IEnumerator velocitySync()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            pv.RPC("veloSyncRPC", RpcTarget.All,rigid.position);
-        }
-    }
-
-    [PunRPC]
-    void veloSyncRPC(Vector2 p)
-    {
-        rigid.position = p;
-    }
-    IEnumerator slimeCor()
+//    IEnumerator velocitySync()
+//    {
+//        while (true)
+//        {
+//            yield return new WaitForSeconds(1f);
+//            pv.RPC("veloSyncRPC", RpcTarget.All,rigid.position);
+//        }
+//    }
+//
+//    [PunRPC]
+//    void veloSyncRPC(Vector2 p)
+//    {
+//        rigid.position = p;
+//    }
+    IEnumerator MoveCor()
     {
         while (true)
         {
             rigid.velocity = Vector2.zero;
             Vector2 roamPos = GetRoamingPosition();
-            //print(roamPos+" + "+Vector2.Distance(transform.position, roamPos));
+            
+            //가려는 방향에 따라 플립
+            if(PhotonNetwork.OfflineMode)
+                localScaleRPC(roamPos.x);
+            else
+                pv.RPC("localScaleRPC",RpcTarget.All,roamPos.x);
+            
+            
             if (Vector2.Distance(transform.position, roamPos) < 1f)
             {
                 rigid.velocity = Vector2.zero;
@@ -196,20 +203,12 @@ public class RegularZombie : MonoBehaviour
 
    IEnumerator Attack(float x)
    {
-       if (x > transform.position.x) //오른쪽에있으면
-       {
+     
            if(PhotonNetwork.OfflineMode)
-               localScaleRPC(localX*-1);
+               localScaleRPC(x);
            else
-               pv.RPC("localScaleRPC",RpcTarget.All,localX*-1);
-       }
-       else
-       {
-           if(PhotonNetwork.OfflineMode)
-               localScaleRPC(localX);
-           else
-               pv.RPC("localScaleRPC",RpcTarget.All,localX);
-       }
+               pv.RPC("localScaleRPC",RpcTarget.All,x);
+           
        
        if(PhotonNetwork.OfflineMode)
            animRPC("RegularZombie_Attack");
@@ -357,6 +356,13 @@ public class RegularZombie : MonoBehaviour
    [PunRPC]
    void localScaleRPC(float x)
    {
-       transform.localScale=new Vector3(x,transform.localScale.y,transform.localScale.z);
+       if (x > transform.position.x) //오른쪽에있으면
+       {
+           transform.localScale=new Vector3(localX*-1,transform.localScale.y,transform.localScale.z);
+       }
+       else
+       {
+           transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
+       }
    }
 }
