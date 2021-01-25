@@ -47,8 +47,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          Spawn();
       }
+      
    }
-
+   
    IEnumerator Disconnecting()
    {
       isDisconnecting = true;

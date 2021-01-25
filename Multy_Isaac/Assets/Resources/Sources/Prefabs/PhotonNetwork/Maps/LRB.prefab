@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7551944353896911921}
   - component: {fileID: 1951160414432177837}
   - component: {fileID: 3308360573331561145}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (6)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231015590449622185}
   - component: {fileID: 1958632040217281344}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4060494233671995843}
   - component: {fileID: 4060494233671995844}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EntryGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 6854780325857585748}
   - component: {fileID: 2344069640169713741}
   - component: {fileID: 4643856381106739670}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (7)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 6847824099822305138}
   - component: {fileID: 6847824099822305141}
   - component: {fileID: 6847824099822305140}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (5)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 6729437212384501150}
   - component: {fileID: 9040173558155266142}
   - component: {fileID: 1405449933450698342}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (4)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -519,7 +519,8 @@ GameObject:
   - component: {fileID: 9106357102505771470}
   - component: {fileID: 2509208209269179804}
   - component: {fileID: -2378824510522775724}
-  m_Layer: 0
+  - component: {fileID: -7196927191503764845}
+  m_Layer: 12
   m_Name: LRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,3 +583,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapObj: {fileID: 7581641885207221910, guid: e1fd6c8f1c25238469c150f8398eeb92,
     type: 3}
+--- !u!61 &-7196927191503764845
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9088240511711106738}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03930998, y: -0.048277855}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 17.948898, y: 10.04965}
+  m_EdgeRadius: 0

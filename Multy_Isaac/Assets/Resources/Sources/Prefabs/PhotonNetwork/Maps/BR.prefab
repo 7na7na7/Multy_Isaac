@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7159043399778682512}
   - component: {fileID: 5307570623183477083}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141318721199751517}
   - component: {fileID: 2141318721199751514}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EntryGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 5891636624778510665}
   - component: {fileID: 2140983094253759942}
   - component: {fileID: 6319958100164812048}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (5)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 8686731783069420800}
   - component: {fileID: 6384870626329532608}
   - component: {fileID: 3922515091423432440}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (4)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 7901337211233110338}
   - component: {fileID: 8978888381324240170}
   - component: {fileID: 5352267814813268267}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (6)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -423,7 +423,8 @@ GameObject:
   - component: {fileID: 6597488115231592784}
   - component: {fileID: -3777753351188072902}
   - component: {fileID: 6996767550868239025}
-  m_Layer: 0
+  - component: {fileID: -6315037110246163466}
+  m_Layer: 12
   m_Name: BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,3 +486,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapObj: {fileID: 7581641885207221910, guid: c4733bf534acbff439478086a990fc38,
     type: 3}
+--- !u!61 &-6315037110246163466
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6625166059178624556}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03930998, y: -0.048277855}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 17.948898, y: 10.04965}
+  m_EdgeRadius: 0

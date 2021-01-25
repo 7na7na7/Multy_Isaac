@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131305716999663682}
   - component: {fileID: 8818746778719323766}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3569841392769852573}
   - component: {fileID: 3569841392769852570}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EntryGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 3569841393228675534}
   - component: {fileID: 3569841393228675535}
   - component: {fileID: 8181823049336015704}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Destroyer
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 7089816221259237771}
   - component: {fileID: 5413057599114976019}
   - component: {fileID: 7830918209487038822}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (2)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 5903015398980807469}
   - component: {fileID: 5754476343001519199}
   - component: {fileID: 6363803511921868215}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (6)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 6860169812516563509}
   - component: {fileID: 4583931399157257251}
   - component: {fileID: 2219852975784552093}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (5)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 6102546086855698624}
   - component: {fileID: 8405546339747478784}
   - component: {fileID: 1896705302429838136}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (4)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 1562731305242547251}
   - component: {fileID: 1454852234522396834}
   - component: {fileID: 296146521469530619}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint (3)
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -708,7 +708,8 @@ GameObject:
   - component: {fileID: 8625270289857819792}
   - component: {fileID: 8139547060184756701}
   - component: {fileID: -3905704076434684532}
-  m_Layer: 0
+  - component: {fileID: -1495053670213900963}
+  m_Layer: 12
   m_Name: StartEntry
   m_TagString: Entry
   m_Icon: {fileID: 0}
@@ -773,3 +774,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapObj: {fileID: 7581641885207221910, guid: 7133b22ee7ea96e44a1ac2f5b2d6021a,
     type: 3}
+--- !u!61 &-1495053670213900963
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632468859075961836}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03930998, y: -0.048277855}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 17.948898, y: 10.04965}
+  m_EdgeRadius: 0
