@@ -26,13 +26,8 @@ public class RoomTemplates : MonoBehaviour
    public GameObject[] rightRooms;
    [Header("큰방이 생성된확률(백분율)")]
    public int BigRoomPercent;
-   //큰방들
-   public GameObject[] bottomRooms_B;
-   public GameObject[] topRooms_B;
-   public GameObject[] leftRooms_B;
-   public GameObject[] rightRooms_B;
-   
-   
+
+
    public GameObject closedRoom;
 
    public List<GameObject> rooms;

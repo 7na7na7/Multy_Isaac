@@ -35,7 +35,7 @@ public class offlineStat : MonoBehaviour
 
             if (stomach.fillAmount > 0)
             {
-                stomach.fillAmount -= player.hungrySpeed/100f * Time.deltaTime;
+                stomach.fillAmount -= player.hungrySpeed/1000f * Time.deltaTime;
                 stomachTxt.text = ((int) (100f * stomach.fillAmount)).ToString();   
             }
         }

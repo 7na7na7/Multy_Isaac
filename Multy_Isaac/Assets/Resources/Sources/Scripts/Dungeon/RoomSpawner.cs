@@ -54,24 +54,19 @@ public class RoomSpawner : MonoBehaviour
         if (spawned == false)//생성되지 않았으면 생성!
         {
             GameObject[] rooms = null;
-            GameObject[] bigRooms = null;
             switch (openingDirection)
             {
                 case 1:
                     rooms = templates.bottomRooms;
-                    bigRooms = templates.bottomRooms_B;
                     break;
                 case 2:
                     rooms = templates.topRooms;
-                    bigRooms = templates.topRooms_B;
                     break;
                 case 3:
                     rooms = templates.leftRooms;
-                    bigRooms = templates.leftRooms_B;
                     break;
                 case 4:
                     rooms = templates.rightRooms;
-                    bigRooms = templates.rightRooms_B;
                     break;  
             } //방 위치 정해주기
             
