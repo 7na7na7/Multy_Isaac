@@ -195,7 +195,7 @@ public class RegularZombie : MonoBehaviour
 
    private void OnCollisionStay2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall") && enemy.canMove)
+       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !isFinding)
        {
            if(PhotonNetwork.OfflineMode)
            {
@@ -214,7 +214,7 @@ public class RegularZombie : MonoBehaviour
    }
    private void OnCollisionEnter2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall") && enemy.canMove)
+       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !isFinding)
        {
            if(PhotonNetwork.OfflineMode)
            {
@@ -233,7 +233,7 @@ public class RegularZombie : MonoBehaviour
    }
    private void OnTriggerEnter2D(Collider2D other)
    {
-       if (other.CompareTag("Player") && enemy.canMove)
+       if (other.CompareTag("Player") && enemy.canMove && !isFinding)
        {
            if(PhotonNetwork.OfflineMode)
            {
