@@ -90,6 +90,10 @@ public class RegularZombie : MonoBehaviour
                         StopCoroutine(corr);
                         isFinding = true;
                         targetPosition = tr;
+                        if(PhotonNetwork.OfflineMode)
+                            animRPC("RegularZombie_Walk");
+                        else
+                            pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Walk");
                         break;
                     }
                 }   
@@ -127,8 +131,9 @@ public class RegularZombie : MonoBehaviour
                 var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
                 Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
                 Vector3 velocity = dir * speed * speedFactor;
-                localScaleRPC((transform.position+velocity).x);
                 rigid.velocity = velocity;
+                
+                localScaleRPC(targetPosition.position.x);
             }
         }
 
@@ -233,20 +238,16 @@ public class RegularZombie : MonoBehaviour
    }
    private void OnTriggerEnter2D(Collider2D other)
    {
-       if (other.CompareTag("Player") && enemy.canMove && !isFinding)
+       if (other.CompareTag("Player") && enemy.canMove)
        {
            if(PhotonNetwork.OfflineMode)
            {
-               StopCoroutine(corr);
-               rigid.velocity=Vector2.zero;
                StartCoroutine(Attack(other.transform.position.x));
            }
            else
            {
                if (PhotonNetwork.IsMasterClient)
                {
-                   StopCoroutine(corr);
-                   rigid.velocity = Vector2.zero;
                    StartCoroutine(Attack(other.transform.position.x));
                }
            }
@@ -255,8 +256,11 @@ public class RegularZombie : MonoBehaviour
 
    IEnumerator Attack(float x)
    {
-     
-           if(PhotonNetwork.OfflineMode)
+       StopCoroutine(corr);
+       isFinding = false;
+       enemy.canMove = false;
+       rigid.velocity=Vector2.zero;
+       if(PhotonNetwork.OfflineMode)
                localScaleRPC(x);
            else
                pv.RPC("localScaleRPC",RpcTarget.All,x);
@@ -268,7 +272,22 @@ public class RegularZombie : MonoBehaviour
            pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Attack");
        
        yield return new WaitForSeconds(AttackTime);
-       StartCoroutine(corr);
+
+       enemy.canMove = true;
+       
+       foreach (Transform tr in PlayerPoses)
+       {
+           if (Vector3.Distance(transform.position, tr.position) < detectRadious)
+           {
+               isFinding = true;
+               targetPosition = tr;
+               if(PhotonNetwork.OfflineMode)
+                   animRPC("RegularZombie_Walk");
+               else
+                   pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Walk");
+               break;
+           }
+       }   
    }
 
 
