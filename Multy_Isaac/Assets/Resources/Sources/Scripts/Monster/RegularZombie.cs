@@ -91,9 +91,9 @@ public class RegularZombie : MonoBehaviour
                         isFinding = true;
                         targetPosition = tr;
                         if(PhotonNetwork.OfflineMode)
-                            animRPC("RegularZombie_Walk");
+                            animRPC("Walk");
                         else
-                            pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Walk");
+                            pv.RPC("animRPC",RpcTarget.All,"Walk");
                         break;
                     }
                 }   
@@ -165,18 +165,18 @@ public class RegularZombie : MonoBehaviour
             if (Vector2.Distance(transform.position, roamPos) < 1.5f)
             {
                 if(PhotonNetwork.OfflineMode)
-                    animRPC("RegularZombie_Idle");
+                    animRPC("dle");
                 else
-                    pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Idle");
+                    pv.RPC("animRPC",RpcTarget.All,"Idle");
                 rigid.velocity=Vector2.zero;
                 yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
             }
             else
             {
                 if(PhotonNetwork.OfflineMode)
-                    animRPC("RegularZombie_Walk");
+                    animRPC("Walk");
                 else
-                    pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Walk"); 
+                    pv.RPC("animRPC",RpcTarget.All,"Walk"); 
              
                 Vector2 dir =roamPos -  (Vector2)transform.position;
                 dir.Normalize();
@@ -267,9 +267,9 @@ public class RegularZombie : MonoBehaviour
            
        
        if(PhotonNetwork.OfflineMode)
-           animRPC("RegularZombie_Attack");
+           animRPC("Attack");
        else
-           pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Attack");
+           pv.RPC("animRPC",RpcTarget.All,"Attack");
        
        yield return new WaitForSeconds(AttackTime);
 
@@ -282,9 +282,9 @@ public class RegularZombie : MonoBehaviour
                isFinding = true;
                targetPosition = tr;
                if(PhotonNetwork.OfflineMode)
-                   animRPC("RegularZombie_Walk");
+                   animRPC("Walk");
                else
-                   pv.RPC("animRPC",RpcTarget.All,"RegularZombie_Walk");
+                   pv.RPC("animRPC",RpcTarget.All,"Walk");
                break;
            }
        }   
