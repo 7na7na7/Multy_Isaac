@@ -54,10 +54,10 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     if (pos != Vector3.zero)
     {
       canMove = false;
-      Vector3 dir = (GetComponent<SpriteRenderer>().bounds.center - pos).normalized;
+      Vector3 dir = (transform.position - pos).normalized;
       Vector2 d = GetComponent<Rigidbody2D>().velocity;
       rigid.velocity=Vector2.zero;
-      rigid.DOMove(GetComponent<SpriteRenderer>().bounds.center +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=>
+      rigid.DOMove(transform.position +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=>
       {
         rigid.velocity = d;
         canMove = true;
