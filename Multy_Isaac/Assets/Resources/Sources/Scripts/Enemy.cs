@@ -26,13 +26,6 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public bool canMove = true;
   private void Start()
   {
-//    if (PhotonNetwork.OfflineMode)
-//      Instantiate(effect, transform.position, quaternion.identity);
-//    else
-//    {
-//      if(PhotonNetwork.IsMasterClient)
-//        PhotonNetwork.InstantiateRoomObject(effect.name, transform.position, quaternion.identity);
-//    }
     rigid = GetComponent<Rigidbody2D>();
       flashwhite = GetComponent<FlashWhite>();
   }

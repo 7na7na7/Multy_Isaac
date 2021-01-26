@@ -101,8 +101,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #region 내장함수
     private void Start()
     {
-        GameObject.Find("RegularZombie").GetComponent<AIDestinationSetter>().target = transform;
-       
+
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
         

@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 
 public class RegularZombie : MonoBehaviour
 {
+    public float detectRadious = 5;
+    public Transform[] PlayerPoses;
     private IEnumerator corr;
     private PhotonView pv;
     public float AttackTime;
@@ -26,7 +28,7 @@ public class RegularZombie : MonoBehaviour
 
 //길찾기
     public bool isFinding = false;
-    public Vector3 targetPosition;
+    public Transform targetPosition;
     private Seeker seeker;
     
     public Path path;
@@ -43,7 +45,14 @@ public class RegularZombie : MonoBehaviour
         localX = transform.localScale.x*-1;
         enemy = GetComponent<Enemy>();
         seeker = GetComponent<Seeker>();
-        
+        //플레이어들 넣어주기
+        Player[] players;
+        players = FindObjectsOfType<Player>();
+        PlayerPoses=new Transform[players.Length];
+
+        for (int i = 0; i < PlayerPoses.Length; i++)
+            PlayerPoses[i] = players[i].transform;
+            
         if (PhotonNetwork.OfflineMode)
         {
          StartCoroutine(corr);
@@ -72,6 +81,19 @@ public class RegularZombie : MonoBehaviour
     
     public void Update () 
         {
+            if (!isFinding)
+            {
+                foreach (Transform tr in PlayerPoses)
+                {
+                    if (Vector3.Distance(transform.position, tr.position) < detectRadious)
+                    {
+                        StopCoroutine(corr);
+                        isFinding = true;
+                        targetPosition = tr;
+                        break;
+                    }
+                }   
+            }
             if (isFinding)
             {
                 if (path == null) //경로가 비었으면 
@@ -105,6 +127,7 @@ public class RegularZombie : MonoBehaviour
                 var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
                 Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
                 Vector3 velocity = dir * speed * speedFactor;
+                localScaleRPC((transform.position+velocity).x);
                 rigid.velocity = velocity;
             }
         }
@@ -113,9 +136,11 @@ public class RegularZombie : MonoBehaviour
     {
         while (true)
         {
-            if(isFinding) 
-                seeker.StartPath(transform.position, targetPosition, OnPathComplete);
-            yield return new WaitForSeconds(1f);
+            if (isFinding)
+            {
+                seeker.StartPath(transform.position, targetPosition.position, OnPathComplete);
+            }
+            yield return new WaitForSeconds(0.5f);
         }
     }
         
