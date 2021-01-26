@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     
     if (pos != Vector3.zero)
     {
+      GetComponent<RegularZombie>().OnDisable();
       canMove = false;
       Vector3 dir = (transform.position - pos).normalized;
       Vector2 d = GetComponent<Rigidbody2D>().velocity;
