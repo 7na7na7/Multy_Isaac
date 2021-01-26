@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Pathfinding;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -73,6 +74,10 @@ public class AddRoom : MonoBehaviour
   {
       templates.rooms.Add(this.gameObject);
     SetRoomProps(); //생성
+    var bounds = GetComponent<Collider2D>().bounds;
+// Expand the bounds along the Z axis
+    bounds.Expand(Vector3.forward*1000);
+    var guo = new GraphUpdateObject(bounds);
   }
 
   void SetRoomProps()
