@@ -23,11 +23,6 @@ public class RegularZombie : MonoBehaviour
     private Rigidbody2D rigid;
     private Enemy enemy;
 
-//길찾기
-    public bool isFinding = false;
-    public Transform targetPosition;
-    private Seeker seeker;
-    
     public Path path;
     public float nextWaypointDistance = 3;
     private int currentWaypoint = 0;
@@ -38,7 +33,6 @@ public class RegularZombie : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         corr = MoveCor();
         enemy = GetComponent<Enemy>();
-        seeker = GetComponent<Seeker>();
         //플레이어들 넣어주기
         Player[] players;
         players = FindObjectsOfType<Player>();
@@ -75,21 +69,21 @@ public class RegularZombie : MonoBehaviour
     
     public void Update () 
         {
-            if (!isFinding && enemy.canMove)
+            if (!enemy.isFinding && enemy.canMove)
             {
                 foreach (Transform tr in PlayerPoses)
                 {
                     if (Vector3.Distance(transform.position, tr.position) < detectRadious)
                     {
                         StopCoroutine(corr);
-                        isFinding = true;
-                        targetPosition = tr; 
+                        enemy.isFinding = true;
+                        enemy.targetPosition = tr; 
                         enemy.setAnim("Walk");
                         break;
                     }
                 }   
             }
-            if (isFinding)
+            if (enemy.isFinding)
             {
                 if (path == null) //경로가 비었으면 
                 {
@@ -124,7 +118,7 @@ public class RegularZombie : MonoBehaviour
                 Vector3 velocity = dir * speed * speedFactor;
                 rigid.velocity = velocity;
                 
-                enemy.setLocalX(targetPosition.transform.position.x);
+                enemy.setLocalX(enemy.targetPosition.transform.position.x);
             }
         }
 
@@ -132,11 +126,11 @@ public class RegularZombie : MonoBehaviour
     {
         while (true)
         {
-            if (isFinding)
+            if (enemy.isFinding)
             {
-                seeker.StartPath(transform.position, targetPosition.position, OnPathComplete);
+                enemy.seeker.StartPath(transform.position, enemy.targetPosition.position, OnPathComplete);
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
         
@@ -171,7 +165,7 @@ public class RegularZombie : MonoBehaviour
     }
     
     public void OnDisable () {
-        seeker.pathCallback -= OnPathComplete;
+        enemy.seeker.pathCallback -= OnPathComplete;
     }
     
    private Vector2 GetRoamingPosition()
@@ -183,7 +177,7 @@ public class RegularZombie : MonoBehaviour
 
    private void OnCollisionStay2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !isFinding)
+       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !enemy.isFinding)
        {
            if(PhotonNetwork.OfflineMode)
            {
@@ -202,7 +196,7 @@ public class RegularZombie : MonoBehaviour
    }
    private void OnCollisionEnter2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !isFinding)
+       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !enemy.isFinding)
        {
            if(PhotonNetwork.OfflineMode)
            {
@@ -240,7 +234,7 @@ public class RegularZombie : MonoBehaviour
    IEnumerator Attack(float x)
    {
        StopCoroutine(corr);
-       isFinding = false;
+       enemy.isFinding = false;
        enemy.canMove = false;
        rigid.velocity=Vector2.zero;
 
@@ -255,8 +249,8 @@ public class RegularZombie : MonoBehaviour
        {
            if (Vector3.Distance(transform.position, tr.position) < detectRadious)
            {
-               isFinding = true;
-               targetPosition = tr;
+               enemy.isFinding = true;
+               enemy.targetPosition = tr;
                enemy.setAnim("Walk");
                break;
            }

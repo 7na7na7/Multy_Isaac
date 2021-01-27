@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Pathfinding;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -27,12 +28,18 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   private Animator anim;
   private float localX;
   
+  //길찾기
+  public bool isFinding = false;
+  public Transform targetPosition;
+  public Seeker seeker;
+  
   private void Start()
   { 
     rigid = GetComponent<Rigidbody2D>(); 
     flashwhite = GetComponent<FlashWhite>(); 
     anim = GetComponent<Animator>();
     localX = transform.localScale.x*-1;
+    seeker = GetComponent<Seeker>();
   }
 
   private void Update()
@@ -48,11 +55,17 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   {
     flashwhite.Flash();
     hp -= value;
-    
+
+    if(hp<=0)
+      setTrigger("Die");
+    else
+      setTrigger("Hit");
     if (pos != Vector3.zero)
     {
       GetComponent<RegularZombie>().OnDisable();
       canMove = false;
+      isFinding = false;
+      
       Vector3 dir = (transform.position - pos).normalized;
       Vector2 d = GetComponent<Rigidbody2D>().velocity;
       rigid.velocity=Vector2.zero;
@@ -74,7 +87,12 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
         }
         Instantiate(corpes, transform.position, Quaternion.identity);
         Destroy(gameObject); //죽어버리렴 ㅋ
-      } }); 
+      }
+        else
+        {
+          setAnim("Walk");
+        }
+      }); 
     }
     else
     {
@@ -149,6 +167,14 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       pv.RPC("animRPC",RpcTarget.All,animName);
   }
 
+  public void setTrigger(string animName)
+  {
+    if(PhotonNetwork.OfflineMode)
+      triggerRPC(animName);
+    else
+      pv.RPC("triggerRPC",RpcTarget.All,animName);
+  }
+  
   public void setLocalX(float x)
   {
     if(PhotonNetwork.OfflineMode)
@@ -174,6 +200,17 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     { }
   }
 
+  [PunRPC]
+  void triggerRPC(string animName)
+  {
+    try
+    {
+      anim.SetTrigger(animName);
+    }
+    catch (Exception e)
+    { }
+  }
+  
   [PunRPC]
   void localScaleRPC(float x)
   {
