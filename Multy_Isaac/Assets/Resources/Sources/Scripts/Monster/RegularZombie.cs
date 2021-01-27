@@ -20,11 +20,8 @@ public class RegularZombie : MonoBehaviour
     public float minMove;
     public float maxMove;
     public float speed;
-    private float localX;
     private Rigidbody2D rigid;
-    private Vector3 startingPosition;
     private Enemy enemy;
-    Animator anim;
 
 //길찾기
     public bool isFinding = false;
@@ -39,10 +36,7 @@ public class RegularZombie : MonoBehaviour
     {
         pv = GetComponent<PhotonView>();
         rigid = GetComponent<Rigidbody2D>();
-        startingPosition = transform.position;
-        anim = GetComponent<Animator>();
         corr = MoveCor();
-        localX = transform.localScale.x*-1;
         enemy = GetComponent<Enemy>();
         seeker = GetComponent<Seeker>();
         //플레이어들 넣어주기
@@ -81,7 +75,7 @@ public class RegularZombie : MonoBehaviour
     
     public void Update () 
         {
-            if (!isFinding)
+            if (!isFinding && enemy.canMove)
             {
                 foreach (Transform tr in PlayerPoses)
                 {
@@ -89,11 +83,8 @@ public class RegularZombie : MonoBehaviour
                     {
                         StopCoroutine(corr);
                         isFinding = true;
-                        targetPosition = tr;
-                        if(PhotonNetwork.OfflineMode)
-                            animRPC("Walk");
-                        else
-                            pv.RPC("animRPC",RpcTarget.All,"Walk");
+                        targetPosition = tr; 
+                        enemy.setAnim("Walk");
                         break;
                     }
                 }   
@@ -133,7 +124,7 @@ public class RegularZombie : MonoBehaviour
                 Vector3 velocity = dir * speed * speedFactor;
                 rigid.velocity = velocity;
                 
-                localScaleRPC(targetPosition.position.x);
+                enemy.setLocalX(targetPosition.transform.position.x);
             }
         }
 
@@ -156,27 +147,19 @@ public class RegularZombie : MonoBehaviour
             Vector2 roamPos = GetRoamingPosition();
             
             //가려는 방향에 따라 플립
-            if(PhotonNetwork.OfflineMode)
-                localScaleRPC(roamPos.x);
-            else
-                pv.RPC("localScaleRPC",RpcTarget.All,roamPos.x);
+            enemy.setLocalX(roamPos.x);
             
 
             if (Vector2.Distance(transform.position, roamPos) < 1.5f)
             {
-                if(PhotonNetwork.OfflineMode)
-                    animRPC("dle");
-                else
-                    pv.RPC("animRPC",RpcTarget.All,"Idle");
+                enemy.setAnim("Idle");
+                
                 rigid.velocity=Vector2.zero;
                 yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
             }
             else
             {
-                if(PhotonNetwork.OfflineMode)
-                    animRPC("Walk");
-                else
-                    pv.RPC("animRPC",RpcTarget.All,"Walk"); 
+                enemy.setAnim("Walk");
              
                 Vector2 dir =roamPos -  (Vector2)transform.position;
                 dir.Normalize();
@@ -194,7 +177,7 @@ public class RegularZombie : MonoBehaviour
    private Vector2 GetRoamingPosition()
    {
        float randomMove = Random.Range(minMove, maxMove);
-       return startingPosition + UtilsClass.GetRandomDir() * randomMove;
+       return transform.position + UtilsClass.GetRandomDir() * randomMove;
    }
 
 
@@ -260,16 +243,9 @@ public class RegularZombie : MonoBehaviour
        isFinding = false;
        enemy.canMove = false;
        rigid.velocity=Vector2.zero;
-       if(PhotonNetwork.OfflineMode)
-               localScaleRPC(x);
-           else
-               pv.RPC("localScaleRPC",RpcTarget.All,x);
-           
-       
-       if(PhotonNetwork.OfflineMode)
-           animRPC("Attack");
-       else
-           pv.RPC("animRPC",RpcTarget.All,"Attack");
+
+       enemy.setLocalX(x);
+       enemy.setAnim("Attack");
        
        yield return new WaitForSeconds(AttackTime);
 
@@ -281,37 +257,9 @@ public class RegularZombie : MonoBehaviour
            {
                isFinding = true;
                targetPosition = tr;
-               if(PhotonNetwork.OfflineMode)
-                   animRPC("Walk");
-               else
-                   pv.RPC("animRPC",RpcTarget.All,"Walk");
+               enemy.setAnim("Walk");
                break;
            }
        }   
-   }
-
-
-   [PunRPC]
-   void animRPC(string animName)
-   {
-       try
-       {
-           anim.Play(animName);
-       }
-       catch (Exception e)
-       { }
-   }
-
-   [PunRPC]
-   void localScaleRPC(float x)
-   {
-       if (x > transform.position.x) //오른쪽에있으면
-       {
-           transform.localScale=new Vector3(localX*-1,transform.localScale.y,transform.localScale.z);
-       }
-       else
-       {
-           transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
-       }
    }
 }

@@ -24,10 +24,15 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public float damageDelay = 1f;
   private float time;
   public bool canMove = true;
+  private Animator anim;
+  private float localX;
+  
   private void Start()
-  {
-    rigid = GetComponent<Rigidbody2D>();
-      flashwhite = GetComponent<FlashWhite>();
+  { 
+    rigid = GetComponent<Rigidbody2D>(); 
+    flashwhite = GetComponent<FlashWhite>(); 
+    anim = GetComponent<Animator>();
+    localX = transform.localScale.x*-1;
   }
 
   private void Update()
@@ -135,9 +140,51 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
   }
 
+
+  public void setAnim(string animName)
+  {
+    if(PhotonNetwork.OfflineMode)
+      animRPC(animName);
+    else
+      pv.RPC("animRPC",RpcTarget.All,animName);
+  }
+
+  public void setLocalX(float x)
+  {
+    if(PhotonNetwork.OfflineMode)
+      localScaleRPC(x);
+    else
+      pv.RPC("localScaleRPC",RpcTarget.All,x);
+  }
   [PunRPC]
   void destroyRPC()
   {
     Destroy(gameObject);
   }
+  
+  
+  [PunRPC]
+  void animRPC(string animName)
+  {
+    try
+    {
+      anim.Play(animName);
+    }
+    catch (Exception e)
+    { }
+  }
+
+  [PunRPC]
+  void localScaleRPC(float x)
+  {
+    if (x > transform.position.x) //오른쪽에있으면
+    {
+      transform.localScale=new Vector3(localX*-1,transform.localScale.y,transform.localScale.z);
+    }
+    else
+    {
+      transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
+    }
+  }
+  
 }
