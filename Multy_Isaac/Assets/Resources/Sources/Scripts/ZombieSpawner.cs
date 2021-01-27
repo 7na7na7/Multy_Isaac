@@ -26,7 +26,10 @@ public class ZombieSpawner : MonoBehaviour
         else
         {
             if (PhotonNetwork.IsMasterClient)
-                PhotonNetwork.InstantiateRoomObject(regularZombie.name, transform.position, Quaternion.identity);
+            {
+                for(int i=0;i<Count;i++) 
+                    PhotonNetwork.InstantiateRoomObject(regularZombie.name,  new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), Quaternion.identity);   
+            }
         }
     }
 }

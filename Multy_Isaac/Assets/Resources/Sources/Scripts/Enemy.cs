@@ -74,50 +74,17 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
         rigid.velocity = d;
         canMove = true;
         if (hp <= 0)
-        {
-          for (int TemIndex = 0; TemIndex < ItemIndex.Length; TemIndex++)
-          {
-            if (Random.Range(1, 101) <= ItemPercent[TemIndex])
-            {
-              if (PhotonNetwork.OfflineMode)
-                Instantiate(Resources.Load("item" + ItemIndex[TemIndex]),
-                  new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),
-                    transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
-              else
-                PhotonNetwork.InstantiateRoomObject("item" + ItemIndex[TemIndex],
-                  new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),
-                    transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
-            }
-          }
-
-          if (PhotonNetwork.OfflineMode)
-          {
-            GameObject g = Instantiate(corpes, transform.position, Quaternion.identity);
-            
-            if (transform.localScale.x < 0)
-              g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-          }
-          else
-          {
-            if (PhotonNetwork.IsMasterClient)
-            {
-              GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
-              if (transform.localScale.x < 0)
-                g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-            }
-          }
-
-
-          if (PhotonNetwork.OfflineMode)
-            destroyRPC();
-          else
-            pv.RPC("destroyRPC", RpcTarget.All);
-        }
+          Die();
         else
-        {
           setAnim("Walk");
-        }
       }); 
+    }
+    else
+    {
+      if (hp <= 0)
+        Die();
+      else
+        setAnim("Walk");
     }
   }
 
@@ -151,7 +118,46 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
   }
 
+  void Die()
+  {
+    for (int TemIndex = 0; TemIndex < ItemIndex.Length; TemIndex++)
+    {
+      if (Random.Range(1, 101) <= ItemPercent[TemIndex])
+      {
+        if (PhotonNetwork.OfflineMode)
+          Instantiate(Resources.Load("item" + ItemIndex[TemIndex]),
+            new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),
+              transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+        else
+          PhotonNetwork.InstantiateRoomObject("item" + ItemIndex[TemIndex],
+            new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),
+              transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+      }
+    }
 
+    if (PhotonNetwork.OfflineMode)
+    {
+      GameObject g = Instantiate(corpes, transform.position, Quaternion.identity);
+            
+      if (transform.localScale.x < 0)
+        g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
+    }
+    else
+    {
+      if (PhotonNetwork.IsMasterClient)
+      {
+        GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
+        if (transform.localScale.x < 0)
+          g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
+      }
+    }
+
+
+    if (PhotonNetwork.OfflineMode)
+      destroyRPC();
+    else
+      pv.RPC("destroyRPC", RpcTarget.All);
+  }
   public void setAnim(string animName)
   {
     if(PhotonNetwork.OfflineMode)
