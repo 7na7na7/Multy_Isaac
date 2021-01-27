@@ -125,13 +125,9 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       if (Random.Range(1, 101) <= ItemPercent[TemIndex])
       {
         if (PhotonNetwork.OfflineMode)
-          Instantiate(Resources.Load("item" + ItemIndex[TemIndex]),
-            new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),
-              transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+          Instantiate(Resources.Load("item" + ItemIndex[TemIndex]), new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
         else
-          PhotonNetwork.InstantiateRoomObject("item" + ItemIndex[TemIndex],
-            new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),
-              transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+          PhotonNetwork.InstantiateRoomObject("item" + ItemIndex[TemIndex], new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
       }
     }
 
