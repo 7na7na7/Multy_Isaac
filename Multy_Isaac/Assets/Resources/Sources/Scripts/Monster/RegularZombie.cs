@@ -179,66 +179,32 @@ public class RegularZombie : MonoBehaviour
    {
        if (other.gameObject.CompareTag("Wall") && enemy.canMove && !enemy.isFinding)
        {
-           if(PhotonNetwork.OfflineMode)
-           {
-               StopCoroutine(corr);
-               StartCoroutine(corr);
-           }
-           else
-           {
-               if(PhotonNetwork.IsMasterClient)
-               {
-                   StopCoroutine(corr);
-                   StartCoroutine(corr);
-               }
-           }
+          collision("Wall");
        }
    }
    private void OnCollisionEnter2D(Collision2D other)
    {
        if (other.gameObject.CompareTag("Wall") && enemy.canMove && !enemy.isFinding)
        {
-           if(PhotonNetwork.OfflineMode)
-           {
-               StopCoroutine(corr);
-               StartCoroutine(corr);
-           }
-           else
-           {
-               if(PhotonNetwork.IsMasterClient)
-               {
-                   StopCoroutine(corr);
-                   StartCoroutine(corr);
-               }
-           }
+          collision("Wall");
        }
    }
    private void OnTriggerEnter2D(Collider2D other)
    {
        if (other.CompareTag("Player") && enemy.canMove)
        {
-           if(PhotonNetwork.OfflineMode)
-           {
-               StartCoroutine(Attack(other.transform.position.x));
-           }
-           else
-           {
-               if (PhotonNetwork.IsMasterClient)
-               {
-                   StartCoroutine(Attack(other.transform.position.x));
-               }
-           }
+           collision("Player");
        }
    }
 
-   IEnumerator Attack(float x)
+   IEnumerator Attack()
    {
        StopCoroutine(corr);
        enemy.isFinding = false;
        enemy.canMove = false;
        rigid.velocity=Vector2.zero;
 
-       enemy.setLocalX(x);
+       enemy.setLocalX(enemy.targetPosition.position.x);
        enemy.setAnim("Attack");
        
        yield return new WaitForSeconds(AttackTime);
@@ -255,5 +221,27 @@ public class RegularZombie : MonoBehaviour
                break;
            }
        }   
+   }
+
+   void collision(string colName)
+   {
+       if(PhotonNetwork.OfflineMode)
+           collisionRPC(colName);
+       else
+           pv.RPC("collisionRPC",RpcTarget.All,colName);
+   }
+   [PunRPC]
+   void collisionRPC(string colNmae)
+   {
+       switch (colNmae)
+       {
+           case "Wall":
+               StopCoroutine(corr);
+               StartCoroutine(corr);
+               break;
+           case "Player":
+               StartCoroutine(Attack());
+               break;
+       }
    }
 }

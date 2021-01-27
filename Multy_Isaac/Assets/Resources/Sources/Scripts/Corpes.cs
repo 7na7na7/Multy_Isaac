@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Corpes : MonoBehaviour
 {
-    void Start()
+    void OnEnable()
     {
         Color c;
         c.a = 0.75f;

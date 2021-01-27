@@ -74,7 +74,12 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
         rigid.velocity = d;
         canMove = true;
         if (hp <= 0)
-          Die();
+        {
+         if(PhotonNetwork.OfflineMode)
+           Die();
+         else
+           pv.RPC("Die",RpcTarget.All);
+        }
         else
           setAnim("Walk");
       }); 
@@ -82,7 +87,12 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     else
     {
       if (hp <= 0)
-        Die();
+      {
+        if(PhotonNetwork.OfflineMode)
+          Die();
+        else
+          pv.RPC("Die",RpcTarget.All);
+      }
       else
         setAnim("Walk");
     }
@@ -118,6 +128,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
   }
 
+  [PunRPC]
   void Die()
   {
     for (int TemIndex = 0; TemIndex < ItemIndex.Length; TemIndex++)
@@ -140,12 +151,9 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
     else
     {
-      if (PhotonNetwork.IsMasterClient)
-      {
-        GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
+      GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
         if (transform.localScale.x < 0)
           g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-      }
     }
 
 
@@ -154,6 +162,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     else
       pv.RPC("destroyRPC", RpcTarget.All);
   }
+  
   public void setAnim(string animName)
   {
     if(PhotonNetwork.OfflineMode)
