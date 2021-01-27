@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
   private Rigidbody2D rigid;
   public float nuckBackDistance;
-  public GameObject corpes;
   public float nuckBackTime;
   public Ease nuckBackEase;
   public int[] ItemIndex;
@@ -142,22 +141,23 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       }
     }
 
-    if (PhotonNetwork.OfflineMode)
-    {
-      GameObject g = Instantiate(corpes, transform.position, Quaternion.identity);
-            
-      if (transform.localScale.x < 0)
-        g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-    }
-    else
-    {
-      GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
-        if (transform.localScale.x < 0)
-          g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-    }
+//    if (PhotonNetwork.OfflineMode)
+//    {
+//      GameObject g = Instantiate(corpes, transform.position, Quaternion.identity);
+//            
+//      if (transform.localScale.x < 0)
+//        g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
+//    }
+//    else
+//    {
+//      GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
+//        if (transform.localScale.x < 0)
+//          g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
+//    }
+transform.GetChild(0).gameObject.SetActive(true);
+transform.GetChild(0).transform.parent = null;
 
-
-    if (PhotonNetwork.OfflineMode)
+if (PhotonNetwork.OfflineMode)
       destroyRPC();
     else
       pv.RPC("destroyRPC", RpcTarget.All);
