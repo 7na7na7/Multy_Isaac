@@ -6,18 +6,33 @@ using UnityEngine;
 
 public class RoomProps : MonoBehaviour
 {
-    public GameObject minimapObj;
     public Vector2 offset;
     public Vector2 BoxSize;
 
-    private void Start()
+   public void setMinimap(GameObject minimapObj,float r,float g,float b)
     {
-        if(PhotonNetwork.OfflineMode) 
-            Instantiate(minimapObj, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
+        if (PhotonNetwork.OfflineMode)
+        {
+            GameObject go=Instantiate(minimapObj, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
+            
+            Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+            color.r = r;
+            color.g = g;
+            color.b = b;
+            go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
+        }
         else
         {
-            if(PhotonNetwork.IsMasterClient)
-                PhotonNetwork.InstantiateRoomObject(minimapObj.name, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                GameObject go=PhotonNetwork.InstantiateRoomObject(minimapObj.name, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
+
+                Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+                color.r = r;
+                color.g = g;
+                color.b = b;
+                go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
+            }
         }
     }
 }

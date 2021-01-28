@@ -13,6 +13,7 @@ public class prop
     public int perValue;
     public int index;
     public Sprite roofSprite;
+    public GameObject minimapObj;
     public int[] getItemIndex;
     public GameObject[] properties;
 }
@@ -84,7 +85,10 @@ public class Roof : MonoBehaviour
     void Set(int realIndex, float r, float g, float b)
     {
         realProp = props[realIndex];
-        
+        if(!realProp.isRandomColor) 
+            transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,1,1,1);
+        else
+            transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
         spr.sprite = realProp.roofSprite;
 
         if (realProp.isRandomColor)
