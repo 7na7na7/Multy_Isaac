@@ -6,33 +6,56 @@ using UnityEngine;
 
 public class RoomProps : MonoBehaviour
 {
+    private PhotonView pv;
     public Vector2 offset;
     public Vector2 BoxSize;
 
-   public void setMinimap(GameObject minimapObj,float r,float g,float b)
+    private float rr, gg, bb;
+
+    private GameObject mp;
+    private void Start()
     {
+        pv = GetComponent<PhotonView>();
+    }
+
+    public void setMinimap(GameObject minimapObj,float r,float g,float b)
+    {
+        rr = r;
+        gg = g;
+        bb = b;
+        mp = minimapObj;
+        
         if (PhotonNetwork.OfflineMode)
         {
-            GameObject go=Instantiate(minimapObj, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
+            GameObject go=Instantiate(mp, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
             
             Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
-            color.r = r;
-            color.g = g;
-            color.b = b;
+            color.r = rr;
+            color.g = gg;
+            color.b = bb;
             go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
         }
         else
         {
-            if (PhotonNetwork.IsMasterClient)
+            try
             {
-                GameObject go=PhotonNetwork.InstantiateRoomObject(minimapObj.name, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
-
-                Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
-                color.r = r;
-                color.g = g;
-                color.b = b;
-                go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
+                pv.RPC("set",RpcTarget.AllBuffered);
             }
+            catch (Exception e)
+            { throw; }
         }
+    }
+
+
+    [PunRPC]
+    private void set()
+    {
+        GameObject go = Instantiate(mp, GameObject.Find("minimapTr").transform.position + new Vector3(transform.position.x * 0.1f, transform.position.y * 0.1f), Quaternion.identity);
+
+        Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+        color.r = rr;
+        color.g = gg;
+        color.b = bb;
+        go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
     }
 }

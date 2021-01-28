@@ -89,6 +89,8 @@ public class Roof : MonoBehaviour
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,1,1,1);
         else
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
+        
+        
         spr.sprite = realProp.roofSprite;
 
         if (realProp.isRandomColor)
