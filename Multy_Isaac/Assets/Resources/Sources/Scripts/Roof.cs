@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 [System.Serializable]
 public class prop
 {
+    public bool isRandomColor = false;
     public int perValue;
     public int index;
     public Sprite roofSprite;
@@ -19,7 +20,6 @@ public class Roof : MonoBehaviour
 {
     public prop[] props;
     private prop realProp;
-    public float alpha = 0.01f;
     private SpriteRenderer spr;
     private List<int> indexList= new List<int>();
     
@@ -51,11 +51,20 @@ public class Roof : MonoBehaviour
         }
 
         spr.sprite = realProp.roofSprite;
+
+        if (realProp.isRandomColor)
+        {
+            Color c = GetComponent<SpriteRenderer>().color;
+            c.r = Random.Range(0f, 1f);
+            c.g = Random.Range(0f, 1f);
+            c.b = Random.Range(0f, 1f);
+            GetComponent<SpriteRenderer>().color = c;   
+        }
     }
     void invisible()
     {
         Color color = spr.color;
-        color.a = alpha;
+        color.a = 0f;
         spr.DOColor(color, 1f);
     }
 

@@ -2804,7 +2804,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3676101062170335715}
   - component: {fileID: 9052558958664553474}
-  - component: {fileID: 4394289892925272739}
   - component: {fileID: 8373359979840075629}
   - component: {fileID: 4588120736999212483}
   m_Layer: 0
@@ -2878,18 +2877,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4394289892925272739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8187444532544193866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3f4e7471b1d5f4c86099134ef782f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8373359979840075629
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2929,17 +2916,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   props:
-  - perValue: 1
+  - isRandomColor: 1
+    perValue: 1
     index: 1
     roofSprite: {fileID: 21300000, guid: e8cffc7dd931bb644a5bf61caa175a9f, type: 3}
     getItemIndex: 
     properties: []
-  - perValue: 1
+  - isRandomColor: 1
+    perValue: 1
     index: 2
     roofSprite: {fileID: 21300000, guid: a8ae268e705e7764c866cdaf8341f4c9, type: 3}
     getItemIndex: 
     properties: []
-  - perValue: 1
+  - isRandomColor: 1
+    perValue: 1
     index: 3
     roofSprite: {fileID: 21300000, guid: 723aebc375862614994af2aacbd00091, type: 3}
     getItemIndex: 
