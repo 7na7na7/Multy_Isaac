@@ -61,7 +61,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
             break;
          }
       }  
-      yield return new WaitForSeconds(0.5f);
+      yield return new WaitForSeconds(1f);
       PhotonNetwork.LeaveRoom();
      
       SceneManager.LoadScene("Main");
