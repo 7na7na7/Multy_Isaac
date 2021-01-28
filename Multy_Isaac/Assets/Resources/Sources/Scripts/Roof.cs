@@ -18,6 +18,7 @@ public class prop
 }
 public class Roof : MonoBehaviour
 {
+    private PhotonView pv;
     public prop[] props;
     private prop realProp;
     private SpriteRenderer spr;
@@ -25,39 +26,73 @@ public class Roof : MonoBehaviour
     
     private void Start()
     {
+        pv = GetComponent<PhotonView>();
         spr = GetComponent<SpriteRenderer>();
-        Set();
+
+        if (PhotonNetwork.OfflineMode)
+        {
+            for (int i = 0; i < props.Length; i++)
+            {
+                for (int j = 0; j < props[i].perValue;j++)
+                {
+                    indexList.Add(props[i].index);   
+                }
+            }
+
+            int index = indexList[Random.Range(0, indexList.Count)];
+
+            for (int i = 0; i < props.Length; i++)
+            {
+                if (props[i].index == index)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            
+            Set(index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));   
+        }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                for (int i = 0; i < props.Length; i++)
+                {
+                    for (int j = 0; j < props[i].perValue;j++)
+                    {
+                        indexList.Add(props[i].index);   
+                    }
+                }
+
+                int index = indexList[Random.Range(0, indexList.Count)];
+
+                for (int i = 0; i < props.Length; i++)
+                {
+                    if (props[i].index == index)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                
+                pv.RPC("Set",RpcTarget.AllBuffered,index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
+            }
+        }
     }
 
-    void Set()
+    [PunRPC]
+    void Set(int realIndex, float r, float g, float b)
     {
-        for (int i = 0; i < props.Length; i++)
-        {
-            for (int j = 0; j < props[i].perValue;j++)
-            {
-                indexList.Add(props[i].index);   
-            }
-        }
-
-        int index = indexList[Random.Range(0, indexList.Count)];
-
-        for (int i = 0; i < props.Length; i++)
-        {
-            if (props[i].index == index)
-            {
-                realProp = props[i];
-                break;
-            }
-        }
-
+        realProp = props[realIndex];
+        
         spr.sprite = realProp.roofSprite;
 
         if (realProp.isRandomColor)
         {
             Color c = GetComponent<SpriteRenderer>().color;
-            c.r = Random.Range(0f, 1f);
-            c.g = Random.Range(0f, 1f);
-            c.b = Random.Range(0f, 1f);
+            c.r = r;
+            c.g = g;
+            c.b = b;
             GetComponent<SpriteRenderer>().color = c;   
         }
     }
