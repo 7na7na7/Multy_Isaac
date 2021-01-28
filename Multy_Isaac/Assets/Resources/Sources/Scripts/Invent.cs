@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Invent : MonoBehaviour
 {
     public RectTransform panel;
-    
-    
+
+    private Pause pause;
     public tem[] completeTemArray;
     public Image BigItemImg;
     public Text BigItemName;
@@ -28,6 +28,7 @@ public class Invent : MonoBehaviour
     private PlayerItem PlayerItem;
     private void Start()
     {
+        pause = FindObjectOfType<Pause>();
         anim = GetComponent<Animator>();
         Player[] players = FindObjectsOfType<Player>();
         foreach (Player p in players)
@@ -43,6 +44,8 @@ public class Invent : MonoBehaviour
     public void Close()
     {
         anim.Play("InvenClose");
+        pause.canPause = true;
+
     }
 
     public void CompleteOpen(int index)
@@ -54,6 +57,8 @@ public class Invent : MonoBehaviour
     {
         if(element!=null)
         {
+            if(Input.GetKeyDown(KeyCode.Escape))
+                Close();
             if(Input.GetMouseButtonDown(1) &&RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition) )
                 Close();
             if (element.SmallItemIndex.Length != 0)
@@ -87,6 +92,7 @@ public class Invent : MonoBehaviour
     
     public void Open(tem taaaaam)
     {
+        pause.canPause = false;
         element = taaaaam;
         anim.Play("InvenOpen");
         tem tem;

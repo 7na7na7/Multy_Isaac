@@ -49,7 +49,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       }
       
    }
-   
    IEnumerator Disconnecting()
    {
       isDisconnecting = true;
@@ -84,12 +83,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       else
       {
          pingSpeed.text = "DisConnected";
-      }
-      
-      if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
-      {
-         if(!isDisconnecting) 
-            StartCoroutine(Disconnecting());
       }
 
       if (ChatInput.isFocused)
@@ -133,7 +126,8 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    #region 연결
    public void Disconnect() //연결 끊기
    {
-      PhotonNetwork.Disconnect();  
+      if(!isDisconnecting) 
+         StartCoroutine(Disconnecting());
    }
 
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
