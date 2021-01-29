@@ -19,6 +19,7 @@ public class prop
 }
 public class Roof : MonoBehaviour
 {
+    public float alpha = 0;
     private PhotonView pv;
     public prop[] props;
     private prop realProp;
@@ -138,7 +139,7 @@ public class Roof : MonoBehaviour
     void invisible()
     {
         Color color = spr.color;
-        color.a = 0f;
+        color.a = alpha;
         spr.DOColor(color, 1f);
     }
 

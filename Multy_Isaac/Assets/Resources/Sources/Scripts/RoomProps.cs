@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class RoomProps : MonoBehaviour
 {
+    public bool startPlay = false;
+    public GameObject minimapObj;
     private PhotonView pv;
     public Vector2 offset;
     public Vector2 BoxSize;
@@ -16,6 +18,8 @@ public class RoomProps : MonoBehaviour
     private void Start()
     {
         pv = GetComponent<PhotonView>();
+        if(startPlay)
+            setMinimap(minimapObj,0,0,0);
     }
 
     public void setMinimap(GameObject minimapObj,float r,float g,float b)
@@ -29,20 +33,30 @@ public class RoomProps : MonoBehaviour
         {
             GameObject go=Instantiate(mp, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
             
-            Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
-            color.r = rr;
-            color.g = gg;
-            color.b = bb;
-            go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
+            if(rr==0&&gg==0&&bb==0)
+            {}
+            else
+            {
+                Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+                color.r = rr;
+                color.g = gg;
+                color.b = bb;
+                go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;   
+            }
         }
         else
         {
-            try
+            if(rr==0&&gg==0&&bb==0)
+            {}
+            else
             {
-                pv.RPC("set",RpcTarget.AllBuffered);
+                try
+                {
+                    pv.RPC("set",RpcTarget.AllBuffered);
+                }
+                catch (Exception e)
+                { throw; }
             }
-            catch (Exception e)
-            { throw; }
         }
     }
 
