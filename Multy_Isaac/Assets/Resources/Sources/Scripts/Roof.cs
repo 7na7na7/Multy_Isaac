@@ -75,8 +75,41 @@ public class Roof : MonoBehaviour
                         break;
                     }
                 }
-                
-                pv.RPC("Set",RpcTarget.AllBuffered,index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
+
+                int a = Random.Range(0, 6);
+                float min = 0.3f;
+                float max = 0.8f;
+                float r=1, g=1, b=1;
+                switch (a)
+                {
+                    case 0:
+                        r = Random.Range(min,max);
+                        break;
+                    case 1:
+                        g = Random.Range(min,max);
+                        break;
+                    case 2:
+                        b = Random.Range(min,max);
+                        break;
+                    case 3:
+                        r = Random.Range(min,max);
+                        g =Random.Range(min,max);
+                        break;
+                    case 4:
+                        r = Random.Range(min,max);
+                        b =Random.Range(min,max);
+                        break;
+                    case 5:
+                        g =Random.Range(min,max);
+                        b = Random.Range(min,max);
+                        break;
+                    case 6:
+                        r =Random.Range(min,max);
+                        g =Random.Range(min,max);
+                        b = Random.Range(min,max);
+                        break;
+                }
+                pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b);
             }
         }
     }
