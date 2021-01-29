@@ -26,7 +26,7 @@ public class Roof : MonoBehaviour
     private SpriteRenderer spr;
     private List<int> indexList= new List<int>();
     
-    private void Start()
+    private IEnumerator Start()
     {
         pv = GetComponent<PhotonView>();
         spr = GetComponent<SpriteRenderer>();
@@ -52,7 +52,7 @@ public class Roof : MonoBehaviour
                 }
             }
             
-            Set(index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));   
+            Set(index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
         }
         else
         {
@@ -110,6 +110,7 @@ public class Roof : MonoBehaviour
                         b = Random.Range(min,max);
                         break;
                 }
+                yield return new WaitForSeconds(1f);
                 pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b);
             }
         }

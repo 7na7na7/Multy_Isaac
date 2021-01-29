@@ -40,12 +40,12 @@ public class AddRoom : MonoBehaviour
       float delay=proc.getCount();
       if (isBig)
       {
-          Invoke("checkBig",templates.delay1+delay);
-          Invoke("SetRoom",templates.delay1+delay);
+          Invoke("checkBig",templates.delay+delay);
+          Invoke("SetRoom",templates.delay+delay);
       }
       else
       {
-          Invoke("SetRoom",templates.delay1+delay);   
+          Invoke("SetRoom",templates.delay+delay);   
       }
   }
   void checkBig()
