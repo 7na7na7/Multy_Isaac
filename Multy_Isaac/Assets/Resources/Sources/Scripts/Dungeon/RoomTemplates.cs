@@ -15,6 +15,9 @@ public class Area
 }
 public class RoomTemplates : MonoBehaviour
 {
+   public float delay1;
+   public float delay2;
+   public float delay3;
    public int TBLRper = 90;
    public GameObject[] RoomProps;
    public GameObject[] RoomProps_Big;

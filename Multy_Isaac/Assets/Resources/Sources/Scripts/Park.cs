@@ -17,13 +17,19 @@ public class Park : MonoBehaviour
    public int wallPropCount;
 
    private List<Vector2> cantList=new List<Vector2>();
+
    private void Start()
+   {
+       Invoke("set",1f);
+   }
+
+   private void set()
    {
        if (PhotonNetwork.OfflineMode)
        {
            for (int j = 0; j < propCount; j++)
            {
-               Instantiate(props[Random.Range(0,props.Length)], transform.position + new Vector3(Random.Range(min.position.x, max.position.x), Random.Range(min.position.y, max.position.y)), quaternion.identity);
+               Instantiate(props[Random.Range(0,props.Length)], new Vector3(Random.Range(min.position.x, max.position.x), Random.Range(min.position.y, max.position.y)), quaternion.identity);
            }
            for (int i = 0; i < wallPropCount; i++)
            {
@@ -55,7 +61,7 @@ public class Park : MonoBehaviour
            {
                for (int j = 0; j < propCount; j++)
                {
-                   PhotonNetwork.InstantiateRoomObject(props[Random.Range(0,props.Length)].name, transform.position + new Vector3(Random.Range(min.position.x, max.position.x), Random.Range(min.position.y, max.position.y)), quaternion.identity);
+                   PhotonNetwork.InstantiateRoomObject(props[Random.Range(0,props.Length)].name, new Vector3(Random.Range(min.position.x, max.position.x), Random.Range(min.position.y, max.position.y)), quaternion.identity);
                }
                for (int i = 0; i < wallPropCount; i++)
                {

@@ -10,9 +10,8 @@ using Random = UnityEngine.Random;
 
 public class AddRoom : MonoBehaviour
 {
-    public float delay1, delay2, delay3;
     private RoomTemplates templates;
-
+    private Procedural proc;
     private bool gizmoOn = false;
     private Vector2 first, second;
 
@@ -34,17 +33,19 @@ public class AddRoom : MonoBehaviour
 
   void set()
   {
+      proc = FindObjectOfType<Procedural>();
       templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
       isBig= PercentReturn(templates.BigRoomPercent);
 
+      float delay=proc.getCount();
       if (isBig)
       {
-          Invoke("checkBig",delay1);
-          Invoke("SetRoom",delay2);
+          Invoke("checkBig",templates.delay1+delay);
+          Invoke("SetRoom",templates.delay1+delay);
       }
       else
       {
-          Invoke("SetRoom",delay3);   
+          Invoke("SetRoom",templates.delay1+delay);   
       }
   }
   void checkBig()
@@ -55,6 +56,15 @@ public class AddRoom : MonoBehaviour
           templates.RoomProps_Big[r].GetComponent<RoomProps>().BoxSize,0,Vector2.down,0);
 
       bool a = false;
+      foreach (RaycastHit2D ray in hit)
+      {
+          if (ray.collider.CompareTag("Entry") || ray.collider.CompareTag("Aspalt") || ray.collider.CompareTag("Destroyer") || ray.collider.CompareTag("Wall"))
+          {
+              isBig = false;
+              return;
+          }
+      }
+
       foreach (RaycastHit2D c in hit)
       {
           if (c.collider.CompareTag("Space"))
