@@ -66,6 +66,7 @@ public class Roof : MonoBehaviour
                     }
                 }
 
+
                 int index = indexList[Random.Range(0, indexList.Count)];
 
                 for (int i = 0; i < props.Length; i++)
