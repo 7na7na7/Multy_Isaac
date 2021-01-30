@@ -7,6 +7,7 @@ using UnityEngine;
 public class ParkObjs : MonoBehaviour
 {
    private PhotonView pv;
+   public bool isFlower = false;
 
    private void Start()
    {
@@ -15,15 +16,33 @@ public class ParkObjs : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D other)
    {
-      if (other.CompareTag("Road"))
+      if (isFlower)
       {
-         if(PhotonNetwork.OfflineMode)
-            DestroyRPC();
-         else
+         if (other.CompareTag("Road") || other.CompareTag("Fountain"))
          {
-            if (PhotonNetwork.IsMasterClient)
+            if(PhotonNetwork.OfflineMode)
+               DestroyRPC();
+            else
             {
-               pv.RPC("DestroyRPC",RpcTarget.AllBuffered);
+               if (PhotonNetwork.IsMasterClient)
+               {
+                  pv.RPC("DestroyRPC",RpcTarget.AllBuffered);
+               }
+            }
+         }  
+      }
+      else
+      {
+         if (other.CompareTag("Fountain"))
+         {
+            if(PhotonNetwork.OfflineMode)
+               DestroyRPC();
+            else
+            {
+               if (PhotonNetwork.IsMasterClient)
+               {
+                  pv.RPC("DestroyRPC",RpcTarget.AllBuffered);
+               }
             }
          }
       }
