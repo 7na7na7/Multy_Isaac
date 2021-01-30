@@ -57,7 +57,7 @@ public class AddRoom : MonoBehaviour
       
       foreach (RaycastHit2D ray in hit)
       {
-          if (ray.collider.CompareTag("Entry") || ray.collider.CompareTag("Aspalt") || ray.collider.CompareTag("Destroyer") || ray.collider.CompareTag("Wall"))
+          if (ray.collider.CompareTag("Entry") || ray.collider.CompareTag("Aspalt") || ray.collider.CompareTag("Destroyer") || ray.collider.CompareTag("Wall") || ray.collider.CompareTag("SpawnPoint"))
           {
               isBig = false;
               return;
@@ -109,10 +109,10 @@ public class AddRoom : MonoBehaviour
              {
                  Destroy(c.collider.gameObject);   
              }
-             if (c.collider.CompareTag("Wall") || c.collider.CompareTag("SpawnPoint")||c.collider.CompareTag("Destroyer")) //벽과 닿으면 생성못함
-             {
-                 canSpawn = false;
-             }
+//             if (c.collider.CompareTag("Wall") || c.collider.CompareTag("SpawnPoint")||c.collider.CompareTag("Destroyer")) //벽과 닿으면 생성못함
+//             {
+//                 canSpawn = false;
+//             }
          }
                         if (canSpawn)
                         { //안닿았으면은
