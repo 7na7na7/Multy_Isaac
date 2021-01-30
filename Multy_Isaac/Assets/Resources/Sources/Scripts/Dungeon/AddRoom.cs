@@ -17,8 +17,8 @@ public class AddRoom : MonoBehaviour
 
     public bool isBig = false;
     int r;
-    private bool canSpawn;
-  private void Start()
+    
+    private void Start()
   {
       if (PhotonNetwork.OfflineMode)
       {
@@ -101,35 +101,23 @@ public class AddRoom : MonoBehaviour
              (Vector2)transform.position+templates.RoomProps_Big[r].GetComponent<RoomProps>().offset,
              templates.RoomProps_Big[r].GetComponent<RoomProps>().BoxSize,0,Vector2.down,0);
 
-                        
-         canSpawn = true;
+         
          foreach (RaycastHit2D c in hit)
          {
              if (c.collider.CompareTag("Space"))
              {
                  Destroy(c.collider.gameObject);   
              }
-//             if (c.collider.CompareTag("Wall") || c.collider.CompareTag("SpawnPoint")||c.collider.CompareTag("Destroyer")) //벽과 닿으면 생성못함
-//             {
-//                 canSpawn = false;
-//             }
          }
-                        if (canSpawn)
-                        { //안닿았으면은
-                            if (PhotonNetwork.OfflineMode)
-                            {
-                                Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
-                            }
-                            else
-                            {
-                                PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position, quaternion.identity);
-                            }
-                        }
-                        else //닿았으면
-                        {
-                            justSpawn();
-                        }
-                }
+         if (PhotonNetwork.OfflineMode) 
+         { 
+             Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
+         }
+         else
+         {
+             PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position, quaternion.identity);
+         }
+     }
      else
      {
         justSpawn();
