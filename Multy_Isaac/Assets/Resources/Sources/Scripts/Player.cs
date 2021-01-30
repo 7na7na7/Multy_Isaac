@@ -455,7 +455,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (!isSuper&&pv.IsMine && !isDead)
         {
-            StartCoroutine(superTick()); //0.1초 무적
+            //StartCoroutine(superTick()); //0.1초 무적
 
             if (pos != Vector3.zero)
             {

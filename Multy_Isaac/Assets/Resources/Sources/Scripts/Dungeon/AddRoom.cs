@@ -54,8 +54,7 @@ public class AddRoom : MonoBehaviour
       RaycastHit2D[] hit = Physics2D.BoxCastAll(
           (Vector2)transform.position+templates.RoomProps_Big[r].GetComponent<RoomProps>().offset,
           templates.RoomProps_Big[r].GetComponent<RoomProps>().BoxSize,0,Vector2.down,0);
-
-      bool a = false;
+      
       foreach (RaycastHit2D ray in hit)
       {
           if (ray.collider.CompareTag("Entry") || ray.collider.CompareTag("Aspalt") || ray.collider.CompareTag("Destroyer") || ray.collider.CompareTag("Wall"))
@@ -65,15 +64,17 @@ public class AddRoom : MonoBehaviour
           }
       }
 
+      
+      bool a = false;
+      
       foreach (RaycastHit2D c in hit)
       {
           if (c.collider.CompareTag("Space"))
           {
-              if (!c.collider.GetComponent<AddRoom>().isBig)
-              {
+           
                   a = true;
                   Destroy(c.collider.gameObject);   
-              }
+              
           }
       }
 
@@ -140,6 +141,20 @@ public class AddRoom : MonoBehaviour
   {
       int randomAreaIndex = Random.Range(0, templates.RoomProps.Length);
       
+      RaycastHit2D[] hit = Physics2D.BoxCastAll(
+          (Vector2)transform.position+templates.RoomProps[randomAreaIndex].GetComponent<RoomProps>().offset,
+          templates.RoomProps[randomAreaIndex].GetComponent<RoomProps>().BoxSize,0,Vector2.down,0);
+
+      
+      foreach (RaycastHit2D c in hit)
+      {
+          if (c.collider.CompareTag("Space"))
+          {
+              Destroy(c.collider.gameObject);   
+          }
+      }
+
+
       if (PhotonNetwork.OfflineMode)
       {
           Instantiate(templates.RoomProps[randomAreaIndex], transform.position, quaternion.identity);
