@@ -92,7 +92,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          {
             if (p.pv.IsMine)
             {
-               p.canMove = false;
+               //p.canMove = false;
                break;
             }
          }  
@@ -113,7 +113,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
             {
                if (p.pv.IsMine)
                {
-                  p.canMove = true;
+                  //p.canMove = true;
                   break;
                }
             }

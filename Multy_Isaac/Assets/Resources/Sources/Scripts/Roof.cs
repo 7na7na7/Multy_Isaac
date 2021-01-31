@@ -14,8 +14,11 @@ public class prop
     public int index;
     public Sprite roofSprite;
     public GameObject minimapObj;
-    public int[] getItemIndex;
-    public GameObject[] properties;
+
+    public GameObject[] tems;
+    public int[] percentCounts;
+    public int minCount;
+    public int maxCount;
 }
 public class Roof : MonoBehaviour
 {
@@ -51,7 +54,7 @@ public class Roof : MonoBehaviour
                     break;
                 }
             }
-            
+            yield return new WaitForSeconds(1f);
             Set(index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
         }
         else
@@ -137,6 +140,8 @@ public class Roof : MonoBehaviour
             c.b = b;
             GetComponent<SpriteRenderer>().color = c;   
         }
+        
+        transform.parent.GetComponent<TemSpawner>().Set(realProp.tems,realProp.percentCounts,realProp.minCount,realProp.maxCount);
     }
     void invisible()
     {

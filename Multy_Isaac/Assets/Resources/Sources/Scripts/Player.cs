@@ -264,45 +264,53 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
     void FixedUpdate() 
     {
-        if (canMove)
+        if (!isDead) //안죽었으면
         {
-            if (canMove&&pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
+            if (canMove)
             {
-                //이동여부에 따른 애니메이션 조정
-                if (moveDirection == Vector2.zero)
+                if (canMove && pv.IsMine) //움직일 수 있고 자고있지 않으며 자신이라면
                 {
-                    if(PhotonNetwork.OfflineMode)
+                    //이동여부에 따른 애니메이션 조정
+                    if (moveDirection == Vector2.zero)
                     {
-                        SetAnimRPC("Idle");   
+                        if (PhotonNetwork.OfflineMode)
+                        {
+                            SetAnimRPC("Idle");
+                        }
+                        else
+                        {
+                            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle");
+                        }
                     }
                     else
                     {
-                        pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
+                        if (PhotonNetwork.OfflineMode)
+                        {
+                            SetAnimRPC("Walk");
+                        }
+                        else
+                        {
+                            pv.RPC("SetAnimRPC", RpcTarget.All, "Walk");
+                        }
+
                     }
-                } 
-                else
-                {
-                    if (PhotonNetwork.OfflineMode)
-                    {
-                        SetAnimRPC("Walk");
-                    }
-                    else
-                    {
-                        pv.RPC("SetAnimRPC",RpcTarget.All,"Walk");
-                    }
-                    
+
+                    rb.velocity = new Vector2(
+                        (moveDirection.x * speed * currentWeapon.walkSpeed_P / 100 *
+                         (mobileTime >= savedMobileTime ? mobilePer / 100f : 1)) *
+                        (isSwamp ? swampMovingSpeed / 100f : 1f),
+                        (moveDirection.y * speed * currentWeapon.walkSpeed_P / 100 *
+                         (mobileTime >= savedMobileTime ? mobilePer / 100f : 1)) *
+                        (isSwamp ? swampMovingSpeed / 100f : 1f));
+
+                    //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 
                 }
-                rb.velocity=new Vector2(
-                    (moveDirection.x*speed*currentWeapon.walkSpeed_P/100 * (mobileTime>=savedMobileTime ? mobilePer/100f : 1))* (isSwamp ? swampMovingSpeed/100f:1f), 
-                    (moveDirection.y*speed*currentWeapon.walkSpeed_P/100 * (mobileTime>=savedMobileTime ? mobilePer/100f : 1))* (isSwamp ? swampMovingSpeed/100f:1f)); 
-                
-                //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 
+                else //그 외는 전부 움직이지 않도록
+                {
+                    //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
+                    rb.velocity = Vector2.zero;
+                }
             }
-            else//그 외는 전부 움직이지 않도록
-            {
-                //  pv.RPC("SetAnimRPC",RpcTarget.All,false,"Idle");
-                rb.velocity=Vector2.zero;
-            }   
         }
     }
     #endregion
@@ -791,8 +799,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         isFight();
         switch (itemIndex)
         {
-            case 42:
+            case 42: //빨간포션
                 statMgr.Heal(10);
+                break;
+            case 44: //붕대
+                statMgr	.Heal(30);
                 break;
         }
     }

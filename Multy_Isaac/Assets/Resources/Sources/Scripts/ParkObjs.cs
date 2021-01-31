@@ -6,51 +6,22 @@ using UnityEngine;
 
 public class ParkObjs : MonoBehaviour
 {
-   private PhotonView pv;
-   public bool isFlower = false;
-
-   private void Start()
-   {
-      pv = GetComponent<PhotonView>();
-   }
+   public bool isRoad = true;
 
    private void OnTriggerEnter2D(Collider2D other)
    {
-      if (isFlower)
+      if (other.gameObject.name != "fountain")
       {
-         if (other.CompareTag("Road") || other.CompareTag("Fountain"))
+         if (isRoad)
          {
-            if(PhotonNetwork.OfflineMode)
-               DestroyRPC();
-            else
-            {
-               if (PhotonNetwork.IsMasterClient)
-               {
-                  pv.RPC("DestroyRPC",RpcTarget.AllBuffered);
-               }
-            }
+            if (other.CompareTag("Flower") || other.CompareTag("Wall") || other.CompareTag("Bush"))
+               Destroy(other.gameObject);
+         }
+         else
+         {
+            if(other.CompareTag("Flower")||other.CompareTag("Rock")|| other.CompareTag("Wall") ||other.CompareTag("Bush"))
+               Destroy(other.gameObject);
          }  
       }
-      else
-      {
-         if (other.CompareTag("Fountain"))
-         {
-            if(PhotonNetwork.OfflineMode)
-               DestroyRPC();
-            else
-            {
-               if (PhotonNetwork.IsMasterClient)
-               {
-                  pv.RPC("DestroyRPC",RpcTarget.AllBuffered);
-               }
-            }
-         }
-      }
-   }
-
-   [PunRPC]
-   void DestroyRPC()
-   { 
-      Destroy(gameObject);   
    }
 }

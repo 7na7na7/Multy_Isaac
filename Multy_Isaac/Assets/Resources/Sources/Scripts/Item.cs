@@ -54,13 +54,11 @@ public class Item : MonoBehaviour
     public Material outlineMat;
     private Material defaultMat;
     private SpriteRenderer spr;
-    public Ease ease;
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         spr = GetComponent<SpriteRenderer>();
         defaultMat = spr.material;
-        StartCoroutine(YuraYura());
         spr.sprite = item.ItemSprite;
     }
     
@@ -98,19 +96,6 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             spr.material = defaultMat;
-        }
-    }
-
-    IEnumerator YuraYura()
-    {
-        Vector3 pos1 = transform.position + new Vector3(0, 0.12f, 0);
-        Vector3 pos2 = transform.position + new Vector3(0, -0.12f, 0);
-        while (true)
-        {
-            transform.DOMove(pos1,2f).SetEase(ease);
-            yield return new WaitForSeconds(2f);
-            transform.DOMove(pos2,2f).SetEase(ease);
-            yield return new WaitForSeconds(2f);
         }
     }
 }

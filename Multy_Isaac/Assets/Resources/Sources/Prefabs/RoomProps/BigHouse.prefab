@@ -1342,6 +1342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3869414592262710634}
   - component: {fileID: 6497879175693065491}
+  - component: {fileID: 4395220490708720985}
   m_Layer: 0
   m_Name: HouseTile
   m_TagString: Untagged
@@ -1414,6 +1415,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &4395220490708720985
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503746098826883080}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.004304111, y: 0.0031085461}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8967017, y: 0.91771686}
+  m_EdgeRadius: 0
 --- !u!1 &3926210429271678789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,6 +2417,7 @@ GameObject:
   - component: {fileID: 3278661773606864906}
   - component: {fileID: 5970128030331374385}
   - component: {fileID: 1225546956542032909}
+  - component: {fileID: 6108023015783802471}
   m_Layer: 0
   m_Name: BigHouse
   m_TagString: SpawnPoint
@@ -2507,6 +2535,24 @@ MonoBehaviour:
   ver1: {fileID: 4243450291947466869}
   ver2: {fileID: 8524754372759637983}
   ver3: {fileID: 3926210429271678789}
+--- !u!114 &6108023015783802471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729632829863765133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff2e4678c07a5744bcb26a74423a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawn: 0
+  bound: {fileID: 4395220490708720985}
+  tems: []
+  percentCounts: 
+  minCount: 0
+  maxCount: 0
 --- !u!1 &7066894184332770927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,32 +2684,44 @@ MonoBehaviour:
     roofSprite: {fileID: 21300000, guid: 0ffcaf4e11e374e4cb79d5af3bf611af, type: 3}
     minimapObj: {fileID: 3379439962471861496, guid: 4373ef36b75ff304eb5775f591218cb8,
       type: 3}
-    getItemIndex: 
-    properties: []
+    tems:
+    - {fileID: 3749522341741181223, guid: 43b5286219d27f2469010c2a10216df7, type: 3}
+    percentCounts: 01000000
+    minCount: 1
+    maxCount: 1
   - isRandomColor: 1
     perValue: 1
     index: 2
     roofSprite: {fileID: 21300000, guid: 98e0e079c25d4de48b2188ca54b595e4, type: 3}
     minimapObj: {fileID: 3379439962471861496, guid: ad4301f2173d4504793f5cd16ad958fa,
       type: 3}
-    getItemIndex: 
-    properties: []
+    tems:
+    - {fileID: 3749522341741181223, guid: 43b5286219d27f2469010c2a10216df7, type: 3}
+    percentCounts: 01000000
+    minCount: 1
+    maxCount: 1
   - isRandomColor: 1
     perValue: 1
     index: 3
     roofSprite: {fileID: 21300000, guid: a8ba464a4c0365a46844e45e74e3704a, type: 3}
     minimapObj: {fileID: 3379439962471861496, guid: 52be0e0afc4d93b4cbac95a675fac932,
       type: 3}
-    getItemIndex: 
-    properties: []
+    tems:
+    - {fileID: 3749522341741181223, guid: 43b5286219d27f2469010c2a10216df7, type: 3}
+    percentCounts: 01000000
+    minCount: 1
+    maxCount: 1
   - isRandomColor: 0
     perValue: 1
     index: 4
     roofSprite: {fileID: 21300000, guid: 70d6253d601a96442ac00c7450fda24d, type: 3}
     minimapObj: {fileID: 3379439962471861496, guid: f64d245f9914a0f4cb0c2ecadad9dbb8,
       type: 3}
-    getItemIndex: 
-    properties: []
+    tems:
+    - {fileID: 3749522341741181223, guid: d5dd070ed61687544957ca9ef673c4bc, type: 3}
+    percentCounts: 01000000
+    minCount: 2
+    maxCount: 5
 --- !u!114 &2505431613705060954
 MonoBehaviour:
   m_ObjectHideFlags: 0
