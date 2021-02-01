@@ -9,7 +9,7 @@ public class TemSpawner : MonoBehaviour
 {
     public bool StartSpawn = false;
     
-    public BoxCollider2D bound;
+    public BoxCollider2D[] bound;
     public GameObject[] tems;
     public int[] percentCounts;
     public int minCount;
@@ -35,15 +35,17 @@ public class TemSpawner : MonoBehaviour
         
         for (int i = 0; i < random; i++)
         {
+            int r = Random.Range(0, bound.Length);
+            
             if (PhotonNetwork.OfflineMode)
             {
-                Instantiate(temArray[Random.Range(0, temArray.Count)],new Vector3(Random.Range(bound.bounds.min.x,bound.bounds.max.x),Random.Range(bound.bounds.min.y,bound.bounds.max.y)),Quaternion.identity);
+                Instantiate(temArray[Random.Range(0, temArray.Count)],new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
             }
             else
             {
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound.bounds.min.x,bound.bounds.max.x),Random.Range(bound.bounds.min.y,bound.bounds.max.y)),Quaternion.identity);
+                    PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
                 }
             }
         }
