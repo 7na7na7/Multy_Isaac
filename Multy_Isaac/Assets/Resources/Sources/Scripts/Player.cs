@@ -535,7 +535,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             bulletTr.localPosition =currentWeapon.bulletPos.position;
             leftBullet.reLoadTime = currentWeapon.reLoadTime;
             leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
-
+            offlineSlash = currentWeapon.OfflineSlash;
+            
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
         }

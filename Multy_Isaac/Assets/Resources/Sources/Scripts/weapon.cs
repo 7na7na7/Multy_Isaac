@@ -13,6 +13,7 @@ public class wep
     public float CoolTime;
     public Transform bulletPos; 
     public string BulletName;
+    public GameObject OfflineSlash;
     public int weaponIndex;
     public float reLoadTime;
     public int BulletCount;
@@ -39,7 +40,7 @@ public class wep
         Copytem.BulletName = this.BulletName;
         Copytem.weaponIndex = this.weaponIndex;
         Copytem.ClusterRate = this.ClusterRate;
-        
+        Copytem.OfflineSlash = this.OfflineSlash;
         return Copytem;
     }
 }
