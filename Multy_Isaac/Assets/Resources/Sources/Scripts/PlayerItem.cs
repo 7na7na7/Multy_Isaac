@@ -305,6 +305,17 @@ public class PlayerItem : MonoBehaviour
                 player.gunSetfalse();
         }
     }
+
+    public int GetItemCount(int Index)
+    {
+        for (int i = 0; i < ItemList.Length; i++)
+        {
+            if (ItemList[i].index == Index)
+                return slots[i].itemCount;
+        }
+
+        return 0;
+    }
     public tem GetItemArray(int Index)
     {
         tem tem = new tem();
