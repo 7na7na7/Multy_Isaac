@@ -172,7 +172,7 @@ public class PlayerItem : MonoBehaviour
                         }
                     }
 
-                    if (Input.GetKeyDown(KeyCode.F)) //F키를 길게 눌러 템 버리기
+                    if (Input.GetKeyDown(KeyCode.Q)) //F키를 길게 눌러 템 버리기
                     {
                         DiscardItem(false);
 //                        if (time >= discardTime)

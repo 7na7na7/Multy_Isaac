@@ -146,9 +146,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (pv.IsMine)
             {
-                //소리 테스트코드
-                if(Input.GetKeyDown(KeyCode.Q))
-                    sound.Play(0,true);
+//                //소리 테스트코드
+//                if(Input.GetKeyDown(KeyCode.Q))
+//                    sound.Play(0,true);
 
                 Lv.text = "Lv." + LvMgr.Lv; //레벨 표시
                 

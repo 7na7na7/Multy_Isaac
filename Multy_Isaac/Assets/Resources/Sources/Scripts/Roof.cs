@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Photon.Pun;
+using Unity.Mathematics;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
@@ -14,7 +15,8 @@ public class prop
     public int index;
     public Sprite roofSprite;
     public GameObject minimapObj;
-
+    public GameObject tile;
+    
     public GameObject[] tems;
     public int[] percentCounts;
     public int minCount;
@@ -147,7 +149,8 @@ public class Roof : MonoBehaviour
         else
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
 
-
+        if(realProp.tile!=null) 
+            Instantiate(realProp.tile, transform.position, quaternion.identity);
         if (isRoof)
         {
             spr.sprite = realProp.roofSprite;
