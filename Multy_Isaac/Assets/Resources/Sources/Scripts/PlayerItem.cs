@@ -157,6 +157,10 @@ public class PlayerItem : MonoBehaviour
                             contactIndex= 4;
                             else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
                             contactIndex = 5;
+                            else if (Input.GetKeyDown(KeyCode.Alpha7)) //7
+                            contactIndex = 6;
+                            else if (Input.GetKeyDown(KeyCode.Alpha8)) //8
+                            contactIndex = 7;
 
                         if (contactIndex != selectedIndex)
                         {
