@@ -11,8 +11,9 @@ public class offlineStat : MonoBehaviour
     public Text hpTxt;
     public Text stomachTxt;
     Player player;
-    
-
+    private float one = 0;
+    private int hungryLessSpeed;
+    private int hungrySpeed;
     private void Awake()
     {
         Player[] players = FindObjectsOfType<Player>();
@@ -23,7 +24,9 @@ public class offlineStat : MonoBehaviour
                 player = p;
                 break;
             }
-        }  
+        }
+        hungrySpeed = player.hungrySpeed;
+        hungryLessSpeed = player.hungryLessHpSpeed;
     }
 
     void Update()
@@ -35,8 +38,17 @@ public class offlineStat : MonoBehaviour
 
             if (stomach.fillAmount > 0)
             {
-                stomach.fillAmount -= player.hungrySpeed/1000f * Time.deltaTime;
+                stomach.fillAmount -= hungrySpeed/1000f * Time.deltaTime;
                 stomachTxt.text = ((int) (100f * stomach.fillAmount)).ToString();   
+            }
+            else
+            {
+                one+= hungryLessSpeed/10f * Time.deltaTime;
+                if (one >= 1f)
+                {
+                    one = 0;
+                    player.loseHP();   
+                }
             }
         }
     }

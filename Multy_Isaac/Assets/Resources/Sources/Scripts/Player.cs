@@ -45,6 +45,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
     //배고픔
     public int hungrySpeed;
+    public int hungryLessHpSpeed;
 
     //기동신
     private int mobile;
@@ -511,7 +512,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             footCount = 0;
         }
     }
-    
+
+    public void loseHP()
+    {
+        if (!isDead)
+        {
+            if(statMgr.LoseHp(1))
+                Die("배고픔");   
+        }
+    }
     public void changeWeapon(wep weapon, bool isFirst) //무기바꾸기
     {
         if (weapon.weaponIndex > 0)
@@ -804,7 +813,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 statMgr.Heal(10);
                 break;
             case 44: //붕대
-                statMgr	.Heal(30);
+                statMgr.Heal(30);
                 break;
         }
     }
