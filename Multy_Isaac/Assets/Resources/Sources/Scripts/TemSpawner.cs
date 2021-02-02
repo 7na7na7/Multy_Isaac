@@ -7,21 +7,10 @@ using Random = UnityEngine.Random;
 
 public class TemSpawner : MonoBehaviour
 {
-    public bool StartSpawn = false;
-    
+
     public BoxCollider2D[] bound;
-    public GameObject[] tems;
-    public int[] percentCounts;
-    public int minCount;
-    public int maxCount;
 
     private List<GameObject> temArray= new List<GameObject>();
-
-    private void Start()
-    {
-        if(StartSpawn)
-            Set(tems,percentCounts,minCount,maxCount);
-    }
 
     public void Set(GameObject[] tems, int[] percentCounts, int minCount, int maxCount)
     {

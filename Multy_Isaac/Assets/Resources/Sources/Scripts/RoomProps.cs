@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class RoomProps : MonoBehaviour
 {
-    public bool startPlay = false;
-    public GameObject minimapObj;
     private PhotonView pv;
     public Vector2 offset;
     public Vector2 BoxSize;
@@ -15,11 +13,11 @@ public class RoomProps : MonoBehaviour
     private float rr, gg, bb;
 
     private GameObject mp;
+    private GameObject minimapTr;
     private void Start()
     {
         pv = GetComponent<PhotonView>();
-        if(startPlay)
-            setMinimap(minimapObj,0,0,0);
+        minimapTr=GameObject.Find("minimapTr");
     }
 
     public void setMinimap(GameObject minimapObj,float r,float g,float b)
@@ -31,9 +29,9 @@ public class RoomProps : MonoBehaviour
         
         if (PhotonNetwork.OfflineMode)
         {
-            GameObject go=Instantiate(mp, GameObject.Find("minimapTr").transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
+            GameObject go=Instantiate(mp, minimapTr.transform.position+new Vector3(transform.position.x*0.1f,transform.position.y*0.1f), Quaternion.identity);
             
-            if(rr==0&&gg==0&&bb==0)
+            if(rr==1&&gg==1&&bb==1)
             {}
             else
             {
@@ -46,13 +44,20 @@ public class RoomProps : MonoBehaviour
         }
         else
         {
-            if(rr==0&&gg==0&&bb==0)
-            {}
+            if (rr == 1 && gg == 1 && bb == 1)
+            {
+                try
+                {
+                    pv.RPC("set",RpcTarget.AllBuffered,false);
+                }
+                catch (Exception e)
+                { throw; }
+            }
             else
             {
                 try
                 {
-                    pv.RPC("set",RpcTarget.AllBuffered);
+                    pv.RPC("set",RpcTarget.AllBuffered,true);
                 }
                 catch (Exception e)
                 { throw; }
@@ -62,14 +67,17 @@ public class RoomProps : MonoBehaviour
 
 
     [PunRPC]
-    private void set()
+    private void set(bool isRandomColor)
     {
-        GameObject go = Instantiate(mp, GameObject.Find("minimapTr").transform.position + new Vector3(transform.position.x * 0.1f, transform.position.y * 0.1f), Quaternion.identity);
+        GameObject go = Instantiate(mp, minimapTr.transform.position + new Vector3(transform.position.x * 0.1f, transform.position.y * 0.1f), Quaternion.identity);
 
-        Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
-        color.r = rr;
-        color.g = gg;
-        color.b = bb;
-        go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;
+        if (isRandomColor)
+        {
+            Color color = go.transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+            color.r = rr;
+            color.g = gg;
+            color.b = bb;
+            go.transform.GetChild(0).GetComponent<SpriteRenderer>().color = color;   
+        }
     }
 }

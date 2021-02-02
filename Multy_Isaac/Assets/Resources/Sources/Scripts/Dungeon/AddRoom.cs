@@ -84,7 +84,7 @@ public class AddRoom : MonoBehaviour
   public void SetRoom()
   {
       templates.rooms.Add(this.gameObject);
-    SetRoomProps(); //생성
+    SetRoomProps(); //생성////////////////////////////////////////////////////////////
     var bounds = GetComponent<Collider2D>().bounds;
 // Expand the bounds along the Z axis
     bounds.Expand(Vector3.forward*1000);
@@ -120,7 +120,7 @@ public class AddRoom : MonoBehaviour
      }
      else
      {
-        justSpawn();
+        justSpawn();/////////////////////////////////////////////////////////
      }
 
   }
@@ -149,7 +149,7 @@ public class AddRoom : MonoBehaviour
       }
       else
       {
-          PhotonNetwork.InstantiateRoomObject(templates.RoomProps[randomAreaIndex].name, transform.position, quaternion.identity);
+          PhotonNetwork.InstantiateRoomObject(templates.RoomProps[randomAreaIndex].name, transform.position, quaternion.identity);//////////////////////////////////////////
       }   
   }
   bool PercentReturn(int percent)

@@ -22,40 +22,57 @@ public class prop
 }
 public class Roof : MonoBehaviour
 {
+    public bool isRoof = true;
     public float alpha = 0;
     private PhotonView pv;
     public prop[] props;
-    private prop realProp;
     private SpriteRenderer spr;
     private List<int> indexList= new List<int>();
-    
+
     private IEnumerator Start()
     {
-        pv = GetComponent<PhotonView>();
-        spr = GetComponent<SpriteRenderer>();
+       pv = GetComponent<PhotonView>();
+       if(isRoof) 
+           spr = GetComponent<SpriteRenderer>();
 
         if (PhotonNetwork.OfflineMode)
         {
-            for (int i = 0; i < props.Length; i++)
+            int index = 0;
+            int a = Random.Range(0, 7);
+            float min = 0.3f;
+            float max = 0.8f;
+            float r=1, g=1, b=1;
+            switch (a)
             {
-                for (int j = 0; j < props[i].perValue;j++)
-                {
-                    indexList.Add(props[i].index);   
-                }
-            }
-
-            int index = indexList[Random.Range(0, indexList.Count)];
-
-            for (int i = 0; i < props.Length; i++)
-            {
-                if (props[i].index == index)
-                {
-                    index = i;
+                case 0:
+                    r = Random.Range(min,max);
                     break;
-                }
+                case 1:
+                    g = Random.Range(min,max);
+                    break;
+                case 2:
+                    b = Random.Range(min,max);
+                    break;
+                case 3:
+                    r = Random.Range(min,max);
+                    g =Random.Range(min,max);
+                    break;
+                case 4:
+                    r = Random.Range(min,max);
+                    b =Random.Range(min,max);
+                    break;
+                case 5:
+                    g =Random.Range(min,max);
+                    b = Random.Range(min,max);
+                    break;
+                case 6:
+                    r =Random.Range(min,max);
+                    g =Random.Range(min,max);
+                    b = Random.Range(min,max);
+                    break;
             }
-            yield return new WaitForSeconds(1f);
-            Set(index,Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
+          yield return new WaitForSeconds(0.5f);
+            Set(index,r,g,b);
         }
         else
         {
@@ -81,7 +98,7 @@ public class Roof : MonoBehaviour
                     }
                 }
 
-                int a = Random.Range(0, 6);
+                int a = Random.Range(0, 7);
                 float min = 0.3f;
                 float max = 0.8f;
                 float r=1, g=1, b=1;
@@ -114,34 +131,41 @@ public class Roof : MonoBehaviour
                         b = Random.Range(min,max);
                         break;
                 }
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
                 pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b);
             }
         }
     }
 
+
     [PunRPC]
     void Set(int realIndex, float r, float g, float b)
     {
-        realProp = props[realIndex];
+        prop realProp = props[realIndex];
         if(!realProp.isRandomColor) 
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,1,1,1);
         else
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
-        
-        
-        spr.sprite = realProp.roofSprite;
 
-        if (realProp.isRandomColor)
+
+        if (isRoof)
         {
-            Color c = GetComponent<SpriteRenderer>().color;
-            c.r = r;
-            c.g = g;
-            c.b = b;
-            GetComponent<SpriteRenderer>().color = c;   
+            spr.sprite = realProp.roofSprite;
+
+            if (realProp.isRandomColor)
+            {
+                Color c = GetComponent<SpriteRenderer>().color;
+                c.r = r;
+                c.g = g;
+                c.b = b;
+                GetComponent<SpriteRenderer>().color = c;   
+            }   
         }
-        
+
         transform.parent.GetComponent<TemSpawner>().Set(realProp.tems,realProp.percentCounts,realProp.minCount,realProp.maxCount);
+        
+        
+        Destroy(transform.parent.GetComponent<PhotonView>());
     }
     void invisible()
     {
@@ -158,19 +182,25 @@ public class Roof : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (isRoof)
         {
-            if(other.GetComponent<PhotonView>().IsMine) 
-                invisible();
+            if (other.CompareTag("Player"))
+            {
+                if(other.GetComponent<PhotonView>().IsMine) 
+                    invisible();
+            }   
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (isRoof)
         {
-            if(other.GetComponent<PhotonView>().IsMine) 
-                unInvisible();
+            if (other.CompareTag("Player"))
+            {
+                if (other.GetComponent<PhotonView>().IsMine)
+                    unInvisible();
+            }
         }
     }
 }

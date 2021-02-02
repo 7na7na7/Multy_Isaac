@@ -97,8 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3a249f5582d3a4fb98edf81d10fcbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRoof: 1
   alpha: 0
-  props: []
+  props:
+  - isRandomColor: 0
+    perValue: 1
+    index: 1
+    roofSprite: {fileID: 21300000, guid: 7c44700b9a7167c4f9ce6352798536c0, type: 3}
+    minimapObj: {fileID: 3379439962471861496, guid: fa308027f188fdf43bb882b8ed70a201,
+      type: 3}
+    tems:
+    - {fileID: 3749522341741181223, guid: aa09a13894e86524b8fd3a377b00fcbf, type: 3}
+    - {fileID: 3749522341741181223, guid: c485d177110fb164591a1dd1862428a7, type: 3}
+    percentCounts: 0300000007000000
+    minCount: 5
+    maxCount: 10
 --- !u!114 &4753237192301554719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,9 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b54bc2ff9367a489cb6ff273f389ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPlay: 1
-  minimapObj: {fileID: 3379439962471861496, guid: fa308027f188fdf43bb882b8ed70a201,
-    type: 3}
   offset: {x: 8.912991, y: 10.11287}
   BoxSize: {x: 28.72321, y: 27.90395}
 --- !u!61 &3596642181762426228
@@ -280,16 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff2e4678c07a5744bcb26a74423a599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartSpawn: 1
   bound:
   - {fileID: 6903179791174054684}
   - {fileID: 6908858888447362912}
-  tems:
-  - {fileID: 3749522341741181223, guid: aa09a13894e86524b8fd3a377b00fcbf, type: 3}
-  - {fileID: 3749522341741181223, guid: c485d177110fb164591a1dd1862428a7, type: 3}
-  percentCounts: 0300000007000000
-  minCount: 5
-  maxCount: 10
 --- !u!1 &4959896255807298758
 GameObject:
   m_ObjectHideFlags: 0

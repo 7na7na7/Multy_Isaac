@@ -9,12 +9,9 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [Serializable]
-public class Area
-{
-   public GameObject[] props;
-}
 public class RoomTemplates : MonoBehaviour
 {
+   private PhotonView pv;
    public float delay;
    public int TBLRper = 90;
    public GameObject[] RoomProps;
@@ -41,6 +38,7 @@ public class RoomTemplates : MonoBehaviour
 
    private void Start()
    {
+      pv = GetComponent<PhotonView>();
       if (PhotonNetwork.OfflineMode)
       {
          //Invoke("Spawn",waitTime);
@@ -51,7 +49,7 @@ public class RoomTemplates : MonoBehaviour
          if (PhotonNetwork.IsMasterClient)
          {
 
-            Invoke("Spawn",waitTime);  
+            //Invoke("Spawn",waitTime);  
             //Invoke("ReLoad",ReLoadTime);
          }
       }
@@ -93,5 +91,6 @@ public class RoomTemplates : MonoBehaviour
 //         }
       }
    }
+   
    
 }
