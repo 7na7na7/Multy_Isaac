@@ -10253,6 +10253,7 @@ GameObject:
   - component: {fileID: 531625337}
   - component: {fileID: 531625336}
   - component: {fileID: 531625335}
+  - component: {fileID: 531625338}
   m_Layer: 5
   m_Name: HappyBtn
   m_TagString: Untagged
@@ -10323,19 +10324,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 531625336}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2062982359}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Disconnect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &531625336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10374,6 +10363,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531625333}
   m_CullTransparentMesh: 0
+--- !u!114 &531625338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531625333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2062982359}
+          m_TargetAssemblyTypeName: InGameNetwork, Assembly-CSharp
+          m_MethodName: Disconnect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &532105970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39877,7 +39895,7 @@ MonoBehaviour:
   isFullScreen: 0
   ResX: 960
   RexY: 540
-  isOffline: 0
+  isOffline: 1
   ChatText:
   - {fileID: 2472824490594548650}
   - {fileID: 2472824491317682257}

@@ -10,6 +10,13 @@ public class Pause : MonoBehaviour
     public GameObject pausePanel;
     public Animator anim;
     private bool isOpen = false;
+
+    private void Start()
+    {
+        isOpen = false;
+        anim.Play("Close");
+    }
+
     private void Update()
     {
         if (canPause)
