@@ -74,7 +74,7 @@ public class PlayerItem : MonoBehaviour
                             
                                 bool isGet = false;
 
-                                if (item.GetComponent<Item>().item.type == itemType.Usable || item.GetComponent<Item>().item.type == itemType.Item) //소비템이면
+                                if (item.GetComponent<Item>().item.type == itemType.Usable) //소비템이면
                                 {
                                     bool isHaveUsable = false;
                                     
@@ -211,7 +211,7 @@ public class PlayerItem : MonoBehaviour
     {
           bool isGet = false;
           int select = 0;
-                                if (item.type == itemType.Usable || item.type==itemType.Item) //소비템 또는 재료템이면
+                                if (item.type == itemType.Usable) //소비템 또는 재료템이면
                                 {
                                     bool isHaveUsable = false;
                                     
@@ -351,7 +351,7 @@ public class PlayerItem : MonoBehaviour
             }
         }
         
-            if (ItemList[inx].type == itemType.Usable || ItemList[inx].type == itemType.Item) //소비템이면
+            if (ItemList[inx].type == itemType.Usable) //소비템이면
             {
                 slots[inx].itemCount--;
                 if (slots[inx].itemCount <= 0)
@@ -377,7 +377,7 @@ public class PlayerItem : MonoBehaviour
         {
             int ind = ItemList[selectedIndex].index;
 
-            if (ItemList[selectedIndex].type == itemType.Usable || ItemList[selectedIndex].type==itemType.Item) //소비템이면
+            if (ItemList[selectedIndex].type == itemType.Usable) //소비템이면
             {
                 slots[selectedIndex].itemCount--;
                 if(slots[selectedIndex].itemCount<=0)
