@@ -142,25 +142,27 @@ public class PlayerItem : MonoBehaviour
                     //1부터 6으로 아이템 선택 가능
                     if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
                         Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
-                        Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6))
+                        Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6)
+                        || Input.GetKeyDown(KeyCode.Alpha7)|| Input.GetKeyDown(KeyCode.Alpha8))
                     {
                         int contactIndex = 0;
                         if (Input.GetKeyDown(KeyCode.Alpha1)) //1
                             contactIndex = 0;
-                            else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
+                        else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
                             contactIndex = 1;
-                            else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
+                        else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
                             contactIndex= 2;
-                            else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
+                        else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
                             contactIndex = 3;
-                            else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
+                        else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
                             contactIndex= 4;
-                            else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
+                        else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
                             contactIndex = 5;
-                            else if (Input.GetKeyDown(KeyCode.Alpha7)) //7
+                        else if (Input.GetKeyDown(KeyCode.Alpha7)) //7
                             contactIndex = 6;
-                            else if (Input.GetKeyDown(KeyCode.Alpha8)) //8
+                        else if (Input.GetKeyDown(KeyCode.Alpha8)) //8
                             contactIndex = 7;
+                        
 
                         if (contactIndex != selectedIndex)
                         {
