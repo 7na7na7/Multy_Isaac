@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1097576002882943575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2484462496786333037}
+  m_Layer: 0
+  m_Name: tr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2484462496786333037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097576002882943575}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.998, z: 0}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8643398306334974492}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8643398306334974491
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,7 +46,8 @@ GameObject:
   - component: {fileID: -7670496350035586433}
   - component: {fileID: 8148325739572810191}
   - component: {fileID: -6723161935204392473}
-  - component: {fileID: -7341512148033541858}
+  - component: {fileID: 1882648435662151304}
+  - component: {fileID: 5355807506242027044}
   m_Layer: 8
   m_Name: bigGreenTree_2
   m_TagString: Wall
@@ -34,7 +65,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2484462496786333037}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -220,7 +252,7 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-7341512148033541858
+--- !u!114 &1882648435662151304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,7 +261,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8643398306334974491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Script: {fileID: 11500000, guid: b0469b75efa7efc4a9528936062ab6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.5
+  hp: 100
+  wood: {fileID: 3749522341741181223, guid: adc5871d258cd2e46aad538ded6a75d4, type: 3}
+  tr: {fileID: 2484462496786333037}
+  isSuperTime: 0.3
+--- !u!114 &5355807506242027044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8643398306334974491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501f6a8d160089d44a37b289494b5e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashWhite: {fileID: 2100000, guid: cbdde7d9e63392a49a4e9716effb3050, type: 2}

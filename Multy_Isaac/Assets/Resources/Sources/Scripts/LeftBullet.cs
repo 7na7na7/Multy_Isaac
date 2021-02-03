@@ -20,7 +20,7 @@ public class LeftBullet : MonoBehaviour
 
     private void Start()
     {
-        leftBullets=new int[6];
+        leftBullets=new int[8];
     }
 
     public int getBulletCount()
