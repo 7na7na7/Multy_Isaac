@@ -66,16 +66,32 @@ public class Invent : MonoBehaviour
                 if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index ==
                     PlayerItem.GetItemArray(element.SmallItemIndex[1]).index) //둘이 똑같은템 조합이면
                 {
-                    if (PlayerItem.GetItemCount(element.SmallItemIndex[0]) >= 2)
+                    if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).type == itemType.Usable)
                     {
-                        InventBtn.interactable = true;
-                        CanCombine = true;
+                        if (PlayerItem.GetUsableItemCount(element.SmallItemIndex[0]) >= 2)
+                        {
+                            InventBtn.interactable = true;
+                            CanCombine = true;
+                        }
+                        else
+                        {
+                            InventBtn.interactable = false;
+                            CanCombine = false;
+                        }            
                     }
                     else
                     {
-                        InventBtn.interactable = false;
-                        CanCombine = false;
-                    }         
+                        if (PlayerItem.GetItemCount(element.SmallItemIndex[0]) >= 2)
+                        {
+                            InventBtn.interactable = true;
+                            CanCombine = true;
+                        }
+                        else
+                        {
+                            InventBtn.interactable = false;
+                            CanCombine = false;
+                        }       
+                    }
                 }
                 else
                 {

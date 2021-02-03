@@ -312,7 +312,7 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public int GetItemCount(int Index)
+    public int GetUsableItemCount(int Index)
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
@@ -321,6 +321,18 @@ public class PlayerItem : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public int GetItemCount(int Index)
+    {
+        int count = 0;
+        for (int i = 0; i < ItemList.Length; i++)
+        {
+            if (ItemList[i].index == Index)
+                count++;
+        }
+
+        return count;
     }
     public tem GetItemArray(int Index)
     {
