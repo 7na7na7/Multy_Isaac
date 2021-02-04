@@ -8,19 +8,26 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
+    public int Count=4;
     public int range1, range2, range3, range4;
     public GameObject StartEntryPrefab;
     private void Start()
     {
         if (PhotonNetwork.OfflineMode)
         {
-          Instantiate(StartEntryPrefab, new Vector3(Random.Range(range1, range2)*18,Random.Range(range3, range4)*10,transform.position.z), quaternion.identity);
+            for (int i = 0; i < Count; i++)
+            {
+                Instantiate(StartEntryPrefab,
+                    new Vector3(Random.Range(range1, range2) * 18, Random.Range(range3, range4) * 10,
+                        transform.position.z), quaternion.identity);
+            }
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                for (int i = 0; i < playerCountSave.instance.playerCount; i++)
+                //playerCountSave.instance.playerCount
+                for (int i = 0; i < Count; i++)
                 {
                     PhotonNetwork.InstantiateRoomObject("StartEntry",   new Vector3(Random.Range(range1, range2)*18,Random.Range(range3, range4)*10,transform.position.z), quaternion.identity);   
                 }

@@ -39,7 +39,26 @@ public class Roof : MonoBehaviour
 
         if (PhotonNetwork.OfflineMode)
         {
-            int index = 0;
+            for (int i = 0; i < props.Length; i++)
+            {
+                for (int j = 0; j < props[i].perValue;j++)
+                {
+                    indexList.Add(props[i].index);   
+                }
+            }
+
+
+            int index = indexList[Random.Range(0, indexList.Count)];
+
+            for (int i = 0; i < props.Length; i++)
+            {
+                if (props[i].index == index)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
             int a = Random.Range(0, 7);
             float min = 0.3f;
             float max = 0.8f;
