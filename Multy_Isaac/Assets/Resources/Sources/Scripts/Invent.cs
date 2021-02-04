@@ -44,8 +44,6 @@ public class Invent : MonoBehaviour
     public void Close()
     {
         anim.Play("InvenClose");
-        pause.canPause = true;
-
     }
 
     public void CompleteOpen(int index)

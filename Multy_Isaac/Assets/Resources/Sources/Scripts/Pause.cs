@@ -14,14 +14,13 @@ public class Pause : MonoBehaviour
     private void Start()
     {
         isOpen = false;
-        anim.Play("Close");
     }
 
     private void Update()
     {
         if (canPause)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
                 if (isOpen)
                 {
@@ -33,7 +32,14 @@ public class Pause : MonoBehaviour
                     isOpen = true;
                     anim.Play("Open");
                 }
-                
+
+            }
+        }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                canPause = true;
             }
         }
     }

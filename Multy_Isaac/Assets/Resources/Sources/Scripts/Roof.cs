@@ -93,7 +93,7 @@ public class Roof : MonoBehaviour
                     break;
             }
           yield return new WaitForSeconds(0.5f);
-            Set(index,r,g,b);
+            Set(index,r,g,b,Random.Range(0,props[index].tiles.Length));
         }
         else
         {
@@ -153,14 +153,14 @@ public class Roof : MonoBehaviour
                         break;
                 }
                 yield return new WaitForSeconds(0.5f);
-                pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b);
+                pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b,Random.Range(0,props[index].tiles.Length));
             }
         }
     }
 
 
     [PunRPC]
-    void Set(int realIndex, float r, float g, float b)
+    void Set(int realIndex, float r, float g, float b,int tileIndex)
     {
         prop realProp = props[realIndex];
         if(!realProp.isRandomColor) 
@@ -169,7 +169,7 @@ public class Roof : MonoBehaviour
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
 
         if(realProp.tiles.Length!=0) 
-            Instantiate(realProp.tiles[Random.Range(0,realProp.tiles.Length)], transform.position, quaternion.identity);
+            Instantiate(realProp.tiles[tileIndex], transform.position, quaternion.identity);
         if (isRoof)
         {
             spr.sprite = realProp.roofSprite;
