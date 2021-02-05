@@ -11243,7 +11243,7 @@ GameObject:
   - component: {fileID: 563845340}
   - component: {fileID: 563845342}
   m_Layer: 0
-  m_Name: Global Light 2D
+  m_Name: GlobalLight2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11338,6 +11338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97b11db257bbb6419da8aa247d64b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
+  dayTime: 3
+  dayToNightTime: 60
+  nightTime: 3
+  nightToDayTime: 60
 --- !u!1001 &567118890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40146,7 +40151,7 @@ MonoBehaviour:
   isFullScreen: 0
   ResX: 960
   RexY: 540
-  isOffline: 0
+  isOffline: 1
   ChatText:
   - {fileID: 2472824490594548650}
   - {fileID: 2472824491317682257}
