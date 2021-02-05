@@ -46,6 +46,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //배고픔
     public int hungrySpeed;
     public int hungryLessHpSpeed;
+    private offlineStat offStat;
 
     //기동신
     private int mobile;
@@ -128,6 +129,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             leftBullet = transform.GetChild(0).transform.GetChild(0).GetComponent<LeftBullet>();
             sound = GetComponent<SoundManager>();
             playerItem.player = this;
+            offStat	=transform.GetChild(0).GetComponent<offlineStat>();
             if (SceneManager.GetActiveScene().name == "Play")
             {
                 GetComponent<CapsuleCollider2D>().isTrigger = true;
@@ -809,10 +811,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         isFight();
         switch (itemIndex)
         {
-            case 42: //빨간포션
-                statMgr.Heal(10);
-                break;
             case 44: //붕대
+                //offStat.HungryHeal(10);
                 statMgr.Heal(30);
                 break;
         }

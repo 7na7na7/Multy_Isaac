@@ -53,4 +53,8 @@ public class offlineStat : MonoBehaviour
         }
     }
 
+    public void HungryHeal(int value)
+    {
+        stomach.fillAmount += value/100f;
+    }
 }
