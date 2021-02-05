@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1699503958582040504}
   - component: {fileID: 4963522698281150646}
+  - component: {fileID: 6441506879442263145}
   m_Layer: 0
   m_Name: Point Light 2D
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0
   m_LightVolumeOpacity: 0.18
   m_ApplyToSortingLayers: 00000000a197b70f7945a607d7bc6f920b438f06
   m_LightCookieSprite: {fileID: 0}
@@ -72,6 +73,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &6441506879442263145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795470140147681181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bfca7603272514395570d8e7e6552f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
 --- !u!1 &6637044811040539379
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 6637044811040539379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 1699503958582040504}
   m_Father: {fileID: 0}

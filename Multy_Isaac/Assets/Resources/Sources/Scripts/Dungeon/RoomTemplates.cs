@@ -11,7 +11,6 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class RoomTemplates : MonoBehaviour
 {
-   private PhotonView pv;
    public float delay;
    public int TBLRper = 90;
    public GameObject[] RoomProps;
@@ -29,16 +28,13 @@ public class RoomTemplates : MonoBehaviour
    public GameObject closedRoom;
 
    public List<GameObject> rooms;
-
-   public float waitTime;
+   
    public float ReLoadTime;
-   public GameObject boss;
 
    private Vector3 pos;
 
    private void Start()
    {
-      pv = GetComponent<PhotonView>();
       if (PhotonNetwork.OfflineMode)
       {
          //Invoke("Spawn",waitTime);
@@ -59,38 +55,4 @@ public class RoomTemplates : MonoBehaviour
    {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
    }
-   void Spawn()
-   {
-      if (PhotonNetwork.OfflineMode)
-      {
-         Instantiate(boss,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-      }
-      else
-      {
-         Player[] players = FindObjectsOfType<Player>();
-         
-         PhotonNetwork.InstantiateRoomObject(boss.name,  rooms[rooms.Count-1].transform.position, quaternion.identity);
-//         foreach (Player p in players)
-//         {
-//            print(p.nickname.text);
-//         }
-
-//         for (int i = 0; i < rooms.Count-1; i++)
-//         {
-//            if (rooms[i].CompareTag("Entry"))
-//            {
-//               if (PlayerCount > 0)
-//               {
-//                  print(players[privateCount-PlayerCount].nickname.text);
-//                  players[privateCount - PlayerCount].GetComponent<Player>().pv.RPC("Move",RpcTarget.AllBuffered,rooms[i].transform.position);
-//                  PhotonNetwork.InstantiateRoomObject("HowTo", rooms[i].transform.position, quaternion.identity);
-//                  //players[privateCount - PlayerCount].GetComponent<Player>().setCam();
-//                  PlayerCount--;
-//               }
-//            }
-//         }
-      }
-   }
-   
-   
 }

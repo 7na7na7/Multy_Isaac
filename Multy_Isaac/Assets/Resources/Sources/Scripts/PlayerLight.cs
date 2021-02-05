@@ -5,6 +5,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerLight : MonoBehaviour
 {
+    public bool isPlayer = false;
     private Light2D pointLight;
     private Light2D globalLight;
     // Start is called before the first frame update
@@ -12,11 +13,15 @@ public class PlayerLight : MonoBehaviour
     {
         pointLight = GetComponent<Light2D>();
         globalLight = GameObject.Find("GlobalLight2D").GetComponent<Light2D>();
+        
+        if(!isPlayer)
+            pointLight.intensity = 1.1f - globalLight.intensity;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointLight.intensity = 1 - globalLight.intensity;
+        if(isPlayer	) 
+            pointLight.intensity = 1 - globalLight.intensity;
     }
 }
