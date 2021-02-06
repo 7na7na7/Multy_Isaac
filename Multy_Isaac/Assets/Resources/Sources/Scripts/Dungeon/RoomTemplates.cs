@@ -15,7 +15,9 @@ public class RoomTemplates : MonoBehaviour
    public int TBLRper = 90;
    public GameObject[] RoomProps;
    public GameObject[] RoomProps_Big;
-   
+   public GameObject oneRoom;
+   public bool isOneRoom = false;
+
    //한칸짜리 방들
    public GameObject[] bottomRooms;
    public GameObject[] topRooms;

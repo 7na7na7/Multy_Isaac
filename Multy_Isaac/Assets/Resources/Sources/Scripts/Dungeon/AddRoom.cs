@@ -38,15 +38,17 @@ public class AddRoom : MonoBehaviour
       isBig= PercentReturn(templates.BigRoomPercent);
 
       float delay=proc.getCount();
-      if (isBig)
-      {
-          Invoke("checkBig",templates.delay+delay);
-          Invoke("SetRoom",templates.delay+delay);
-      }
-      else
-      {
-          Invoke("SetRoom",templates.delay+delay);   
-      }
+
+          if (isBig)
+          {
+              Invoke("checkBig",templates.delay+delay);
+              Invoke("SetRoom",templates.delay+delay);
+          }
+          else
+          {
+              Invoke("SetRoom",templates.delay+delay);   
+          }   
+      
   }
   void checkBig()
   {
@@ -85,10 +87,6 @@ public class AddRoom : MonoBehaviour
   {
       templates.rooms.Add(this.gameObject);
     SetRoomProps(); //생성////////////////////////////////////////////////////////////
-    var bounds = GetComponent<Collider2D>().bounds;
-// Expand the bounds along the Z axis
-    bounds.Expand(Vector3.forward*1000);
-    var guo = new GraphUpdateObject(bounds);
   }
 
   void SetRoomProps()
@@ -111,11 +109,23 @@ public class AddRoom : MonoBehaviour
          }
          if (PhotonNetwork.OfflineMode) 
          { 
-             Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
+             if (templates.isOneRoom)
+             {
+                 Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
+             }
+             else
+             {
+                 templates.isOneRoom = true;
+                 Instantiate(templates.oneRoom, transform.position,quaternion.identity);
+             }
          }
          else
          {
-             PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position, quaternion.identity);
+             if (templates.isOneRoom)
+             {
+                 PhotonNetwork.InstantiateRoomObject(templates.oneRoom.name, transform.position, quaternion.identity);
+                 templates.isOneRoom = true;
+             }
          }
      }
      else

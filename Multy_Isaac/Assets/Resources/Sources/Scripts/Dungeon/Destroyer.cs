@@ -14,8 +14,11 @@ public class Destroyer : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D other)
    {
-      if(IsoutDestroyer) 
-         Destroy(other.gameObject);
+      if (IsoutDestroyer)
+      {
+         if(!other.CompareTag("Player")) 
+            Destroy(other.gameObject);  
+      }
       else
       {
          if(other.CompareTag("Wall"))
