@@ -14,6 +14,7 @@ public class wep
     public Transform bulletPos; 
     public string BulletName;
     public GameObject OfflineSlash;
+    public GameObject offlineBullet;
     public int weaponIndex;
     public float reLoadTime;
     public int BulletCount;
@@ -41,6 +42,7 @@ public class wep
         Copytem.weaponIndex = this.weaponIndex;
         Copytem.ClusterRate = this.ClusterRate;
         Copytem.OfflineSlash = this.OfflineSlash;
+        Copytem.offlineBullet = this.offlineBullet;
         return Copytem;
     }
 }

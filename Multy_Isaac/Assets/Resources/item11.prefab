@@ -4922,14 +4922,15 @@ MonoBehaviour:
     weaponIndex: 11
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 0100000002000000
+    SmallItemIndex: 1a00000032000000
     CompleteItemIndex: 
     index: 11
-    ItemName: "\uC0F7\uAC74"
+    ItemName: "\uBC84\uC12F \uD53C\uC2A4\uD1A8"
     ItemSprite: {fileID: 21300000, guid: 65e857b9aa4c4c94985fdd7ceb827df1, type: 3}
     type: 0
-    ItemDescription: "\uC815\uD655\uC131\uC774 \uB354 \uB192\uC740 \uAD8C\uCD1D."
-    WhereGet: "\uC81C\uC791 \uBD88\uAC00\uB2A5"
+    ItemDescription: "\uBC84\uC12F\uC774 \uB098\uAC04\uB2E4\uB294 \uAC83\uB9CC \uBC30\uBA74,
+      \uD3C9\uBC94\uD55C(?) \uAD8C\uCD1D."
+    WhereGet: "\uC81C\uC791"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
 CircleCollider2D:
@@ -5010,8 +5011,11 @@ MonoBehaviour:
     scale: {x: 1, y: 1}
     CoolTime: 0.5
     bulletPos: {fileID: 4869776060961844962}
-    BulletName: Bullet
-    OfflineSlash: {fileID: 0}
+    BulletName: MushBullet
+    OfflineSlash: {fileID: 6637044811040539379, guid: e7fe4f95a20462449909374fb1012e69,
+      type: 3}
+    offlineBullet: {fileID: 6637044811040539379, guid: e7fe4f95a20462449909374fb1012e69,
+      type: 3}
     weaponIndex: 11
     reLoadTime: 1
     BulletCount: 8
@@ -5043,7 +5047,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160867055047779158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.403, y: 0.098, z: 0}
+  m_LocalPosition: {x: 0.503, y: 0.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3749522341741181216}

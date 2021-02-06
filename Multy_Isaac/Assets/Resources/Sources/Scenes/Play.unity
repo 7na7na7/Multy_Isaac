@@ -11339,10 +11339,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  dayTime: 60
-  dayToNightTime: 3
-  nightTime: 3
-  nightToDayTime: 3
+  dayTime: 1
+  dayToNightTime: 60
+  nightTime: 1
+  nightToDayTime: 60
 --- !u!1001 &567118890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14780,6 +14780,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Destroyer
       objectReference: {fileID: 0}
+    - target: {fileID: 4500129948988536661, guid: 31313b46d258d264283e4181e9a547c6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6105617472539375565, guid: 31313b46d258d264283e4181e9a547c6,
         type: 3}
       propertyPath: m_RootOrder
@@ -14862,6 +14867,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 731661801}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &731661807
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731661802}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1001 &736163584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18156,6 +18182,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Destroyer
       objectReference: {fileID: 0}
+    - target: {fileID: 4500129948988536661, guid: 31313b46d258d264283e4181e9a547c6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6105617472539375565, guid: 31313b46d258d264283e4181e9a547c6,
         type: 3}
       propertyPath: m_RootOrder
@@ -18248,6 +18279,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 921165518}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &921165524
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921165519}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1001 &921315793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20443,7 +20495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1045480111
 Transform:
   m_ObjectHideFlags: 0
@@ -39448,6 +39500,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Destroyer
       objectReference: {fileID: 0}
+    - target: {fileID: 4500129948988536661, guid: 31313b46d258d264283e4181e9a547c6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6105617472539375565, guid: 31313b46d258d264283e4181e9a547c6,
         type: 3}
       propertyPath: m_RootOrder
@@ -39540,6 +39597,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2027838340}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &2027838346
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027838341}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1001 &2028638962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41993,6 +42071,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3343080823108722991}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &2283894429703397088
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283894429703397083}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!222 &2472824489363283234
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -43664,6 +43763,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Destroyer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500129948988536661, guid: 31313b46d258d264283e4181e9a547c6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6105617472539375565, guid: 31313b46d258d264283e4181e9a547c6,
         type: 3}

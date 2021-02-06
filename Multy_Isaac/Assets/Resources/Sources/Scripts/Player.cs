@@ -17,7 +17,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
     //패시브 변수
-    public GameObject offlineSlash;
+    private GameObject offlineSlash;
 
      public RectTransform panel;
      public RectTransform panel2;
@@ -67,7 +67,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    //총쏘기
     public Transform bulletTr; //총알이 나가는 위치
     private float time = 0; //쿨타임 계산을 위한 시간변수
-    public GameObject offLineBullet; //오프라인 모드에서 나갈 총알
+    private GameObject offLineBullet; //오프라인 모드에서 나갈 총알
     public GameObject Arm; //팔
     private Vector2 savedGunPos;
     private Animator gunAnim;
@@ -547,6 +547,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             leftBullet.reLoadTime = currentWeapon.reLoadTime;
             leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
             offlineSlash = currentWeapon.OfflineSlash;
+            offLineBullet = currentWeapon.offlineBullet;
             
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;

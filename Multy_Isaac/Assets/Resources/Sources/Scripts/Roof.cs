@@ -15,15 +15,16 @@ public class prop
     public int index;
     public Sprite roofSprite;
     public GameObject minimapObj;
-    public GameObject[] tiles;
-    
+}
+public class Roof : MonoBehaviour
+{
     public GameObject[] tems;
     public int[] percentCounts;
     public int minCount;
     public int maxCount;
-}
-public class Roof : MonoBehaviour
-{
+    public GameObject[] tiles;
+    
+    
     public bool isRoof = true;
     public float alpha = 0;
     private PhotonView pv;
@@ -93,7 +94,7 @@ public class Roof : MonoBehaviour
                     break;
             }
           yield return new WaitForSeconds(0.5f);
-            Set(index,r,g,b,Random.Range(0,props[index].tiles.Length));
+            Set(index,r,g,b,Random.Range(0,tiles.Length));
         }
         else
         {
@@ -153,7 +154,7 @@ public class Roof : MonoBehaviour
                         break;
                 }
                 yield return new WaitForSeconds(0.5f);
-                pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b,Random.Range(0,props[index].tiles.Length));
+                pv.RPC("Set",RpcTarget.AllBuffered,index,r,g,b,Random.Range(0,tiles.Length));
             }
         }
     }
@@ -168,8 +169,8 @@ public class Roof : MonoBehaviour
         else
             transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
 
-        if(realProp.tiles.Length!=0) 
-            Instantiate(realProp.tiles[tileIndex], transform.position, quaternion.identity);
+        if(tiles.Length!=0) 
+            Instantiate(tiles[tileIndex], transform.position, quaternion.identity);
         if (isRoof)
         {
             spr.sprite = realProp.roofSprite;
@@ -184,7 +185,7 @@ public class Roof : MonoBehaviour
             }   
         }
 
-        transform.parent.GetComponent<TemSpawner>().Set(realProp.tems,realProp.percentCounts,realProp.minCount,realProp.maxCount);
+        transform.parent.GetComponent<TemSpawner>().Set(tems,percentCounts,minCount,maxCount);
         
         
         Destroy(transform.parent.GetComponent<PhotonView>());
