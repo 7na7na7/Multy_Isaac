@@ -164,10 +164,13 @@ public class Roof : MonoBehaviour
     void Set(int realIndex, float r, float g, float b,int tileIndex)
     {
         prop realProp = props[realIndex];
-        if(!realProp.isRandomColor) 
-            transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,1,1,1);
-        else
-            transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);
+        if (props[realIndex].minimapObj != null)
+        {
+            if(!realProp.isRandomColor) 
+                transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,1,1,1);
+            else
+                transform.parent.GetComponent<RoomProps>().setMinimap(props[realIndex].minimapObj,r,g,b);   
+        }
 
         if(tiles.Length!=0) 
             Instantiate(tiles[tileIndex], transform.position, quaternion.identity);

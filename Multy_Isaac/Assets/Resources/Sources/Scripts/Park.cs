@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Park : MonoBehaviour
 {
-   public GameObject[] props;
+    public GameObject[] props;
    public GameObject[] wallProps;
    public Transform min;
    public Transform max;
