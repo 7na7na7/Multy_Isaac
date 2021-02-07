@@ -11,8 +11,7 @@ public class wep
     public Vector2 tr;
     public Vector2 scale;
     public float CoolTime;
-    public Transform bulletPos; 
-    public string BulletName;
+    public Transform bulletPos;
     public GameObject OfflineSlash;
     public GameObject offlineBullet;
     public int weaponIndex;
@@ -38,7 +37,7 @@ public class wep
         Copytem.scale = this.scale;
         Copytem.CoolTime = this.CoolTime;
         Copytem.bulletPos = this.bulletPos;
-        Copytem.BulletName = this.BulletName;
+      
         Copytem.weaponIndex = this.weaponIndex;
         Copytem.ClusterRate = this.ClusterRate;
         Copytem.OfflineSlash = this.OfflineSlash;

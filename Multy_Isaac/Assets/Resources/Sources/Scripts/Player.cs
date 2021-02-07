@@ -364,7 +364,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.OfflineMode) 
                 Instantiate(offlineSlash,bulletTr.position,Quaternion.Euler(a2));
             else
-                PhotonNetwork.Instantiate(currentWeapon.BulletName,gun.transform.position,Quaternion.Euler(a2));
+                PhotonNetwork.Instantiate(offLineBullet.name,gun.transform.position,Quaternion.Euler(a2));
 
             gun.transform.DORotate(a, currentWeapon.slashTime).SetEase(Ease.OutCubic).OnComplete(()=> {
                 StartCoroutine(swordInitial(a2, 0.05f));
@@ -415,7 +415,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     if (PhotonNetwork.OfflineMode) 
                         Instantiate(offLineBullet,bulletTr.position,q);
                     else
-                        PhotonNetwork.Instantiate(currentWeapon.BulletName, bulletTr.position, q);
+                        PhotonNetwork.Instantiate(offLineBullet.name, bulletTr.position, q);
                 }
             }
             else
