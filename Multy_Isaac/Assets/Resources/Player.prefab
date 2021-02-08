@@ -1417,6 +1417,7 @@ GameObject:
   - component: {fileID: 1656125519388946568}
   - component: {fileID: 112638434888358731}
   - component: {fileID: 2316534264001469433}
+  - component: {fileID: 2131273893658612526}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -1673,6 +1674,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Idle41
+  - Type: 9
+    SynchronizeType: 0
+    Name: Idle30
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -1695,6 +1699,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &2131273893658612526
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656125519388945597}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1 &1656125519388946299
 GameObject:
   m_ObjectHideFlags: 0
@@ -11224,8 +11244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fa8870c491b8540baa96fc290726ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offlineSlash: {fileID: 8587958215958462638, guid: 3e5335dbe564cfd45b13eaf80ec644ce,
-    type: 3}
   panel: {fileID: 9207444285022455384}
   panel2: {fileID: 1083951901806957472}
   canvas: {fileID: 6815524545763313015}
@@ -11248,8 +11266,6 @@ MonoBehaviour:
   nickname: {fileID: 8249542334432618771}
   hp: {fileID: 8249542335099230702}
   bulletTr: {fileID: 1656125519388945703}
-  offLineBullet: {fileID: 6637044811040539379, guid: bc9ba9c2ed454424faabbb939108cf62,
-    type: 3}
   Arm: {fileID: 5634795106152292587}
   isSuper: 0
   gun: {fileID: 1656125519388945597}

@@ -12,7 +12,6 @@ public class AddRoom : MonoBehaviour
 {
     private RoomTemplates templates;
     private Procedural proc;
-    private bool gizmoOn = false;
     private Vector2 first, second;
 
     public bool isBig = false;
@@ -168,14 +167,5 @@ public class AddRoom : MonoBehaviour
           return true;
       else
           return false;
-  }
-  
-  private void OnDrawGizmos()
-  {
-      if (gizmoOn)
-      {
-          Gizmos.color = Color.red;
-          Gizmos.DrawWireCube(first,second);
-      }
   }
 }

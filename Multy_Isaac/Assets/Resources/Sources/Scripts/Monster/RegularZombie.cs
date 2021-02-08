@@ -58,7 +58,7 @@ public class RegularZombie : MonoBehaviour
     }
 
     public void OnPathComplete (Path p) {
-        Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
+        //Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
 
         if (!p.error) {
             path = p;
@@ -66,7 +66,10 @@ public class RegularZombie : MonoBehaviour
             currentWaypoint = 0;
         }
     }
-    
+    public void stopCor()
+    {
+        StopCoroutine(corr);
+    }
     public void Update () 
         {
             if (!enemy.isFinding && enemy.canMove)

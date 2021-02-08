@@ -227,5 +227,12 @@ if (PhotonNetwork.OfflineMode)
       transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
     }
   }
-  
+
+  public void setPlayer(Transform tr)
+  {
+    GetComponent<RegularZombie>().stopCor();
+    isFinding = true;
+    targetPosition = tr; 
+    setAnim("Walk");
+  }
 }

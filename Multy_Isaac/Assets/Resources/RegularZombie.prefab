@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 6030439151700246094}
   - component: {fileID: 692161826}
   - component: {fileID: 1755109966}
-  - component: {fileID: 1755109967}
   m_Layer: 0
   m_Name: RegularZombie
   m_TagString: Enemy
@@ -345,7 +344,7 @@ MonoBehaviour:
   nuckBackEase: 6
   ItemIndex: 0100000002000000
   ItemPercent: 1e0000001e000000
-  hp: 40
+  hp: 30
   pv: {fileID: 5458050791320017465}
   CollsionDamage: 20
   damageDelay: 1
@@ -365,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60395ee72e288994fb5c2d016f5430c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRadious: 3.5
+  detectRadious: 4
   PlayerPoses: []
   AttackTime: 0.5
   minIdleTime: 0.5
@@ -421,30 +420,3 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &1755109967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
-  radiusBackingField: 0.2
-  heightBackingField: 1
-  centerBackingField: 0
-  locked: 0
-  lockWhenNotMoving: 0
-  agentTimeHorizon: 0.6
-  obstacleTimeHorizon: 0.2
-  maxNeighbours: 10
-  layer: 1
-  collidesWith: -1
-  wallAvoidForce: 1
-  wallAvoidFalloff: 1
-  priority: 0.5
-  debug: 0

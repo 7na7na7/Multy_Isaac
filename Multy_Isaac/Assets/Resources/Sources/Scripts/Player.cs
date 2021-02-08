@@ -65,6 +65,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    public Text nickname; //닉네임
    public Slider hp;
    //총쏘기
+   private float soundRadious;
     public Transform bulletTr; //총알이 나가는 위치
     private float time = 0; //쿨타임 계산을 위한 시간변수
     private GameObject offLineBullet; //오프라인 모드에서 나갈 총알
@@ -417,6 +418,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     else
                         PhotonNetwork.Instantiate(offLineBullet.name, bulletTr.position, q);
                 }
+                
+                RaycastHit2D[] zombieCol = Physics2D.CircleCastAll(gun.transform.position, soundRadious, Vector2.up,0);
+                foreach (RaycastHit2D col in zombieCol)
+                {
+                    if (col.collider.CompareTag("Enemy"))
+                        col.collider.GetComponent<Enemy>().setPlayer(transform);
+                }
             }
             else
             {
@@ -424,7 +432,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
-
+    
     IEnumerator speedCor()
     {
         speed = savedSpeed * currentWeapon.shotSpeed_P / 100;
@@ -548,6 +556,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             leftBullet.SetBullet(currentWeapon.BulletCount,playerItem.selectedIndex, isFirst);
             offlineSlash = currentWeapon.OfflineSlash;
             offLineBullet = currentWeapon.offlineBullet;
+            soundRadious = currentWeapon.soundRadious;
             
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
