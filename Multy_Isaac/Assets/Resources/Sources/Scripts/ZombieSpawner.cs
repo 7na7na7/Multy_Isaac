@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ZombieSpawner : MonoBehaviour
 {
+    public int StartZombieCount;
     public Vector2 randomMin, randomMax;
     public float delay;
     public GameObject regularZombie;
@@ -14,8 +15,26 @@ public class ZombieSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(Spawn());
+        StartSpawn();
     }
-    
+
+    void StartSpawn()
+    {
+        for (int i = 0; i < StartZombieCount; i++)
+        {
+            if (PhotonNetwork.OfflineMode)
+            {
+                Instantiate(regularZombie, new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), quaternion.identity);
+            }
+            else
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    PhotonNetwork.InstantiateRoomObject(regularZombie.name,  new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), Quaternion.identity);   
+                }
+            }      
+        }
+    }
     IEnumerator Spawn()
     {
         while (true)

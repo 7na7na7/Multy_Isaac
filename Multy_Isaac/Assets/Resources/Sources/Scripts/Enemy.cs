@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
+  public Animator Exclamation;
   private Rigidbody2D rigid;
   public float nuckBackDistance;
   public float nuckBackTime;
@@ -31,6 +32,42 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public bool isFinding = false;
   public Transform targetPosition;
   public Seeker seeker;
+
+  public void ExclamationOpen()
+  {
+    if (PhotonNetwork.OfflineMode)
+    {
+      Open();
+    }
+    else
+    {
+      pv.RPC("Open",RpcTarget.All);
+    }
+  }
+
+  public void ExclamationClose()
+  {
+    if (PhotonNetwork.OfflineMode)
+    {
+      Close();
+    }
+    else
+    {
+      pv.RPC("Close",RpcTarget.All);
+    }
+  }
+
+  [PunRPC]
+  void Open()
+  {
+    Exclamation.Play("Open");
+  }
+  
+  [PunRPC]
+  void Close()
+  {
+    Exclamation.Play("Close");
+  }
   
   private void Start()
   { 
@@ -233,6 +270,7 @@ if (PhotonNetwork.OfflineMode)
     GetComponent<RegularZombie>().stopCor();
     isFinding = true;
     targetPosition = tr; 
+    ExclamationOpen();
     setAnim("Walk");
   }
 }

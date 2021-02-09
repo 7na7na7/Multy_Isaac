@@ -77,11 +77,8 @@ public class RegularZombie : MonoBehaviour
                 foreach (Transform tr in PlayerPoses)
                 {
                     if (Vector3.Distance(transform.position, tr.position) < detectRadious)
-                    {
-                        StopCoroutine(corr);
-                        enemy.isFinding = true;
-                        enemy.targetPosition = tr; 
-                        enemy.setAnim("Walk");
+                    { 
+                        enemy.setPlayer(tr);
                         break;
                     }
                 }   
