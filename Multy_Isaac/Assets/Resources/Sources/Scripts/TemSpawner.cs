@@ -21,7 +21,8 @@ public class TemSpawner : MonoBehaviour
         }
         
         int random=Random.Range	(minCount,maxCount+1);
-        
+//        if (random > 3)
+//            random = 3;
         for (int i = 0; i < random; i++)
         {
             int r = Random.Range(0, bound.Length);
@@ -39,11 +40,10 @@ public class TemSpawner : MonoBehaviour
             }
         }
     }
-    /// //////////////////////////////////////////범인알아내기용
 
     IEnumerator delaySpawn(int r)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10);
         PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
     }
 }

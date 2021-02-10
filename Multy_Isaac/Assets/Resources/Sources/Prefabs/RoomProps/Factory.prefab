@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7991755209054214645}
   - component: {fileID: 4753237192301554719}
   - component: {fileID: 3497404193740226052}
+  - component: {fileID: 5207873290726524452}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -166,6 +167,19 @@ PolygonCollider2D:
       - {x: 1.190884, y: 0.6808159}
       - {x: 3.188297, y: 0.680102}
       - {x: 3.188, y: 2.6799998}
+--- !u!114 &5207873290726524452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81440947632476202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
 --- !u!1 &4492206120788921032
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +194,7 @@ GameObject:
   - component: {fileID: 5671110890026362447}
   - component: {fileID: 3596642181762426228}
   - component: {fileID: 4032971679135664162}
+  - component: {fileID: 5733302350475120506}
   m_Layer: 0
   m_Name: Factory
   m_TagString: SpawnPoint
@@ -294,6 +309,19 @@ MonoBehaviour:
   bound:
   - {fileID: 6903179791174054684}
   - {fileID: 6908858888447362912}
+--- !u!114 &5733302350475120506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492206120788921032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
 --- !u!1 &4959896255807298758
 GameObject:
   m_ObjectHideFlags: 0

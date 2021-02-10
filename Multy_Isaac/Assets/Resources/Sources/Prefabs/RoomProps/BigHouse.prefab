@@ -2418,6 +2418,7 @@ GameObject:
   - component: {fileID: 5970128030331374385}
   - component: {fileID: 1225546956542032909}
   - component: {fileID: 6108023015783802471}
+  - component: {fileID: 4922534290825437951}
   m_Layer: 0
   m_Name: BigHouse
   m_TagString: SpawnPoint
@@ -2547,6 +2548,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bound:
   - {fileID: 4395220490708720985}
+--- !u!114 &4922534290825437951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729632829863765133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
 --- !u!1 &7066894184332770927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,6 +2574,7 @@ GameObject:
   - component: {fileID: 2220444801450745546}
   - component: {fileID: 998563029650929584}
   - component: {fileID: 2505431613705060954}
+  - component: {fileID: 8712577856641419081}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -2671,8 +2686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tems:
-  - {fileID: 769638638053198199, guid: ab85b76a372e8e344bca177cb1c3e6f2, type: 3}
-  - {fileID: 6760128626622784328, guid: 61398e990bc69c84296a07d056328248, type: 3}
+  - {fileID: 1421824259398481184, guid: a689a65a2d09e1e41857fd78818dd3b3, type: 3}
+  - {fileID: 1824713383374139417, guid: e2e067f76a4d1af4ab88b769da95de1f, type: 3}
   - {fileID: 3749522341741181223, guid: c485d177110fb164591a1dd1862428a7, type: 3}
   - {fileID: 3749522341741181223, guid: 43b5286219d27f2469010c2a10216df7, type: 3}
   - {fileID: 3749522341741181223, guid: 3d7d05fe0a2df114c8eb8238ea4414c3, type: 3}
@@ -2731,6 +2746,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8712577856641419081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7066894184332770927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
 --- !u!1 &7355917697707897000
 GameObject:
   m_ObjectHideFlags: 0
