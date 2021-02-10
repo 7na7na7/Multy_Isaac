@@ -29,7 +29,8 @@ public class TemSpawner : MonoBehaviour
             
             if (PhotonNetwork.OfflineMode)
             {
-                Instantiate(temArray[Random.Range(0, temArray.Count)],new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
+                Instantiate(temArray[Random.Range(0, temArray.Count)],new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),
+                    Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),temArray[Random.Range(0, temArray.Count)].transform.rotation);
             }
             else
             {
@@ -44,6 +45,7 @@ public class TemSpawner : MonoBehaviour
     IEnumerator delaySpawn(int r)
     {
         yield return new WaitForSeconds(10);
-        PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
+        PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),
+            Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),temArray[Random.Range(0, temArray.Count)].transform.rotation);
     }
 }
