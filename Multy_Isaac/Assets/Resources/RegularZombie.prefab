@@ -446,8 +446,14 @@ MonoBehaviour:
   nuckBackDistance: 1
   nuckBackTime: 0.3
   nuckBackEase: 6
-  ItemIndex: 0100000002000000
-  ItemPercent: 1e0000001e000000
+  TemCount: 2
+  DropTem:
+  - {fileID: 1130041891365937121, guid: 92624682a3657874a9bf06b8a2316d0f, type: 3}
+  DropTemPercent: 01000000
+  DropExp:
+  - {fileID: 2226278619992225646, guid: 0e767fd285948f141934e406fc8182ae, type: 3}
+  - {fileID: 4753391054025745582, guid: 428bb6c58ae37fb41b124aebf37bcad8, type: 3}
+  DropExpCount: 0400000002000000
   hp: 30
   pv: {fileID: 5458050791320017465}
   CollsionDamage: 20
@@ -468,14 +474,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60395ee72e288994fb5c2d016f5430c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRadious: 4
+  nightDetecctRad: 20
+  detectRad: 5
   PlayerPoses: []
   AttackTime: 0.5
   minIdleTime: 0.5
   maxIdleTIme: 2
   minMove: 0
   maxMove: 5
-  speed: 3
+  speed: 2.5
   nextWaypointDistance: 0.5
 --- !u!95 &692161826
 Animator:

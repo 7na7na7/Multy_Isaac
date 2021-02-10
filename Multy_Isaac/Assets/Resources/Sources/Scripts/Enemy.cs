@@ -11,13 +11,17 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 {
+  private List<GameObject> dropTemList;
   public Animator Exclamation;
   private Rigidbody2D rigid;
   public float nuckBackDistance;
   public float nuckBackTime;
   public Ease nuckBackEase;
-  public int[] ItemIndex;
-  public int[] ItemPercent;
+  public int TemCount;
+  public GameObject[] DropTem;
+  public int[] DropTemPercent;
+  public GameObject[] DropExp;
+  public int[] DropExpCount;
   private FlashWhite flashwhite;
   public int hp = 50;
   public PhotonView pv;
@@ -76,6 +80,14 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     anim = GetComponent<Animator>();
     localX = transform.localScale.x*-1;
     seeker = GetComponent<Seeker>();
+    dropTemList=new List<GameObject>();
+    for (int i = 0; i < DropTem.Length; i++)
+    {
+      for (int j = 0; j < DropTemPercent[i]; j++)
+      {
+        dropTemList.Add(DropTem[i]);
+      }
+    }
   }
 
   private void Update()
@@ -167,31 +179,27 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   [PunRPC]
   void Die()
   {
-    for (int TemIndex = 0; TemIndex < ItemIndex.Length; TemIndex++)
+    for (int i = 0; i < DropExp.Length; i++)
     {
-      if (Random.Range(1, 101) <= ItemPercent[TemIndex])
+      for (int j = 0; j < Random.Range(0,DropExpCount[i]+1); j++)
       {
         if (PhotonNetwork.OfflineMode)
-          Instantiate(Resources.Load("item" + ItemIndex[TemIndex]), new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+          Instantiate(DropExp[i], new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
         else
-          PhotonNetwork.InstantiateRoomObject("item" + ItemIndex[TemIndex], new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+          PhotonNetwork.InstantiateRoomObject(DropExp[i].name, new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+ 
       }
     }
 
-//    if (PhotonNetwork.OfflineMode)
-//    {
-//      GameObject g = Instantiate(corpes, transform.position, Quaternion.identity);
-//            
-//      if (transform.localScale.x < 0)
-//        g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-//    }
-//    else
-//    {
-//      GameObject g=PhotonNetwork.InstantiateRoomObject(corpes.name, transform.position, Quaternion.identity);
-//        if (transform.localScale.x < 0)
-//          g.transform.localScale = new Vector3(g.transform.localScale.x * -1, g.transform.localScale.y, g.transform.localScale.z);
-//    }
-transform.GetChild(0).gameObject.SetActive(true);
+    for (int i = 0; i < Random.Range(0,TemCount+1); i++)
+    {
+      if (PhotonNetwork.OfflineMode)
+        Instantiate(dropTemList[Random.Range(0,dropTemList.Count)], new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+      else
+        PhotonNetwork.InstantiateRoomObject(dropTemList[Random.Range(0,dropTemList.Count)].name, new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+    }
+    
+    transform.GetChild(0).gameObject.SetActive(true);
 transform.GetChild(0).transform.parent = null;
 
 if (PhotonNetwork.OfflineMode)

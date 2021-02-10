@@ -9,6 +9,7 @@ using Light2D = UnityEngine.Experimental.Rendering.Universal.Light2D;
 
 public class TimeManager : MonoBehaviour
 {
+    public bool isNight = false;
     private bool isDay = true;
     private Light2D globalLight;
     private PhotonView pv;
@@ -54,6 +55,23 @@ public class TimeManager : MonoBehaviour
                 } 
             }
 
+            if (time > dayTime + dayToNightTime)
+            {
+                if (!isNight)
+                {
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        setIsNight(true);
+                    }
+                    else
+                    {
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            pv.RPC("setIsNight", RpcTarget.All,true);
+                        }   
+                    }
+                }
+            }
             if (time > dayTime + dayToNightTime + nightTime)
             {
                 if (!isDay)
@@ -78,11 +96,34 @@ public class TimeManager : MonoBehaviour
                     }
                 }
                 }
+            if (time ==0)
+            {
+                if (isNight)
+                {
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        setIsNight(false);
+                    }
+                    else
+                    {
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            pv.RPC("setIsNight", RpcTarget.All,false);
+                        }   
+                    }
+                }
+            }
             }
         }
     [PunRPC]
     void timeRPC(int value)
     {
         time = value;
+    }
+
+    [PunRPC]
+    void setIsNight(bool istrue)
+    {
+        isNight = istrue;
     }
 }

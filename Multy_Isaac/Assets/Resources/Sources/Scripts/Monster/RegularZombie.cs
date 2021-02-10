@@ -10,7 +10,9 @@ using Random = UnityEngine.Random;
 
 public class RegularZombie : MonoBehaviour
 {
-    public float detectRadious = 5;
+    private TimeManager time;
+    public float nightDetecctRad;
+    public float detectRad= 5;
     public Transform[] PlayerPoses;
     private IEnumerator corr;
     private PhotonView pv;
@@ -37,7 +39,7 @@ public class RegularZombie : MonoBehaviour
         Player[] players;
         players = FindObjectsOfType<Player>();
         PlayerPoses=new Transform[players.Length];
-
+        time = FindObjectOfType<TimeManager>();
         for (int i = 0; i < PlayerPoses.Length; i++)
             PlayerPoses[i] = players[i].transform;
             
@@ -70,13 +72,31 @@ public class RegularZombie : MonoBehaviour
     {
         StopCoroutine(corr);
     }
+
+    public void nightDetect()
+    {
+        if (!enemy.isFinding && enemy.canMove)
+        {
+            foreach (Transform tr in PlayerPoses)
+            {
+                if (Vector3.Distance(transform.position, tr.position) < nightDetecctRad)
+                { 
+                    enemy.setPlayer(tr);
+                    break;
+                }
+            }   
+        }
+    }
     public void Update () 
         {
             if (!enemy.isFinding && enemy.canMove)
             {
                 foreach (Transform tr in PlayerPoses)
                 {
-                    if (Vector3.Distance(transform.position, tr.position) < detectRadious)
+                    float rad = detectRad;
+                    if (time.isNight)
+                        rad = nightDetecctRad;
+                    if (Vector3.Distance(transform.position, tr.position) < rad)
                     { 
                         enemy.setPlayer(tr);
                         break;
@@ -213,7 +233,10 @@ public class RegularZombie : MonoBehaviour
        
        foreach (Transform tr in PlayerPoses)
        {
-           if (Vector3.Distance(transform.position, tr.position) < detectRadious)
+           float rad = detectRad;
+           if (time.isNight)
+               rad = nightDetecctRad;
+           if (Vector3.Distance(transform.position, tr.position) < rad)
            {
                enemy.isFinding = true;
                enemy.targetPosition = tr;

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2226278619992225636}
   - component: {fileID: 2226278619992225644}
   - component: {fileID: 2226278619992225647}
-  - component: {fileID: 2226278619992225645}
   m_Layer: 0
   m_Name: Exp_Small
   m_TagString: Exp
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2226278619992225646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -166,52 +165,3 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 2048
---- !u!114 &2226278619992225645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2226278619992225646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344074fc1d0a864ea2dbdb8f5403d42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: 128d2dfbb80407c46ba2b30477a456d9, type: 2}
-  variable: _ColorHSV_Hue_1
-  anm:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 1
-    m_PostInfinity: 1
-    m_RotationOrder: 0
-  Mul: 360
-  Speed: 0.1
