@@ -34,9 +34,16 @@ public class TemSpawner : MonoBehaviour
             {
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
+                    StartCoroutine(delaySpawn(r));
                 }
             }
         }
+    }
+    /// //////////////////////////////////////////범인알아내기용
+
+    IEnumerator delaySpawn(int r)
+    {
+        yield return new WaitForSeconds(5f);
+        PhotonNetwork.InstantiateRoomObject(temArray[Random.Range(0, temArray.Count)].name,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)),Quaternion.identity);
     }
 }

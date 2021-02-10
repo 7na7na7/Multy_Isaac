@@ -121,9 +121,13 @@ public class AddRoom : MonoBehaviour
          else
          {
              if (templates.isOneRoom)
+             { 
+                 PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position,quaternion.identity);
+             }
+             else
              {
-                 PhotonNetwork.InstantiateRoomObject(templates.oneRoom.name, transform.position, quaternion.identity);
                  templates.isOneRoom = true;
+                 PhotonNetwork.InstantiateRoomObject(templates.oneRoom.name, transform.position,quaternion.identity);
              }
          }
      }

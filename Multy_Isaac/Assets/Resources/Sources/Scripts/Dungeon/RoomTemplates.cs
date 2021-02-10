@@ -46,7 +46,6 @@ public class RoomTemplates : MonoBehaviour
       {
          if (PhotonNetwork.IsMasterClient)
          {
-
             //Invoke("Spawn",waitTime);  
             //Invoke("ReLoad",ReLoadTime);
          }
