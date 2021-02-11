@@ -29,19 +29,13 @@ public class ZombieSpawner : MonoBehaviour
         }
         
         StartCoroutine(Spawn());
-        Invoke("StartSpawn", 1f);
+        Invoke("StartSpawn", 12f);
         
     }
 
     void StartSpawn()
     {
-        if (!PhotonNetwork.OfflineMode && !PhotonNetwork.IsMasterClient)
-        {
-            
-        }
-        else
-        {
-            Player[] players = FindObjectsOfType<Player>();
+        Player[] players = FindObjectsOfType<Player>();
             foreach (Player p in players)
             {
                 PlayerTrs.Add(p.GetComponent<Transform>());
@@ -51,10 +45,10 @@ public class ZombieSpawner : MonoBehaviour
             {
                 AllMapSpawn();
             }
-        }
     }
     IEnumerator Spawn()
     {
+        yield return new WaitForSeconds(12f);
         while (true)
         {
             yield return new WaitForSeconds(delay);
@@ -87,7 +81,7 @@ public class ZombieSpawner : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                PhotonNetwork.Instantiate(regularZombie.name,  PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
             }
         }      
     }
@@ -103,7 +97,7 @@ public class ZombieSpawner : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                PhotonNetwork.Instantiate(regularZombie.name,  PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
             }
         }      
     }
