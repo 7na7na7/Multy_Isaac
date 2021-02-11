@@ -1,18 +1,29 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using Photon.Pun;
 using UnityEngine;
 
-public class ItemData : MonoBehaviour
+public class TemManager : MonoBehaviour
 {
+    private PhotonView pv;
+    
+    public int temCount = 100;
     private List<GameObject> temPrefabs=new List<GameObject>();
     public List<tem> temDatas;
     public List<wep> weaponList;
+    public List<GameObject> temList;
+    public int Index = 0;
+    
+
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+    }
 
     private void Awake()
     {
-        for (int j = 1; j < 100; j++)
+        for (int j = 1; j < temCount; j++)
         {
             GameObject go = Resources.Load("item" + j) as GameObject;
             if (go != null)
@@ -35,8 +46,8 @@ public class ItemData : MonoBehaviour
 
     public wep GetWeapon(int Index)
     {
-       wep tem = weaponList.Find(data => data.weaponIndex == Index);
-       wep copyTem=new wep();
+        wep tem = weaponList.Find(data => data.weaponIndex == Index);
+        wep copyTem=new wep();
         if (tem != null)
         {
             copyTem = tem.DeepCopy();
@@ -63,7 +74,6 @@ public class ItemData : MonoBehaviour
             return copyTem;
         }
     }
-
     public GameObject GetItemGameObject(int Index)
     {
         for (int i = 0; i < temDatas.Count; i++)
@@ -73,5 +83,45 @@ public class ItemData : MonoBehaviour
         }
         print(Index + "(이)라는 인덱스는 없어용!");
         return temPrefabs[0];
+    }
+
+    public void setTem(int dex, Vector3 pos)
+    {
+        if(PhotonNetwork.OfflineMode)
+            SetItem(dex,pos);
+        else
+            pv.RPC("SetItem",RpcTarget.AllBuffered,dex,pos);
+    }
+
+    public void delTem(int dex)
+    {
+        if(PhotonNetwork.OfflineMode)
+            DelItem(dex);
+        else
+            pv.RPC("DelItem",RpcTarget.AllBuffered,dex);
+    }
+    
+    
+    [PunRPC]
+    void SetItem(int dex, Vector3 pos)
+    {
+        GameObject tem=Instantiate(GetItemGameObject(dex), pos, Quaternion.identity);
+        tem.GetComponent<Item>().Index = Index;
+        temList.Add(tem);
+        Index++;
+    }
+
+    [PunRPC]
+    void DelItem(int dex)
+    {
+        for (int i = 0; i < temList.Count; i++)
+        {
+            if (temList[i].GetComponent<Item>().Index == dex)
+            {
+                Destroy(temList[i]);
+                temList.RemoveAt(i);
+                break;
+            }
+        }
     }
 }

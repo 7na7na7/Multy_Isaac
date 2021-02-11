@@ -23,11 +23,15 @@ public class PlayerItem : MonoBehaviour
     public Player player;
     public Sprite NullSprite;
     public ItemSlot[] slots;
-    public ItemData itemData;
     public GameObject[] Selected;
+    private TemManager temMgr;
     
     public int selectedIndex = 0;
 
+    private void Start()
+    {
+        temMgr = FindObjectOfType<TemManager>();
+    }
 
     private void Update()
     {
@@ -297,7 +301,7 @@ public class PlayerItem : MonoBehaviour
         {
             if (ItemList[i].weaponIndex>0 && selectedIndex==i) 
             {
-                player.changeWeapon(itemData.GetWeapon(ItemList[selectedIndex].weaponIndex),isFirst); 
+                player.changeWeapon(temMgr.GetWeapon(ItemList[selectedIndex].weaponIndex),isFirst); 
             }
             else
             {
@@ -451,7 +455,7 @@ public class PlayerItem : MonoBehaviour
         }
 
         if (PhotonNetwork.OfflineMode)
-            Instantiate(itemData.GetItemGameObject(TemIndex), pos, Quaternion.identity);
+            Instantiate(temMgr.GetItemGameObject(TemIndex), pos, Quaternion.identity);
         else
             PhotonNetwork.InstantiateRoomObject("item"+TemIndex,pos , Quaternion.identity);
     }

@@ -86,7 +86,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private PlayerItem playerItem;
     private LevelMgr LvMgr;
     private StatManager statMgr;
-    private ItemData itemData;
+    private TemManager temMgr;
     
     public LeftBullet leftBullet;
     
@@ -104,7 +104,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #region 내장함수
     private void Start()
     {
-
+        temMgr = FindObjectOfType<TemManager>();
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
         
@@ -123,7 +123,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             //FindObjectOfType<CameraManager>().target = p.gameObject;
-            itemData = transform.GetChild(0).GetComponent<ItemData>();
             LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
             statMgr=transform.GetChild(0).GetComponent<StatManager>();
             playerItem = GetComponent<PlayerItem>();
@@ -158,6 +157,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                 if(time>0)  
                     time -= Time.deltaTime; //총쏘기 쿨타임용 시간 감소
+             
+                    if(Input.GetKeyDown(KeyCode.Z))
+                        temMgr.setTem(3,transform.position);
+                    if(Input.GetKeyDown(KeyCode.X))
+                       temMgr.delTem(1);
                 
                 if (canMove) //움직일 수 있다면
                 {
@@ -675,8 +679,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void setSprite(int i)
     {
-        print(itemData.GetWeapon(i).weaponIndex+" "+itemData.GetWeapon(i).spr.name);
-        gun.GetComponent<SpriteRenderer>().sprite = itemData.GetWeapon(i).spr;
+        print( temMgr.GetWeapon(i).weaponIndex+" "+ temMgr.GetWeapon(i).spr.name);
+        gun.GetComponent<SpriteRenderer>().sprite =  temMgr.GetWeapon(i).spr;
         //gun.GetComponent<SpriteRenderer>().sprite = gunSprites[i - 1];
     }
 

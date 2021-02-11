@@ -19,7 +19,7 @@ public class Invent : MonoBehaviour
     public Image[] completes; //조합템
     public Text ItemName; //템이름 
     public Text ItemDescription; //템설명
-    public ItemData ItemData;
+    private TemManager temMgr;
     private Animator anim;
     public GameObject Big, Small;
     public tem element;
@@ -28,6 +28,7 @@ public class Invent : MonoBehaviour
     private PlayerItem PlayerItem;
     private void Start()
     {
+        temMgr = FindObjectOfType<TemManager>();
         pause = FindObjectOfType<Pause>();
         anim = GetComponent<Animator>();
         Player[] players = FindObjectsOfType<Player>();
@@ -116,7 +117,7 @@ public class Invent : MonoBehaviour
     public void SmallOpen(int index)
     {
         tem temm=new tem();
-        tem tempTem = ItemData.GetItemList(element.SmallItemIndex[index]);
+        tem tempTem = temMgr.GetItemList(element.SmallItemIndex[index]);
         temm = tempTem.DeepCopy();
         Open(temm);
     }
@@ -135,7 +136,7 @@ public class Invent : MonoBehaviour
         
         for (int i = 0; i < element.CompleteItemIndex.Length; i++)
         {
-            tem = ItemData.GetItemList(element.CompleteItemIndex[i]);
+            tem = temMgr.GetItemList(element.CompleteItemIndex[i]);
             completeTemArray[i] = tem.DeepCopy();
         }
 
@@ -167,10 +168,10 @@ public class Invent : MonoBehaviour
             {
                 Big.SetActive(false);
                 Small.SetActive(true);
-                SmallItemImg1.sprite = ItemData.GetItemList(element.SmallItemIndex[0]).ItemSprite;
-                SmallItemImg2.sprite = ItemData.GetItemList(element.SmallItemIndex[1]).ItemSprite;
-                SmallItemName1.text = ItemData.GetItemList(element.SmallItemIndex[0]).ItemName;
-                SmallItemName2.text = ItemData.GetItemList(element.SmallItemIndex[1]).ItemName;
+                SmallItemImg1.sprite = temMgr.GetItemList(element.SmallItemIndex[0]).ItemSprite;
+                SmallItemImg2.sprite = temMgr.GetItemList(element.SmallItemIndex[1]).ItemSprite;
+                SmallItemName1.text = temMgr.GetItemList(element.SmallItemIndex[0]).ItemName;
+                SmallItemName2.text = temMgr.GetItemList(element.SmallItemIndex[1]).ItemName;
                 BigItemImg2.sprite = element.ItemSprite;
                 BigItemName2.text = element.ItemName;
             }

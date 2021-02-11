@@ -49,6 +49,7 @@ public class tem
 public enum itemType { Gun,Melee,Item,Passive,Usable}
 public class Item : MonoBehaviour
 {
+    public int Index;
     public tem item;
     private PhotonView pv;
     public Material outlineMat;
