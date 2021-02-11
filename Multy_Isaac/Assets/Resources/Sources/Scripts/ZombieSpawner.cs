@@ -35,15 +35,22 @@ public class ZombieSpawner : MonoBehaviour
 
     void StartSpawn()
     {
-        Player[] players = FindObjectsOfType<Player>();
-        foreach (Player p in players)
+        if (!PhotonNetwork.OfflineMode && !PhotonNetwork.IsMasterClient)
         {
-            PlayerTrs.Add(p.GetComponent<Transform>());
+            
         }
-        
-        for (int i = 0; i < StartZombieCount; i++)
+        else
         {
-            AllMapSpawn();
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (Player p in players)
+            {
+                PlayerTrs.Add(p.GetComponent<Transform>());
+            }
+        
+            for (int i = 0; i < StartZombieCount; i++)
+            {
+                AllMapSpawn();
+            }
         }
     }
     IEnumerator Spawn()
@@ -54,9 +61,17 @@ public class ZombieSpawner : MonoBehaviour
             foreach (Transform tr in PlayerTrs)
             {
                 if(time.isNight)
-                    NightSpawn(tr);
+                    if (!PhotonNetwork.OfflineMode && !PhotonNetwork.IsMasterClient) { }
+                    else
+                    {
+                        NightSpawn(tr);
+                    }
                 else
+                if (!PhotonNetwork.OfflineMode && !PhotonNetwork.IsMasterClient) { }
+                else
+                {
                     DaySpawn(tr);
+                }
             }
         }
     }
