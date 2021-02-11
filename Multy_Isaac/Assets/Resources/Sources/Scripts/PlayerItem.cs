@@ -92,7 +92,8 @@ public class PlayerItem : MonoBehaviour
                                         
                                             check(i,false);
                                         
-                                            item.GetComponent<Item>().Destroy();
+                                            temMgr.delTem(item.GetComponent<Item>().Index); 
+                                            Destroy(item);
                                             break;
                                         }
                                     }
@@ -109,7 +110,8 @@ public class PlayerItem : MonoBehaviour
                                         
                                                 check(i,true);
                                         
-                                                item.GetComponent<Item>().Destroy();
+                                                temMgr.delTem(item.GetComponent<Item>().Index);
+                                                Destroy(item);
                                                 break;
                                             }
                                         }      
@@ -129,7 +131,8 @@ public class PlayerItem : MonoBehaviour
 
                                             check(i,true);
                                         
-                                            item.GetComponent<Item>().Destroy();
+                                            temMgr.delTem(item.GetComponent<Item>().Index);
+                                            Destroy(item);
                                             break;
                                         }
                                     }   
@@ -416,10 +419,8 @@ public class PlayerItem : MonoBehaviour
                     player.PassiveOff(ItemList[selectedIndex].index); //패시브 비활성화
                 ItemList[selectedIndex].Clear();   
             }
-            if(PhotonNetwork.OfflineMode)
-                discardRPC(ind,isDead);
-            else
-                player.pv.RPC("discardRPC",RpcTarget.All,ind,isDead);   
+            
+            discardRPC(ind,isDead);
         }
     }
     
@@ -429,17 +430,13 @@ public class PlayerItem : MonoBehaviour
         {
             if (ItemList[i].index != 0)
             {
-                if(PhotonNetwork.OfflineMode)
-                    discardRPC(ItemList[i].index,true);
-                else
-                    player.pv.RPC("discardRPC",RpcTarget.All,ItemList[i].index,true);
+                discardRPC(ItemList[i].index,true);
             }
             
             ItemList[i].Clear();
         }
     }
-
-    [PunRPC]
+    
     void discardRPC(int TemIndex, bool isDead = false)
     {
         Vector2 pos=new Vector2();
@@ -452,11 +449,9 @@ public class PlayerItem : MonoBehaviour
             pos = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.2f, 0.2f),
                 transform.position.y + UnityEngine.Random.Range(-0.3f, 0.3f));
 
-        }
-
-        if (PhotonNetwork.OfflineMode)
-            Instantiate(temMgr.GetItemGameObject(TemIndex), pos, Quaternion.identity);
-        else
-            PhotonNetwork.InstantiateRoomObject("item"+TemIndex,pos , Quaternion.identity);
+        } 
+        
+        temMgr.setTem(TemIndex,pos);
+       
     }
 }

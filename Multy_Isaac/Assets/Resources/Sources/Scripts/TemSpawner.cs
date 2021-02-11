@@ -19,21 +19,30 @@ public class TemSpawner : MonoBehaviour
 
     public void Set(int[] temIndex, int[] percentCounts, int minCount, int maxCount)
     {
-        for (int j = 0; j < percentCounts.Length; j++)
+        bool canGo = true;
+        if (!PhotonNetwork.OfflineMode)
         {
-            for (int k = 0; k < percentCounts[j]; k++)
-                temIndexes.Add(temIndex[j]);
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                canGo = false;
+            }
         }
-        
-        int random=Random.Range	(minCount,maxCount+1);
-//        if (random > 3)
-//            random = 3;
-        for (int i = 0; i < random; i++)
+        if (canGo)
         {
-            int r = Random.Range(0, bound.Length);
-            int index = temIndexes[Random.Range(0, temIndexes.Count)];
-            temMgr.setTem(index,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),
+            for (int j = 0; j < percentCounts.Length; j++)
+            {
+                for (int k = 0; k < percentCounts[j]; k++)
+                    temIndexes.Add(temIndex[j]);
+            }
+        
+            int random=Random.Range	(minCount,maxCount+1);
+            for (int i = 0; i < random; i++)
+            {
+                int r = Random.Range(0, bound.Length);
+                int index = temIndexes[Random.Range(0, temIndexes.Count)];
+                temMgr.setTem(index,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),
                     Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y))); 
+            }   
         }
     }
 }

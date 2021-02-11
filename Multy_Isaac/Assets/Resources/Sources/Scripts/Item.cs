@@ -51,29 +51,14 @@ public class Item : MonoBehaviour
 {
     public int Index;
     public tem item;
-    private PhotonView pv;
     public Material outlineMat;
     private Material defaultMat;
     private SpriteRenderer spr;
     private void Start()
     {
-        pv = GetComponent<PhotonView>();
         spr = GetComponent<SpriteRenderer>();
         defaultMat = spr.material;
         spr.sprite = item.ItemSprite;
-    }
-    
-    public void Destroy()
-    {
-        if(InGameNetwork.instance.isOffline)
-            Destroy(gameObject);
-        else
-            pv.RPC("DestroyRPC", RpcTarget.All);
-    }
-    [PunRPC]
-    public void DestroyRPC()
-    {
-        Destroy(gameObject);
     }
 
     public bool canGet()
