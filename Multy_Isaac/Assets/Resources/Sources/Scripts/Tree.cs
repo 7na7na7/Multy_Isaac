@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class Tree : MonoBehaviour
 {
+    private TemManager temMgr;
     private PhotonView pv;
     public int hp;
     public GameObject wood;
@@ -19,6 +20,7 @@ public class Tree : MonoBehaviour
     private void Start()
     {
         pv = GetComponent<PhotonView>();
+        temMgr = FindObjectOfType<TemManager>();
         hpSave = hp;
     }
 
@@ -56,10 +58,7 @@ public class Tree : MonoBehaviour
         else
         {
             hp = hpSave;
-            if (PhotonNetwork.OfflineMode)
-                Instantiate(wood, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)),quaternion.identity);
-            else
-                PhotonNetwork.InstantiateRoomObject(wood.name, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)),quaternion.identity);
+            temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
         }
     }
 }
