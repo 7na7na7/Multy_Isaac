@@ -98,7 +98,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     private Vector3 savedCanvasScale;
     //죽음
-    private bool isDead;
+    public bool isDead;
     #endregion
 
     #region 내장함수

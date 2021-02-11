@@ -31,12 +31,13 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public bool canMove = true;
   private Animator anim;
   private float localX;
+  private TemManager temMgr;
   
   //길찾기
   public bool isFinding = false;
   public Transform targetPosition;
   public Seeker seeker;
-
+  
   public void ExclamationOpen()
   {
     if (PhotonNetwork.OfflineMode)
@@ -81,6 +82,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     localX = transform.localScale.x*-1;
     seeker = GetComponent<Seeker>();
     dropTemList=new List<GameObject>();
+    temMgr = FindObjectOfType<TemManager>();
     for (int i = 0; i < DropTem.Length; i++)
     {
       for (int j = 0; j < DropTemPercent[i]; j++)
@@ -193,10 +195,8 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
 
     for (int i = 0; i < Random.Range(0,TemCount+1); i++)
     {
-      if (PhotonNetwork.OfflineMode)
-        Instantiate(dropTemList[Random.Range(0,dropTemList.Count)], new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
-      else
-        PhotonNetwork.InstantiateRoomObject(dropTemList[Random.Range(0,dropTemList.Count)].name, new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+      temMgr.setTem(dropTemList[Random.Range(0,dropTemList.Count)].GetComponent<Item>().item.index,
+        new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f))); 
     }
     
     transform.GetChild(0).gameObject.SetActive(true);

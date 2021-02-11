@@ -13,7 +13,8 @@ public class RegularZombie : MonoBehaviour
     private TimeManager time;
     public float nightDetecctRad;
     public float detectRad= 5;
-    public Transform[] PlayerPoses;
+    public List<Player> Players=new List<Player>();
+    public List<Transform> PlayerTrs=new List<Transform>();
     private IEnumerator corr;
     private PhotonView pv;
     public float AttackTime;
@@ -29,6 +30,7 @@ public class RegularZombie : MonoBehaviour
     public float nextWaypointDistance = 3;
     private int currentWaypoint = 0;
     private bool reachedEndOfPath;
+    private bool canUpdate = false;
     private void Start()
     {
         pv = GetComponent<PhotonView>();
@@ -38,15 +40,20 @@ public class RegularZombie : MonoBehaviour
         //플레이어들 넣어주기
         Player[] players;
         players = FindObjectsOfType<Player>();
-        PlayerPoses=new Transform[players.Length];
+
+        foreach (Player p in players)
+        {
+            Players.Add(p);
+            PlayerTrs.Add(p.GetComponent<Transform>());
+        }
+        
         time = FindObjectOfType<TimeManager>();
-        for (int i = 0; i < PlayerPoses.Length; i++)
-            PlayerPoses[i] = players[i].transform;
-            
+
         if (PhotonNetwork.OfflineMode)
         {
          StartCoroutine(corr);
          StartCoroutine(find());
+         canUpdate = true;
         }
         else
         {
@@ -54,6 +61,7 @@ public class RegularZombie : MonoBehaviour
             {
                 StartCoroutine(corr);
                StartCoroutine(find());
+               canUpdate = true;
             }
                 
         }
@@ -77,29 +85,42 @@ public class RegularZombie : MonoBehaviour
     {
         if (!enemy.isFinding && enemy.canMove)
         {
-            foreach (Transform tr in PlayerPoses)
+            for (int i = 0; i < Players.Count; i++)
             {
-                if (Vector3.Distance(transform.position, tr.position) < nightDetecctRad)
+                if (!Players[i].isDead)
                 { 
-                    enemy.setPlayer(tr);
-                    break;
+                    Transform tr = PlayerTrs[i];
+                    if (Vector3.Distance(transform.position, tr.position) < nightDetecctRad)
+                    { 
+                        enemy.setPlayer(tr);
+                        break;
+                    }
                 }
-            }   
+            }
         }
     }
     public void Update () 
         {
-            if (!enemy.isFinding && enemy.canMove)
+            if (canUpdate)
             {
-                foreach (Transform tr in PlayerPoses)
+              if (!enemy.isFinding && enemy.canMove)
+            {
+                for (int i = 0; i < Players.Count; i++)
                 {
-                    float rad = detectRad;
-                    if (time.isNight)
-                        rad = nightDetecctRad;
-                    if (Vector3.Distance(transform.position, tr.position) < rad)
-                    { 
-                        enemy.setPlayer(tr);
-                        break;
+                    if (!Players[i].isDead)
+                    {
+                        Transform tr = PlayerTrs[i];
+                        if (tr != null)
+                        {
+                            float rad = detectRad;
+                            if (time.isNight)
+                                rad = nightDetecctRad;
+                            if (Vector3.Distance(transform.position, tr.position) < rad)
+                            {
+                                enemy.setPlayer(tr);
+                                break;
+                            }
+                        }
                     }
                 }   
             }
@@ -139,6 +160,7 @@ public class RegularZombie : MonoBehaviour
                 rigid.velocity = velocity;
                 
                 enemy.setLocalX(enemy.targetPosition.transform.position.x);
+            }   
             }
         }
 
@@ -231,17 +253,21 @@ public class RegularZombie : MonoBehaviour
 
        enemy.canMove = true;
        
-       foreach (Transform tr in PlayerPoses)
+       for (int i = 0; i < Players.Count; i++)
        {
-           float rad = detectRad;
-           if (time.isNight)
-               rad = nightDetecctRad;
-           if (Vector3.Distance(transform.position, tr.position) < rad)
+           if (!Players[i].isDead)
            {
-               enemy.isFinding = true;
-               enemy.targetPosition = tr;
-               enemy.setAnim("Walk");
-               break;
+               Transform tr = PlayerTrs[i];
+               float rad = detectRad;
+               if (time.isNight)
+                   rad = nightDetecctRad;
+               if (Vector3.Distance(transform.position, tr.position) < rad)
+               {
+                   enemy.isFinding = true;
+                   enemy.targetPosition = tr;
+                   enemy.setAnim("Walk");
+                   break;
+               }
            }
        }   
    }

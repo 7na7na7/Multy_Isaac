@@ -43,7 +43,7 @@ public class ZombieSpawner : MonoBehaviour
         
         for (int i = 0; i < StartZombieCount; i++)
         {
-            NightSpawn(PlayerTrs[0]);
+            AllMapSpawn();
         }
     }
     IEnumerator Spawn()
