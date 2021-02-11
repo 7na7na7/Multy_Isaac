@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ZombieSpawner : MonoBehaviour
 {
+    public int FirstDelay = 15;
    private List<BoxCollider2D> DaySpawnAreas=new List<BoxCollider2D>();
     private List<BoxCollider2D> NightSpawnAreas=new List<BoxCollider2D>();
     public List<Transform> PlayerTrs;
@@ -29,7 +30,7 @@ public class ZombieSpawner : MonoBehaviour
         }
         
         StartCoroutine(Spawn());
-        Invoke("StartSpawn", 12f);
+        Invoke("StartSpawn", FirstDelay);
         
     }
 
@@ -48,7 +49,7 @@ public class ZombieSpawner : MonoBehaviour
     }
     IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(12f);
+        yield return new WaitForSeconds(FirstDelay);
         while (true)
         {
             yield return new WaitForSeconds(delay);

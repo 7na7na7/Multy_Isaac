@@ -186,9 +186,9 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       for (int j = 0; j < Random.Range(0,DropExpCount[i]+1); j++)
       {
         if (PhotonNetwork.OfflineMode)
-          Instantiate(DropExp[i], new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+          Instantiate(DropExp[i], new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
         else
-          PhotonNetwork.InstantiateRoomObject(DropExp[i].name, new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f)), Quaternion.identity);
+          PhotonNetwork.InstantiateRoomObject(DropExp[i].name, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
  
       }
     }
@@ -196,7 +196,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     for (int i = 0; i < Random.Range(0,TemCount+1); i++)
     {
       temMgr.setTem(dropTemList[Random.Range(0,dropTemList.Count)].GetComponent<Item>().item.index,
-        new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f), transform.position.y + Random.Range(-0.3f, 0.3f))); 
+        new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
     }
     
     transform.GetChild(0).gameObject.SetActive(true);
