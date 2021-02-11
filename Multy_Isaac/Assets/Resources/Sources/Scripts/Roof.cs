@@ -18,7 +18,7 @@ public class prop
 }
 public class Roof : MonoBehaviour
 {
-    public GameObject[] tems;
+    public int[] temIndexes;
     public int[] percentCounts;
     public int minCount;
     public int maxCount;
@@ -188,7 +188,7 @@ public class Roof : MonoBehaviour
             }   
         }
 
-        transform.parent.GetComponent<TemSpawner>().Set(tems,percentCounts,minCount,maxCount);
+        transform.parent.GetComponent<TemSpawner>().Set(temIndexes,percentCounts,minCount,maxCount);
         
         
         Destroy(transform.parent.GetComponent<PhotonView>());

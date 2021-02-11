@@ -4829,7 +4829,6 @@ GameObject:
   - component: {fileID: 3749522341741181217}
   - component: {fileID: 3749522341741181222}
   - component: {fileID: 3749522341741181219}
-  - component: {fileID: 3749522341741181218}
   - component: {fileID: 3749522341741181245}
   - component: {fileID: 3835402859275112753}
   m_Layer: 9
@@ -4918,6 +4917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a0795950235464ab8272acfa463102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 0
   item:
     weaponIndex: 17
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
@@ -4947,28 +4947,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
---- !u!114 &3749522341741181218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3749522341741181223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!50 &3749522341741181245
 Rigidbody2D:
   serializedVersion: 4
