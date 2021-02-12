@@ -277,7 +277,7 @@ public class RegularZombie : MonoBehaviour
        if(PhotonNetwork.OfflineMode)
            collisionRPC(colName);
        else
-           pv.RPC("collisionRPC",RpcTarget.All,colName);
+           pv.RPC("collisionRPC",RpcTarget.AllBuffered,colName);
    }
    [PunRPC]
    void collisionRPC(string colNmae)

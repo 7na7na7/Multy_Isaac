@@ -30,19 +30,13 @@ public class ZombieSpawner : MonoBehaviour
         }
         
         StartCoroutine(Spawn());
-        Invoke("StartSpawn", FirstDelay);
+        //Invoke("StartSpawn", FirstDelay);
         
     }
 
     void StartSpawn()
     {
-        Player[] players = FindObjectsOfType<Player>();
-            foreach (Player p in players)
-            {
-                PlayerTrs.Add(p.GetComponent<Transform>());
-            }
-        
-            for (int i = 0; i < StartZombieCount; i++)
+        for (int i = 0; i < StartZombieCount; i++)
             {
                 AllMapSpawn();
             }
@@ -50,6 +44,11 @@ public class ZombieSpawner : MonoBehaviour
     IEnumerator Spawn()
     {
         yield return new WaitForSeconds(FirstDelay);
+        Player[] players = FindObjectsOfType<Player>();
+        foreach (Player p in players)
+        {
+            PlayerTrs.Add(p.GetComponent<Transform>());
+        }
         while (true)
         {
             yield return new WaitForSeconds(delay);
