@@ -48,17 +48,20 @@ public class Tree : MonoBehaviour
     [PunRPC]
     void Hit(int value)
     {
-        GetComponent<FlashWhite>().Flash();
-        transform.DOScale(new Vector3(1.6f,1.6f), 0.15f).OnComplete(() =>
+        if (PhotonNetwork.IsMasterClient)
         {
-            transform.DOScale(new Vector3(1.5f,1.5f), 0.15f);
-        });   
-        if (hp-value > 0)
-            hp -= value;
-        else
-        {
-            hp = hpSave;
-            temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+            GetComponent<FlashWhite>().Flash();
+            transform.DOScale(new Vector3(1.6f,1.6f), 0.15f).OnComplete(() =>
+            {
+                transform.DOScale(new Vector3(1.5f,1.5f), 0.15f);
+            });   
+            if (hp-value > 0)
+                hp -= value;
+            else
+            {
+                hp = hpSave;
+                temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+            }   
         }
     }
 }

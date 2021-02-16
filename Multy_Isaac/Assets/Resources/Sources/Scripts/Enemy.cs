@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
+public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
   private List<GameObject> dropTemList;
   public Animator Exclamation;
@@ -27,18 +27,18 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   public PhotonView pv;
   public int CollsionDamage = 20;
   public float damageDelay = 1f;
-  private float time;
+  public float time;
   public bool canMove = true;
   private Animator anim;
   private float localX;
   private TemManager temMgr;
-  
+
   //길찾기
   public bool isFinding = false;
   public Transform targetPosition;
   public Seeker seeker;
-  
-  public void ExclamationOpen()
+
+  public void ExclamationOpen() //느낌표열기 
   {
     if (PhotonNetwork.OfflineMode)
     {
@@ -46,11 +46,11 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
     else
     {
-      pv.RPC("Open",RpcTarget.All);
+      pv.RPC("Open", RpcTarget.All);
     }
   }
 
-  public void ExclamationClose()
+  public void ExclamationClose() //느낌표닫기
   {
     if (PhotonNetwork.OfflineMode)
     {
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
     else
     {
-      pv.RPC("Close",RpcTarget.All);
+      pv.RPC("Close", RpcTarget.All);
     }
   }
 
@@ -67,21 +67,21 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
   {
     Exclamation.Play("Open");
   }
-  
+
   [PunRPC]
   void Close()
   {
     Exclamation.Play("Close");
   }
-  
+
   private void Start()
-  { 
-    rigid = GetComponent<Rigidbody2D>(); 
-    flashwhite = GetComponent<FlashWhite>(); 
+  {
+    rigid = GetComponent<Rigidbody2D>();
+    flashwhite = GetComponent<FlashWhite>();
     anim = GetComponent<Animator>();
-    localX = transform.localScale.x*-1;
+    localX = transform.localScale.x * -1;
     seeker = GetComponent<Seeker>();
-    dropTemList=new List<GameObject>();
+    dropTemList = new List<GameObject>();
     temMgr = FindObjectOfType<TemManager>();
     for (int i = 0; i < DropTem.Length; i++)
     {
@@ -100,13 +100,24 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
     }
   }
 
+  public void Hit(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
+  {
+    if (PhotonNetwork.OfflineMode)
+      HitRPC(value, pos, nuckBackDistance);
+    else
+    {
+      if (PhotonNetwork.IsMasterClient)
+        pv.RPC("HitRPC", RpcTarget.AllBuffered, value, pos, nuckBackDistance);
+    }
+  }
+
   [PunRPC]
-  public void HitRPC(int value, Vector3 pos=default(Vector3),float nuckBackDistance=0)
+  void HitRPC(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
   {
     flashwhite.Flash();
     hp -= value;
 
-    if(hp<=0)
+    if (hp <= 0)
       setTrigger("Die");
     else
       setTrigger("Hit");
@@ -115,129 +126,103 @@ public class Enemy : MonoBehaviour//PunCallbacks, IPunObservable
       GetComponent<RegularZombie>().OnDisable();
       canMove = false;
       isFinding = false;
-      
+
       Vector3 dir = (transform.position - pos).normalized;
-      Vector2 d = GetComponent<Rigidbody2D>().velocity;
-      rigid.velocity=Vector2.zero;
-      rigid.DOMove(transform.position +dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(()=>
+      Vector2 savedVel = GetComponent<Rigidbody2D>().velocity;
+      rigid.velocity = Vector2.zero;
+      rigid.DOMove(transform.position + dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(() =>
       {
-        rigid.velocity = d;
+        rigid.velocity = savedVel;
         canMove = true;
         if (hp <= 0)
         {
-         if(PhotonNetwork.OfflineMode)
-           Die();
-         else
-           pv.RPC("Die",RpcTarget.All);
+          Die();
         }
         else
           setAnim("Walk");
-      }); 
+      });
     }
     else
     {
       if (hp <= 0)
       {
-        if(PhotonNetwork.OfflineMode)
+        if (hp <= 0)
+        {
           Die();
-        else
-          pv.RPC("Die",RpcTarget.All);
-      }
-      else
-        setAnim("Walk");
-    }
-  }
-
-  private void OnTriggerEnter2D(Collider2D other)
-  {
-    if (other.CompareTag("Player"))
-    {
-      if (time >= damageDelay)
-      {
-        time = 0;
-        if(name.Contains("(")) 
-          other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")),nuckBackDistance,transform.position);
-        else
-          other.GetComponent<Player>().Hit(CollsionDamage, name,nuckBackDistance,transform.position);
-      }
-    }
-  }
-
-  private void OnTriggerStay2D(Collider2D other)
-  {
-    if (other.CompareTag("Player"))
-    {
-      if (time >= damageDelay)
-      {
-          time = 0;
-          if(name.Contains("(")) 
-            other.GetComponent<Player>().Hit(CollsionDamage, name.Substring(0, name.IndexOf("(")),nuckBackDistance,transform.position);
-          else
-            other.GetComponent<Player>().Hit(CollsionDamage, name,nuckBackDistance,transform.position);
         }
+        else
+          setAnim("Walk");
+      }
     }
   }
+
+
 
   [PunRPC]
   void Die()
   {
     for (int i = 0; i < DropExp.Length; i++)
     {
-      for (int j = 0; j < Random.Range(0,DropExpCount[i]+1); j++)
+      for (int j = 0; j < Random.Range(0, DropExpCount[i] + 1); j++)
       {
         if (PhotonNetwork.OfflineMode)
-          Instantiate(DropExp[i], new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+          Instantiate(DropExp[i],
+            new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
+              transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
         else
-          PhotonNetwork.InstantiateRoomObject(DropExp[i].name, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
- 
+          PhotonNetwork.InstantiateRoomObject(DropExp[i].name,
+            new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
+              transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
       }
     }
 
-    for (int i = 0; i < Random.Range(0,TemCount+1); i++)
+    for (int i = 0; i < Random.Range(0, TemCount + 1); i++)
     {
-      temMgr.setTem(dropTemList[Random.Range(0,dropTemList.Count)].GetComponent<Item>().item.index,
-        new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+      temMgr.setTem(dropTemList[Random.Range(0, dropTemList.Count)].GetComponent<Item>().item.index,
+        new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
+          transform.position.y + Random.Range(-0.2f, 0.2f)));
     }
-    
-    transform.GetChild(0).gameObject.SetActive(true);
-transform.GetChild(0).transform.parent = null;
 
-if (PhotonNetwork.OfflineMode)
-      destroyRPC();
-    else
-      pv.RPC("destroyRPC", RpcTarget.All);
+    transform.GetChild(0).gameObject.SetActive(true);
+    transform.GetChild(0).transform.parent = null;
+
+//if (PhotonNetwork.OfflineMode)
+    destroyRPC();
+//    else
+//      pv.RPC("destroyRPC", RpcTarget.All);
   }
-  
+
   public void setAnim(string animName)
   {
-    if(PhotonNetwork.OfflineMode)
+    if (PhotonNetwork.OfflineMode)
       animRPC(animName);
     else
-      pv.RPC("animRPC",RpcTarget.All,animName);
+      pv.RPC("animRPC", RpcTarget.All, animName);
   }
 
   public void setTrigger(string animName)
   {
-    if(PhotonNetwork.OfflineMode)
+    if (PhotonNetwork.OfflineMode)
       triggerRPC(animName);
     else
-      pv.RPC("triggerRPC",RpcTarget.All,animName);
+      pv.RPC("triggerRPC", RpcTarget.All, animName);
   }
-  
+
   public void setLocalX(float x)
   {
-    if(PhotonNetwork.OfflineMode)
+    if (PhotonNetwork.OfflineMode)
       localScaleRPC(x);
     else
-      pv.RPC("localScaleRPC",RpcTarget.All,x);
+      pv.RPC("localScaleRPC", RpcTarget.All, x);
   }
+
   [PunRPC]
   void destroyRPC()
   {
     Destroy(gameObject);
   }
-  
-  
+
+
   [PunRPC]
   void animRPC(string animName)
   {
@@ -246,7 +231,8 @@ if (PhotonNetwork.OfflineMode)
       anim.Play(animName);
     }
     catch (Exception e)
-    { }
+    {
+    }
   }
 
   [PunRPC]
@@ -257,19 +243,20 @@ if (PhotonNetwork.OfflineMode)
       anim.SetTrigger(animName);
     }
     catch (Exception e)
-    { }
+    {
+    }
   }
-  
+
   [PunRPC]
   void localScaleRPC(float x)
   {
     if (x > transform.position.x) //오른쪽에있으면
     {
-      transform.localScale=new Vector3(localX*-1,transform.localScale.y,transform.localScale.z);
+      transform.localScale = new Vector3(1, 1, 1);
     }
     else
     {
-      transform.localScale=new Vector3(localX,transform.localScale.y,transform.localScale.z);
+      transform.localScale = new Vector3(-1, 1, 1);
     }
   }
 
@@ -277,8 +264,22 @@ if (PhotonNetwork.OfflineMode)
   {
     GetComponent<RegularZombie>().stopCor();
     isFinding = true;
-    targetPosition = tr; 
+    targetPosition = tr;
     ExclamationOpen();
     setAnim("Walk");
+  }
+  
+  public void setPlayerRPC(int viewId)
+  {
+    pv.RPC("SPR",RpcTarget.All,viewId);
+  }
+
+  [PunRPC]
+  void SPR(int viewId)
+  {
+    if (PhotonNetwork.IsMasterClient)
+    {
+      setPlayer(PhotonView.Find(viewId).transform);
+    }
   }
 }

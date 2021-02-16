@@ -8,9 +8,8 @@ using Random = UnityEngine.Random;
 public class ZombieSpawner : MonoBehaviour
 {
     public int FirstDelay = 15;
-   private List<BoxCollider2D> DaySpawnAreas=new List<BoxCollider2D>();
-    private List<BoxCollider2D> NightSpawnAreas=new List<BoxCollider2D>();
-    public List<Transform> PlayerTrs;
+    public BoxCollider2D[] DaySpawnAreas;
+    public BoxCollider2D[] NightSpawnAreas;
     public int StartZombieCount;
     public Vector2 randomMin, randomMax;
     public float delay;
@@ -20,18 +19,14 @@ public class ZombieSpawner : MonoBehaviour
     void Start()
     {
         time = FindObjectOfType<TimeManager>();
-        for (int i = 0; i < 4; i++)
+        if(PhotonNetwork.OfflineMode)
+            StartCoroutine(Spawn());
+        else
         {
-            DaySpawnAreas.Add(transform.GetChild(i).GetComponent<BoxCollider2D>());
+            if(PhotonNetwork.IsMasterClient) 
+                StartCoroutine(Spawn());   
         }
-        for (int i = 4; i < 8; i++)
-        {
-            NightSpawnAreas.Add(transform.GetChild(i).GetComponent<BoxCollider2D>());
-        }
-        
-        StartCoroutine(Spawn());
-        //Invoke("StartSpawn", FirstDelay);
-        
+        Invoke("StartSpawn", FirstDelay);
     }
 
     void StartSpawn()
@@ -44,60 +39,48 @@ public class ZombieSpawner : MonoBehaviour
     IEnumerator Spawn()
     {
         yield return new WaitForSeconds(FirstDelay);
-        Player[] players = FindObjectsOfType<Player>();
-        foreach (Player p in players)
-        {
-            PlayerTrs.Add(p.GetComponent<Transform>());
-        }
         while (true)
         {
             yield return new WaitForSeconds(delay);
-            foreach (Transform tr in PlayerTrs)
+            Player[] players = FindObjectsOfType<Player>();
+            for (int i = 0; i < players.Length; i++)
             {
                 if(time.isNight)
-                    if (!PhotonNetwork.OfflineMode && !PhotonNetwork.IsMasterClient) { }
-                    else
-                    {
-                        NightSpawn(tr);
-                    }
+                    NightSpawn(players[i].transform.position);
                 else
-                if (!PhotonNetwork.OfflineMode && !PhotonNetwork.IsMasterClient) { }
-                else
-                {
-                    DaySpawn(tr);
-                }
+                    DaySpawn(players[i].transform.position);
             }
         }
     }
 
-    void DaySpawn(Transform PlayerTr)
+    void DaySpawn(Vector3 PlayerPos)
     {
-        area = DaySpawnAreas[Random.Range(0, DaySpawnAreas.Count)];
+        area = DaySpawnAreas[Random.Range(0, DaySpawnAreas.Length)];
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(regularZombie, PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
+            Instantiate(regularZombie, PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.Instantiate(regularZombie.name,  PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
             }
         }      
     }
 
-    void NightSpawn(Transform PlayerTr)
+    void NightSpawn(Vector3 PlayerPos)
     {
-        area = NightSpawnAreas[Random.Range(0, DaySpawnAreas.Count)];
+        area = NightSpawnAreas[Random.Range(0, DaySpawnAreas.Length)];
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(regularZombie, PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
+            Instantiate(regularZombie, PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.Instantiate(regularZombie.name,  PlayerTr.position+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
             }
         }      
     }

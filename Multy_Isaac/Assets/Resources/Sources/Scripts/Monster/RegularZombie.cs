@@ -30,7 +30,7 @@ public class RegularZombie : MonoBehaviour
     public float nextWaypointDistance = 3;
     private int currentWaypoint = 0;
     private bool reachedEndOfPath;
-    private bool canUpdate = false;
+    private bool isMaster= false;
     private void Start()
     {
         pv = GetComponent<PhotonView>();
@@ -53,7 +53,7 @@ public class RegularZombie : MonoBehaviour
         {
          StartCoroutine(corr);
          StartCoroutine(find());
-         canUpdate = true;
+         isMaster = true;
         }
         else
         {
@@ -61,19 +61,21 @@ public class RegularZombie : MonoBehaviour
             {
                 StartCoroutine(corr);
                StartCoroutine(find());
-               canUpdate = true;
+               isMaster = true;
             }
-                
         }
     }
 
     public void OnPathComplete (Path p) {
-        //Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
+        if (isMaster)
+        {
+            //Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
 
-        if (!p.error) {
-            path = p;
-            // Reset the waypoint counter so that we start to move towards the first point in the path
-            currentWaypoint = 0;
+            if (!p.error) {
+                path = p;
+                // Reset the waypoint counter so that we start to move towards the first point in the path
+                currentWaypoint = 0;
+            }   
         }
     }
     public void stopCor()
@@ -101,7 +103,7 @@ public class RegularZombie : MonoBehaviour
     }
     public void Update () 
         {
-            if (canUpdate)
+            if (isMaster)
             {
               if (!enemy.isFinding && enemy.canMove)
             {
@@ -205,9 +207,11 @@ public class RegularZombie : MonoBehaviour
             }
         }
     }
-    
-    public void OnDisable () {
-        enemy.seeker.pathCallback -= OnPathComplete;
+
+    public void OnDisable()
+    {
+        if(isMaster) 
+            enemy.seeker.pathCallback -= OnPathComplete;
     }
     
    private Vector2 GetRoamingPosition()
@@ -219,23 +223,33 @@ public class RegularZombie : MonoBehaviour
 
    private void OnCollisionStay2D(Collision2D other)
    {
-       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !enemy.isFinding)
+       if (isMaster)
        {
-          collision("Wall");
+           if (enemy.canMove)
+           {
+               if (!enemy.isFinding)
+               {
+                   if (other.gameObject.CompareTag("Wall"))
+                   {
+                       StopCoroutine(corr);
+                       StartCoroutine(corr);
+                   }
+               }
+           }
        }
    }
-   private void OnCollisionEnter2D(Collision2D other)
-   {
-       if (other.gameObject.CompareTag("Wall") && enemy.canMove && !enemy.isFinding)
-       {
-          collision("Wall");
-       }
-   }
+   
    private void OnTriggerEnter2D(Collider2D other)
    {
-       if (other.CompareTag("Player") && enemy.canMove)
+       if (isMaster)
        {
-           collision("Player");
+           if (enemy.canMove)
+           {
+               if (other.CompareTag("Player") && enemy.canMove && isMaster)
+               {
+                   StartCoroutine(Attack());
+               }
+           }
        }
    }
 
@@ -270,27 +284,5 @@ public class RegularZombie : MonoBehaviour
                }
            }
        }   
-   }
-
-   void collision(string colName)
-   {
-       if(PhotonNetwork.OfflineMode)
-           collisionRPC(colName);
-       else
-           pv.RPC("collisionRPC",RpcTarget.AllBuffered,colName);
-   }
-   [PunRPC]
-   void collisionRPC(string colNmae)
-   {
-       switch (colNmae)
-       {
-           case "Wall":
-               StopCoroutine(corr);
-               StartCoroutine(corr);
-               break;
-           case "Player":
-               StartCoroutine(Attack());
-               break;
-       }
    }
 }

@@ -55,21 +55,13 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.OfflineMode)
             {
-                other.GetComponent<Enemy>().HitRPC(Dmg,transform.position, nuckBackDistance);
                 Destroy(gameObject);
             }
             else
             {
-                if (pv.IsMine)
-                {
-                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, Dmg,transform.position,nuckBackDistance);
-                    pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
-                }
-                else
-                {
-                    pv.RPC("DestroyRPC", RpcTarget.AllBuffered);   
-                }
+                pv.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
+            other.GetComponent<Enemy>().Hit(Dmg,transform.position, nuckBackDistance);
         }
         else if (other.gameObject.tag=="Wall")
         {

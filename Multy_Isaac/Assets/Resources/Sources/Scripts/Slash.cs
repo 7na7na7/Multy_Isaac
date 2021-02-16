@@ -32,17 +32,7 @@ public class Slash : MonoBehaviourPunCallbacks
         }
         else if (other.CompareTag("Enemy"))
         {
-            if (PhotonNetwork.OfflineMode)
-            {
-                other.GetComponent<Enemy>().HitRPC(Dmg,transform.position,nuckBackDistance);
-            }
-            else
-            {
-                if (pv.IsMine)
-                {
-                    other.GetComponent<Enemy>().pv.RPC("HitRPC", RpcTarget.AllBuffered, Dmg,transform.position,nuckBackDistance);
-                }
-            }
+            other.GetComponent<Enemy>().Hit(Dmg,transform.position,nuckBackDistance);
         }
     }
     

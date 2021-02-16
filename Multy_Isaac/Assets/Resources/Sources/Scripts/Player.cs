@@ -16,6 +16,8 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
+
+    public bool SUPERRRRRRR = true;
     //패시브 변수
     private GameObject offlineSlash;
 
@@ -403,7 +405,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (canShot&&leftBullet.bulletCount>=currentWeapon.consumeBullet)
         {
             isFight();
-            if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet))
+            if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet)) //쏘기!!!!!
             {
                 if(PhotonNetwork.OfflineMode)
                     gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
@@ -423,11 +425,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         PhotonNetwork.Instantiate(offLineBullet.name, bulletTr.position, q);
                 }
                 
+                //총소리 듣고 좀비오기
                 RaycastHit2D[] zombieCol = Physics2D.CircleCastAll(gun.transform.position, soundRadious, Vector2.up,0);
                 foreach (RaycastHit2D col in zombieCol)
                 {
                     if (col.collider.CompareTag("Enemy"))
-                        col.collider.GetComponent<Enemy>().setPlayer(transform);
+                    {
+                        if (PhotonNetwork.OfflineMode)
+                        {
+                            col.collider.GetComponent<Enemy>().setPlayer(transform);    
+                        }
+                        else
+                        {
+                            col.collider.GetComponent<Enemy>().setPlayerRPC(pv.ViewID);
+                        }
+                    }
                 }
             }
             else
@@ -476,7 +488,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3)) //공격받을때 공격한사람 이름도 받음
     {
-        if (!isSuper&&pv.IsMine && !isDead)
+        if (!isSuper&&pv.IsMine && !isDead && !SUPERRRRRRR)
         {
             //StartCoroutine(superTick()); //0.1초 무적
 
@@ -746,53 +758,36 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
-
         }
     }
 
-        private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
         {
-
             if (pv.IsMine)
             {
-//                if (other.CompareTag("Bush"))
-//                {
-//                    if(PhotonNetwork.OfflineMode)
-//                        canvasOff();
-//                    else
-//                        pv.RPC("canvasOff",RpcTarget.All);
-//                }   
-                
                 if (other.CompareTag("Swamp")) //늪에 닿으면
                     isSwamp = true;
+                if (other.CompareTag("Enemy"))
+                {
+                    Enemy enemy=other.gameObject.GetComponent<Enemy>();
+                    if (enemy.time >= enemy.damageDelay)
+                    {
+                        enemy.time = 0;
+                        if(enemy.name.Contains("(")) 
+                            Hit(enemy.CollsionDamage, enemy.name.Substring(0, enemy.name.IndexOf("(")),enemy.nuckBackDistance,enemy.transform.position);
+                        else
+                            Hit(enemy.CollsionDamage, enemy.name,enemy.nuckBackDistance,enemy.transform.position);
+                    }
+                }
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-//            if (other.CompareTag("Bush"))
-//            {
-//                if(PhotonNetwork.OfflineMode)
-//                    canvasOn();
-//                else
-//                    pv.RPC("canvasOn",RpcTarget.All);
-//            }
-
             if (other.CompareTag("Swamp")) //늪에 닿으면
                 isSwamp = false;
         }
-
-//        private void OnCollisionStay2D(Collision2D other)  //플레이어 강체 충돌판정
-//    {
-//        if (pv.IsMine)
-//        {
-//            if (other.gameObject.tag == "Wall") //벽에 닿으면 DOTween취소
-//            {
-//               충돌용이었는데.. 
-//            }   
-//        }
-//    }
-    #endregion
+        #endregion
 
     #region 패시브
     
