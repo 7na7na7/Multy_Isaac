@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482181105226105787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: 1.07, z: 0}
+  m_LocalPosition: {x: 0.42, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 5458050791320017468}
@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7792098860288925435, guid: 8fab642fe7af6614bae4914ec5b84b2c,
+  m_Sprite: {fileID: -8123386678554590398, guid: a56a65885f731ad4cb4145dd83741e3f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -236,11 +236,11 @@ GameObject:
   - component: {fileID: 5458050791320017467}
   - component: {fileID: 5458050791320017466}
   - component: {fileID: 1343795421238119719}
-  - component: {fileID: 5458050791320017456}
   - component: {fileID: 5458050791320017446}
   - component: {fileID: 6030439151700246094}
   - component: {fileID: 692161826}
   - component: {fileID: 1755109966}
+  - component: {fileID: 1016078240731654622}
   m_Layer: 0
   m_Name: RegularZombie
   m_TagString: Enemy
@@ -257,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 5458050791320017457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children:
   - {fileID: 2787882456134447271}
   - {fileID: 3339905566978214674}
@@ -304,7 +304,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: 7768150858930018949, guid: a0fa39fbc2a2f404eb95d82e27af0824,
+  m_Sprite: {fileID: 6019453725058403666, guid: a56a65885f731ad4cb4145dd83741e3f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -414,22 +414,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashWhite: {fileID: 2100000, guid: cbdde7d9e63392a49a4e9716effb3050, type: 2}
---- !u!70 &5458050791320017456
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458050791320017457}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.11037028, y: -0.032405615}
-  m_Size: {x: 0.60217166, y: 1.0320144}
-  m_Direction: 0
 --- !u!114 &5458050791320017446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,3 +517,19 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!70 &1016078240731654622
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458050791320017457}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00011503697, y: -0.22222567}
+  m_Size: {x: 0.6198912, y: 0.92887974}
+  m_Direction: 0
