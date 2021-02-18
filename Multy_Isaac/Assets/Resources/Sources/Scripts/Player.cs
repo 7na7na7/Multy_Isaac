@@ -17,6 +17,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
 
+    public GameObject offlineBomb;
     public bool SUPERRRRRRR = true;
     //패시브 변수
     private GameObject offlineSlash;
@@ -758,6 +759,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
+
+            if (other.CompareTag("Explosion")) //폭탄
+            {
+                DelayDestroy enemy = other.GetComponent<DelayDestroy>();
+                Hit(enemy.damage, enemy.name,enemy.nuckBackDistance,enemy.transform.position);
+            }
         }
     }
 
@@ -823,6 +830,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             case 44: //붕대
                 //offStat.HungryHeal(10);
                 statMgr.Heal(30);
+                break;
+            case 55:
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(offlineBomb, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.Instantiate(offlineBomb.name, transform.position, Quaternion.identity);
                 break;
         }
     }

@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  private bool isDead = false;
   private List<GameObject> dropTemList;
   public Animator Exclamation;
   private Rigidbody2D rigid;
@@ -111,6 +112,15 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     }
   }
 
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("Explosion")) //폭탄
+    {
+      DelayDestroy enemy = other.GetComponent<DelayDestroy>();
+      Hit(enemy.damage, enemy.transform.position,enemy.nuckBackDistance);
+    }
+  }
+
   [PunRPC]
   void HitRPC(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
   {
@@ -145,14 +155,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     else
     {
       if (hp <= 0)
-      {
-        if (hp <= 0)
         {
           Die();
         }
         else
           setAnim("Walk");
-      }
     }
   }
 
@@ -161,35 +168,39 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
   [PunRPC]
   void Die()
   {
-    for (int i = 0; i < DropExp.Length; i++)
+    if (!isDead)
     {
-      for (int j = 0; j < Random.Range(0, DropExpCount[i] + 1); j++)
+      isDead = true;
+      for (int i = 0; i < DropExp.Length; i++)
       {
-        if (PhotonNetwork.OfflineMode)
-          Instantiate(DropExp[i],
-            new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-              transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
-        else
-          PhotonNetwork.InstantiateRoomObject(DropExp[i].name,
-            new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-              transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+        for (int j = 0; j < Random.Range(0, DropExpCount[i] + 1); j++)
+        {
+          if (PhotonNetwork.OfflineMode)
+            Instantiate(DropExp[i],
+              new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
+                transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+          else
+            PhotonNetwork.InstantiateRoomObject(DropExp[i].name,
+              new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
+                transform.position.y + Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+        }
       }
-    }
 
-    for (int i = 0; i < Random.Range(0, TemCount + 1); i++)
-    {
-      temMgr.setTem(dropTemList[Random.Range(0, dropTemList.Count)].GetComponent<Item>().item.index,
-        new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-          transform.position.y + Random.Range(-0.2f, 0.2f)));
-    }
+      for (int i = 0; i < Random.Range(0, TemCount + 1); i++)
+      {
+        temMgr.setTem(dropTemList[Random.Range(0, dropTemList.Count)].GetComponent<Item>().item.index,
+          new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
+            transform.position.y + Random.Range(-0.2f, 0.2f)));
+      }
 
-    transform.GetChild(0).gameObject.SetActive(true);
-    transform.GetChild(0).transform.parent = null;
+      transform.GetChild(0).gameObject.SetActive(true);
+      transform.GetChild(0).transform.parent = null;
 
 //if (PhotonNetwork.OfflineMode)
-    destroyRPC();
+      destroyRPC();
 //    else
-//      pv.RPC("destroyRPC", RpcTarget.All);
+//      pv.RPC("destroyRPC", RpcTarget.All); 
+    }
   }
 
   public void setAnim(string animName)
