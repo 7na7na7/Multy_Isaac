@@ -14,8 +14,10 @@ public class TemManager : MonoBehaviour
     public List<wep> weaponList;
     public List<GameObject> temList;
     public int Index = 0;
-    
 
+    public int BulletIndex;
+    public List<GameObject> bulletPrefab=new List<GameObject>();
+    
     private void Start()
     {
         pv = GetComponent<PhotonView>();
