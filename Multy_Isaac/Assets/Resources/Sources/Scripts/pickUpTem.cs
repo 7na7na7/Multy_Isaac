@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class pickUpTem : MonoBehaviour
 {
+    public int subIndex;
+    public int Index;
     public temType type;
     
     public float speed;
@@ -15,11 +17,12 @@ public class pickUpTem : MonoBehaviour
     public float radius;
     public LayerMask player;
 
+    private TemManager temMgr;
     //private Rigidbody2D rigid;
 
     private void Start()
     {
-        //rigid = GetComponent<Rigidbody2D>();
+        temMgr = FindObjectOfType<TemManager>();
     }
 
     public enum temType
@@ -49,28 +52,14 @@ public class pickUpTem : MonoBehaviour
                 if (type == temType.exp)
                 {
                     other.GetComponent<Player>().getEXP(ExpAmount);
-                
-                    if(PhotonNetwork.OfflineMode)
-                        Destroy(gameObject);
-                    else
-                        GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);        
+                    temMgr.delExp(Index);
                 }
                 else if (type == temType.bullet)
                 {
                     other.GetComponent<Player>().leftBullet.GetBullet(ExpAmount); //총알수얻어오기
-                
-                    if(PhotonNetwork.OfflineMode)
-                        Destroy(gameObject);
-                    else
-                        GetComponent<PhotonView>().RPC("punDestroy",RpcTarget.AllBuffered);        
+                    temMgr.delBullet(Index);
                 }
             }
         }
-    }
-
-    [PunRPC]
-    void punDestroy()
-    {
-        Destroy(gameObject);
     }
 }

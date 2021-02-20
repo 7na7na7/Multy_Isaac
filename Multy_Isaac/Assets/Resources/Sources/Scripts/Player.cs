@@ -830,7 +830,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         switch (itemIndex)
         {
             case 44: //붕대
-                statMgr.Heal(20);
+                statMgr.Heal(15);
+                break;
+            case 53: //좀비고기
+                offStat.HungryHeal(10);
+                statMgr.Heal(-10);
                 break;
             case 55: //폭탄
                 if (PhotonNetwork.OfflineMode)
@@ -843,6 +847,21 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 break;
             case 58: //삼각김밥
                 offStat.HungryHeal(15);
+                break;
+            case 60: //꿀물
+                statMgr.Heal(15);
+                break;
+            case 61: //포도주스
+                statMgr.Heal(30);
+                break;
+            case 62: //사과주스
+                statMgr.Heal(30);
+                break;
+            case 63: //사과
+                offStat.HungryHeal(10);
+                break;
+            case 64: //포도
+                offStat.HungryHeal(10);
                 break;
         }
     }

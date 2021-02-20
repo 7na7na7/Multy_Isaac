@@ -13,6 +13,8 @@ public class Tree : MonoBehaviour
     private PhotonView pv;
     public int hp;
     public GameObject wood;
+    public GameObject[] randomTems;
+    public int percent;
     private int hpSave;
     public Transform tr;
     public float isSuperTime = 0.3f;
@@ -32,9 +34,9 @@ public class Tree : MonoBehaviour
             {
                 time = 0;
                 if(PhotonNetwork.OfflineMode)
-                    Hit(other.GetComponent<Slash>().Dmg);
+                    Hit(other.GetComponent<Slash>().Dmg,Random.Range(0,randomTems.Length),percentreturn(percent));
                 else
-                    pv.RPC("Hit",RpcTarget.All,other.GetComponent<Slash>().Dmg);   
+                    pv.RPC("Hit",RpcTarget.All,other.GetComponent<Slash>().Dmg,Random.Range(0,randomTems.Length),percentreturn(percent));   
             }
         }
     }
@@ -46,7 +48,7 @@ public class Tree : MonoBehaviour
     }
 
     [PunRPC]
-    void Hit(int value)
+    void Hit(int value,int randomValue, bool isRandomTem)
     {
         if (PhotonNetwork.IsMasterClient)
         {
@@ -61,7 +63,17 @@ public class Tree : MonoBehaviour
             {
                 hp = hpSave;
                 temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
-            }   
+            }
+            if(isRandomTem)
+                temMgr.setTem(randomTems[randomValue].GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
         }
+    }
+
+    bool percentreturn(int per)
+    {
+        if (Random.Range(1, 101) <= percent)
+            return true;
+        else
+            return false;
     }
 }

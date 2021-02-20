@@ -48,10 +48,17 @@ public class StatManager : MonoBehaviour
     
     public void Heal(int value)
     {
-        if (hpSlider.maxValue - hpSlider.value < value) //회복량이 잃은체력보다 크면
-            hpSlider.value = hpSlider.maxValue;
+        if (value > 0)
+        {
+            if (hpSlider.maxValue - hpSlider.value < value) //회복량이 잃은체력보다 크면
+                hpSlider.value = hpSlider.maxValue;
+            else
+                hpSlider.value += value;
+        }
         else
+        {
             hpSlider.value += value;
+        }
     }
 
     public bool LoseHp(int value)
