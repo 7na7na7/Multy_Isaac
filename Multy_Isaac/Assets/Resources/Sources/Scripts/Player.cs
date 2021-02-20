@@ -830,14 +830,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         switch (itemIndex)
         {
             case 44: //붕대
-                //offStat.HungryHeal(10);
-                statMgr.Heal(30);
+                statMgr.Heal(20);
                 break;
-            case 55:
+            case 55: //폭탄
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(offlineBomb, transform.position, Quaternion.identity);
                 else
                     PhotonNetwork.Instantiate(offlineBomb.name, transform.position, Quaternion.identity);
+                break;
+            case 57: //컵라면
+                offStat.HungryHeal(20);
+                break;
+            case 58: //삼각김밥
+                offStat.HungryHeal(15);
                 break;
         }
     }
