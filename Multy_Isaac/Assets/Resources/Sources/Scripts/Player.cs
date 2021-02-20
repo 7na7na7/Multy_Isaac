@@ -481,6 +481,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canMove = false;
         rb.velocity=Vector2.zero;
         rb.bodyType = RigidbodyType2D.Static;
+        Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<CapsuleCollider2D>());
         if(PhotonNetwork.OfflineMode) 
             SetAnimRPC("Die");
         else

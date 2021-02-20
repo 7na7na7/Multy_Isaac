@@ -231,8 +231,7 @@ public class RegularZombie : MonoBehaviour
                {
                    if (other.gameObject.CompareTag("Wall"))
                    {
-                       StopCoroutine(corr);
-                       StartCoroutine(corr);
+                       Restart();
                    }
                }
            }
@@ -253,6 +252,12 @@ public class RegularZombie : MonoBehaviour
        }
    }
 
+   void Restart()
+   {
+       StopCoroutine(corr);
+       StartCoroutine(corr);
+   }
+   
    IEnumerator Attack()
    {
        StopCoroutine(corr);
@@ -266,23 +271,29 @@ public class RegularZombie : MonoBehaviour
        yield return new WaitForSeconds(AttackTime);
 
        enemy.canMove = true;
-       
-       for (int i = 0; i < Players.Count; i++)
+
+       if (enemy.targetPosition.GetComponent<Player>().isDead)
        {
-           if (!Players[i].isDead)
-           {
-               Transform tr = PlayerTrs[i];
-               float rad = detectRad;
-               if (time.isNight)
-                   rad = nightDetecctRad;
-               if (Vector3.Distance(transform.position, tr.position) < rad)
-               {
-                   enemy.isFinding = true;
-                   enemy.targetPosition = tr;
-                   enemy.setAnim("Walk");
-                   break;
-               }
-           }
-       }   
+           enemy.ExclamationClose();
+           Restart();
+       }
+       
+//       for (int i = 0; i < Players.Count; i++)
+//       {
+//           if (!Players[i].isDead)
+//           {
+//               Transform tr = PlayerTrs[i];
+//               float rad = detectRad;
+//               if (time.isNight)
+//                   rad = nightDetecctRad;
+//               if (Vector3.Distance(transform.position, tr.position) < rad)
+//               {
+//                   enemy.isFinding = true;
+//                   enemy.targetPosition = tr;
+//                   enemy.setAnim("Walk");
+//                   break;
+//               }
+//           }
+//       }   
    }
 }
