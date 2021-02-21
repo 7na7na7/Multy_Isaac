@@ -450,12 +450,15 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
           PhotonNetwork.CurrentRoom.IsVisible = false; //방목록에서 안보이게함
 
           Player[] players = FindObjectsOfType<Player>();
-          playerCountSave[] ps = FindObjectsOfType<playerCountSave>();
-          foreach (var VARIABLE in ps)
-          {
-             VARIABLE.playerCount = players.Length;
-          }
+          PV.RPC("SetPlayerCount",RpcTarget.AllBuffered,players.Length);
+
           PhotonNetwork.LoadLevel(1); //Build Settng에서 1번째 인덱스의 씬 호출  
        }
+    }
+
+    [PunRPC]
+    void SetPlayerCount(int value)
+    {
+       FindObjectOfType<playerCountSave>().playerCount = value;
     }
 }

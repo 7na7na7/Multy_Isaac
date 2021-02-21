@@ -16,6 +16,7 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject regularZombie;
     private BoxCollider2D area;
     private TimeManager time;
+    
     void Start()
     {
         time = FindObjectOfType<TimeManager>();

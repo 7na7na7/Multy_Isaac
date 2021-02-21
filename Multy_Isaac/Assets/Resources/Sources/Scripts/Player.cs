@@ -129,7 +129,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             StartCoroutine(hpRegenCor());
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-            //FindObjectOfType<CameraManager>().target = p.gameObject;
             LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
             statMgr=transform.GetChild(0).GetComponent<StatManager>();
             playerItem = GetComponent<PlayerItem>();
@@ -140,7 +139,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (SceneManager.GetActiveScene().name == "Play")
             {
                 GetComponent<CapsuleCollider2D>().isTrigger = true;
-                setCam();
+                Invoke("aspaltSet",FindObjectOfType<RoomTemplates>().delay);
+                Invoke("setCam",FindObjectOfType<ZombieSpawner>().FirstDelay+0.5f);
             }
             else
             {
@@ -152,6 +152,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
        
     }
 
+    void aspaltSet()
+    {
+        GameObject[] aspalts = GameObject.FindGameObjectsWithTag("Aspalt");
+        transform.position = aspalts[Random.Range(0, aspalts.Length)].transform.position;
+    }
     private void Update()
     {
         if (pv.IsMine)
