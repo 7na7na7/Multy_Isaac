@@ -92,10 +92,15 @@ public class TemManager : MonoBehaviour
 
     public void setTem(int dex, Vector3 pos)
     {
-        if(PhotonNetwork.OfflineMode)
-            SetItem(dex,pos);
+        if(dex==101 || dex==102 || dex==103)
+            setBullet(dex-101,pos);
         else
-            pv.RPC("SetItem",RpcTarget.AllBuffered,dex,pos);
+        {
+            if (PhotonNetwork.OfflineMode)
+                SetItem(dex,pos);
+            else
+                pv.RPC("SetItem",RpcTarget.AllBuffered,dex,pos);   
+        }
     }
 
     public void delTem(int dex)
@@ -109,7 +114,7 @@ public class TemManager : MonoBehaviour
     public void setBullet(int dex, Vector3 pos)
     {
         if(PhotonNetwork.OfflineMode)
-            setBullet(dex,pos);
+            SetBullet(dex,pos);
         else
             pv.RPC("SetBullet",RpcTarget.AllBuffered,dex,pos);
     }
