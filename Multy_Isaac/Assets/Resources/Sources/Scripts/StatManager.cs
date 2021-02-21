@@ -69,4 +69,9 @@ public class StatManager : MonoBehaviour
         else
             return false;
     }
+
+    public int GetHp()
+    {
+        return (int)hpSlider.value;
+    }
 }

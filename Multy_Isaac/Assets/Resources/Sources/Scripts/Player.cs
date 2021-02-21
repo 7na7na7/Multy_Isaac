@@ -17,6 +17,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
 
+    private bool isRegen = true;
+    public float hpRegenDelay=1f;
+    public int hpRegenCut=70;
     public GameObject offlineBomb;
     public bool SUPERRRRRRR = true;
     //패시브 변수
@@ -124,6 +127,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         savedCanvasScale = photonviewCanvas.transform.localScale;
         if (pv.IsMine)
         {
+            StartCoroutine(hpRegenCor());
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             //FindObjectOfType<CameraManager>().target = p.gameObject;
             LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
@@ -328,6 +332,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     #region 일반함수,코루틴
 
+    IEnumerator hpRegenCor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(hpRegenDelay);
+            if(offStat.getHungry()>hpRegenCut && !isDead) 
+                statMgr.Heal(1);
+        }
+    }
     public void isFight() //전투 중
     {
         mobileTime = 0;

@@ -57,4 +57,9 @@ public class offlineStat : MonoBehaviour
     {
         stomach.fillAmount += value/100f;
     }
+
+    public int getHungry()
+    {
+        return ((int) (100f * stomach.fillAmount));
+    }
 }
