@@ -852,7 +852,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 break;
             case 53: //좀비고기
                 offStat.HungryHeal(10);
-                statMgr.Heal(-10);
+                if(statMgr.LoseHp(1))
+                    Die("식중독");   
                 break;
             case 55: //폭탄
                 if (PhotonNetwork.OfflineMode)

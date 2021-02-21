@@ -12,6 +12,9 @@ using System.Linq;
 
 public class PlayerItem : MonoBehaviour
 {
+    public GameObject[] startTem;
+    public int[] startTemCount;
+    
     public float discardTime = 1f;
     private float time = 0f;
     
@@ -31,8 +34,69 @@ public class PlayerItem : MonoBehaviour
     private void Start()
     {
         temMgr = FindObjectOfType<TemManager>();
+        Invoke("StartTem",FindObjectOfType<RoomTemplates>().delay);
     }
 
+    void StartTem()
+    {
+        for (int j = 0; j < startTem.Length;j++) 
+        {
+            for (int k = 0; k < startTemCount[j]; k++)
+            {
+              bool isGet = false;
+            if (startTem[j].GetComponent<Item>().item.type == itemType.Usable) //소비템이면
+            {
+                bool isHaveUsable = false;
+                                    
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName ==startTem[j].GetComponent<Item>().item.ItemName) //이름이 같은 소비템이면
+                                        {
+                                            isHaveUsable = true;
+                                            isGet = true;
+                                            slots[i].itemCount++;
+                                        
+                                            check(i,false);
+                                            break;
+                                        }
+                                    }
+
+                                    if (!isHaveUsable) //소비템이 없으면
+                                    {
+                                        for (int i = 0; i < ItemList.Length; i++) 
+                                        {
+                                            if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                            {
+                                                isGet = true;
+                                                ItemList[i]=startTem[j].GetComponent<Item>().item;
+                                                slots[i].itemCount++;
+                                        
+                                                check(i,true);
+                                                break;
+                                            }
+                                        }      
+                                    }
+                                }
+                                else//소비템이 아니면 
+                                {
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                        {
+                                            isGet = true;
+                                            ItemList[i]=startTem[j].GetComponent<Item>().item;
+                                            
+                                            if(startTem[j].GetComponent<Item>().item.type==itemType.Passive) //패시브템이면
+                                                player.PassiveOn(startTem[j].GetComponent<Item>().item.index); //패시브 ON
+
+                                            check(i,true);
+                                            break;
+                                        }
+                                    }   
+                                }      
+            }
+        }
+    }
     private void Update()
     {
 
