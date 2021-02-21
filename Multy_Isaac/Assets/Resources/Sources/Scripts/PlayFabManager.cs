@@ -16,8 +16,8 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
    public List<GameObject> Prefabs;
-   
-   
+
+   public GameObject titleImg;
    private Text txt;
    //public string GameVersion = "0.1";
    public InputField EmailInput, PasswordInput, UsernameInput;
@@ -265,6 +265,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       LoadingPanel.SetActive(false);
       LobbyPanel.SetActive(true);
       RoomPanel.SetActive(false);
+      titleImg.SetActive(true);
       PhotonNetwork.LocalPlayer.NickName = NickName;
       myList.Clear();
    }
@@ -350,6 +351,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        Spawn();
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
+       titleImg.SetActive(false);
        //RoomRenewal();
        ChatInput.text = "";
        for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
