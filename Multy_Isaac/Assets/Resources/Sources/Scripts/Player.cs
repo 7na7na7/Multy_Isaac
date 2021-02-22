@@ -882,6 +882,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             case 64: //포도
                 offStat.HungryHeal(10);
                 break;
+            case 67: //꿀
+                statMgr.Heal(10);
+                break;
         }
     }
 
