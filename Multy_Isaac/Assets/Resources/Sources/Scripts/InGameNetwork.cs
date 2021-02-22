@@ -15,7 +15,6 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
    public GameObject playerPrefab;
-   public float WaitTime;
    public bool isFullScreen;
    public int ResX, RexY;
    public bool isOffline;
