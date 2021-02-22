@@ -34,7 +34,7 @@ public class PlayerItem : MonoBehaviour
     private void Start()
     {
         temMgr = FindObjectOfType<TemManager>();
-        Invoke("StartTem",FindObjectOfType<RoomTemplates>().delay);
+        Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
     }
 
     void StartTem()
@@ -43,17 +43,14 @@ public class PlayerItem : MonoBehaviour
         {
             for (int k = 0; k < startTemCount[j]; k++)
             {
-              bool isGet = false;
-            if (startTem[j].GetComponent<Item>().item.type == itemType.Usable) //소비템이면
+                if (startTem[j].GetComponent<Item>().item.type == itemType.Usable) //소비템이면
             {
                 bool isHaveUsable = false;
-                                    
-                                    for (int i = 0; i < ItemList.Length; i++) 
-                                    {
-                                        if (ItemList[i].ItemName ==startTem[j].GetComponent<Item>().item.ItemName) //이름이 같은 소비템이면
-                                        {
-                                            isHaveUsable = true;
-                                            isGet = true;
+                for (int i = 0; i < ItemList.Length; i++) 
+                {
+                    if (ItemList[i].ItemName ==startTem[j].GetComponent<Item>().item.ItemName) //이름이 같은 소비템이면
+                    {
+                        isHaveUsable = true;
                                             slots[i].itemCount++;
                                         
                                             check(i,false);
@@ -67,7 +64,6 @@ public class PlayerItem : MonoBehaviour
                                         {
                                             if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
                                             {
-                                                isGet = true;
                                                 ItemList[i]=startTem[j].GetComponent<Item>().item;
                                                 slots[i].itemCount++;
                                         
@@ -83,7 +79,6 @@ public class PlayerItem : MonoBehaviour
                                     {
                                         if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
                                         {
-                                            isGet = true;
                                             ItemList[i]=startTem[j].GetComponent<Item>().item;
                                             
                                             if(startTem[j].GetComponent<Item>().item.type==itemType.Passive) //패시브템이면

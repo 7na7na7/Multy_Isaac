@@ -12,13 +12,11 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
   private bool isDead = false;
-  private List<GameObject> dropTemList;
   public Animator Exclamation;
   private Rigidbody2D rigid;
   public float nuckBackDistance;
   public float nuckBackTime;
   public Ease nuckBackEase;
-  public int TemCount;
   public GameObject[] DropTem;
   public int[] DropTemPercent;
   public GameObject[] DropExp;
@@ -82,15 +80,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     anim = GetComponent<Animator>();
     localX = transform.localScale.x * -1;
     seeker = GetComponent<Seeker>();
-    dropTemList = new List<GameObject>();
     temMgr = FindObjectOfType<TemManager>();
-    for (int i = 0; i < DropTem.Length; i++)
-    {
-      for (int j = 0; j < DropTemPercent[i]; j++)
-      {
-        dropTemList.Add(DropTem[i]);
-      }
-    }
   }
 
   private void Update()
@@ -163,7 +153,13 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     }
   }
 
-
+  bool percentreturn(int per)
+  {
+    if (Random.Range(1, 101) <= per)
+      return true;
+    else
+      return false;
+  }
 
   [PunRPC]
   void Die()
@@ -180,11 +176,13 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
         }
       }
 
-      for (int i = 0; i < Random.Range(0, TemCount + 1); i++)
+      for (int i = 0; i < DropTem.Length; i++)
       {
-        temMgr.setTem(dropTemList[Random.Range(0, dropTemList.Count)].GetComponent<Item>().item.index,
-          new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-            transform.position.y + Random.Range(-0.2f, 0.2f)));
+        if (percentreturn(DropTemPercent[i]))
+        {
+          temMgr.setTem(DropTem[i].GetComponent<Item>().item.index,
+            new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+        }
       }
 
       transform.GetChild(0).gameObject.SetActive(true);
