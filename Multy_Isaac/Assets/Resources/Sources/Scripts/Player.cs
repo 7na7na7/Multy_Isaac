@@ -145,6 +145,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
             {
                 canMove = true;
+                camera.GetComponent<CameraManager>().target = gameObject;
             }
         }
         else
@@ -358,7 +359,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         camera.GetComponent<CameraManager>().target = gameObject;
         FindObjectOfType<MinimapPlayer>().target = gameObject;
     }
-
+    
     void Slash(bool isDown)
     {
         bool canShot = false;

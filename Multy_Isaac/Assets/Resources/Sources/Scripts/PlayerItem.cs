@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = Unity.Mathematics.Random;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class PlayerItem : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class PlayerItem : MonoBehaviour
     private void Start()
     {
         temMgr = FindObjectOfType<TemManager>();
-        Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
+        if(SceneManager.GetActiveScene().name=="Play") 
+            Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
     }
 
     void StartTem()
