@@ -199,7 +199,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnLoginSuccess(LoginResult result)
    {
-      PopUpManager.instance.PopUp("로그인 성공", Color.green);
+      PopUpManager.instance.PopUp("Login Succeed", Color.green);
       
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
       PlayerPrefs.SetString(NameKey,UsernameInput.text);
@@ -212,7 +212,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnLoginFailure(PlayFabError error)
    {
-      PopUpManager.instance.PopUp("로그인 실패", Color.red);
+      PopUpManager.instance.PopUp(error.ToString(), Color.red);
       
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
@@ -220,7 +220,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
    {
-      PopUpManager.instance.PopUp("회원가입 성공", Color.green);
+      PopUpManager.instance.PopUp("Register Succeed", Color.green);
       
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
       PlayerPrefs.SetString(NameKey,UsernameInput.text);
@@ -235,7 +235,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnRegisterFailure(PlayFabError error)
    {
-      PopUpManager.instance.PopUp("회원가입 실패", Color.red);
+      PopUpManager.instance.PopUp(error.ToString(), Color.red);
       
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
