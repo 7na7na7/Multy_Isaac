@@ -4263,3 +4263,503 @@ Total: 5.304400 ms (FindLiveObjects: 0.855600 ms CreateObjectMapping: 0.311900 m
 Received Prepare
 Registering precompiled user dll's ...
 Registered in 0.007586 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.19 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.511 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3439 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.8 MB.
+System memory in use after: 193.0 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4841.
+Total: 4.464300 ms (FindLiveObjects: 0.523000 ms CreateObjectMapping: 0.264400 ms MarkObjects: 3.646500 ms  DeleteObjects: 0.028500 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 171.925206 seconds.
+  path: Assets/Resources/Sources/Prefabs/JustPrefab/PopUp.prefab
+  artifactKey: Guid(ae4ec4a4f2aef9342bda715cfeba586b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/JustPrefab/PopUp.prefab using Guid(ae4ec4a4f2aef9342bda715cfeba586b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63686a17fbb54742b22c681f184e1f1f') in 0.033260 seconds
+  Import took 0.047149 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.752955 seconds.
+  path: Assets/Resources/Sources/Prefabs/JustPrefab/PopUp.prefab
+  artifactKey: Guid(ae4ec4a4f2aef9342bda715cfeba586b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/JustPrefab/PopUp.prefab using Guid(ae4ec4a4f2aef9342bda715cfeba586b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b89ce007855c4a6d26cc91e0f59c6923') in 0.011003 seconds
+  Import took 0.025551 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 37.086298 seconds.
+  path: Assets/Resources/Sources/Scenes/Play.unity
+  artifactKey: Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Scenes/Play.unity using Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26f7153ef9006360372d390ab9c93943') in 0.006848 seconds
+  Import took 0.022314 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 74.994845 seconds.
+  path: Assets/Resources/item65.prefab
+  artifactKey: Guid(01ad26a383a924c4d9568bcf7cef3934) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item65.prefab using Guid(01ad26a383a924c4d9568bcf7cef3934) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '023c7e8e06f38a2ed6cd2aeab21fb3ff') in 0.136894 seconds
+  Import took 0.144412 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.261232 seconds.
+  path: Assets/Resources/item65.prefab
+  artifactKey: Guid(01ad26a383a924c4d9568bcf7cef3934) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item65.prefab using Guid(01ad26a383a924c4d9568bcf7cef3934) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '362578e70a5f3c2baf6691d46bc944a5') in 0.012230 seconds
+  Import took 0.026589 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.074864 seconds.
+  path: Assets/Resources/item66.prefab
+  artifactKey: Guid(c7be1ece595579b45b1646d7fa7e61cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item66.prefab using Guid(c7be1ece595579b45b1646d7fa7e61cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aafc21744dc4683dce485e9b9b884774') in 0.024095 seconds
+  Import took 0.030167 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.344363 seconds.
+  path: Assets/Resources/item55.prefab
+  artifactKey: Guid(2a4d063fc9f44444e87a58266b962526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item55.prefab using Guid(2a4d063fc9f44444e87a58266b962526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd06bb885bd05f035a040e0c47f48732d') in 0.018832 seconds
+  Import took 0.026013 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.382001 seconds.
+  path: Assets/Resources/item55.prefab
+  artifactKey: Guid(2a4d063fc9f44444e87a58266b962526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item55.prefab using Guid(2a4d063fc9f44444e87a58266b962526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a873e9e81470fddd4349b1d92bba00c') in 0.012333 seconds
+  Import took 0.025530 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.315919 seconds.
+  path: Assets/Resources/item55.prefab
+  artifactKey: Guid(2a4d063fc9f44444e87a58266b962526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item55.prefab using Guid(2a4d063fc9f44444e87a58266b962526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78048ae30d3f2ae7c63f57bc73a3536e') in 0.011353 seconds
+  Import took 0.026649 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 80.145325 seconds.
+  path: Assets/Resources/item66.prefab
+  artifactKey: Guid(c7be1ece595579b45b1646d7fa7e61cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item66.prefab using Guid(c7be1ece595579b45b1646d7fa7e61cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0db52e58a8eb6ff12cf9aee697661e7f') in 0.014447 seconds
+  Import took 0.021479 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003312 seconds.
+  path: Assets/Resources/item66.prefab
+  artifactKey: Guid(c7be1ece595579b45b1646d7fa7e61cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item66.prefab using Guid(c7be1ece595579b45b1646d7fa7e61cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0db52e58a8eb6ff12cf9aee697661e7f') in 0.009950 seconds
+  Import took 0.016117 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.118025 seconds.
+  path: Assets/Resources/item70 1.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item70 1.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5870e483bc2a1ebc12eb96de0db50ee') in 0.015366 seconds
+  Import took 0.022646 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.104463 seconds.
+  path: Assets/Resources/item29.prefab
+  artifactKey: Guid(adc5871d258cd2e46aad538ded6a75d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item29.prefab using Guid(adc5871d258cd2e46aad538ded6a75d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6aa80a4ed7bb4512eeb0d11d5bf5369b') in 0.031108 seconds
+  Import took 0.038412 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.139170 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b3d7594c082215563a97b67e9ae1d36') in 0.016981 seconds
+  Import took 0.024752 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.357170 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'befc755f9b9487fd79b2b594a0748ce8') in 0.011500 seconds
+  Import took 0.017646 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.005929 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd40b323e8e6f6ce0fd64b97144d87be') in 0.010146 seconds
+  Import took 0.016356 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015395 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd40b323e8e6f6ce0fd64b97144d87be') in 0.010725 seconds
+  Import took 0.016955 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.835757 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7ed222fa1693c835bbea271c214c1c6') in 0.010259 seconds
+  Import took 0.016402 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.602326 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa3101a19707cb798f56f41ea19b0294') in 0.013029 seconds
+  Import took 0.021106 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.011621 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa3101a19707cb798f56f41ea19b0294') in 0.010252 seconds
+  Import took 0.016608 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.225275 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73090a7040d23203c182a074bfcf0078') in 0.031166 seconds
+  Import took 0.037209 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 187.575422 seconds.
+  path: Assets/Resources/Sources/Images/Items/MushRoomSoup.png
+  artifactKey: Guid(b7dd807d40b6730459c9b2ecec4671ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Images/Items/MushRoomSoup.png using Guid(b7dd807d40b6730459c9b2ecec4671ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '040363bb5288ef23608ac21a5791616c') in 0.039895 seconds
+  Import took 0.047585 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003994 seconds.
+  path: Assets/Resources/Sources/Images/Items/MushRoomSoup.png
+  artifactKey: Guid(b7dd807d40b6730459c9b2ecec4671ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Images/Items/MushRoomSoup.png using Guid(b7dd807d40b6730459c9b2ecec4671ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '040363bb5288ef23608ac21a5791616c') in 0.009115 seconds
+  Import took 0.015317 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.964940 seconds.
+  path: Assets/Resources/Sources/Images/Items/Bowl.png
+  artifactKey: Guid(1bb0e1fc02db2d44daac6398d676be71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Images/Items/Bowl.png using Guid(1bb0e1fc02db2d44daac6398d676be71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d3c436d24db46635b499d2e51c44d53') in 0.023523 seconds
+  Import took 0.030926 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.820487 seconds.
+  path: Assets/Resources/Sources/Images/Items/MushRoomSoup.png
+  artifactKey: Guid(b7dd807d40b6730459c9b2ecec4671ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Images/Items/MushRoomSoup.png using Guid(b7dd807d40b6730459c9b2ecec4671ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dc05d66c21116b579e8a08bf8a67fe3') in 0.020160 seconds
+  Import took 0.028198 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000169 seconds.
+  path: Assets/Resources/Sources/Images/Items/Bowl.png
+  artifactKey: Guid(1bb0e1fc02db2d44daac6398d676be71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Images/Items/Bowl.png using Guid(1bb0e1fc02db2d44daac6398d676be71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3083ac014b0ddff7442a943e85f2b8f') in 0.015018 seconds
+  Import took 0.021558 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.196521 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '667fdd88a80079a714f1cfc80b3c27ed') in 0.021124 seconds
+  Import took 0.027567 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.127341 seconds.
+  path: Assets/Resources/item71 1.prefab
+  artifactKey: Guid(463902d056178b6499b7fcf21627f6a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71 1.prefab using Guid(463902d056178b6499b7fcf21627f6a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c499fb114f8bd217a11a27785ef7635') in 0.015374 seconds
+  Import took 0.022309 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.937064 seconds.
+  path: Assets/Resources/item72.prefab
+  artifactKey: Guid(463902d056178b6499b7fcf21627f6a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item72.prefab using Guid(463902d056178b6499b7fcf21627f6a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b0372798d4a982885908ee207529371') in 0.014290 seconds
+  Import took 0.029543 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.379367 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba2c314638d990cbb19b7a239a5ba886') in 0.010545 seconds
+  Import took 0.020008 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.005196 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25345f08d8767da986e695284eb89e91') in 0.011595 seconds
+  Import took 0.025750 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.251109 seconds.
+  path: Assets/Resources/item71.prefab
+  artifactKey: Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item71.prefab using Guid(d48a7a78f54751944a6c2b526a2e6267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe04c11eaead933f9c40ff9966fe5081') in 0.015818 seconds
+  Import took 0.030563 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010688 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.26 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.263 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.14 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3439 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.9 MB.
+System memory in use after: 193.1 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4881.
+Total: 4.023900 ms (FindLiveObjects: 0.613600 ms CreateObjectMapping: 0.310500 ms MarkObjects: 3.065200 ms  DeleteObjects: 0.033100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007161 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.126 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3439 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.9 MB.
+System memory in use after: 193.1 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4885.
+Total: 4.475800 ms (FindLiveObjects: 0.715800 ms CreateObjectMapping: 0.722500 ms MarkObjects: 3.010100 ms  DeleteObjects: 0.025500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006308 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.114 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3439 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.9 MB.
+System memory in use after: 193.2 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4889.
+Total: 6.092800 ms (FindLiveObjects: 0.542800 ms CreateObjectMapping: 0.202300 ms MarkObjects: 5.311100 ms  DeleteObjects: 0.035100 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 149.449964 seconds.
+  path: Assets/Resources/item48.prefab
+  artifactKey: Guid(50b7defcedf22444bbe06fd62b660fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item48.prefab using Guid(50b7defcedf22444bbe06fd62b660fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5d576d75ee615d617e84b31f27ca8ef') in 0.161504 seconds
+  Import took 0.167943 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.375779 seconds.
+  path: Assets/Resources/item48.prefab
+  artifactKey: Guid(50b7defcedf22444bbe06fd62b660fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item48.prefab using Guid(50b7defcedf22444bbe06fd62b660fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24136804259df0bd7a204299e929245e') in 0.027046 seconds
+  Import took 0.034753 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.720368 seconds.
+  path: Assets/Resources/item49.prefab
+  artifactKey: Guid(5933fcd7964725248ab9fee33d1f3ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item49.prefab using Guid(5933fcd7964725248ab9fee33d1f3ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5d193df10a5ffd7261c87b3a905c77e') in 0.026302 seconds
+  Import took 0.032740 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.532228 seconds.
+  path: Assets/Resources/item49.prefab
+  artifactKey: Guid(5933fcd7964725248ab9fee33d1f3ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item49.prefab using Guid(5933fcd7964725248ab9fee33d1f3ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d31580a3efd0f654d41dc1847e7ac6d') in 0.011149 seconds
+  Import took 0.018607 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.686424 seconds.
+  path: Assets/Resources/item50.prefab
+  artifactKey: Guid(034c762a4ff776545afed34c657b864a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item50.prefab using Guid(034c762a4ff776545afed34c657b864a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ae2f1f3b09404aa4f91ddbf2b45743a') in 0.021287 seconds
+  Import took 0.029895 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.411323 seconds.
+  path: Assets/Resources/item50.prefab
+  artifactKey: Guid(034c762a4ff776545afed34c657b864a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item50.prefab using Guid(034c762a4ff776545afed34c657b864a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a97177f6b44182b966a4cc7efe1d0a52') in 0.011069 seconds
+  Import took 0.025759 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000714 seconds.
+  path: Assets/Resources/item50.prefab
+  artifactKey: Guid(034c762a4ff776545afed34c657b864a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/item50.prefab using Guid(034c762a4ff776545afed34c657b864a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a97177f6b44182b966a4cc7efe1d0a52') in 0.010774 seconds
+  Import took 0.018760 seconds .
+
