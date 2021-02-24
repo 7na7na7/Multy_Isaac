@@ -180,8 +180,10 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       {
         if (percentreturn(DropTemPercent[i]))
         {
-          temMgr.setTem(DropTem[i].GetComponent<Item>().item.index,
-            new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+          if(DropTem[i].GetComponent<Item>()!=null) 
+            temMgr.setTem(DropTem[i].GetComponent<Item>().item.index, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+          else
+            temMgr.setBullet(DropTem[i].GetComponent<pickUpTem>().subIndex, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
         }
       }
 
