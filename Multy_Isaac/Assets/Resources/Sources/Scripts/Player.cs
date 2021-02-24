@@ -16,7 +16,7 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
-
+    public bool isTEST = true;
     private bool isRegen = true;
     public float hpRegenDelay=1f;
     public int hpRegenCut=70;
@@ -139,8 +139,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (SceneManager.GetActiveScene().name == "Play")
             {
                 GetComponent<CapsuleCollider2D>().isTrigger = true;
-                Invoke("aspaltSet",FindObjectOfType<RoomTemplates>().delay);
-                Invoke("setCam",FindObjectOfType<ZombieSpawner>().FirstDelay+0.5f);
+                if (!isTEST)
+                {
+                    Invoke("aspaltSet",FindObjectOfType<RoomTemplates>().delay);
+                    Invoke("setCam",FindObjectOfType<ZombieSpawner>().FirstDelay+0.5f);   
+                }
+                else
+                {
+                    setCam();
+                }
             }
             else
             {
