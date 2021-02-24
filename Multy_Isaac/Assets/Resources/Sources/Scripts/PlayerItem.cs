@@ -38,7 +38,7 @@ public class PlayerItem : MonoBehaviour
         if(SceneManager.GetActiveScene().name=="Play") 
             Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
     }
-
+    
     void StartTem()
     {
         for (int j = 0; j < startTem.Length;j++) 
@@ -96,7 +96,6 @@ public class PlayerItem : MonoBehaviour
     }
     private void Update()
     {
-
         if (player != null)
         {
             if (player.pv.IsMine)
