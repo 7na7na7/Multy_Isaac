@@ -897,6 +897,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 offStat.HungryHeal(40);
                 statMgr.Heal(20);
                 break;
+            case 73: //식빵
+                offStat.HungryHeal(15);
+                break;
+            case 74: //비타민주사
+                statMgr.Heal(20);
+                break;
+            case 75: //부목
+                statMgr.Heal(45);
+                break;
         }
     }
 
