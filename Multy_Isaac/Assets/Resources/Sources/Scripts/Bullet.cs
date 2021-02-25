@@ -15,7 +15,8 @@ public class Bullet : MonoBehaviourPunCallbacks
     private int dir;
     public PhotonView pv;
     private SpriteRenderer spr;
-
+    public GameObject wallEffect;
+    public GameObject hitEffect;
     private Vector3 savedLocalScale;
     void Start()
     {
@@ -39,7 +40,7 @@ public class Bullet : MonoBehaviourPunCallbacks
             {
                 other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position);
                 spr.sprite = none;
-               DestroyRPC();
+               DestroyHit();
             }
             else if (other.GetComponent<PhotonView>().IsMine && pv.IsMine)
             {
@@ -54,15 +55,15 @@ public class Bullet : MonoBehaviourPunCallbacks
         else if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().Hit(Dmg,transform.position, nuckBackDistance);
-            DestroyRPC();
+            DestroyHit();
         }
         else if (other.gameObject.tag=="Wall")
         {
-           Destroy();
+           DestroyWall();
         }
     }
 
-    public void Destroy()
+    public void DestroyWall()
     {
         if(PhotonNetwork.OfflineMode)
             DestroyRPC();
@@ -73,5 +74,20 @@ public class Bullet : MonoBehaviourPunCallbacks
    void DestroyRPC()
     {
         Destroy(gameObject);
+        Instantiate(wallEffect, transform.position, Quaternion.identity);
     }
+   
+   public void DestroyHit()
+   {
+       if(PhotonNetwork.OfflineMode)
+           DestroyRPC2();
+       else
+           pv.RPC("DestroyRPC2", RpcTarget.All);   
+   }
+   [PunRPC]
+   void DestroyRPC2()
+   {
+       Destroy(gameObject);
+       Instantiate(hitEffect, transform.position, Quaternion.identity);
+   }
 }
