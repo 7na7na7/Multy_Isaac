@@ -12109,6 +12109,7 @@ GameObject:
   - component: {fileID: 5845764388835472176}
   - component: {fileID: 6788358204477907302}
   - component: {fileID: 5845764388835472204}
+  - component: {fileID: 6541522957800784214}
   - component: {fileID: 5845764388835472177}
   - component: {fileID: 5845764388835472206}
   - component: {fileID: 5845764388835472201}
@@ -12356,6 +12357,7 @@ MonoBehaviour:
   - {fileID: 1835028450509348182}
   - {fileID: 6528074865955872272}
   - {fileID: 6888835637388767033}
+  usable: {fileID: 6541522957800784214}
   selectedIndex: 0
 --- !u!95 &5845764388835472204
 Animator:
@@ -12376,6 +12378,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6541522957800784214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249542335554125626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1a3d4b994d86a4fa769eb72da70e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bomb: {fileID: 3907011692088903090, guid: a227db52a38069e46a17150ca0b011c8, type: 3}
+  BonFire: {fileID: 9058477515124319131, guid: 3a490ee572281c948b75a8ad6ee7a743, type: 3}
+  Light: {fileID: 5585194801904126205, guid: 46985be2feb27fc448fc5b44429336a4, type: 3}
+  FireBomb: {fileID: 0}
 --- !u!114 &5845764388835472177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12391,8 +12409,6 @@ MonoBehaviour:
   isTEST: 1
   hpRegenDelay: 2
   hpRegenCut: 70
-  offlineBomb: {fileID: 3907011692088903090, guid: a227db52a38069e46a17150ca0b011c8,
-    type: 3}
   SUPERRRRRRR: 0
   panel: {fileID: 9207444285022455384}
   panel2: {fileID: 1083951901806957472}
@@ -12662,6 +12678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bfca7603272514395570d8e7e6552f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isExplosion: 0
   isPlayer: 1
 --- !u!1 &8418892436680301139
 GameObject:

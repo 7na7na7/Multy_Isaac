@@ -4830,9 +4830,8 @@ GameObject:
   - component: {fileID: 3749522341741181222}
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
-  - component: {fileID: 3835402859275112753}
   m_Layer: 9
-  m_Name: item9
+  m_Name: item80
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4847,7 +4846,7 @@ Transform:
   m_GameObject: {fileID: 3749522341741181223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 449410984}
   - {fileID: 4869776060961844962}
@@ -4894,7 +4893,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: a08566dc26146764bbd28e12ccc478bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00387547fc9ddf7428df661ef239a19c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4919,19 +4918,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   item:
-    weaponIndex: 9
+    weaponIndex: 0
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 0100000002000000
+    SmallItemIndex: 2c00000033000000
     CompleteItemIndex: 
-    index: 9
-    ItemName: "\uD50C\uB808\uC5B4\uAC74"
-    ItemSprite: {fileID: 21300000, guid: a08566dc26146764bbd28e12ccc478bd, type: 3}
-    type: 0
-    ItemDescription: "\uC0B0\uC18D\uC5D0\uC11C \uAE38\uC744 \uC783\uC5B4\uB3C4, \uC2DC\uB0B4\uC5D0\uC11C
-      \uAE38\uC744 \uC783\uC5B4\uB3C4 \uC774\uAC83\uB9CC \uC788\uC73C\uBA74 \uBBF8\uC544\uAC00
-      \uB418\uC9C4 \uC54A\uC744 \uAC83 \uAC19\uB2E4!"
-    WhereGet: "\uC81C\uC791 \uBD88\uAC00\uB2A5"
+    index: 80
+    ItemName: "\uBAA8\uB2E5\uBD88"
+    ItemSprite: {fileID: 21300000, guid: 00387547fc9ddf7428df661ef239a19c, type: 3}
+    type: 4
+    ItemDescription: "\uB530\uB73B\uD558\uB2E4... \uBB34\uC5B8\uAC00 \uC783\uC5B4\uBC84\uB9B0
+      \uAC83\uB4E4\uC774 \uB2E4\uC2DC \uCC28\uC624\uB974\uB294 \uB290\uB08C\uC774\uB2E4.
+      (\uBD88\uC744 \uBC1D\uD600\uC8FC\uB294 \uBAA8\uB2E5\uBD88 \uC124\uCE58)"
+    WhereGet: "\uC81C\uC791"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
 CircleCollider2D:
@@ -4948,7 +4947,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.5
 --- !u!50 &3749522341741181245
 Rigidbody2D:
   serializedVersion: 4
@@ -4970,37 +4969,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3835402859275112753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3749522341741181223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3802716f2fd48ff49a31d1b35ba2b514, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponObj:
-    soundRadious: 15
-    consumeBullet: 1
-    shotBullet: 1
-    spr: {fileID: 21300000, guid: eac78a15a5735b441b6dd86c0c1df67f, type: 3}
-    tr: {x: -0.1, y: -0.05}
-    scale: {x: 1, y: 1}
-    CoolTime: 0.5
-    bulletPos: {fileID: 4869776060961844962}
-    OfflineSlash: {fileID: 0}
-    offlineBullet: {fileID: 6637044811040539379, guid: bc9ba9c2ed454424faabbb939108cf62,
-      type: 3}
-    weaponIndex: 9
-    reLoadTime: 3
-    BulletCount: 1
-    ClusterRate: 0
-    walkSpeed_P: 90
-    shotSpeed_P: 50
-    slashTime: 0
 --- !u!1 &6160867055047779158
 GameObject:
   m_ObjectHideFlags: 0
@@ -5025,7 +4993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160867055047779158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.403, y: 0.256, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3749522341741181216}

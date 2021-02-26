@@ -29,7 +29,7 @@ public class PlayerItem : MonoBehaviour
     public ItemSlot[] slots;
     public GameObject[] Selected;
     private TemManager temMgr;
-    
+    public UsableItem usable;
     public int selectedIndex = 0;
 
     private void Start()
@@ -116,7 +116,7 @@ public class PlayerItem : MonoBehaviour
                     {
                         if (ItemList[selectedIndex].type == itemType.Usable)
                         {
-                            player.UseItem(ItemList[selectedIndex].index);
+                            usable.UseItem(ItemList[selectedIndex].index);
                             slots[selectedIndex].itemCount--;
                             if(slots[selectedIndex].itemCount<=0)
                                 ItemList[selectedIndex].Clear();   

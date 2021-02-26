@@ -20,7 +20,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private bool isRegen = true;
     public float hpRegenDelay=1f;
     public int hpRegenCut=70;
-    public GameObject offlineBomb;
     public bool SUPERRRRRRR = true;
     //패시브 변수
     private GameObject offlineSlash;
@@ -846,68 +845,5 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
     
-    #endregion
-    
-    #region 소비템
-
-    public void UseItem(int itemIndex)
-    {
-        isFight();
-        switch (itemIndex)
-        {
-            case 44: //붕대
-                statMgr.Heal(15);
-                break;
-            case 53: //좀비고기
-                offStat.HungryHeal(10);
-                if(statMgr.LoseHp(10))
-                    Die("식중독");   
-                break;
-            case 55: //폭탄
-                if (PhotonNetwork.OfflineMode)
-                    Instantiate(offlineBomb, transform.position, Quaternion.identity);
-                else
-                    PhotonNetwork.Instantiate(offlineBomb.name, transform.position, Quaternion.identity);
-                break;
-            case 57: //컵라면
-                offStat.HungryHeal(20);
-                break;
-            case 58: //삼각김밥
-                offStat.HungryHeal(15);
-                break;
-            case 60: //꿀물
-                statMgr.Heal(15);
-                break;
-            case 61: //포도주스
-                statMgr.Heal(30);
-                break;
-            case 62: //사과주스
-                statMgr.Heal(30);
-                break;
-            case 63: //사과
-                offStat.HungryHeal(10);
-                break;
-            case 64: //포도
-                offStat.HungryHeal(10);
-                break;
-            case 67: //꿀
-                statMgr.Heal(10);
-                break;
-            case 72: //버섯 수프
-                offStat.HungryHeal(40);
-                statMgr.Heal(20);
-                break;
-            case 73: //식빵
-                offStat.HungryHeal(15);
-                break;
-            case 74: //비타민주사
-                statMgr.Heal(20);
-                break;
-            case 75: //부목
-                statMgr.Heal(45);
-                break;
-        }
-    }
-
     #endregion
 }
