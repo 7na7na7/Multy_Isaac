@@ -89,6 +89,12 @@ public class UsableItem : MonoBehaviour
                 else
                     PhotonNetwork.Instantiate(Light.name, transform.position, Quaternion.identity);
                 break;
+            case 79: //전등
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(FireBomb, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.Instantiate(FireBomb.name, transform.position, Quaternion.identity);
+                break;
         }
     }
 }

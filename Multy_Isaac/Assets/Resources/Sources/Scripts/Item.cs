@@ -59,6 +59,7 @@ public class Item : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         defaultMat = spr.material;
         spr.sprite = item.ItemSprite;
+        item.ItemSprite = spr.sprite;
     }
 
     public bool canGet()

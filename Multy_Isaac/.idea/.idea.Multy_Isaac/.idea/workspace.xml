@@ -4,15 +4,16 @@
     <list default="true" id="354fe281-ccef-4149-bd88-853a6cf90119" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Multy_Isaac/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Multy_Isaac/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Multy_Isaac/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Multy_Isaac/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Bomb.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Bomb.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/PlayerItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/PlayerItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/item29.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/item29.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/item68.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/item68.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/item69.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/item69.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/item9.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/item9.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/BigHouse.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/BigHouse.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/House.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/House.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/PlayGround.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/PlayGround.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/Police.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Prefabs/RoomProps/Police.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Scenes/Play.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Scenes/Play.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/UsableItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/UsableItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/item55.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/item55.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/item79.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/item79.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
     </list>
@@ -47,6 +48,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Sources/Scripts/weapon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Spawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Sources/Scripts/InGameNetwork.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Sources/Scripts/FireBomb.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Sources/Scripts/FlashWhite.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Sources/Scripts/ParkObjs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ETC/Photon/PhotonUnityNetworking/Code/Views/PhotonAnimatorView.cs" root0="FORCE_HIGHLIGHTING" />
@@ -154,7 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Sources/AstarPathfindingProject/ExampleScenes/Example12_Procedural/ProceduralGridMover.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Pathfind.cs" />
         <option value="$PROJECT_DIR$/Assets/Sources/AstarPathfindingProject/Core/astarclasses.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Corpes.cs" />
@@ -179,7 +180,6 @@
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/ItemData.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Invent.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Roof.cs" />
-        <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/TemSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Slash.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Bomb.cs" />
@@ -202,9 +202,11 @@
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/SpawnEffect.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Bullet.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/PlayerLight.cs" />
-        <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/PlayerItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/UsableItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Sources/Scripts/FireBomb.cs" />
       </list>
     </option>
   </component>
@@ -289,7 +291,7 @@
       <workItem from="1612342448310" duration="27207000" />
       <workItem from="1612859034526" duration="9798000" />
       <workItem from="1613458555191" duration="15014000" />
-      <workItem from="1613637760917" duration="39564000" />
+      <workItem from="1613637760917" duration="43212000" />
     </task>
     <servers />
   </component>
