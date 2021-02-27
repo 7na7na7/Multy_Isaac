@@ -11,6 +11,8 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  public float fireDamageTick=0.1f;
+  private float fireTime=0;
   private bool isDead = false;
   public Animator Exclamation;
   private Rigidbody2D rigid;
@@ -89,6 +91,8 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     {
       time += Time.deltaTime;
     }
+    if (fireTime > 0)
+      fireTime -= Time.deltaTime;
   }
 
   public void Hit(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
@@ -111,6 +115,35 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     }
   }
 
+  private void OnTriggerStay2D(Collider2D other)
+  {
+    if (other.CompareTag("Fire"))
+    {
+      if (fireTime <=0)
+      {
+        LoseHP(other.GetComponent<DelayDestroy>().damage);
+        fireTime = fireDamageTick;
+      }
+    }
+  }
+
+  void LoseHP(int value)
+  {
+    if(PhotonNetwork.OfflineMode)
+      LoseHPRPC(value);
+    else
+      pv.RPC("LoseHPRPC",RpcTarget.All,value*2);
+  }
+  [PunRPC]
+  void LoseHPRPC(int value)
+  {
+    hp -= value;
+    flashwhite.Flash();
+    if (hp <= 0)
+    {
+      Die();
+    }
+  }
   [PunRPC]
   void HitRPC(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
   {

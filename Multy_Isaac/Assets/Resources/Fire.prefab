@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7929742704129722390}
   - component: {fileID: 5434114458771540210}
   - component: {fileID: 2181222464156797927}
+  - component: {fileID: 1478727875160609889}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Fire
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8153699bfa379634891a258636d3ba13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nuckBackDistance: 0
-  damage: 0
+  damage: 2
   delay: 5
 --- !u!60 &2181222464156797927
 PolygonCollider2D:
@@ -247,3 +248,24 @@ PolygonCollider2D:
       - {x: 3.6624384, y: -3.0616748}
       - {x: 3.7569451, y: -2.2825005}
       - {x: 4.1283, y: -1.7874382}
+--- !u!50 &1478727875160609889
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657553679644712889}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 0

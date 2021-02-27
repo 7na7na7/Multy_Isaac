@@ -16,6 +16,9 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
+
+    public float fireDamageTick;
+    private float fireTime=0;
     public bool isTEST = true;
     private bool isRegen = true;
     public float hpRegenDelay=1f;
@@ -172,6 +175,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //                if(Input.GetKeyDown(KeyCode.Q))
 //                    sound.Play(0,true);
 
+                if (fireTime > 0)
+                    fireTime -= Time.deltaTime;
+                
                 Lv.text = "Lv." + LvMgr.Lv; //레벨 표시
                 
                 if(time>0)  
@@ -811,6 +817,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                             Hit(enemy.CollsionDamage, enemy.name.Substring(0, enemy.name.IndexOf("(")),enemy.nuckBackDistance,enemy.transform.position);
                         else
                             Hit(enemy.CollsionDamage, enemy.name,enemy.nuckBackDistance,enemy.transform.position);
+                    }
+                }
+
+                if (other.CompareTag("Fire"))
+                {
+                    if (fireTime <=0)
+                    {
+                        Hit(other.GetComponent<DelayDestroy>().damage, "불꽃", 0, Vector3.zero);
+                        fireTime = fireDamageTick;
                     }
                 }
             }
