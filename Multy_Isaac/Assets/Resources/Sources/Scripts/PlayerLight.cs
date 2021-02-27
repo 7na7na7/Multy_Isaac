@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLight : MonoBehaviour
 {
-    public bool isExplosion = false;
+    public float lightValue = 1.1f;
     public bool isPlayer = false;
     private Light2D pointLight;
     private Light2D globalLight;
@@ -20,10 +20,7 @@ public class PlayerLight : MonoBehaviour
 
             if (!isPlayer)
             {
-                if(!isExplosion)
-                    pointLight.intensity = 1.1f - globalLight.intensity;   
-                else
-                    pointLight.intensity =2f - globalLight.intensity;   
+                pointLight.intensity =lightValue - globalLight.intensity;   
             }
                 
         }
