@@ -13,7 +13,8 @@ public class PassiveItem : MonoBehaviour
     public float savedMobileTime=5;
     //소음기
     public int Silence = 0;
-    
+    //신발등 이동속도
+    public int Speed = 0;
     private void Start()
     {
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
@@ -32,6 +33,9 @@ public class PassiveItem : MonoBehaviour
             case 82:
                 statMgr.armor += 10;
                 break;
+            case 83:
+                Speed += 10;
+                break;
         }
     }
         
@@ -47,6 +51,9 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 82:
                 statMgr.armor -= 10;
+                break;
+            case 83:
+                Speed -= 10;
                 break;
         }
     }

@@ -328,10 +328,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     }
 
                     rb.velocity = new Vector2(
-                        (moveDirection.x * speed * currentWeapon.walkSpeed_P / 100 *
+                        (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                         (isSwamp ? swampMovingSpeed / 100f : 1f),
-                        (moveDirection.y * speed * currentWeapon.walkSpeed_P / 100 *
+                        (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                         (isSwamp ? swampMovingSpeed / 100f : 1f));
 
