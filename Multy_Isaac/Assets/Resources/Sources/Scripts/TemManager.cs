@@ -92,8 +92,8 @@ public class TemManager : MonoBehaviour
 
     public void setTem(int dex, Vector3 pos)
     {
-        if(dex==101 || dex==102 || dex==103)
-            setBullet(dex-101,pos);
+        if(dex>1000)
+            setBullet(dex-1001,pos);
         else
         {
             if (PhotonNetwork.OfflineMode)
