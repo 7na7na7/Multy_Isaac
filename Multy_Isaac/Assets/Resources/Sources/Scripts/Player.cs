@@ -24,7 +24,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float hpRegenDelay=1f;
     public int hpRegenCut=70;
     public bool SUPERRRRRRR = true;
-    //패시브 변수
+    private PassiveItem passive;
+    
     private GameObject offlineSlash;
 
      public RectTransform panel;
@@ -56,13 +57,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public int hungryLessHpSpeed;
     private offlineStat offStat;
 
-    //기동신
-    private int mobile;
-    private float mobileTime= 0;
-    private int mobilePer=100;
-    public float savedMobileTime=5;
-    
-  
+
     public PhotonView pv; //포톤뷰
     //캔버스
     public GameObject photonviewCanvas; //포톤뷰캔벗,
@@ -129,6 +124,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         savedCanvasScale = photonviewCanvas.transform.localScale;
         if (pv.IsMine)
         {
+            passive = GetComponent<PassiveItem>();
             StartCoroutine(hpRegenCor());
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
@@ -190,10 +186,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                 if (canMove) //움직일 수 있다면
                 {
-                    if (mobileTime < savedMobileTime)
-                        mobileTime += Time.deltaTime;
-                  
-                        if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)&&!RectTransformUtility.RectangleContainsScreenPoint(panel2, Input.mousePosition)) //클릭불가능영역이 아니면
+                    if (passive.mobilePer > 100)
+                    {
+                        if (passive.mobileTime < passive.savedMobileTime)
+                            passive.mobileTime += Time.deltaTime;   
+                    }
+
+                    if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)&&!RectTransformUtility.RectangleContainsScreenPoint(panel2, Input.mousePosition)) //클릭불가능영역이 아니면
                         {
                             if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading) //연타하면 더빠르게 쏨
                             { 
@@ -330,10 +329,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     rb.velocity = new Vector2(
                         (moveDirection.x * speed * currentWeapon.walkSpeed_P / 100 *
-                         (mobileTime >= savedMobileTime ? mobilePer / 100f : 1)) *
+                         (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                         (isSwamp ? swampMovingSpeed / 100f : 1f),
                         (moveDirection.y * speed * currentWeapon.walkSpeed_P / 100 *
-                         (mobileTime >= savedMobileTime ? mobilePer / 100f : 1)) *
+                         (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                         (isSwamp ? swampMovingSpeed / 100f : 1f));
 
                     //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 
@@ -361,7 +360,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     }
     public void isFight() //전투 중
     {
-        mobileTime = 0;
+        passive.mobileTime = 0;
     }
     void setCam()
     {
@@ -456,22 +455,25 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     else
                         PhotonNetwork.Instantiate(offLineBullet.name, bulletTr.position, q);
                 }
-                
-                //총소리 듣고 좀비오기
-                RaycastHit2D[] zombieCol = Physics2D.CircleCastAll(gun.transform.position, soundRadious, Vector2.up,0);
-                foreach (RaycastHit2D col in zombieCol)
+
+                if (passive.Silence <=0) //소음기 안꼈으면
                 {
-                    if (col.collider.CompareTag("Enemy"))
+                    //총소리 듣고 좀비오기
+                    RaycastHit2D[] zombieCol = Physics2D.CircleCastAll(gun.transform.position, soundRadious, Vector2.up,0);
+                    foreach (RaycastHit2D col in zombieCol)
                     {
-                        if (PhotonNetwork.OfflineMode)
+                        if (col.collider.CompareTag("Enemy"))
                         {
-                            col.collider.GetComponent<Enemy>().setPlayer(transform);    
+                            if (PhotonNetwork.OfflineMode)
+                            {
+                                col.collider.GetComponent<Enemy>().setPlayer(transform);    
+                            }
+                            else
+                            {
+                                col.collider.GetComponent<Enemy>().setPlayerRPC(pv.ViewID);
+                            }
                         }
-                        else
-                        {
-                            col.collider.GetComponent<Enemy>().setPlayerRPC(pv.ViewID);
-                        }
-                    }
+                    }   
                 }
             }
             else
@@ -837,28 +839,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 isSwamp = false;
         }
         #endregion
-
-    #region 패시브
-    
-    public void PassiveOn(int itemIndex)
-    {
-        switch (itemIndex)
-        {
-            case 43:
-                mobilePer += 30;
-                break;
+        public void PassiveOn(int itemIndex)
+        { 
+            passive.PassiveOn(itemIndex);
         }
-    }
         
-    public void PassiveOff(int itemIndex)
-    {
-        switch (itemIndex)
+        public void PassiveOff(int itemIndex)
         {
-            case 43:
-                mobilePer -= 30;
-                break;
+            passive.PassiveOff(itemIndex);
         }
-    }
-    
-    #endregion
 }
