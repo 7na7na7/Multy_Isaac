@@ -10,7 +10,6 @@ public class StatManager : MonoBehaviour
     public int startHealth;
     public int startArmor;
     public int[] healths;
-    public int[] armors;
 
     public int armor;
 
@@ -36,14 +35,6 @@ public class StatManager : MonoBehaviour
             healValue=healths[i] - healths[i - 1];
         hpSlider.maxValue += healValue;
         hpSlider.value += healValue;
-        
-        
-        int armorValue;
-        if (i == 0)
-            armorValue = armors[i] - startArmor;
-        else
-            armorValue = armors[i] -armors[i-1];
-        armor += armorValue;
     }
     
     public void Heal(int value)
