@@ -296,4 +296,23 @@ public class RegularZombie : MonoBehaviour
 //           }
 //       }   
    }
+
+   public void Detect(float rad)
+   {
+       for (int i = 0; i < Players.Count; i++)
+       {
+           if (!Players[i].isDead)
+           {
+               Transform tr = PlayerTrs[i];
+               if (tr != null)
+               {
+                   if (Vector3.Distance(transform.position, tr.position) < rad)
+                   {
+                       enemy.setPlayer(tr);
+                       break;
+                   }
+               }
+           }
+       }   
+   }
 }

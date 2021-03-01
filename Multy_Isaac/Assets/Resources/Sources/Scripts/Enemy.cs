@@ -174,6 +174,8 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
         else
           setAnim("Walk");
       });
+      
+      GetComponent<RegularZombie>().Detect(15);
     }
     else
     {
