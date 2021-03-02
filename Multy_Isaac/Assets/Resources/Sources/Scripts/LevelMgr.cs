@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class LevelMgr : MonoBehaviour
 {
+    public ParticleSystem LvEffect;
     public int[] expValues;
     public Slider expSlider;
     
@@ -30,6 +31,7 @@ public class LevelMgr : MonoBehaviour
         currentValue += value;
         if (currentValue >= expSlider.maxValue) //레벨업할 exp면
         {
+            LvEffect.Play();
             currentValue -= (int)expSlider.maxValue;
             Lv++;
             statMgr.SetLevel(Lv-2);
