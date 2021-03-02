@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
 public class Corpes : MonoBehaviour
 {
+    private void Start()
+    {
+        Destroy(gameObject,60);
+    }
+
     void OnEnable()
     {
         Color c;
