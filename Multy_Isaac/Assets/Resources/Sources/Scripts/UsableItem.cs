@@ -65,8 +65,8 @@ public class UsableItem : MonoBehaviour
                 statMgr.Heal(10);
                 break;
             case 72: //버섯 수프
-                offStat.HungryHeal(40);
-                statMgr.Heal(20);
+                offStat.HungryHeal(60);
+                statMgr.Heal(30);
                 break;
             case 73: //식빵
                 offStat.HungryHeal(15);
