@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     private Vector3 savedLocalScale;
     void Start()
     {
-        Destroy(gameObject,DestroyTime);
+        Invoke("DestroyHit",DestroyTime);
         spr = GetComponent<SpriteRenderer>();
         savedLocalScale = transform.localScale;
         transform.localScale=Vector3.zero;

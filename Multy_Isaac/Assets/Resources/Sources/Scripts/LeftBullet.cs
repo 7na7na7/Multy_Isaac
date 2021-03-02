@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LeftBullet : MonoBehaviour
 {
+    public int StartBulletCount = 30;
     public int[] leftBullets;
     int GetedBullet = 0;
     public Text GetedBulletText;
@@ -21,6 +22,7 @@ public class LeftBullet : MonoBehaviour
     private void Start()
     {
         leftBullets=new int[8];
+        GetBullet(StartBulletCount);
     }
 
     public int getBulletCount()
