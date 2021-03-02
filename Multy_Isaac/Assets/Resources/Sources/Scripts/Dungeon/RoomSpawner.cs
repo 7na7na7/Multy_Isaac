@@ -97,7 +97,14 @@ public class RoomSpawner : MonoBehaviour
                     if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {
                         if (PhotonNetwork.OfflineMode)
-                            Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                        {
+                            try
+                            {
+                                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);   
+                            }
+                            catch (Exception e)
+                            { }
+                        }
                         else
                             PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
                         
