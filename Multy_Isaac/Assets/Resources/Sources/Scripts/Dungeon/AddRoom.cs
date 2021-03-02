@@ -107,28 +107,12 @@ public class AddRoom : MonoBehaviour
              }
          }
          if (PhotonNetwork.OfflineMode) 
-         { 
-             if (templates.isOneRoom)
-             {
-                 Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
-             }
-             else
-             {
-                 templates.isOneRoom = true;
-                 Instantiate(templates.oneRoom, transform.position,quaternion.identity);
-             }
+         {
+             Instantiate(templates.RoomProps_Big[r], transform.position,quaternion.identity);
          }
          else
          {
-             if (templates.isOneRoom)
-             { 
-                 PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position,quaternion.identity);
-             }
-             else
-             {
-                 templates.isOneRoom = true;
-                 PhotonNetwork.InstantiateRoomObject(templates.oneRoom.name, transform.position,quaternion.identity);
-             }
+             PhotonNetwork.InstantiateRoomObject(templates.RoomProps_Big[r].name, transform.position,quaternion.identity);
          }
      }
      else
