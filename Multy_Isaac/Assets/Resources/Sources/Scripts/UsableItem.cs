@@ -75,7 +75,7 @@ public class UsableItem : MonoBehaviour
                 statMgr.Heal(20);
                 break;
             case 75: //부목
-                statMgr.Heal(45);
+                statMgr.Heal(35);
                 break;
             case 76: //모닥불
                 if (PhotonNetwork.OfflineMode)
@@ -94,6 +94,13 @@ public class UsableItem : MonoBehaviour
                     Instantiate(FireBomb, transform.position, Quaternion.identity);
                 else
                     PhotonNetwork.Instantiate(FireBomb.name, transform.position, Quaternion.identity);
+                break;
+            case 84: //피자
+                offStat.HungryHeal(15);
+                break;
+            case 86: //치즈가 늘어나는 피자
+                offStat.HungryHeal(50);
+                statMgr.Heal(50);
                 break;
         }
     }
