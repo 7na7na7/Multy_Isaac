@@ -40,8 +40,11 @@ public class TemSpawner : MonoBehaviour
             {
                 int r = Random.Range(0, bound.Length);
                 int index = temIndexes[Random.Range(0, temIndexes.Count)];
-                temMgr.setTem(index,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),
-                    Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y))); 
+                if (index < 3000)
+                {
+                    temMgr.setTem(index,new Vector3(Random.Range(bound[r].bounds.min.x,bound[r].bounds.max.x),
+                        Random.Range(bound[r].bounds.min.y,bound[r].bounds.max.y)));    
+                }
             }   
         }
     }
