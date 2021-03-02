@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    public ParticleSystem starEffect;
     public RectTransform panel;
 
     private Pause pause;
@@ -201,6 +202,7 @@ public class Invent : MonoBehaviour
            
             PlayerItem.GetItem(item);
             Open(item);
+            starEffect.Play();
         }
     }
 }
