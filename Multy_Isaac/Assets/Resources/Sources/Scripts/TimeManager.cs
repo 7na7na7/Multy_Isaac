@@ -6,10 +6,13 @@ using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.LWRP;
+using UnityEngine.UI;
 using Light2D = UnityEngine.Experimental.Rendering.Universal.Light2D;
 
 public class TimeManager : MonoBehaviour
 {
+    public Text dayText;
+    public int day = 1;
     private float maxTime;
     public RectTransform ClockRect;
     public bool isNight = false;
@@ -32,6 +35,7 @@ public class TimeManager : MonoBehaviour
     private void Update()
     {
         ClockRect.eulerAngles=new Vector3( ClockRect.eulerAngles.x, ClockRect.eulerAngles.y, time/maxTime*-360);
+        dayText.text = "Day " + day;
     }
 
     IEnumerator cor()
@@ -94,6 +98,7 @@ public class TimeManager : MonoBehaviour
                     if (PhotonNetwork.OfflineMode)
                     {
                         time = 0;
+                        day++;
                     }
                     else
                     {

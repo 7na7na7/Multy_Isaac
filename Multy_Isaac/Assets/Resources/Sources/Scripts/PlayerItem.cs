@@ -35,15 +35,24 @@ public class PlayerItem : MonoBehaviour
     private void Start()
     {
         temMgr = FindObjectOfType<TemManager>();
-        if (GetComponent<PhotonView>().IsMine)
+        if (PhotonNetwork.OfflineMode)
         {
             if(SceneManager.GetActiveScene().name=="Play") 
                 Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);   
+        }
+        else
+        {
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                if(SceneManager.GetActiveScene().name=="Play") 
+                    Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);   
+            }   
         }
     }
     
     void StartTem()
     {
+        print("A");
         for (int j = 0; j < startTem.Length;j++) 
         {
             for (int k = 0; k < startTemCount[j]; k++)
