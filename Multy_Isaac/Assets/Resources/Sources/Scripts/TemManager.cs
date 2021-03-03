@@ -30,7 +30,7 @@ public class TemManager : MonoBehaviour
     {
         for (int j = 1; j < temCount; j++)
         {
-            GameObject go = Resources.Load("item" + j) as GameObject;
+            GameObject go = Resources.Load("Sources/Items/item" + j) as GameObject;
             if (go != null)
             {
                 temPrefabs.Add(go);   
