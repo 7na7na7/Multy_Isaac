@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,6 +10,8 @@ using Light2D = UnityEngine.Experimental.Rendering.Universal.Light2D;
 
 public class TimeManager : MonoBehaviour
 {
+    private float maxTime;
+    public RectTransform ClockRect;
     public bool isNight = false;
     private bool isDay = true;
     private Light2D globalLight;
@@ -23,6 +26,12 @@ public class TimeManager : MonoBehaviour
         pv = GetComponent<PhotonView>();
         globalLight = GetComponent<Light2D>();
         StartCoroutine(cor());
+        maxTime = dayTime + dayToNightTime + nightTime + nightToDayTime;
+    }
+
+    private void Update()
+    {
+        ClockRect.eulerAngles=new Vector3( ClockRect.eulerAngles.x, ClockRect.eulerAngles.y, time/maxTime*-360);
     }
 
     IEnumerator cor()
