@@ -1,0 +1,212 @@
+Using pre-set license
+Built from '2020.2/release' branch; Version is '2020.2.2f1 (068178b99f32) revision 426360'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 18363.1379; Version 1909; 64bit' Language: 'ko' Physical Memory: 16232 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.2.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/mingu/Documents/GitHub/Multy_Isaac/Multy_Isaac
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+12761
+Successfully changed project path to: C:/Users/mingu/Documents/GitHub/Multy_Isaac/Multy_Isaac
+C:/Users/mingu/Documents/GitHub/Multy_Isaac/Multy_Isaac
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 113.45 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.2.2f1 (068178b99f32)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/mingu/Documents/GitHub/Multy_Isaac/Multy_Isaac/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 (ID=0x1c20)
+    Vendor:   
+    VRAM:     6052 MB
+    Driver:   27.21.14.5167
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56496
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001698 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 98.58 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.952 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005929 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 105.60 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.463 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3668 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 199.0 MB.
+System memory in use after: 199.3 MB.
+
+Unloading 33 unused Assets to reduce memory usage. Loaded Objects now: 4149.
+Total: 2.423900 ms (FindLiveObjects: 0.348100 ms CreateObjectMapping: 0.156200 ms MarkObjects: 1.890300 ms  DeleteObjects: 0.028000 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Resources/Sources/Prefabs/Minimap/Shop_M.prefab
+  artifactKey: Guid(92ac054c48e1d6449b626e1b602acc93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/Shop_M.prefab using Guid(92ac054c48e1d6449b626e1b602acc93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d02b3bcaae310d557165459f62763f7') in 0.212166 seconds
+  Import took 0.219320 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000249 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/House3_M.prefab
+  artifactKey: Guid(4d43af09dce075141b1e6b6f3d058d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/House3_M.prefab using Guid(4d43af09dce075141b1e6b6f3d058d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26203cf07d46c53a7652ba537444641c') in 0.015176 seconds
+  Import took 0.022210 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000303 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/LRB_M.prefab
+  artifactKey: Guid(e1fd6c8f1c25238469c150f8398eeb92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/LRB_M.prefab using Guid(e1fd6c8f1c25238469c150f8398eeb92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09141d3955346fe1817141aaf9758e9f') in 0.015536 seconds
+  Import took 0.021653 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/PlayGround_M.prefab
+  artifactKey: Guid(d1d8295759d9a9140ad7b14a93e71815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/PlayGround_M.prefab using Guid(d1d8295759d9a9140ad7b14a93e71815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25d7b57825e6cb96d15d1a5c0fd18562') in 0.015467 seconds
+  Import took 0.022361 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/TR_M.prefab
+  artifactKey: Guid(4ef4d4b784638844a93f802ebdc45b3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/TR_M.prefab using Guid(4ef4d4b784638844a93f802ebdc45b3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63a7dee794dfeb8121dd2f6c42b7ef71') in 0.013901 seconds
+  Import took 0.019239 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/TL_M.prefab
+  artifactKey: Guid(d7d3320206e372a41a1738366ba9f565) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/TL_M.prefab using Guid(d7d3320206e372a41a1738366ba9f565) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '857e0516bf1da252928244180d7e8684') in 0.015118 seconds
+  Import took 0.023075 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000252 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/BigHouse1_M.prefab
+  artifactKey: Guid(4373ef36b75ff304eb5775f591218cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/BigHouse1_M.prefab using Guid(4373ef36b75ff304eb5775f591218cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '320190caf987faa20b8ed0d1a080e4ed') in 0.014904 seconds
+  Import took 0.022151 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000304 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/TBL_M.prefab
+  artifactKey: Guid(90427e0d5bbbb914781c155cd4e2318c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/TBL_M.prefab using Guid(90427e0d5bbbb914781c155cd4e2318c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd174c8fc3fc4431bc24f32ef4833f8fd') in 0.014469 seconds
+  Import took 0.020931 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000301 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/Park_M.prefab
+  artifactKey: Guid(08ae5fef500101240a6f7f754f9a5c07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/Park_M.prefab using Guid(08ae5fef500101240a6f7f754f9a5c07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15a15233e3f74aa64322bc870787784d') in 0.016378 seconds
+  Import took 0.023007 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000311 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/TB_M.prefab
+  artifactKey: Guid(415928378714b1f41a0548c345fed813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/TB_M.prefab using Guid(415928378714b1f41a0548c345fed813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '488c269376d9b90274fbe78568932350') in 0.018272 seconds
+  Import took 0.024921 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/TBR_M.prefab
+  artifactKey: Guid(871cc45bc5aad32459d77a15208cd11d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/TBR_M.prefab using Guid(871cc45bc5aad32459d77a15208cd11d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b11c0bb5757235672d8b46b803da899f') in 0.015122 seconds
+  Import took 0.020949 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000274 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/LRT_M.prefab
+  artifactKey: Guid(bdbe8c3b7dced244ba0598c5d8b89eb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/LRT_M.prefab using Guid(bdbe8c3b7dced244ba0598c5d8b89eb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3eb2b8dc2d91d7942f451e7027ebc05b') in 0.018073 seconds
+  Import took 0.025899 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000312 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/Police_M.prefab
+  artifactKey: Guid(016b53b9b9313b34996b4a12d6a8e74d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/Police_M.prefab using Guid(016b53b9b9313b34996b4a12d6a8e74d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7aa089428cbd2f9f6d44bf4508b14102') in 0.015250 seconds
+  Import took 0.021735 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Resources/Sources/Prefabs/Minimap/LR_M.prefab
+  artifactKey: Guid(b4d03f92aa27d07489216de775b5ee5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Prefabs/Minimap/LR_M.prefab using Guid(b4d03f92aa27d07489216de775b5ee5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ff4f2e2544e971812d2deaa1aef897a') in 0.019422 seconds
+  Import took 0.026489 seconds .
+
