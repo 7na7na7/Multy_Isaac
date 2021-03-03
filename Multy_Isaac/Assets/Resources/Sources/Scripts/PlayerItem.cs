@@ -35,8 +35,11 @@ public class PlayerItem : MonoBehaviour
     private void Start()
     {
         temMgr = FindObjectOfType<TemManager>();
-        if(SceneManager.GetActiveScene().name=="Play") 
-            Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            if(SceneManager.GetActiveScene().name=="Play") 
+                Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);   
+        }
     }
     
     void StartTem()

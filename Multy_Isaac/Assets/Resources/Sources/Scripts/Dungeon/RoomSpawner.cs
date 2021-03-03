@@ -106,8 +106,15 @@ public class RoomSpawner : MonoBehaviour
                             { }
                         }
                         else
-                            PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
-                        
+                        {
+                            try
+                            {
+                                PhotonNetwork.InstantiateRoomObject(templates.closedRoom.name, transform.position, Quaternion.identity);
+                            }
+                            catch (Exception e)
+                            { }
+                        }
+
                         other.GetComponent<RoomSpawner>().spawned = true;
                     }
                     spawned = true;

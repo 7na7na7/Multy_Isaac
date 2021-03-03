@@ -17,6 +17,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region 변수선언
 
+    public enum  bulletType
+    {
+        common,snow,mushroom
+    }
+    
     public float fireDamageTick;
     private float fireTime=0;
     public bool isTEST = true;
@@ -522,10 +527,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             pv.RPC("SetAnimRPC",RpcTarget.All,"Die");
     }
 
-    public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3)) //공격받을때 공격한사람 이름도 받음
+    public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3),bulletType type=bulletType.common) //공격받을때 공격한사람 이름도 받음
     {
         if (!isSuper&&pv.IsMine && !isDead && !SUPERRRRRRR)
         {
+            switch (type)
+            {
+                case bulletType.snow:
+                    break;
+                case bulletType.mushroom:
+                    break;
+            }
+            
             //StartCoroutine(superTick()); //0.1초 무적
 
             if (pos != Vector3.zero)

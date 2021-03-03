@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class Slash : MonoBehaviourPunCallbacks
 {
+ 
     public int Dmg;
     public float nuckBackDistance;
     private bool canDmg = true;
     public float DestroyTime = 1;
     public PhotonView pv;
+      public Player.bulletType type=Player.bulletType.common;
     void Start()
     {
         transform.position=new Vector3(transform.position.x,transform.position.y);
@@ -25,7 +27,7 @@ public class Slash : MonoBehaviourPunCallbacks
             {
                 if (canDmg)
                 {
-                    other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position);
+                    other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position,type);
                     canDmg = false;
                 }
             }

@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviourPunCallbacks
 {
+    public Player.bulletType type=Player.bulletType.common;
     public int Dmg=10;
     public float nuckBackDistance;
     public Sprite none;
@@ -38,7 +39,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             if (other.GetComponent<PhotonView>().IsMine && !pv.IsMine&&!other.GetComponent<Player>().isSuper)
             {
-                other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position);
+                other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position,type);
                 spr.sprite = none;
                DestroyHit();
             }
