@@ -61,7 +61,13 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       //동기화 빠르게
    }
 
-   
+   public void offlineMode()
+   {
+      PhotonNetwork.OfflineMode = true;
+      OnConnectedToMaster();
+      CreateRoom();
+      SceneManager.LoadScene("Play");
+   }
    void Start ()
    {
       DefaultPool pool = PhotonNetwork.PrefabPool as DefaultPool;
