@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
   m_Layer: 9
-  m_Name: item52
+  m_Name: item96
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,9 +4846,10 @@ Transform:
   m_GameObject: {fileID: 3749522341741181223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 449410984}
+  - {fileID: 4869776060961844962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4892,12 +4893,12 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 5e31fa0142cddc84bb267308f7f484d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5c4ae7cfb104a14889039d0eaeb901e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.23, y: 0.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4920,15 +4921,14 @@ MonoBehaviour:
     weaponIndex: 0
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 1c00000020000000
-    CompleteItemIndex: 0400000060000000
-    index: 52
-    ItemName: "\uACE0\uC624\uAE09 \uAE30\uACC4\uC7A5\uCE58"
-    ItemSprite: {fileID: 21300000, guid: 5e31fa0142cddc84bb267308f7f484d9, type: 3}
-    type: 2
-    ItemDescription: "\uACE0\uC624\uAE09 \uAE30\uACC4\uC7A5\uCE58\uB2E4. \uC6D0\uB798
-      \uAE30\uACC4\uC7A5\uCE58\uBCF4\uB2E4 \uD6E8\uC52C \uBE60\uB978 \uD68C\uC804\uACFC
-      \uAC15\uB825\uD55C \uD798\uC774 \uB290\uAEF4\uC9C4\uB2E4!"
+    SmallItemIndex: 340000004a000000
+    CompleteItemIndex: 
+    index: 96
+    ItemName: "\uBE44\uD0C0\uBBFC\uC8FC\uC0AC"
+    ItemSprite: {fileID: 21300000, guid: f5c4ae7cfb104a14889039d0eaeb901e, type: 3}
+    type: 4
+    ItemDescription: "\uC815\uC2E0\uC774 \uC0C8\uB85C\uC6CC\uC9C0\uB294 \uAC83 \uAC19\uB2E4.(\uCCB4\uB825
+      50\uD68C\uBCF5, 20\uCD08\uAC04 \uC774\uB3D9 \uC18D\uB3C4 \uB300\uD3ED \uC0C1\uC2B9)"
     WhereGet: "\uC81C\uC791"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
@@ -4968,3 +4968,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &6160867055047779158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4869776060961844962}
+  m_Layer: 9
+  m_Name: bulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4869776060961844962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6160867055047779158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3749522341741181216}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

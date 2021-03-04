@@ -32,7 +32,7 @@ public class PlayerItem : MonoBehaviour
     public UsableItem usable;
     public int selectedIndex = 0;
 
-    private void Start()
+    private void Awake()
     {
         temMgr = FindObjectOfType<TemManager>();
         if (PhotonNetwork.OfflineMode)
@@ -44,7 +44,7 @@ public class PlayerItem : MonoBehaviour
         {
             if (GetComponent<PhotonView>().IsMine)
             {
-                if(SceneManager.GetActiveScene().name=="Play") 
+                if(SceneManager.GetActiveScene().name=="Play")
                     Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);   
             }   
         }
@@ -52,57 +52,13 @@ public class PlayerItem : MonoBehaviour
     
     void StartTem()
     {
-        print("A");
         for (int j = 0; j < startTem.Length;j++) 
         {
             for (int k = 0; k < startTemCount[j]; k++)
             {
-                if (startTem[j].GetComponent<Item>().item.type == itemType.Usable) //소비템이면
-            {
-                bool isHaveUsable = false;
-                for (int i = 0; i < ItemList.Length; i++) 
-                {
-                    if (ItemList[i].ItemName ==startTem[j].GetComponent<Item>().item.ItemName) //이름이 같은 소비템이면
-                    {
-                        isHaveUsable = true;
-                                            slots[i].itemCount++;
-                                        
-                                            check(i,false);
-                                            break;
-                                        }
-                                    }
-
-                                    if (!isHaveUsable) //소비템이 없으면
-                                    {
-                                        for (int i = 0; i < ItemList.Length; i++) 
-                                        {
-                                            if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
-                                            {
-                                                ItemList[i]=startTem[j].GetComponent<Item>().item;
-                                                slots[i].itemCount++;
-                                        
-                                                check(i,true);
-                                                break;
-                                            }
-                                        }      
-                                    }
-                                }
-                                else//소비템이 아니면 
-                                {
-                                    for (int i = 0; i < ItemList.Length; i++) 
-                                    {
-                                        if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
-                                        {
-                                            ItemList[i]=startTem[j].GetComponent<Item>().item;
-                                            
-                                            if(startTem[j].GetComponent<Item>().item.type==itemType.Passive) //패시브템이면
-                                                player.PassiveOn(startTem[j].GetComponent<Item>().item.index); //패시브 ON
-
-                                            check(i,true);
-                                            break;
-                                        }
-                                    }   
-                                }      
+                tem item=new tem();
+                item = startTem[j].GetComponent<Item>().item.DeepCopy();
+                GetItem(item);
             }
         }
     }
@@ -300,7 +256,7 @@ public class PlayerItem : MonoBehaviour
 
     public void GetItem(tem item)
     {
-          bool isGet = false;
+        bool isGet = false;
           int select = 0;
                                 if (item.type == itemType.Usable) //소비템 또는 재료템이면
                                 {

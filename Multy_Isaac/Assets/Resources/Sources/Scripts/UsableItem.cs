@@ -195,7 +195,16 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
-            case 96: //지뢰
+            case 96: //아드레날린
+                if (eat())
+                {
+                    statMgr.Heal(50);
+                    setHappy();
+                    StartCoroutine(Adrenalin());
+                    return true;
+                }
+                break;
+            case 97: //지뢰
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Bomb, transform.position, Quaternion.identity);
                 else
@@ -207,6 +216,12 @@ public class UsableItem : MonoBehaviour
         return false;
     }
 
+    IEnumerator Adrenalin()
+    {
+        GetComponent<PassiveItem>().Speed += 50;
+        yield return new WaitForSeconds(20f);
+        GetComponent<PassiveItem>().Speed -= 50;
+    }
     private void Update()
     {
         if (time > 0)
