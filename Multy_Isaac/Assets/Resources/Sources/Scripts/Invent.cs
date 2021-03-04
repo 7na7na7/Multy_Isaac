@@ -199,8 +199,15 @@ public class Invent : MonoBehaviour
           
             tem item=new tem();
             item = element.DeepCopy();
-           
-            PlayerItem.GetItem(item);
+            
+            if (item.index != 95)
+            {
+                PlayerItem.GetItem(item);
+            }
+            else
+            {
+                transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(20);
+            }
             Open(item);
             starEffect.Play();
         }
