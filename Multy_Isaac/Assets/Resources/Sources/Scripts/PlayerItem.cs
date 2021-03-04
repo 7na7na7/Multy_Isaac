@@ -128,10 +128,16 @@ public class PlayerItem : MonoBehaviour
                     {
                         if (ItemList[selectedIndex].type == itemType.Usable)
                         {
-                            usable.UseItem(ItemList[selectedIndex].index);
-                            slots[selectedIndex].itemCount--;
-                            if(slots[selectedIndex].itemCount<=0)
-                                ItemList[selectedIndex].Clear();   
+                            if (usable.UseItem(ItemList[selectedIndex].index))
+                            {
+                                slots[selectedIndex].itemCount--;
+                                if(slots[selectedIndex].itemCount<=0)
+                                    ItemList[selectedIndex].Clear();      
+                            }
+                            else
+                            {
+                                PopUpManager.instance.PopUp("회복아이템은 "+usable.getCool()+"초 후 재사용 가능", Color.cyan);
+                            }
                         }
                     }
                     
