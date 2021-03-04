@@ -206,7 +206,7 @@ public class Invent : MonoBehaviour
             }
             else
             {
-                transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(20);
+                transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(30);
             }
             Open(item);
             starEffect.Play();

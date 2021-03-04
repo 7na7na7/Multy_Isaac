@@ -133,7 +133,7 @@ public class Zombie : MonoBehaviour
                 {
                     return; //아무것도 안함
                 }
-
+                
                 reachedEndOfPath = false;
                 float distanceToWaypoint;
                 while (true)
@@ -270,7 +270,7 @@ public class Zombie : MonoBehaviour
        enemy.setAnim("Attack");
        
        yield return new WaitForSeconds(AttackTime);
-
+       enemy.setAnim("Walk");
        //enemy.canMove = true;
 
        if (enemy.targetPosition.GetComponent<Player>().isDead)
