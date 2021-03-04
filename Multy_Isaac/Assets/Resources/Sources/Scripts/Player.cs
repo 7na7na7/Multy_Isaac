@@ -517,16 +517,24 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 //        transform.position = spawnPoint;
         isDead = true;
         canMove = false;
-        rb.velocity=Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Static;
-        Destroy(GetComponent<BoxCollider2D>());
-        Destroy(GetComponent<CapsuleCollider2D>());
+if(PhotonNetwork.OfflineMode)
+    DieRPC();
+else
+pv.RPC("DieRPC",RpcTarget.All);
         if(PhotonNetwork.OfflineMode) 
             SetAnimRPC("Die");
         else
             pv.RPC("SetAnimRPC",RpcTarget.All,"Die");
     }
 
+    [PunRPC]
+    void DieRPC()
+    {
+        rb.velocity=Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+        Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<CapsuleCollider2D>());
+    }
     public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3),bulletType type=bulletType.common) //공격받을때 공격한사람 이름도 받음
     {
         if (!isSuper&&pv.IsMine && !isDead && !SUPERRRRRRR)
