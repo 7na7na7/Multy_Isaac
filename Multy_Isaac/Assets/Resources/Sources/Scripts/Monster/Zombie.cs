@@ -8,8 +8,9 @@ using Pathfinding;
 using Photon.Pun;
 using Random = UnityEngine.Random;
 
-public class RegularZombie : MonoBehaviour
+public class Zombie : MonoBehaviour
 {
+    public int zombieIndex = 1;
     private TimeManager time;
     public float nightDetecctRad;
     public float detectRad= 5;
@@ -262,7 +263,7 @@ public class RegularZombie : MonoBehaviour
    {
        StopCoroutine(corr);
        enemy.isFinding = false;
-       enemy.canMove = false;
+       //enemy.canMove = false;
        rigid.velocity=Vector2.zero;
 
        enemy.setLocalX(enemy.targetPosition.position.x);
@@ -270,7 +271,7 @@ public class RegularZombie : MonoBehaviour
        
        yield return new WaitForSeconds(AttackTime);
 
-       enemy.canMove = true;
+       //enemy.canMove = true;
 
        if (enemy.targetPosition.GetComponent<Player>().isDead)
        {

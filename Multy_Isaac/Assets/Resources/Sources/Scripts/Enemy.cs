@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       setTrigger("Hit");
     if (pos != Vector3.zero)
     {
-      GetComponent<RegularZombie>().OnDisable();
+      GetComponent<Zombie>().OnDisable();
       canMove = false;
       isFinding = false;
 
@@ -174,7 +174,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           setAnim("Walk");
       });
       
-      GetComponent<RegularZombie>().Detect(15);
+      GetComponent<Zombie>().Detect(15);
     }
     else
     {
@@ -293,7 +293,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   public void setPlayer(Transform tr)
   {
-    GetComponent<RegularZombie>().stopCor();
+    GetComponent<Zombie>().stopCor();
     isFinding = true;
     targetPosition = tr;
     ExclamationOpen();

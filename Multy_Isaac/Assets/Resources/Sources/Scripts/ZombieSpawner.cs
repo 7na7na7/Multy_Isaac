@@ -13,7 +13,7 @@ public class ZombieSpawner : MonoBehaviour
     public int StartZombieCount;
     public Vector2 randomMin, randomMax;
     public float delay;
-    public GameObject regularZombie;
+    public GameObject[] zombies;
     private BoxCollider2D area;
     private TimeManager time;
     
@@ -59,13 +59,13 @@ public class ZombieSpawner : MonoBehaviour
         area = DaySpawnAreas[Random.Range(0, DaySpawnAreas.Length)];
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(regularZombie, PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
+            Instantiate(zombies[Random.Range(0,zombies.Length)], PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0,zombies.Length)].name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
             }
         }      
     }
@@ -75,13 +75,13 @@ public class ZombieSpawner : MonoBehaviour
         area = NightSpawnAreas[Random.Range(0, DaySpawnAreas.Length)];
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(regularZombie, PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
+            Instantiate(zombies[Random.Range(0,zombies.Length)], PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0,zombies.Length)].name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
             }
         }      
     }
@@ -90,13 +90,13 @@ public class ZombieSpawner : MonoBehaviour
     {
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(regularZombie, new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), quaternion.identity);
+            Instantiate(zombies[Random.Range(0,zombies.Length)], new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), quaternion.identity);
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(regularZombie.name,  new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), Quaternion.identity);   
+                PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0,zombies.Length)].name,  new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), Quaternion.identity);   
             }
         }   
     }
