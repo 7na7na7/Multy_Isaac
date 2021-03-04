@@ -61,6 +61,7 @@ public class UsableItem : MonoBehaviour
                     Instantiate(Bomb, transform.position, Quaternion.identity);
                 else
                     PhotonNetwork.Instantiate(Bomb.name, transform.position, Quaternion.identity);
+                return true;
                 break;
             case 57: //컵라면
                 if (eat())
@@ -193,6 +194,13 @@ public class UsableItem : MonoBehaviour
                     setHappy();
                     return true;
                 }
+                break;
+            case 96: //지뢰
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(Bomb, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.Instantiate(Bomb.name, transform.position, Quaternion.identity);
+                return true;
                 break;
         }
 

@@ -38,9 +38,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
      
     public GameObject canvas;
     private bool isHaveGun = false;
-  
-    public Text Lv;
-    
+
     //이동, 애니메이션
     public Ease nuckBackEase;
     public float nuckBackTime = 0.2f;
@@ -673,7 +671,6 @@ pv.RPC("DieRPC",RpcTarget.All);
             stream.SendNext(canMove);
             stream.SendNext(gun.transform.localScale);
             stream.SendNext(gun.transform.rotation);
-            stream.SendNext(Lv.text);
         }
         else
         {
@@ -689,7 +686,6 @@ pv.RPC("DieRPC",RpcTarget.All);
             canMove = (bool) stream.ReceiveNext();
             gun.transform.localScale = (Vector3) stream.ReceiveNext();
             gun.transform.rotation = (Quaternion) stream.ReceiveNext();
-            Lv.text = (string) stream.ReceiveNext();
         }
     }
     
@@ -811,7 +807,7 @@ pv.RPC("DieRPC",RpcTarget.All);
             if (other.CompareTag("Explosion")) //폭탄
             {
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
-                Hit(enemy.damage, enemy.name,enemy.nuckBackDistance,enemy.transform.position);
+                Hit(enemy.damage, "폭발",enemy.nuckBackDistance,enemy.transform.position);
             }
         }
     }
