@@ -212,8 +212,17 @@ public class Roof : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                if(other.GetComponent<PhotonView>().IsMine) 
-                    invisible();
+                if (other.GetComponent<PhotonView>().IsMine)
+                {
+                    try
+                    {
+                        invisible();
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
+                   
             }   
         }
     }
