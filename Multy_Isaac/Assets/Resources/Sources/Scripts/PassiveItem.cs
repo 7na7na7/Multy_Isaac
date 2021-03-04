@@ -36,6 +36,9 @@ public class PassiveItem : MonoBehaviour
             case 83:
                 Speed += 10;
                 break;
+            case 90:
+                statMgr.armor += 15;
+                break;
         }
     }
         
@@ -54,6 +57,9 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 83:
                 Speed -= 10;
+                break;
+            case 90:
+                statMgr.armor -= 15;
                 break;
         }
     }
