@@ -92,7 +92,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private float angle;
     
     private PlayerItem playerItem;
-    private LevelMgr LvMgr;
     private StatManager statMgr;
     private TemManager temMgr;
     
@@ -132,7 +131,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             passive = GetComponent<PassiveItem>();
             StartCoroutine(hpRegenCor());
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-            LvMgr = transform.GetChild(0).GetComponent<LevelMgr>();
             statMgr=transform.GetChild(0).GetComponent<StatManager>();
             playerItem = GetComponent<PlayerItem>();
             leftBullet = transform.GetChild(0).transform.GetChild(0).GetComponent<LeftBullet>();
@@ -179,7 +177,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if (fireTime > 0)
                     fireTime -= Time.deltaTime;
                 
-                Lv.text = "Lv." + LvMgr.Lv; //레벨 표시
                 
                 if(time>0)  
                     time -= Time.deltaTime; //총쏘기 쿨타임용 시간 감소
@@ -653,11 +650,6 @@ pv.RPC("DieRPC",RpcTarget.All);
         speed = savedSpeed;
         currentWeapon.walkSpeed_P = 100;
         currentWeapon.shotSpeed_P = 100;
-    }
-
-    public void getEXP(int value) //경험치획득
-    {
-        LvMgr.GetExp(value);
     }
 
 

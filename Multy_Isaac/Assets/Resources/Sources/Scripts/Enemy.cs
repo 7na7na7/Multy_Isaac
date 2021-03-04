@@ -21,8 +21,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
   public Ease nuckBackEase;
   public GameObject[] DropTem;
   public int[] DropTemPercent;
-  public GameObject[] DropExp;
-  public int[] DropExpCount;
+
   private FlashWhite flashwhite;
   public int hp = 50;
   public PhotonView pv;
@@ -202,14 +201,6 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     if (!isDead)
     {
       isDead = true;
-      for (int i = 0; i < DropExp.Length; i++)
-      {
-        for (int j = 0; j < Random.Range(0, DropExpCount[i] + 1); j++)
-        {
-          temMgr.setExp(DropExp[i].GetComponent<pickUpTem>().subIndex,new Vector3(
-            transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f)));
-        }
-      }
 
       for (int i = 0; i < DropTem.Length; i++)
       {

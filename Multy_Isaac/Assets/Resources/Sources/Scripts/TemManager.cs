@@ -17,10 +17,7 @@ public class TemManager : MonoBehaviour
     public int BulletIndex=0;
     public GameObject[] bulletPrefabs;
     public List<GameObject> bulletList=new List<GameObject>();
-    public int ExpIndex = 0;
-    public GameObject[] expPrefabs;
-    public List<GameObject> expList=new List<GameObject>();
-    
+
     private void Start()
     {
         pv = GetComponent<PhotonView>();
@@ -126,24 +123,8 @@ public class TemManager : MonoBehaviour
         else
             pv.RPC("DelBullet",RpcTarget.AllBuffered,dex);
     }
-    
 
-    public void setExp(int dex, Vector3 pos)
-    {
-        if(PhotonNetwork.OfflineMode)
-            SetExp(dex,pos);
-        else
-            pv.RPC("SetExp",RpcTarget.AllBuffered,dex,pos);
-    }
 
-    public void delExp(int dex)
-    {
-        if(PhotonNetwork.OfflineMode)
-            DelExp(dex);
-        else
-            pv.RPC("DelExp",RpcTarget.AllBuffered,dex);
-    }
-    
     [PunRPC]
     void SetItem(int dex, Vector3 pos)
     {
@@ -185,29 +166,6 @@ public class TemManager : MonoBehaviour
             {
                 Destroy(bulletList[i]);
                 bulletList.RemoveAt(i);
-                break;
-            }
-        }
-    }
-    
-    [PunRPC]
-    void SetExp(int dex, Vector3 pos)
-    {
-        GameObject tem=Instantiate(expPrefabs[dex], pos, Quaternion.identity);
-        tem.GetComponent<pickUpTem>().Index = ExpIndex;
-       expList.Add(tem);
-       ExpIndex++;
-    }
-    
-    [PunRPC]
-    void DelExp(int dex)
-    {
-        for (int i = 0; i < expList.Count; i++)
-        {
-            if (expList[i].GetComponent<pickUpTem>().Index == dex)
-            {
-                Destroy(expList[i]);
-                expList.RemoveAt(i);
                 break;
             }
         }

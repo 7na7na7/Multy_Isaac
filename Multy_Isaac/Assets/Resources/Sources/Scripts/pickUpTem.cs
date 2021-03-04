@@ -10,8 +10,7 @@ public class pickUpTem : MonoBehaviour
 {
     public int subIndex;
     public int Index;
-    public temType type;
-    
+
     public float speed;
     public int ExpAmount = 1;
     public float radius;
@@ -24,12 +23,7 @@ public class pickUpTem : MonoBehaviour
     {
         temMgr = FindObjectOfType<TemManager>();
     }
-
-    public enum temType
-    {
-        exp,
-        bullet,
-    };
+    
 
     void FixedUpdate()
     {
@@ -49,16 +43,8 @@ public class pickUpTem : MonoBehaviour
         {
             if (other.GetComponent<PhotonView>().IsMine)
             {
-                if (type == temType.exp)
-                {
-                    other.GetComponent<Player>().getEXP(ExpAmount);
-                    temMgr.delExp(Index);
-                }
-                else if (type == temType.bullet)
-                {
-                    other.GetComponent<Player>().leftBullet.GetBullet(ExpAmount); //총알수얻어오기
+                other.GetComponent<Player>().leftBullet.GetBullet(ExpAmount); //총알수얻어오기
                     temMgr.delBullet(Index);
-                }
             }
         }
     }
