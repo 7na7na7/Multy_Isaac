@@ -26,13 +26,30 @@ public class Bullet : MonoBehaviourPunCallbacks
         savedLocalScale = transform.localScale;
         transform.localScale=Vector3.zero;
         transform.DOScale(savedLocalScale, 0.1f);
+        if (type == Player.bulletType.snow)
+        {
+            StartCoroutine(snowDmgUpCor());
+        }
     }
     
     void Update()
     {
         transform.Translate(Vector3.right*speed*Time.deltaTime);
+        if (type == Player.bulletType.snow)
+        {
+            transform.localScale+=Vector3.one*Time.deltaTime*5f;
+            speed -= Time.deltaTime;
+        }
     }
 
+    IEnumerator snowDmgUpCor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            Dmg++;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -74,8 +91,9 @@ public class Bullet : MonoBehaviourPunCallbacks
     [PunRPC]
    void DestroyRPC()
     {
+        GameObject go=Instantiate(wallEffect, transform.position, Quaternion.identity);
+        go.transform.localScale = transform.localScale;
         Destroy(gameObject);
-        Instantiate(wallEffect, transform.position, Quaternion.identity);
     }
    
    public void DestroyHit()
@@ -88,7 +106,8 @@ public class Bullet : MonoBehaviourPunCallbacks
    [PunRPC]
    void DestroyRPC2()
    {
+       GameObject go=Instantiate(hitEffect, transform.position, Quaternion.identity);
+       go.transform.localScale = transform.localScale;
        Destroy(gameObject);
-       Instantiate(hitEffect, transform.position, Quaternion.identity);
    }
 }

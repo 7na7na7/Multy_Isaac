@@ -218,9 +218,9 @@ public class UsableItem : MonoBehaviour
 
     IEnumerator Adrenalin()
     {
-        GetComponent<PassiveItem>().Speed += 50;
+        GetComponent<PassiveItem>().Speed += 60;
         yield return new WaitForSeconds(20f);
-        GetComponent<PassiveItem>().Speed -= 50;
+        GetComponent<PassiveItem>().Speed -= 60;
     }
     private void Update()
     {
