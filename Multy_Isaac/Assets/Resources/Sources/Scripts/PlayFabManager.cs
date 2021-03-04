@@ -405,7 +405,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
           {
              if (p.pv.IsMine)
              {
-                p.pv.RPC("ChatBaloonRPC",RpcTarget.AllBuffered,ChatInput.text);
+                p.pv.RPC("ChatBaloonRPC",RpcTarget.All,ChatInput.text);
                 break;
              }
           }  

@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     else
     {
       if (PhotonNetwork.IsMasterClient)
-        pv.RPC("HitRPC", RpcTarget.AllBuffered, value, pos, nuckBackDistance);
+        pv.RPC("HitRPC", RpcTarget.All, value, pos, nuckBackDistance);
     }
   }
 
