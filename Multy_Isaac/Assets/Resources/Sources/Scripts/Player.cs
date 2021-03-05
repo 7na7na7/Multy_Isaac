@@ -19,7 +19,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public enum  bulletType
     {
-        common,snow,mushroom
+        common,snow,mushroom,bomb
     }
     
     public float fireDamageTick;

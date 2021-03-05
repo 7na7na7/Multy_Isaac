@@ -227,6 +227,14 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
+            case 102: //껍질없는식빵
+                if (eat())
+                {
+                    offStat.HungryHeal(40);
+                    setHappy();
+                    return true;
+                }
+                break;
         }
 
         return false;

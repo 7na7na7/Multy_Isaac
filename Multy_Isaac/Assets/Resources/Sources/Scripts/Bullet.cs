@@ -93,7 +93,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     {
         GameObject go=Instantiate(wallEffect, transform.position, Quaternion.identity);
         if(type==Player.bulletType.snow) 
-            go.transform.localScale = transform.localScale;
+            go.transform.localScale = transform.localScale/2;
         Destroy(gameObject);
     }
    
@@ -109,7 +109,7 @@ public class Bullet : MonoBehaviourPunCallbacks
    {
        GameObject go=Instantiate(hitEffect, transform.position, Quaternion.identity);
        if(type==Player.bulletType.snow) 
-           go.transform.localScale = transform.localScale;
+           go.transform.localScale = transform.localScale/2;
        Destroy(gameObject);
    }
 }
