@@ -211,6 +211,22 @@ public class UsableItem : MonoBehaviour
                     PhotonNetwork.Instantiate(Bomb.name, transform.position, Quaternion.identity);
                 return true;
                 break;
+            case 100: //과일세트
+                if (eat())
+                {
+                    offStat.HungryHeal(25);
+                    setHappy();
+                    return true;
+                }
+                break;
+            case 101: //샐러드
+                if (eat())
+                {
+                    statMgr.Heal(50);
+                    setHappy();
+                    return true;
+                }
+                break;
         }
 
         return false;

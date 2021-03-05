@@ -18,6 +18,7 @@ public class prop
 }
 public class Roof : MonoBehaviour
 {
+    public string[] temNames;
     public int[] temIndexes;
     public int[] percentCounts;
     public int minCount;
