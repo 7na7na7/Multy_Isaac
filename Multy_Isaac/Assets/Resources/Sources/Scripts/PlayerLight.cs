@@ -29,7 +29,19 @@ public class PlayerLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isPlayer && globalLight!=null) 
-            pointLight.intensity = 1 - globalLight.intensity;
+        if (isPlayer && globalLight != null)
+        {
+            pointLight.intensity = lightValue - globalLight.intensity;   
+        }
+    }
+
+    public void torchOn()
+    {
+        pointLight.pointLightOuterRadius += 2.5f;
+    }
+
+    public void torchOff()
+    {
+        pointLight.pointLightOuterRadius -= 2.5f;
     }
 }

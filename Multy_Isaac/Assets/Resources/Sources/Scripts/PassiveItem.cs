@@ -6,6 +6,7 @@ using UnityEngine;
 public class PassiveItem : MonoBehaviour
 {
     private StatManager statMgr;
+    private PlayerLight light;
     //기동신
     private int mobile;
     public float mobileTime= 0;
@@ -18,26 +19,31 @@ public class PassiveItem : MonoBehaviour
     private void Start()
     {
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
+        light=transform.GetChild(1).GetComponent<PlayerLight>();
     }
 
     public void PassiveOn(int itemIndex)
     {
         switch (itemIndex)
         {
-            case 43:
+            case 43: //기동신
                 mobilePer += 30;
                 break;
-            case 81:
+            case 81: //소음기
                 Silence++;
                 break;
-            case 82:
+            case 82://티셔츠
                 statMgr.armor += 10;
                 break;
-            case 83:
+            case 83: //신발
                 Speed += 10;
                 break;
-            case 90:
+            case 90: //멋진티셔츠
                 statMgr.armor += 15;
+                break;
+            case 107: //횃불
+                light.lightValue += 0.05f;
+                light.torchOn();
                 break;
         }
     }
@@ -60,6 +66,10 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 90:
                 statMgr.armor -= 15;
+                break;
+            case 107: //횃불
+                light.lightValue -= 0.05f;
+                light.torchOff();
                 break;
         }
     }
