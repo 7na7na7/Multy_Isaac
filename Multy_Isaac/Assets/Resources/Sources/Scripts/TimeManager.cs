@@ -11,6 +11,7 @@ using Light2D = UnityEngine.Experimental.Rendering.Universal.Light2D;
 
 public class TimeManager : MonoBehaviour
 {
+    public ZombieSpawner spawner;
     public Text dayText;
     public int day = 1;
     private float maxTime;
@@ -30,6 +31,7 @@ public class TimeManager : MonoBehaviour
         globalLight = GetComponent<Light2D>();
         StartCoroutine(cor());
         maxTime = dayTime + dayToNightTime + nightTime + nightToDayTime;
+        spawner.DaybyDay(day);
     }
 
     private void Update()
@@ -99,6 +101,7 @@ public class TimeManager : MonoBehaviour
                     {
                         time = 0;
                         day++;
+                        spawner.DaybyDay(day);
                     }
                     else
                     {

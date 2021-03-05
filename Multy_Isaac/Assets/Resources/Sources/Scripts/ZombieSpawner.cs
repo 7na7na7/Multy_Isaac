@@ -14,9 +14,26 @@ public class ZombieSpawner : MonoBehaviour
     public Vector2 randomMin, randomMax;
     public float delay;
     public GameObject[] zombies;
+    public int[] Days;
+    public int[] Indexes;
+    public int[] counts;
+    public List<GameObject> zombieList=new List<GameObject>();
     private BoxCollider2D area;
     private TimeManager time;
-    
+
+    public void DaybyDay(int day)
+    {
+        for (int i = 0; i < Days.Length; i++)
+        {
+            if (Days[i] == day)
+            {
+                for (int j = 0; j < counts[i]; j++)
+                {
+                    zombieList.Add(zombies[Indexes[i]-1]);
+                }
+            }
+        }
+    }
     void Start()
     {
         time = FindObjectOfType<TimeManager>();
@@ -59,13 +76,14 @@ public class ZombieSpawner : MonoBehaviour
         area = DaySpawnAreas[Random.Range(0, DaySpawnAreas.Length)];
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(zombies[Random.Range(0,zombies.Length)], PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
-        }
+            SpawnZombie(zombieList[Random.Range(0,zombieList.Count)],
+                PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x), Random.Range(area.bounds.min.y,area.bounds.max.y))); }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0,zombies.Length)].name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
+                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)],
+                    PlayerPos + new Vector3(Random.Range(area.bounds.min.x, area.bounds.max.x), Random.Range(area.bounds.min.y, area.bounds.max.y)));
             }
         }      
     }
@@ -75,14 +93,13 @@ public class ZombieSpawner : MonoBehaviour
         area = NightSpawnAreas[Random.Range(0, DaySpawnAreas.Length)];
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(zombies[Random.Range(0,zombies.Length)], PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), quaternion.identity);
+          SpawnZombie(zombieList[Random.Range(0, zombieList.Count)],PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)));
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0,zombies.Length)].name,  PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)), Quaternion.identity);   
-            }
+                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)],PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x),Random.Range(area.bounds.min.y,area.bounds.max.y)));            }
         }      
     }
     
@@ -90,14 +107,22 @@ public class ZombieSpawner : MonoBehaviour
     {
         if (PhotonNetwork.OfflineMode)
         {
-            Instantiate(zombies[Random.Range(0,zombies.Length)], new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), quaternion.identity);
+            SpawnZombie(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0,zombies.Length)].name,  new Vector2(Random.Range(randomMin.x,randomMax.x),Random.Range(randomMin.y,randomMax.y)), Quaternion.identity);   
-            }
+                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));            }
         }   
+    }
+
+    public void SpawnZombie(GameObject zombie, Vector2 pos)
+    {
+        Instantiate(zombie, pos, quaternion.identity);
+    }
+    public void SpawnZombie_N(GameObject zombie, Vector2 pos)
+    {
+        PhotonNetwork.InstantiateRoomObject(zombie.name, pos, quaternion.identity);
     }
 }
