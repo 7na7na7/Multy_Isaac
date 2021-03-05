@@ -4816,9 +4816,9 @@ GameObject:
   - component: {fileID: 1064714333086079793}
   - component: {fileID: 1064714333086079795}
   - component: {fileID: 1064714333086079794}
-  - component: {fileID: 7987020767616627166}
   - component: {fileID: 5854950384668889296}
   - component: {fileID: 896232749286779451}
+  - component: {fileID: 1572631618655179963}
   m_Layer: 0
   m_Name: MissileBullet
   m_TagString: Bullet
@@ -4835,7 +4835,7 @@ Transform:
   m_GameObject: {fileID: 1064714333086079798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4992518108822376061}
   - {fileID: 976452962}
@@ -4939,22 +4939,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!58 &7987020767616627166
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064714333086079798}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.002620101, y: 0.0017082095}
-  serializedVersion: 2
-  m_Radius: 0.34569198
 --- !u!50 &5854950384668889296
 Rigidbody2D:
   serializedVersion: 4
@@ -4992,6 +4976,22 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!70 &1572631618655179963
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064714333086079798}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.07135984, y: -0.00017703434}
+  m_Size: {x: 0.8220064, y: 0.40646154}
+  m_Direction: 1
 --- !u!1 &7381702050162007640
 GameObject:
   m_ObjectHideFlags: 0
