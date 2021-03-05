@@ -222,7 +222,8 @@ public class UsableItem : MonoBehaviour
             case 101: //샐러드
                 if (eat())
                 {
-                    statMgr.Heal(50);
+                    offStat.HungryHeal(20);
+                    statMgr.Heal(40);
                     setHappy();
                     return true;
                 }
@@ -231,6 +232,22 @@ public class UsableItem : MonoBehaviour
                 if (eat())
                 {
                     offStat.HungryHeal(40);
+                    setHappy();
+                    return true;
+                }
+                break;
+            case 103: //오이
+                if (eat())
+                {
+                    offStat.HungryHeal(15);
+                    setHappy();
+                    return true;
+                }
+                break;
+            case 104: //피클
+                if (eat())
+                {
+                    offStat.HungryHeal(30);
                     setHappy();
                     return true;
                 }

@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         transform.Translate(Vector3.right*speed*Time.deltaTime);
         if (type == Player.bulletType.snow)
         {
-            transform.localScale+=Vector3.one*Time.deltaTime*10f;
+            transform.localScale+=Vector3.one*Time.deltaTime*7f;
             speed -= Time.deltaTime*1.5f;
         }
     }
@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.01f);
             Dmg++;
         }
     }
