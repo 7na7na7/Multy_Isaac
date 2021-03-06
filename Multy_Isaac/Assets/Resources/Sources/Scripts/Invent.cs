@@ -15,6 +15,7 @@ public class Invent : MonoBehaviour
     public Text BigItemName;
     public Image SmallItemImg1, SmallItemImg2, BigItemImg2;
     public Text SmallItemName1, SmallItemName2, BigItemName2;
+    private Text SmallType1, SmallType2, BigType2, BigType;
     public Text WhereGet;
     public Image[] completeBoxes; //조합템 테두리
     public Image[] completes; //조합템
@@ -40,7 +41,12 @@ public class Invent : MonoBehaviour
                 PlayerItem = p.GetComponent<PlayerItem>();
                 break;
             }
-        }  
+        }
+
+        BigType = BigItemName.transform.GetChild(0).GetComponent<Text>();
+        BigType2 = BigItemName2.transform.GetChild(0).GetComponent<Text>();
+        SmallType1 = SmallItemName1.transform.GetChild(0).GetComponent<Text>();
+            SmallType2 = SmallItemName2.transform.GetChild(0).GetComponent<Text>();
     }
     
     public void Close()
@@ -172,9 +178,12 @@ public class Invent : MonoBehaviour
                 SmallItemImg1.sprite = temMgr.GetItemList(element.SmallItemIndex[0]).ItemSprite;
                 SmallItemImg2.sprite = temMgr.GetItemList(element.SmallItemIndex[1]).ItemSprite;
                 SmallItemName1.text = temMgr.GetItemList(element.SmallItemIndex[0]).ItemName;
+                SmallType1.text = getType(temMgr.GetItemList(element.SmallItemIndex[0]).type);
                 SmallItemName2.text = temMgr.GetItemList(element.SmallItemIndex[1]).ItemName;
+                SmallType2.text = getType(temMgr.GetItemList(element.SmallItemIndex[1]).type);
                 BigItemImg2.sprite = element.ItemSprite;
                 BigItemName2.text = element.ItemName;
+                BigType2.text = getType(element.type);
             }
             else
             {
@@ -182,6 +191,7 @@ public class Invent : MonoBehaviour
                 Small.SetActive(false);
                 BigItemImg.sprite = element.ItemSprite;
                 BigItemName.text = element.ItemName;
+                BigType.text = getType(element.type);
             }
             ItemName.text = element.ItemName;
             ItemDescription.text = element.ItemDescription;
@@ -190,6 +200,24 @@ public class Invent : MonoBehaviour
         }
     }
 
+    string getType(itemType type)
+    {
+        switch (type)
+        {
+            case itemType.Gun:
+                return "(원거리 무기)";
+            case itemType.Item:
+                return "(재료 아이템)";
+            case itemType.Melee:
+                return "(근접 무기)";
+            case itemType.Passive:
+                return "(패시브 아이템)";
+            case itemType.Usable:
+                return "(소모성 아이템)";
+            default:
+                return "ERROR";
+        }
+    }
     public void Combine()
     {
         if (CanCombine)
