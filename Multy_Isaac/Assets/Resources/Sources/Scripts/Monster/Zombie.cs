@@ -10,6 +10,10 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    private Animator anim;
+    private IEnumerator poisonCor;
+    private bool canPoison = false;
+    private float poisonTime=0;
     public int zombieIndex = 1;
     private TimeManager time;
     public float nightDetecctRad;
@@ -34,6 +38,7 @@ public class Zombie : MonoBehaviour
     private bool isMaster= false;
     private void Start()
     {
+        anim = GetComponent<Animator>();
         pv = GetComponent<PhotonView>();
         rigid = GetComponent<Rigidbody2D>();
         corr = MoveCor();
@@ -65,6 +70,8 @@ public class Zombie : MonoBehaviour
                isMaster = true;
             }
         }
+
+        poisonCor = poisonAttack();
     }
 
     public void OnPathComplete (Path p) {
@@ -102,71 +109,154 @@ public class Zombie : MonoBehaviour
             }
         }
     }
+
+    void GoPath()
+    {
+        if (path == null) //경로가 비었으면 
+        {
+            return; //아무것도 안함
+        }
+        reachedEndOfPath = false;
+        float distanceToWaypoint;
+        while (true)
+        {
+            distanceToWaypoint = Vector3.Distance(transform.position,
+                path.vectorPath[currentWaypoint]);
+            if (distanceToWaypoint < nextWaypointDistance)
+            {
+                if (currentWaypoint + 1 < path.vectorPath.Count)
+                {
+                    currentWaypoint++;
+                }
+                else
+                {
+                    reachedEndOfPath = true;
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+        var speedFactor =
+            reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
+        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+        Vector3 velocity = dir * speed * speedFactor;
+        rigid.velocity = velocity;
+
+        enemy.setAnim("Walk");
+        enemy.setLocalX(enemy.targetPosition.transform.position.x);
+        canPoison = false;
+    }
     public void Update () 
         {
             if (isMaster)
             {
-              if (!enemy.isFinding && enemy.canMove)
-            {
-                for (int i = 0; i < Players.Count; i++)
-                {
-                    if (!Players[i].isDead)
-                    {
-                        Transform tr = PlayerTrs[i];
-                        if (tr != null)
-                        {
-                            float rad = detectRad;
-                            if (time.isNight)
-                                rad = nightDetecctRad;
-                            if (Vector3.Distance(transform.position, tr.position) < rad)
-                            {
-                                enemy.setPlayer(tr);
-                                break;
-                            }
-                        }
-                    }
-                }   
-            }
-            if (enemy.isFinding)
-            {
-                if (path == null) //경로가 비었으면 
-                {
-                    return; //아무것도 안함
-                }
-                
-                reachedEndOfPath = false;
-                float distanceToWaypoint;
-                while (true)
-                {
-                    distanceToWaypoint = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
-                    if (distanceToWaypoint < nextWaypointDistance)
-                    {
-                        if (currentWaypoint + 1 < path.vectorPath.Count)
-                        {
-                            currentWaypoint++;
-                        }
-                        else
-                        {
-                            reachedEndOfPath = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+                if (poisonTime < AttackTime)
+                    poisonTime += Time.deltaTime;
+              if (!enemy.isFinding && enemy.canMove) 
+              {
+                  switch (zombieIndex)
+                  {
+                      case 1:
+                      case 2:
+                      case 3:
+                      case 4:
+                          for (int i = 0; i < Players.Count; i++)
+                          {
+                              if (!Players[i].isDead)
+                              {
+                                  Transform tr = PlayerTrs[i];
+                                  if (tr != null)
+                                  {
+                                      float rad = detectRad;
+                                      if (time.isNight)
+                                          rad = nightDetecctRad;
+                                      if (Vector3.Distance(transform.position, tr.position) < rad)
+                                      {
+                                          enemy.setPlayer(tr);
+                                          break;
+                                      }
+                                  }
+                              }
+                          }
+                          break;
+                  }
+              }
+              else
+              {
+                  if (enemy.isFinding)
+                  {
+                      if (zombieIndex == 1 || zombieIndex == 4 || zombieIndex == 3)
+                      { 
+                          GoPath();
+                      }
+                      else if (zombieIndex == 2)
+                      {
+                          bool isDetecting = false;
+                          Transform tr = null;
+                          for (int i = 0; i < Players.Count; i++)
+                          {
+                              if (!Players[i].isDead)
+                              {
+                                  tr = PlayerTrs[i];
+                                  if (tr != null)
+                                  {
+                                      if (Vector3.Distance(transform.position, tr.position) < detectRad+1f)
+                                      {
+                                          isDetecting = true;
+                                          break;
+                                      }
+                                  }
+                              }
+                          }
 
-                var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
-                Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-                Vector3 velocity = dir * speed * speedFactor;
-                rigid.velocity = velocity;
-                
-                enemy.setLocalX(enemy.targetPosition.transform.position.x);
-            }   
+                          if (isDetecting)
+                          {
+                              rigid.velocity=Vector2.zero;
+                              enemy.setLocalX(tr.position.x);
+                              if (canPoison == false)
+                              {
+                                  canPoison = true;
+                                  StopCoroutine(poisonCor);
+                                  StartCoroutine(poisonCor);
+                              }
+                          }
+                          else
+                          {
+                              StopCoroutine(poisonCor);
+                              GoPath();
+                          }
+                      }
+                  }
+              }
             }
         }
 
+    IEnumerator poisonAttack()
+    {
+        while (true)
+        {
+            if (poisonTime < AttackTime)
+            {
+                enemy.setAnim("Idle");
+            }
+            else
+            {
+                enemy.setAnim("Attack");
+                poisonTime = 0;
+            }
+            
+            yield return new WaitUntil(()=>isEndAnim());
+            enemy.setAnim("Idle");
+            yield return new WaitForSeconds(AttackTime);
+        }
+    }
+    bool isEndAnim()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f;
+    }
     IEnumerator find()
     {
         while (true)
@@ -189,7 +279,7 @@ public class Zombie : MonoBehaviour
             enemy.setLocalX(roamPos.x);
             
 
-            if (Vector2.Distance(transform.position, roamPos) < 1.5f)
+            if (Vector2.Distance(transform.position, roamPos) < 2f)
             {
                 enemy.setAnim("Idle");
                 
@@ -226,14 +316,11 @@ public class Zombie : MonoBehaviour
    {
        if (isMaster)
        {
-           if (enemy.canMove)
+           if (enemy.canMove && !enemy.isFinding)
            {
-               if (!enemy.isFinding)
-               {
-                   if (other.gameObject.CompareTag("Wall"))
-                   {
-                       Restart();
-                   }
+               if (other.gameObject.CompareTag("Wall")) 
+               { 
+                   Restart(); 
                }
            }
        }
@@ -245,9 +332,16 @@ public class Zombie : MonoBehaviour
        {
            if (enemy.canMove)
            {
-               if (other.CompareTag("Player") && enemy.canMove && isMaster)
+               if (other.CompareTag("Player") && enemy.canMove)
                {
-                   StartCoroutine(Attack());
+                   switch (zombieIndex)
+                   {
+                       case 1:
+                       case 3:
+                       case 4:
+                           StartCoroutine(Attack());
+                           break;
+                   }
                }
            }
        }
