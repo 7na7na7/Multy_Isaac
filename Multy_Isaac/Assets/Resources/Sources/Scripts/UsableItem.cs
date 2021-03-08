@@ -124,7 +124,7 @@ public class UsableItem : MonoBehaviour
             case 67: //꿀
                 if (eat())
                 {
-                statMgr.Heal(10);
+                statMgr.Heal(15);
                 setHappy();
                 return true;
                 }
