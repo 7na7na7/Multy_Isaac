@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  private Zombie zombie;
   public float fireDamageTick=0.1f;
   private float fireTime=0;
   private bool isDead = false;
@@ -82,6 +83,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     localX = transform.localScale.x * -1;
     seeker = GetComponent<Seeker>();
     temMgr = FindObjectOfType<TemManager>();
+    zombie = GetComponent<Zombie>();
   }
 
   private void Update()
@@ -153,9 +155,10 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       setTrigger("Die");
     else
       setTrigger("Hit");
+    
     if (pos != Vector3.zero)
     {
-      GetComponent<Zombie>().OnDisable();
+      zombie.OnDisable();
       canMove = false;
       isFinding = false;
 
@@ -171,10 +174,20 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           Die();
         }
         else
-          setAnim("Walk");
+        {
+          if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+          {
+            setAnim("Walk");
+          }
+          else if (zombie.zombieIndex == 2)
+          {
+            setAnim("Idle");
+          }
+        }
+          
       });
       
-      GetComponent<Zombie>().Detect(15);
+      zombie.Detect(15);
     }
     else
     {
@@ -183,7 +196,16 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           Die();
         }
         else
+      {
+        if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+        {
           setAnim("Walk");
+        }
+        else if (zombie.zombieIndex == 2)
+        {
+          setAnim("Idle");
+        }
+      }
     }
   }
 
@@ -293,11 +315,18 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   public void setPlayer(Transform tr)
   {
-    GetComponent<Zombie>().stopCor();
+    zombie.stopCor();
     isFinding = true;
     targetPosition = tr;
     ExclamationOpen();
-    setAnim("Walk");
+    if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+    {
+      setAnim("Walk");
+    }
+    else if (zombie.zombieIndex == 2)
+    {
+      setAnim("Idle");
+    }
   }
   
   public void setPlayerRPC(int viewId)

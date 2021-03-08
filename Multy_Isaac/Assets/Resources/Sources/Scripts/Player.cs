@@ -807,7 +807,7 @@ pv.RPC("DieRPC",RpcTarget.All);
             if (other.CompareTag("Explosion")) //폭탄
             {
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
-                Hit(enemy.damage, "폭발",enemy.nuckBackDistance,enemy.transform.position);
+                Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
             }
         }
     }

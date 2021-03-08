@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    public GameObject Poison;
     private Animator anim;
     private IEnumerator poisonCor;
     private bool canPoison = false;
@@ -147,7 +148,6 @@ public class Zombie : MonoBehaviour
 
         enemy.setAnim("Walk");
         enemy.setLocalX(enemy.targetPosition.transform.position.x);
-        canPoison = false;
     }
     public void Update () 
         {
@@ -225,7 +225,7 @@ public class Zombie : MonoBehaviour
                           }
                           else
                           {
-                              StopCoroutine(poisonCor);
+                              canPoison = false;
                               GoPath();
                           }
                       }
@@ -234,6 +234,16 @@ public class Zombie : MonoBehaviour
             }
         }
 
+    private float getAngle(float x1, float y1, float x2, float y2) //Vector값을 넘겨받고 회전값을 넘겨줌
+{
+float dx = x2 - x1;
+float dy = y2 - y1;
+
+float rad = Mathf.Atan2(dx, dy);
+float degree = rad * Mathf.Rad2Deg;
+        
+    return degree;
+}
     IEnumerator poisonAttack()
     {
         while (true)
@@ -245,6 +255,16 @@ public class Zombie : MonoBehaviour
             else
             {
                 enemy.setAnim("Attack");
+                Vector3 angle=new Vector3(0, 0, -getAngle(transform.position.x, transform.position.y, enemy.targetPosition.position.x, enemy.targetPosition.position.y)+90); 
+                if (PhotonNetwork.OfflineMode)
+                {
+                    Instantiate(Poison, transform.position, Quaternion.Euler(angle));
+                }
+                else
+                {
+                    if (PhotonNetwork.IsMasterClient)
+                        PhotonNetwork.InstantiateRoomObject(Poison.name, transform.position, Quaternion.Euler(angle));
+                }
                 poisonTime = 0;
             }
             

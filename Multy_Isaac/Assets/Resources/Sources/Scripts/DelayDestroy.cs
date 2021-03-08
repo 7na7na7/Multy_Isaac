@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DelayDestroy : MonoBehaviour
 {
+    public string myName;
     public float nuckBackDistance;
     public int damage;
     public float delay;
