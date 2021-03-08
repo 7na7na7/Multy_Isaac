@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1064714333086079793}
   - component: {fileID: 1064714333086079795}
   - component: {fileID: 1064714333086079794}
-  - component: {fileID: 7987020767616627166}
   - component: {fileID: 5854950384668889296}
   - component: {fileID: 896232749286779451}
+  - component: {fileID: 3897801775543814987}
   m_Layer: 0
-  m_Name: PistolBullet
+  m_Name: BreadBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1064714333086079798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 4992518108822376061}
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: be26743e392e05744b11297f12da77cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4cb49076ac08dde43ba5d5a39525d798, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  Dmg: 10
-  nuckBackDistance: 0.75
+  Dmg: 20
+  nuckBackDistance: 1.5
   none: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
   speed: 12
   DestroyTime: 2
@@ -134,22 +134,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!58 &7987020767616627166
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064714333086079798}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.000014424324, y: -0.0053560836}
-  serializedVersion: 2
-  m_Radius: 0.061301757
 --- !u!50 &5854950384668889296
 Rigidbody2D:
   serializedVersion: 4
@@ -187,6 +171,32 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!61 &3897801775543814987
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064714333086079798}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0046789944, y: -0.005519338}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.099583074, y: 0.08156842}
+  m_EdgeRadius: 0
 --- !u!1 &7381702050162007640
 GameObject:
   m_ObjectHideFlags: 0

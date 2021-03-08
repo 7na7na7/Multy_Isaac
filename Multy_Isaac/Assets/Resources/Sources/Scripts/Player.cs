@@ -438,6 +438,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             isFight();
             if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet)) //쏘기!!!!!
             {
+                if(playerItem.getCurrentTem().weaponIndex==7)
+                    statMgr.Heal(1);
                 if(PhotonNetwork.OfflineMode)
                     gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
                 else

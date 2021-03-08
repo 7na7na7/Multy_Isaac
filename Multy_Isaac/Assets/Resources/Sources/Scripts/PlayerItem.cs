@@ -49,7 +49,11 @@ public class PlayerItem : MonoBehaviour
             }   
         }
     }
-    
+
+    public tem getCurrentTem()
+    {
+        return ItemList[selectedIndex];
+    }
     void StartTem()
     {
         for (int j = 0; j < startTem.Length;j++) 
