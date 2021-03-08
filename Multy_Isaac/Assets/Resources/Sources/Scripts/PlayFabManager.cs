@@ -57,7 +57,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
       UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
       PhotonNetwork.SendRate = 60;
-      PhotonNetwork.SerializationRate = 60;
+      PhotonNetwork.SerializationRate = 30;
       //동기화 빠르게
    }
 
