@@ -30,8 +30,10 @@ public class UsableItem : MonoBehaviour
 
     void setHappy()
     {
-        happy.Play("Open");
-        time = happyTime;
+        if(PhotonNetwork.OfflineMode)
+            happyRPC("Open");
+        else
+            GetComponent<PhotonView>().RPC("happyRPC",RpcTarget.All,"Open");
     }
     public bool UseItem(int itemIndex)
     {
@@ -252,6 +254,15 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
+            case 108: //버섯볶음
+                if (eat())
+                {
+                    offStat.HungryHeal(20);
+                    statMgr.Heal(20);
+                    setHappy();
+                    return true;
+                }
+                break;
         }
 
         return false;
@@ -268,11 +279,23 @@ public class UsableItem : MonoBehaviour
         if (time > 0)
         {
             time -= Time.deltaTime;
-            if(time<=0)
-                happy.Play("Close");
+            if (time <= 0)
+            {
+               if(PhotonNetwork.OfflineMode)
+                   happyRPC("Close");
+               else
+                   GetComponent<PhotonView>().RPC("happyRPC",RpcTarget.All,"Close");
+            }
         }
     }
 
+    [PunRPC]
+    void happyRPC(string anim)
+    {
+        if(anim=="Open")
+            time = happyTime;
+        happy.Play(anim);
+    }
     bool eat()
     {
         if (canEat)
