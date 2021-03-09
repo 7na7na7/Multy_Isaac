@@ -29,6 +29,9 @@ public class PassiveItem : MonoBehaviour
             case 43: //기동신
                 mobilePer += 30;
                 break;
+            case 48: //양말
+                Speed += 7;
+                break;
             case 81: //소음기
                 Silence++;
                 break;
@@ -36,7 +39,8 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 10;
                 break;
             case 83: //신발
-                Speed += 10;
+                statMgr.armor += 5;
+                Speed += 7;
                 break;
             case 90: //멋진티셔츠
                 statMgr.armor += 15;
@@ -55,6 +59,9 @@ public class PassiveItem : MonoBehaviour
             case 43:
                 mobilePer -= 30;
                 break;
+            case 48:
+                Speed -= 7;
+                break;
             case 81:
                 Silence--;
                 break;
@@ -62,7 +69,8 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 10;
                 break;
             case 83:
-                Speed -= 10;
+                statMgr.armor -= 5;
+                Speed -= 7;
                 break;
             case 90:
                 statMgr.armor -= 15;
