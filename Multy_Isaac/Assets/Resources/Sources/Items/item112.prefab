@@ -4830,9 +4830,9 @@ GameObject:
   - component: {fileID: 3749522341741181222}
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
-  - component: {fileID: 4638437076096118672}
+  - component: {fileID: 3835402859275112753}
   m_Layer: 9
-  m_Name: item42
+  m_Name: item112
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4847,7 +4847,7 @@ Transform:
   m_GameObject: {fileID: 3749522341741181223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 449410984}
   - {fileID: 4869776060961844962}
@@ -4894,7 +4894,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 660c010e15b578942b1770652c48c31e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 79a2d511d361a1743871da681d10e74f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4919,16 +4919,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   item:
-    weaponIndex: 42
+    weaponIndex: 112
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 290000002e000000
+    SmallItemIndex: 6f0000002e000000
     CompleteItemIndex: 
-    index: 42
-    ItemName: "\uB9CC\uB144\uD544"
-    ItemSprite: {fileID: 21300000, guid: 660c010e15b578942b1770652c48c31e, type: 3}
+    index: 112
+    ItemName: "\uAC70\uB300 \uB3C4\uB07C"
+    ItemSprite: {fileID: 21300000, guid: 79a2d511d361a1743871da681d10e74f, type: 3}
     type: 1
-    ItemDescription: "\uD39C\uC740 \uCE7C\uBCF4\uB2E4 \uAC15\uD558\uB2E4."
+    ItemDescription: "\uC774\uAC78 \uB9DE\uACE0 \uBC84\uD2F8 \uC218 \uC788\uC744\uAE4C?"
     WhereGet: "\uC81C\uC791"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
@@ -4944,9 +4944,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17, y: 0.17}
+  m_Offset: {x: 0.1, y: 0.1}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
 --- !u!50 &3749522341741181245
 Rigidbody2D:
   serializedVersion: 4
@@ -4968,7 +4968,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4638437076096118672
+--- !u!114 &3835402859275112753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4983,21 +4983,21 @@ MonoBehaviour:
   weaponObj:
     soundRadious: 0
     consumeBullet: 0
-    shotBullet: 0
-    spr: {fileID: 21300000, guid: 660c010e15b578942b1770652c48c31e, type: 3}
-    tr: {x: -0.05, y: -0.1}
-    scale: {x: 2, y: 2}
-    CoolTime: 0.75
+    shotBullet: 1
+    spr: {fileID: 21300000, guid: 1142458950e9c924d8fbc24bd6737265, type: 3}
+    tr: {x: 0, y: 0}
+    scale: {x: 4, y: 4}
+    CoolTime: 1.5
     bulletPos: {fileID: 4869776060961844962}
-    OfflineSlash: {fileID: 8587958215958462638, guid: 6e57d3bb44576194ea42572cb06ea3f1,
+    OfflineSlash: {fileID: 8587958215958462638, guid: a3bf705f3059f04419f65169ab6af680,
       type: 3}
     offlineBullet: {fileID: 0}
-    weaponIndex: 42
+    weaponIndex: 112
     reLoadTime: 0
     BulletCount: 0
     ClusterRate: 0
-    walkSpeed_P: 95
-    shotSpeed_P: 90
+    walkSpeed_P: 70
+    shotSpeed_P: 50
     slashTime: 0.25
 --- !u!1 &6160867055047779158
 GameObject:
@@ -5023,7 +5023,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160867055047779158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3749522341741181216}
