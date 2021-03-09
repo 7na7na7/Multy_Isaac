@@ -16,6 +16,6 @@ public class MinimapPlayer : MonoBehaviour
     void Update()
     {
         if(target!=null) 
-            transform.position =pos + new Vector3(target.transform.position.x * 0.1f, target.transform.position.y * 0.1f,0);
+            transform.position =new Vector3(pos.x,pos.y,0) + new Vector3(target.transform.position.x * 0.1f, target.transform.position.y * 0.1f,0);
     }
 }

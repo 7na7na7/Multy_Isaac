@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraManager : MonoBehaviour
 {
+    public bool isMinimap = false;
     public BoxCollider2D bound;
 
     public float speed = 2f;
-    public GameObject target; //카메라가 따라갈 대상
-
+    public GameObject target;
+    public GameObject minimapHead;
     private Vector3 targetPosition; //대상의 현재 값
     private Vector3 minBound, maxBound; //박스 콜라이더 영역의 최소/최대 xyz값을 지님
     private float halfWidth, halfHeight; //카메라의 반너비, 반높이 값을 지닐 변수
@@ -18,7 +20,21 @@ public class CameraManager : MonoBehaviour
     {
         minBound = bound.bounds.min;
         maxBound = bound.bounds.max;
-    
+
+        if (isMinimap)
+        {
+            if (PhotonNetwork.OfflineMode)
+            {
+                print("A");
+                GameObject t=Instantiate(minimapHead, transform.position, Quaternion.identity);
+                target = t;
+            }
+            else
+            {
+                GameObject t=PhotonNetwork.Instantiate(minimapHead.name, transform.position, Quaternion.identity);
+                target = t;
+            }   
+        }
     }
   
     void Update()

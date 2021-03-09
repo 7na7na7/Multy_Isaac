@@ -368,9 +368,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
         camera.GetComponent<CameraManager>().target = gameObject;
-        FindObjectOfType<MinimapPlayer>().target = gameObject;
+        MinimapPlayer[] targets = FindObjectsOfType<MinimapPlayer>();
+        foreach (MinimapPlayer target in targets)
+        {
+            if (target.GetComponent<PhotonView>().IsMine)
+                target.target = gameObject;
+        }
     }
-    
+
     void Slash(bool isDown)
     {
         bool canShot = false;
