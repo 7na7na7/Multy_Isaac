@@ -146,7 +146,7 @@ public class Zombie : MonoBehaviour
         Vector3 velocity = dir * speed * speedFactor;
         rigid.velocity = velocity;
 
-        enemy.setAnim("Walk");
+        //enemy.setAnim("Walk");
         enemy.setLocalX(enemy.targetPosition.transform.position.x);
     }
     public void Update () 

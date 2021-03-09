@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ZombieSpawner : MonoBehaviour
 {
+    public bool isAllZombie = true;
     public int FirstDelay = 15;
     public BoxCollider2D[] DaySpawnAreas;
     public BoxCollider2D[] NightSpawnAreas;
@@ -119,10 +120,16 @@ public class ZombieSpawner : MonoBehaviour
 
     public void SpawnZombie(GameObject zombie, Vector2 pos)
     {
-        Instantiate(zombie, pos, quaternion.identity);
+        if (isAllZombie)
+            Instantiate(zombies[Random.Range(0, zombies.Length)], pos, quaternion.identity);
+        else
+            Instantiate(zombie, pos, quaternion.identity);
     }
     public void SpawnZombie_N(GameObject zombie, Vector2 pos)
     {
-        PhotonNetwork.InstantiateRoomObject(zombie.name, pos, quaternion.identity);
+        if (isAllZombie)
+            PhotonNetwork.InstantiateRoomObject(zombies[Random.Range(0, zombies.Length)].name, pos, quaternion.identity);
+        else
+            PhotonNetwork.InstantiateRoomObject(zombie.name, pos, quaternion.identity);
     }
 }

@@ -3566,3 +3566,2323 @@ System memory in use after: 193.2 MB.
 Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4966.
 Total: 4.587700 ms (FindLiveObjects: 0.740900 ms CreateObjectMapping: 0.495200 ms MarkObjects: 3.323600 ms  DeleteObjects: 0.026000 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006944 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.14 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.129 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.9 MB.
+System memory in use after: 193.2 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4970.
+Total: 3.461300 ms (FindLiveObjects: 0.405100 ms CreateObjectMapping: 0.155300 ms MarkObjects: 2.876900 ms  DeleteObjects: 0.022700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 520.458994 seconds.
+  path: Assets/Resources/Explosion.prefab
+  artifactKey: Guid(5b779cd8403da874f82c7e04d36e076a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Explosion.prefab using Guid(5b779cd8403da874f82c7e04d36e076a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00bb99c8b8debd32f9e7292f3a053d73') in 0.190377 seconds
+  Import took 0.200098 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000235 seconds.
+  path: Assets/Resources/Fire.prefab
+  artifactKey: Guid(7bdee38e275f6164491c624276ab557e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Fire.prefab using Guid(7bdee38e275f6164491c624276ab557e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64cffcbed3818446f4caa687021d1a55') in 0.017084 seconds
+  Import took 0.023192 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000259 seconds.
+  path: Assets/Resources/HitEffect.prefab
+  artifactKey: Guid(16a4441501c1e8546b57e06b8201215b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/HitEffect.prefab using Guid(16a4441501c1e8546b57e06b8201215b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d9e46a562f5a8667cd6f2c77d59c2b2') in 0.045362 seconds
+  Import took 0.052299 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.618302 seconds.
+  path: Assets/Resources/WallEffect.prefab
+  artifactKey: Guid(1ff3e3b24f342984aac2b7acae7e63ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/WallEffect.prefab using Guid(1ff3e3b24f342984aac2b7acae7e63ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e306a2d8151c523dbcb7ed718b9c85f9') in 0.025560 seconds
+  Import took 0.033368 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.008252 seconds.
+  path: Assets/Resources/WallEffect.prefab
+  artifactKey: Guid(1ff3e3b24f342984aac2b7acae7e63ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/WallEffect.prefab using Guid(1ff3e3b24f342984aac2b7acae7e63ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e306a2d8151c523dbcb7ed718b9c85f9') in 0.010446 seconds
+  Import took 0.017630 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006451 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.58 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.241 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.1 MB.
+System memory in use after: 193.3 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5010.
+Total: 3.792900 ms (FindLiveObjects: 0.513600 ms CreateObjectMapping: 0.232000 ms MarkObjects: 3.009800 ms  DeleteObjects: 0.036700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005559 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.11 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.141 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.13 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.1 MB.
+System memory in use after: 193.3 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5014.
+Total: 4.075300 ms (FindLiveObjects: 0.763500 ms CreateObjectMapping: 0.308500 ms MarkObjects: 2.977200 ms  DeleteObjects: 0.024900 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 303.736308 seconds.
+  path: Assets/Resources/Sources/Items/item3.prefab
+  artifactKey: Guid(27f02c4258c09f94b8a0c223cb15a985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item3.prefab using Guid(27f02c4258c09f94b8a0c223cb15a985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9477199d0a344970f28a32115634b492') in 0.173881 seconds
+  Import took 0.181672 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006301 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.109 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.2 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5054.
+Total: 5.476300 ms (FindLiveObjects: 0.767100 ms CreateObjectMapping: 0.326900 ms MarkObjects: 4.289900 ms  DeleteObjects: 0.089500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005980 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.64 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.134 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.2 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5058.
+Total: 4.165500 ms (FindLiveObjects: 0.583600 ms CreateObjectMapping: 0.212600 ms MarkObjects: 3.337100 ms  DeleteObjects: 0.029900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005574 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.151 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.2 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5062.
+Total: 4.591800 ms (FindLiveObjects: 0.716600 ms CreateObjectMapping: 0.283200 ms MarkObjects: 3.561000 ms  DeleteObjects: 0.029400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008296 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.090 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.2 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5066.
+Total: 3.962500 ms (FindLiveObjects: 0.506400 ms CreateObjectMapping: 0.314200 ms MarkObjects: 3.113000 ms  DeleteObjects: 0.027700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010084 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.070 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.4 MB.
+System memory in use after: 193.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5070.
+Total: 3.976800 ms (FindLiveObjects: 0.521300 ms CreateObjectMapping: 0.295600 ms MarkObjects: 3.131900 ms  DeleteObjects: 0.026800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005816 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.24 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.115 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.3 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5074.
+Total: 4.338700 ms (FindLiveObjects: 0.855000 ms CreateObjectMapping: 0.337300 ms MarkObjects: 3.117200 ms  DeleteObjects: 0.027700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005831 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.091 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.3 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5078.
+Total: 3.979800 ms (FindLiveObjects: 0.519500 ms CreateObjectMapping: 0.305000 ms MarkObjects: 3.127200 ms  DeleteObjects: 0.027000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006427 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.25 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.354 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.3 MB.
+System memory in use after: 193.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5082.
+Total: 3.937300 ms (FindLiveObjects: 0.488000 ms CreateObjectMapping: 0.295900 ms MarkObjects: 3.125100 ms  DeleteObjects: 0.027200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006009 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.095 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.13 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.3 MB.
+System memory in use after: 193.6 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5086.
+Total: 3.866300 ms (FindLiveObjects: 0.494600 ms CreateObjectMapping: 0.236900 ms MarkObjects: 3.105200 ms  DeleteObjects: 0.028600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005643 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.75 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.187 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.4 MB.
+System memory in use after: 193.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5090.
+Total: 4.324300 ms (FindLiveObjects: 0.544000 ms CreateObjectMapping: 0.335300 ms MarkObjects: 3.416300 ms  DeleteObjects: 0.027300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007608 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.346 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.26 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.4 MB.
+System memory in use after: 193.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5094.
+Total: 4.417300 ms (FindLiveObjects: 0.644600 ms CreateObjectMapping: 0.253800 ms MarkObjects: 3.455200 ms  DeleteObjects: 0.061500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006786 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.111 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.4 MB.
+System memory in use after: 193.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5098.
+Total: 4.547200 ms (FindLiveObjects: 0.861100 ms CreateObjectMapping: 0.341700 ms MarkObjects: 3.315400 ms  DeleteObjects: 0.027700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007660 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.271 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.4 MB.
+System memory in use after: 193.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5102.
+Total: 3.883700 ms (FindLiveObjects: 0.482500 ms CreateObjectMapping: 0.158400 ms MarkObjects: 3.200400 ms  DeleteObjects: 0.041400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007020 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.49 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.444 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.18 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.5 MB.
+System memory in use after: 193.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 5106.
+Total: 4.768700 ms (FindLiveObjects: 0.500200 ms CreateObjectMapping: 0.501100 ms MarkObjects: 3.717100 ms  DeleteObjects: 0.048200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 2831.348932 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BrainA.png
+  artifactKey: Guid(1962efabbb677b44ea09acda094262f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BrainA.png using Guid(1962efabbb677b44ea09acda094262f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b3622e099d93d6b4511bc9d5715c123') in 0.120255 seconds
+  Import took 0.131579 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BugA.png
+  artifactKey: Guid(90d4656fa093a884198ea128adaab037) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BugA.png using Guid(90d4656fa093a884198ea128adaab037) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f9071ab2552f1e6ce4f927f4bbd65cf') in 0.037349 seconds
+  Import took 0.043830 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000254 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BrainE.png
+  artifactKey: Guid(9c040ba40d9df89438c100a694a820e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BrainE.png using Guid(9c040ba40d9df89438c100a694a820e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e12281dac5b1f7121c69c6f77639eca3') in 0.048351 seconds
+  Import took 0.054651 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/Sources/PixelMobs/Mob/ButterflyA.png
+  artifactKey: Guid(c4ef4b3283820274f9d5eff772190102) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/ButterflyA.png using Guid(c4ef4b3283820274f9d5eff772190102) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7269996da3d571189a0bc7951e5a8990') in 0.030043 seconds
+  Import took 0.035998 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000294 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BrainD.png
+  artifactKey: Guid(ec026daf0dcec1c438f675e2605d991c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BrainD.png using Guid(ec026daf0dcec1c438f675e2605d991c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b6285a96b5e0b58aaa136e15ee10f68') in 0.036252 seconds
+  Import took 0.041854 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000299 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BugC.png
+  artifactKey: Guid(493903d0c73444743af1e77d26b92136) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BugC.png using Guid(493903d0c73444743af1e77d26b92136) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '184af78f251f5819a105d6943f6f0994') in 0.036321 seconds
+  Import took 0.043646 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/Sources/PixelMobs/Mob/ButterflyB.png
+  artifactKey: Guid(8907a435dff09104a81778c4572b4e39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/ButterflyB.png using Guid(8907a435dff09104a81778c4572b4e39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd856eb52628afb8e83b4efee7e865d2e') in 0.032306 seconds
+  Import took 0.039037 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000285 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BugD.png
+  artifactKey: Guid(a5943828c0169cf4e996c0070702ab88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BugD.png using Guid(a5943828c0169cf4e996c0070702ab88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cdeedbdb6daa185459dc51553e148f4') in 0.034912 seconds
+  Import took 0.043164 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000292 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BrainC.png
+  artifactKey: Guid(e9dd76a44064a2a4182543bb3707e784) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BrainC.png using Guid(e9dd76a44064a2a4182543bb3707e784) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf18fa67865d1e7426729251af5143b0') in 0.030938 seconds
+  Import took 0.037522 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000306 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BugE.png
+  artifactKey: Guid(23520d1e0a5d27a409a64af65fc6c466) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BugE.png using Guid(23520d1e0a5d27a409a64af65fc6c466) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0960a6034d951d653a9ff1d96bdeb2a9') in 0.037697 seconds
+  Import took 0.044343 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000323 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BrainB.png
+  artifactKey: Guid(dddd3b80280d540428f7ce1b07e3c957) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BrainB.png using Guid(dddd3b80280d540428f7ce1b07e3c957) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f57e5238422ff93e39f661126aacc967') in 0.029480 seconds
+  Import took 0.035619 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000308 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BugB.png
+  artifactKey: Guid(c4c0e7f730df9374d94e3d927930981e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BugB.png using Guid(c4c0e7f730df9374d94e3d927930981e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '245390f80fdabe37c4c72713db34c670') in 0.034270 seconds
+  Import took 0.041513 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.647267 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BeardA.png
+  artifactKey: Guid(91f88a08265de614ca911ad7d15ff836) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BeardA.png using Guid(91f88a08265de614ca911ad7d15ff836) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72e445d03f1fdca4d3c0a97c1cb1e62b') in 0.031529 seconds
+  Import took 0.045326 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatO.png
+  artifactKey: Guid(4db9df033b238f64490bf65d0d56378b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatO.png using Guid(4db9df033b238f64490bf65d0d56378b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cdd9061ec76069df5efc9aa61c493389') in 0.017608 seconds
+  Import took 0.023686 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000327 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatSmallE.png
+  artifactKey: Guid(53eee918919b98c489ec9e7cb13232ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatSmallE.png using Guid(53eee918919b98c489ec9e7cb13232ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cec40124b62915debc7c8bf35e730f1c') in 0.022461 seconds
+  Import took 0.030263 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatSmallB.png
+  artifactKey: Guid(849bb6125ad902f4493d33c1cbacce90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatSmallB.png using Guid(849bb6125ad902f4493d33c1cbacce90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b384da45e1d519d00315aea44e3196cf') in 0.026750 seconds
+  Import took 0.034506 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000257 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatSmallA.png
+  artifactKey: Guid(336582a46774db741816235f145c750d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatSmallA.png using Guid(336582a46774db741816235f145c750d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9b25f429813c057cd28c247b083f966') in 0.021927 seconds
+  Import took 0.028908 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000309 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatQ.png
+  artifactKey: Guid(ca7a5ee15c560cc40b17c0d1bb5babe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatQ.png using Guid(ca7a5ee15c560cc40b17c0d1bb5babe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51b642278007d30c19324d8bb8d6639d') in 0.020073 seconds
+  Import took 0.028312 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000279 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatJ.png
+  artifactKey: Guid(fbae48ac621f21044af1fdd14d706815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatJ.png using Guid(fbae48ac621f21044af1fdd14d706815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47ab80d0b7a18c1f915a36731ec4f0f8') in 0.018086 seconds
+  Import took 0.025154 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000261 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatE.png
+  artifactKey: Guid(91ae14fd7b760c746964dd1709103b0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatE.png using Guid(91ae14fd7b760c746964dd1709103b0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a482905c2d3fa5631aae92de08e433c') in 0.017521 seconds
+  Import took 0.024321 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000252 seconds.
+  path: Assets/Sources/PixelMobs/Mob/AirA.png
+  artifactKey: Guid(f633c27c122797143bf4782f5c45d885) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/AirA.png using Guid(f633c27c122797143bf4782f5c45d885) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa56d08ad0d9b1b282390d738b1632ee') in 0.024355 seconds
+  Import took 0.031220 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatH.png
+  artifactKey: Guid(49740f3dd1223224092e67d67643b96a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatH.png using Guid(49740f3dd1223224092e67d67643b96a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30c1248bed372f9367754a3d20988a39') in 0.017723 seconds
+  Import took 0.024136 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000297 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatA.png
+  artifactKey: Guid(596c4e7389db33c4ca8a947cfc88665f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatA.png using Guid(596c4e7389db33c4ca8a947cfc88665f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd51d63d7181b11802be2b92f93c16dac') in 0.017370 seconds
+  Import took 0.023305 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000277 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BallA.png
+  artifactKey: Guid(d68b0d6bc0466a3428459f3c8ceab74d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BallA.png using Guid(d68b0d6bc0466a3428459f3c8ceab74d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5912411372baf1ab55c59e36c2fe93c9') in 0.025281 seconds
+  Import took 0.031322 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000244 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatB.png
+  artifactKey: Guid(340fe7f3d595feb479210de6d24ee2fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatB.png using Guid(340fe7f3d595feb479210de6d24ee2fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19be9609530a5eeeb6a1f1434433638e') in 0.018004 seconds
+  Import took 0.025698 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000206 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatN.png
+  artifactKey: Guid(3d8910be9f98c0e47a3ae4019136b1ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatN.png using Guid(3d8910be9f98c0e47a3ae4019136b1ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e8906bac022d57b7a00eb139ca9c28a') in 0.019783 seconds
+  Import took 0.027709 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000277 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BallB.png
+  artifactKey: Guid(c2ab0b2c464e0da43b83a04118ceb95f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BallB.png using Guid(c2ab0b2c464e0da43b83a04118ceb95f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '630a9d39cdae86870d8ce071596fd3d7') in 0.024369 seconds
+  Import took 0.030177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000266 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BallD.png
+  artifactKey: Guid(6b3b502c97d2c7c43a1d7a6b0e31744a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BallD.png using Guid(6b3b502c97d2c7c43a1d7a6b0e31744a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '458bfe4d12d1e5a22cd199a29793d37a') in 0.025763 seconds
+  Import took 0.032558 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000481 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatM.png
+  artifactKey: Guid(5e90a037e7f2e2e4ba11ecc4a35361ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatM.png using Guid(5e90a037e7f2e2e4ba11ecc4a35361ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb281af1896e578860a595f93d1471d4') in 0.017367 seconds
+  Import took 0.024486 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000259 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatF.png
+  artifactKey: Guid(2c2ff30b9c0644446a0cc0e6e7fde2fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatF.png using Guid(2c2ff30b9c0644446a0cc0e6e7fde2fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd0f3aeb20f898648aed2dd9bea37b79') in 0.017060 seconds
+  Import took 0.023388 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000217 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatK.png
+  artifactKey: Guid(9e69b082c92c2da4da2bb8f7115441c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatK.png using Guid(9e69b082c92c2da4da2bb8f7115441c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0a16b36e1431e8f0a12c5b2e1726ed2') in 0.020291 seconds
+  Import took 0.026432 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000320 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatS.png
+  artifactKey: Guid(50f6a17a5ee6dff44892517adb29772f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatS.png using Guid(50f6a17a5ee6dff44892517adb29772f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05c74f0151254f4fd2093a955c9a9d5e') in 0.017191 seconds
+  Import took 0.024378 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatG.png
+  artifactKey: Guid(13064b555c48d1d4eacd7a1a4eb4355e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatG.png using Guid(13064b555c48d1d4eacd7a1a4eb4355e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7cf8409b3b98f0e9c0dc56bdc16f5bf') in 0.019054 seconds
+  Import took 0.025662 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000252 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatD.png
+  artifactKey: Guid(efc6a2d332ce2ce4ea99a5e9a7b04aca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatD.png using Guid(efc6a2d332ce2ce4ea99a5e9a7b04aca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39e7e1d5935a1a5c3775d39de7724e24') in 0.017692 seconds
+  Import took 0.023364 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000262 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatT.png
+  artifactKey: Guid(60e4ee8c942e40a4b971454a08700adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatT.png using Guid(60e4ee8c942e40a4b971454a08700adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ba1d5a2f01278ed5c10f6b943a88bb7') in 0.017263 seconds
+  Import took 0.023323 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000307 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatSmallC.png
+  artifactKey: Guid(dc5485b1da806334aa707061ddbf1b3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatSmallC.png using Guid(dc5485b1da806334aa707061ddbf1b3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0bcb65e9fdb51808da3771fc35596ba') in 0.023625 seconds
+  Import took 0.031331 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000256 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatI.png
+  artifactKey: Guid(58abe88eda0d1d042b5a4ebfceb9b10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatI.png using Guid(58abe88eda0d1d042b5a4ebfceb9b10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40f00b506929178449628d590fdd4ea2') in 0.016649 seconds
+  Import took 0.023521 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000263 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatP.png
+  artifactKey: Guid(a5e907f7013c27e47a0a2253bfaa011f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatP.png using Guid(a5e907f7013c27e47a0a2253bfaa011f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0dc265c71f1d67c4a79e8a16d979cca') in 0.025172 seconds
+  Import took 0.031507 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BallC.png
+  artifactKey: Guid(33d212c2cee4a7949936cf5d5e80d06b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BallC.png using Guid(33d212c2cee4a7949936cf5d5e80d06b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dafbc98c6981766a11096e2d58aaef94') in 0.026034 seconds
+  Import took 0.033279 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000268 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatC.png
+  artifactKey: Guid(9edd0747cac16304a94df836fe9336a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatC.png using Guid(9edd0747cac16304a94df836fe9336a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '411785dab629c179b64dfaf1c5547f77') in 0.020678 seconds
+  Import took 0.027094 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000294 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatSmallD.png
+  artifactKey: Guid(494f12668e635de4288601f5e39a2217) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatSmallD.png using Guid(494f12668e635de4288601f5e39a2217) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d3663b15a80a656d59315f14f3927e2') in 0.026931 seconds
+  Import took 0.034031 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000244 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatR.png
+  artifactKey: Guid(d9a613415e195f546999da36804d6af7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatR.png using Guid(d9a613415e195f546999da36804d6af7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18e19bb5100fa28a0b662df8b45f5e2d') in 0.022927 seconds
+  Import took 0.031118 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000251 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BeardB.png
+  artifactKey: Guid(ee616ca48381f574197b874b53fc1620) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BeardB.png using Guid(ee616ca48381f574197b874b53fc1620) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd291b7caa6b66876e7e88dd88c40d781') in 0.031447 seconds
+  Import took 0.038002 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Sources/PixelMobs/Mob/BatL.png
+  artifactKey: Guid(16f95191341f3104aae583c5d7fbf411) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/BatL.png using Guid(16f95191341f3104aae583c5d7fbf411) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '928b0e582ca3306d992e7d3aedfdab89') in 0.022967 seconds
+  Import took 0.029413 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.847365 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabA.png
+  artifactKey: Guid(2f7b1b408d2cedd44baafac3d18cb42a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabA.png using Guid(2f7b1b408d2cedd44baafac3d18cb42a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efaf582f32e90dbc1c2b8664163d3d50') in 0.025528 seconds
+  Import took 0.033402 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000271 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabC.png
+  artifactKey: Guid(3b6fbc8ea76066f4fbdf949485d3c4a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabC.png using Guid(3b6fbc8ea76066f4fbdf949485d3c4a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65cf27fa93533751e39b7f0d12b0e8a7') in 0.026702 seconds
+  Import took 0.033609 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000304 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabA.png
+  artifactKey: Guid(2f7b1b408d2cedd44baafac3d18cb42a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabA.png using Guid(2f7b1b408d2cedd44baafac3d18cb42a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efaf582f32e90dbc1c2b8664163d3d50') in 0.013991 seconds
+  Import took 0.019690 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000229 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabD.png
+  artifactKey: Guid(8c6b6f765fff2b54994bbeb2e63852f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabD.png using Guid(8c6b6f765fff2b54994bbeb2e63852f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fad75d9185a21bb5ab720066cddbcd09') in 0.035500 seconds
+  Import took 0.041414 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000311 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabE.png
+  artifactKey: Guid(594e15d0b5eeef54dafad0e102df072a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabE.png using Guid(594e15d0b5eeef54dafad0e102df072a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33242927818682009df330dc1a06b60c') in 0.020118 seconds
+  Import took 0.027384 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabF.png
+  artifactKey: Guid(d182ee2410fe65949b460804dbd17012) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabF.png using Guid(d182ee2410fe65949b460804dbd17012) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d27e301f05dae2000ac0cc72f8d2265') in 0.025266 seconds
+  Import took 0.031177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000322 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DiscA.png
+  artifactKey: Guid(b3561c0ab5f300140b9a96ff4e8c4ccd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DiscA.png using Guid(b3561c0ab5f300140b9a96ff4e8c4ccd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80a222b3c9c4288193a029f2de159c76') in 0.023376 seconds
+  Import took 0.030660 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000315 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogG.png
+  artifactKey: Guid(e0d3578a5dc26f94dbd94b2616bbf7a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogG.png using Guid(e0d3578a5dc26f94dbd94b2616bbf7a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a55d97c71769257f006a6811ee87d814') in 0.021465 seconds
+  Import took 0.028371 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000407 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogD.png
+  artifactKey: Guid(189acef6648224445839f64b6016775a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogD.png using Guid(189acef6648224445839f64b6016775a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b4667f07babe2d534cf2323343bc66f') in 0.020747 seconds
+  Import took 0.028390 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000318 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogF.png
+  artifactKey: Guid(4f1c0604b158df545810938200b8a2fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogF.png using Guid(4f1c0604b158df545810938200b8a2fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd09759fa1814d8e373aeb1fa665961a5') in 0.020747 seconds
+  Import took 0.028265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000234 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DuckB.png
+  artifactKey: Guid(f1a819cadb2e36040abf0a920cb033c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DuckB.png using Guid(f1a819cadb2e36040abf0a920cb033c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30f2f4ba39039cf17fee343f006f363a') in 0.027057 seconds
+  Import took 0.033882 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogE.png
+  artifactKey: Guid(697e3927fdf951540b3fd6bffd5edeab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogE.png using Guid(697e3927fdf951540b3fd6bffd5edeab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '559551d427c181dc25938416ac3a6e0e') in 0.018816 seconds
+  Import took 0.025327 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000271 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogB.png
+  artifactKey: Guid(481071bc151197b4fa9f7ba5ca576235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogB.png using Guid(481071bc151197b4fa9f7ba5ca576235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e01ae8a48928cfd2482643440ba6117') in 0.023608 seconds
+  Import took 0.031960 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Sources/PixelMobs/Mob/LurkerB.png
+  artifactKey: Guid(9649ba5ec42c94e4794e062ff299ef03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/LurkerB.png using Guid(9649ba5ec42c94e4794e062ff299ef03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38bbdcdd7d32636172b1cd8d17dc47ea') in 0.021210 seconds
+  Import took 0.028055 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000302 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithH.png
+  artifactKey: Guid(e9076755068d4d14093b01e4e02e4c53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithH.png using Guid(e9076755068d4d14093b01e4e02e4c53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c54b64cde4af29fab24ec30fc1ebebe1') in 0.020496 seconds
+  Import took 0.026369 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000239 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SkullSmallE.png
+  artifactKey: Guid(26ae8a30c5f8a604ab6d520b34c199f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SkullSmallE.png using Guid(26ae8a30c5f8a604ab6d520b34c199f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e0fe7ef06cbcefefe632cc0319b8f3f') in 0.021183 seconds
+  Import took 0.028543 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeD.png
+  artifactKey: Guid(96f0cb1546f23d04badd42167b7bccb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeD.png using Guid(96f0cb1546f23d04badd42167b7bccb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97d58a6cac40d84ea7e7a974f7b4b9f8') in 0.035545 seconds
+  Import took 0.041772 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000245 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeM.png
+  artifactKey: Guid(b05dac6f161d1394281cff62c61fc7ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeM.png using Guid(b05dac6f161d1394281cff62c61fc7ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0f326c4c7c0456f2b131b1d7ce0725f') in 0.033798 seconds
+  Import took 0.040872 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeN.png
+  artifactKey: Guid(42d1e5d4ce451fe4cbd85f05ceff928d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeN.png using Guid(42d1e5d4ce451fe4cbd85f05ceff928d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd7b705d1e5961b4d1a4431e5d28cdcc') in 0.039591 seconds
+  Import took 0.045543 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000327 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareF.png
+  artifactKey: Guid(97c6fb4a6290a734cad728632dc60d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareF.png using Guid(97c6fb4a6290a734cad728632dc60d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52776c864c529c4908b290cd77185ac0') in 0.021991 seconds
+  Import took 0.028193 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000315 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithE.png
+  artifactKey: Guid(a94538140eaa6b64c9315a208413e0b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithE.png using Guid(a94538140eaa6b64c9315a208413e0b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e08768f13a8d1dcc2f36bf37a17280e3') in 0.023705 seconds
+  Import took 0.030792 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000266 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareF.png
+  artifactKey: Guid(97c6fb4a6290a734cad728632dc60d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareF.png using Guid(97c6fb4a6290a734cad728632dc60d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52776c864c529c4908b290cd77185ac0') in 0.014279 seconds
+  Import took 0.021278 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000320 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareJ.png
+  artifactKey: Guid(3887eb4dbf57ffa4f9403b9a205e47b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareJ.png using Guid(3887eb4dbf57ffa4f9403b9a205e47b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eedd7a434974372d73acd9e0dbaec681') in 0.020607 seconds
+  Import took 0.027418 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000268 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeP.png
+  artifactKey: Guid(70874d924cd2a2640974c3c4dfd880a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeP.png using Guid(70874d924cd2a2640974c3c4dfd880a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db77ca1684aa2a87c3e0f1d8ed7e5c8e') in 0.043590 seconds
+  Import took 0.049929 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000326 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeF.png
+  artifactKey: Guid(5865684741d6116418eba56af8fae6bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeF.png using Guid(5865684741d6116418eba56af8fae6bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'feb216ae45a1f5903c87a19d791621d5') in 0.023303 seconds
+  Import took 0.030856 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000288 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerA.png
+  artifactKey: Guid(b4d3659424d09bd419679f92eaebc1e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerA.png using Guid(b4d3659424d09bd419679f92eaebc1e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '539479af7fab5d42abfe9cceaae7c20b') in 0.040135 seconds
+  Import took 0.047833 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000277 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeC.png
+  artifactKey: Guid(80d490a332fba8e42acfcf2b34e721e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeC.png using Guid(80d490a332fba8e42acfcf2b34e721e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69af9e4f8d9fed34358209340524a5cd') in 0.022335 seconds
+  Import took 0.030715 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000243 seconds.
+  path: Assets/Sources/PixelMobs/Mob/LurkerC.png
+  artifactKey: Guid(1835dd25ff60ec846998450e1735e77f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/LurkerC.png using Guid(1835dd25ff60ec846998450e1735e77f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd90983c2f6be67b5cb32c9f8c8777d47') in 0.026986 seconds
+  Import took 0.035433 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000302 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeE.png
+  artifactKey: Guid(791632869f8c7ad4984979edb83b7823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeE.png using Guid(791632869f8c7ad4984979edb83b7823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c97907f37098653cd045693663838236') in 0.039082 seconds
+  Import took 0.047256 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000239 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeK.png
+  artifactKey: Guid(e03a0c75cb24d41429f54629625745c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeK.png using Guid(e03a0c75cb24d41429f54629625745c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fbf8e6d4782309b83ba279aa67a36f3') in 0.023158 seconds
+  Import took 0.031208 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SkullSmallH.png
+  artifactKey: Guid(2948244553012e4478ee751eb6c26451) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SkullSmallH.png using Guid(2948244553012e4478ee751eb6c26451) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b29db85b497ca5de6533b40cd7026b3') in 0.020555 seconds
+  Import took 0.028452 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000261 seconds.
+  path: Assets/Sources/PixelMobs/Mob/ZombieA.png
+  artifactKey: Guid(37630e41834a2404c8b5bf9de4725acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/ZombieA.png using Guid(37630e41834a2404c8b5bf9de4725acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebefe6ff793ccd2941890ab875888f2a') in 0.028772 seconds
+  Import took 0.037443 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000278 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeC.png
+  artifactKey: Guid(fc357f5b054047f46b2d159d59216642) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeC.png using Guid(fc357f5b054047f46b2d159d59216642) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df7cabd0af9c79c275e9c84d0e444856') in 0.035099 seconds
+  Import took 0.041166 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000375 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallI.png
+  artifactKey: Guid(b7702c836d2324b4881992fa45f65102) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallI.png using Guid(b7702c836d2324b4881992fa45f65102) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f9b18514f39466c19f49257369bf186') in 0.034211 seconds
+  Import took 0.040051 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000249 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeE.png
+  artifactKey: Guid(9683ed1fb6fbade47b98a8c273f243d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeE.png using Guid(9683ed1fb6fbade47b98a8c273f243d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '846784c1839a78af42dd53de8c40e9b6') in 0.023864 seconds
+  Import took 0.029636 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallC.png
+  artifactKey: Guid(293380141a9d3e94f8727b63ff4bf551) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallC.png using Guid(293380141a9d3e94f8727b63ff4bf551) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3da1c556412e89252d9c2554ae0ba5ea') in 0.034262 seconds
+  Import took 0.041672 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000245 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithD.png
+  artifactKey: Guid(fb95c20833f435647bbd0483c4f9bb3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithD.png using Guid(fb95c20833f435647bbd0483c4f9bb3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55e7eb673a681406cc9d25f5433d6d3f') in 0.023570 seconds
+  Import took 0.030276 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000285 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WitchF.png
+  artifactKey: Guid(45a89bb0482dced4d8a355d13b63c706) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WitchF.png using Guid(45a89bb0482dced4d8a355d13b63c706) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '217248d09f35a6c6247c0d45e404b87e') in 0.024684 seconds
+  Import took 0.031521 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000343 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WitchB.png
+  artifactKey: Guid(6c21c27f0443def48a49c449b0515500) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WitchB.png using Guid(6c21c27f0443def48a49c449b0515500) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf9296bf456c6e360e6443ca9881abfa') in 0.024908 seconds
+  Import took 0.032037 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000254 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithA.png
+  artifactKey: Guid(c2f2f9d1d7c76ba4bbd72e7ceb023f32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithA.png using Guid(c2f2f9d1d7c76ba4bbd72e7ceb023f32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2610c29c1ad90d6de1a873ea6cc6c0f') in 0.019735 seconds
+  Import took 0.025961 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlugF.png
+  artifactKey: Guid(c113f6fdd15f2e04b81904354dd9072d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlugF.png using Guid(c113f6fdd15f2e04b81904354dd9072d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac62e4152b178ba0515c0c533e6040fb') in 0.021167 seconds
+  Import took 0.029395 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000321 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerC.png
+  artifactKey: Guid(ac303b3aa4ef12444834df23018f997f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerC.png using Guid(ac303b3aa4ef12444834df23018f997f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21a9fd092cdb8f822d4fb0726d7018e8') in 0.033305 seconds
+  Import took 0.039283 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000319 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MaskC.png
+  artifactKey: Guid(9caeb7472f1a2b44c9b811cc9f861279) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MaskC.png using Guid(9caeb7472f1a2b44c9b811cc9f861279) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ceb2d13eac2a351c36774d94472420d') in 0.021196 seconds
+  Import took 0.028585 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeA.png
+  artifactKey: Guid(a8b0c4d6908207e4f889aaf2a39d4537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeA.png using Guid(a8b0c4d6908207e4f889aaf2a39d4537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1416b67a7cd63463f27f191c63825d7') in 0.021041 seconds
+  Import took 0.027931 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000270 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WeaselA.png
+  artifactKey: Guid(9e74dc7bcd745c74d81412624e6fb88f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WeaselA.png using Guid(9e74dc7bcd745c74d81412624e6fb88f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6eec11224d7eb1f3e76cf964df29f46a') in 0.026012 seconds
+  Import took 0.032261 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000309 seconds.
+  path: Assets/Sources/PixelMobs/Mob/TentacleA.png
+  artifactKey: Guid(e60422814d6ee8343ba35a9fdff8ab80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/TentacleA.png using Guid(e60422814d6ee8343ba35a9fdff8ab80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19d3e1e30a014b439d8e60b4c548b536') in 0.024256 seconds
+  Import took 0.030164 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000300 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareC.png
+  artifactKey: Guid(28c02fd8d65378b40a61087a917a1793) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareC.png using Guid(28c02fd8d65378b40a61087a917a1793) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '300e332195196f1a597ed794e8daf723') in 0.020389 seconds
+  Import took 0.027423 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DuckA.png
+  artifactKey: Guid(da329953066dea74e95706ddf316b573) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DuckA.png using Guid(da329953066dea74e95706ddf316b573) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79862e10e25acd60c761be872ac66ae9') in 0.022102 seconds
+  Import took 0.028757 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000319 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerB.png
+  artifactKey: Guid(6500ed67c2546a6458e9ad251b9f306b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerB.png using Guid(6500ed67c2546a6458e9ad251b9f306b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f9e92a8ac809f92826fa38dacb3ed21') in 0.021219 seconds
+  Import took 0.028167 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000284 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WitchC.png
+  artifactKey: Guid(faaa4e1f2fe106948b8fab3d36d77938) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WitchC.png using Guid(faaa4e1f2fe106948b8fab3d36d77938) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f79e1d7b39a95f2dd6d009015e347abf') in 0.026093 seconds
+  Import took 0.033885 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000319 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerA.png
+  artifactKey: Guid(1e69f7abf41fa644dafbe38f5f8bf448) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerA.png using Guid(1e69f7abf41fa644dafbe38f5f8bf448) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf4140363e93efb00122066fedd24a82') in 0.022518 seconds
+  Import took 0.028898 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000285 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallE.png
+  artifactKey: Guid(7b38fb57d90d54b4b9797ae8b31cf293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallE.png using Guid(7b38fb57d90d54b4b9797ae8b31cf293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34892d6c348ab5ef767c130763df14aa') in 0.036641 seconds
+  Import took 0.043586 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000311 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlugD.png
+  artifactKey: Guid(da80f521b02b06b4db238accbe6bb781) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlugD.png using Guid(da80f521b02b06b4db238accbe6bb781) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c02acd2da13468309e04a7531e8cfcc3') in 0.020678 seconds
+  Import took 0.026237 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000305 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareI.png
+  artifactKey: Guid(8407c0d53fec472428873246afb0bd1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareI.png using Guid(8407c0d53fec472428873246afb0bd1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1645d00021d5b713b3fad63d3137b7c') in 0.023438 seconds
+  Import took 0.028893 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithC.png
+  artifactKey: Guid(9a7bfd2817d0343438c8aafb4ba300c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithC.png using Guid(9a7bfd2817d0343438c8aafb4ba300c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66dc27da3e2706ead281e5b6dee43adc') in 0.022275 seconds
+  Import took 0.030010 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000205 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerE.png
+  artifactKey: Guid(9ace9e965edf0414187965c79f7c1b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerE.png using Guid(9ace9e965edf0414187965c79f7c1b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6f203c7056908653d3ce01a80fb76ae') in 0.035054 seconds
+  Import took 0.041568 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000312 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerB.png
+  artifactKey: Guid(5f38cd29eb67f874ba86543e83f1a2d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerB.png using Guid(5f38cd29eb67f874ba86543e83f1a2d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b8810b5901a1dbd6bc819f4d68fb77c') in 0.031005 seconds
+  Import took 0.036997 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000376 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeK.png
+  artifactKey: Guid(c44103527fd3f9945aa2aa709e68037d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeK.png using Guid(c44103527fd3f9945aa2aa709e68037d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a0cf7a4b3459e478269680d49daa095') in 0.036214 seconds
+  Import took 0.043018 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeG.png
+  artifactKey: Guid(cd8af2038dc6a5949a24442bef61c6ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeG.png using Guid(cd8af2038dc6a5949a24442bef61c6ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4fdf1e1dba7b4e6110c88620e3cc08e') in 0.038465 seconds
+  Import took 0.043925 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000253 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SphereD.png
+  artifactKey: Guid(ac046613f350d6c4e94d55aa68c00653) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SphereD.png using Guid(ac046613f350d6c4e94d55aa68c00653) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ff2f183d29390eb7fae52cb140ae8fa') in 0.022281 seconds
+  Import took 0.029688 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000219 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeF.png
+  artifactKey: Guid(e01428453fad2b345a0c5f3626d3b8c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeF.png using Guid(e01428453fad2b345a0c5f3626d3b8c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3581e9a0f5cd7515caa69da7991dc719') in 0.035831 seconds
+  Import took 0.043762 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000308 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareL.png
+  artifactKey: Guid(891648ec85071274ab1381adc2b1a50c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareL.png using Guid(891648ec85071274ab1381adc2b1a50c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93dd193f5dfb04e40c044ecdd72b52ac') in 0.020938 seconds
+  Import took 0.027098 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000246 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MaskB.png
+  artifactKey: Guid(7ea1bece55e064e43b85899b09050e59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MaskB.png using Guid(7ea1bece55e064e43b85899b09050e59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc8efb972a17873c1dbff710b1071312') in 0.019301 seconds
+  Import took 0.025065 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000323 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallD.png
+  artifactKey: Guid(b42202ac3bf408945bdc2c692283cb91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallD.png using Guid(b42202ac3bf408945bdc2c692283cb91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c890cf5248f9496585f37c698aafe397') in 0.035656 seconds
+  Import took 0.042819 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000235 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WitchD.png
+  artifactKey: Guid(0d7727def7efa90439e96b512dd31dcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WitchD.png using Guid(0d7727def7efa90439e96b512dd31dcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'feac90235aa1cb5ae8dfa61fb43916b5') in 0.027011 seconds
+  Import took 0.033322 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000220 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SkullSmallD.png
+  artifactKey: Guid(09a67eda40fa815429a034fb71b8541d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SkullSmallD.png using Guid(09a67eda40fa815429a034fb71b8541d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a522b98c01b7c1ab9cc39205e93e1e36') in 0.025372 seconds
+  Import took 0.032551 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000219 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithB.png
+  artifactKey: Guid(5cda69cba77a01d45974077127533308) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithB.png using Guid(5cda69cba77a01d45974077127533308) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcebce6d69466c608848e6c064951394') in 0.022224 seconds
+  Import took 0.030839 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000279 seconds.
+  path: Assets/Sources/PixelMobs/Mob/TentacleD.png
+  artifactKey: Guid(0593265d14acfca4dbe6b514d84c0cb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/TentacleD.png using Guid(0593265d14acfca4dbe6b514d84c0cb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8be96ad735eef9a5c8e4d9eb03703f9') in 0.030387 seconds
+  Import took 0.038030 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000221 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerD.png
+  artifactKey: Guid(ffd383baf921c1b4191d347caf08b6f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerD.png using Guid(ffd383baf921c1b4191d347caf08b6f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d64b630708068797f2029098fbf2692') in 0.022974 seconds
+  Import took 0.029909 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000253 seconds.
+  path: Assets/Sources/PixelMobs/Mob/TentacleF.png
+  artifactKey: Guid(888980dd27d6f3042b5f55371e1479a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/TentacleF.png using Guid(888980dd27d6f3042b5f55371e1479a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '838728b3d97d099131f2dce2f341009a') in 0.026668 seconds
+  Import took 0.033072 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000199 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlugE.png
+  artifactKey: Guid(b181eb38e29edc7499691d5e302b40ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlugE.png using Guid(b181eb38e29edc7499691d5e302b40ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a907ea82f08173917eae845e9a90733f') in 0.021579 seconds
+  Import took 0.028458 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000229 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WitchA.png
+  artifactKey: Guid(0646b07f762e063419f644603d1182b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WitchA.png using Guid(0646b07f762e063419f644603d1182b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9c23192ed99a15a902a9d6922151c92') in 0.030708 seconds
+  Import took 0.036991 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000242 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WaterSmallA.png
+  artifactKey: Guid(845d2cc70cdce4e408fcbdcb39f3bae1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WaterSmallA.png using Guid(845d2cc70cdce4e408fcbdcb39f3bae1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73580cfbcc65a91e369142fb8dd71cc6') in 0.028652 seconds
+  Import took 0.034668 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareE.png
+  artifactKey: Guid(e58ef1aa7ce751e4daa584f3333ab1d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareE.png using Guid(e58ef1aa7ce751e4daa584f3333ab1d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e62909a9a051f1bf863e4f64fbe12fc4') in 0.021713 seconds
+  Import took 0.027847 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000250 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareK.png
+  artifactKey: Guid(3afdcf85414f65044a295c22512fa739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareK.png using Guid(3afdcf85414f65044a295c22512fa739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a6853aeea832ef897ca36fcad4b3bad2') in 0.023363 seconds
+  Import took 0.030345 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeH.png
+  artifactKey: Guid(3327cd2a7b2980848817c95de533cfa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeH.png using Guid(3327cd2a7b2980848817c95de533cfa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c39bc02b3b52eb077156495c35eb674') in 0.032912 seconds
+  Import took 0.040103 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000236 seconds.
+  path: Assets/Sources/PixelMobs/Mob/CrabB.png
+  artifactKey: Guid(2fcc33d09bee2b148bb545c4800a81de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/CrabB.png using Guid(2fcc33d09bee2b148bb545c4800a81de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28f8c9a1e912b0ab202e2748e594e201') in 0.019519 seconds
+  Import took 0.027043 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000245 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallB.png
+  artifactKey: Guid(0525e4a197f32bb46bd1f1cc1a39a3c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallB.png using Guid(0525e4a197f32bb46bd1f1cc1a39a3c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c8437e381273e5267903dc8c042ecf0') in 0.033297 seconds
+  Import took 0.039986 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000302 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeL.png
+  artifactKey: Guid(58ba21488a4de2946b7fc76affb66f9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeL.png using Guid(58ba21488a4de2946b7fc76affb66f9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42ca8f40f08db4f6a1a2c1336b8518f7') in 0.021298 seconds
+  Import took 0.027950 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000285 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeB.png
+  artifactKey: Guid(1b96a20596afe224b947fba1cf0ec200) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeB.png using Guid(1b96a20596afe224b947fba1cf0ec200) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6e3565413621e3dd23c0585521ba250') in 0.021402 seconds
+  Import took 0.028585 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000274 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SquirrelB.png
+  artifactKey: Guid(719e1eb693d14a74786e0606f0b418c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SquirrelB.png using Guid(719e1eb693d14a74786e0606f0b418c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b82c8d039cafdbd38b229615a7cc497c') in 0.024321 seconds
+  Import took 0.031992 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000306 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SphereC.png
+  artifactKey: Guid(5c3770a201022b94d8a13e78260db644) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SphereC.png using Guid(5c3770a201022b94d8a13e78260db644) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2d2120f100b839be3471d48b5e91c7b') in 0.021639 seconds
+  Import took 0.028554 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000311 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerG.png
+  artifactKey: Guid(4158ced763507774798dcdac23f38f32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerG.png using Guid(4158ced763507774798dcdac23f38f32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b6c8bf48de14de7b638b9bee5f295c9') in 0.031698 seconds
+  Import took 0.038650 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000247 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithF.png
+  artifactKey: Guid(20c1f4fa1683b744e8b5d94678621838) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithF.png using Guid(20c1f4fa1683b744e8b5d94678621838) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d2f608b21ae89ff01149af3290fb321') in 0.022641 seconds
+  Import took 0.028591 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000374 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallA.png
+  artifactKey: Guid(f21efb8d6bc06bb44b8adc215c9c6369) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallA.png using Guid(f21efb8d6bc06bb44b8adc215c9c6369) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c8b424c66a41c0a11838c465c66a42f') in 0.020898 seconds
+  Import took 0.026543 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000295 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareB.png
+  artifactKey: Guid(58cf07eb849c90942a8fc54bb19e829d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareB.png using Guid(58cf07eb849c90942a8fc54bb19e829d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33a9d4ec71073d9be0733bb200b4a1ca') in 0.020536 seconds
+  Import took 0.026763 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000413 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SkullSmallC.png
+  artifactKey: Guid(b17d9f356cdd92d4dae6651bc6d9df21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SkullSmallC.png using Guid(b17d9f356cdd92d4dae6651bc6d9df21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8254fe417409776d321764867beb13fe') in 0.022520 seconds
+  Import took 0.029305 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000239 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WeaselC.png
+  artifactKey: Guid(5039291d9eac90649a382f8e4c8871fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WeaselC.png using Guid(5039291d9eac90649a382f8e4c8871fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '151320aa1bc971ab39ff7f95a7959380') in 0.025004 seconds
+  Import took 0.031856 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000238 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeI.png
+  artifactKey: Guid(80f0acdb044d3294595e8f6617c19044) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeI.png using Guid(80f0acdb044d3294595e8f6617c19044) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b775cb07e57b3ad619f3dea3be171bd') in 0.025201 seconds
+  Import took 0.031386 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000251 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallH.png
+  artifactKey: Guid(661245fe613c2934cac251b6cd725368) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallH.png using Guid(661245fe613c2934cac251b6cd725368) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d419bc9650f00fd0a3c7dc8c59ca4ab') in 0.035002 seconds
+  Import took 0.042189 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000321 seconds.
+  path: Assets/Sources/PixelMobs/Mob/TentacleC.png
+  artifactKey: Guid(1e70e2558c399314ea8c2e961483d64c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/TentacleC.png using Guid(1e70e2558c399314ea8c2e961483d64c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a9b6f83b44c625ba2843ab52e68b258') in 0.022367 seconds
+  Import took 0.028390 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000323 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeA.png
+  artifactKey: Guid(9d69ae98725365b4b94189120dc1b40a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeA.png using Guid(9d69ae98725365b4b94189120dc1b40a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ba98b9e713613c0440747143d8ba6d4') in 0.041592 seconds
+  Import took 0.048624 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000211 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WeaselB.png
+  artifactKey: Guid(50b9dfa0cbaae4f4ca738708430b812a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WeaselB.png using Guid(50b9dfa0cbaae4f4ca738708430b812a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16ca443da35861dc396173e71c6f8bff') in 0.026261 seconds
+  Import took 0.033738 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000315 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WitchE.png
+  artifactKey: Guid(db39c8fd5313f7045b30a2c63c09807a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WitchE.png using Guid(db39c8fd5313f7045b30a2c63c09807a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '689de73f385f41178fdc4e8f1ac5937a') in 0.028099 seconds
+  Import took 0.034463 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogA.png
+  artifactKey: Guid(2257454f6cf054b408b00c689de6775c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogA.png using Guid(2257454f6cf054b408b00c689de6775c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1f3cdde34fb2722e9fbed3cd4462bc3') in 0.021012 seconds
+  Import took 0.028392 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000269 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeE_Dead.png
+  artifactKey: Guid(c4f4edd513b93124895a67265867cd3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeE_Dead.png using Guid(c4f4edd513b93124895a67265867cd3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8d2bfc44dc4fa512e06f48ea79960bb') in 0.021890 seconds
+  Import took 0.029135 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeD.png
+  artifactKey: Guid(bfd078c450abf8e49a0f7413d9abccc2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeD.png using Guid(bfd078c450abf8e49a0f7413d9abccc2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a644312266650fef41a001641b862aa8') in 0.022824 seconds
+  Import took 0.030370 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000225 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeB.png
+  artifactKey: Guid(90aad0cf8dd99a042b600728db7470d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeB.png using Guid(90aad0cf8dd99a042b600728db7470d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a783d24af2de33f90793970b5b515c95') in 0.053512 seconds
+  Import took 0.061485 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000245 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallA.png
+  artifactKey: Guid(2d760effdb840184685ee187ede2f8c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallA.png using Guid(2d760effdb840184685ee187ede2f8c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c3a66b701f5a8a5a3cf1c74353f6b53') in 0.052470 seconds
+  Import took 0.061450 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeG.png
+  artifactKey: Guid(52f3036389b4b6342a5ef9ce9f27968b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeG.png using Guid(52f3036389b4b6342a5ef9ce9f27968b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a3c2d431ac32f4b46a3348da26f0723') in 0.024489 seconds
+  Import took 0.032809 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000208 seconds.
+  path: Assets/Sources/PixelMobs/Mob/DogC.png
+  artifactKey: Guid(82dbaed2cb6ca9f4795dfea940d71d8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/DogC.png using Guid(82dbaed2cb6ca9f4795dfea940d71d8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6010924400ad0f87ef4aa83affe65ea') in 0.021651 seconds
+  Import took 0.029606 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000345 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerE.png
+  artifactKey: Guid(ac671aadfaf7a3944a36a3b1f93c9d80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerE.png using Guid(ac671aadfaf7a3944a36a3b1f93c9d80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f394f707afe05fe240a32cc26d78c97') in 0.022119 seconds
+  Import took 0.029226 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000206 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MachineA.png
+  artifactKey: Guid(dc8dff11b285ad744968d6cdd6e22a4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MachineA.png using Guid(dc8dff11b285ad744968d6cdd6e22a4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb84c23d0fe0555232c833583fb34b3d') in 0.022170 seconds
+  Import took 0.029927 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000199 seconds.
+  path: Assets/Sources/PixelMobs/Mob/TentacleB.png
+  artifactKey: Guid(afe3ddb1db11e2d49a78c0e19a632168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/TentacleB.png using Guid(afe3ddb1db11e2d49a78c0e19a632168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55a245f18bda8156d9e50c5e7286c0dc') in 0.024130 seconds
+  Import took 0.030747 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000198 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SkullSmallF.png
+  artifactKey: Guid(cf801eecbbe633a45bca93cc02020e43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SkullSmallF.png using Guid(cf801eecbbe633a45bca93cc02020e43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dbd4e11c41982a5f85611a2a80fe2c35') in 0.022575 seconds
+  Import took 0.029095 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000204 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareA.png
+  artifactKey: Guid(855e3db828c83944092a581e31dd58ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareA.png using Guid(855e3db828c83944092a581e31dd58ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '487d2c7b58c6886f8e6246d136c942b9') in 0.022343 seconds
+  Import took 0.030025 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000208 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MaskD.png
+  artifactKey: Guid(bae69dd1f5ce14e4397618251c2866c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MaskD.png using Guid(bae69dd1f5ce14e4397618251c2866c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '125c99ac3eee447bb1004304f7deea1c') in 0.023273 seconds
+  Import took 0.030180 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000250 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallD.png
+  artifactKey: Guid(885099eb16bca2d49b53d5f8157951fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallD.png using Guid(885099eb16bca2d49b53d5f8157951fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '786d9847aa0eb8a03b7f14b42f345c6a') in 0.023894 seconds
+  Import took 0.032634 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000267 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeO.png
+  artifactKey: Guid(20fd59d224c5bce4495cea6386e35924) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeO.png using Guid(20fd59d224c5bce4495cea6386e35924) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e6b8f4648579a36e4cc6b4ecbe76419') in 0.042864 seconds
+  Import took 0.050028 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000237 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallC.png
+  artifactKey: Guid(0857f7d5a1454094b851ad5c36f6f844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallC.png using Guid(0857f7d5a1454094b851ad5c36f6f844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a8059efc85c6c95b56ff9ac7fc1c961') in 0.022861 seconds
+  Import took 0.029704 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000218 seconds.
+  path: Assets/Sources/PixelMobs/Mob/WaterA.png
+  artifactKey: Guid(9a00ecbd5c39bea46947c89a4bdb32bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/WaterA.png using Guid(9a00ecbd5c39bea46947c89a4bdb32bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec150a9ae2a7041e639785f73c51a076') in 0.022377 seconds
+  Import took 0.029562 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallB.png
+  artifactKey: Guid(34e9f398ad15380469bc50ba3a41f958) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallB.png using Guid(34e9f398ad15380469bc50ba3a41f958) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea090ba1c07c38624ddc71b4b34aa94f') in 0.024525 seconds
+  Import took 0.031128 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000202 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeI.png
+  artifactKey: Guid(c3ea56ba49081224ebc8357c2ead5f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeI.png using Guid(c3ea56ba49081224ebc8357c2ead5f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5281eccda78d2e05f7bcbcd612d24959') in 0.037531 seconds
+  Import took 0.044207 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000236 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithG.png
+  artifactKey: Guid(3d4b55be2c9677e4fade767730e92015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithG.png using Guid(3d4b55be2c9677e4fade767730e92015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ffca208c1cdeb0987e0758d59e025d6') in 0.019833 seconds
+  Import took 0.025974 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000220 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SphereA.png
+  artifactKey: Guid(c7f555e60422c8c47a8f5f9d201a37fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SphereA.png using Guid(c7f555e60422c8c47a8f5f9d201a37fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '435b2553d76672659c9e9f00288ed47c') in 0.021087 seconds
+  Import took 0.027618 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000220 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareG.png
+  artifactKey: Guid(e3666f8874387f34aa8d348dc34559a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareG.png using Guid(e3666f8874387f34aa8d348dc34559a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c19e30e21c8b191751897904b505940') in 0.021730 seconds
+  Import took 0.028486 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000260 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MaskA.png
+  artifactKey: Guid(dc4babbfb22ca3a4bb896f77bbb8de8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MaskA.png using Guid(dc4babbfb22ca3a4bb896f77bbb8de8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33d4d2acb4fb5319a6cf43e23308b218') in 0.017674 seconds
+  Import took 0.023543 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000247 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SpaceA.png
+  artifactKey: Guid(7ad5b7e93ea9c9549a48190459144e3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SpaceA.png using Guid(7ad5b7e93ea9c9549a48190459144e3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f8b6879bbd1fa425c0453fdb8874227') in 0.034360 seconds
+  Import took 0.040257 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000262 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SphereB.png
+  artifactKey: Guid(c0a3bd17b480d1c499ddd8f88038fe79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SphereB.png using Guid(c0a3bd17b480d1c499ddd8f88038fe79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '044b899450c1307a3859a14be86b606d') in 0.020786 seconds
+  Import took 0.026743 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000265 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerF.png
+  artifactKey: Guid(f8960be1216101d4dba4a883994b5acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerF.png using Guid(f8960be1216101d4dba4a883994b5acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25808696ad78007c9b2881fcfeb52ec6') in 1.612043 seconds
+  Import took 1.618496 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000226 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallG.png
+  artifactKey: Guid(e47c86481d899434b823966b9cb5ee8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallG.png using Guid(e47c86481d899434b823966b9cb5ee8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e67d26be637518e9d6091a6ced796e1') in 0.033984 seconds
+  Import took 0.041202 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000288 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallF.png
+  artifactKey: Guid(d8b1736c27ee1d547beb3f02bb3da3df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallF.png using Guid(d8b1736c27ee1d547beb3f02bb3da3df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f680e07aa76120c9427271f1510e9028') in 0.050192 seconds
+  Import took 0.056513 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSmallerD.png
+  artifactKey: Guid(f725bab5dc2bb494eb7c84f0358e0761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSmallerD.png using Guid(f725bab5dc2bb494eb7c84f0358e0761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd00958bc1a0dd28e97566ad0e19b9159') in 0.034222 seconds
+  Import took 0.040326 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareH.png
+  artifactKey: Guid(48887c7bff8cc364fb32641be6f76f5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareH.png using Guid(48887c7bff8cc364fb32641be6f76f5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25eb94519070e52c1d033d9786f40b98') in 0.020273 seconds
+  Import took 0.026316 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000303 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeL.png
+  artifactKey: Guid(1891480d79935ed4ebb30a1438dc6ac8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeL.png using Guid(1891480d79935ed4ebb30a1438dc6ac8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3427eda2866009b95c3c98df12b8a15') in 0.035279 seconds
+  Import took 0.042093 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000333 seconds.
+  path: Assets/Sources/PixelMobs/Mob/TentacleE.png
+  artifactKey: Guid(86f8052fd3b284246ad8c990a390e2a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/TentacleE.png using Guid(86f8052fd3b284246ad8c990a390e2a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd859fdba1daf105f790e90051035b175') in 0.022324 seconds
+  Import took 0.027968 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000307 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerC.png
+  artifactKey: Guid(adc51fc6c22b23f45aba5cefc9ca9e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallerC.png using Guid(adc51fc6c22b23f45aba5cefc9ca9e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7481e4df4e545d8e206fba0671cdc5b1') in 0.021816 seconds
+  Import took 0.028242 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000228 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeJ.png
+  artifactKey: Guid(0fa308d548688d44baa34f5299ea7587) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeJ.png using Guid(0fa308d548688d44baa34f5299ea7587) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19062ddd2cd07a7efabda1f315276ad8') in 0.033886 seconds
+  Import took 0.039699 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000204 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlugG.png
+  artifactKey: Guid(41ad162b08f166740a04a299a9c0eddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlugG.png using Guid(41ad162b08f166740a04a299a9c0eddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07e32b50700c45092cb3e712e4b21f36') in 0.024926 seconds
+  Import took 0.031454 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000267 seconds.
+  path: Assets/Sources/PixelMobs/Mob/ZombieB.png
+  artifactKey: Guid(9208c7ce7defbb1408b4f6a318aa1263) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/ZombieB.png using Guid(9208c7ce7defbb1408b4f6a318aa1263) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cde0f2ddbc6840f30f644eb786e3056f') in 0.025021 seconds
+  Import took 0.031175 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000347 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SquirrelA.png
+  artifactKey: Guid(05abc62f99eeef744a9d90f72e8ba544) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SquirrelA.png using Guid(05abc62f99eeef744a9d90f72e8ba544) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03c2ddb379dba20f5fe15ab183be1bfc') in 0.024046 seconds
+  Import took 0.030666 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000237 seconds.
+  path: Assets/Sources/PixelMobs/Mob/LurkerA.png
+  artifactKey: Guid(af68e4e43ab59154aa4f8e16a01eeddc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/LurkerA.png using Guid(af68e4e43ab59154aa4f8e16a01eeddc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '690300580b3913365674dfed23446bf5') in 0.021438 seconds
+  Import took 0.027697 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareSmallE.png
+  artifactKey: Guid(bdcc96e67daa9b84b8d46d713cb54872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareSmallE.png using Guid(bdcc96e67daa9b84b8d46d713cb54872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e16d712978dcd3415dea6be43063802') in 0.023094 seconds
+  Import took 0.029414 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000299 seconds.
+  path: Assets/Sources/PixelMobs/Mob/MonolithI.png
+  artifactKey: Guid(41bfc94f493473a469b2f00e894b47ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/MonolithI.png using Guid(41bfc94f493473a469b2f00e894b47ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6005dec0e9cbee4ad18f7c17d7801f28') in 0.020539 seconds
+  Import took 0.026829 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000198 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeJ.png
+  artifactKey: Guid(36696d2b303dffa43948b43ff23f1171) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeJ.png using Guid(36696d2b303dffa43948b43ff23f1171) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d7bba43b4002d5582326490d41fedfa') in 0.023303 seconds
+  Import took 0.029531 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000254 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SkullSmallG.png
+  artifactKey: Guid(2352024c3a978914fbcab442a3ea6c26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SkullSmallG.png using Guid(2352024c3a978914fbcab442a3ea6c26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a0243520087ad7aae87d3044268d883') in 0.021286 seconds
+  Import took 0.027401 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000304 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SnakeH.png
+  artifactKey: Guid(5d8c4bfe0863dd349907c8ab29b5d8c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SnakeH.png using Guid(5d8c4bfe0863dd349907c8ab29b5d8c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20ab26ee343a4ab7568b8f4120531940') in 0.020606 seconds
+  Import took 0.026949 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/PixelMobs/Mob/SlimeSquareD.png
+  artifactKey: Guid(31650574caec5b14791b465ac015721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/PixelMobs/Mob/SlimeSquareD.png using Guid(31650574caec5b14791b465ac015721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58e189f217f13f35f6e107d8e3a0ecc6') in 0.020423 seconds
+  Import took 0.027800 seconds .
+
