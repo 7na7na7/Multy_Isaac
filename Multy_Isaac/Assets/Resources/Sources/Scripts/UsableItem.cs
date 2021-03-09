@@ -263,6 +263,23 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
+            case 109: //과일빙수
+                if (eat())
+                {
+                    offStat.HungryHeal(70);
+                    statMgr.Heal(50);
+                    setHappy();
+                    return true;
+                }
+                break;
+            case 110: //좀비요리
+                if (eat())
+                {
+                    offStat.HungryHeal(25);
+                    setHappy();
+                    return true;
+                }
+                break;
         }
 
         return false;
