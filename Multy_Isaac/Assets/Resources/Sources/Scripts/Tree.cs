@@ -60,7 +60,6 @@ public class Tree : MonoBehaviour
     [PunRPC]
     void Hit(int value,int randomValue, bool isRandomTem)
     {
-        print("B");
         GetComponent<FlashWhite>().Flash();
                 transform.DOScale(new Vector3(1.6f,1.6f), 0.15f).OnComplete(() =>
                 {

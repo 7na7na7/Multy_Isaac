@@ -19,7 +19,11 @@ public class Bomb : MonoBehaviour
         if(PhotonNetwork.OfflineMode) 
             Instantiate(explosion, transform.position, quaternion.identity);
         else
-            PhotonNetwork.Instantiate(explosion.name, transform.position, quaternion.identity);
+        {
+            if(PhotonNetwork.IsMasterClient)
+                PhotonNetwork.Instantiate(explosion.name, transform.position, quaternion.identity);
+        }
+           
         Destroy(gameObject);
     }
 

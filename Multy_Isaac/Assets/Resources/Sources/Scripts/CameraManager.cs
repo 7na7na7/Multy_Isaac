@@ -25,7 +25,6 @@ public class CameraManager : MonoBehaviour
         {
             if (PhotonNetwork.OfflineMode)
             {
-                print("A");
                 GameObject t=Instantiate(minimapHead, transform.position, Quaternion.identity);
                 target = t;
             }
