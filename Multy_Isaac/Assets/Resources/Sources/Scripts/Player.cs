@@ -21,7 +21,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         common,snow,mushroom,bomb
     }
-    
+
+    private TimeManager timeMgr;
     public float fireDamageTick;
     private float fireTime=0;
     public bool isTEST = true;
@@ -109,6 +110,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #region 내장함수
     private void Start()
     {
+        timeMgr = FindObjectOfType<TimeManager>();
         temMgr = FindObjectOfType<TemManager>();
         nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
         nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
@@ -291,6 +293,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     transform.position = curPos;
                 else //조금 떨어져 있으면 Lerp로 자연스럽게 위치 동기화
                     transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);   
+                
+                    if (timeMgr.isNight)
+                    {
+                        nickname.gameObject.SetActive(false);
+                        hp.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        nickname.gameObject.SetActive(true);
+                        hp.gameObject.SetActive(true);
+                    }   
+                
             }
         }
     
