@@ -146,7 +146,7 @@ public class Zombie : MonoBehaviour
         Vector3 velocity = dir * speed * speedFactor;
         rigid.velocity = velocity;
 
-        //enemy.setAnim("Walk");
+        enemy.setAnim("Walk");
         enemy.setLocalX(enemy.targetPosition.transform.position.x);
     }
     public void Update () 
@@ -186,7 +186,7 @@ public class Zombie : MonoBehaviour
               }
               else
               {
-                  if (enemy.isFinding)
+                  if (enemy.isFinding&& enemy.canMove)
                   {
                       if (zombieIndex == 1 || zombieIndex == 4 || zombieIndex == 3)
                       { 
@@ -203,7 +203,7 @@ public class Zombie : MonoBehaviour
                                   tr = PlayerTrs[i];
                                   if (tr != null)
                                   {
-                                      if (Vector3.Distance(transform.position, tr.position) < detectRad+1f)
+                                      if (Vector3.Distance(transform.position, tr.position) < detectRad-0.1f)
                                       {
                                           isDetecting = true;
                                           break;
