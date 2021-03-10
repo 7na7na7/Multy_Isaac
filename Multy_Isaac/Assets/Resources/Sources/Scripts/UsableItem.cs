@@ -297,6 +297,22 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
+            case 115: //꿀단지
+                if (eat())
+                {
+                    statMgr.Heal(45);
+                    setHappy();
+                    return true;
+                }
+                break;
+            case 116: //감자칩
+                if (eat())
+                {
+                    offStat.HungryHeal(35);
+                    setHappy();
+                    return true;
+                }
+                break;
         }
 
         return false;
