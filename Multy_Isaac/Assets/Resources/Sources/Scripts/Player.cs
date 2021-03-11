@@ -19,7 +19,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public enum  bulletType
     {
-        common,snow,mushroom,bomb
+        common,snow,mushroom,electric
     }
 
     private TimeManager timeMgr;
@@ -560,6 +560,12 @@ pv.RPC("DieRPC",RpcTarget.All);
                 case bulletType.snow:
                     break;
                 case bulletType.mushroom:
+                    break;
+                case bulletType.electric:
+                    pos=Vector3.zero;
+                    canMove = false;
+                    rb.velocity=Vector2.zero;
+                    rb.DOMove(transform.position, nuckBackTime*2).SetEase(nuckBackEase).OnComplete(()=> { if(!isDead) canMove = true; });
                     break;
             }
             

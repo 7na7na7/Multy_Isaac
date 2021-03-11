@@ -96,14 +96,14 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       fireTime -= Time.deltaTime;
   }
 
-  public void Hit(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
+  public void Hit(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0, Player.bulletType type=Player.bulletType.common)
   {
     if (PhotonNetwork.OfflineMode)
-      HitRPC(value, pos, nuckBackDistance);
+      HitRPC(value, pos, nuckBackDistance,type);
     else
     {
       if (PhotonNetwork.IsMasterClient)
-        pv.RPC("HitRPC", RpcTarget.All, value, pos, nuckBackDistance);
+        pv.RPC("HitRPC", RpcTarget.All, value, pos, nuckBackDistance,type);
     }
   }
 
@@ -146,7 +146,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     }
   }
   [PunRPC]
-  void HitRPC(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0)
+  void HitRPC(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0,Player.bulletType type=Player.bulletType.common)
   {
     flashwhite.Flash();
     hp -= value;
@@ -165,28 +165,57 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       Vector3 dir = (transform.position - pos).normalized;
       Vector2 savedVel = GetComponent<Rigidbody2D>().velocity;
       rigid.velocity = Vector2.zero;
-      rigid.DOMove(transform.position + dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(() =>
+      if (type == Player.bulletType.electric)
       {
-        rigid.velocity = savedVel;
-        canMove = true;
-        if (hp <= 0)
+        rigid.DOMove(transform.position, nuckBackTime*2).SetEase(nuckBackEase).OnComplete(() =>
         {
-          Die();
-        }
-        else
+          rigid.velocity = savedVel;
+          canMove = true;
+          if (hp <= 0)
+          {
+            Die();
+          }
+          else
+          {
+            if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+            {
+              setAnim("Walk");
+            }
+            else if (zombie.zombieIndex == 2)
+            {
+              setAnim("Idle");
+            }
+          }
+          if(zombie.zombieIndex==2)
+            zombie.stopPoison();
+        });
+      }
+      else
+      {
+        rigid.DOMove(transform.position + dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(() =>
         {
-          if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+          rigid.velocity = savedVel;
+          canMove = true;
+          if (hp <= 0)
           {
-            setAnim("Walk");
+            Die();
           }
-          else if (zombie.zombieIndex == 2)
+          else
           {
-            setAnim("Idle");
+            if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+            {
+              setAnim("Walk");
+            }
+            else if (zombie.zombieIndex == 2)
+            {
+              setAnim("Idle");
+            }
           }
-        }
-          
-      });
-      
+          if(zombie.zombieIndex==2)
+            zombie.stopPoison();
+        }); 
+      }
+
       zombie.Detect(15);
     }
     else

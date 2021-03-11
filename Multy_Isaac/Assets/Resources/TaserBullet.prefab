@@ -60,7 +60,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 3
+  m_PointLightOuterRadius: 2
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 6637044811040539383}
   - component: {fileID: 260596654096173333}
   - component: {fileID: -2401214700219501570}
-  - component: {fileID: 5322556594269903062}
+  - component: {fileID: 2777142759637079090}
   m_Layer: 0
-  m_Name: CrossBowBullet
+  m_Name: TaserBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 6637044811040539379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1699503958582040504}
   m_Father: {fileID: 0}
@@ -164,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 715a65bcfdbbdb64cb1400f88ad7fd9f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9da8ec53eeae76b43b1b4c75e34cc03d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -187,16 +187,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf6c94d6a03d2043be7ec66b232fded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  Dmg: 40
-  nuckBackDistance: 2
+  type: 3
+  Dmg: 8
+  nuckBackDistance: 0.5
   none: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
-  speed: 25
-  DestroyTime: 1.5
+  speed: 18
+  DestroyTime: 0.75
   pv: {fileID: 6637044811040539383}
   wallEffect: {fileID: 6975551736277749814, guid: 1ff3e3b24f342984aac2b7acae7e63ac,
     type: 3}
-  hitEffect: {fileID: 6975551736277749814, guid: 16a4441501c1e8546b57e06b8201215b,
+  hitEffect: {fileID: 3323856011215036361, guid: 1c47a89be44b8824884ec0af0b2917dc,
     type: 3}
 --- !u!114 &6637044811040539383
 MonoBehaviour:
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
---- !u!70 &5322556594269903062
+--- !u!70 &2777142759637079090
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,6 +271,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.028840704, y: -0.017288117}
-  m_Size: {x: 0.8784904, y: 0.062091492}
+  m_Offset: {x: 0.030028123, y: 0.008618739}
+  m_Size: {x: 0.37988946, y: 0.2337712}
   m_Direction: 1

@@ -157,12 +157,8 @@ public class Zombie : MonoBehaviour
                     poisonTime += Time.deltaTime;
               if (!enemy.isFinding && enemy.canMove) 
               {
-                  switch (zombieIndex)
-                  {
-                      case 1:
-                      case 2:
-                      case 3:
-                      case 4:
+                
+                  
                           for (int i = 0; i < Players.Count; i++)
                           {
                               if (!Players[i].isDead)
@@ -181,8 +177,7 @@ public class Zombie : MonoBehaviour
                                   }
                               }
                           }
-                          break;
-                  }
+ 
               }
               else
               {
@@ -203,7 +198,7 @@ public class Zombie : MonoBehaviour
                                   tr = PlayerTrs[i];
                                   if (tr != null)
                                   {
-                                      if (Vector3.Distance(transform.position, tr.position) < detectRad-0.1f)
+                                      if (Vector3.Distance(transform.position, tr.position) < detectRad+1f)
                                       {
                                           isDetecting = true;
                                           break;
@@ -234,6 +229,11 @@ public class Zombie : MonoBehaviour
             }
         }
 
+    public void stopPoison()
+    {
+        canPoison = false;
+        GoPath();
+    }
     private float getAngle(float x1, float y1, float x2, float y2) //Vector값을 넘겨받고 회전값을 넘겨줌
 {
 float dx = x2 - x1;

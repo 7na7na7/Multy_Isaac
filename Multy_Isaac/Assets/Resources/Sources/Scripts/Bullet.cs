@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         }
         else if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().Hit(Dmg,transform.position, nuckBackDistance);
+            other.GetComponent<Enemy>().Hit(Dmg,transform.position, nuckBackDistance,type);
             DestroyHit();
         }
         else if (other.gameObject.tag=="Wall")
