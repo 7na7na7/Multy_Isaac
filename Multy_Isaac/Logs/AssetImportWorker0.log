@@ -194,3 +194,555 @@ Received Import Request.
 Start importing Assets/Resources/WallEffect.prefab using Guid(1ff3e3b24f342984aac2b7acae7e63ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cc5430a75a0e605a14992026b4f011e') in 0.018110 seconds
   Import took 0.025104 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007210 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.204 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.11 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.4 MB.
+System memory in use after: 190.6 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4203.
+Total: 3.155000 ms (FindLiveObjects: 0.494700 ms CreateObjectMapping: 0.228300 ms MarkObjects: 2.402600 ms  DeleteObjects: 0.028200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.014777 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.17 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.885 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.24 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.4 MB.
+System memory in use after: 190.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4207.
+Total: 4.589800 ms (FindLiveObjects: 0.489100 ms CreateObjectMapping: 0.258000 ms MarkObjects: 3.800500 ms  DeleteObjects: 0.040100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008080 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.24 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.422 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.5 MB.
+System memory in use after: 190.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4211.
+Total: 3.081600 ms (FindLiveObjects: 0.396900 ms CreateObjectMapping: 0.215100 ms MarkObjects: 2.438800 ms  DeleteObjects: 0.029500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005010 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.63 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.440 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.40 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.5 MB.
+System memory in use after: 190.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4215.
+Total: 2.865600 ms (FindLiveObjects: 0.383200 ms CreateObjectMapping: 0.223400 ms MarkObjects: 2.233700 ms  DeleteObjects: 0.024100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008050 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.361 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.5 MB.
+System memory in use after: 190.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4219.
+Total: 4.332400 ms (FindLiveObjects: 0.647400 ms CreateObjectMapping: 0.339900 ms MarkObjects: 3.314900 ms  DeleteObjects: 0.028600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006625 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.11 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.267 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.5 MB.
+System memory in use after: 190.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4223.
+Total: 4.792700 ms (FindLiveObjects: 0.646900 ms CreateObjectMapping: 0.424600 ms MarkObjects: 3.693700 ms  DeleteObjects: 0.026400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005332 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.243 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 190.5 MB.
+System memory in use after: 190.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4227.
+Total: 3.508200 ms (FindLiveObjects: 0.502400 ms CreateObjectMapping: 0.221500 ms MarkObjects: 2.757300 ms  DeleteObjects: 0.026200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 471.073594 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '284c32cfad14252f4af91fcfc37c44d2') in 0.276394 seconds
+  Import took 0.287623 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.220554 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d8eff602de99a0dbeed6857fbc5d0b5') in 0.065759 seconds
+  Import took 0.082943 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.049334 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d8eff602de99a0dbeed6857fbc5d0b5') in 0.065218 seconds
+  Import took 0.076558 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.620182 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cf2a8319fbd598e9a9bbb758daef0d1') in 0.080975 seconds
+  Import took 0.090821 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.392352 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e4dbdcb430ae804b5e0fc589c5e129d') in 0.071338 seconds
+  Import took 0.089111 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.607577 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '055624558caf4d80700f0618e0873b49') in 0.066879 seconds
+  Import took 0.075442 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.014992 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.359 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.20 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.0 MB.
+System memory in use after: 191.2 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 4267.
+Total: 2.695100 ms (FindLiveObjects: 0.371700 ms CreateObjectMapping: 0.175900 ms MarkObjects: 2.119400 ms  DeleteObjects: 0.026700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005555 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.215 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.0 MB.
+System memory in use after: 191.2 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4271.
+Total: 3.249300 ms (FindLiveObjects: 0.364900 ms CreateObjectMapping: 0.199700 ms MarkObjects: 2.639800 ms  DeleteObjects: 0.043800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008037 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.14 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.559 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.0 MB.
+System memory in use after: 191.2 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4275.
+Total: 3.012000 ms (FindLiveObjects: 0.400300 ms CreateObjectMapping: 0.209900 ms MarkObjects: 2.371800 ms  DeleteObjects: 0.028900 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 9605.733730 seconds.
+  path: Assets/Resources/Sources/Items/item8.prefab
+  artifactKey: Guid(3f9c33f798adca448a2661777e99eb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item8.prefab using Guid(3f9c33f798adca448a2661777e99eb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad8781508ceb234507d26e2cf53da1c0') in 0.755558 seconds
+  Import took 0.884690 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.160774 seconds.
+  path: Assets/Resources/Sources/Items/item8.prefab
+  artifactKey: Guid(3f9c33f798adca448a2661777e99eb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item8.prefab using Guid(3f9c33f798adca448a2661777e99eb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5774c6d181f0332f7d2244b79418e06f') in 0.021302 seconds
+  Import took 0.037770 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.537128 seconds.
+  path: Assets/Resources/Sources/Items/item8.prefab
+  artifactKey: Guid(3f9c33f798adca448a2661777e99eb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item8.prefab using Guid(3f9c33f798adca448a2661777e99eb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa00ced3abde2ae02317d1d1d1044bb8') in 0.022695 seconds
+  Import took 0.038034 seconds .
+
