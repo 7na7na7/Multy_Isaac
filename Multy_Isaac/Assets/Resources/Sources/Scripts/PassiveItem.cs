@@ -32,6 +32,9 @@ public class PassiveItem : MonoBehaviour
             case 48: //양말
                 Speed += 7;
                 break;
+            case 49: //스타킹
+                Speed += 17;
+                break;
             case 81: //소음기
                 Silence++;
                 break;
@@ -61,6 +64,9 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 48:
                 Speed -= 7;
+                break;
+            case 49:
+                Speed -= 17;
                 break;
             case 81:
                 Silence--;
