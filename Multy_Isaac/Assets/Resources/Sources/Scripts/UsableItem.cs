@@ -182,6 +182,14 @@ public class UsableItem : MonoBehaviour
                 else
                     PhotonNetwork.InstantiateRoomObject(FireBomb.name, transform.position, Quaternion.identity);
                 return true;
+            case 80: //사과식초
+                if (eat())
+                {
+                    statMgr.Heal(30);
+                    setHappy();
+                    return true;
+                }
+                break;
             case 84: //피자
                 if (eat())
                 {
