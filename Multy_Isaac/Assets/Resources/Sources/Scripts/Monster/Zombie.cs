@@ -10,6 +10,10 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    private bool isPan1 = false; //나무판인가?
+    private bool isPan2 = false;//철판인가?
+    public int pan1SpeedPercent = 40;
+    public int pan2SpeedPercent = 40;
     public GameObject Poison;
     private Animator anim;
     private IEnumerator poisonCor;
@@ -140,10 +144,15 @@ public class Zombie : MonoBehaviour
                 break;
             }
         }
+        float PanValue = 1;
+        if (isPan1)
+            PanValue = pan1SpeedPercent / 100f;
+        else if (isPan2)
+            PanValue = pan2SpeedPercent / 100f;
         var speedFactor =
             reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-        Vector3 velocity = dir * speed * speedFactor;
+        Vector3 velocity = dir * speed * speedFactor*PanValue;
         rigid.velocity = velocity;
 
         enemy.setAnim("Walk");
@@ -410,6 +419,22 @@ float degree = rad * Mathf.Rad2Deg;
 //               }
 //           }
 //       }   
+   }
+
+   private void OnTriggerStay2D(Collider2D other)
+   {
+       if (other.CompareTag("Pan1"))
+           isPan1 = true;
+       if (other.CompareTag("Pan2"))
+           isPan2 = true;
+   }
+
+   private void OnTriggerExit2D(Collider2D other)
+   {
+       if (other.CompareTag("Pan1"))
+           isPan1 = false;
+       if (other.CompareTag("Pan2"))
+           isPan2 = false;
    }
 
    public void Detect(float rad)

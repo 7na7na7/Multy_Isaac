@@ -21,6 +21,7 @@ public class UsableItem : MonoBehaviour
     public GameObject BonFire;
     public GameObject Light;
     public GameObject FireBomb;
+    public GameObject Pan1, Pan2;
     
     private void Start()
     {
@@ -312,6 +313,20 @@ public class UsableItem : MonoBehaviour
                     setHappy();
                     return true;
                 }
+                break;
+            case 117: //나무판
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(Pan1, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.InstantiateRoomObject(Pan1.name, transform.position, Quaternion.identity);
+                return true;
+                break;
+            case 118: //철판
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(Pan2, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.InstantiateRoomObject(Pan2.name, transform.position, Quaternion.identity);
+                return true;
                 break;
         }
 

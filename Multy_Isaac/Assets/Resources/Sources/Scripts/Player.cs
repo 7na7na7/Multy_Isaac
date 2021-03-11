@@ -51,8 +51,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 curPos; 
     public float footCountCut = 10; //10거리마다 발자국소리 재생
     private float footCount; //저장변수
-    private bool isSwamp = false; //늪인가?
-    public int swampMovingSpeed = 40; //늪에서의 이동속도
+    private bool isPan1 = false; //나무판인가?
+    private bool isPan2 = false;//철판인가?
+    public int pan1SpeedPercent = 40;
+    public int pan2SpeedPercent = 40;
     public float speed; //속도
     public float savedSpeed; //속도 저장변수
     
@@ -341,13 +343,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                     }
 
+                    float PanValue = 1;
+                    if (isPan1)
+                        PanValue = pan1SpeedPercent / 100f;
+                    else if (isPan2)
+                        PanValue = pan2SpeedPercent / 100f;
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        (isSwamp ? swampMovingSpeed / 100f : 1f),
+                        PanValue,
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        (isSwamp ? swampMovingSpeed / 100f : 1f));
+                    PanValue);
 
                     //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 
                 }
@@ -844,8 +851,10 @@ pv.RPC("DieRPC",RpcTarget.All);
         {
             if (pv.IsMine)
             {
-                if (other.CompareTag("Swamp")) //늪에 닿으면
-                    isSwamp = true;
+                if (other.CompareTag("Pan1"))
+                    isPan1 = true;
+                if (other.CompareTag("Pan2"))
+                    isPan2 = true;
                 if (other.CompareTag("Enemy"))
                 {
                     Enemy enemy=other.gameObject.GetComponent<Enemy>();
@@ -872,8 +881,10 @@ pv.RPC("DieRPC",RpcTarget.All);
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Swamp")) //늪에 닿으면
-                isSwamp = false;
+            if (other.CompareTag("Pan1"))
+                isPan1 = false;
+            if (other.CompareTag("Pan2"))
+                isPan2 = false;
         }
         #endregion
         public void PassiveOn(int itemIndex)
