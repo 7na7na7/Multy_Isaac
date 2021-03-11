@@ -344,20 +344,17 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   public void setPlayer(Transform tr)
   {
-    if(targetPosition==null)
+    zombie.stopCor();
+    isFinding = true;
+    targetPosition = tr;
+    ExclamationOpen();
+    if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
     {
-      zombie.stopCor();
-      isFinding = true;
-      targetPosition = tr;
-      ExclamationOpen();
-      if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
-      {
-        setAnim("Walk");
-      }
-      else if (zombie.zombieIndex == 2)
-      {
-        setAnim("Idle");
-      } 
+      setAnim("Walk");
+    }
+    else if (zombie.zombieIndex == 2)
+    {
+      setAnim("Idle");
     }
   }
   

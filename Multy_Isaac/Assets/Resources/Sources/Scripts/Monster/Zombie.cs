@@ -166,9 +166,7 @@ public class Zombie : MonoBehaviour
                     poisonTime += Time.deltaTime;
               if (!enemy.isFinding && enemy.canMove) 
               {
-                
-                  
-                          for (int i = 0; i < Players.Count; i++)
+                  for (int i = 0; i < Players.Count; i++)
                           {
                               if (!Players[i].isDead)
                               {
@@ -192,6 +190,11 @@ public class Zombie : MonoBehaviour
               {
                   if (enemy.isFinding&& enemy.canMove)
                   {
+                      if (enemy.targetPosition.GetComponent<Player>().isDead)
+                      {
+                          enemy.ExclamationClose();
+                          Restart();
+                      }
                       if (zombieIndex == 1 || zombieIndex == 4 || zombieIndex == 3)
                       { 
                           GoPath();
@@ -277,14 +280,10 @@ float degree = rad * Mathf.Rad2Deg;
                 poisonTime = 0;
             }
             
-            yield return new WaitUntil(()=>isEndAnim());
+            yield return new WaitForSeconds(0.2f);
             enemy.setAnim("Idle");
-            yield return new WaitForSeconds(AttackTime);
+            yield return new WaitForSeconds(AttackTime-0.2f);
         }
-    }
-    bool isEndAnim()
-    {
-        return anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f;
     }
     IEnumerator find()
     {
@@ -363,14 +362,7 @@ float degree = rad * Mathf.Rad2Deg;
            {
                if (other.CompareTag("Player") && enemy.canMove)
                {
-                   switch (zombieIndex)
-                   {
-                       case 1:
-                       case 3:
-                       case 4:
-                           StartCoroutine(Attack());
-                           break;
-                   }
+                   StartCoroutine(Attack());
                }
            }
        }
@@ -396,12 +388,6 @@ float degree = rad * Mathf.Rad2Deg;
        enemy.setAnim("Walk");
        //enemy.canMove = true;
 
-       if (enemy.targetPosition.GetComponent<Player>().isDead)
-       {
-           enemy.ExclamationClose();
-           Restart();
-       }
-       
 //       for (int i = 0; i < Players.Count; i++)
 //       {
 //           if (!Players[i].isDead)
