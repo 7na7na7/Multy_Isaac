@@ -55,6 +55,9 @@ public class PassiveItem : MonoBehaviour
             case 119: //안전모
                 statMgr.armor += 7;
                 break;
+            case 120: //목발
+                Speed += 12;
+                break;
         }
     }
         
@@ -90,6 +93,9 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 119: //안전모
                 statMgr.armor -= 7;
+                break;
+            case 120: //목발
+                Speed -= 12;
                 break;
         }
     }
