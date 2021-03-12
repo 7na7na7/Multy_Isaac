@@ -348,6 +348,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         PanValue = pan1SpeedPercent / 100f;
                     else if (isPan2)
                         PanValue = pan2SpeedPercent / 100f;
+                    
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
@@ -355,8 +356,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                     PanValue);
+                    
+                    anim.SetFloat("WalkSpeed",(((speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P /
+                                               100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue)/4f);
 
-                    //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 
+                        //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 * 가시판에있는지
                 }
                 else //그 외는 전부 움직이지 않도록
                 {
