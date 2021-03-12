@@ -44,6 +44,8 @@ public class Poison : MonoBehaviour
         {
             Destroy();
         }
+        else if(other.CompareTag("Slash"))
+            Destroy();
     }
     
     public void Destroy()

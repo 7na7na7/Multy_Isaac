@@ -79,6 +79,8 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
            DestroyWall();
         }
+        else if(other.CompareTag("Slash"))
+            DestroyHit();
     }
 
     public void DestroyWall()
