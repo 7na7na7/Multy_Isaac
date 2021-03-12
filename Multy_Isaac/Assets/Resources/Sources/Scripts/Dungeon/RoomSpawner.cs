@@ -92,7 +92,7 @@ public class RoomSpawner : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("SpawnPoint") && !isConstant)
+        if (other.CompareTag("SpawnPoint") && !isConstant && !other.GetComponent<RoomSpawner>().isConstant)
                 {
                     if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false) //겹친 방이 아직 생성되지 않았고, 자신도 생성되지 않았다면
                     {

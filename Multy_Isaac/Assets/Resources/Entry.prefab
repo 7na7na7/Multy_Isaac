@@ -36,7 +36,6 @@ Transform:
   - {fileID: 5602489124707082979}
   - {fileID: 8698107594002226917}
   - {fileID: 4612023996195580572}
-  - {fileID: 4612023997989238729}
   - {fileID: 4084773950846922177}
   - {fileID: 6466461996826802386}
   m_Father: {fileID: 0}
@@ -436,7 +435,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 448302877438732228}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4210005995868458689
 MonoBehaviour:
@@ -615,7 +614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4612023996195580572
 Transform:
   m_ObjectHideFlags: 0
@@ -690,49 +689,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0646005, y: 2.9860077}
   m_EdgeRadius: 0
---- !u!1 &4612023997989238728
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4612023997989238729}
-  - component: {fileID: 4612023997989238734}
-  m_Layer: 12
-  m_Name: EntryGrid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4612023997989238729
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4612023997989238728}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 448302877438732228}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &4612023997989238734
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4612023997989238728}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
 --- !u!1 &8638347141159689714
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,7 +718,7 @@ Transform:
   m_LocalScale: {x: 3.1999998, y: 3.1999998, z: 1}
   m_Children: []
   m_Father: {fileID: 448302877438732228}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6697606876703429017
 SpriteRenderer:

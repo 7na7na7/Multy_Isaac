@@ -847,6 +847,25 @@ pv.RPC("DieRPC",RpcTarget.All);
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (pv.IsMine)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Enemy enemy=other.gameObject.GetComponent<Enemy>();
+                if (enemy.time >= enemy.damageDelay)
+                {
+                    enemy.time = 0;
+                    if(enemy.name.Contains("(")) 
+                        Hit(enemy.CollsionDamage, enemy.name.Substring(0, enemy.name.IndexOf("(")),enemy.nuckBackDistance,enemy.transform.position);
+                    else
+                        Hit(enemy.CollsionDamage, enemy.name,enemy.nuckBackDistance,enemy.transform.position);
+                }
+            }
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D other)
         {
             if (pv.IsMine)
@@ -855,18 +874,6 @@ pv.RPC("DieRPC",RpcTarget.All);
                     isPan1 = true;
                 if (other.CompareTag("Pan2"))
                     isPan2 = true;
-                if (other.CompareTag("Enemy"))
-                {
-                    Enemy enemy=other.gameObject.GetComponent<Enemy>();
-                    if (enemy.time >= enemy.damageDelay)
-                    {
-                        enemy.time = 0;
-                        if(enemy.name.Contains("(")) 
-                            Hit(enemy.CollsionDamage, enemy.name.Substring(0, enemy.name.IndexOf("(")),enemy.nuckBackDistance,enemy.transform.position);
-                        else
-                            Hit(enemy.CollsionDamage, enemy.name,enemy.nuckBackDistance,enemy.transform.position);
-                    }
-                }
 
                 if (other.CompareTag("Fire"))
                 {

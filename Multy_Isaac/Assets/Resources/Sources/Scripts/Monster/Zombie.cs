@@ -354,13 +354,13 @@ float degree = rad * Mathf.Rad2Deg;
        }
    }
    
-   private void OnTriggerEnter2D(Collider2D other)
+   private void OnCollisionEnter2D(Collision2D other)
    {
        if (isMaster)
        {
            if (enemy.canMove)
            {
-               if (other.CompareTag("Player") && enemy.canMove)
+               if (other.gameObject.CompareTag("Player") && enemy.canMove)
                {
                    StartCoroutine(Attack());
                }
@@ -378,7 +378,7 @@ float degree = rad * Mathf.Rad2Deg;
    {
        StopCoroutine(corr);
        enemy.isFinding = false;
-       //enemy.canMove = false;
+       enemy.canMove = false;
        rigid.velocity=Vector2.zero;
 
        enemy.setLocalX(enemy.targetPosition.position.x);
@@ -386,8 +386,7 @@ float degree = rad * Mathf.Rad2Deg;
        
        yield return new WaitForSeconds(AttackTime);
        enemy.setAnim("Walk");
-       //enemy.canMove = true;
-
+       enemy.canMove = true;
 //       for (int i = 0; i < Players.Count; i++)
 //       {
 //           if (!Players[i].isDead)
