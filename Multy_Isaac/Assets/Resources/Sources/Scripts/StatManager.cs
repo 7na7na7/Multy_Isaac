@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class StatManager : MonoBehaviour
 {
     public int startHealth;
-    public int startArmor;
-    public int[] healths;
 
     public int armor;
 
@@ -25,18 +23,6 @@ public class StatManager : MonoBehaviour
 //        }
     }
 
-    public void SetLevel(int i)
-    {
-        //체력
-        int healValue;
-        if (i == 0)
-            healValue = healths[i] - startHealth;
-        else
-            healValue=healths[i] - healths[i - 1];
-        hpSlider.maxValue += healValue;
-        hpSlider.value += healValue;
-    }
-    
     public void Heal(int value)
     {
         if (value > 0)
@@ -52,15 +38,24 @@ public class StatManager : MonoBehaviour
         }
     }
 
-    public bool LoseHp(int value)
+    public bool Hit(int value)  
     {
-        hpSlider.value -= value-(value*(armor*0.01f));
+        float minusPer = 100 *((float)armor / (armor + 100f));
+        hpSlider.value -= value-(value * minusPer / 100f);
         if (hpSlider.value <= 0)
             return true;
         else
             return false;
     }
 
+    public bool LoseHp(int value)
+    {
+        hpSlider.value -= value;
+        if (hpSlider.value <= 0)
+            return true;
+        else
+            return false;
+    }
     public int GetHp()
     {
         return (int)hpSlider.value;

@@ -596,7 +596,7 @@ pv.RPC("DieRPC",RpcTarget.All);
                 pv.RPC("flashWhiteRPC",RpcTarget.All); 
             
             isFight();
-            if(statMgr.LoseHp(Damage))
+            if(statMgr.Hit(Damage))
                 Die(HitName);
         }
     }
