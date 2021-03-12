@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
   m_Layer: 9
-  m_Name: item91
+  m_Name: item121
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,10 +4846,9 @@ Transform:
   m_GameObject: {fileID: 3749522341741181223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449410984}
-  - {fileID: 4869776060961844962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4893,12 +4892,12 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: b287816d22ffb194e8f53d916e8951bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0020f3467514f66448fcb3f0a3f2049c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.23, y: 0.38}
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4922,14 +4921,14 @@ MonoBehaviour:
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
     SmallItemIndex: 
-    CompleteItemIndex: 150000007a000000
-    index: 91
-    ItemName: "\uC2E4"
-    ItemSprite: {fileID: 21300000, guid: b287816d22ffb194e8f53d916e8951bb, type: 3}
+    CompleteItemIndex: 7a000000
+    index: 121
+    ItemName: "\uCC9C"
+    ItemSprite: {fileID: 21300000, guid: 0020f3467514f66448fcb3f0a3f2049c, type: 3}
     type: 2
-    ItemDescription: "\uC0C1\uCC98\uB97C \uAFF0\uB9EC \uB54C\uB3C4, \uBC14\uB290\uC9C8\uC744
-      \uD560 \uB54C\uB3C4 \uC0AC\uC6A9\uB418\uB294 \uC2E4."
-    WhereGet: "\uC637\uAC00\uAC8C"
+    ItemDescription: "\uB290\uB08C\uC774 \uC88B\uC740 \uCC9C\uC774\uB2E4. \uC5BC\uAD74\uC744
+      \uD30C\uBB3B\uACE0 \uC790\uACE0 \uC2F6\uC5B4\uC9C4\uB2E4..."
+    WhereGet: "\uC9D1, \uC637\uAC00\uAC8C"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
 CircleCollider2D:
@@ -4968,33 +4967,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &6160867055047779158
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4869776060961844962}
-  m_Layer: 9
-  m_Name: bulletPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4869776060961844962
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6160867055047779158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3749522341741181216}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
