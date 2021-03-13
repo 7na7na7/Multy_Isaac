@@ -65,7 +65,7 @@ public class Invent : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Escape))
                 Close();
-            if(Input.GetMouseButtonDown(1))// &&RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition) 
+            if(Input.GetMouseButtonDown(1) &&RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition) )
                 Close();
             if (element.SmallItemIndex.Length != 0)
             {
