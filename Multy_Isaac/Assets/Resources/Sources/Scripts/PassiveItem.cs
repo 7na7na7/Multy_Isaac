@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PassiveItem : MonoBehaviour
 {
+    public float laderRad = 10;
+    private IEnumerator laderCor;
+    public ParticleSystem laderParticle;
     private StatManager statMgr;
     private PlayerLight light;
     //기동신
@@ -19,6 +22,7 @@ public class PassiveItem : MonoBehaviour
     public int Speed = 0;
     private void Start()
     {
+        laderCor = LaderCor();
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
         light=transform.GetChild(1).GetComponent<PlayerLight>();
     }
@@ -62,6 +66,12 @@ public class PassiveItem : MonoBehaviour
             case 123: //방탄모
                 statMgr.armor += 20;
                 break;
+            case 125: //목도리
+                statMgr.armor += 15;
+                break;
+            case 126: //레이더
+                StartCoroutine(laderCor);
+                break;
         }
     }
         
@@ -104,6 +114,30 @@ public class PassiveItem : MonoBehaviour
             case 123: //방탄모
                 statMgr.armor -= 20;
                 break;
+            case 125: //목도리
+                statMgr.armor -= 15;
+                break;
+            case 126: //레이더
+                StopCoroutine(laderCor);
+                break;
+        }
+    }
+
+    IEnumerator LaderCor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            laderParticle.Play();
+            
+            RaycastHit2D[] zombies = Physics2D.CircleCastAll(transform.position, laderRad, Vector2.up,0);
+            foreach (RaycastHit2D col in zombies)
+            {
+                if (col.collider.CompareTag("Enemy"))
+                {
+                    col.collider.gameObject.GetComponent<FlashWhite>().Lader();
+                }
+            }   
         }
     }
 }

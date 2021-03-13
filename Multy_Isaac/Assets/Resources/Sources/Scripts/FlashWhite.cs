@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class FlashWhite : MonoBehaviour
 {
+	public bool isLader = false;
+	public Material laderMaterial;
 public Material flashWhite ;
 private Material defaultMaterial;
 
 SpriteRenderer[] s;
 
-void Start ()
+private void Start()
 {
-	s =  gameObject.GetComponentsInChildren<SpriteRenderer> ();
-	defaultMaterial = s [0].material;
+	s =  gameObject.GetComponentsInChildren<SpriteRenderer>();
+	defaultMaterial = s[0].material;
 }
 
 public void Flash()
@@ -32,4 +34,17 @@ void HideChange()
 	}
 }
 
+public void Lader()
+{
+	if (!isLader)
+	{
+		isLader = true;
+		defaultMaterial = laderMaterial;
+		foreach (SpriteRenderer SR in s)
+		{
+			SR.material = laderMaterial;
+		}
+	}
+	
+}
 }
