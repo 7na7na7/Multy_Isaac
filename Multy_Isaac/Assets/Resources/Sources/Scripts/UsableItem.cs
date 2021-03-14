@@ -16,6 +16,7 @@ public class UsableItem : MonoBehaviour
     private StatManager statMgr;
     private offlineStat offStat;
 
+    public GameObject Turret;
     public GameObject Mine;
     public GameObject Bomb;
     public GameObject BonFire;
@@ -334,6 +335,13 @@ public class UsableItem : MonoBehaviour
                     Instantiate(Pan2, transform.position, Quaternion.identity);
                 else
                     PhotonNetwork.InstantiateRoomObject(Pan2.name, transform.position, Quaternion.identity);
+                return true;
+                break;
+            case 128: //터렛
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(Turret, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.InstantiateRoomObject(Turret.name, transform.position, Quaternion.identity);
                 return true;
                 break;
         }
