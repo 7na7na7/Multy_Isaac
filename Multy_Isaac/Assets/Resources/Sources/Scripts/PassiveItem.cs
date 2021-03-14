@@ -79,6 +79,7 @@ public class PassiveItem : MonoBehaviour
                 laderCount++;
                 break;
             case 127: //기계다리
+                statMgr.armor += 10;
                 Speed += 15;
                 machineLegCount++;
                 break;
@@ -133,6 +134,7 @@ public class PassiveItem : MonoBehaviour
                     StopCoroutine(laderCor);
                 break;
             case 127: //기계다리
+                statMgr.armor -= 10;
                 Speed -= 15;
                 machineLegCount--;
                 break;
