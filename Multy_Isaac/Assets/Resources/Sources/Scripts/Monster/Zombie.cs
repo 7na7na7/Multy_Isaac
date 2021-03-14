@@ -153,6 +153,7 @@ public class Zombie : MonoBehaviour
             reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         Vector3 velocity = dir * speed * speedFactor*PanValue;
+        anim.SetFloat("WalkSpeed",speed * speedFactor*PanValue/4f);
         rigid.velocity = velocity;
 
         enemy.setAnim("Walk");

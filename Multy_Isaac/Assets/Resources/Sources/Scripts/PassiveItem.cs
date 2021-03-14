@@ -123,6 +123,10 @@ public class PassiveItem : MonoBehaviour
         }
     }
 
+    public void StopLader()
+    {
+        StopCoroutine(laderCor);
+    }
     IEnumerator LaderCor()
     {
         while (true)

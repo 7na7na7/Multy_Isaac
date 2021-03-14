@@ -537,6 +537,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     AttackerName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
             }
 
+            GetComponent<PassiveItem>().StopLader();
             playerItem.Dead();
             gunSetfalse();
         }
