@@ -6,9 +6,12 @@ using UnityEngine;
 
 public class PassiveItem : MonoBehaviour
 {
+    //레이더
     public float laderRad = 10;
     private IEnumerator laderCor;
     public ParticleSystem laderParticle;
+    private int laderCount = 0;
+    
     private StatManager statMgr;
     private PlayerLight light;
     //기동신
@@ -20,6 +23,8 @@ public class PassiveItem : MonoBehaviour
     public int Silence = 0;
     //신발등 이동속도
     public int Speed = 0;
+    //기계다리
+    public int machineLegCount = 0;
     private void Start()
     {
         laderCor = LaderCor();
@@ -71,6 +76,11 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 126: //레이더
                 StartCoroutine(laderCor);
+                laderCount++;
+                break;
+            case 127: //기계다리
+                Speed += 15;
+                machineLegCount++;
                 break;
         }
     }
@@ -118,7 +128,13 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 15;
                 break;
             case 126: //레이더
-                StopCoroutine(laderCor);
+                laderCount--;
+                if(laderCount<=0) 
+                    StopCoroutine(laderCor);
+                break;
+            case 127: //기계다리
+                Speed -= 15;
+                machineLegCount--;
                 break;
         }
     }

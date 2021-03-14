@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private offlineStat offStat;
     private TimeManager timeMgr;
     public float fireDamageTick;
     private float fireTime=0;
@@ -61,7 +62,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //배고픔
     public int hungrySpeed;
     public int hungryLessHpSpeed;
-    private offlineStat offStat;
 
 
     public PhotonView pv; //포톤뷰
@@ -350,10 +350,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                         PanValue = pan2SpeedPercent / 100f;
                     
                     rb.velocity = new Vector2(
-                        (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
+                        (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                         PanValue,
-                        (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P / 100 *
+                        (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                     PanValue);
                     
@@ -469,7 +469,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet)) //쏘기!!!!!
             {
                 if(playerItem.getCurrentTem().weaponIndex==7)
-                    statMgr.Heal(1);
+                   offStat.HungryHeal(1);
                 if(PhotonNetwork.OfflineMode)
                     gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
                 else
