@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 9058477515124319133}
   - component: {fileID: 9058477515124319132}
   - component: {fileID: 1550887101882366752}
-  - component: {fileID: 6908739984658968764}
   - component: {fileID: 7576346121689545866}
   m_Layer: 0
   m_Name: Use_Turret
@@ -195,19 +194,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6908739984658968764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9058477515124319131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2
 --- !u!114 &7576346121689545866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098d57399016e1d4383a09f8995cb110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurretBullet: {fileID: 1064714333086079798, guid: 1f1203e93308aa844bb6a0a18d29857f,
+  shotRadious: 9
+  TurretBullet: {fileID: 1064714333086079798, guid: 931f6fee336c58f46b23d2c352f54fab,
     type: 3}
   shotDelay: 2
