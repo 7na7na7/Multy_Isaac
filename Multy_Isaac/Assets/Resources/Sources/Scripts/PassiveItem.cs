@@ -59,7 +59,7 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 15;
                 break;
             case 107: //횃불
-                light.lightValue += 0.03f;
+                light.lightValue += 0.05f;
                 light.torchOn();
                 break;
             case 119: //안전모
@@ -113,7 +113,7 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 15;
                 break;
             case 107: //횃불
-                light.lightValue -= 0.03f;
+                light.lightValue -= 0.05f;
                 light.torchOff();
                 break;
             case 119: //안전모

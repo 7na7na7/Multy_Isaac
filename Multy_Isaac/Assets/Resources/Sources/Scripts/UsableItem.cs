@@ -277,8 +277,8 @@ public class UsableItem : MonoBehaviour
             case 109: //과일빙수
                 if (eat())
                 {
-                    offStat.HungryHeal(70);
-                    statMgr.Heal(50);
+                    offStat.HungryHeal(100);
+                    statMgr.Heal(100);
                     setHappy();
                     return true;
                 }
