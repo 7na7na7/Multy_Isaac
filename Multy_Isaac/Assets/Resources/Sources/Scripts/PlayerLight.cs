@@ -37,11 +37,11 @@ public class PlayerLight : MonoBehaviour
 
     public void torchOn()
     {
-        pointLight.pointLightOuterRadius += 3f;
+        pointLight.pointLightOuterRadius += 4f;
     }
 
     public void torchOff()
     {
-        pointLight.pointLightOuterRadius -= 3f;
+        pointLight.pointLightOuterRadius -= 4f;
     }
 }
