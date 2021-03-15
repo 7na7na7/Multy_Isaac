@@ -95,7 +95,7 @@ public class UsableItem : MonoBehaviour
             case 61: //포도주스
                 if (eat())
                 {
-                statMgr.Heal(30);
+                statMgr.Heal(40);
                 setHappy();
                 return true;
                 }
@@ -103,7 +103,7 @@ public class UsableItem : MonoBehaviour
             case 62: //사과주스
                 if (eat())
                 {
-                statMgr.Heal(30);
+                statMgr.Heal(40);
                 setHappy();
                 return true;
                 }
@@ -127,7 +127,7 @@ public class UsableItem : MonoBehaviour
             case 67: //꿀
                 if (eat())
                 {
-                statMgr.Heal(15);
+                statMgr.Heal(20);
                 setHappy();
                 return true;
                 }
