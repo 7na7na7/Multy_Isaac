@@ -334,11 +334,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
   {
     if (x > transform.position.x) //오른쪽에있으면
     {
-      transform.localScale = new Vector3(1, 1, 1);
+      transform.localScale = new Vector3(-1*localX, -1*localX, 1);
     }
     else
     {
-      transform.localScale = new Vector3(-1, 1, 1);
+      transform.localScale = new Vector3(localX, -1*localX, 1);
     }
   }
 

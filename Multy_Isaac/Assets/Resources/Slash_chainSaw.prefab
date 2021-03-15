@@ -69,17 +69,12 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.14991203, y: 0.0101281, z: 0}
-  - {x: -0.11218094, y: -0.05545843, z: 0}
-  - {x: -0.019520193, y: -0.068201385, z: 0}
-  - {x: 0.037154846, y: -0.017984074, z: 0}
-  - {x: 0.08525218, y: 0.09033555, z: 0}
-  - {x: 0.108826734, y: 0.18326029, z: 0}
-  - {x: 0.10940812, y: 0.2963227, z: 0}
-  - {x: 0.1063111, y: 0.43482986, z: 0}
-  - {x: 0.0612356, y: 0.5489078, z: 0}
-  - {x: -0.03827746, y: 0.22373596, z: 0}
-  - {x: -0.15845513, y: 0.0810477, z: 0}
+  - {x: -0.41448617, y: 0.36007935, z: 0}
+  - {x: -0.029611409, y: 0.7753572, z: 0}
+  - {x: -0.035415903, y: 0.8346635, z: 0}
+  - {x: -0.08330695, y: 0.8768388, z: 0}
+  - {x: -0.14255337, y: 0.8788426, z: 0}
+  - {x: -0.5371088, y: 0.4595046, z: 0}
 --- !u!114 &8270228051066463351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bfca7603272514395570d8e7e6552f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightValue: 0.5
+  lightValue: 0.2
   isPlayer: 0
 --- !u!1 &8587958215958462638
 GameObject:
@@ -104,12 +99,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6907680332019608218}
   - component: {fileID: 7761557510597772096}
-  - component: {fileID: 2773131490155976011}
   - component: {fileID: 8538638622977802825}
   - component: {fileID: 7377598020941030138}
   - component: {fileID: 2172715907036345174}
+  - component: {fileID: 498376677702011016}
   m_Layer: 0
-  m_Name: Slash_saw
+  m_Name: Slash_chainSaw
   m_TagString: Slash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +165,7 @@ SpriteRenderer:
   m_SortingLayerID: 110052107
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7811676811123722494, guid: 7250fc410906ce64eb713348986772fa,
+  m_Sprite: {fileID: -6427430311899640900, guid: 8bdab08f44730a04895cc59de35120e9,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -182,32 +177,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2773131490155976011
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8587958215958462638}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.38068557, y: -0.11731318}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1800935, y: 1.9032807}
-  m_EdgeRadius: 0
 --- !u!114 &8538638622977802825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,9 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba837ec94948e3d4396fef809f59afb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dmg: 10
-  nuckBackDistance: 0.5
-  DestroyTime: 0.15
+  Dmg: 5
+  nuckBackDistance: 0.25
+  DestroyTime: 0.05
   pv: {fileID: 7377598020941030138}
   type: 0
 --- !u!114 &7377598020941030138
@@ -257,7 +226,7 @@ Animator:
   m_GameObject: {fileID: 8587958215958462638}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 13209fd2cbf48534788b3a5d1f580219, type: 2}
+  m_Controller: {fileID: 9100000, guid: 99bedf8299740ac41bd0551e5069d407, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -266,3 +235,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!60 &498376677702011016
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8587958215958462638}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.085508525, y: 0.035209984}
+      - {x: 0.08099711, y: 0.1631204}
+      - {x: 0.4157964, y: 0.48945484}
+      - {x: 0.69739634, y: 0.8451077}
+      - {x: 0.7031636, y: 0.960907}
+      - {x: 0.59482324, y: 1.059566}
+      - {x: 0.4490536, y: 1.0556939}
+      - {x: 0.2493212, y: 0.869384}
+      - {x: -0.32510513, y: 0.22779965}

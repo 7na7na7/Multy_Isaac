@@ -434,9 +434,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             else
                 PhotonNetwork.Instantiate(offlineSlash.name,gun.transform.position,Quaternion.Euler(a2));
 
-            gun.transform.DORotate(a, currentWeapon.slashTime).SetEase(Ease.OutCubic).OnComplete(()=> {
-                StartCoroutine(swordInitial(a2, 0.05f));
-            });   
+            if(playerItem.getCurrentTem().weaponIndex!=130) //전기톱
+            {
+                gun.transform.DORotate(a, currentWeapon.slashTime).SetEase(Ease.OutCubic).OnComplete(()=> {
+                    StartCoroutine(swordInitial(a2, 0.05f)); });   
+            }
+            else
+            {
+                StartCoroutine(swordInitial(a2, 0.05f));  
+            }
         }
     }
 
@@ -468,8 +474,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             isFight();
             if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet)) //쏘기!!!!!
             {
-                if(playerItem.getCurrentTem().weaponIndex==7)
-                   offStat.HungryHeal(1);
+                if(playerItem.getCurrentTem().weaponIndex==7) //식빵총이면
+                   offStat.HungryHeal(1); //체력 1회복
+              
                 if(PhotonNetwork.OfflineMode)
                     gunAnimRPC(currentWeapon.weaponIndex.ToString(),false);
                 else

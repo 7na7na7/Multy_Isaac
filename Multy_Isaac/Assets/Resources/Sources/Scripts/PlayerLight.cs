@@ -20,7 +20,8 @@ public class PlayerLight : MonoBehaviour
 
             if (!isPlayer)
             {
-                pointLight.intensity =lightValue - globalLight.intensity;   
+                if(lightValue-globalLight.intensity>=0) 
+                    pointLight.intensity =lightValue - globalLight.intensity;
             }
                 
         }
