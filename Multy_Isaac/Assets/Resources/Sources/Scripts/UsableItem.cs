@@ -277,7 +277,7 @@ public class UsableItem : MonoBehaviour
             case 109: //과일빙수
                 if (eat())
                 {
-                    offStat.HungryHeal(100);
+                    offStat.HungryHeal(70);
                     statMgr.Heal(100);
                     setHappy();
                     return true;
@@ -343,6 +343,15 @@ public class UsableItem : MonoBehaviour
                 else
                     PhotonNetwork.InstantiateRoomObject(Turret.name, transform.position, Quaternion.identity);
                 return true;
+                break;
+            case 131: //오이냉국
+                if (eat())
+                {
+                    offStat.HungryHeal(70);
+                    statMgr.Heal(50);
+                    setHappy();
+                    return true;
+                }
                 break;
         }
 
