@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Dic : MonoBehaviour
 {
+    public itemType type;
     private List<tem> tems;
     public GameObject dicElement;
     private void Start()
@@ -18,8 +19,11 @@ public class Dic : MonoBehaviour
         tems = FindObjectOfType<TemManager>().temDatas;
         foreach (tem t in tems)
         {
-            GameObject a=Instantiate(dicElement, transform);
-            a.GetComponent<DicElement>().tem = t;
+            if (t.type == type)
+            {
+                GameObject a=Instantiate(dicElement, transform);
+                a.GetComponent<DicElement>().tem = t;   
+            }
         }
 
         gameObject.transform.parent.gameObject.transform.parent.gameObject.SetActive(false);
