@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    public GameObject Dic;
+    public GameObject Com;
     public ParticleSystem starEffect;
     public RectTransform panel;
 
@@ -48,7 +50,18 @@ public class Invent : MonoBehaviour
         SmallType1 = SmallItemName1.transform.GetChild(0).GetComponent<Text>();
             SmallType2 = SmallItemName2.transform.GetChild(0).GetComponent<Text>();
     }
+
+    public void DicOpen()
+    {
+        Dic.SetActive(true);
+        Com.SetActive(false);
+    }
     
+    public void DicClose()
+    {
+        Com.SetActive(true);
+       
+    }
     public void Close()
     {
         anim.Play("InvenClose");
@@ -131,6 +144,7 @@ public class Invent : MonoBehaviour
     
     public void Open(tem taaaaam)
     {
+        Dic.SetActive(false);
         pause.canPause = false;
         element = taaaaam;
         anim.Play("InvenOpen");
