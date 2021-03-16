@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class tem
 {
+    public int Count = 1;
     public int weaponIndex;
     public Sprite NoneSprite;
     public bool canSee = true;
@@ -31,6 +32,7 @@ public class tem
     public tem DeepCopy()
     {
         tem Copytem = new tem();
+        Copytem.Count = this.Count;
         Copytem.weaponIndex = this.weaponIndex;
         Copytem.NoneSprite = this.NoneSprite;
         Copytem.canSee = this.canSee;

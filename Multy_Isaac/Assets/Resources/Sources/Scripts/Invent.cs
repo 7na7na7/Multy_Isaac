@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    public GameObject dicBtn;
+    public GameObject XBtn;
     public GameObject Dic;
     public GameObject Com;
     public ParticleSystem starEffect;
@@ -53,14 +55,17 @@ public class Invent : MonoBehaviour
 
     public void DicOpen()
     {
+        dicBtn.SetActive(false);
+        XBtn.SetActive(true);
         Dic.SetActive(true);
         Com.SetActive(false);
     }
     
     public void DicClose()
     {
+        dicBtn.SetActive(true);
+        XBtn.SetActive(false);
         Com.SetActive(true);
-       
     }
     public void Close()
     {
@@ -144,6 +149,10 @@ public class Invent : MonoBehaviour
     
     public void Open(tem taaaaam)
     {
+        if (XBtn.activeSelf)
+            XBtn.SetActive(false);
+        if(!dicBtn.activeSelf)
+            dicBtn.SetActive(true);
         if(Dic.activeSelf) 
             Dic.SetActive(false);
         if(!Com.activeSelf)
@@ -247,7 +256,8 @@ public class Invent : MonoBehaviour
             
             if (item.index != 95)
             {
-                PlayerItem.GetItem(item);
+                for(int i=0;i<item.Count;i++) 
+                    PlayerItem.GetItem(item);
             }
             else
             {

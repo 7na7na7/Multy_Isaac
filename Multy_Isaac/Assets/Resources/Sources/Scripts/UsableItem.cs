@@ -87,15 +87,16 @@ public class UsableItem : MonoBehaviour
             case 60: //꿀물
                 if (eat())
                 {
-                statMgr.Heal(15);
+                statMgr.Heal(20);
                 setHappy();
                 return true;
                 }
                 break;
             case 61: //포도주스
                 if (eat())
-                {
-                statMgr.Heal(40);
+                { 
+                    offStat.HungryHeal(10);
+                statMgr.Heal(10);
                 setHappy();
                 return true;
                 }
@@ -103,7 +104,8 @@ public class UsableItem : MonoBehaviour
             case 62: //사과주스
                 if (eat())
                 {
-                statMgr.Heal(40);
+                    offStat.HungryHeal(10);
+                    statMgr.Heal(10);
                 setHappy();
                 return true;
                 }
@@ -186,7 +188,7 @@ public class UsableItem : MonoBehaviour
             case 80: //사과식초
                 if (eat())
                 {
-                    statMgr.Heal(30);
+                    statMgr.Heal(20);
                     setHappy();
                     return true;
                 }
@@ -202,8 +204,7 @@ public class UsableItem : MonoBehaviour
             case 86: //치즈가 늘어나는 피자
                 if (eat())
                 {
-                    offStat.HungryHeal(50);
-                    statMgr.Heal(50);
+                    offStat.HungryHeal(40);
                     setHappy();
                     return true;
                 }
@@ -236,7 +237,7 @@ public class UsableItem : MonoBehaviour
                 if (eat())
                 {
                     offStat.HungryHeal(20);
-                    statMgr.Heal(40);
+                    statMgr.Heal(20);
                     setHappy();
                     return true;
                 }
@@ -260,7 +261,7 @@ public class UsableItem : MonoBehaviour
             case 104: //피클
                 if (eat())
                 {
-                    offStat.HungryHeal(30);
+                    offStat.HungryHeal(10);
                     setHappy();
                     return true;
                 }
@@ -277,8 +278,8 @@ public class UsableItem : MonoBehaviour
             case 109: //과일빙수
                 if (eat())
                 {
-                    offStat.HungryHeal(70);
-                    statMgr.Heal(100);
+                    offStat.HungryHeal(20);
+                    statMgr.Heal(30);
                     setHappy();
                     return true;
                 }
@@ -286,7 +287,7 @@ public class UsableItem : MonoBehaviour
             case 110: //좀비요리
                 if (eat())
                 {
-                    offStat.HungryHeal(25);
+                    offStat.HungryHeal(15);
                     setHappy();
                     return true;
                 }
@@ -302,7 +303,7 @@ public class UsableItem : MonoBehaviour
             case 114: //감자맛탕
                 if (eat())
                 {
-                    offStat.HungryHeal(40);
+                    offStat.HungryHeal(15);
                     setHappy();
                     return true;
                 }
@@ -310,7 +311,7 @@ public class UsableItem : MonoBehaviour
             case 115: //꿀단지
                 if (eat())
                 {
-                    statMgr.Heal(45);
+                    statMgr.Heal(25);
                     setHappy();
                     return true;
                 }
@@ -318,7 +319,7 @@ public class UsableItem : MonoBehaviour
             case 116: //감자칩
                 if (eat())
                 {
-                    offStat.HungryHeal(35);
+                    offStat.HungryHeal(20);
                     setHappy();
                     return true;
                 }
@@ -347,8 +348,7 @@ public class UsableItem : MonoBehaviour
             case 131: //오이냉국
                 if (eat())
                 {
-                    offStat.HungryHeal(70);
-                    statMgr.Heal(50);
+                    offStat.HungryHeal(60);
                     setHappy();
                     return true;
                 }
