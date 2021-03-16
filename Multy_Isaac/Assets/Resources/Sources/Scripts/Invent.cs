@@ -144,7 +144,10 @@ public class Invent : MonoBehaviour
     
     public void Open(tem taaaaam)
     {
-        Dic.SetActive(false);
+        if(Dic.activeSelf) 
+            Dic.SetActive(false);
+        if(!Com.activeSelf)
+            Com.SetActive(true);
         pause.canPause = false;
         element = taaaaam;
         anim.Play("InvenOpen");
