@@ -38,7 +38,10 @@ public class RoomTemplates : MonoBehaviour
       if (PhotonNetwork.OfflineMode)
       {
          //Invoke("Spawn",waitTime);
-         Invoke("ReLoad",ReLoadTime);
+         if (ReLoadTime > 0)
+         {
+            Invoke("ReLoad",ReLoadTime);  
+         }
       }
       else
       {

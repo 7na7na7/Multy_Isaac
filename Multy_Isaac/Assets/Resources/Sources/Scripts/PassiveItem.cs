@@ -68,8 +68,11 @@ public class PassiveItem : MonoBehaviour
             case 120: //목발
                 Speed += 12;
                 break;
-            case 123: //방탄모
+            case 122: //스웨터
                 statMgr.armor += 20;
+                break;
+            case 123: //방탄모
+                statMgr.armor += 25;
                 break;
             case 125: //목도리
                 statMgr.armor += 15;
@@ -82,6 +85,9 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 10;
                 Speed += 15;
                 machineLegCount++;
+                break;
+            case 133: //패딩
+                statMgr.armor += 40;
                 break;
         }
     }
@@ -122,8 +128,11 @@ public class PassiveItem : MonoBehaviour
             case 120: //목발
                 Speed -= 12;
                 break;
-            case 123: //방탄모
+            case 122: //스웨터
                 statMgr.armor -= 20;
+                break;
+            case 123: //방탄모
+                statMgr.armor -= 25;
                 break;
             case 125: //목도리
                 statMgr.armor -= 15;
@@ -137,6 +146,9 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 10;
                 Speed -= 15;
                 machineLegCount--;
+                break;
+            case 133: //패딩
+                statMgr.armor -= 40;
                 break;
         }
     }
