@@ -63,19 +63,19 @@ public class PassiveItem : MonoBehaviour
                 light.torchOn();
                 break;
             case 119: //안전모
-                statMgr.armor += 7;
+                statMgr.armor += 10;
                 break;
             case 120: //목발
                 Speed += 12;
                 break;
             case 122: //스웨터
-                statMgr.armor += 20;
-                break;
-            case 123: //방탄모
                 statMgr.armor += 25;
                 break;
+            case 123: //방탄모
+                statMgr.armor += 35;
+                break;
             case 125: //목도리
-                statMgr.armor += 15;
+                statMgr.armor += 20;
                 break;
             case 126: //레이더
                 StartCoroutine(laderCor);
@@ -87,7 +87,18 @@ public class PassiveItem : MonoBehaviour
                 machineLegCount++;
                 break;
             case 133: //패딩
-                statMgr.armor += 40;
+                statMgr.armor += 50;
+                break;
+            case 134: //기름신발
+                statMgr.armor += 10;
+                Speed += 14;
+                break;
+            case 135: //셔츠
+                statMgr.armor += 20;
+                break;
+            case 136: //슈트
+                statMgr.armor += 70;
+                Speed -= 15;
                 break;
         }
     }
@@ -123,19 +134,19 @@ public class PassiveItem : MonoBehaviour
                 light.torchOff();
                 break;
             case 119: //안전모
-                statMgr.armor -= 7;
+                statMgr.armor -= 10;
                 break;
             case 120: //목발
                 Speed -= 12;
                 break;
             case 122: //스웨터
-                statMgr.armor -= 20;
-                break;
-            case 123: //방탄모
                 statMgr.armor -= 25;
                 break;
+            case 123: //방탄모
+                statMgr.armor -= 35;
+                break;
             case 125: //목도리
-                statMgr.armor -= 15;
+                statMgr.armor -= 20;
                 break;
             case 126: //레이더
                 laderCount--;
@@ -148,7 +159,18 @@ public class PassiveItem : MonoBehaviour
                 machineLegCount--;
                 break;
             case 133: //패딩
-                statMgr.armor -= 40;
+                statMgr.armor -= 50;
+                break;
+            case 134: //기름신발
+                statMgr.armor -= 10;
+                Speed -= 14;
+                break;
+            case 135: //셔츠
+                statMgr.armor -= 20;
+                break;
+            case 136: //슈트
+                statMgr.armor -= 70;
+                Speed += 15;
                 break;
         }
     }
