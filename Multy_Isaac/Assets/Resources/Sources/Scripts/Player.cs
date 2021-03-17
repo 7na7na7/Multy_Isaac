@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private bool isHouse = false;
     private offlineStat offStat;
     private TimeManager timeMgr;
     public float fireDamageTick;
@@ -632,7 +633,10 @@ pv.RPC("DieRPC",RpcTarget.All);
             footCount += rb.velocity.sqrMagnitude/100;
         if (footCount > footCountCut)
         {
-            sound.Play(0,true,0.25f);
+            if(isHouse)
+                sound.Play(1,true,1.5f);
+            else
+                sound.Play(0,true,0.25f);
             footCount = 0;
         }
     }
@@ -882,6 +886,8 @@ pv.RPC("DieRPC",RpcTarget.All);
         {
             if (pv.IsMine)
             {
+                if (other.CompareTag("HouseTile"))
+                    isHouse = true;
                 if (other.CompareTag("Pan1"))
                     isPan1 = true;
                 if (other.CompareTag("Pan2"))
@@ -900,6 +906,8 @@ pv.RPC("DieRPC",RpcTarget.All);
 
         private void OnTriggerExit2D(Collider2D other)
         {
+            if (other.CompareTag("HouseTile"))
+                isHouse = false;
             if (other.CompareTag("Pan1"))
                 isPan1 = false;
             if (other.CompareTag("Pan2"))
