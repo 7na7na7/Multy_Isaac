@@ -311,7 +311,7 @@ float degree = rad * Mathf.Rad2Deg;
             //가려는 방향에 따라 플립
             enemy.setLocalX(roamPos.x);
             
-
+           
             if (Vector2.Distance(transform.position, roamPos) < 2f)
             {
                 enemy.setAnim("Idle");
@@ -321,6 +321,9 @@ float degree = rad * Mathf.Rad2Deg;
             }
             else
             {
+                if(Random.Range(0,3)==1) 
+                    enemy.sound.Play(Random.Range(3,6),true,0.25f);
+                
                 enemy.setAnim("Walk");
              
                 Vector2 dir =roamPos -  (Vector2)transform.position;

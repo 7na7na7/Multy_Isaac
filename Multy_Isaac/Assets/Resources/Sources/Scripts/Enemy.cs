@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   public void Hit(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0, Player.bulletType type=Player.bulletType.common)
   {
-    sound.Play(1,true,0.5f);
+    sound.Play(1,true,0.4f);
     if (PhotonNetwork.OfflineMode)
       HitRPC(value, pos, nuckBackDistance,type);
     else
@@ -274,7 +274,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       canMove = false;
       rigid.velocity=Vector2.zero;
       ExclamationClose();
-      sound.Play(2,true,0.5f);
+      sound.Play(2,true,0.25f);
 //if (PhotonNetwork.OfflineMode)
       destroyRPC();
 //    else

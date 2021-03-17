@@ -632,7 +632,7 @@ pv.RPC("DieRPC",RpcTarget.All);
             footCount += rb.velocity.sqrMagnitude/100;
         if (footCount > footCountCut)
         {
-            sound.Play(Random.Range(3,10),true,0.5f);
+            sound.Play(0,true,0.25f);
             footCount = 0;
         }
     }
