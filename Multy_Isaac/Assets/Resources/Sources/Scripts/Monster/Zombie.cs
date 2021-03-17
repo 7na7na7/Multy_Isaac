@@ -445,4 +445,9 @@ float degree = rad * Mathf.Rad2Deg;
            }
        }   
    }
+
+   public void StopAllCor()
+   {
+       StopAllCoroutines();
+   }
 }

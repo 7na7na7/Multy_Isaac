@@ -78,7 +78,6 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   private void Start()
   {
-    sound = GetComponent<SoundManager>();
     rigid = GetComponent<Rigidbody2D>();
     flashwhite = GetComponent<FlashWhite>();
     anim = GetComponent<Animator>();
@@ -266,10 +265,16 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
             temMgr.setBullet(DropTem[i].GetComponent<pickUpTem>().subIndex, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
         }
       }
-
       transform.GetChild(0).gameObject.SetActive(true);
       transform.GetChild(0).transform.parent = null;
-
+      GetComponent<SpriteRenderer>().sprite = null;
+      GetComponent<Collider2D>().enabled = false;
+      Destroy(GetComponent<PhotonAnimatorView>());
+      Destroy(GetComponent<Animator>());
+      canMove = false;
+      rigid.velocity=Vector2.zero;
+      ExclamationClose();
+      sound.Play(2,true,0.5f);
 //if (PhotonNetwork.OfflineMode)
       destroyRPC();
 //    else
@@ -304,7 +309,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
   [PunRPC]
   void destroyRPC()
   {
-    Destroy(gameObject);
+    Destroy(gameObject,1.5f);
   }
 
 
