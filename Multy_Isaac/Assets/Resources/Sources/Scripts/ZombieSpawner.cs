@@ -14,6 +14,7 @@ public class ZombieSpawner : MonoBehaviour
     public int StartZombieCount;
     public Vector2 randomMin, randomMax;
     public float delay;
+    public float[] delays;
     public GameObject[] zombies;
     public int[] Days;
     public int[] Indexes;
@@ -24,6 +25,7 @@ public class ZombieSpawner : MonoBehaviour
 
     public void DaybyDay(int day)
     {
+        delay = delays[day - 1];
         for (int i = 0; i < Days.Length; i++)
         {
             if (Days[i] == day)
