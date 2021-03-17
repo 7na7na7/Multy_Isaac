@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    public Image[] categories;
+    public GameObject[] scrollViews;
     public GameObject dicBtn;
     public GameObject XBtn;
     public GameObject Dic;
@@ -53,6 +55,26 @@ public class Invent : MonoBehaviour
             SmallType2 = SmallItemName2.transform.GetChild(0).GetComponent<Text>();
     }
 
+    public void CategoryTem(int index)
+    {
+        for (int i = 0; i < categories.Length; i++)
+        {
+            if (i == index)
+            {
+                Color color = categories[i].color;
+                color.a = 0.5f;
+                categories[i].color = color;
+                scrollViews[i].SetActive(true);
+            }
+            else
+            {
+                Color color2 = categories[i].color;
+                color2.a = 1f;
+                categories[i].color = color2;
+                scrollViews[i].SetActive(false);   
+            }
+        }
+    }
     public void DicOpen()
     {
         dicBtn.SetActive(false);

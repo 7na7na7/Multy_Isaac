@@ -26,6 +26,7 @@ public class Dic : MonoBehaviour
             }
         }
 
-        gameObject.transform.parent.gameObject.transform.parent.gameObject.SetActive(false);
+        if(type!=itemType.Item)
+            gameObject.transform.parent.gameObject.SetActive(false);
     }
 }
