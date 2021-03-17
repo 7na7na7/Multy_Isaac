@@ -265,6 +265,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
             temMgr.setBullet(DropTem[i].GetComponent<pickUpTem>().subIndex, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
         }
       }
+      zombie.StopAllCor();
       transform.GetChild(0).gameObject.SetActive(true);
       transform.GetChild(0).transform.parent = null;
       GetComponent<SpriteRenderer>().sprite = null;
