@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 692161826}
   - component: {fileID: 1755109966}
   - component: {fileID: 1016078240731654622}
+  - component: {fileID: -733105244225613214}
   m_Layer: 0
   m_Name: Zombie4
   m_TagString: Enemy
@@ -413,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501f6a8d160089d44a37b289494b5e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLader: 0
   laderMaterial: {fileID: 2100000, guid: 557ad0c19e48c934abde36b493041952, type: 2}
   flashWhite: {fileID: 2100000, guid: 4a89b1bc0e1f0334084c6f0f674d0677, type: 2}
 --- !u!114 &5458050791320017446
@@ -427,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe2b362d2750a940865e04e33a78f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 0}
   fireDamageTick: 0.2
   Exclamation: {fileID: 4748071977300609019}
   nuckBackDistance: 0.75
@@ -537,3 +540,22 @@ CapsuleCollider2D:
   m_Offset: {x: -0.00011503697, y: -0.31912223}
   m_Size: {x: 0.6198912, y: 0.7350869}
   m_Direction: 0
+--- !u!114 &-733105244225613214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458050791320017457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba82dda9f7565c34d861fd1ce3c43d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 0.5
+  maxDistance: 12
+  pv: {fileID: 5458050791320017465}
+  clips:
+  - {fileID: 8300000, guid: 4f9dbf6aa9afdbd4e9e4da9d31984dfb, type: 3}
+  - {fileID: 8300000, guid: 326564527fcc1c64bb87293875b8cb20, type: 3}
+  SourceCount: 2

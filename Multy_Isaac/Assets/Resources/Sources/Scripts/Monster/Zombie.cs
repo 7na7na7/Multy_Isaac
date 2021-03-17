@@ -270,6 +270,7 @@ float degree = rad * Mathf.Rad2Deg;
                 if (canPoison)
                 {
                     enemy.setAnim("Attack");
+                    enemy.sound.Play(0,true,0.3f);
                     Vector3 angle=new Vector3(0, 0, -getAngle(transform.position.x, transform.position.y, enemy.targetPosition.position.x, enemy.targetPosition.position.y)+90); 
                     if (PhotonNetwork.OfflineMode)
                     {
@@ -387,7 +388,7 @@ float degree = rad * Mathf.Rad2Deg;
 
        enemy.setLocalX(enemy.targetPosition.position.x);
        enemy.setAnim("Attack");
-       
+       enemy.sound.Play(0,true,0.3f);
        yield return new WaitForSeconds(AttackTime);
        enemy.setAnim("Walk");
        enemy.canMove = true;

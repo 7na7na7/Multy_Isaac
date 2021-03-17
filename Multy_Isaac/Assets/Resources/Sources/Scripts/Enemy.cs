@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  public SoundManager sound;
   private Zombie zombie;
   public float fireDamageTick=0.1f;
   private float fireTime=0;
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   private void Start()
   {
+    sound = GetComponent<SoundManager>();
     rigid = GetComponent<Rigidbody2D>();
     flashwhite = GetComponent<FlashWhite>();
     anim = GetComponent<Animator>();
@@ -98,6 +100,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
   public void Hit(int value, Vector3 pos = default(Vector3), float nuckBackDistance = 0, Player.bulletType type=Player.bulletType.common)
   {
+    sound.Play(1,true,0.5f);
     if (PhotonNetwork.OfflineMode)
       HitRPC(value, pos, nuckBackDistance,type);
     else

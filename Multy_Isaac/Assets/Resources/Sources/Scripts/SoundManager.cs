@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public float minDistance = 8f;
+    public float maxDistance = 20f;
     public PhotonView pv;
     public AudioClip[] clips;
    private AudioSource[] ClipSources;
@@ -24,8 +26,8 @@ public class SoundManager : MonoBehaviour
        for (int j = 0; j < SourceCount; j++)
        {
            ClipSources[j].spatialBlend = 1f;
-           ClipSources[j].minDistance = 8;
-           ClipSources[j].maxDistance = 20;
+           ClipSources[j].minDistance = minDistance;
+           ClipSources[j].maxDistance = maxDistance;
            ClipSources[j].rolloffMode = AudioRolloffMode.Linear;
            ClipSources[j].loop = false;
            ClipSources[j].playOnAwake = false;
