@@ -14,7 +14,7 @@ public class Invent : MonoBehaviour
     public GameObject Com;
     public ParticleSystem starEffect;
     public RectTransform panel;
-
+    private Player player;
     private Pause pause;
     public tem[] completeTemArray;
     public Image BigItemImg;
@@ -36,6 +36,7 @@ public class Invent : MonoBehaviour
     private PlayerItem PlayerItem;
     private void Start()
     {
+        player = transform.parent.gameObject.transform.parent.gameObject.GetComponent<Player>();
         temMgr = FindObjectOfType<TemManager>();
         pause = FindObjectOfType<Pause>();
         anim = GetComponent<Animator>();
@@ -287,6 +288,7 @@ public class Invent : MonoBehaviour
             }
             Open(item);
             starEffect.Play();
+            player.CombineSound();
         }
     }
 }

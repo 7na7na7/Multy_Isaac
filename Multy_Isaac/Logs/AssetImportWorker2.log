@@ -802,3 +802,875 @@ System memory in use after: 191.8 MB.
 Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 4385.
 Total: 3.903600 ms (FindLiveObjects: 0.450300 ms CreateObjectMapping: 0.218200 ms MarkObjects: 3.195800 ms  DeleteObjects: 0.037700 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005993 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.76 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.177 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3446 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.6 MB.
+System memory in use after: 191.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4389.
+Total: 5.677200 ms (FindLiveObjects: 0.723000 ms CreateObjectMapping: 0.420900 ms MarkObjects: 4.494800 ms  DeleteObjects: 0.036600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 861.623120 seconds.
+  path: Assets/Resources/Sources/Items/item6.prefab
+  artifactKey: Guid(6a1fe33542962514fba1d46eb4e25652) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item6.prefab using Guid(6a1fe33542962514fba1d46eb4e25652) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6df49de27b632067007f92c71b7cd895') in 0.169517 seconds
+  Import took 0.180805 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.324414 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f6138fa61d711f8acfa2b36ab24fb66') in 0.107905 seconds
+  Import took 0.118719 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.345324 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_1.wav
+  artifactKey: Guid(979a71e6da80d7e4fb40957fc4d5c63c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_1.wav using Guid(979a71e6da80d7e4fb40957fc4d5c63c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df59ded324dc30580ced0d1b4efeb20b') in 0.022528 seconds
+  Import took 0.030448 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000305 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_2.wav
+  artifactKey: Guid(ce2939c94d50d584186c49c1324c02fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_2.wav using Guid(ce2939c94d50d584186c49c1324c02fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e6efe04e0371e1f88d43f72cf418a79') in 0.019214 seconds
+  Import took 0.025859 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000319 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_3.wav
+  artifactKey: Guid(4e18d8f2f8f76f8448c1ff543f61633f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_3.wav using Guid(4e18d8f2f8f76f8448c1ff543f61633f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1d6c249c967b528560e5572a58369f3') in 0.021327 seconds
+  Import took 0.028624 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000291 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_4.wav
+  artifactKey: Guid(1c36877eb0733f741bea694bbf089afd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_4.wav using Guid(1c36877eb0733f741bea694bbf089afd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af55b64eb54c1651f793eabdc1d03867') in 0.022710 seconds
+  Import took 0.030631 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_5.wav
+  artifactKey: Guid(9c75875c999d7b1469d2ee48ca257f6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 04/Gun 4_5.wav using Guid(9c75875c999d7b1469d2ee48ca257f6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c567343c02cb12fc23d105b6935b2bf') in 0.021779 seconds
+  Import took 0.029547 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.150314 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_1.wav
+  artifactKey: Guid(515dcdc5b8e79174392d2821a4e058a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_1.wav using Guid(515dcdc5b8e79174392d2821a4e058a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '910fb3942f77c67164def5aa846da1ad') in 0.019110 seconds
+  Import took 0.026740 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_4.wav
+  artifactKey: Guid(7d0f0e37c01c40643bfd1ca4ca30e65f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_4.wav using Guid(7d0f0e37c01c40643bfd1ca4ca30e65f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70911de6668b13436055daf38b60dd65') in 0.019407 seconds
+  Import took 0.026076 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000327 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_3.wav
+  artifactKey: Guid(2dd1bfd11a62cc04eb462fea923dd1ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_3.wav using Guid(2dd1bfd11a62cc04eb462fea923dd1ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d116c6e8121e2ea9aa7a2f9c1ff7407') in 0.023051 seconds
+  Import took 0.030419 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_5.wav
+  artifactKey: Guid(64bd727029ca2984eb3127bcac099a21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_5.wav using Guid(64bd727029ca2984eb3127bcac099a21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e80cc76c1fbc191b8af67b5f318fdda') in 0.021728 seconds
+  Import took 0.029825 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_2.wav
+  artifactKey: Guid(93b01be532cf21a4599e720ddf611c35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 08/Gun 8_2.wav using Guid(93b01be532cf21a4599e720ddf611c35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a6d8fa1934a37ad38e43e14031d5bc1') in 0.020683 seconds
+  Import took 0.028388 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 29.505962 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional
+  artifactKey: Guid(1d4c9b6d114655242b0ad2dcb1a29ff8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional using Guid(1d4c9b6d114655242b0ad2dcb1a29ff8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f323674f7f7b0f2766a9c2b2d51526f') in 0.006630 seconds
+  Import took 0.013492 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.585553 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c954c34408c0bf1d0e93aff9c769e48') in 0.081504 seconds
+  Import took 0.092306 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 92.370014 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 01.wav
+  artifactKey: Guid(a5d107f753ac78f408e885de9e6faf3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 01.wav using Guid(a5d107f753ac78f408e885de9e6faf3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1711dba69ad65658cf539fc252dead7a') in 0.021413 seconds
+  Import took 0.029847 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 02.wav
+  artifactKey: Guid(73c06b75b55ebe54f9b4c67b210560f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 02.wav using Guid(73c06b75b55ebe54f9b4c67b210560f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cbe571e777466a62e77fa742eb6c70a0') in 0.020116 seconds
+  Import took 0.027400 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.031964 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 03.wav
+  artifactKey: Guid(41bb6b9bb56b16945853a8f6adddb4d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 03.wav using Guid(41bb6b9bb56b16945853a8f6adddb4d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cfcd1bf90007b09275b8131a98be52d7') in 0.021046 seconds
+  Import took 0.029448 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 04.wav
+  artifactKey: Guid(dea0777265345d140a254b5b30aad010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 04.wav using Guid(dea0777265345d140a254b5b30aad010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af55afabafabf14149bfb4f755c910cc') in 0.020993 seconds
+  Import took 0.027298 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013916 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 04.wav
+  artifactKey: Guid(dea0777265345d140a254b5b30aad010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 04.wav using Guid(dea0777265345d140a254b5b30aad010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af55afabafabf14149bfb4f755c910cc') in 0.008498 seconds
+  Import took 0.015941 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.536525 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 05.wav
+  artifactKey: Guid(8d7a861fba937e548bc19f94e8f69582) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 05.wav using Guid(8d7a861fba937e548bc19f94e8f69582) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41e4cc63715d7293207c397eb031d2cc') in 0.021081 seconds
+  Import took 0.028679 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000288 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 06.wav
+  artifactKey: Guid(972523713707b404b83faa7057603784) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 06.wav using Guid(972523713707b404b83faa7057603784) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45db4260bdf9111edb53dd6d3bb589c0') in 0.021355 seconds
+  Import took 0.028735 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.879099 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 07.wav
+  artifactKey: Guid(6fad2f7f5d53c7247a4b261100eb510f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 07.wav using Guid(6fad2f7f5d53c7247a4b261100eb510f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58682948b9760e9e06a0c0a2d30bab7e') in 0.020293 seconds
+  Import took 0.027844 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000312 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 08.wav
+  artifactKey: Guid(ff76b2d764c69fc47bdadc33d68f36b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 08.wav using Guid(ff76b2d764c69fc47bdadc33d68f36b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02cc90fc4d0c3982870936cdc462983d') in 0.021485 seconds
+  Import took 0.029874 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.130343 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 09.wav
+  artifactKey: Guid(63a511d0fae72b044b67732d33bda811) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 09.wav using Guid(63a511d0fae72b044b67732d33bda811) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '084d47b5b2c13c684d8bc56f93e9d8f4') in 0.022793 seconds
+  Import took 0.030408 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000260 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 10.wav
+  artifactKey: Guid(3161c05009faa5545b3429cec797bb32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Gun Tail 10.wav using Guid(3161c05009faa5545b3429cec797bb32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93ebf39f01248f8c4f54ae5c8f5ecef1') in 0.020051 seconds
+  Import took 0.026878 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000272 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 04.wav
+  artifactKey: Guid(bab91f50b92842d4d81ec8424ee77b0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 04.wav using Guid(bab91f50b92842d4d81ec8424ee77b0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c36cf43457e8fe6af4902772e3a7ba5') in 0.024424 seconds
+  Import took 0.031552 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000291 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 03.wav
+  artifactKey: Guid(1d58dc270a6df694386fd5e7d4966d48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 03.wav using Guid(1d58dc270a6df694386fd5e7d4966d48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be38c4d90323cc3a244b720b45b3a914') in 0.020209 seconds
+  Import took 0.028286 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000256 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 05.wav
+  artifactKey: Guid(f3c7d64c493c49340bf69d8fe42aaa14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 05.wav using Guid(f3c7d64c493c49340bf69d8fe42aaa14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '428c8bcc7f9e884c2ee18aa099357672') in 0.024871 seconds
+  Import took 0.034290 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000362 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 02.wav
+  artifactKey: Guid(a72daed8ca01cd8489a7b05a8de97e71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 02.wav using Guid(a72daed8ca01cd8489a7b05a8de97e71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2b9d84c6f10951ab89084c98203d347') in 0.022439 seconds
+  Import took 0.030188 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000318 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 01.wav
+  artifactKey: Guid(cc091b38c92042c4593564424ee73162) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 01.wav using Guid(cc091b38c92042c4593564424ee73162) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff7e718e465dcadfc1c79956d85cc837') in 0.020756 seconds
+  Import took 0.026789 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 06.wav
+  artifactKey: Guid(bebdc256e039a7a4b93b4bd8b393e939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 06.wav using Guid(bebdc256e039a7a4b93b4bd8b393e939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aeef5760f0dc4b2394a5d1570ce57ab4') in 0.022840 seconds
+  Import took 0.029917 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.363800 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 07.wav
+  artifactKey: Guid(f80d7b4e41ff06e42a3297bb66a81ff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 07.wav using Guid(f80d7b4e41ff06e42a3297bb66a81ff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e80968b54f43c3c1015080ffa21383ee') in 0.019301 seconds
+  Import took 0.026170 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000236 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 08.wav
+  artifactKey: Guid(cd31cbb7137974b49b3bd5b876141143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 08.wav using Guid(cd31cbb7137974b49b3bd5b876141143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f45dfa7088b74c316525f5af07a18f8c') in 0.020981 seconds
+  Import took 0.029078 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 10.wav
+  artifactKey: Guid(5ebb09e3815c5094fb8ec105c3701ee0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 10.wav using Guid(5ebb09e3815c5094fb8ec105c3701ee0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2acf7231ab08e95c303ec7e237e4a055') in 0.020366 seconds
+  Import took 0.028858 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 09.wav
+  artifactKey: Guid(053cebf5b2034ba4b88272e9740231e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 09.wav using Guid(053cebf5b2034ba4b88272e9740231e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2602f069bcd89491f5c905042fbe0199') in 0.021699 seconds
+  Import took 0.029689 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 08.wav
+  artifactKey: Guid(cd31cbb7137974b49b3bd5b876141143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 08.wav using Guid(cd31cbb7137974b49b3bd5b876141143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f45dfa7088b74c316525f5af07a18f8c') in 0.008517 seconds
+  Import took 0.015177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 07.wav
+  artifactKey: Guid(f80d7b4e41ff06e42a3297bb66a81ff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 07.wav using Guid(f80d7b4e41ff06e42a3297bb66a81ff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e80968b54f43c3c1015080ffa21383ee') in 0.008210 seconds
+  Import took 0.014465 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.432527 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 11.wav
+  artifactKey: Guid(dfad4e0d422ca494ebaab13cc7d68c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 11.wav using Guid(dfad4e0d422ca494ebaab13cc7d68c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47aa52c085f98a066ba85117b250eb20') in 0.022073 seconds
+  Import took 0.030316 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000992 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 11.wav
+  artifactKey: Guid(dfad4e0d422ca494ebaab13cc7d68c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Ricochet 11.wav using Guid(dfad4e0d422ca494ebaab13cc7d68c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47aa52c085f98a066ba85117b250eb20') in 0.008365 seconds
+  Import took 0.014866 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.138130 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 01.wav
+  artifactKey: Guid(07f0b37fa9c2e5244900d9e8f7e339e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 01.wav using Guid(07f0b37fa9c2e5244900d9e8f7e339e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd55c698fa32ef972187cb63d5416c41') in 0.021075 seconds
+  Import took 0.029072 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000328 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 03.wav
+  artifactKey: Guid(c283cb6e15fc6c54cb2ea6bdb13edd1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 03.wav using Guid(c283cb6e15fc6c54cb2ea6bdb13edd1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5176f8659999c860973de92158cb2857') in 0.019513 seconds
+  Import took 0.025727 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000325 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 02.wav
+  artifactKey: Guid(5c4eaa878a09e8b41a69913e1cf04421) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 02.wav using Guid(5c4eaa878a09e8b41a69913e1cf04421) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90e4a9d4e47c2386070c6d620435fcbc') in 0.023043 seconds
+  Import took 0.029622 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.252034 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 04.wav
+  artifactKey: Guid(9243289aad25d3c40b1626f92efbc097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 04.wav using Guid(9243289aad25d3c40b1626f92efbc097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5058a843b9179e568f9b56c8a738ee8') in 0.023906 seconds
+  Import took 0.030787 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000291 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 06.wav
+  artifactKey: Guid(9139e1efeee3930499ca24cfcfc88f54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 06.wav using Guid(9139e1efeee3930499ca24cfcfc88f54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e7858cb4d4197e57f3bc29f1af6805a') in 0.022604 seconds
+  Import took 0.030561 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 07.wav
+  artifactKey: Guid(5b96a2a25e3fbc743b4968a195bfeb29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 07.wav using Guid(5b96a2a25e3fbc743b4968a195bfeb29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ee16ab3dc0facdfd57eff40b6b5e7f9') in 0.022139 seconds
+  Import took 0.029059 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000282 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 05.wav
+  artifactKey: Guid(f757daa2272e9f94c9e82f4b85bd7294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 05.wav using Guid(f757daa2272e9f94c9e82f4b85bd7294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00a32f2d701b162b5d463b3a6fcd8847') in 0.023290 seconds
+  Import took 0.030249 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.026991 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 08.wav
+  artifactKey: Guid(2502f4658e3598544856476145c90d50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 08.wav using Guid(2502f4658e3598544856476145c90d50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99466f1ad09ab20b7c2bf819101c6eb1') in 0.021536 seconds
+  Import took 0.030068 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000293 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 09.wav
+  artifactKey: Guid(c38f9ac6e11c9eb499937581b7a52fc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 09.wav using Guid(c38f9ac6e11c9eb499937581b7a52fc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03cf3456d33c1c5f4debde1714d2e47f') in 0.022187 seconds
+  Import took 0.028944 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.010451 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 09.wav
+  artifactKey: Guid(c38f9ac6e11c9eb499937581b7a52fc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 09.wav using Guid(c38f9ac6e11c9eb499937581b7a52fc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03cf3456d33c1c5f4debde1714d2e47f') in 0.008026 seconds
+  Import took 0.014821 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.307909 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 10.wav
+  artifactKey: Guid(0a679e6611cc7124ca5ebf4b492354ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 10.wav using Guid(0a679e6611cc7124ca5ebf4b492354ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4aab848a9919af25c5c78aedc3e3548') in 0.020627 seconds
+  Import took 0.027443 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000413 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 11.wav
+  artifactKey: Guid(c4bce22981f895d46bd54e2eedbe0dfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 11.wav using Guid(c4bce22981f895d46bd54e2eedbe0dfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3bfd72748889c19f52e9f2984a49794') in 0.022242 seconds
+  Import took 0.030787 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000318 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 10.wav
+  artifactKey: Guid(0a679e6611cc7124ca5ebf4b492354ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 10.wav using Guid(0a679e6611cc7124ca5ebf4b492354ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4aab848a9919af25c5c78aedc3e3548') in 0.009040 seconds
+  Import took 0.015116 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000238 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 12.wav
+  artifactKey: Guid(bbd7367573b9dfc478c79620c63fbab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 12.wav using Guid(bbd7367573b9dfc478c79620c63fbab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bcd46254050da5c2a1af16f6f13a5ed') in 0.020831 seconds
+  Import took 0.030355 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000285 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 11.wav
+  artifactKey: Guid(c4bce22981f895d46bd54e2eedbe0dfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 11.wav using Guid(c4bce22981f895d46bd54e2eedbe0dfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3bfd72748889c19f52e9f2984a49794') in 0.008388 seconds
+  Import took 0.015301 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000312 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 13.wav
+  artifactKey: Guid(4b2eb679b12912a4da52d82b21915ad7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 13.wav using Guid(4b2eb679b12912a4da52d82b21915ad7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3602685bc3644510791808d03bcf4303') in 0.020334 seconds
+  Import took 0.027579 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000222 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 14.wav
+  artifactKey: Guid(f3a675f8e36b51a48bbe29adee51248b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 14.wav using Guid(f3a675f8e36b51a48bbe29adee51248b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55da253d6c89405f156e094e210d9b7b') in 0.020657 seconds
+  Import took 0.029172 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000348 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 15.wav
+  artifactKey: Guid(d6c77bbccffb8e64a9842427069f785a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun Additional/Whiz 15.wav using Guid(d6c77bbccffb8e64a9842427069f785a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9736b713592b5af5f05e921cb5cb92f5') in 0.019970 seconds
+  Import took 0.026592 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005771 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.36 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.454 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3446 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.8 MB.
+System memory in use after: 192.0 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 4429.
+Total: 4.536000 ms (FindLiveObjects: 0.464800 ms CreateObjectMapping: 0.236000 ms MarkObjects: 3.801800 ms  DeleteObjects: 0.031300 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 61.776846 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '218a1e36f410a6cb84270971dfaf1d6e') in 0.250228 seconds
+  Import took 0.262452 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.804112 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7 Loop.wav
+  artifactKey: Guid(39fd2a67495ca4d40a9486ed7a374517) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7 Loop.wav using Guid(39fd2a67495ca4d40a9486ed7a374517) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e778ad9184c4396fad2b7695ef6fae3') in 0.027098 seconds
+  Import took 0.035652 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000336 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7_2.wav
+  artifactKey: Guid(8ffa42966f1124b449becd51d22ef1cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7_2.wav using Guid(8ffa42966f1124b449becd51d22ef1cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '263e1ee7a7f8505675c942fe64f0a70e') in 0.021177 seconds
+  Import took 0.028827 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7_1.wav
+  artifactKey: Guid(6291a301b57e7044f9f278f1198fa1ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7_1.wav using Guid(6291a301b57e7044f9f278f1198fa1ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb4e7b1e85cd9b7030775fe236b3a208') in 0.023275 seconds
+  Import took 0.031934 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000277 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7_3.wav
+  artifactKey: Guid(d6189a296c7763b4ebd12925e9d4980c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 07 (Flamethrower)/Gun 7_3.wav using Guid(d6189a296c7763b4ebd12925e9d4980c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b975bca2b9cfc1e30e9d90e1b15a6620') in 0.023059 seconds
+  Import took 0.031804 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.531279 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_1.wav
+  artifactKey: Guid(cf29eb455a6067a4aa0034e9f2cae11b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_1.wav using Guid(cf29eb455a6067a4aa0034e9f2cae11b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '404e916e10bd68d21444404e4c61d148') in 0.020844 seconds
+  Import took 0.027875 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_4.wav
+  artifactKey: Guid(f1b09de662c237344be54c86c0bed73f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_4.wav using Guid(f1b09de662c237344be54c86c0bed73f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06e758879af9db5c94d836344a896de3') in 0.020288 seconds
+  Import took 0.026391 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000301 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_2.wav
+  artifactKey: Guid(d301044bdb030554ba0fa524cb46e89d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_2.wav using Guid(d301044bdb030554ba0fa524cb46e89d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a30dd1f7ab3096bb5bfb91c7165d7317') in 0.021758 seconds
+  Import took 0.028275 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000329 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_5.wav
+  artifactKey: Guid(3ac78e50be0e52f4f84658e692909561) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_5.wav using Guid(3ac78e50be0e52f4f84658e692909561) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f329796f1a56c7f4f66e8976277cc72') in 0.021453 seconds
+  Import took 0.027164 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_3.wav
+  artifactKey: Guid(79131af09f59a2b4faad821a25bef1db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 10/Gun 10_3.wav using Guid(79131af09f59a2b4faad821a25bef1db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e6cad8d5841bbaf9d59e5c77043fc81') in 0.021778 seconds
+  Import took 0.030068 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.862059 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_1.wav
+  artifactKey: Guid(e005bf02ee4ba3a45ad52150338df708) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_1.wav using Guid(e005bf02ee4ba3a45ad52150338df708) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77b48f93722aeea06c763ef563f33b56') in 0.020530 seconds
+  Import took 0.026690 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000308 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_4.wav
+  artifactKey: Guid(b1b95dfa0578a18429e423e3a768a3eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_4.wav using Guid(b1b95dfa0578a18429e423e3a768a3eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edff6b0f0b9ea68e8b0388b7662014a9') in 0.020978 seconds
+  Import took 0.027826 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000302 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_5.wav
+  artifactKey: Guid(a9d583ee42e97dc45944c1cb3e1834a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_5.wav using Guid(a9d583ee42e97dc45944c1cb3e1834a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d7676bb7a78bf9005dd107b639265d6') in 0.026986 seconds
+  Import took 0.034535 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000312 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_2.wav
+  artifactKey: Guid(d37387772e4172646b6cb032d4a798d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_2.wav using Guid(d37387772e4172646b6cb032d4a798d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7dc882bece7f9b0741e892cafdc9a9a') in 0.021230 seconds
+  Import took 0.028209 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000342 seconds.
+  path: Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_3.wav
+  artifactKey: Guid(8b9f7ef75405f194789d0d042b20d9d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sources/Cafofo - Gun & Explosion Sounds/Gun 12/Gun 12_3.wav using Guid(8b9f7ef75405f194789d0d042b20d9d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d738e54f6511108f541d7a8678fa8d4') in 0.022309 seconds
+  Import took 0.030159 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 77.567745 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae4ad8eb6280483d0fe412678e20ccbd') in 0.081421 seconds
+  Import took 0.092265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.721011 seconds.
+  path: Assets/Resources/Sources/Items/item73.prefab
+  artifactKey: Guid(eb78119d59e46f84c93f0b0d3b0427bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item73.prefab using Guid(eb78119d59e46f84c93f0b0d3b0427bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18c113c3824630d5820d0477504a396d') in 0.018914 seconds
+  Import took 0.028293 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.611660 seconds.
+  path: Assets/Resources/Sources/Items/item1.prefab
+  artifactKey: Guid(3c6d7f6d051052844a8fcdf67bf37a7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item1.prefab using Guid(3c6d7f6d051052844a8fcdf67bf37a7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '569299ad380c52e9800a25cdde1e85c7') in 0.032190 seconds
+  Import took 0.039377 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.738179 seconds.
+  path: Assets/Resources/Sources/Items/item5.prefab
+  artifactKey: Guid(a5aa4c9d301d4e248899b1600fca7aed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item5.prefab using Guid(a5aa4c9d301d4e248899b1600fca7aed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ca4c2477c263aefafb2eb8b637a6bba') in 0.022795 seconds
+  Import took 0.032130 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.334926 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ccd475c304367e512ac5a9df46e1f11') in 0.073900 seconds
+  Import took 0.084993 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005640 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.50 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.461 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.25 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3446 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.1 MB.
+System memory in use after: 192.4 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 4469.
+Total: 4.468400 ms (FindLiveObjects: 0.456900 ms CreateObjectMapping: 0.180800 ms MarkObjects: 3.790400 ms  DeleteObjects: 0.039200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 477.920799 seconds.
+  path: Assets/Resources/Sources/Sounds/Make.wav
+  artifactKey: Guid(e8c77c63fe91e284eb8faeac67e1a11e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Sounds/Make.wav using Guid(e8c77c63fe91e284eb8faeac67e1a11e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bd51682bac642b9664650119ef51a52') in 0.046108 seconds
+  Import took 0.056330 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005893 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.28 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.325 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 2.02 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3446 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.1 MB.
+System memory in use after: 192.4 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4474.
+Total: 3.552900 ms (FindLiveObjects: 0.674700 ms CreateObjectMapping: 0.338900 ms MarkObjects: 2.508200 ms  DeleteObjects: 0.029500 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 111.460733 seconds.
+  path: Assets/Resources/Player.prefab
+  artifactKey: Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Player.prefab using Guid(cc3fd1998ff69854e9fef46ed30ed859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bba0569a822c50f0d5f8e2b8c0067b4') in 0.286778 seconds
+  Import took 0.297411 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006127 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.19 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.067 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3446 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.3 MB.
+System memory in use after: 192.5 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 4514.
+Total: 3.593600 ms (FindLiveObjects: 0.384500 ms CreateObjectMapping: 0.187700 ms MarkObjects: 2.988100 ms  DeleteObjects: 0.032300 ms)
+

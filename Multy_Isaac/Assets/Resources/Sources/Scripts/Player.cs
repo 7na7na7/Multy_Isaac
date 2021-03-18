@@ -650,6 +650,10 @@ pv.RPC("DieRPC",RpcTarget.All);
         }
     }
 
+    public void CombineSound()
+    {
+        sound.Play(3,true,0.5f);
+    }
     public void loseHP()
     {
         if (!isDead)
