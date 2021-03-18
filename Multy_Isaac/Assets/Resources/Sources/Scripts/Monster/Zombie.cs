@@ -322,7 +322,7 @@ float degree = rad * Mathf.Rad2Deg;
             else
             {
                 if(Random.Range(0,3)==1) 
-                    enemy.sound.Play(Random.Range(3,6),true,0.25f);
+                    enemy.sound.Play(Random.Range(3,6),true,0.1f);
                 
                 enemy.setAnim("Walk");
              

@@ -11,7 +11,7 @@ public class Dic : MonoBehaviour
     public GameObject dicElement;
     private void Start()
     {
-        Invoke("set",0.2f);
+        Invoke("set",3f);
     }
 
     void set()

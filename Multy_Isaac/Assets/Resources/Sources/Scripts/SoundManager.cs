@@ -3,9 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using Random = System.Random;
 
+[System.Serializable]
+public class gunSounds
+{
+    public AudioClip[] sounds;
+}
 public class SoundManager : MonoBehaviour
 {
+    public gunSounds[] guns;
     public float minDistance = 8f;
     public float maxDistance = 20f;
     public PhotonView pv;
@@ -47,7 +54,6 @@ public class SoundManager : MonoBehaviour
                pv.RPC("PlayRPC",RpcTarget.All,clipIndex,volume);
        }
    }
-  
    
    [PunRPC]
    void PlayRPC( int clipIndex ,float volume)
@@ -57,5 +63,43 @@ public class SoundManager : MonoBehaviour
        
            ClipSources[index].PlayOneShot(clips[clipIndex],volume);
            index++;
+   }
+
+   public void PlayGun(int clipIndex, bool isRPC, float volume = 1f, bool isReload = false)
+   {
+       if (isReload)
+       {
+           if(!isRPC)
+               PlayGunRPC(clipIndex,guns[clipIndex].sounds.Length-1,volume);
+           else
+           {
+               if(PhotonNetwork.OfflineMode)
+                   PlayGunRPC(clipIndex,guns[clipIndex].sounds.Length-1,volume);
+               else
+                   pv.RPC("PlayGunRPC",RpcTarget.All,clipIndex,guns[clipIndex].sounds.Length-1,volume);
+           }
+       }
+       else
+       {
+           if(!isRPC)
+               PlayGunRPC(clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume);
+           else
+           {
+               if(PhotonNetwork.OfflineMode)
+                   PlayGunRPC(clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume);
+               else
+                   pv.RPC("PlayGunRPC",RpcTarget.All,clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume);
+           }   
+       }
+   }
+   
+   [PunRPC]
+   void PlayGunRPC( int gunIndex,int soundIndex,float volume)
+   {
+       if (index == SourceCount)
+           index = 0;
+       
+       ClipSources[index].PlayOneShot(guns[gunIndex].sounds[soundIndex],volume);
+       index++;
    }
 }

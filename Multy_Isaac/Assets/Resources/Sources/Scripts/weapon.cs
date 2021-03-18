@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class wep
 {
+    public int shotSoundIndex;
+    public float volume = 0.5f;
     public float soundRadious = 5;
     public int consumeBullet=1;
     public int shotBullet = 1;
@@ -26,6 +28,8 @@ public class wep
     public wep DeepCopy()
     {
         wep Copytem = new wep();
+        Copytem.shotSoundIndex = this.shotSoundIndex;
+        Copytem.volume = this.volume;
         Copytem.soundRadious = this.soundRadious;
         Copytem.slashTime = this.slashTime;
         Copytem.shotBullet = this.shotBullet;

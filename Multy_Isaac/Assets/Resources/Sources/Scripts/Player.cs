@@ -22,6 +22,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private int shotSoundIndex;
+    private float volume;
     private bool isHouse = false;
     private offlineStat offStat;
     private TimeManager timeMgr;
@@ -425,7 +427,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             time = currentWeapon.CoolTime;
             
             isReLoading = true;
-            
+            sound.PlayGun(shotSoundIndex,true,volume);
             Vector3 a = gun.transform.eulerAngles;
             Vector3 a2 = a;
             a.z -=135;
@@ -475,6 +477,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             isFight();
             if (leftBullet.MinusBullet(playerItem.selectedIndex,currentWeapon.consumeBullet)) //쏘기!!!!!
             {
+                sound.PlayGun(shotSoundIndex,true,volume);
                 if(playerItem.getCurrentTem().weaponIndex==7) //식빵총이면
                    offStat.HungryHeal(1); //체력 1회복
               
@@ -675,7 +678,8 @@ pv.RPC("DieRPC",RpcTarget.All);
             offlineSlash = currentWeapon.OfflineSlash;
             offLineBullet = currentWeapon.offlineBullet;
             soundRadious = currentWeapon.soundRadious;
-            
+            volume = currentWeapon.volume;
+            shotSoundIndex=currentWeapon.shotSoundIndex-1;
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
         }
@@ -801,8 +805,8 @@ pv.RPC("DieRPC",RpcTarget.All);
         Vector3 a = gun.transform.eulerAngles;
         a.z += 181;
         isReLoading = true;
-                
         canReload = true;
+        sound.PlayGun(shotSoundIndex,true,volume,true);
         gun.transform.DORotate(a, reloadTime/2).SetEase(reLoadEase1).OnComplete(()=> {
             Vector3 b = gun.transform.eulerAngles;
             b.z += 181;
