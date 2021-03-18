@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 6637044811040539380}
   - component: {fileID: 6637044811040539382}
   - component: {fileID: 6637044811040539383}
-  - component: {fileID: 4326477160790616091}
   - component: {fileID: 260596654096173333}
   - component: {fileID: -2401214700219501570}
+  - component: {fileID: 4505423809494404338}
   m_Layer: 0
   m_Name: Gun4_Bullet
   m_TagString: Bullet
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 6637044811040539379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 8.5, y: 1.2, z: 1}
   m_Children:
   - {fileID: 1699503958582040504}
   m_Father: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   Dmg: 8
   nuckBackDistance: 0.4
   none: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
-  speed: 12
+  speed: 15
   DestroyTime: 1.5
   pv: {fileID: 6637044811040539383}
   wallEffect: {fileID: 6975551736277749814, guid: 1ff3e3b24f342984aac2b7acae7e63ac,
@@ -221,22 +221,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!58 &4326477160790616091
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6637044811040539379}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.000014424324, y: -0.0053560836}
-  serializedVersion: 2
-  m_Radius: 0.061301757
 --- !u!50 &260596654096173333
 Rigidbody2D:
   serializedVersion: 4
@@ -274,3 +258,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!70 &4505423809494404338
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637044811040539379}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0005264441, y: -0.0021658586}
+  m_Size: {x: 0.11858641, y: 0.121017136}
+  m_Direction: 1
