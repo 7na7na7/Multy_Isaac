@@ -415,6 +415,7 @@ public class UsableItem : MonoBehaviour
     {
         if (canEat)
         {
+            player.eatSound();
             StartCoroutine(eatCool());
             return true;
             

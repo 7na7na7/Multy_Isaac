@@ -639,9 +639,9 @@ pv.RPC("DieRPC",RpcTarget.All);
         if (footCount > footCountCut)
         {
             if(isHouse)
-                sound.Play(1,true,1.3f);
+                sound.Play(1,true,1.2f);
             else if(isAspalt)
-                sound.Play(2,true,0.6f);
+                sound.Play(2,true,0.4f);
             else
             {
                 sound.Play(0,true,0.4f);
@@ -653,6 +653,10 @@ pv.RPC("DieRPC",RpcTarget.All);
     public void CombineSound()
     {
         sound.Play(3,true,0.5f);
+    }
+    public void eatSound()
+    {
+        sound.Play(4,true,0.5f);
     }
     public void loseHP()
     {

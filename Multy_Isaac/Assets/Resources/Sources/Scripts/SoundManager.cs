@@ -92,7 +92,8 @@ public class SoundManager : MonoBehaviour
            }   
        }
    }
-   
+
+
    [PunRPC]
    void PlayGunRPC( int gunIndex,int soundIndex,float volume)
    {
