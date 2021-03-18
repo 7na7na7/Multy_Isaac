@@ -100,6 +100,8 @@ GameObject:
   - component: {fileID: 5434114458771540210}
   - component: {fileID: 2181222464156797927}
   - component: {fileID: 1478727875160609889}
+  - component: {fileID: 8591050834291778237}
+  - component: {fileID: 6479367611209610799}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Fire
@@ -185,9 +187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8a56a5b9e7b594daec049d7847b97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSound: 1
+  myName: 
   nuckBackDistance: 0
   damage: 2
   delay: 5
+  playerDmg: 0
 --- !u!60 &2181222464156797927
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -269,3 +274,44 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &8591050834291778237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657553679644712889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba82dda9f7565c34d861fd1ce3c43d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns: []
+  minDistance: 0.5
+  maxDistance: 15
+  pv: {fileID: 6479367611209610799}
+  clips:
+  - {fileID: 8300000, guid: 31dfdf64c03bbb4418530c46e8cab499, type: 3}
+  SourceCount: 1
+--- !u!114 &6479367611209610799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657553679644712889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 488023865330879636}
   - component: {fileID: 488023865330879638}
   - component: {fileID: 488023865330879639}
+  - component: {fileID: 7471716341300384598}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Explosion
@@ -157,11 +158,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8a56a5b9e7b594daec049d7847b97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSound: 1
   myName: "\uD3ED\uBC1C"
   nuckBackDistance: 6
   damage: 70
-  delay: 0.2
+  delay: 0.32
   playerDmg: 0
+--- !u!114 &7471716341300384598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488023865330879624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba82dda9f7565c34d861fd1ce3c43d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns: []
+  minDistance: 0.5
+  maxDistance: 25
+  pv: {fileID: 488023865330879638}
+  clips:
+  - {fileID: 8300000, guid: eaf11339ddaaba347bd6368a98fbae62, type: 3}
+  SourceCount: 1
 --- !u!1 &488023866620494641
 GameObject:
   m_ObjectHideFlags: 0
