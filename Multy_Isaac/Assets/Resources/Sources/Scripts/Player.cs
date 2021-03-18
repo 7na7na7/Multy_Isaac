@@ -634,7 +634,7 @@ pv.RPC("DieRPC",RpcTarget.All);
         if (footCount > footCountCut)
         {
             if(isHouse)
-                sound.Play(1,true,1.5f);
+                sound.Play(1,true,1f);
             else
                 sound.Play(0,true,0.25f);
             footCount = 0;

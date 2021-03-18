@@ -100,6 +100,9 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 70;
                 Speed -= 15;
                 break;
+            case 139: //사슬갑옷
+                statMgr.armor += 40;
+                break;
         }
     }
         
@@ -171,6 +174,9 @@ public class PassiveItem : MonoBehaviour
             case 136: //슈트
                 statMgr.armor -= 70;
                 Speed += 15;
+                break;
+            case 139: //사슬갑옷
+                statMgr.armor -= 40;
                 break;
         }
     }
