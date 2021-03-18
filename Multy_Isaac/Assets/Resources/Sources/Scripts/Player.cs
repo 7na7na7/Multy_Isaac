@@ -110,6 +110,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 savedCanvasScale;
     //죽음
     public bool isDead;
+
+    private bool isAspalt = false;
     #endregion
 
     #region 내장함수
@@ -637,9 +639,13 @@ pv.RPC("DieRPC",RpcTarget.All);
         if (footCount > footCountCut)
         {
             if(isHouse)
-                sound.Play(1,true,1f);
+                sound.Play(1,true,1.3f);
+            else if(isAspalt)
+                sound.Play(2,true,0.6f);
             else
-                sound.Play(0,true,0.25f);
+            {
+                sound.Play(0,true,0.4f);
+            }
             footCount = 0;
         }
     }
@@ -892,6 +898,8 @@ pv.RPC("DieRPC",RpcTarget.All);
             {
                 if (other.CompareTag("HouseTile"))
                     isHouse = true;
+                if (other.CompareTag("Aspalt"))
+                    isAspalt = true;
                 if (other.CompareTag("Pan1"))
                     isPan1 = true;
                 if (other.CompareTag("Pan2"))
@@ -912,6 +920,8 @@ pv.RPC("DieRPC",RpcTarget.All);
         {
             if (other.CompareTag("HouseTile"))
                 isHouse = false;
+            if (other.CompareTag("Aspalt"))
+                isAspalt = false;
             if (other.CompareTag("Pan1"))
                 isPan1 = false;
             if (other.CompareTag("Pan2"))

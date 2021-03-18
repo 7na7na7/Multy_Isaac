@@ -299,6 +299,8 @@ float degree = rad * Mathf.Rad2Deg;
                 enemy.seeker.StartPath(transform.position, enemy.targetPosition.position, OnPathComplete);
             }
             yield return new WaitForSeconds(0.2f);
+            if(Random.Range(0,20)==1) 
+                enemy.sound.Play(Random.Range(3,6),true,0.1f);
         }
     }
         
