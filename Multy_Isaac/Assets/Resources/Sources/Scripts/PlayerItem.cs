@@ -211,6 +211,7 @@ public class PlayerItem : MonoBehaviour
 
                         if (contactIndex != selectedIndex)
                         {
+                            player.ChangeWeaponSound();
                             selectedIndex = contactIndex;
                             for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
                             {
@@ -438,6 +439,7 @@ public class PlayerItem : MonoBehaviour
     {
         if (ItemList[selectedIndex].ItemSprite != null&&ItemList[selectedIndex].ItemSprite != NullSprite) //비어있지않다면
         {
+            player.discardSound();
             int ind = ItemList[selectedIndex].index;
 
             if (ItemList[selectedIndex].type == itemType.Usable) //소비템이면

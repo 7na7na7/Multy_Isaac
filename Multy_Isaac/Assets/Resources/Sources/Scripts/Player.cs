@@ -650,6 +650,14 @@ pv.RPC("DieRPC",RpcTarget.All);
         }
     }
 
+    public void ChangeWeaponSound()
+    {
+        sound.Play(5,false,0.5f);
+    }
+    public void discardSound()
+    {
+        sound.Play(6,false,0.5f);
+    }
     public void CombineSound()
     {
         sound.Play(3,true,0.5f);
