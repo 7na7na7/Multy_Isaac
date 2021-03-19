@@ -220,7 +220,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                         }
                                            
                                         else
-                                            print("총알이 부족합니다!");
+                                            noBulletSound();
                                     }
                                     else
                                         ShotGun(true);
@@ -648,6 +648,10 @@ pv.RPC("DieRPC",RpcTarget.All);
             }
             footCount = 0;
         }
+    }
+    public void noBulletSound()
+    {
+        sound.Play(9,false,0.5f);
     }
     public void PutBombSound()
     {
