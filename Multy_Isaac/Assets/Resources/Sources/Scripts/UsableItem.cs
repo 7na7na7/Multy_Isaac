@@ -62,6 +62,7 @@ public class UsableItem : MonoBehaviour
                 }
                 break;
             case 55: //폭탄
+                player.PutBombSound();
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Bomb, transform.position, Quaternion.identity);
                 else
@@ -219,6 +220,7 @@ public class UsableItem : MonoBehaviour
                 }
                 break;
             case 97: //지뢰
+                player.PutBombSound();
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Mine, transform.position, Quaternion.identity);
                 else

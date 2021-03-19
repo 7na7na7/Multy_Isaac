@@ -649,7 +649,10 @@ pv.RPC("DieRPC",RpcTarget.All);
             footCount = 0;
         }
     }
-
+    public void PutBombSound()
+    {
+        sound.Play(8,false,0.5f);
+    }
     public void GetSound()
     {
         sound.Play(7,false,0.5f);
