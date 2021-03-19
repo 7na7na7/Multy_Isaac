@@ -15,6 +15,8 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+   public int SendRate;
+   public int SerializationRate;
    public Vector2Int startResolution;
    public List<GameObject> Prefabs;
 
@@ -56,8 +58,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       Screen.SetResolution(startResolution.x,startResolution.y, false);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
       UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
-      PhotonNetwork.SendRate = 60;
-      PhotonNetwork.SerializationRate = 30;
+      PhotonNetwork.SendRate = SendRate;
+      PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
    }
 
