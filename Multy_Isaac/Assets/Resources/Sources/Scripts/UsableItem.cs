@@ -380,6 +380,14 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
+            case 141: //팝콘
+                if (eat())
+                {
+                    offStat.HungryHeal(5);
+                    setHappy();
+                    return true;
+                }
+                break;
         }
 
         return false;
