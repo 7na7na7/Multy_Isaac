@@ -178,6 +178,8 @@ public class PlayerItem : MonoBehaviour
 
                                 if(!isGet) 
                                     PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
+                                else
+                                    player.GetSound();
                             }   
                         }
                         catch (Exception e)

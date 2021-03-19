@@ -650,6 +650,10 @@ pv.RPC("DieRPC",RpcTarget.All);
         }
     }
 
+    public void GetSound()
+    {
+        sound.Play(7,false,0.5f);
+    }
     public void ChangeWeaponSound()
     {
         sound.Play(5,false,0.5f);
