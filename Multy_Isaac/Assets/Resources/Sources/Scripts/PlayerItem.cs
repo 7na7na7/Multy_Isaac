@@ -72,6 +72,47 @@ public class PlayerItem : MonoBehaviour
         {
             if (player.pv.IsMine)
             {
+                float scroll = Input.GetAxis("Mouse ScrollWheel");
+                if (scroll != 0)
+                {
+                    if (scroll > 0)
+                    {
+                        if (selectedIndex >= 7)
+                            selectedIndex = 0;
+                        else
+                            selectedIndex++;
+                   
+                    
+                        player.ChangeWeaponSound();
+                        for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                        {
+                            if (i == selectedIndex)
+                                Selected[i].SetActive(true);
+                            else
+                                Selected[i].SetActive(false); 
+                        }
+                        check(selectedIndex,false);   
+                    
+                    }
+                    else
+                    {
+                        if (selectedIndex <= 0)
+                            selectedIndex = 7;
+                        else
+                            selectedIndex--;
+                   
+                    
+                        player.ChangeWeaponSound();
+                        for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                        {
+                            if (i == selectedIndex)
+                                Selected[i].SetActive(true);
+                            else
+                                Selected[i].SetActive(false); 
+                        }
+                        check(selectedIndex,false);   
+                    }   
+                }
                 //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
             
                 for (int i = 0; i < ItemList.Length; i++) //아이템이미지가 존재한다면 매 프레임마다 박스에 이미지 갱신

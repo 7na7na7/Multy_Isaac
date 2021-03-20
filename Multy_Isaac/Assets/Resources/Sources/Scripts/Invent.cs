@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
-{
+{ 
     public Image[] categories;
     public GameObject[] scrollViews;
     public GameObject dicBtn;

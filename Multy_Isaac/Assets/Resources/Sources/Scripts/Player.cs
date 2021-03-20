@@ -164,8 +164,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
         else
+        {
             Destroy(canvas);
-       
+            Destroy(GetComponent<AudioListener>());
+        }
     }
 
     void aspaltSet()
@@ -448,6 +450,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 StartCoroutine(swordInitial(a2, 0.05f));  
             }
+            //총소리 듣고 좀비오기
+            RaycastHit2D[] zombieCol = Physics2D.CircleCastAll(gun.transform.position, soundRadious, Vector2.up,0);
+            foreach (RaycastHit2D col in zombieCol)
+            {
+                if (col.collider.CompareTag("Enemy"))
+                {
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        col.collider.GetComponent<Enemy>().setPlayer(transform);    
+                    }
+                    else
+                    {
+                        col.collider.GetComponent<Enemy>().setPlayerRPC(pv.ViewID);
+                    }
+                }
+            }   
         }
     }
 

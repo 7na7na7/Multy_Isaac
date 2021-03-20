@@ -13,8 +13,8 @@ public class FireBomb : MonoBehaviour
     public float rotateSpeed;
     private void Start()
     {
-        cam = FindObjectOfType<Wheel_Cam>().GetComponent<Camera>();
-        transform.DOMove((Vector2)cam.ScreenToWorldPoint(Input.mousePosition), 1.5f).SetEase(easeType).OnComplete(()=>
+        cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        transform.DOMove((Vector2)cam.ScreenToWorldPoint(Input.mousePosition), 0.75f).SetEase(easeType).OnComplete(()=>
             {
                 if(PhotonNetwork.OfflineMode) 
                     Instantiate(fire,transform.position,Quaternion.identity);
