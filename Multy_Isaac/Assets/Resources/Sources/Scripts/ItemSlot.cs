@@ -41,7 +41,7 @@ public class ItemSlot : MonoBehaviour
 
     public void Down()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             if (player.ItemList[index].ItemName != "")
                 {

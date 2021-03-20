@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerItem : MonoBehaviour
 {
+    public Invent invent;
     public GameObject[] startTem;
     public int[] startTemCount;
     
@@ -75,7 +76,7 @@ public class PlayerItem : MonoBehaviour
                 float scroll = Input.GetAxis("Mouse ScrollWheel");
                 if (scroll != 0)
                 {
-                    if (scroll > 0)
+                    if (scroll < 0)
                     {
                         if (selectedIndex >= 7)
                             selectedIndex = 0;
@@ -112,7 +113,7 @@ public class PlayerItem : MonoBehaviour
                         }
                         check(selectedIndex,false);   
                     }   
-                }
+                } //스크롤 템전환
                 //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
             
                 for (int i = 0; i < ItemList.Length; i++) //아이템이미지가 존재한다면 매 프레임마다 박스에 이미지 갱신
@@ -122,7 +123,12 @@ public class PlayerItem : MonoBehaviour
                     else
                         ItemBoxes[i].sprite = NullSprite;
                 }
-                
+
+                if (Input.GetMouseButtonDown(1)) //우클릭으로 템조합하기
+                {
+                    if(ItemList[selectedIndex].ItemName!="") 
+                        invent.Open(ItemList[selectedIndex]);
+                }
                 if (player.canMove) //움직일 수 있는 상태에서만 입력 가능
                 {
                     if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
