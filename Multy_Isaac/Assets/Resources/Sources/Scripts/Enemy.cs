@@ -248,8 +248,17 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       return false;
   }
 
-  [PunRPC]
   void Die()
+  {
+    if(PhotonNetwork.OfflineMode)
+      DieRPC();
+    else
+    {
+      pv.RPC("DieRPC",RpcTarget.AllBuffered);
+    }
+  }
+  [PunRPC]
+  void DieRPC()
   {
     if (!isDead)
     {
