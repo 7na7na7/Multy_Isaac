@@ -55,9 +55,11 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     
    private void Awake()
    {
+      PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString(NameKey,"");
       Screen.SetResolution(startResolution.x,startResolution.y, false);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
       UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
+
       PhotonNetwork.SendRate = SendRate;
       PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
@@ -188,6 +190,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       if(UsernameInput!=null) 
          NickName = UsernameInput.text;
       
+      PlayerPrefs.SetString(NameKey,NickName);
+
       LoginPanel.SetActive(false);
       LoadingPanel.SetActive(true);
    }

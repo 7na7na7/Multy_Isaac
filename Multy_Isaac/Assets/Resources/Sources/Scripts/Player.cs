@@ -220,7 +220,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                                             else
                                                 pv.RPC("ReLoad",RpcTarget.All,leftBullet.reLoadTime);
                                         }
-                                           
                                         else
                                             noBulletSound();
                                     }

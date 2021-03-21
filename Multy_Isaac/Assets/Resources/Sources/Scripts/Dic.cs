@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Dic : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class Dic : MonoBehaviour
     public GameObject dicElement;
     private void Start()
     {
-        Invoke("set",3f);
+        if(SceneManager.GetActiveScene().name=="Play") 
+            Invoke("set",3f);
     }
 
     void set()
