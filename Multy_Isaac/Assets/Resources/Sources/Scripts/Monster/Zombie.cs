@@ -43,7 +43,12 @@ public class Zombie : MonoBehaviour
     private bool isMaster= false;
     private void Start()
     {
-        Destroy(GetComponent<Seeker>());
+        if (!PhotonNetwork.OfflineMode)
+        {
+            if(!PhotonNetwork.IsMasterClient)
+                Destroy(GetComponent<Seeker>());
+        }
+        
         anim = GetComponent<Animator>();
         pv = GetComponent<PhotonView>();
         rigid = GetComponent<Rigidbody2D>();
