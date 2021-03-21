@@ -126,14 +126,13 @@ public class PlayerItem : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(1)) //우클릭으로 템조합하기
                 {
-                    if(ItemList[selectedIndex].ItemName!="") 
-                        invent.OpenIfCan(ItemList[selectedIndex]);
+                    invent.OpenIfCan(ItemList[selectedIndex]);
                 }
                 if (player.canMove) //움직일 수 있는 상태에서만 입력 가능
                 {
                     if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
                     {
-                        if (ItemList[selectedIndex].type == itemType.Usable||ItemList[selectedIndex].type ==itemType.Item)
+                        if (ItemList[selectedIndex].type == itemType.Usable)
                         {
                             if (usable.UseItem(ItemList[selectedIndex].index))
                             {

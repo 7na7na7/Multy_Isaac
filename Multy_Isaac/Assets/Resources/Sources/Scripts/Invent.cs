@@ -173,18 +173,25 @@ public class Invent : MonoBehaviour
 
     public void OpenIfCan(tem tam)
     {
-        if (element != null)
+        if (tam.ItemName != "")
         {
-            if(PlayerItem.getCurrentTem().index==element.index && isOpen)
-                Close();
+            if (element != null)
+            {
+                if(PlayerItem.getCurrentTem().index==element.index && isOpen)
+                    Close();
+                else
+                    Open(tam);
+            }
             else
+            {
                 Open(tam);
+            }   
         }
         else
         {
-            Open(tam);
+            Close();
         }
-    
+
     }
     public void Open(tem taaaaam)
     {

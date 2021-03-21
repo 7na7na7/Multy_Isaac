@@ -362,7 +362,7 @@ float degree = rad * Mathf.Rad2Deg;
        {
            if (enemy.canMove && !enemy.isFinding)
            {
-               if (other.gameObject.CompareTag("Wall")) 
+               if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy")) 
                { 
                    Restart(); 
                }
