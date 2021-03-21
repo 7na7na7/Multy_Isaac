@@ -127,13 +127,13 @@ public class PlayerItem : MonoBehaviour
                 if (Input.GetMouseButtonDown(1)) //우클릭으로 템조합하기
                 {
                     if(ItemList[selectedIndex].ItemName!="") 
-                        invent.Open(ItemList[selectedIndex]);
+                        invent.OpenIfCan(ItemList[selectedIndex]);
                 }
                 if (player.canMove) //움직일 수 있는 상태에서만 입력 가능
                 {
                     if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
                     {
-                        if (ItemList[selectedIndex].type == itemType.Usable)
+                        if (ItemList[selectedIndex].type == itemType.Usable||ItemList[selectedIndex].type ==itemType.Item)
                         {
                             if (usable.UseItem(ItemList[selectedIndex].index))
                             {
@@ -163,7 +163,7 @@ public class PlayerItem : MonoBehaviour
                             
                                 bool isGet = false;
 
-                                if (item.GetComponent<Item>().item.type == itemType.Usable) //소비템이면
+                                if (item.GetComponent<Item>().item.type == itemType.Usable||item.GetComponent<Item>().item.type == itemType.Item) //소비템이면
                                 {
                                     bool isHaveUsable = false;
                                     
@@ -312,7 +312,7 @@ public class PlayerItem : MonoBehaviour
     {
         bool isGet = false;
           int select = 0;
-                                if (item.type == itemType.Usable) //소비템 또는 재료템이면
+                                if (item.type == itemType.Usable||item.type==itemType.Item) //소비템 또는 재료템이면
                                 {
                                     bool isHaveUsable = false;
                                     
@@ -464,7 +464,7 @@ public class PlayerItem : MonoBehaviour
             }
         }
         
-            if (ItemList[inx].type == itemType.Usable) //소비템이면
+            if (ItemList[inx].type == itemType.Usable||ItemList[inx].type == itemType.Item) //소비템이면
             {
                 slots[inx].itemCount--;
                 if (slots[inx].itemCount <= 0)
@@ -491,7 +491,7 @@ public class PlayerItem : MonoBehaviour
             player.discardSound();
             int ind = ItemList[selectedIndex].index;
 
-            if (ItemList[selectedIndex].type == itemType.Usable) //소비템이면
+            if (ItemList[selectedIndex].type == itemType.Usable||ItemList[selectedIndex].type ==itemType.Item) //소비템이면
             {
                 slots[selectedIndex].itemCount--;
                 if(slots[selectedIndex].itemCount<=0)

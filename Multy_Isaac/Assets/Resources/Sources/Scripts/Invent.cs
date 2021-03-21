@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
-{ 
+{
+    private bool isOpen = false;
     public Image[] categories;
     public GameObject[] scrollViews;
     public GameObject dicBtn;
@@ -92,6 +93,7 @@ public class Invent : MonoBehaviour
     }
     public void Close()
     {
+        isOpen = false;
         anim.Play("InvenClose");
     }
 
@@ -106,14 +108,13 @@ public class Invent : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Escape))
                 Close();
-            if(Input.GetMouseButtonDown(1) &&RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition) )
-                Close();
+
             if (element.SmallItemIndex.Length != 0)
             {
                 if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index ==
                     PlayerItem.GetItemArray(element.SmallItemIndex[1]).index) //둘이 똑같은템 조합이면
                 {
-                    if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).type == itemType.Usable)
+                    if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).type == itemType.Usable ||PlayerItem.GetItemArray(element.SmallItemIndex[0]).type == itemType.Item)
                     {
                         if (PlayerItem.GetUsableItemCount(element.SmallItemIndex[0]) >= 2)
                         {
@@ -169,7 +170,22 @@ public class Invent : MonoBehaviour
         temm = tempTem.DeepCopy();
         Open(temm);
     }
+
+    public void OpenIfCan(tem tam)
+    {
+        if (element != null)
+        {
+            if(PlayerItem.getCurrentTem().index==element.index && isOpen)
+                Close();
+            else
+                Open(tam);
+        }
+        else
+        {
+            Open(tam);
+        }
     
+    }
     public void Open(tem taaaaam)
     {
         if (XBtn.activeSelf)
@@ -182,6 +198,7 @@ public class Invent : MonoBehaviour
             Com.SetActive(true);
         pause.canPause = false;
         element = taaaaam;
+        isOpen = true;
         anim.Play("InvenOpen");
         tem tem;
         

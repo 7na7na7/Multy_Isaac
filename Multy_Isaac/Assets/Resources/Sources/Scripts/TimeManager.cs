@@ -36,7 +36,6 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        Time.timeScale = 20f;
         ClockRect.eulerAngles=new Vector3( ClockRect.eulerAngles.x, ClockRect.eulerAngles.y, time/maxTime*-360);
         dayText.text = "Day " + day;
     }
