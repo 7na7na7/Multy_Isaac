@@ -438,7 +438,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.OfflineMode) 
                 Instantiate(offlineSlash,bulletTr.position,Quaternion.Euler(a2));
             else
-                PhotonNetwork.Instantiate(offlineSlash.name,gun.transform.position,Quaternion.Euler(a2));
+                PhotonNetwork.Instantiate(offlineSlash.name,bulletTr.position,Quaternion.Euler(a2));
 
             if(playerItem.getCurrentTem().weaponIndex!=130) //전기톱
             {
