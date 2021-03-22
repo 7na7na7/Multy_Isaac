@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LeftBullet : MonoBehaviour
 {
+    private Player player;
     public int StartBulletCount = 30;
     public int[] leftBullets;
     int GetedBullet = 0;
@@ -21,8 +22,10 @@ public class LeftBullet : MonoBehaviour
 
     private void Start()
     {
+        player = transform.parent.gameObject.transform.parent.GetComponent<Player>();
         leftBullets=new int[8];
-        GetBullet(StartBulletCount);
+        GetedBullet += StartBulletCount;
+        GetedBulletText.text = "X " + GetedBullet;
     }
 
     public int getBulletCount()
@@ -32,6 +35,7 @@ public class LeftBullet : MonoBehaviour
     
     public void GetBullet(int value)
     {
+        player.getBulletSound();
         GetedBullet += value;
         GetedBulletText.text = "X " + GetedBullet;
     }

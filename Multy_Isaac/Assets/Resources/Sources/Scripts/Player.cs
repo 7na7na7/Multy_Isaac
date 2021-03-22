@@ -666,6 +666,10 @@ pv.RPC("DieRPC",RpcTarget.All);
             footCount = 0;
         }
     }
+    public void getBulletSound()
+    {
+        sound.Play(10,false,0.5f);
+    }
     public void noBulletSound()
     {
         sound.Play(9,false,0.5f);
