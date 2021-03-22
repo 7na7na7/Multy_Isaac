@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
   private Zombie zombie;
   public float fireDamageTick=0.1f;
   private float fireTime=0;
-  private bool isDead = false;
+  public bool isDead = false;
   public Animator Exclamation;
   private Rigidbody2D rigid;
   public float nuckBackDistance;

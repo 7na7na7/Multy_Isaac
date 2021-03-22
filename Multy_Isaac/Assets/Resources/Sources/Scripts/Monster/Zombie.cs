@@ -296,19 +296,26 @@ float degree = rad * Mathf.Rad2Deg;
             {
                 if (canPoison)
                 {
-                    enemy.setAnim("Attack");
-                    enemy.sound.Play(0,true,0.2f);
-                    Vector3 angle=new Vector3(0, 0, -getAngle(transform.position.x, transform.position.y, enemy.targetPosition.position.x, enemy.targetPosition.position.y)+90); 
-                    if (PhotonNetwork.OfflineMode)
+                    if (enemy.isDead)
                     {
-                        Instantiate(Poison, transform.position, Quaternion.Euler(angle));
+                        StopAllCor();
                     }
                     else
                     {
-                        if (PhotonNetwork.IsMasterClient)
-                            PhotonNetwork.InstantiateRoomObject(Poison.name, transform.position, Quaternion.Euler(angle));
+                        enemy.setAnim("Attack");
+                        enemy.sound.Play(0,true,0.2f);
+                        Vector3 angle=new Vector3(0, 0, -getAngle(transform.position.x, transform.position.y, enemy.targetPosition.position.x, enemy.targetPosition.position.y)+90); 
+                        if (PhotonNetwork.OfflineMode)
+                        {
+                            Instantiate(Poison, transform.position, Quaternion.Euler(angle));
+                        }
+                        else
+                        {
+                            if (PhotonNetwork.IsMasterClient)
+                                PhotonNetwork.InstantiateRoomObject(Poison.name, transform.position, Quaternion.Euler(angle));
+                        }
+                        poisonTime = 0;      
                     }
-                    poisonTime = 0;   
                 }
             }
             
