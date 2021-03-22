@@ -40,7 +40,7 @@ public class StatManager : MonoBehaviour
 
     public bool Hit(int value)  
     {
-        float minusPer = 100 *((float)armor*2 / (armor*2 + 100f));
+        float minusPer = 100 *((float)armor*1.5f / (armor*1.5f + 100f));
         hpSlider.value -= value-(value * minusPer / 100f);
         if (hpSlider.value <= 0)
             return true;
