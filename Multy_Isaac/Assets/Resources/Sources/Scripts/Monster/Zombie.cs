@@ -10,6 +10,9 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    public int StartDay;
+    public int hpUpValue = 5;
+    public float speedValue = 0.1f;
     private bool isPan1 = false; //나무판인가?
     private bool isPan2 = false;//철판인가?
     public int pan1SpeedPercent = 40;
@@ -41,14 +44,16 @@ public class Zombie : MonoBehaviour
     private int currentWaypoint = 0;
     private bool reachedEndOfPath;
     private bool isMaster= false;
+
+    [PunRPC]
+    void hpUp()
+    {
+        if(time.day>=StartDay) 
+            enemy.hp += Random.Range(0, hpUpValue * (time.day-StartDay));
+    }
+    
     private void Start()
     {
-        if (!PhotonNetwork.OfflineMode)
-        {
-            if(!PhotonNetwork.IsMasterClient)
-                Destroy(GetComponent<Seeker>());
-        }
-        
         anim = GetComponent<Animator>();
         pv = GetComponent<PhotonView>();
         rigid = GetComponent<Rigidbody2D>();
@@ -66,6 +71,22 @@ public class Zombie : MonoBehaviour
         
         time = FindObjectOfType<TimeManager>();
 
+        if (!PhotonNetwork.OfflineMode)
+        {
+            if (!PhotonNetwork.IsMasterClient)
+                Destroy(GetComponent<Seeker>());
+            else
+            {
+                speed += Random.Range(-speedValue, speedValue) * speed;
+                pv.RPC("hpUp",RpcTarget.AllBuffered);
+            }
+        }
+        else
+        {
+            speed += Random.Range(-speedValue, speedValue) * speed;
+            hpUp();
+        }
+        
         if (PhotonNetwork.OfflineMode)
         {
          StartCoroutine(corr);
