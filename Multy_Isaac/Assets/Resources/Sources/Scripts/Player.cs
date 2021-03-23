@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private string[] AnimNames = new[] {"Idle","Walk","Die" };
     private int shotSoundIndex;
     private float volume;
     private bool isHouse = false;
@@ -332,26 +333,11 @@ if(isPlay)
                     //이동여부에 따른 애니메이션 조정
                     if (moveDirection == Vector2.zero)
                     {
-                        if (PhotonNetwork.OfflineMode)
-                        {
-                            SetAnimRPC("Idle");
-                        }
-                        else
-                        {
-                            pv.RPC("SetAnimRPC", RpcTarget.All, "Idle");
-                        }
+                        SetAnimRPC(0);
                     }
                     else
                     {
-                        if (PhotonNetwork.OfflineMode)
-                        {
-                            SetAnimRPC("Walk");
-                        }
-                        else
-                        {
-                            pv.RPC("SetAnimRPC", RpcTarget.All, "Walk");
-                        }
-
+                        SetAnimRPC(1);
                     }
 
                     float PanValue = 1;
@@ -579,15 +565,13 @@ if(isPlay)
 //        statMgr.Heal(99999);
 //        transform.position = spawnPoint;
         isDead = true;
-        canMove = false;
-if(PhotonNetwork.OfflineMode)
-    DieRPC();
-else
-pv.RPC("DieRPC",RpcTarget.All);
+        canMove = false; 
         if(PhotonNetwork.OfflineMode) 
-            SetAnimRPC("Die");
+            DieRPC();
         else
-            pv.RPC("SetAnimRPC",RpcTarget.All,"Die");
+            pv.RPC("DieRPC",RpcTarget.All);
+
+        SetAnimRPC(2);
     }
 
     [PunRPC]
@@ -830,15 +814,22 @@ pv.RPC("DieRPC",RpcTarget.All);
         Arm.SetActive(true);
         gun.SetActive(true);
     }
-    [PunRPC]
-    public void SetAnimRPC(string animName)
+
+    void SetAnimRPC(byte animName)
     {
-        try
+        if (PhotonNetwork.OfflineMode)
         {
-        anim.Play(animName);
+            SetAnimRPCRPC(animName);
         }
-        catch (Exception e)
-        { }
+        else
+        {
+         pv.RPC("SetAnimRPCRPC",RpcTarget.All,animName);   
+        }
+    }
+    [PunRPC]
+    public void SetAnimRPCRPC(byte animName)
+    {
+        anim.Play(AnimNames[animName]);
     }
     [PunRPC]
     public void ChatBaloonRPC(string txt)
@@ -906,21 +897,9 @@ pv.RPC("DieRPC",RpcTarget.All);
             if (other.CompareTag("Teleport")) //순간이동
             {
                 StopAllCoroutines();
-                
-                   
-                        canMove = true;
-                
-                        if (PhotonNetwork.OfflineMode)
-                        {
-                            SetAnimRPC("Idle");
-                        }
-                        else
-                        {
-                            pv.RPC("SetAnimRPC",RpcTarget.All,"Idle");
-                        }
-                    
-
-                    FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
+                canMove = true;
+                SetAnimRPC(0);
+                FindObjectOfType<Fade>().Teleport(this,GameObject.Find(other.name + "_T").transform.position);
             }
 
             if (other.CompareTag("Explosion")) //폭탄
