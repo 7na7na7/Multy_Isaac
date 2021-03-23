@@ -111,6 +111,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public bool isDead;
 
     private bool isAspalt = false;
+    private bool isPlay= false;
     #endregion
 
     #region 내장함수
@@ -132,6 +133,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         gunAnim = gun.GetComponent<Animator>();
         currentWeapon.walkSpeed_P = 100;
         savedCanvasScale = photonviewCanvas.transform.localScale;
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            isPlay = true;
+        }
         if (pv.IsMine)
         {
             passive = GetComponent<PassiveItem>();
@@ -143,9 +148,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             sound = GetComponent<SoundManager>();
             playerItem.player = this;
             offStat	=transform.GetChild(0).GetComponent<offlineStat>();
-            if (SceneManager.GetActiveScene().name == "Play")
-            {
-                GetComponent<CapsuleCollider2D>().isTrigger = true;
+          
+if(isPlay)
+{
+            GetComponent<CapsuleCollider2D>().isTrigger = true;
                 if (!isTEST)
                 {
                     Invoke("aspaltSet",FindObjectOfType<RoomTemplates>().delay);
@@ -299,8 +305,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 if ((transform.position - curPos).sqrMagnitude >= 100) //너무 많이 떨어져 있으면 순간이동
                     transform.position = curPos;
                 else //조금 떨어져 있으면 Lerp로 자연스럽게 위치 동기화
-                    transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);   
-                
+                    transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+
+                if (isPlay)
+                {
                     if (timeMgr.isNight)
                     {
                         photonviewCanvas.SetActive(false);
@@ -309,7 +317,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         photonviewCanvas.SetActive(true);
                     }   
-                
+                }
             }
         }
     
@@ -551,7 +559,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
     public void Die(string AttackerName) //죽을때 공격한사람 이름을 받아 로그띄울때 씀
     {
-        if (SceneManager.GetActiveScene().name == "Play")
+        if (isPlay)
         {
             if (AttackerName==PhotonNetwork.NickName)
             {
