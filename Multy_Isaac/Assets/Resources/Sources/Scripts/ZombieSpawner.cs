@@ -80,15 +80,16 @@ public class ZombieSpawner : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             SpawnZombie(zombieList[Random.Range(0,zombieList.Count)],
-                PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x), Random.Range(area.bounds.min.y,area.bounds.max.y))); }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)],
-                    PlayerPos + new Vector3(Random.Range(area.bounds.min.x, area.bounds.max.x), Random.Range(area.bounds.min.y, area.bounds.max.y)));
-            }
-        }      
+                PlayerPos+new Vector3(Random.Range(area.bounds.min.x,area.bounds.max.x), Random.Range(area.bounds.min.y,area.bounds.max.y))); 
+        }
+//        else
+//        {
+//            if (PhotonNetwork.IsMasterClient)
+//            {
+//                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)],
+//                    PlayerPos + new Vector3(Random.Range(area.bounds.min.x, area.bounds.max.x), Random.Range(area.bounds.min.y, area.bounds.max.y)));
+//            }
+//        }      
     }
 
     void NightSpawn(Vector3 PlayerPos)
@@ -112,12 +113,12 @@ public class ZombieSpawner : MonoBehaviour
         {
             SpawnZombie(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));
         }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));            }
-        }   
+//        else
+//        {
+//            if (PhotonNetwork.IsMasterClient)
+//            {
+//                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));            }
+//        }   
     }
 
     public void SpawnZombie(GameObject zombie, Vector2 pos)

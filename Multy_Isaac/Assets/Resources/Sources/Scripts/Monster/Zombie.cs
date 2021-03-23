@@ -50,8 +50,13 @@ public class Zombie : MonoBehaviour
     [PunRPC]
     void hpUp()
     {
-        if(time.day>=StartDay) 
-            enemy.hp += Random.Range(0, hpUpValue * (time.day-StartDay));
+        if (time.day >= StartDay)
+        {
+          int r= Random.Range(0, hpUpValue * (time.day-StartDay));
+           if (r > 0)
+               enemy.hp += r;
+        }
+           
     }
     
     private void Start()

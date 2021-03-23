@@ -770,7 +770,6 @@ if(isPlay)
         {
             stream.SendNext(transform.position);
             stream.SendNext(angle);
-            stream.SendNext(MousePosition);
             stream.SendNext(moveDirection);
             stream.SendNext(transform.localScale);
             stream.SendNext(canvasLocalScaleX);
@@ -782,7 +781,6 @@ if(isPlay)
         {
             curPos = (Vector3) stream.ReceiveNext();
             angle = (float) stream.ReceiveNext();
-            MousePosition = (Vector3) stream.ReceiveNext();
             moveDirection = (Vector2) stream.ReceiveNext();
             transform.localScale = (Vector3) stream.ReceiveNext();
             canvasLocalScaleX = (float)stream.ReceiveNext();
@@ -829,7 +827,14 @@ if(isPlay)
     [PunRPC]
     public void SetAnimRPCRPC(byte animName)
     {
-        anim.Play(AnimNames[animName]);
+        try
+        {
+            anim.Play(AnimNames[animName]);
+        }
+        catch (Exception e)
+        {
+        }
+    
     }
     [PunRPC]
     public void ChatBaloonRPC(string txt)

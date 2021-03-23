@@ -17,7 +17,6 @@ public class PlayerItem : MonoBehaviour
     public GameObject[] startTem;
     public int[] startTemCount;
     
-    public float discardTime = 1f;
     private float time = 0f;
     
     //아이템
