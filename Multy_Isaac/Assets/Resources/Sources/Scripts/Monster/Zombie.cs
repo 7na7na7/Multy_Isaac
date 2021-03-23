@@ -127,17 +127,31 @@ public class Zombie : MonoBehaviour
     {
         if (!enemy.isFinding && enemy.canMove)
         {
+            List<Transform> trList=new List<Transform>();
+            List<float> distanceList=new List<float>();
+            bool canFind = false;
             for (int i = 0; i < Players.Count; i++)
             {
                 if (!Players[i].isDead)
-                { 
-                    Transform tr = PlayerTrs[i];
-                    if (Vector3.Distance(transform.position, tr.position) < nightDetecctRad)
+                {
+                    if (Vector3.Distance(transform.position, PlayerTrs[i].position) < nightDetecctRad)
                     { 
-                        enemy.setPlayer(tr);
-                        break;
+                        trList.Add(PlayerTrs[i]);
+                        distanceList.Add(Vector3.Distance(transform.position, PlayerTrs[i].position));
+                        canFind = true;
                     }
                 }
+            }
+
+            if (canFind)
+            {
+                int index = 0;
+                for (int i = 1; i < trList.Count; i++)
+                {
+                    if (distanceList[i] > distanceList[index])
+                        index = i;
+                }
+                enemy.setPlayer(PlayerTrs[index]);
             }
         }
     }
