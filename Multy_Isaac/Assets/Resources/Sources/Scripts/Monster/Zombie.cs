@@ -272,7 +272,11 @@ public class Zombie : MonoBehaviour
                           if (isDetecting)
                           {
                               rigid.velocity=Vector2.zero;
-                              enemy.setLocalX(tr.position.x);
+                              if (time2 > gopathTime)
+                              {
+                                  time2 = 0;
+                                  enemy.setLocalX(tr.position.x);
+                              }
                               if (canPoison == false)
                               {
                                   canPoison = true;
