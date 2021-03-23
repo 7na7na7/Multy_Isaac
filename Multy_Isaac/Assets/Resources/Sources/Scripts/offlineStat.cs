@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class offlineStat : MonoBehaviour
 {
+    public Slider hpSlider;
     public Image hp;
     public Image stomach;
     public Text hpTxt;
@@ -33,8 +35,8 @@ public class offlineStat : MonoBehaviour
     {
         if (player != null)
         {
-            hp.fillAmount = player.hp.value/player.hp.maxValue;
-            hpTxt.text = ((int)player.hp.value).ToString();
+            hp.fillAmount = hpSlider.value/ hpSlider.maxValue;
+            hpTxt.text = ((int) hpSlider.value).ToString();
 
             if (stomach.fillAmount > 0)
             {

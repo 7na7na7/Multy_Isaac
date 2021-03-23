@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class StatManager : MonoBehaviour
 {
-    public int startHealth;
-
+    private Player player;
     public int armor;
 
     public Slider hpSlider;
-    private void Update()
+
+    private void Start()
     {
-        //if(canMove) 
-            //
-//        if (isSleeping)
-//        {
-//            tempHp += Time.deltaTime * sleepHealSpeed;
-//            hpSlider.value = hpSlider.value+Mathf.CeilToInt(tempHp);
-//        }
+        player = transform.parent.GetComponent<Player>();
     }
 
     public void Heal(int value)
@@ -36,12 +31,14 @@ public class StatManager : MonoBehaviour
         {
             hpSlider.value += value;
         }
+        player.hpSync(hpSlider.value);
     }
 
     public bool Hit(int value)  
     {
         float minusPer = 100 *((float)armor*1.5f / (armor*1.5f + 100f));
         hpSlider.value -= value-(value * minusPer / 100f);
+        player.hpSync(hpSlider.value);
         if (hpSlider.value <= 0)
             return true;
         else
@@ -51,6 +48,7 @@ public class StatManager : MonoBehaviour
     public bool LoseHp(int value)
     {
         hpSlider.value -= value;
+        player.hpSync(hpSlider.value);
         if (hpSlider.value <= 0)
             return true;
         else

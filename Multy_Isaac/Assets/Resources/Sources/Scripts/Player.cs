@@ -65,7 +65,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //배고픔
     public int hungrySpeed;
     public int hungryLessHpSpeed;
-
+    public Slider hp;
 
     public PhotonView pv; //포톤뷰
     //캔버스
@@ -75,7 +75,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
    public Text ChatBaloon; //말풍선
    public ChatBox chatbox; //챗박스
    public Text nickname; //닉네임
-   public Slider hp;
    //총쏘기
    private float soundRadious;
     public Transform bulletTr; //총알이 나가는 위치
@@ -304,13 +303,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 
                     if (timeMgr.isNight)
                     {
-                        nickname.gameObject.SetActive(false);
-                        hp.gameObject.SetActive(false);
+                        photonviewCanvas.SetActive(false);
                     }
                     else
                     {
-                        nickname.gameObject.SetActive(true);
-                        hp.gameObject.SetActive(true);
+                        photonviewCanvas.SetActive(true);
                     }   
                 
             }
@@ -632,6 +629,18 @@ pv.RPC("DieRPC",RpcTarget.All);
         }
     }
 
+    public void hpSync(float value)
+    {
+        if (!PhotonNetwork.OfflineMode)
+        {
+            pv.RPC("hpRPC",RpcTarget.All,value);
+        }
+    }
+    [PunRPC]
+    void hpRPC(float value)
+    {
+        hp.value = value;
+    }
     [PunRPC]
     void flashWhiteRPC()
     {
@@ -768,8 +777,6 @@ pv.RPC("DieRPC",RpcTarget.All);
         if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
-            stream.SendNext(hp.value);
-            stream.SendNext(hp.maxValue);
             stream.SendNext(angle);
             stream.SendNext(MousePosition);
             stream.SendNext(moveDirection);
@@ -783,8 +790,6 @@ pv.RPC("DieRPC",RpcTarget.All);
         else
         {
             curPos = (Vector3) stream.ReceiveNext();
-            hp.value = (float) stream.ReceiveNext();
-            hp.maxValue = (float) stream.ReceiveNext();
             angle = (float) stream.ReceiveNext();
             MousePosition = (Vector3) stream.ReceiveNext();
             moveDirection = (Vector2) stream.ReceiveNext();
