@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    public float gopathTime = 0.5f;
+    private float time2 = 0;
     public int StartDay;
     public int hpUpValue = 5;
     public float speedValue = 0.1f;
@@ -197,8 +199,12 @@ public class Zombie : MonoBehaviour
         anim.SetFloat("WalkSpeed",speed * speedFactor*PanValue/4f);
         rigid.velocity = velocity;
 
-        enemy.setAnim(1);
-        enemy.setLocalX(enemy.targetPosition.transform.position.x);
+        if (time2 >= gopathTime)
+        {
+            time2 = 0;
+            enemy.setAnim(1);
+            enemy.setLocalX(enemy.targetPosition.transform.position.x);
+        }
     }
     public void Update () 
         {
@@ -206,6 +212,8 @@ public class Zombie : MonoBehaviour
             {
                 if (poisonTime < AttackTime)
                     poisonTime += Time.deltaTime;
+                if (time2 < gopathTime)
+                    time2 += Time.deltaTime;
               if (!enemy.isFinding && enemy.canMove) 
               {
                   for (int i = 0; i < Players.Count; i++)
