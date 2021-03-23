@@ -62,7 +62,11 @@ public class ZombieSpawner : MonoBehaviour
         yield return new WaitForSeconds(FirstDelay);
         while (true)
         {
-            yield return new WaitForSeconds(delay);
+            if (PhotonNetwork.OfflineMode)
+                yield return new WaitForSeconds(delay);
+            else
+                yield return new WaitForSeconds(delay*1.5f);
+
             Player[] players = FindObjectsOfType<Player>();
             for (int i = 0; i < players.Length; i++)
             {
