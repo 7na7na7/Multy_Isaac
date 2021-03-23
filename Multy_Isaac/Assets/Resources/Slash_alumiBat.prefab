@@ -48,7 +48,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.1
+  m_Intensity: 0
   m_LightVolumeOpacity: 0.18
   m_ApplyToSortingLayers: 00000000a197b70f7945a607d7bc6f920b438f06
   m_LightCookieSprite: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bfca7603272514395570d8e7e6552f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightValue: 1
+  lightValue: 0.5
   isPlayer: 0
 --- !u!1 &8587958215958462638
 GameObject:
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7377598020941030138}
   - component: {fileID: 2172715907036345174}
   m_Layer: 0
-  m_Name: SpringSlash
+  m_Name: Slash_alumiBat
   m_TagString: Slash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 8587958215958462638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.65, y: 1.65, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_Children:
   - {fileID: 3052023921313818775}
   m_Father: {fileID: 0}
@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba837ec94948e3d4396fef809f59afb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dmg: 25
-  nuckBackDistance: 1.5
+  Dmg: 16
+  nuckBackDistance: 5
   DestroyTime: 0.15
   pv: {fileID: 7377598020941030138}
   type: 0
