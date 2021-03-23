@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  private string[] animNames = new[] {"Idle", "Walk", "Hit", "Die", "Attack"};
   public SoundManager sound;
   private Zombie zombie;
   public float fireDamageTick=0.1f;
@@ -154,9 +155,9 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     hp -= value;
 
     if (hp <= 0)
-      setTrigger("Die");
+      setTrigger(3);
     else
-      setTrigger("Hit");
+      setTrigger(2);
     
     if (pos != Vector3.zero)
     {
@@ -181,11 +182,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           {
             if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
             {
-              setAnim("Walk");
+              setAnim(1);
             }
             else if (zombie.zombieIndex == 2)
             {
-              setAnim("Idle");
+              setAnim(0);
             }
           }
           if(zombie.zombieIndex==2)
@@ -206,11 +207,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           {
             if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
             {
-              setAnim("Walk");
+              setAnim(1);
             }
             else if (zombie.zombieIndex == 2)
             {
-              setAnim("Idle");
+              setAnim(0);
             }
           }
           if(zombie.zombieIndex==2)
@@ -230,11 +231,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       {
         if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
         {
-          setAnim("Walk");
+          setAnim(1);
         }
         else if (zombie.zombieIndex == 2)
         {
-          setAnim("Idle");
+          setAnim(0);
         }
       }
     }
@@ -311,7 +312,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     }
   }
 
-  public void setAnim(string animName)
+  public void setAnim(byte animName)
   {
     if (PhotonNetwork.OfflineMode)
       animRPC(animName);
@@ -319,7 +320,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       pv.RPC("animRPC", RpcTarget.All, animName);
   }
 
-  public void setTrigger(string animName)
+  public void setTrigger(byte animName)
   {
     if (PhotonNetwork.OfflineMode)
       triggerRPC(animName);
@@ -343,11 +344,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
 
   [PunRPC]
-  void animRPC(string animName)
+  void animRPC(byte animName)
   {
     try
     {
-      anim.Play(animName);
+      anim.Play(animNames[animName]);
     }
     catch (Exception e)
     {
@@ -355,11 +356,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
   }
 
   [PunRPC]
-  void triggerRPC(string animName)
+  void triggerRPC(byte animName)
   {
     try
     {
-      anim.SetTrigger(animName);
+      anim.SetTrigger(animNames[animName]);
     }
     catch (Exception e)
     {
@@ -387,11 +388,11 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     ExclamationOpen();
     if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
     {
-      setAnim("Walk");
+      setAnim(1);
     }
     else if (zombie.zombieIndex == 2)
     {
-      setAnim("Idle");
+      setAnim(0);
     }
   }
   

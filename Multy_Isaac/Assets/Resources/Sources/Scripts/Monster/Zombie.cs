@@ -197,7 +197,7 @@ public class Zombie : MonoBehaviour
         anim.SetFloat("WalkSpeed",speed * speedFactor*PanValue/4f);
         rigid.velocity = velocity;
 
-        enemy.setAnim("Walk");
+        enemy.setAnim(1);
         enemy.setLocalX(enemy.targetPosition.transform.position.x);
     }
     public void Update () 
@@ -304,7 +304,7 @@ float degree = rad * Mathf.Rad2Deg;
         {
             if (poisonTime < AttackTime)
             {
-                enemy.setAnim("Idle");
+                enemy.setAnim(0);
             }
             else
             {
@@ -316,7 +316,7 @@ float degree = rad * Mathf.Rad2Deg;
                     }
                     else
                     {
-                        enemy.setAnim("Attack");
+                        enemy.setAnim(4);
                         enemy.sound.Play(0,true,0.2f);
                         Vector3 angle=new Vector3(0, 0, -getAngle(transform.position.x, transform.position.y, enemy.targetPosition.position.x, enemy.targetPosition.position.y)+90); 
                         if (PhotonNetwork.OfflineMode)
@@ -334,7 +334,7 @@ float degree = rad * Mathf.Rad2Deg;
             }
             
             yield return new WaitForSeconds(0.2f);
-            enemy.setAnim("Idle");
+            enemy.setAnim(0);
             yield return new WaitForSeconds(AttackTime-0.2f);
         }
     }
@@ -364,7 +364,7 @@ float degree = rad * Mathf.Rad2Deg;
            
             if (Vector2.Distance(transform.position, roamPos) < 2f)
             {
-                enemy.setAnim("Idle");
+                enemy.setAnim(0);
                 
                 rigid.velocity=Vector2.zero;
                 yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
@@ -374,7 +374,7 @@ float degree = rad * Mathf.Rad2Deg;
                 if(Random.Range(0,3)==1) 
                     enemy.sound.Play(Random.Range(3,6),true,0.1f);
                 
-                enemy.setAnim("Walk");
+                enemy.setAnim(1);
              
                 Vector2 dir =roamPos -  (Vector2)transform.position;
                 dir.Normalize();
@@ -440,10 +440,10 @@ float degree = rad * Mathf.Rad2Deg;
        rigid.velocity=Vector2.zero;
 
        enemy.setLocalX(enemy.targetPosition.position.x);
-       enemy.setAnim("Attack");
+       enemy.setAnim(4);
        enemy.sound.Play(0,true,0.2f);
        yield return new WaitForSeconds(AttackTime);
-       enemy.setAnim("Walk");
+       enemy.setAnim(1);
        enemy.canMove = true;
 //       for (int i = 0; i < Players.Count; i++)
 //       {
