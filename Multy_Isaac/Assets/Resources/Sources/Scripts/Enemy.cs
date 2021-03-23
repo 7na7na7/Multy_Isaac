@@ -264,14 +264,33 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     {
       isDead = true;
 
-      for (int i = 0; i < DropTem.Length; i++)
+      if (PhotonNetwork.OfflineMode)
       {
-        if (percentreturn(DropTemPercent[i]))
+        for (int i = 0; i < DropTem.Length; i++)
         {
-          if(DropTem[i].GetComponent<Item>()!=null) 
-            temMgr.setTem(DropTem[i].GetComponent<Item>().item.index, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
-          else
-            temMgr.setBullet(DropTem[i].GetComponent<pickUpTem>().subIndex, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+          if (percentreturn(DropTemPercent[i]))
+          {
+            if(DropTem[i].GetComponent<Item>()!=null) 
+              temMgr.setTem(DropTem[i].GetComponent<Item>().item.index, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+            else
+              temMgr.setBullet(DropTem[i].GetComponent<pickUpTem>().subIndex, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+          }
+        } 
+      }
+      else
+      {
+        if (PhotonNetwork.IsMasterClient)
+        {
+          for (int i = 0; i < DropTem.Length; i++)
+          {
+            if (percentreturn(DropTemPercent[i]))
+            {
+              if(DropTem[i].GetComponent<Item>()!=null) 
+                temMgr.setTem(DropTem[i].GetComponent<Item>().item.index, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+              else
+                temMgr.setBullet(DropTem[i].GetComponent<pickUpTem>().subIndex, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f))); 
+            }
+          }
         }
       }
       zombie.StopAllCor();
