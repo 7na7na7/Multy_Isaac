@@ -70,10 +70,30 @@ public class Tree : MonoBehaviour
                 else
                 {
                     hp = hpSave;
-                    temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+                    }
+                    else
+                    {
+                        if(PhotonNetwork.IsMasterClient)
+                            temMgr.setTem(wood.GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+                    }
+                   
                 }
-                if(isRandomTem)
-                    temMgr.setTem(randomTems[randomValue].GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+
+                if (isRandomTem)
+                {
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        temMgr.setTem(randomTems[randomValue].GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+                    }
+                    else
+                    {
+                        if(PhotonNetwork.IsMasterClient)
+                            temMgr.setTem(randomTems[randomValue].GetComponent<Item>().item.index, tr.position + new Vector3(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)));
+                    }
+                }
     }
 
     bool percentreturn(int per)
