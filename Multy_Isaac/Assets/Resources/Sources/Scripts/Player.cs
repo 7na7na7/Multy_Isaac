@@ -791,7 +791,6 @@ pv.RPC("DieRPC",RpcTarget.All);
             stream.SendNext(transform.localScale);
             stream.SendNext(canvasLocalScaleX);
             stream.SendNext(canvasRect.localScale);
-            stream.SendNext(canMove);
             stream.SendNext(gun.transform.localScale);
             stream.SendNext(gun.transform.rotation);
         }
@@ -804,7 +803,6 @@ pv.RPC("DieRPC",RpcTarget.All);
             transform.localScale = (Vector3) stream.ReceiveNext();
             canvasLocalScaleX = (float)stream.ReceiveNext();
             canvasRect.localScale = (Vector3) stream.ReceiveNext();
-            canMove = (bool) stream.ReceiveNext();
             gun.transform.localScale = (Vector3) stream.ReceiveNext();
             gun.transform.rotation = (Quaternion) stream.ReceiveNext();
         }
