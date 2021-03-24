@@ -673,11 +673,15 @@ if(isPlay)
     }
     public void noBulletSound()
     {
-        sound.Play(9,false,0.5f);
+        sound.Play(9,true,0.5f);
     }
     public void PutBombSound()
     {
         sound.Play(8,false,0.5f);
+    }
+    public void fireSound()
+    {
+        sound.Play(11,false,0.5f);
     }
     public void GetSound()
     {
@@ -689,11 +693,11 @@ if(isPlay)
     }
     public void discardSound()
     {
-        sound.Play(6,false,0.5f);
+        sound.Play(6,true,0.5f);
     }
     public void CombineSound()
     {
-        sound.Play(3,true,0.5f);
+        sound.Play(3,false,0.5f);
     }
     public void eatSound()
     {

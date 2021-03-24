@@ -40,8 +40,7 @@ public class SoundManager : MonoBehaviour
            ClipSources[j].playOnAwake = false;
        }
    }
-
-
+   
    public void Play(int clipIndex, bool isRPC, float volume=1f)
    {
        if(!isRPC)

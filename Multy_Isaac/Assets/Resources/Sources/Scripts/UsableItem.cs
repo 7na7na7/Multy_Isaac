@@ -181,6 +181,7 @@ public class UsableItem : MonoBehaviour
                     PhotonNetwork.InstantiateRoomObject(Light.name, transform.position, Quaternion.identity);
                 return true;
             case 79: //화염병
+                player.fireSound();
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(FireBomb, transform.position, Quaternion.identity);
                 else
