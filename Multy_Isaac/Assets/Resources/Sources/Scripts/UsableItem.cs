@@ -270,7 +270,7 @@ public class UsableItem : MonoBehaviour
             case 104: //피클
                 if (eat())
                 {
-                    offStat.HungryHeal(5);
+                    offStat.HungryHeal(8);
                     setHappy();
                     return true;
                 }
