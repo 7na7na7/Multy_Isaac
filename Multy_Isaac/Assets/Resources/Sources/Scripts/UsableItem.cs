@@ -85,28 +85,34 @@ public class UsableItem : MonoBehaviour
                 return true;
                 }
                 break;
+            case 59: //물
+                if (eat())
+                {
+                    statMgr.Heal(10);
+                    setHappy();
+                    return true;
+                }
+                break;
             case 60: //꿀물
                 if (eat())
                 {
-                statMgr.Heal(20);
+                statMgr.Heal(15);
                 setHappy();
                 return true;
                 }
                 break;
             case 61: //포도주스
                 if (eat())
-                { 
-                    offStat.HungryHeal(10);
-                statMgr.Heal(10);
-                setHappy();
-                return true;
+                {
+                    statMgr.Heal(30);
+                    setHappy(); 
+                    return true;
                 }
                 break;
             case 62: //사과주스
                 if (eat())
                 {
-                    offStat.HungryHeal(10);
-                    statMgr.Heal(10);
+                    statMgr.Heal(30);
                 setHappy();
                 return true;
                 }
@@ -214,7 +220,7 @@ public class UsableItem : MonoBehaviour
             case 96: //아드레날린
                 if (eat())
                 {
-                    statMgr.Heal(50);
+                    statMgr.Heal(100);
                     setHappy();
                     StartCoroutine(Adrenalin());
                     return true;
@@ -264,7 +270,7 @@ public class UsableItem : MonoBehaviour
             case 104: //피클
                 if (eat())
                 {
-                    offStat.HungryHeal(10);
+                    offStat.HungryHeal(5);
                     setHappy();
                     return true;
                 }
@@ -272,8 +278,8 @@ public class UsableItem : MonoBehaviour
             case 108: //버섯볶음
                 if (eat())
                 {
-                    offStat.HungryHeal(20);
-                    statMgr.Heal(20);
+                    offStat.HungryHeal(30);
+                    statMgr.Heal(30);
                     setHappy();
                     return true;
                 }
@@ -281,8 +287,8 @@ public class UsableItem : MonoBehaviour
             case 109: //과일빙수
                 if (eat())
                 {
-                    offStat.HungryHeal(20);
-                    statMgr.Heal(30);
+                    offStat.HungryHeal(25);
+                    statMgr.Heal(35);
                     setHappy();
                     return true;
                 }
@@ -306,7 +312,8 @@ public class UsableItem : MonoBehaviour
             case 114: //감자맛탕
                 if (eat())
                 {
-                    offStat.HungryHeal(15);
+                    offStat.HungryHeal(10);
+                    statMgr.Heal(10);
                     setHappy();
                     return true;
                 }
@@ -314,7 +321,7 @@ public class UsableItem : MonoBehaviour
             case 115: //꿀단지
                 if (eat())
                 {
-                    statMgr.Heal(25);
+                    statMgr.Heal(30);
                     setHappy();
                     return true;
                 }
