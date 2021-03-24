@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Photon.Pun;
 using UnityEngine;
 
 public class PassiveItem : MonoBehaviour
 {
+    private PhotonView pv;
+    //가시갑옥
+    public int spike = 0;
     //레이더
     public float laderRad = 10;
     private IEnumerator laderCor;
@@ -27,11 +31,17 @@ public class PassiveItem : MonoBehaviour
     public int machineLegCount = 0;
     private void Start()
     {
+        pv = GetComponent<PhotonView>();
         laderCor = LaderCor();
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
         light=transform.GetChild(1).GetComponent<PlayerLight>();
     }
 
+    [PunRPC]
+    void spikeRPC(int v)
+    {
+        spike = v;
+    }
     public void PassiveOn(int itemIndex)
     {
         switch (itemIndex)
@@ -106,6 +116,12 @@ public class PassiveItem : MonoBehaviour
             case 146: //체인레깅스
                 statMgr.armor += 20;
                 Speed += 20;
+                break;
+            case 147: //가시갑옷
+                statMgr.armor += 40;
+                spike++;
+                if(!PhotonNetwork.OfflineMode)
+                    pv.RPC("spikeRPC",RpcTarget.All,spike);
                 break;
         }
     }
@@ -185,6 +201,12 @@ public class PassiveItem : MonoBehaviour
             case 146: //체인레깅스
                 statMgr.armor -= 20;
                 Speed -= 20;
+                break;
+            case 147: //가시갑옷
+                statMgr.armor -= 40;
+                spike--;
+                if(!PhotonNetwork.OfflineMode)
+                    pv.RPC("spikeRPC",RpcTarget.All,spike);
                 break;
         }
     }

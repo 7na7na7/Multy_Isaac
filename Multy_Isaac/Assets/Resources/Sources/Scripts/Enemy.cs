@@ -109,7 +109,6 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
         pv.RPC("HitRPC", RpcTarget.All, value, pos, nuckBackDistance,type);
     }
   }
-
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.CompareTag("Explosion")) //폭탄
@@ -127,6 +126,23 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       {
         LoseHP(other.GetComponent<DelayDestroy>().damage);
         fireTime = fireDamageTick;
+      }
+    }
+  }
+
+  IEnumerator delayHit(int value,Vector2 pos, float nuck)
+  {
+    yield return new WaitForSeconds(0.05f);
+    Hit(value,pos,nuck);
+  }
+  private void OnCollisionEnter2D(Collision2D other)
+  {
+    if (other.collider.CompareTag("Player"))
+    {
+      Player player = other.collider.GetComponent<Player>();
+      if (player.passive.spike > 0)
+      {
+        StartCoroutine(delayHit(player.passive.spike * 15, player.transform.position, 0.5f));
       }
     }
   }

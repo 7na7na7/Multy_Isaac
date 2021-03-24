@@ -35,7 +35,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float hpRegenDelay=1f;
     public int hpRegenCut=70;
     public bool SUPERRRRRRR = true;
-    private PassiveItem passive;
+    public PassiveItem passive;
     
     private GameObject offlineSlash;
 
@@ -134,13 +134,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         gunAnim = gun.GetComponent<Animator>();
         currentWeapon.walkSpeed_P = 100;
         savedCanvasScale = photonviewCanvas.transform.localScale;
+        passive = GetComponent<PassiveItem>();
         if (SceneManager.GetActiveScene().name == "Play")
         {
             isPlay = true;
         }
         if (pv.IsMine)
         {
-            passive = GetComponent<PassiveItem>();
+            
             StartCoroutine(hpRegenCor());
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
             statMgr=transform.GetChild(0).GetComponent<StatManager>();
@@ -652,7 +653,7 @@ if(isPlay)
     IEnumerator superTick()
     {
         isSuper = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         isSuper = false;
     }
     void GetMove() //이동입력
@@ -927,6 +928,19 @@ if(isPlay)
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
                 Hit(enemy.playerDmg, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
                 enemy.playerDmg = 0;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Player"))
+        {
+            Player player = other.collider.GetComponent<Player>();
+            if (player.passive.spike > 0)
+            {
+                Hit(player.passive.spike * 15, player.pv.Controller.NickName, 0.5f, player.transform.position);
+                superTick();
             }
         }
     }
