@@ -56,7 +56,7 @@ public class PassiveItem : MonoBehaviour
                 Speed += 7;
                 break;
             case 90: //멋진티셔츠
-                statMgr.armor += 15;
+                statMgr.armor += 25;
                 break;
             case 107: //횃불
                 light.lightValue += 0.05f;
@@ -103,6 +103,10 @@ public class PassiveItem : MonoBehaviour
             case 139: //사슬갑옷
                 statMgr.armor += 40;
                 break;
+            case 146: //체인레깅스
+                statMgr.armor += 20;
+                Speed += 20;
+                break;
         }
     }
         
@@ -130,7 +134,7 @@ public class PassiveItem : MonoBehaviour
                 Speed -= 7;
                 break;
             case 90:
-                statMgr.armor -= 15;
+                statMgr.armor -= 25;
                 break;
             case 107: //횃불
                 light.lightValue -= 0.05f;
@@ -177,6 +181,10 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 139: //사슬갑옷
                 statMgr.armor -= 40;
+                break;
+            case 146: //체인레깅스
+                statMgr.armor -= 20;
+                Speed -= 20;
                 break;
         }
     }
