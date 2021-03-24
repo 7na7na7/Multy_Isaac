@@ -123,6 +123,9 @@ public class PassiveItem : MonoBehaviour
                 if(!PhotonNetwork.OfflineMode)
                     pv.RPC("spikeRPC",RpcTarget.All,spike);
                 break;
+            case 149: //찢어진스타킹
+                Speed += 27;
+                break;
         }
     }
         
@@ -207,6 +210,9 @@ public class PassiveItem : MonoBehaviour
                 spike--;
                 if(!PhotonNetwork.OfflineMode)
                     pv.RPC("spikeRPC",RpcTarget.All,spike);
+                break;
+            case 149: //찢어진스타킹
+                Speed -= 27;
                 break;
         }
     }
