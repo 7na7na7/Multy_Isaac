@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
   m_Layer: 9
-  m_Name: item147
+  m_Name: item148
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4849,7 +4849,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449410984}
-  - {fileID: 4869776060961844962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4893,12 +4892,12 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 8b32dd490e6cb1c4bb225f1aaa882800, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f98e703b86bd6e344bd1be5d1dcc6143, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.23, y: 0.38}
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4922,16 +4921,14 @@ MonoBehaviour:
     weaponIndex: 0
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 8b0000008e000000
+    SmallItemIndex: 
     CompleteItemIndex: 
-    index: 147
-    ItemName: "\uAC00\uC2DC\uAC11\uC637"
-    ItemSprite: {fileID: 21300000, guid: 8b32dd490e6cb1c4bb225f1aaa882800, type: 3}
-    type: 3
-    ItemDescription: "\uAC00\uC2DC\uB85C \uB36E\uC778 \uAC11\uC637. \uB54C\uB9AC\uB294
-      \uCABD\uC774 \uC624\uD788\uB824 \uC544\uD50C \uAC83 \uAC19\uB2E4...(\uBC29\uC5B4\uB825
-      +40, \uCDA9\uB3CC\uD55C \uC801\uC5D0\uAC8C 15\uB370\uBBF8\uC9C0)"
-    WhereGet: "\uC81C\uC791"
+    index: 148
+    ItemName: "\uAC00\uC704"
+    ItemSprite: {fileID: 21300000, guid: f98e703b86bd6e344bd1be5d1dcc6143, type: 3}
+    type: 2
+    ItemDescription: "\uC790\uB974\uB294 \uC18C\uB9AC\uAC00 \uBB54\uAC00 \uAE30\uBD84\uC88B\uB2E4."
+    WhereGet: "\uBCD1\uC6D0"
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
 CircleCollider2D:
@@ -4970,33 +4967,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &6160867055047779158
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4869776060961844962}
-  m_Layer: 9
-  m_Name: bulletPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4869776060961844962
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6160867055047779158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3749522341741181216}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
