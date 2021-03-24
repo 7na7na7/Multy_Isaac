@@ -195,12 +195,7 @@ if(isPlay)
                 
                 if(time>0)  
                     time -= Time.deltaTime; //총쏘기 쿨타임용 시간 감소
-             
-                    if(Input.GetKeyDown(KeyCode.Z))
-                        temMgr.setTem(3,transform.position);
-                    if(Input.GetKeyDown(KeyCode.X))
-                       temMgr.delTem(1);
-                
+
                 if (canMove) //움직일 수 있다면
                 {
                     if (passive.mobilePer > 100)
@@ -564,7 +559,7 @@ if(isPlay)
         }
 //        statMgr.Heal(99999);
 //        transform.position = spawnPoint;
-        isDead = true;
+       isDeadFunc();
         canMove = false; 
         if(PhotonNetwork.OfflineMode) 
             DieRPC();
@@ -574,6 +569,22 @@ if(isPlay)
         SetAnimRPC(2);
     }
 
+    void isDeadFunc()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            isDeadRPC();
+        }
+        else
+        {
+            pv.RPC("isDeadRPC",RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    void isDeadRPC()
+    {
+        isDead = true;
+    }
     [PunRPC]
     void DieRPC()
     {

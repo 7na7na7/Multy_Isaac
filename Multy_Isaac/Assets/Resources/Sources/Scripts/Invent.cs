@@ -295,24 +295,34 @@ public class Invent : MonoBehaviour
     {
         if (CanCombine)
         {
-            PlayerItem.DestroyItem(element.SmallItemIndex[0]);
-            PlayerItem.DestroyItem(element.SmallItemIndex[1]);
-          
             tem item=new tem();
             item = element.DeepCopy();
-            
+            bool canGet = false;
             if (item.index != 95)
             {
-                for(int i=0;i<item.Count;i++) 
-                    PlayerItem.GetItem(item);
+                for (int i = 0; i < item.Count; i++)
+                {
+                    if (PlayerItem.GetItem(item))
+                    {
+                        canGet = true;
+                        PlayerItem.DestroyItem(element.SmallItemIndex[0]);
+                        PlayerItem.DestroyItem(element.SmallItemIndex[1]);   
+                    }
+                }
+                    
             }
             else
             {
                 transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(30);
+                canGet = true;
             }
-            Open(item);
-            starEffect.Play();
-            player.CombineSound();
+
+            if (canGet)
+            {
+                Open(item);
+                starEffect.Play();
+                player.CombineSound();   
+            }
         }
     }
 }

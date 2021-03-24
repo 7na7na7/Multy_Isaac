@@ -306,7 +306,7 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void GetItem(tem item)
+    public bool GetItem(tem item)
     {
         bool isGet = false;
           int select = 0;
@@ -366,9 +366,12 @@ public class PlayerItem : MonoBehaviour
                                         }
                                     }   
                                 }
-                                
-                                if(!isGet) 
+
+                                if (!isGet)
+                                {
                                     PopUpManager.instance.PopUp("더 이상 제작할 수 없습니다!",Color.red);
+                                    return false;
+                                }
                                 else
                                 {
                                     selectedIndex = select;
@@ -379,7 +382,8 @@ public class PlayerItem : MonoBehaviour
                                         else
                                             Selected[i].SetActive(false); 
                                     }
-                                    check(selectedIndex,false);   
+                                    check(selectedIndex,false);
+                                    return true;
                                 }
     }
 
