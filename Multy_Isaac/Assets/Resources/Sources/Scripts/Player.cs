@@ -278,7 +278,13 @@ if(isPlay)
                             
                             //총 회전
                             MousePosition = Input.mousePosition;
-                            Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - gun.transform.position; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
+                            Vector3 pos = Vector3.zero;
+                            if (currentWeapon.consumeBullet == 0)
+                                pos = transform.position;
+                            else
+                                pos = gun.transform.position;
+                            
+                            Vector3 MousePosition2 = camera.ScreenToWorldPoint(MousePosition) - pos; //플레이어포지션을 빼줘야한다!!!!!!!!!!!
                             //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
                             //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
                             angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
