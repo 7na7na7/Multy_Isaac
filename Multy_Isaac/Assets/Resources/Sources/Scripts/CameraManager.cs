@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
 
     public float speed = 2f;
     public GameObject target;
-    public GameObject minimapHead;
+    public GameObject[] minimapHeads;
     private Vector3 targetPosition; //대상의 현재 값
     private Vector3 minBound, maxBound; //박스 콜라이더 영역의 최소/최대 xyz값을 지님
     private float halfWidth, halfHeight; //카메라의 반너비, 반높이 값을 지닐 변수
@@ -25,12 +25,12 @@ public class CameraManager : MonoBehaviour
         {
             if (PhotonNetwork.OfflineMode)
             {
-                GameObject t=Instantiate(minimapHead, transform.position, Quaternion.identity);
+                GameObject t=Instantiate(minimapHeads[FindObjectOfType<playerCountSave>().PlayerIndex], transform.position, Quaternion.identity);
                 target = t;
             }
             else
             {
-                GameObject t=PhotonNetwork.Instantiate(minimapHead.name, transform.position, Quaternion.identity);
+                GameObject t=PhotonNetwork.Instantiate("MiniHead"+FindObjectOfType<playerCountSave>().PlayerIndex, transform.position, Quaternion.identity);
                 target = t;
             }   
         }
