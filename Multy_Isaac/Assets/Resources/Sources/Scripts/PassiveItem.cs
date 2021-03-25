@@ -126,6 +126,12 @@ public class PassiveItem : MonoBehaviour
             case 149: //찢어진스타킹
                 Speed += 27;
                 break;
+            case 150: //경찰조끼
+                statMgr.armor += 15;
+                break;
+            case 151: //방탄조끼
+                statMgr.armor += 40;
+                break;
         }
     }
         
@@ -213,6 +219,12 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 149: //찢어진스타킹
                 Speed -= 27;
+                break;
+            case 150: //경찰조끼
+                statMgr.armor -= 15;
+                break;
+            case 151: //방탄조끼
+                statMgr.armor -= 40;
                 break;
         }
     }
