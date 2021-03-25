@@ -26,6 +26,21 @@ public class playerCountSave : MonoBehaviour
    private void Start()
    {
       PlayerIndex = PlayerPrefs.GetInt(playerKey, 0);
+      for (int i = 0; i < imgs.Length; i++)
+      {
+         if (i == PlayerIndex)
+         {
+            Color color= Color.white;
+            color.a = 1f;
+            imgs[i].color = color;
+         }
+         else
+         {
+            Color color= Color.white;
+            color.a = 0.5f;
+            imgs[i].color = color;
+         }
+      }
    }
 
    public void SetIndex(int index)
