@@ -7,7 +7,6 @@ public class PlayerChange : MonoBehaviour
 {
     public int Index = 0;
     public Sprite[] sprites;
-    public Sprite NoneSprite;
     public Image leftImg;
     public Image mainImg;
     public Image rightImg;
