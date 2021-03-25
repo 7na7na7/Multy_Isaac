@@ -294,6 +294,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       RoomPanel.SetActive(false);
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
+      EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
+      UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
    }
    #endregion
 
@@ -454,7 +456,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     }
     public void Spawn()
     {
-       PhotonNetwork.Instantiate("Player", Vector3.zero, quaternion.identity);
+       PhotonNetwork.Instantiate("Player"+FindObjectOfType<playerCountSave>().PlayerIndex, Vector3.zero, quaternion.identity);
     }
 
     public void GameStart()
@@ -465,15 +467,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
           PhotonNetwork.CurrentRoom.IsVisible = false; //방목록에서 안보이게함
 
           Player[] players = FindObjectsOfType<Player>();
-          PV.RPC("SetPlayerCount",RpcTarget.AllBuffered,players.Length);
 
           PhotonNetwork.LoadLevel(1); //Build Settng에서 1번째 인덱스의 씬 호출  
        }
     }
-
-    [PunRPC]
-    void SetPlayerCount(int value)
-    {
-       FindObjectOfType<playerCountSave>().playerCount = value;
-    }
+   
 }

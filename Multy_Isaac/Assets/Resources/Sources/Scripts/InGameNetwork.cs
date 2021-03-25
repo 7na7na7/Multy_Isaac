@@ -14,7 +14,7 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
-   public GameObject playerPrefab;
+   public GameObject[] playerPrefabs;
    public bool isFullScreen;
    public int ResX, RexY;
    public bool isOffline;
@@ -218,11 +218,11 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
     {
        if (isOffline)
        {
-          Instantiate(playerPrefab, Vector3.zero, quaternion.identity);  
+          Instantiate(playerPrefabs[FindObjectOfType<playerCountSave>().PlayerIndex], Vector3.zero, quaternion.identity);  
        }
        else
        {
-          PhotonNetwork.Instantiate("Player", Vector3.zero, quaternion.identity);  
+          PhotonNetwork.Instantiate("Player"+FindObjectOfType<playerCountSave>().PlayerIndex, Vector3.zero, quaternion.identity);  
        }
     }
 
