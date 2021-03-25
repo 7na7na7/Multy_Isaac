@@ -558,7 +558,7 @@ if(isPlay)
             else
             {
                 InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                    AttackerName+"<color=red> Killed </color>"+ PhotonNetwork.NickName);      
+                    AttackerName+"<color=red> Killed </color>"+ nickname.text);      
             }
 
             GetComponent<PassiveItem>().StopLader();
