@@ -235,7 +235,8 @@ public class PlayerItem : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
                         Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
                         Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6)
-                        || Input.GetKeyDown(KeyCode.Alpha7)|| Input.GetKeyDown(KeyCode.Alpha8))
+                        || Input.GetKeyDown(KeyCode.Alpha7)|| Input.GetKeyDown(KeyCode.Alpha8)
+                        || Input.GetKeyDown(KeyCode.Alpha9))
                     {
                         int contactIndex = 0;
                         if (Input.GetKeyDown(KeyCode.Alpha1)) //1
@@ -253,9 +254,17 @@ public class PlayerItem : MonoBehaviour
                         else if (Input.GetKeyDown(KeyCode.Alpha7)) //7
                             contactIndex = 6;
                         else if (Input.GetKeyDown(KeyCode.Alpha8)) //8
-                            contactIndex = 7;
+                        {
+                            contactIndex = 7;   
+                        }
+                        else if (Input.GetKeyDown(KeyCode.Alpha9)) //9
+                        {
+                            if (player.PlayerIndex == 3)
+                            {
+                                contactIndex = 8;       
+                            }
+                        }
                         
-
                         if (contactIndex != selectedIndex)
                         {
                             player.ChangeWeaponSound();
