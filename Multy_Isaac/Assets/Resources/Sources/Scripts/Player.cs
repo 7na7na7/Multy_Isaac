@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    public int PlayerIndex = 0;
     private string[] AnimNames = new[] {"Idle","Walk","Die" };
     private int shotSoundIndex;
     private float volume;
@@ -348,17 +349,24 @@ if(isPlay)
                         PanValue = pan1SpeedPercent / 100f;
                     else if (isPan2)
                         PanValue = pan2SpeedPercent / 100f;
-                    
+
+                    float is4 = 1;
+                    if (PlayerIndex == 4)
+                    {
+                        if(currentWeapon.consumeBullet==0)
+                            is4 = 1.5f;
+                    }
+
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        PanValue,
+                        PanValue*is4,
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                    PanValue);
+                    PanValue*is4);
                     
                     anim.SetFloat("WalkSpeed",(((speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P /
-                                               100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue)/4f);
+                                               100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue*is4)/4f);
 
                         //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 * 가시판에있는지
                 }
@@ -416,7 +424,10 @@ if(isPlay)
                 canShot = true;
             }
         }
-        
+        if (PlayerIndex ==6)
+        {
+            canShot = false;
+        }
         if (canShot)
         {
             isFight();
@@ -462,6 +473,10 @@ if(isPlay)
         }
     }
 
+    public void consumeBulletReset()
+    {
+        currentWeapon.consumeBullet = 100;
+    }
     IEnumerator swordInitial(Vector3 a3,float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -484,7 +499,10 @@ if(isPlay)
                 canShot = true;
             }
         }
-
+        if (PlayerIndex == 4)
+        {
+            canShot = false;
+        }
         if (canShot&&leftBullet.bulletCount>=currentWeapon.consumeBullet)
         {
             isFight();

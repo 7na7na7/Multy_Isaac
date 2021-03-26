@@ -319,6 +319,10 @@ public class Invent : MonoBehaviour
 
             if (canGet)
             {
+                if (player.PlayerIndex == 6)
+                {
+                    transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(20);
+                }
                 Open(item);
                 starEffect.Play();
                 player.CombineSound();   

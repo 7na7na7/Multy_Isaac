@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerChange : MonoBehaviour
 {
+    public string[] pTxts;
+    public Text pTxt;
+    public string[] pTxts2;
+    public Text pTxt2;
     public int Index = 0;
     public Sprite[] sprites;
     public Image leftImg;
@@ -27,6 +31,9 @@ public class PlayerChange : MonoBehaviour
           rightImg.sprite = sprites[Index + 1];
           leftImg.sprite = sprites[Index  -1];
       }
+
+      pTxt.text = pTxts[Index];
+      pTxt2.text = pTxts2[Index];
     }
 
     public void Left()
@@ -48,6 +55,8 @@ public class PlayerChange : MonoBehaviour
             rightImg.sprite = sprites[Index + 1];
             leftImg.sprite = sprites[Index  -1];
         }
+        pTxt2.text = pTxts2[Index];
+        pTxt.text = pTxts[Index];
         mainImg.sprite = sprites[Index];
         PlayerPrefs.SetInt(playerKey,Index);
         playerCountSave.instance.PlayerIndex = Index;
@@ -72,6 +81,8 @@ public class PlayerChange : MonoBehaviour
             rightImg.sprite = sprites[Index + 1];
             leftImg.sprite = sprites[Index  -1];
         }
+        pTxt2.text = pTxts2[Index];
+        pTxt.text = pTxts[Index];
         mainImg.sprite = sprites[Index]; 
         PlayerPrefs.SetInt(playerKey,Index);
         playerCountSave.instance.PlayerIndex = Index;

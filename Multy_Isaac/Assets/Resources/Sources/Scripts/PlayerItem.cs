@@ -77,7 +77,7 @@ public class PlayerItem : MonoBehaviour
                 {
                     if (scroll < 0)
                     {
-                        if (selectedIndex >= 7)
+                        if (selectedIndex >= Selected.Length-1)
                             selectedIndex = 0;
                         else
                             selectedIndex++;
@@ -97,7 +97,7 @@ public class PlayerItem : MonoBehaviour
                     else
                     {
                         if (selectedIndex <= 0)
-                            selectedIndex = 7;
+                            selectedIndex = Selected.Length-1;
                         else
                             selectedIndex--;
                    
@@ -173,7 +173,7 @@ public class PlayerItem : MonoBehaviour
                                             isGet = true;
                                             slots[i].itemCount++;
                                         
-                                            check(i,false);
+                                            //check(i,false);
                                         
                                             temMgr.delTem(item.GetComponent<Item>().Index); 
                                             Destroy(item);
@@ -191,7 +191,7 @@ public class PlayerItem : MonoBehaviour
                                                 ItemList[i]=item.GetComponent<Item>().item;
                                                 slots[i].itemCount++;
                                         
-                                                check(i,true);
+                                                //check(i,true);
                                         
                                                 temMgr.delTem(item.GetComponent<Item>().Index);
                                                 Destroy(item);
@@ -211,8 +211,8 @@ public class PlayerItem : MonoBehaviour
                                             
                                             if(item.GetComponent<Item>().item.type==itemType.Passive) //패시브템이면
                                                 player.PassiveOn(item.GetComponent<Item>().item.index); //패시브 ON
-
-                                            check(i,true);
+                                            else if(item.GetComponent<Item>().item.type == itemType.Gun||item.GetComponent<Item>().item.type == itemType.Melee) 
+                                                check(i,true);
                                         
                                             temMgr.delTem(item.GetComponent<Item>().Index);
                                             Destroy(item);
@@ -404,6 +404,7 @@ public class PlayerItem : MonoBehaviour
         }
         else //아니면 무기없앰
         {
+            player.consumeBulletReset();
             if(selectedIndex==i) 
                 player.gunSetfalse();
         }
