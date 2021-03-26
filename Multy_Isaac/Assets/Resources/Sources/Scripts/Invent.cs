@@ -302,12 +302,10 @@ public class Invent : MonoBehaviour
             {
                 for (int i = 0; i < item.Count; i++)
                 {
-                    if (PlayerItem.GetItem(item))
-                    {
-                        canGet = true;
-                        PlayerItem.DestroyItem(element.SmallItemIndex[0]);
-                        PlayerItem.DestroyItem(element.SmallItemIndex[1]);   
-                    }
+                    PlayerItem.DestroyItem(element.SmallItemIndex[0]);
+                    PlayerItem.DestroyItem(element.SmallItemIndex[1]);
+                    PlayerItem.CombineItem(item);
+                    canGet = true;
                 }
                     
             }

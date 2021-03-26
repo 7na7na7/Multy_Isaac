@@ -779,6 +779,10 @@ if(isPlay)
             if (gun.GetComponent<Animator>()!=null) //애니메이터가 있으면
                 gun.GetComponent<Animator>().enabled = true;
         }
+        else
+        {
+            currentWeapon.consumeBullet = 100;
+        }
     }
 
     public void KillReload()

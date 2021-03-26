@@ -173,7 +173,7 @@ public class PlayerItem : MonoBehaviour
                                             isGet = true;
                                             slots[i].itemCount++;
                                         
-                                            //check(i,false);
+                                            check(i,false);
                                         
                                             temMgr.delTem(item.GetComponent<Item>().Index); 
                                             Destroy(item);
@@ -191,7 +191,7 @@ public class PlayerItem : MonoBehaviour
                                                 ItemList[i]=item.GetComponent<Item>().item;
                                                 slots[i].itemCount++;
                                         
-                                                //check(i,true);
+                                                check(i,true);
                                         
                                                 temMgr.delTem(item.GetComponent<Item>().Index);
                                                 Destroy(item);
@@ -211,8 +211,8 @@ public class PlayerItem : MonoBehaviour
                                             
                                             if(item.GetComponent<Item>().item.type==itemType.Passive) //패시브템이면
                                                 player.PassiveOn(item.GetComponent<Item>().item.index); //패시브 ON
-                                            else if(item.GetComponent<Item>().item.type == itemType.Gun||item.GetComponent<Item>().item.type == itemType.Melee) 
-                                                check(i,true);
+
+                                            check(i,true);
                                         
                                             temMgr.delTem(item.GetComponent<Item>().Index);
                                             Destroy(item);
@@ -306,7 +306,7 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public bool GetItem(tem item)
+    public void GetItem(tem item)
     {
         bool isGet = false;
           int select = 0;
@@ -370,7 +370,6 @@ public class PlayerItem : MonoBehaviour
                                 if (!isGet)
                                 {
                                     PopUpManager.instance.PopUp("더 이상 제작할 수 없습니다!",Color.red);
-                                    return false;
                                 }
                                 else
                                 {
@@ -383,7 +382,84 @@ public class PlayerItem : MonoBehaviour
                                             Selected[i].SetActive(false); 
                                     }
                                     check(selectedIndex,false);
-                                    return true;
+                                }
+    }
+     public void CombineItem(tem item)
+    {
+        bool isGet = false;
+          int select = 0;
+                                if (item.type == itemType.Usable||item.type==itemType.Item) //소비템 또는 재료템이면
+                                {
+                                    bool isHaveUsable = false;
+                                    
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName == item.ItemName) //이름이 같으면
+                                        {
+                                            select = i;
+                                            isHaveUsable = true;
+                                            isGet = true;
+                                            slots[i].itemCount++;
+                                        
+                                            check(i,false);
+                                            
+                                            break;
+                                        }
+                                    }
+
+                                    if (!isHaveUsable) //소비템이 없으면
+                                    {
+                                        for (int i = 0; i < ItemList.Length; i++)
+                                        {
+                                            if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                            {
+                                                select = i;
+                                                isGet = true;
+                                                ItemList[i]=item;
+                                                slots[i].itemCount++;
+                                        
+                                                check(i,true);
+                                                
+                                                break;
+                                            }
+                                        }      
+                                    }
+                                }
+                                else//소비템도 재료템도 아니면 
+                                {
+                                    for (int i = 0; i < ItemList.Length; i++) 
+                                    {
+                                        if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
+                                        {
+                                            select = i;
+                                            isGet = true;
+                                            ItemList[i]=item;
+                                            
+                                            if(item.type==itemType.Passive) //패시브템이면
+                                                player.PassiveOn(item.index); //패시브 ON
+
+                                            check(i,true);
+                                            
+                                            break;
+                                        }
+                                    }   
+                                }
+
+                                if (!isGet)
+                                {
+                                    discardRPC(item.index);
+                                }
+                                else
+                                {
+                                    selectedIndex = select;
+                                    for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                                    {
+                                        if (i == selectedIndex)
+                                            Selected[i].SetActive(true);
+                                        else
+                                            Selected[i].SetActive(false); 
+                                    }
+                                    check(selectedIndex,false);
                                 }
     }
 
@@ -404,7 +480,6 @@ public class PlayerItem : MonoBehaviour
         }
         else //아니면 무기없앰
         {
-            player.consumeBulletReset();
             if(selectedIndex==i) 
                 player.gunSetfalse();
         }
