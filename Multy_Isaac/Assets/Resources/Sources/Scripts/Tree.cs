@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class Tree : MonoBehaviour
 {
+    public GameObject txt;
     private TemManager temMgr;
     private PhotonView pv;
     public int hp;
@@ -24,6 +25,17 @@ public class Tree : MonoBehaviour
         pv = GetComponent<PhotonView>();
         temMgr = FindObjectOfType<TemManager>();
         hpSave = hp;
+    }
+
+    private void OnMouseOver()
+    {
+        if (!txt.activeSelf)
+            txt.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        txt.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
