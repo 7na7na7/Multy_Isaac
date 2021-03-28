@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class RoomTemplates : MonoBehaviour
 {
+   public float firstDelay;
    public float delay;
    public int TBLRper = 90;
    public GameObject[] RoomProps;
