@@ -12,7 +12,7 @@ public class RoomSpawner : MonoBehaviour
     public bool isConstant = false;
     public int openingDirection;
     //1 --> need bottom door
-    //2 --> need top door
+    //2 --> need top doorz
     //3 --> need left door
     //4 --> need right door
     private RoomTemplates templates;

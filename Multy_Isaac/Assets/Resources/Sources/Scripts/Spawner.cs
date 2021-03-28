@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public int Count=4;
-    public int range1, range2, range3, range4;
+    public Vector4[] ranges;
     public GameObject StartEntryPrefab;
     private void Start()
     {
@@ -17,19 +17,18 @@ public class Spawner : MonoBehaviour
         {
             for (int i = 0; i < Count; i++)
             {
-                Instantiate(StartEntryPrefab,
-                    new Vector3(Random.Range(range1, range2) * 18, Random.Range(range3, range4) * 10,
-                        transform.position.z), quaternion.identity);
+                Instantiate(StartEntryPrefab, new Vector2(
+                    Random.Range((int)ranges[i].x, (int)ranges[i].y+1) * 18, Random.Range((int)ranges[i].z, (int)ranges[i].w+1) * 10), quaternion.identity);
             }
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                //playerCountSave.instance.playerCount
                 for (int i = 0; i < Count; i++)
                 {
-                    PhotonNetwork.InstantiateRoomObject("StartEntry",   new Vector3(Random.Range(range1, range2)*18,Random.Range(range3, range4)*10,transform.position.z), quaternion.identity);   
+                    PhotonNetwork.InstantiateRoomObject(StartEntryPrefab.name, new Vector2(
+                        Random.Range((int)ranges[i].x, (int)ranges[i].y) * 18+1, Random.Range((int)ranges[i].z, (int)ranges[i].w+1) * 10), quaternion.identity);
                 }
             }   
         }

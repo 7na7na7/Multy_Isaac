@@ -349,7 +349,7 @@ if(isPlay)
                         PanValue = pan1SpeedPercent / 100f;
                     else if (isPan2)
                         PanValue = pan2SpeedPercent / 100f;
-
+                    
                     float is4 = 1;
                     if (PlayerIndex == 4)
                     {
@@ -360,13 +360,13 @@ if(isPlay)
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        PanValue*is4,
+                        PanValue*is4*(isAspalt	? 1.1f : 1),
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                    PanValue*is4);
+                    PanValue*is4* (isAspalt	? 1.1f : 1));
                     
                     anim.SetFloat("WalkSpeed",(((speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P /
-                                               100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue*is4)/4f);
+                                               100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue*is4*(isAspalt	? 1.1f : 1))/4f);
 
                         //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 * 가시판에있는지
                 }
