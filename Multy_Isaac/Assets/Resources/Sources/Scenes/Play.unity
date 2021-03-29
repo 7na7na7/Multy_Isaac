@@ -16175,6 +16175,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002177095}
   m_CullTransparentMesh: 1
+--- !u!1 &1007625823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007625824}
+  - component: {fileID: 1007625825}
+  m_Layer: 0
+  m_Name: PlayerCountSave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007625824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007625823}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.09608245, y: -0.028646968, z: -19.55857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1300170086}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007625825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007625823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f336871ba88c1fc49af793e08d735eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: 7
 --- !u!1001 &1023888601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19226,6 +19270,7 @@ Transform:
   - {fileID: 1290413360}
   - {fileID: 1159167332}
   - {fileID: 202939328}
+  - {fileID: 1007625824}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33198,7 +33243,6 @@ GameObject:
   - component: {fileID: 2472824489652345162}
   - component: {fileID: 2472824489652345165}
   - component: {fileID: 2472824489652345166}
-  - component: {fileID: 2472824489652345167}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -33238,19 +33282,6 @@ MonoBehaviour:
   canPause: 1
   pausePanel: {fileID: 311906792}
   anim: {fileID: 311906796}
---- !u!114 &2472824489652345167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472824489652345164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f336871ba88c1fc49af793e08d735eec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerIndex: 7
 --- !u!1 &2472824489710273409
 GameObject:
   m_ObjectHideFlags: 0

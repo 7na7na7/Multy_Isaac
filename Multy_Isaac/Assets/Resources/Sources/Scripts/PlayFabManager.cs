@@ -16,6 +16,7 @@ using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+   public string myID;
    public int SendRate;
    public int SerializationRate;
    public Vector2Int startResolution;
@@ -220,12 +221,17 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public void Register()
    {
-      var request = new RegisterPlayFabUserRequest
-         {Email = EmailInput.text, Password = PasswordInput.text, Username = UsernameInput.text};
-      PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
+      if(UsernameInput	.text.Length<=0)
+         PopUpManager.instance.PopUp("Username is NULL",Color.red);
+      else
+      {
+         var request = new RegisterPlayFabUserRequest
+            {Email = EmailInput.text, Password = PasswordInput.text, Username = PasswordInput.text};
+         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
       
-      LoginPanel.SetActive(false);
-      LoadingPanel.SetActive(true);
+         LoginPanel.SetActive(false);
+         LoadingPanel.SetActive(true);  
+      }
    }
    
    void GetAccountInfo() {
@@ -256,12 +262,13 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PopUpManager.instance.PopUp("Login Succeed", Color.green);
       
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
-      PlayerPrefs.SetString(NameKey,UsernameInput.text);
+      myID = result.PlayFabId;
+      GetNick();
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
       
-      GetAccountInfo();
+      //GetAccountInfo();
       
       Connect();
    }
@@ -283,6 +290,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
+
+      SetNick(UsernameInput.text);
       
       EmailInput.text = null;
       PasswordInput.text = null;
@@ -291,6 +300,22 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       regiPanel.SetActive(false);
    }
 
+   void SetNick(string Nick)
+   {
+      var request = new UpdateUserDataRequest() {Data = new Dictionary<string, string>() {{"nick", Nick}}};
+      PlayFabClientAPI.UpdateUserData	(request,(result)=>print	("데이터 저장 성공"),(error => print	("데이터 저장 실패")));
+   }
+
+   void GetNick()
+   {
+      var request = new GetUserDataRequest() {PlayFabId = myID};
+      PlayFabClientAPI.GetUserData(request, (result) =>
+      {
+         NickName=result.Data["nick"].Value;
+         PlayerPrefs.SetString(NameKey,NickName);
+      },(error) => print	("데이터 저장 실패"));
+    
+   }
    private void OnRegisterFailure(PlayFabError error)
    {
       PopUpManager.instance.PopUp(error.ToString(), Color.red);
