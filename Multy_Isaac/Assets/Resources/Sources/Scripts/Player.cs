@@ -848,6 +848,7 @@ if(isPlay)
     [PunRPC]
     public void armgunSetFalse()
     {
+        currentWeapon.consumeBullet = 100;
         Arm.SetActive(false);
         gun.SetActive(false);
     }
