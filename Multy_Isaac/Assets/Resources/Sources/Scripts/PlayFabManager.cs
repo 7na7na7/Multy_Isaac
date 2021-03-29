@@ -12,6 +12,7 @@ using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
 using Unity.Mathematics;
 using Hashtable=ExitGames.Client.Photon.Hashtable;
+using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
@@ -19,7 +20,12 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    public int SerializationRate;
    public Vector2Int startResolution;
    public List<GameObject> Prefabs;
-
+   public Sprite logSpr;
+   public Sprite regiSpr;
+   public Image BtnImg;
+   public GameObject logPanel;
+   public GameObject regiPanel;
+   private bool isLogin = true;
    public GameObject titleImg;
    private Text txt;
    //public string GameVersion = "0.1";
@@ -58,13 +64,24 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString(NameKey,"");
       Screen.SetResolution(startResolution.x,startResolution.y, false);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
-      UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
+      //UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
 
       PhotonNetwork.SendRate = SendRate;
       PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
    }
 
+   public void RegiBtn()
+   {
+      logPanel.SetActive(false);
+      regiPanel.SetActive(true);
+   }
+
+   public void LogPanel()
+   {
+      logPanel.SetActive(true);
+      regiPanel.SetActive(false);
+   }
    public void offlineMode()
    {
       PhotonNetwork.OfflineMode = true;
@@ -86,6 +103,15 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    
    private void Update()
    {
+      if (EmailInput.text.Length != 0 && PasswordInput.text.Length != 0)
+      {
+         BtnImg.sprite = logSpr;
+      }
+      else
+      {
+         BtnImg.sprite = regiSpr;
+      }
+
       if (PhotonNetwork.IsConnected)
       {
          if(PhotonNetwork.GetPing()<50)
@@ -187,10 +213,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    {
       var request = new LoginWithEmailAddressRequest {Email = EmailInput.text, Password = PasswordInput.text};
       PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-      if(UsernameInput!=null) 
-         NickName = UsernameInput.text;
-      
-      PlayerPrefs.SetString(NameKey,NickName);
 
       LoginPanel.SetActive(false);
       LoadingPanel.SetActive(true);
@@ -205,7 +227,26 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       LoginPanel.SetActive(false);
       LoadingPanel.SetActive(true);
    }
+   
+   void GetAccountInfo() {
+      GetAccountInfoRequest request = new GetAccountInfoRequest();
+      PlayFabClientAPI.GetAccountInfo(request, Successs, fail);
+   }
+ 
+ 
+   void Successs (GetAccountInfoResult result)
+   {
+      NickName	=	 result.AccountInfo.Username;
+      PlayerPrefs.SetString(NameKey,NickName);
+   }
+ 
+ 
+   void fail(PlayFabError error){
+ 
+      Debug.LogError (error.GenerateErrorReport ());
+   }
 
+   
    #endregion
 
    #region 로그인/회원가입 성공/실패 처리
@@ -219,6 +260,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
+      
+      GetAccountInfo();
       
       Connect();
    }
@@ -244,6 +287,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
+      logPanel.SetActive(true);
+      regiPanel.SetActive(false);
    }
 
    private void OnRegisterFailure(PlayFabError error)
@@ -295,7 +340,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       LoadingPanel.SetActive(false);
       LoginPanel.SetActive(true);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
-      UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
+      //UsernameInput.text = PlayerPrefs.GetString(NameKey, "");
    }
    #endregion
 
@@ -349,13 +394,22 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
        RoomOptions roomOpton=new RoomOptions();
-       roomOpton.MaxPlayers = 10;
+       roomOpton.MaxPlayers = 8;
        PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + UnityEngine.Random.Range(0, 100) : RoomInput.text, roomOpton); //방만들기     
     }
 
     public void JoinRandomRoom()
     {
-       PhotonNetwork.JoinRandomRoom(); //랜덤룸 입장
+       if (PhotonNetwork.CountOfRooms > 0)
+       {
+          PhotonNetwork.JoinRandomRoom();
+       }
+       else
+       {
+          RoomOptions roomOpton=new RoomOptions();
+          roomOpton.MaxPlayers = 8;
+          PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + UnityEngine.Random.Range(0, 100) : RoomInput.text, roomOpton); //방만들기   
+       }
     }
 
     public void LeaveRoom() => PhotonNetwork.LeaveRoom(); //방떠나기
