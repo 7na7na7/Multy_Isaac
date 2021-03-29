@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  public GameObject bomb;
   private string[] animNames = new[] {"Idle", "Walk", "Hit", "Die", "Attack"};
   public SoundManager sound;
   private Zombie zombie;
@@ -264,13 +265,27 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     else
       return false;
   }
-
-  void Die()
+ 
+  public void Die()
   {
     if(PhotonNetwork.OfflineMode)
       DieRPC();
     else
     {
+      pv.RPC("DieRPC",RpcTarget.AllBuffered);
+    }
+  }
+  public void BoomDie()
+  {
+    if (PhotonNetwork.OfflineMode)
+    {
+      Instantiate(bomb, transform.position, quaternion.identity);
+      DieRPC();
+    }
+    else
+    {
+      if (PhotonNetwork.IsMasterClient)
+        PhotonNetwork.InstantiateRoomObject(bomb.name, transform.position, quaternion.identity);
       pv.RPC("DieRPC",RpcTarget.AllBuffered);
     }
   }

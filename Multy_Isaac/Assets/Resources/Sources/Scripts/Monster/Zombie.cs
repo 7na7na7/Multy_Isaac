@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    public float bombRad;
+    private bool isBombing = false;
     private bool canGo;
     public float gopathTime = 0.5f;
     private float time2 = 0;
@@ -209,6 +211,7 @@ if(canGo)
                     poisonTime += Time.deltaTime;
                 if (time2 < gopathTime)
                     time2 += Time.deltaTime;
+                
               if (!enemy.isFinding && enemy.canMove) 
               {
                   for (int i = 0; i < Players.Count; i++)
@@ -235,12 +238,26 @@ if(canGo)
               {
                   if (enemy.isFinding&& enemy.canMove)
                   {
+                      if (zombieIndex == 5 && !isBombing&&Vector3.Distance(transform.position, enemy.targetPosition.position) < bombRad)
+                      {
+                        
+                              isBombing = true;
+                              if(PhotonNetwork.OfflineMode) 
+                                  boom();
+                              else
+                              {
+                                  if(PhotonNetwork.IsMasterClient)
+                                      pv.RPC("boom",RpcTarget.All);
+                              }
+                          
+                      }
+                      
                       if (enemy.targetPosition.GetComponent<Player>().isDead)
                       {
                           enemy.ExclamationClose();
                           Restart();
                       }
-                      if (zombieIndex == 1 || zombieIndex == 4 || zombieIndex == 3)
+                      if (zombieIndex == 1 || zombieIndex == 4 || zombieIndex == 3||zombieIndex==5)
                       { 
                           GoPath();
                       }
@@ -305,6 +322,11 @@ float degree = rad * Mathf.Rad2Deg;
         
     return degree;
 }
+    [PunRPC] 
+    void boom()
+    {
+        transform.DOScale(new Vector2(transform.localScale.x*1.5f,transform.localScale.y*1.5f) ,1.2f ).SetEase(Ease.OutCubic).OnComplete(()=> { enemy.BoomDie();});
+    }
     IEnumerator poisonAttack()
     {
         while (true)
@@ -361,7 +383,7 @@ float degree = rad * Mathf.Rad2Deg;
                     enemy.sound.Play(Random.Range(3, 6), true, 0.1f);
             }
             else
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
         }
     }
         

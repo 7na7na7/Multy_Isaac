@@ -69,9 +69,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 128337273
-  m_SortingLayer: 2
-  m_SortingOrder: 6
+  m_SortingLayerID: 110052107
+  m_SortingLayer: 4
+  m_SortingOrder: 13
   m_Sprite: {fileID: 21300000, guid: 969b2e5bc8041524693d5095de7ac439, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 3253719210093974561, guid: a1f0e00f958d4f84f88283a308333b77,
+  m_Sprite: {fileID: 6527473906217038212, guid: 9d41f5006968f294c89b77887a73a1d3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -241,9 +241,9 @@ GameObject:
   - component: {fileID: 692161826}
   - component: {fileID: 1755109966}
   - component: {fileID: 1016078240731654622}
-  - component: {fileID: -733105244225613214}
+  - component: {fileID: 345775424125089518}
   m_Layer: 0
-  m_Name: "\uAF2C\uB9C8\uC880\uBE44"
+  m_Name: "\uD3ED\uD0C4\uC880\uBE44"
   m_TagString: Enemy
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: 8285181305115731904, guid: a1f0e00f958d4f84f88283a308333b77,
+  m_Sprite: {fileID: 3298630276595400155, guid: 9d41f5006968f294c89b77887a73a1d3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -355,13 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 0
-    Name: Hit
-  - Type: 9
-    SynchronizeType: 0
-    Name: Die
+  m_SynchronizeParameters: []
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -429,12 +423,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe2b362d2750a940865e04e33a78f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 0}
-  sound: {fileID: -733105244225613214}
+  bomb: {fileID: 488023865330879624, guid: db3a0b6288966a347bd16e10d1be7d71, type: 3}
+  sound: {fileID: 345775424125089518}
   fireDamageTick: 0.2
   isDead: 0
   Exclamation: {fileID: 4748071977300609019}
-  nuckBackDistance: 0.75
+  nuckBackDistance: 1
   nuckBackTime: 0.3
   nuckBackEase: 6
   DropTem:
@@ -443,9 +437,9 @@ MonoBehaviour:
   - {fileID: 1824713383374139417, guid: e2e067f76a4d1af4ab88b769da95de1f, type: 3}
   - {fileID: 3749522341741181223, guid: 034c762a4ff776545afed34c657b864a, type: 3}
   DropTemPercent: 140000000f0000000500000001000000
-  hp: 10
+  hp: 30
   pv: {fileID: 5458050791320017465}
-  CollsionDamage: 12
+  CollsionDamage: 10
   damageDelay: 0.75
   time: 0
   canMove: 1
@@ -464,25 +458,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60395ee72e288994fb5c2d016f5430c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombRad: 0
+  bombRad: 2
   gopathTime: 0.5
-  StartDay: 3
-  hpUpValue: 5
+  StartDay: 1
+  hpUpValue: 10
   speedValue: 0.1
   pan1SpeedPercent: 60
   pan2SpeedPercent: 40
   Poison: {fileID: 0}
-  zombieIndex: 4
-  nightDetecctRad: 20
-  detectRad: 7
+  zombieIndex: 5
+  nightDetecctRad: 30
+  detectRad: 6.5
   Players: []
   PlayerTrs: []
-  AttackTime: 0.3
+  AttackTime: 0.4
   minIdleTime: 0.5
   maxIdleTIme: 2
   minMove: 0
   maxMove: 5
-  speed: 7.5
+  speed: 5.5
   nextWaypointDistance: 0.5
 --- !u!95 &692161826
 Animator:
@@ -494,7 +488,7 @@ Animator:
   m_GameObject: {fileID: 5458050791320017457}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c3e7ddf5cd96d3542a714a90bf90938f, type: 2}
+  m_Controller: {fileID: 22100000, guid: f60301b0dcb3331468dc90bbe0307192, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -544,10 +538,10 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00011503697, y: -0.31912223}
-  m_Size: {x: 0.6198912, y: 0.7350869}
+  m_Offset: {x: -0.00011503697, y: -0.22222567}
+  m_Size: {x: 0.6198912, y: 0.92887974}
   m_Direction: 0
---- !u!114 &-733105244225613214
+--- !u!114 &345775424125089518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
