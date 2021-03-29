@@ -52,10 +52,20 @@ public class ZombieSpawner : MonoBehaviour
 
     void StartSpawn()
     {
-        for (int i = 0; i < StartZombieCount; i++)
+        if (PhotonNetwork.OfflineMode)
+        {
+            for (int i = 0; i < StartZombieCount; i++)
             {
                 AllMapSpawn();
-            }
+            }   
+        }
+        else
+        {
+            for (int i = 0; i < StartZombieCount/2; i++)
+            {
+                AllMapSpawn();
+            }   
+        }
     }
     IEnumerator Spawn()
     {
@@ -117,12 +127,12 @@ public class ZombieSpawner : MonoBehaviour
         {
             SpawnZombie(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));
         }
-//        else
-//        {
-//            if (PhotonNetwork.IsMasterClient)
-//            {
-//                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));            }
-//        }   
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));            }
+        }   
     }
 
     public void SpawnZombie(GameObject zombie, Vector2 pos)

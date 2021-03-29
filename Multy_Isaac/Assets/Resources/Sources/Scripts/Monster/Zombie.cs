@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    private bool canGo;
     public float gopathTime = 0.5f;
     private float time2 = 0;
     public int StartDay;
@@ -45,7 +46,6 @@ public class Zombie : MonoBehaviour
     public float nextWaypointDistance = 3;
     private int currentWaypoint = 0;
     private bool reachedEndOfPath;
-    private bool isMaster= false;
 
     [PunRPC]
     void hpUp()
@@ -80,50 +80,28 @@ public class Zombie : MonoBehaviour
 
         if (!PhotonNetwork.OfflineMode)
         {
-            if (!PhotonNetwork.IsMasterClient)
-                Destroy(GetComponent<Seeker>());
-            else
-            {
-                speed += Random.Range(-speedValue, speedValue) * speed;
-                pv.RPC("hpUp",RpcTarget.AllBuffered);
-            }
+            speed += Random.Range(-speedValue, speedValue) * speed; 
+            pv.RPC("hpUp",RpcTarget.AllBuffered);
         }
         else
         {
             speed += Random.Range(-speedValue, speedValue) * speed;
             hpUp();
         }
+
+        StartCoroutine(corr);
+            StartCoroutine(find());
         
-        if (PhotonNetwork.OfflineMode)
-        {
-         StartCoroutine(corr);
-         StartCoroutine(find());
-         isMaster = true;
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                StartCoroutine(corr);
-               StartCoroutine(find());
-               isMaster = true;
-            }
-        }
 
         poisonCor = poisonAttack();
     }
 
     public void OnPathComplete (Path p) {
-        if (isMaster)
-        {
-            //Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
-
-            if (!p.error) {
+        if (!p.error) {
                 path = p;
                 // Reset the waypoint counter so that we start to move towards the first point in the path
                 currentWaypoint = 0;
-            }   
-        }
+            }
     }
     public void stopCor()
     {
@@ -211,11 +189,23 @@ public class Zombie : MonoBehaviour
             enemy.setLocalX(enemy.targetPosition.transform.position.x);
         }
     }
-    public void Update () 
+    public void Update ()
+    {
+        if (PhotonNetwork.OfflineMode)
+            canGo = true;
+        else
         {
-            if (isMaster)
+            if (PhotonNetwork.IsMasterClient)
             {
-                if (poisonTime < AttackTime)
+                canGo = true;
+            }
+            else
+            {
+                canGo = false;
+            }
+        }
+if(canGo)
+{        if (poisonTime < AttackTime)
                     poisonTime += Time.deltaTime;
                 if (time2 < gopathTime)
                     time2 += Time.deltaTime;
@@ -359,13 +349,19 @@ float degree = rad * Mathf.Rad2Deg;
     {
         while (true)
         {
-            if (enemy.isFinding)
+            if (PhotonNetwork.IsMasterClient)
             {
-                enemy.seeker.StartPath(transform.position, enemy.targetPosition.position, OnPathComplete);
+                if (enemy.isFinding)
+                {
+                    enemy.seeker.StartPath(transform.position, enemy.targetPosition.position, OnPathComplete);
+                }
+
+                yield return new WaitForSeconds(0.2f);
+                if (Random.Range(0, 20) == 1)
+                    enemy.sound.Play(Random.Range(3, 6), true, 0.1f);
             }
-            yield return new WaitForSeconds(0.2f);
-            if(Random.Range(0,20)==1) 
-                enemy.sound.Play(Random.Range(3,6),true,0.1f);
+            else
+                yield return new WaitForSeconds(1.5f);
         }
     }
         
@@ -373,38 +369,43 @@ float degree = rad * Mathf.Rad2Deg;
     {
         while (true)
         {
-            Vector2 roamPos = GetRoamingPosition();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Vector2 roamPos = GetRoamingPosition();
             
-            //가려는 방향에 따라 플립
-            enemy.setLocalX(roamPos.x);
+                //가려는 방향에 따라 플립
+                enemy.setLocalX(roamPos.x);
             
            
-            if (Vector2.Distance(transform.position, roamPos) < 2f)
-            {
-                enemy.setAnim(0);
+                if (Vector2.Distance(transform.position, roamPos) < 2f)
+                {
+                    enemy.setAnim(0);
                 
-                rigid.velocity=Vector2.zero;
-                yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
+                    rigid.velocity=Vector2.zero;
+                    yield return new WaitForSeconds(Random.Range(minIdleTime,maxIdleTIme));
+                }
+                else
+                {
+                    if(Random.Range(0,3)==1) 
+                        enemy.sound.Play(Random.Range(3,6),true,0.1f);
+                
+                    enemy.setAnim(1);
+             
+                    Vector2 dir =roamPos -  (Vector2)transform.position;
+                    dir.Normalize();
+                    float reachedPositionDistance = 0.5f;
+                    rigid.velocity = dir * speed;
+                    yield return new WaitUntil(() =>Vector2.Distance( transform.position,roamPos)<reachedPositionDistance);      
+                }   
             }
             else
-            {
-                if(Random.Range(0,3)==1) 
-                    enemy.sound.Play(Random.Range(3,6),true,0.1f);
-                
-                enemy.setAnim(1);
-             
-                Vector2 dir =roamPos -  (Vector2)transform.position;
-                dir.Normalize();
-                float reachedPositionDistance = 0.5f;
-                rigid.velocity = dir * speed;
-                yield return new WaitUntil(() =>Vector2.Distance( transform.position,roamPos)<reachedPositionDistance);      
-            }
+                yield return new WaitForSeconds(1f);
         }
     }
 
     public void OnDisable()
     {
-        if(isMaster) 
+        if(PhotonNetwork.IsMasterClient) 
             enemy.seeker.pathCallback -= OnPathComplete;
     }
     
@@ -417,7 +418,7 @@ float degree = rad * Mathf.Rad2Deg;
 
    private void OnCollisionStay2D(Collision2D other)
    {
-       if (isMaster)
+       if(PhotonNetwork.IsMasterClient) 
        {
            if (enemy.canMove && !enemy.isFinding)
            {
@@ -431,7 +432,7 @@ float degree = rad * Mathf.Rad2Deg;
    
    private void OnCollisionEnter2D(Collision2D other)
    {
-       if (isMaster)
+       if(PhotonNetwork.IsMasterClient) 
        {
            if (enemy.canMove)
            {
