@@ -44,8 +44,7 @@ public class ZombieSpawner : MonoBehaviour
             StartCoroutine(Spawn());
         else
         {
-            if(PhotonNetwork.IsMasterClient) 
-                StartCoroutine(Spawn());   
+            StartCoroutine(Spawn());   
         }
         Invoke("StartSpawn", FirstDelay);
     }
@@ -59,13 +58,13 @@ public class ZombieSpawner : MonoBehaviour
                 AllMapSpawn();
             }   
         }
-        else
-        {
-            for (int i = 0; i < StartZombieCount/2; i++)
-            {
-                AllMapSpawn();
-            }   
-        }
+//        else
+//        {
+//            for (int i = 0; i < StartZombieCount/2; i++)
+//            {
+//                AllMapSpawn();
+//            }   
+//        }
     }
     IEnumerator Spawn()
     {
