@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2397804484583914203}
   - component: {fileID: -5529708031544147172}
   - component: {fileID: 6530565871682143133}
+  - component: {fileID: 2181065250481120664}
   m_Layer: 8
   m_Name: bigGreenTree_1
   m_TagString: Wall
@@ -258,6 +259,25 @@ MonoBehaviour:
   isLader: 0
   laderMaterial: {fileID: 0}
   flashWhite: {fileID: 2100000, guid: cbdde7d9e63392a49a4e9716effb3050, type: 2}
+--- !u!114 &2181065250481120664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414049667462710939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba82dda9f7565c34d861fd1ce3c43d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns: []
+  minDistance: 0.5
+  maxDistance: 12
+  pv: {fileID: 2397804484583914203}
+  clips:
+  - {fileID: 8300000, guid: edce7e48c6792c647bbdd8d72cfe486f, type: 3}
+  SourceCount: 1
 --- !u!1 &5680122587549915571
 GameObject:
   m_ObjectHideFlags: 0

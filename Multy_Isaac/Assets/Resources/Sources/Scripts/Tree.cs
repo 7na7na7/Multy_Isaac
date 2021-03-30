@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class Tree : MonoBehaviour
 {
+    private SoundManager sound;
     public GameObject txt;
     private TemManager temMgr;
     private PhotonView pv;
@@ -22,6 +23,7 @@ public class Tree : MonoBehaviour
     private float time = 0;
     private void Start()
     {
+        sound = GetComponent<SoundManager>();
         pv = GetComponent<PhotonView>();
         temMgr = FindObjectOfType<TemManager>();
         hpSave = hp;
@@ -44,6 +46,7 @@ public class Tree : MonoBehaviour
         {
             if (time > isSuperTime)
             {
+                sound.Play(0,true,0.75f);
                 if (PhotonNetwork.OfflineMode)
                 {
                     timeRPC();
