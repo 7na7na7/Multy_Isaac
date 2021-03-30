@@ -432,8 +432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe2b362d2750a940865e04e33a78f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb: {fileID: 0}
   sound: {fileID: 4213832093376300228}
   fireDamageTick: 0.2
+  isDead: 0
   Exclamation: {fileID: 4748071977300609019}
   nuckBackDistance: 1
   nuckBackTime: 0.3
@@ -465,6 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60395ee72e288994fb5c2d016f5430c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombRad: 0
+  gopathTime: 0.5
   StartDay: 2
   hpUpValue: 7
   speedValue: 0.1
@@ -473,7 +477,7 @@ MonoBehaviour:
   Poison: {fileID: 1064714333086079798, guid: 7d4dc23274a332b4c87ce9b54d2c4cea, type: 3}
   zombieIndex: 2
   nightDetecctRad: 30
-  detectRad: 7
+  detectRad: 6.5
   Players: []
   PlayerTrs: []
   AttackTime: 1
