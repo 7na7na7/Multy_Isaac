@@ -25,6 +25,7 @@ public class TimeManager : MonoBehaviour
     public int dayToNightTime;
     public int nightTime;
     public int nightToDayTime;
+
     void Start()
     {
         pv = GetComponent<PhotonView>();
@@ -36,7 +37,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        ClockRect.eulerAngles=new Vector3( ClockRect.eulerAngles.x, ClockRect.eulerAngles.y, time/maxTime*-360);
+        ClockRect.eulerAngles = new Vector3(ClockRect.eulerAngles.x, ClockRect.eulerAngles.y, time / maxTime * -360);
         dayText.text = "Day " + day;
     }
 
@@ -45,7 +46,19 @@ public class TimeManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+
+            bool canGo = false;
             if (PhotonNetwork.OfflineMode)
+                canGo = true;
+            else
+            {
+                if (PhotonNetwork.IsMasterClient)
+                    canGo = true;
+            }
+
+            if (canGo)
+            {
+                         if (PhotonNetwork.OfflineMode)
             {
                 time++;
             }
@@ -54,8 +67,8 @@ public class TimeManager : MonoBehaviour
                 if (PhotonNetwork.IsMasterClient)
                 {
                     time++;
-                    pv.RPC("timeRPC", RpcTarget.All,time);
-                }   
+                    pv.RPC("timeRPC", RpcTarget.All, time,day);
+                }
             }
 
             if (time > dayTime)
@@ -65,9 +78,16 @@ public class TimeManager : MonoBehaviour
                     isDay = false;
                     //낮에서 밤으로 전환
 
-                    DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0, dayToNightTime)
-                        .SetEase(Ease.InQuad);
-                } 
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                        nightRPC();
+                    }
+                    else
+                    {
+                        if(PhotonNetwork.IsMasterClient)
+                            pv.RPC("nightRPC",RpcTarget.All);
+                    }
+                }
             }
 
             if (time > dayTime + dayToNightTime)
@@ -82,11 +102,12 @@ public class TimeManager : MonoBehaviour
                     {
                         if (PhotonNetwork.IsMasterClient)
                         {
-                            pv.RPC("setIsNight", RpcTarget.All,true);
-                        }   
+                            pv.RPC("setIsNight", RpcTarget.All, true);
+                        }
                     }
                 }
             }
+
             if (time > dayTime + dayToNightTime + nightTime)
             {
                 if (!isDay)
@@ -94,26 +115,37 @@ public class TimeManager : MonoBehaviour
                     isDay = true;
                     //밤에서 낮으로 전환
 
-                    DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 1, nightToDayTime)
-                        .SetEase(Ease.InQuad);
-                    yield return new WaitForSeconds	(nightToDayTime	);
+                    if (PhotonNetwork.OfflineMode)
+                    {
+                       dayRPC();
+                    }
+                    else
+                    {
+                        if(PhotonNetwork.IsMasterClient)
+                            pv.RPC("dayRPC",RpcTarget.All);
+                    }
+
+                    yield return new WaitForSeconds(nightToDayTime);
                     if (PhotonNetwork.OfflineMode)
                     {
                         time = 0;
                         day++;
-                        spawner.DaybyDay(day);
+                       dbdRPC();
                     }
                     else
                     {
                         if (PhotonNetwork.IsMasterClient)
                         {
                             time = 0;
-                            pv.RPC("timeRPC", RpcTarget.All,time);
-                        }   
+                            day++;
+                            pv.RPC("dbdRPC", RpcTarget.All);
+                            pv.RPC("timeRPC", RpcTarget.All, time,day);
+                        }
                     }
                 }
-                }
-            if (time ==0)
+            }
+
+            if (time == 0)
             {
                 if (isNight)
                 {
@@ -125,16 +157,36 @@ public class TimeManager : MonoBehaviour
                     {
                         if (PhotonNetwork.IsMasterClient)
                         {
-                            pv.RPC("setIsNight", RpcTarget.All,false);
-                        }   
+                            pv.RPC("setIsNight", RpcTarget.All, false);
+                        }
                     }
                 }
-            }
+            }   
             }
         }
+    }
+
     [PunRPC]
-    void timeRPC(int value)
+    void dbdRPC()
     {
+        spawner.DaybyDay(day);
+    }
+    [PunRPC]
+    void dayRPC()
+    {
+        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 1, nightToDayTime)
+            .SetEase(Ease.InQuad);
+    }
+    [PunRPC]
+    void nightRPC()
+    {
+        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0, dayToNightTime)
+            .SetEase(Ease.InQuad);
+    }
+    [PunRPC]
+    void timeRPC(int value, int value2)
+    {
+        day = value2;
         time = value;
     }
 

@@ -476,7 +476,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     {
         ListText.text = "";
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-            ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+" - "+PhotonNetwork.GetPing()+"ms"+"\n";
+            ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+"\n";
+        //" - "+PhotonNetwork.PlayerList[i].GetPing()+"ms"+
         RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " - " + PhotonNetwork.CurrentRoom.PlayerCount+ " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
     #endregion
