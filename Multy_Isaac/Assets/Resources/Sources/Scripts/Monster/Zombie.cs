@@ -149,7 +149,6 @@ public class Zombie : MonoBehaviour
         {
             return; //아무것도 안함
         }
-        print("A");
         reachedEndOfPath = false;
         float distanceToWaypoint;
         while (true)

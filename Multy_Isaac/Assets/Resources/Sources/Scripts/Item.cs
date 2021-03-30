@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
 [System.Serializable]
 public class tem
 {
@@ -51,6 +54,13 @@ public class tem
 public enum itemType { Gun,Melee,Item,Passive,Usable}
 public class Item : MonoBehaviour
 {
+    public Text txt;
+    public int price;
+    public int[] prices;
+    public int[] shopIndexes;
+    private TemManager temMgr;
+    public bool isShopTem = false;
+    private PhotonView pv;
     public int Index;
     public tem item;
     public Material outlineMat;
@@ -62,6 +72,12 @@ public class Item : MonoBehaviour
         defaultMat = spr.material;
         spr.sprite = item.ItemSprite;
         item.ItemSprite = spr.sprite;
+        if (isShopTem)
+        {
+            pv = GetComponent<PhotonView>();
+            temMgr = FindObjectOfType<TemManager>();
+            Invoke("Del",5f);
+        }
     }
 
     public bool canGet()
@@ -72,6 +88,26 @@ public class Item : MonoBehaviour
             return true;
     }
 
+    public void Del()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            delRPC(Random.Range(0, shopIndexes.Length));
+        }
+        else
+        {
+            pv.RPC("delRPC",RpcTarget.All,Random.Range(0, shopIndexes.Length));
+        }
+    }
+
+    [PunRPC]
+    void delRPC(int temIndex)
+    {
+        item = temMgr.GetItemList(shopIndexes[temIndex]);
+        spr.sprite = item.ItemSprite;
+        price = prices[temIndex];
+        txt.text = "X" +price;
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

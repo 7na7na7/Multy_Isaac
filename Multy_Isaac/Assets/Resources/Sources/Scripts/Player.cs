@@ -708,6 +708,10 @@ if(isPlay)
     {
         sound.Play(10,false,0.5f);
     }
+    public void purchaseSound()
+    {
+        sound.Play(12,false,0.75f);
+    }
     public void noBulletSound()
     {
         sound.Play(9,true,0.5f);

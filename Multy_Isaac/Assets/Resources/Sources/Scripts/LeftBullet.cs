@@ -32,7 +32,11 @@ public class LeftBullet : MonoBehaviour
     {
         return bulletCount;
     }
-    
+
+    public int GetedBulletCount()
+    {
+        return GetedBullet;
+    }
     public void GetBullet(int value)
     {
         player.getBulletSound();
@@ -51,6 +55,13 @@ public class LeftBullet : MonoBehaviour
         else
             return false;
     }
+
+    public void GetBulletMinus(int value)
+    {
+        GetedBullet -= value;
+        GetedBulletText.text = "X " + GetedBullet;
+    }
+    
     public void Reload(int selectedIndex)
     {
         int leftBullet = maxBulletCount - bulletCount; //재장전해야 하는 총알의 수

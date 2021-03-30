@@ -66,6 +66,8 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
+
+
     private void Update()
     {
         if (player != null)
@@ -157,26 +159,53 @@ public class PlayerItem : MonoBehaviour
                                 items.OrderBy(c => c.transform.position - transform.position);
                             
                                 Collider2D item = items[0];
+                                Item it = item.GetComponent<Item>();
+                                bool canGo = false;
+                                if (it.isShopTem)
+                                {
+                                    if (player.leftBullet.GetedBulletCount() >= it.price)
+                                    {
+                                        canGo = true;
+                                        player.leftBullet.GetBulletMinus(it.price);
+                                        player.purchaseSound();
+                                    }
+                                    else
+                                    {
+                                        PopUpManager.instance.PopUp("총알이 부족합니다!",Color.red);
+                                    }
+                                }
+                                else
+                                {
+                                    canGo = true;
+                                }
 
-                            
-                                bool isGet = false;
+                                if (canGo)
+                                {
+                                                                     bool isGet = false;
 
-                                if (item.GetComponent<Item>().item.type == itemType.Usable||item.GetComponent<Item>().item.type == itemType.Item) //소비템이면
+                                if (it.item.type == itemType.Usable||it.item.type == itemType.Item) //소비템이면
                                 {
                                     bool isHaveUsable = false;
                                     
                                     for (int i = 0; i < ItemList.Length; i++) 
                                     {
-                                        if (ItemList[i].ItemName == item.GetComponent<Item>().item.ItemName) //이름이 같은 소비템이면
+                                        if (ItemList[i].ItemName == it.item.ItemName) //이름이 같은 소비템이면
                                         {
                                             isHaveUsable = true;
                                             isGet = true;
                                             slots[i].itemCount++;
                                         
                                             check(i,false);
-                                        
-                                            temMgr.delTem(item.GetComponent<Item>().Index); 
-                                            Destroy(item);
+
+                                            if (!it.isShopTem)
+                                            {
+                                                temMgr.delTem(it.Index); 
+                                                Destroy(item);   
+                                            }
+                                            else
+                                            {
+                                                it.Del();
+                                            }
                                             break;
                                         }
                                     }
@@ -188,13 +217,21 @@ public class PlayerItem : MonoBehaviour
                                             if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
                                             {
                                                 isGet = true;
-                                                ItemList[i]=item.GetComponent<Item>().item;
+                                                ItemList[i]=it.item;
                                                 slots[i].itemCount++;
                                         
                                                 check(i,true);
                                         
-                                                temMgr.delTem(item.GetComponent<Item>().Index);
-                                                Destroy(item);
+                                                if (!it.isShopTem)
+                                                {
+                                                    temMgr.delTem(it.Index);
+                                                    Destroy(item);  
+                                                }
+                                                else
+                                                {
+                                                   it.Del();
+                                                }
+                                               
                                                 break;
                                             }
                                         }      
@@ -207,15 +244,22 @@ public class PlayerItem : MonoBehaviour
                                         if (ItemList[i].ItemName == "") //빈곳에 템넣어줌
                                         {
                                             isGet = true;
-                                            ItemList[i]=item.GetComponent<Item>().item;
+                                            ItemList[i]=it.item;
                                             
-                                            if(item.GetComponent<Item>().item.type==itemType.Passive) //패시브템이면
-                                                player.PassiveOn(item.GetComponent<Item>().item.index); //패시브 ON
+                                            if(it.item.type==itemType.Passive) //패시브템이면
+                                                player.PassiveOn(it.item.index); //패시브 ON
 
                                             check(i,true);
                                         
-                                            temMgr.delTem(item.GetComponent<Item>().Index);
-                                            Destroy(item);
+                                            if (!it.isShopTem)
+                                            {
+                                                temMgr.delTem(it.Index);
+                                                Destroy(item);  
+                                            }
+                                            else
+                                            {
+                                                it.Del();
+                                            }
                                             break;
                                         }
                                     }   
@@ -224,7 +268,8 @@ public class PlayerItem : MonoBehaviour
                                 if(!isGet) 
                                     PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
                                 else
-                                    player.GetSound();
+                                    player.GetSound();   
+                                }
                             }   
                         }
                         catch (Exception e)
