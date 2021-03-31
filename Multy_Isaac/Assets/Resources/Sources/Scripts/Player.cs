@@ -67,7 +67,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     //배고픔
     public int hungrySpeed;
     public int hungryLessHpSpeed;
-    public Slider hp;
+    public GameObject hp;
 
     public PhotonView pv; //포톤뷰
     //캔버스
@@ -316,11 +316,11 @@ if(isPlay)
                 {
                     if (timeMgr.isNight)
                     {
-                        photonviewCanvas.SetActive(false);
+                       nickname.gameObject.SetActive(false);
                     }
                     else
                     {
-                        photonviewCanvas.SetActive(true);
+                        nickname.gameObject.SetActive(true);
                     }   
                 }
             }
@@ -668,7 +668,7 @@ if(isPlay)
     [PunRPC]
     void hpRPC(float value)
     {
-        hp.value = value;
+        hp.transform.localScale = new Vector2(value,hp.transform.localScale.y);
     }
     [PunRPC]
     void flashWhiteRPC()

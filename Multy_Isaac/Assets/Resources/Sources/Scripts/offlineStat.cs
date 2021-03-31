@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class offlineStat : MonoBehaviour
 {
-    public Slider hpSlider;
+    public float maxValue;
+    public GameObject hpslider;
     public Image hp;
     public Image stomach;
     public Text hpTxt;
@@ -35,8 +36,8 @@ public class offlineStat : MonoBehaviour
     {
         if (player != null)
         {
-            hp.fillAmount = hpSlider.value/ hpSlider.maxValue;
-            hpTxt.text = ((int) hpSlider.value).ToString();
+            hp.fillAmount = hpslider.transform.localScale.x/100;
+            hpTxt.text = ((int) (hpslider.transform.localScale.x/100*maxValue)).ToString();
 
             if (stomach.fillAmount > 0)
             {

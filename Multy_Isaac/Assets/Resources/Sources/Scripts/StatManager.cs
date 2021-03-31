@@ -8,13 +8,15 @@ using UnityEngine.UI;
 
 public class StatManager : MonoBehaviour
 {
+    private float maxValue;
     private Player player;
     public int armor;
 
-    public Slider hpSlider;
+    public GameObject hpslider;
 
     private void Start()
     {
+        maxValue = GetComponent<offlineStat>().maxValue;
         player = transform.parent.GetComponent<Player>();
     }
 
@@ -22,40 +24,47 @@ public class StatManager : MonoBehaviour
     {
         if (value > 0)
         {
-            if (hpSlider.maxValue - hpSlider.value < value) //회복량이 잃은체력보다 크면
-                hpSlider.value = hpSlider.maxValue;
+            if (maxValue - hpslider.transform.localScale.x/100 * maxValue < value) //회복량이 잃은체력보다 크면
+                hpslider.transform.localScale=new Vector3(100,hpslider.transform.localScale.y,hpslider.transform.localScale.z);
             else
-                hpSlider.value += value;
+                hpslider.transform.localScale=new Vector3(hpslider.transform.localScale.x+value/maxValue*100,hpslider.transform.localScale.y,hpslider.transform.localScale.z);
         }
         else
         {
-            hpSlider.value += value;
+            hpslider.transform.localScale=new Vector3(hpslider.transform.localScale.x+value/maxValue*100,hpslider.transform.localScale.y,hpslider.transform.localScale.z);
         }
-        player.hpSync(hpSlider.value);
+        player.hpSync(hpslider.transform.localScale.x);
     }
 
     public bool Hit(int value)  
     {
         float minusPer = 100 *((float)armor*1.5f / (armor*1.5f + 100f));
-        hpSlider.value -= value-(value * minusPer / 100f);
-        player.hpSync(hpSlider.value);
-        if (hpSlider.value <= 0)
-            return true;
+        float v = (value - (value * minusPer / 100f)) / maxValue;
+        hpslider.transform.localScale = new Vector2(hpslider.transform.localScale.x - v*100, hpslider.transform.localScale.y);
+        player.hpSync(hpslider.transform.localScale.x );
+        if (hpslider.transform.localScale.x <= 0)
+        {
+            hpslider.transform.localScale=new Vector2(0,hpslider.transform.localScale.y);
+            return true;   
+        }
         else
             return false;
     }
 
     public bool LoseHp(int value)
     {
-        hpSlider.value -= value;
-        player.hpSync(hpSlider.value);
-        if (hpSlider.value <= 0)
-            return true;
+        hpslider.transform.localScale = new Vector2(hpslider.transform.localScale.x - value/maxValue*100, hpslider.transform.localScale.y);
+        player.hpSync(hpslider.transform.localScale.x);
+        if (hpslider.transform.localScale.x <= 0)
+        {
+            hpslider.transform.localScale=new Vector2(0,hpslider.transform.localScale.y);
+            return true;   
+        }
         else
             return false;
     }
     public int GetHp()
     {
-        return (int)hpSlider.value;
+        return (int) (maxValue * hpslider.transform.localScale.x);
     }
 }
