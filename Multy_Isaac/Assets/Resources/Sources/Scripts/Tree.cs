@@ -19,6 +19,8 @@ public class Tree : MonoBehaviour
     public int percent;
     private int hpSave;
     public Transform tr;
+    public float isSuperTime = 0.3f;
+    private float time = 0;
     private void Start()
     {
         sound = GetComponent<SoundManager>();
@@ -42,24 +44,26 @@ public class Tree : MonoBehaviour
     {
         if (other.CompareTag("Slash"))
         {
-            if (PhotonNetwork.OfflineMode)
-                {
-                    Hit(other.GetComponent<Slash>().Dmg, Random.Range(0, randomTems.Length), percentreturn(percent));
-                }
-                else
-                {
-                    
-                        if (other.gameObject.GetComponent<PhotonView>().IsMine)
-                        {
-                            sound.Play(0,true,0.75f);
-                            pv.RPC("Hit", RpcTarget.All, other.GetComponent<Slash>().Dmg/2, Random.Range(0, randomTems.Length),
-                                percentreturn(percent));   
-                        }
-                }
-            
+            if (time > isSuperTime)
+            {
+                sound.Play(0, false, 0.75f);
+
+                timeRPC();
+                Hit(other.GetComponent<Slash>().Dmg, Random.Range(0, randomTems.Length), percentreturn(percent));
+            }
         }
     }
 
+    [PunRPC]
+    void timeRPC()
+    {
+        time = 0;
+    }
+    private void Update()
+    {
+        if (time <= isSuperTime)
+            time += Time.deltaTime;
+    }
 
     [PunRPC]
     void Hit(int value,int randomValue, bool isRandomTem)

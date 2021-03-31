@@ -458,7 +458,7 @@ float degree = rad * Mathf.Rad2Deg;
        {
            if (enemy.canMove)
            {
-               if (other.gameObject.CompareTag("Player") && enemy.canMove)
+               if (other.gameObject.CompareTag("Player") && enemy.canMove && zombieIndex!=5)
                {
                    StartCoroutine(Attack());
                }
