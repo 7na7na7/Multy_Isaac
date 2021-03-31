@@ -111,8 +111,7 @@ public class Invent : MonoBehaviour
 
             if (element.SmallItemIndex.Length != 0)
             {
-                if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index ==
-                    PlayerItem.GetItemArray(element.SmallItemIndex[1]).index) //둘이 똑같은템 조합이면
+                if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index == PlayerItem.GetItemArray(element.SmallItemIndex[1]).index) //둘이 똑같은템 조합이면
                 {
                     if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).type == itemType.Usable ||PlayerItem.GetItemArray(element.SmallItemIndex[0]).type == itemType.Item)
                     {
@@ -304,7 +303,7 @@ public class Invent : MonoBehaviour
                 {
                     PlayerItem.DestroyItem(element.SmallItemIndex[0]);
                     PlayerItem.DestroyItem(element.SmallItemIndex[1]);
-                    PlayerItem.CombineItem(item);
+                    PlayerItem.CombineItem(item.DeepCopy());
                     canGet = true;
                 }
                     
@@ -326,5 +325,40 @@ public class Invent : MonoBehaviour
                 player.CombineSound();   
             }
         }
+    }
+    public void CombineClick(tem t)
+    {
+      
+            tem item=new tem();
+            item = t;
+            bool canGet = false;
+            if (item.index != 95)
+            {
+                for (int i = 0; i < item.Count; i++)
+                {
+                    PlayerItem.DestroyItem(t.SmallItemIndex[0]);
+                    PlayerItem.DestroyItem(t.SmallItemIndex[1]);
+                    PlayerItem.CombineItem(item.DeepCopy());
+                    canGet = true;
+                }
+                    
+            }
+            else
+            {
+                transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(30);
+                canGet = true;
+            }
+
+            if (canGet)
+            {
+                if (player.PlayerIndex == 6)
+                {
+                    transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(20);
+                }
+                //Open(item);
+                starEffect.Play();
+                player.CombineSound();   
+            }
+        
     }
 }

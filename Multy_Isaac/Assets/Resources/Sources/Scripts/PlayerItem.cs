@@ -13,6 +13,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerItem : MonoBehaviour
 {
+    public Sprite noneSprite;
+    public int[] indexes;
+    private tem t = null;
+    private bool cango = true;
+    public Image[] canItems;
     public Invent invent;
     public GameObject[] startTem;
     public int[] startTemCount;
@@ -34,6 +39,7 @@ public class PlayerItem : MonoBehaviour
 
     private void Awake()
     {
+        indexes=new int[canItems.Length];
         temMgr = FindObjectOfType<TemManager>();
         if (PhotonNetwork.OfflineMode)
         {
@@ -66,8 +72,7 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
-
-
+    
     private void Update()
     {
         if (player != null)
@@ -344,6 +349,9 @@ public class PlayerItem : MonoBehaviour
 //                        time = 0;
 //                    }
                 }
+
+                
+                canTem();
             }   
         }
         else
@@ -360,6 +368,91 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    void canTem()
+    {
+                      for (int q = 0; q < indexes.Length; q++)
+                    indexes[q] = 0;
+                
+                for (int i = 0; i < ItemList.Length; i++)
+                {
+                    if (ItemList[i].ItemSprite != null&&ItemList[i].CompleteItemIndex.Length > 0)
+                    {
+                        for (int j = 0; j < ItemList[i].CompleteItemIndex.Length; j++)
+                        {
+                            t = temMgr.GetItemList(ItemList[i].CompleteItemIndex[j]);
+                            cango = true;
+                            if (temMgr.GetItemList(t.SmallItemIndex[0]).index ==
+                                temMgr.GetItemList(t.SmallItemIndex[1]).index) //하위템 두개가 같은재료면
+                            {
+                                if (slots[returnCurrentTem(temMgr.GetItemList(t.SmallItemIndex[0]).index)].itemCount >= 2) //2개이상 있으면
+                                {
+                                    foreach (int w in indexes)
+                                    {
+                                        if (w == t.index)
+                                        {
+                                            cango = false;
+                                        }
+                                    }
+                                    
+                                    if (cango)
+                                    {
+                                        for (int k = 0; k < indexes.Length; k++)
+                                        {
+                                            if (indexes[k] == 0)
+                                            {
+                                                indexes[k] = t.index;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (GetItemArray(t.SmallItemIndex[0]).index != 0 && GetItemArray(t.SmallItemIndex[1]).index != 0)//하위템 두개다 갖고있으면
+                                {
+                                    foreach (int w in indexes)
+                                    {
+                                        if (w == t.index)
+                                        {
+                                            cango = false;
+                                            break;
+                                        }
+                                    }
+                                   
+                                    if (cango)
+                                    {
+                                        for (int k = 0; k < indexes.Length; k++)
+                                        {
+                                            if (indexes[k] == 0)
+                                            {
+                                                indexes[k] = t.index;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }   
+                            }
+                        }   
+                    }
+
+                  
+                    for (int a = 0; a < canItems.Length; a++)
+                    {
+                        if (indexes[a] != 0)
+                        {
+                            canItems[a].sprite = temMgr.GetItemList(indexes[a]).ItemSprite;
+                            canItems[a].GetComponent<CanItem>().index = indexes[a];
+                        }
+                        else
+                        {
+                            canItems[a].sprite = noneSprite;
+                            canItems[a].GetComponent<CanItem>().index = 0;
+                        }
+                    }
+                        
+                }
+    }
     public void GetItem(tem item)
     {
         bool isGet = false;
@@ -568,7 +661,7 @@ public class PlayerItem : MonoBehaviour
         {
             if (item.index == Index)
             {
-                tem = item;
+                tem = item.DeepCopy();
                 break;
             }
         }
@@ -583,10 +676,20 @@ public class PlayerItem : MonoBehaviour
             return tem;
         }
     }
-
+    public int returnCurrentTem(int Index)
+    {
+        for (int i = 0; i < ItemList.Length; i++)
+        {
+            if (ItemList[i].index == Index)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
     public void DestroyItem(int index)
     {
-        int inx = 0;
+        int inx = -1;
         for (int i = 0; i < ItemList.Length; i++)
         {
             if (ItemList[i].index == index)
@@ -595,7 +698,9 @@ public class PlayerItem : MonoBehaviour
                 break;
             }
         }
-        
+
+        if (inx != -1)
+        {
             if (ItemList[inx].type == itemType.Usable||ItemList[inx].type == itemType.Item) //소비템이면
             {
                 slots[inx].itemCount--;
@@ -613,8 +718,8 @@ public class PlayerItem : MonoBehaviour
                 if (ItemList[inx].type == itemType.Passive) //패시브 아이템을 버렸으면
                     player.PassiveOff(ItemList[inx].index); //패시브 비활성화
                 ItemList[inx].Clear();
-            }
-        
+            }   
+        }
     }
     public void DiscardItem(bool isDead=false)
     {
