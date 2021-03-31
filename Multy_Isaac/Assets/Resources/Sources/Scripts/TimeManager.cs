@@ -130,6 +130,7 @@ public class TimeManager : MonoBehaviour
                     {
                         time = 0;
                         day++;
+                        FindObjectOfType<ShopTem>().Change();
                        dbdRPC();
                     }
                     else
@@ -138,6 +139,7 @@ public class TimeManager : MonoBehaviour
                         {
                             time = 0;
                             day++;
+                            FindObjectOfType<ShopTem>().Change();
                             pv.RPC("dbdRPC", RpcTarget.All);
                             pv.RPC("timeRPC", RpcTarget.All, time,day);
                         }

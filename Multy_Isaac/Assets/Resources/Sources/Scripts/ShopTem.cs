@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ShopTem : MonoBehaviour
 {
+    List<Item> tems=new List<Item>();
     public GameObject[] shopTems;
     public Transform[] poses;
     void Start()
@@ -14,16 +15,25 @@ public class ShopTem : MonoBehaviour
         {
             if (PhotonNetwork.OfflineMode)
             {
-                Instantiate(shopTems[i], poses[i].transform.position, quaternion.identity);
+               GameObject g=Instantiate(shopTems[i], poses[i].transform.position, quaternion.identity);
+               tems.Add(g.GetComponent<Item>());
             }
             else
             {
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    PhotonNetwork.InstantiateRoomObject(shopTems[i].name, poses[i].transform.position, quaternion.identity);
+                    GameObject g=PhotonNetwork.InstantiateRoomObject(shopTems[i].name, poses[i].transform.position, quaternion.identity);
+                    tems.Add(g.GetComponent<Item>());
                 }
             }   
         }
     }
 
+    public void Change()
+    {
+        foreach (Item t in tems)
+        {
+            t.Del();
+        }
+    }
 }
