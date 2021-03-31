@@ -28,8 +28,16 @@ public class PlayerChange : MonoBehaviour
       }
       else
       {
-          rightImg.sprite = sprites[Index + 1];
-          leftImg.sprite = sprites[Index  -1];
+          if (Index == sprites.Length - 1)
+          {
+              rightImg.sprite = sprites[0];
+              leftImg.sprite = sprites[Index  -1];
+          }
+          else
+          {
+              rightImg.sprite = sprites[Index + 1];
+              leftImg.sprite = sprites[Index  -1];   
+          }
       }
 
       pTxt.text = pTxts[Index];

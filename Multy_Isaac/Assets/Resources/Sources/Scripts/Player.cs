@@ -968,7 +968,7 @@ if(isPlay)
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Player"))
+        if (other.collider.CompareTag("Player")&&isPlay)
         {
             Player player = other.collider.GetComponent<Player>();
             if (player.passive.spike > 0)
