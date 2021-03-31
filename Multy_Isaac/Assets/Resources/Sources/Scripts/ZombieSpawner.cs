@@ -12,7 +12,7 @@ public class ZombieSpawner : MonoBehaviour
     public BoxCollider2D[] DaySpawnAreas;
     public BoxCollider2D[] NightSpawnAreas;
     public int StartZombieCount;
-    public Vector2 randomMin, randomMax;
+    public Transform randomMin, randomMax;
     public float delay;
     public float[] delays;
     public GameObject[] zombies;
@@ -127,13 +127,13 @@ public class ZombieSpawner : MonoBehaviour
     {
         if (PhotonNetwork.OfflineMode)
         {
-            SpawnZombie(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));
+            SpawnZombie(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.position.x, randomMax.position.x), Random.Range(randomMin.position.y, randomMax.position.y)));
         }
         else
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y)));            }
+                SpawnZombie_N(zombieList[Random.Range(0, zombieList.Count)], new Vector2(Random.Range(randomMin.position.x, randomMax.position.x), Random.Range(randomMin.position.y, randomMax.position.y)));            }
         }   
     }
 
