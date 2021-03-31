@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private bool isBush = false;
     public int PlayerIndex = 0;
     private string[] AnimNames = new[] {"Idle","Walk","Die" };
     private int shotSoundIndex;
@@ -320,7 +321,10 @@ if(isPlay)
                     }
                     else
                     {
-                        photonviewCanvas.SetActive(true);
+                        if(isBush)
+                            photonviewCanvas.SetActive(false);
+                        else
+                            photonviewCanvas.SetActive(true);
                     }   
                 }
             }
@@ -409,6 +413,11 @@ if(isPlay)
         }
     }
 
+    [PunRPC]
+    void bushRPC(bool isb)
+    {
+        isBush = isb;
+    }
     void Slash(bool isDown)
     {
         bool canShot = false;
@@ -963,6 +972,12 @@ if(isPlay)
                 Hit(enemy.playerDmg, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
                 enemy.playerDmg = 0;
             }
+
+            if (other.CompareTag("Bush"))
+            {
+                print("A");
+                pv.RPC("bushRPC",RpcTarget.All,true);
+            }
         }
     }
 
@@ -1032,6 +1047,8 @@ if(isPlay)
                 isPan1 = false;
             if (other.CompareTag("Pan2"))
                 isPan2 = false;
+            if (other.CompareTag("Bush"))
+                pv.RPC("bushRPC",RpcTarget.All,false);
         }
         #endregion
         public void PassiveOn(int itemIndex)
