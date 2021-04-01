@@ -330,18 +330,17 @@ public class Invent : MonoBehaviour
     }
     public void CombineClick(tem t)
     {
-      
-            tem item=new tem();
+        tem item=new tem();
             item = t;
             bool canGet = false;
             if (item.index != 95)
             {
+                PlayerItem.DestroyItem(t.SmallItemIndex[0]);
+                PlayerItem.DestroyItem(t.SmallItemIndex[1]);
+                canGet = true;
                 for (int i = 0; i < item.Count; i++)
                 {
-                    PlayerItem.DestroyItem(t.SmallItemIndex[0]);
-                    PlayerItem.DestroyItem(t.SmallItemIndex[1]);
                     PlayerItem.CombineItem(item.DeepCopy());
-                    canGet = true;
                 }
                     
             }
