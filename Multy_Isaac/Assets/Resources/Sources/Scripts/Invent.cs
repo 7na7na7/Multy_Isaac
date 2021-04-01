@@ -310,6 +310,8 @@ public class Invent : MonoBehaviour
             }
             else
             {
+                PlayerItem.DestroyItem(element.SmallItemIndex[0]);
+                PlayerItem.DestroyItem(element.SmallItemIndex[1]);
                 transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(30);
                 canGet = true;
             }
@@ -345,6 +347,8 @@ public class Invent : MonoBehaviour
             }
             else
             {
+                PlayerItem.DestroyItem(t.SmallItemIndex[0]);
+                PlayerItem.DestroyItem(t.SmallItemIndex[1]);
                 transform.parent.transform.parent.GetComponent<Player>().leftBullet.GetBullet(30);
                 canGet = true;
             }
