@@ -21,7 +21,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         common,snow,mushroom,electric
     }
-    
+
+    private InGameNetwork net;
     public int PlayerIndex = 0;
     private string[] AnimNames = new[] {"Idle","Walk","Die" };
     private int shotSoundIndex;
@@ -397,6 +398,9 @@ if(isPlay)
     }
     void setCam()
     {
+        FindObjectOfType<Pause>().player = this;
+            net=FindObjectOfType<InGameNetwork>();
+        net.p = this;
         GetComponent<CapsuleCollider2D>().isTrigger = false;
         canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
@@ -593,6 +597,7 @@ if(isPlay)
             pv.RPC("DieRPC",RpcTarget.All);
 
         SetAnimRPC(2);
+        net.GameOver();
     }
 
     void isDeadFunc()

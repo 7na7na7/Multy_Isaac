@@ -14,6 +14,8 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   public GameObject GameOverPanel;
+   public Player p;
    public GameObject[] playerPrefabs;
    public bool isFullScreen;
    public int ResX, RexY;
@@ -30,6 +32,10 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public Text pingSpeed;
    public PhotonView PV;
 
+   public void GameOver()
+   {
+      GameOverPanel.SetActive(true);
+   }
    private void Awake()
    {
       StartCoroutine(delayDestroy());
@@ -52,18 +58,8 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    {
       isDisconnecting = true;
       Player[] players = FindObjectsOfType<Player>();
-      foreach (Player p in players)
-      {
-         if (p.pv.IsMine)
-         {
-            p.Die(PhotonNetwork.NickName);
-            break;
-         }
-      }  
-      yield return new WaitForSeconds(1f);
-      PhotonNetwork.LeaveRoom();
-     PhotonNetwork.Disconnect();
-      SceneManager.LoadScene("Main");
+      p.Die(PhotonNetwork.NickName);
+      yield return new WaitForSeconds(0.5f);
    }
    private void Update()
    {
@@ -123,8 +119,20 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    #region 연결
    public void Disconnect() //연결 끊기
    {
-      if(!isDisconnecting) 
-         StartCoroutine(Disconnecting());
+      if (!isDisconnecting)
+      {
+         if (p.isDead)
+         {
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene("Main");
+         }
+         else
+         {
+            StartCoroutine(Disconnecting());  
+         }
+      }
+        
    }
 
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
