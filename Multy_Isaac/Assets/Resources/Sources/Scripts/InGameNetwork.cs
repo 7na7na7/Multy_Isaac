@@ -14,6 +14,8 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   public Text killedZombie;
+   public Text Day;
    public GameObject GameOverPanel;
    public Player p;
    public GameObject[] playerPrefabs;
@@ -35,6 +37,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public void GameOver()
    {
       GameOverPanel.SetActive(true);
+      Day.text = FindObjectOfType<TimeManager>().day.ToString();
    }
    private void Awake()
    {
