@@ -53,7 +53,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public bool canMove = true;
     private Animator anim;
     private Vector2 moveDirection; 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private float localScaleX;
     private Vector3 curPos; 
     public float footCountCut = 10; //10거리마다 발자국소리 재생
@@ -178,6 +178,8 @@ if(isPlay)
             Destroy(canvas);
             Destroy(GetComponent<AudioListener>());
         }
+
+        offStat.startSpeed = speedValue();
     }
 
     void aspaltSet()
@@ -366,10 +368,9 @@ if(isPlay)
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
                     PanValue*is4* (isAspalt	? 1.1f : 1));
                     
-                    anim.SetFloat("WalkSpeed",(((speed+speed*(passive.Speed*0.01f)) * currentWeapon.walkSpeed_P /
-                                               100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue*is4*(isAspalt	? 1.1f : 1))/4f);
+                    anim.SetFloat("WalkSpeed",speedValue());
 
-                        //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 * 가시판에있는지
+                    //방향 x 속도 x 무기속도 x 늪속도 x 기동신속도 * 가시판에있는지
                 }
                 else //그 외는 전부 움직이지 않도록
                 {
@@ -378,6 +379,26 @@ if(isPlay)
                 }
             }
         }
+    }
+
+    public float speedValue()
+    {
+        float PanValue = 1;
+        if (isPan1)
+            PanValue = pan1SpeedPercent / 100f;
+        else if (isPan2)
+            PanValue = pan2SpeedPercent / 100f;
+                    
+        float is4 = 1;
+        if (PlayerIndex == 4)
+        {
+            if(currentWeapon.consumeBullet==0)
+                is4 = 1.5f;
+        }
+
+        return (((speed + speed * (passive.Speed * 0.01f)) * currentWeapon.walkSpeed_P /
+                 100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue *
+                is4 * (isAspalt ? 1.1f : 1)) / 4f;
     }
     #endregion
 

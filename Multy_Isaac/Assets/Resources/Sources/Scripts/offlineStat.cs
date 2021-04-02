@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class offlineStat : MonoBehaviour
 {
+    public float startSpeed;
     public float maxValue;
     public GameObject hpslider;
     public Image hp;
@@ -41,6 +42,12 @@ public class offlineStat : MonoBehaviour
 
             if (stomach.fillAmount > 0)
             {
+                if (player.rb.velocity != Vector2.zero)
+                {
+                    if(player.speedValue()>0) 
+                        stomach.fillAmount -= (player.speedValue()-startSpeed)*2/1000f * Time.deltaTime;
+                }
+                
                 stomach.fillAmount -= hungrySpeed/1000f * Time.deltaTime;
                 stomachTxt.text = Mathf.CeilToInt(100f * stomach.fillAmount).ToString();   
             }
