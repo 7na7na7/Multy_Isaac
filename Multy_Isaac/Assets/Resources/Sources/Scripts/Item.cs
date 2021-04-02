@@ -54,6 +54,7 @@ public class tem
 public enum itemType { Gun,Melee,Item,Passive,Usable}
 public class Item : MonoBehaviour
 {
+    public GameObject name;
     public Text txt;
     public int price;
     public int[] prices;
@@ -66,8 +67,25 @@ public class Item : MonoBehaviour
     public Material outlineMat;
     private Material defaultMat;
     private SpriteRenderer spr;
+    private GameObject NameCan;
+
+    void setName()
+    {
+        NameCan = transform.GetChild(2).gameObject; 
+        NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName;
+    }
     private void Start()
     {
+        Instantiate(name, transform);
+        NameCan = transform.GetChild(2).gameObject; 
+        NameCan.transform.GetChild(0).GetComponent<Text>().fontSize = (int)(NameCan.transform.GetChild(0).GetComponent<Text>().fontSize*(1/transform.localScale.x));
+        if(shopIndexes.Length<=0)
+            setName();
+        else
+        {
+            NameCan.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition=
+               new Vector2(-960f,-540.82f);
+        }
         spr = GetComponent<SpriteRenderer>();
         defaultMat = spr.material;
         spr.sprite = item.ItemSprite;
@@ -76,8 +94,9 @@ public class Item : MonoBehaviour
         {
             pv = GetComponent<PhotonView>();
             temMgr = FindObjectOfType<TemManager>();
-            Invoke("Del",5f);
+            Invoke("Del",5);
         }
+        
     }
 
     public bool canGet()
@@ -105,6 +124,7 @@ public class Item : MonoBehaviour
     {
         item = temMgr.GetItemList(shopIndexes[temIndex]);
         spr.sprite = item.ItemSprite;
+        NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName;
         price = prices[temIndex];
         txt.text = "X" +price;
     }
@@ -112,6 +132,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            NameCan.SetActive(true);
             spr.material = outlineMat;
         }
     }
@@ -120,6 +141,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            NameCan.SetActive(false);
             spr.material = defaultMat;
         }
     }

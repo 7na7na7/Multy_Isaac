@@ -333,7 +333,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       //PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = "editor";
       //PhotonNetwork.GameVersion = GameVersion;
       PhotonNetwork.AutomaticallySyncScene = true; //씬동기화
-      PhotonNetwork.ConnectUsingSettings();  
+      PhotonNetwork.ConnectUsingSettings();
    }
 
    public override void OnConnectedToMaster() //연결되었을때 
