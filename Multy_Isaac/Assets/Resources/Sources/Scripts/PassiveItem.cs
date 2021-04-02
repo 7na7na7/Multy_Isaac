@@ -100,7 +100,7 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 50;
                 break;
             case 134: //기름신발
-                statMgr.armor += 10;
+                statMgr.armor += 5;
                 Speed += 14;
                 break;
             case 135: //셔츠
@@ -194,7 +194,7 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 50;
                 break;
             case 134: //기름신발
-                statMgr.armor -= 10;
+                statMgr.armor -= 5;
                 Speed -= 14;
                 break;
             case 135: //셔츠
