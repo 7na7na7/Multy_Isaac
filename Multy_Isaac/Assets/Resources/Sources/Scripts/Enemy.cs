@@ -6,11 +6,13 @@ using Pathfinding;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 {
+  public int score;
   public GameObject bomb;
   private string[] animNames = new[] {"Idle", "Walk", "Hit", "Die", "Attack"};
   public SoundManager sound;
@@ -298,7 +300,9 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
       if (PhotonNetwork.OfflineMode)
       {
-        FindObjectOfType<InGameNetwork>().killedZombies++;
+        InGameNetwork inG=FindObjectOfType<InGameNetwork>();
+        inG.killedZombies++;
+        inG.zombieScore += score;
         for (int i = 0; i < DropTem.Length; i++)
         {
           if (percentreturn(DropTemPercent[i]))
