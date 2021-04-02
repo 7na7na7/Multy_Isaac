@@ -16,6 +16,7 @@ using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+   public string AppVersion;
    public string myID;
    public int SendRate;
    public int SerializationRate;
@@ -330,8 +331,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public void Connect() //연결
    {
-      //PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = "editor";
-      //PhotonNetwork.GameVersion = GameVersion;
+      PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = AppVersion;
       PhotonNetwork.AutomaticallySyncScene = true; //씬동기화
       PhotonNetwork.ConnectUsingSettings();
    }
