@@ -543,12 +543,19 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     {
        if (PhotonNetwork.IsMasterClient) //방주인이면
        {
-          PhotonNetwork.CurrentRoom.IsOpen = false; //더이상 플레이어 못들어오게함
-          PhotonNetwork.CurrentRoom.IsVisible = false; //방목록에서 안보이게함
+          if(PhotonNetwork.CurrentRoom.PlayerCount>1)
+          {
+             PhotonNetwork.CurrentRoom.IsOpen = false; //더이상 플레이어 못들어오게함
+             PhotonNetwork.CurrentRoom.IsVisible = false; //방목록에서 안보이게함
 
-          Player[] players = FindObjectsOfType<Player>();
+             Player[] players = FindObjectsOfType<Player>();
 
-          PhotonNetwork.LoadLevel(1); //Build Settng에서 1번째 인덱스의 씬 호출  
+             PhotonNetwork.LoadLevel(1); //Build Settng에서 1번째 인덱스의 씬 호출    
+          }
+          else
+          {
+             PopUpManager.instance.PopUp("혼자서는 솔로 모드로 해주세요!",Color.red);
+          }
        }
     }
    
