@@ -298,6 +298,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
 
       if (PhotonNetwork.OfflineMode)
       {
+        FindObjectOfType<InGameNetwork>().killedZombies++;
         for (int i = 0; i < DropTem.Length; i++)
         {
           if (percentreturn(DropTemPercent[i]))
