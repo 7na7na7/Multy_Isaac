@@ -20,6 +20,4 @@ public class playerCountSave : MonoBehaviour
          Destroy(gameObject);
       }
    }
-
-
 }

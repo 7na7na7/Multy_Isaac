@@ -21,6 +21,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public Text killedZombie;
    public Text Day;
    public GameObject GameOverPanel;
+   public GameObject GameOverPanel2;
+   public Text LoseOrWin;
+   public Text rank;
    public Player p;
    public GameObject[] playerPrefabs;
    public bool isFullScreen;
@@ -45,6 +48,22 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       Day.text = d+" "+(d == 1 ? "Day":"Days");
       killedZombie.text = killedZombies.ToString();
       score.text = (dayScore * d + zombieScore).ToString();
+   }
+
+   public void GameOver2()
+   {
+      GameOverPanel2.SetActive(true);
+      if (p.rank == 1)
+      {
+         LoseOrWin.text = "Win!";
+         LoseOrWin.color=Color.yellow;
+      }
+      else
+      {
+         LoseOrWin.text = "Lose...";  
+         LoseOrWin.color=Color.red;
+      }
+      rank.text = p.rank.ToString();
    }
    private void Awake()
    {

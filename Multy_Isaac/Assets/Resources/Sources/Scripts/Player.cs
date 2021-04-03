@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    public int rank;
     private InGameNetwork net;
     public int PlayerIndex = 0;
     private string[] AnimNames = new[] {"Idle","Walk","Die" };
@@ -166,6 +167,7 @@ if(isPlay)
                 {
                     setCam();
                 }
+                offStat.startSpeed = speedValue();
             }
             else
             {
@@ -178,8 +180,6 @@ if(isPlay)
             Destroy(canvas);
             Destroy(GetComponent<AudioListener>());
         }
-
-        offStat.startSpeed = speedValue();
     }
 
     void aspaltSet()
@@ -432,6 +432,7 @@ if(isPlay)
             if (target.GetComponent<PhotonView>().IsMine)
                 target.target = gameObject;
         }
+        rank=targets.Length+1;
     }
     
     void Slash(bool isDown)
@@ -616,11 +617,12 @@ if(isPlay)
             DieRPC();
         else
             pv.RPC("DieRPC",RpcTarget.All);
-
         SetAnimRPC(2);
-        net.GameOver();
+        if(PhotonNetwork.OfflineMode) 
+            net.GameOver();
+        else
+            net.GameOver2();
     }
-
     void isDeadFunc()
     {
         if (PhotonNetwork.OfflineMode)
@@ -640,6 +642,11 @@ if(isPlay)
     [PunRPC]
     void DieRPC()
     {
+        Player[] players = FindObjectsOfType<Player>();
+        foreach (Player p in players)
+        {
+            p.rank--;
+        }
         rb.velocity=Vector2.zero;
         rb.bodyType = RigidbodyType2D.Static;
         Destroy(GetComponent<BoxCollider2D>());
@@ -995,15 +1002,20 @@ if(isPlay)
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Player")&&isPlay)
+        try
         {
-            Player player = other.collider.GetComponent<Player>();
-            if (player.passive.spike > 0)
+            if (other.collider.CompareTag("Player")&&isPlay)
             {
-                Hit(player.passive.spike * 15, player.pv.Controller.NickName, 0.5f, player.transform.position);
-                superTick();
+                Player player = other.collider.GetComponent<Player>();
+                if (player.passive.spike > 0)
+                {
+                    Hit(player.passive.spike * 15, player.pv.Controller.NickName, 0.5f, player.transform.position);
+                    superTick();
+                }
             }
         }
+        catch (Exception e)
+        { }
     }
 
     private void OnCollisionStay2D(Collision2D other)
