@@ -19,7 +19,7 @@ public class FireBomb : MonoBehaviour
                 if(PhotonNetwork.OfflineMode) 
                     Instantiate(fire,transform.position,Quaternion.identity);
                 else 
-                    PhotonNetwork.InstantiateRoomObject(fire.name,transform.position,Quaternion.identity);
+                    PhotonNetwork.Instantiate(fire.name,transform.position,Quaternion.identity);
                 Destroy(gameObject);
             });   
     }

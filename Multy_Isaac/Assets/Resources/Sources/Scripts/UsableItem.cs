@@ -66,7 +66,7 @@ public class UsableItem : MonoBehaviour
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Bomb, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(Bomb.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(Bomb.name, transform.position, Quaternion.identity);
                 return true;
                 break;
             case 57: //컵라면
@@ -178,20 +178,20 @@ public class UsableItem : MonoBehaviour
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(BonFire, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(BonFire.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(BonFire.name, transform.position, Quaternion.identity);
                 return true;
             case 78: //전등
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Light, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(Light.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(Light.name, transform.position, Quaternion.identity);
                 return true;
             case 79: //화염병
                 player.fireSound();
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(FireBomb, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(FireBomb.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(FireBomb.name, transform.position, Quaternion.identity);
                 return true;
             case 80: //사과식초
                 if (eat())
@@ -231,7 +231,7 @@ public class UsableItem : MonoBehaviour
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Mine, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(Mine.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(Mine.name, transform.position, Quaternion.identity);
                 return true;
                 break;
             case 100: //과일세트
@@ -338,21 +338,21 @@ public class UsableItem : MonoBehaviour
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Pan1, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(Pan1.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(Pan1.name, transform.position, Quaternion.identity);
                 return true;
                 break;
             case 118: //철판
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Pan2, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(Pan2.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(Pan2.name, transform.position, Quaternion.identity);
                 return true;
                 break;
             case 128: //터렛
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Turret, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.InstantiateRoomObject(Turret.name, transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(Turret.name, transform.position, Quaternion.identity);
                 return true;
                 break;
             case 131: //오이냉국

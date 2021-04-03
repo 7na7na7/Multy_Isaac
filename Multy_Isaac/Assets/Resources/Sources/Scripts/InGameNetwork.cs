@@ -83,12 +83,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       }
       
    }
-   IEnumerator Disconnecting()
+   public void Suicide()
    {
-      isDisconnecting = true;
-      Player[] players = FindObjectsOfType<Player>();
       p.Die(PhotonNetwork.NickName);
-      yield return new WaitForSeconds(0.5f);
    }
    private void Update()
    {
@@ -148,8 +145,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    #region 연결
    public void Disconnect() //연결 끊기
    {
-      if (!isDisconnecting)
-      {
+    
          if (p.isDead)
          {
             PhotonNetwork.LeaveRoom();
@@ -158,12 +154,15 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          }
          else
          {
-            StartCoroutine(Disconnecting());  
+            Suicide();
          }
-      }
-        
+      
    }
 
+   public void Die()
+   {
+      
+   }
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {
       PopUpManager.instance.PopUp("연결 끊어짐", Color.red);
