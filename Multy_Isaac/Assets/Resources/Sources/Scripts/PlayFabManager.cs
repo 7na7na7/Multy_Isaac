@@ -157,7 +157,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
          if(Input.GetKeyDown(KeyCode.Escape)) 
             Disconnect();
          
-         LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ PhotonNetwork.CountOfPlayersInRooms) + "명";
+         LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ PhotonNetwork.CountOfPlayers+PhotonNetwork.CountOfPlayersInRooms) + "명";
       }
 
       if (RoomPanel.activeSelf)

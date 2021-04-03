@@ -22,6 +22,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private bool canRank = false;
     public int rank;
     private InGameNetwork net;
     public int PlayerIndex = 0;
@@ -187,14 +188,27 @@ if(isPlay)
         GameObject[] aspalts = GameObject.FindGameObjectsWithTag("Aspalt");
         transform.position = aspalts[Random.Range(0, aspalts.Length)].transform.position;
     }
+
+    void isWin()
+    {
+        if (rank <= 2 && !isDead)
+        {
+            isSuper = true;
+            isDead = true;
+            canMove = false;
+            rank--;
+            net.GameOver2();
+        }
+    }
     private void Update()
     {
         if (pv.IsMine)
             {
-//                //소리 테스트코드
-//                if(Input.GetKeyDown(KeyCode.Q))
-//                    sound.Play(0,true);
-
+                if ( canRank&&rank <= 2 && !isDead)
+                {
+                    canRank = false;
+                   Invoke("isWin",0.5f);
+                }
                 if (fireTime > 0)
                     fireTime -= Time.deltaTime;
                 
@@ -433,6 +447,7 @@ if(isPlay)
                 target.target = gameObject;
         }
         rank=targets.Length+1;
+        canRank = true;
     }
     
     void Slash(bool isDown)
