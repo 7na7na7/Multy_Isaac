@@ -43,7 +43,7 @@ public class Turret : MonoBehaviour
                 }
                 else
                 {
-                    GetComponent<PhotonView>().RPC("setAngleRPC",RpcTarget.All);
+                    GetComponent<PhotonView>().RPC("setAngleRPC",RpcTarget.All,angle);
                     if (PhotonNetwork.IsMasterClient)
                     {
                         PhotonNetwork.InstantiateRoomObject(TurretBullet.name, transform.position, Quaternion.Euler(angle));
