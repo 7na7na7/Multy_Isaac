@@ -13,9 +13,7 @@ GameObject:
   - component: {fileID: 5481154595884983869}
   - component: {fileID: 5961346932506947313}
   - component: {fileID: 382625002247182341}
-  - component: {fileID: 7455241645174447680}
   - component: {fileID: 6645820401060606156}
-  - component: {fileID: -5153938724018156117}
   - component: {fileID: 3632333399764116904}
   m_Layer: 8
   m_Name: pinkTree_3
@@ -34,7 +32,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3932105607041441947}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,22 +154,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5359837, y: 0.20756048}
   m_EdgeRadius: 0
---- !u!114 &7455241645174447680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481154595884983842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  uniqueID: 6056438417836576732
-  updateError: 1
-  checkTime: 1
 --- !u!114 &6645820401060606156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,13 +176,59 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!61 &-5153938724018156117
-BoxCollider2D:
+--- !u!114 &3632333399764116904
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5481154595884983842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
+--- !u!1 &5715299458705377360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3932105607041441947}
+  - component: {fileID: 3353882797136638059}
+  - component: {fileID: 6781534772558489746}
+  - component: {fileID: 8909533536225541820}
+  m_Layer: 8
+  m_Name: destroycol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3932105607041441947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715299458705377360}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5481154595884983871}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3353882797136638059
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715299458705377360}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -219,16 +248,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2351637, y: 1.0423877}
   m_EdgeRadius: 0
---- !u!114 &3632333399764116904
+--- !u!114 &6781534772558489746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481154595884983842}
+  m_GameObject: {fileID: 5715299458705377360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144cbd9522c438843aa9013c669acd29, type: 3}
+  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  version: 1
+  uniqueID: 4552952836552685377
+  updateError: 1
+  checkTime: 1
+--- !u!114 &8909533536225541820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715299458705377360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8a56a5b9e7b594daec049d7847b97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRPCSound: 1
+  myName: 
+  nuckBackDistance: 0
+  damage: 0
+  delay: 5
+  playerDmg: 0
