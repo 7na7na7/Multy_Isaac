@@ -988,3 +988,505 @@ Received Import Request.
 Start importing Assets/Resources/pinkTree_3.prefab using Guid(4b4edfc2b9360ee49902691283360db3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ec3cbd2cfaed5a3cc0c5724c8aa73c6') in 0.012500 seconds
   Import took 0.027846 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007133 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.357 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.43 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3451 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.6 MB.
+System memory in use after: 191.9 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4359.
+Total: 4.354300 ms (FindLiveObjects: 0.433800 ms CreateObjectMapping: 0.296700 ms MarkObjects: 3.588600 ms  DeleteObjects: 0.033600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007247 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.279 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.28 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3451 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.7 MB.
+System memory in use after: 191.9 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4363.
+Total: 4.884000 ms (FindLiveObjects: 0.813400 ms CreateObjectMapping: 0.444900 ms MarkObjects: 3.587200 ms  DeleteObjects: 0.037200 ms)
+
+========================================================================
+Received Prepare
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 4.80 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.0 MB.
+System memory in use after: 124.2 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 4363.
+Total: 3.795500 ms (FindLiveObjects: 0.377500 ms CreateObjectMapping: 0.203200 ms MarkObjects: 3.193000 ms  DeleteObjects: 0.020000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007694 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.15 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.118 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.18 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3451 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.7 MB.
+System memory in use after: 191.9 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4367.
+Total: 3.681800 ms (FindLiveObjects: 0.677200 ms CreateObjectMapping: 0.216000 ms MarkObjects: 2.722400 ms  DeleteObjects: 0.064300 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 9140.936020 seconds.
+  path: Assets/Resources/Explosion_Zom.prefab
+  artifactKey: Guid(db3a0b6288966a347bd16e10d1be7d71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Explosion_Zom.prefab using Guid(db3a0b6288966a347bd16e10d1be7d71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddfbd10f3e8d34a8f78b1404b20e0448') in 0.170540 seconds
+  Import took 0.185164 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000271 seconds.
+  path: Assets/Resources/Fire.prefab
+  artifactKey: Guid(7bdee38e275f6164491c624276ab557e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Fire.prefab using Guid(7bdee38e275f6164491c624276ab557e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7af52a040b73f5c64063f7f3117f7d3a') in 0.011279 seconds
+  Import took 0.018158 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000318 seconds.
+  path: Assets/Resources/Explosion_Bullet.prefab
+  artifactKey: Guid(a197862dea4d11041a07eee9d3b90afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Explosion_Bullet.prefab using Guid(a197862dea4d11041a07eee9d3b90afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78591791ca417d4ed0369078ab50efee') in 0.012525 seconds
+  Import took 0.019772 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000281 seconds.
+  path: Assets/Resources/Explosion.prefab
+  artifactKey: Guid(5b779cd8403da874f82c7e04d36e076a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Explosion.prefab using Guid(5b779cd8403da874f82c7e04d36e076a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '658e68916e22b906626a15be522fa5f8') in 0.014395 seconds
+  Import took 0.023406 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.856855 seconds.
+  path: Assets/Resources/Explosion_Bullet.prefab
+  artifactKey: Guid(a197862dea4d11041a07eee9d3b90afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Explosion_Bullet.prefab using Guid(a197862dea4d11041a07eee9d3b90afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0eca01f97f30324fc953388ee27c9ae6') in 0.017247 seconds
+  Import took 0.032658 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.120571 seconds.
+  path: Assets/Resources/Explosion_Bullet.prefab
+  artifactKey: Guid(a197862dea4d11041a07eee9d3b90afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Explosion_Bullet.prefab using Guid(a197862dea4d11041a07eee9d3b90afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6343c696494fb006a4ef0df07c1b2944') in 0.009288 seconds
+  Import took 0.023091 seconds .
+
+========================================================================
+Received Prepare
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 4.92 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 128.4 MB.
+System memory in use after: 128.6 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 4424.
+Total: 3.444200 ms (FindLiveObjects: 0.347300 ms CreateObjectMapping: 0.189500 ms MarkObjects: 2.889200 ms  DeleteObjects: 0.017400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007375 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.46 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.377 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.41 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3451 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.8 MB.
+System memory in use after: 192.0 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4407.
+Total: 11.737500 ms (FindLiveObjects: 0.770400 ms CreateObjectMapping: 0.491300 ms MarkObjects: 10.426300 ms  DeleteObjects: 0.048400 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 132.655101 seconds.
+  path: Assets/Resources/Sources/Images/Dic.png
+  artifactKey: Guid(bb0ea720a99aa164290de0a1f2dd5290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Images/Dic.png using Guid(bb0ea720a99aa164290de0a1f2dd5290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f756e9d918305dc92bd3d74587c7f8d') in 0.626608 seconds
+  Import took 0.634860 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.135809 seconds.
+  path: Assets/Resources/Sources/Items/item10.prefab
+  artifactKey: Guid(e7199fbab4de615498e937d9a330a5c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item10.prefab using Guid(e7199fbab4de615498e937d9a330a5c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a8711f2afe231b10cbf0093c5036eed') in 0.163957 seconds
+  Import took 0.180604 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.459172 seconds.
+  path: Assets/Resources/Sources/Items/item10.prefab
+  artifactKey: Guid(e7199fbab4de615498e937d9a330a5c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sources/Items/item10.prefab using Guid(e7199fbab4de615498e937d9a330a5c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f797e25bf711bbba2d02117bc6832fb') in 0.019758 seconds
+  Import took 0.027093 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.318561 seconds.
+  path: Assets/Resources/greenTree_1.prefab
+  artifactKey: Guid(70cb7799d85a9454dbd884c180099761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/greenTree_1.prefab using Guid(70cb7799d85a9454dbd884c180099761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efb8ac0972b816727c79fdd124759327') in 0.018038 seconds
+  Import took 0.033635 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000307 seconds.
+  path: Assets/Resources/greenTree_2.prefab
+  artifactKey: Guid(759ba9514f413b748bbb4a487ef7789d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/greenTree_2.prefab using Guid(759ba9514f413b748bbb4a487ef7789d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6937c4dc39d9dcc9da9b5c7193ce30a') in 0.011462 seconds
+  Import took 0.020522 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000345 seconds.
+  path: Assets/Resources/greenTree_3.prefab
+  artifactKey: Guid(86fad1f2d1a7a2c41a37916cbfaccab8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/greenTree_3.prefab using Guid(86fad1f2d1a7a2c41a37916cbfaccab8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a869d9c633cd8edfdcea930ae221be00') in 0.012080 seconds
+  Import took 0.020115 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.066402 seconds.
+  path: Assets/Resources/HitEffect.prefab
+  artifactKey: Guid(16a4441501c1e8546b57e06b8201215b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/HitEffect.prefab using Guid(16a4441501c1e8546b57e06b8201215b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '452c5516ffcba73b68da5732d2abfdc2') in 0.013252 seconds
+  Import took 0.021067 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000310 seconds.
+  path: Assets/Resources/HitEffect2.prefab
+  artifactKey: Guid(0bdeccaac37f10a46b2ff975a33f0e73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/HitEffect2.prefab using Guid(0bdeccaac37f10a46b2ff975a33f0e73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1887d7883651dc3e467a0ff037e69f99') in 0.013524 seconds
+  Import took 0.022385 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.827929 seconds.
+  path: Assets/Resources/pinkTree_1.prefab
+  artifactKey: Guid(dcacf9a4b7c56e64b85a186108450094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/pinkTree_1.prefab using Guid(dcacf9a4b7c56e64b85a186108450094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97846dc9b3aebee7f4111359a19e9bba') in 0.012712 seconds
+  Import took 0.027955 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Resources/pinkTree_2.prefab
+  artifactKey: Guid(3e728df3d6b59a545ab9678a7e92d1fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/pinkTree_2.prefab using Guid(3e728df3d6b59a545ab9678a7e92d1fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50eabb0d724b6858c657297dbd15fbdf') in 0.013041 seconds
+  Import took 0.021064 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Resources/pinkTree_1.prefab
+  artifactKey: Guid(dcacf9a4b7c56e64b85a186108450094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/pinkTree_1.prefab using Guid(dcacf9a4b7c56e64b85a186108450094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97846dc9b3aebee7f4111359a19e9bba') in 0.010077 seconds
+  Import took 0.015883 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000307 seconds.
+  path: Assets/Resources/pinkTree_3.prefab
+  artifactKey: Guid(4b4edfc2b9360ee49902691283360db3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/pinkTree_3.prefab using Guid(4b4edfc2b9360ee49902691283360db3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5dcac7738568b4a49ff868b90b05e589') in 0.010219 seconds
+  Import took 0.017594 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000267 seconds.
+  path: Assets/Resources/pinkTree_2.prefab
+  artifactKey: Guid(3e728df3d6b59a545ab9678a7e92d1fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/pinkTree_2.prefab using Guid(3e728df3d6b59a545ab9678a7e92d1fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50eabb0d724b6858c657297dbd15fbdf') in 0.009213 seconds
+  Import took 0.016021 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.839101 seconds.
+  path: Assets/Resources/MissileBullet.prefab
+  artifactKey: Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/MissileBullet.prefab using Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2468e5d694cd11e56cfd9a1fca07723') in 0.015149 seconds
+  Import took 0.034234 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.842526 seconds.
+  path: Assets/Resources/MissileBullet.prefab
+  artifactKey: Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/MissileBullet.prefab using Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60ce8d89f9fb2ef3c7ecd14c02967a65') in 0.026248 seconds
+  Import took 0.044959 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.020514 seconds.
+  path: Assets/Resources/MissileBullet.prefab
+  artifactKey: Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/MissileBullet.prefab using Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf2ca5b2b1d26aa12f75cd90e86c3a31') in 0.016508 seconds
+  Import took 0.025168 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006982 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.94 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.356 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.79 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3451 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 191.9 MB.
+System memory in use after: 192.2 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4450.
+Total: 4.728500 ms (FindLiveObjects: 0.485600 ms CreateObjectMapping: 0.345000 ms MarkObjects: 3.855300 ms  DeleteObjects: 0.040900 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.358231 seconds.
+  path: Assets/Resources/MissileBullet.prefab
+  artifactKey: Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/MissileBullet.prefab using Guid(fe97dce35f5a3384c98d6f1e5bff92c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb9321e5b702c52d0a62f7f9c1169fb9') in 0.140857 seconds
+  Import took 0.155122 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006680 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.66 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+CreateSerializedAsset is not supported while importing out-of-process
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+PlayFab.PfEditor.PlayFabEditorPrefsSO:get_Instance () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs:38)
+PlayFab.PfEditor.SubMenuComponent:RegisterMenuItem (string,System.Action) (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs:42)
+PlayFab.PfEditor.PlayFabEditorDataMenu:RegisterMenu () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:93)
+PlayFab.PfEditor.PlayFabEditorDataMenu:.cctor () (at Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs:74)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/ETC/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorPrefsSO.cs line 38]
+
+UnityEngine.UnityException: Creating asset at path Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset failed.
+  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
+  at PlayFab.PfEditor.PlayFabEditorPrefsSO.get_Instance () [0x00084] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Utils\PlayFabEditorPrefsSO.cs:38 
+  at PlayFab.PfEditor.SubMenuComponent.RegisterMenuItem (System.String n, System.Action m) [0x00010] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Components\SubMenuComponent.cs:42 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu.RegisterMenu () [0x00018] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:93 
+  at PlayFab.PfEditor.PlayFabEditorDataMenu..cctor () [0x0003a] in C:\Users\mingu\Documents\GitHub\Multy_Isaac\Multy_Isaac\Assets\ETC\PlayFabEditorExtensions\Editor\Scripts\Panels\PlayFabEditorDataMenu.cs:74 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.240 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3451 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 192.0 MB.
+System memory in use after: 192.3 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4490.
+Total: 3.349800 ms (FindLiveObjects: 0.461700 ms CreateObjectMapping: 0.257100 ms MarkObjects: 2.600200 ms  DeleteObjects: 0.029100 ms)
+

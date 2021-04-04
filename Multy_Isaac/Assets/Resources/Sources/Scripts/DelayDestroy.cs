@@ -10,11 +10,9 @@ public class DelayDestroy : MonoBehaviour
     public float nuckBackDistance;
     public int damage;
     public float delay;
-    public int playerDmg;
     // Start is called before the first frame update
     private void Awake()
     {
-        playerDmg = damage;
     }
 
     void Start()

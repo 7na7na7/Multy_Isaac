@@ -1039,8 +1039,8 @@ if(isPlay)
             if (other.CompareTag("Explosion")) //폭탄
             {
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
-                Hit(enemy.playerDmg, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
-                enemy.playerDmg = 0;
+                Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
+                superTick();
             }
 
             if (other.CompareTag("rantem"))
