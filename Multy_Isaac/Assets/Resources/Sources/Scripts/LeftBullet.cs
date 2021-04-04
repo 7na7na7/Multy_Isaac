@@ -24,7 +24,10 @@ public class LeftBullet : MonoBehaviour
     {
         player = transform.parent.gameObject.transform.parent.GetComponent<Player>();
         leftBullets=new int[8];
-        GetedBullet += StartBulletCount;
+        if (player.isPlay)
+            GetedBullet += StartBulletCount;
+        else
+            GetedBullet += 999;
         GetedBulletText.text = "X " + GetedBullet;
     }
 

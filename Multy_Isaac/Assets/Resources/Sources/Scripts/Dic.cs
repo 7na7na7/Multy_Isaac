@@ -12,7 +12,7 @@ public class Dic : MonoBehaviour
     public GameObject dicElement;
     private void Start()
     {
-        if(SceneManager.GetActiveScene().name=="Play") 
+        //if(SceneManager.GetActiveScene().name=="Play") 
             Invoke("set",3f);
     }
 

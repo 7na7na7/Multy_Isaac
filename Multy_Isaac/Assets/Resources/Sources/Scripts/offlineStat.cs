@@ -18,6 +18,7 @@ public class offlineStat : MonoBehaviour
     private float one = 0;
     private int hungryLessSpeed;
     private int hungrySpeed;
+    private bool canHungry = false;
     private void Awake()
     {
         Player[] players = FindObjectsOfType<Player>();
@@ -31,34 +32,43 @@ public class offlineStat : MonoBehaviour
         }
         hungrySpeed = player.hungrySpeed;
         hungryLessSpeed = player.hungryLessHpSpeed;
+        if(player.isPlay) 
+            Invoke("canhun",FindObjectOfType<ZombieSpawner>().FirstDelay);
     }
 
+    void canhun()
+    {
+        canHungry = true;
+    }
     void Update()
     {
         if (player != null)
         {
-            hp.fillAmount = hpslider.transform.localScale.x/100;
-            hpTxt.text = ((int) (hpslider.transform.localScale.x/100*maxValue)).ToString();
+            if (player.isPlay && canHungry)
+            {
+                hp.fillAmount = hpslider.transform.localScale.x/100;
+                hpTxt.text = ((int) (hpslider.transform.localScale.x/100*maxValue)).ToString();
 
-            if (stomach.fillAmount > 0)
-            {
-                if (player.rb.velocity != Vector2.zero)
+                if (stomach.fillAmount > 0)
                 {
-                    if(player.speedValue()>0) 
-                        stomach.fillAmount -= (player.speedValue()-startSpeed)*2/1000f * Time.deltaTime;
-                }
+                    if (player.rb.velocity != Vector2.zero)
+                    {
+                        if(player.speedValue()>0) 
+                            stomach.fillAmount -= (player.speedValue()-startSpeed)*2/1000f * Time.deltaTime;
+                    }
                 
-                stomach.fillAmount -= hungrySpeed/1000f * Time.deltaTime;
-                stomachTxt.text = Mathf.CeilToInt(100f * stomach.fillAmount).ToString();   
-            }
-            else
-            {
-                one+= hungryLessSpeed/10f * Time.deltaTime;
-                if (one >= 1f)
-                {
-                    one = 0;
-                    player.loseHP();   
+                    stomach.fillAmount -= hungrySpeed/1000f * Time.deltaTime;
+                    stomachTxt.text = Mathf.CeilToInt(100f * stomach.fillAmount).ToString();   
                 }
+                else
+                {
+                    one+= hungryLessSpeed/10f * Time.deltaTime;
+                    if (one >= 1f)
+                    {
+                        one = 0;
+                        player.loseHP();   
+                    }
+                }   
             }
         }
     }

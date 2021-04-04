@@ -154,10 +154,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
       if (LobbyPanel.activeSelf)
       {
-         if(Input.GetKeyDown(KeyCode.Escape)) 
-            Disconnect();
+//         if(Input.GetKeyDown(KeyCode.Escape)) 
+//            Disconnect();
          
-         LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ PhotonNetwork.CountOfPlayers+PhotonNetwork.CountOfPlayersInRooms) + "명";
+         LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ (PhotonNetwork.CountOfPlayers-PhotonNetwork.CountOfPlayersInRooms)) + "명";
       }
 
       if (RoomPanel.activeSelf)
@@ -168,8 +168,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
          else
             StartBtn.SetActive(false);
          
-         if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
-            PhotonNetwork.LeaveRoom();
+//         if (Input.GetKeyDown(KeyCode.Escape)) //방에있을때 esc누르면 방에서나감
+//            PhotonNetwork.LeaveRoom();
          
          if (ChatInput.isFocused)
          {

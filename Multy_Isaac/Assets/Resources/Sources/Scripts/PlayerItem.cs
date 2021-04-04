@@ -52,6 +52,8 @@ public class PlayerItem : MonoBehaviour
             {
                 if(SceneManager.GetActiveScene().name=="Play")
                     Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);   
+                else
+                    Invoke("StartTem",0.2f);   
             }   
         }
     }
@@ -72,56 +74,70 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
-    
+
+    public void ranTem()
+    {
+        DestroyItem(ItemList[0].index);
+        List<tem> weapons=new List<tem>();
+        foreach (tem tt in temMgr.temDatas)
+        {
+            if(tt.weaponIndex!=0)
+                weapons.Add(tt.DeepCopy());
+        }
+        tem t = weapons[UnityEngine.Random.Range(0, weapons.Count)].DeepCopy();
+        GetItem(t);
+    }
     private void Update()
     {
         if (player != null)
         {
             if (player.pv.IsMine)
             {
-                float scroll = Input.GetAxis("Mouse ScrollWheel");
-                if (scroll != 0)
+                if (player.isPlay)
                 {
-                    if (scroll < 0)
-                    {
-                        if (selectedIndex >= Selected.Length-1)
-                            selectedIndex = 0;
-                        else
-                            selectedIndex++;
-                   
-                    
-                        player.ChangeWeaponSound();
-                        for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
-                        {
-                            if (i == selectedIndex)
-                                Selected[i].SetActive(true);
-                            else
-                                Selected[i].SetActive(false); 
-                        }
-                        check(selectedIndex,false);   
-                    
-                    }
-                    else
-                    {
-                        if (selectedIndex <= 0)
-                            selectedIndex = Selected.Length-1;
-                        else
-                            selectedIndex--;
-                   
-                    
-                        player.ChangeWeaponSound();
-                        for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
-                        {
-                            if (i == selectedIndex)
-                                Selected[i].SetActive(true);
-                            else
-                                Selected[i].SetActive(false); 
-                        }
-                        check(selectedIndex,false);   
-                    }   
-                } //스크롤 템전환
-                //print(ItemList[0].index+" "+ItemList[1].index+" "+ItemList[2].index+" "+ItemList[3].index+" "+ItemList[4].index+" "+ItemList[5].index);
-            
+                      float scroll = Input.GetAxis("Mouse ScrollWheel");
+                      if (scroll != 0)
+                                 {
+                                     if (scroll < 0)
+                                     {
+                                         if (selectedIndex >= Selected.Length-1)
+                                             selectedIndex = 0;
+                                         else
+                                             selectedIndex++;
+                                    
+                                     
+                                         player.ChangeWeaponSound();
+                                         for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                                         {
+                                             if (i == selectedIndex)
+                                                 Selected[i].SetActive(true);
+                                             else
+                                                 Selected[i].SetActive(false); 
+                                         }
+                                         check(selectedIndex,false);   
+                                     
+                                     }
+                                     else
+                                     {
+                                         if (selectedIndex <= 0)
+                                             selectedIndex = Selected.Length-1;
+                                         else
+                                             selectedIndex--;
+                                    
+                                     
+                                         player.ChangeWeaponSound();
+                                         for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                                         {
+                                             if (i == selectedIndex)
+                                                 Selected[i].SetActive(true);
+                                             else
+                                                 Selected[i].SetActive(false); 
+                                         }
+                                         check(selectedIndex,false);   
+                                     }   
+                                 } //스크롤 템전환   
+                }
+
                 for (int i = 0; i < ItemList.Length; i++) //아이템이미지가 존재한다면 매 프레임마다 박스에 이미지 갱신
                 {
                     if(ItemList[i].ItemSprite!=null) 
@@ -280,78 +296,68 @@ public class PlayerItem : MonoBehaviour
                         catch (Exception e)
                         { }
                     }
-                    
-                    //1부터 6으로 아이템 선택 가능
-                    if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
-                        Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
-                        Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6)
-                        || Input.GetKeyDown(KeyCode.Alpha7)|| Input.GetKeyDown(KeyCode.Alpha8)
-                        || Input.GetKeyDown(KeyCode.Alpha9))
+
+                    if (player.isPlay)
                     {
-                        int contactIndex = 0;
-                        if (Input.GetKeyDown(KeyCode.Alpha1)) //1
-                            contactIndex = 0;
-                        else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
-                            contactIndex = 1;
-                        else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
-                            contactIndex= 2;
-                        else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
-                            contactIndex = 3;
-                        else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
-                            contactIndex= 4;
-                        else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
-                            contactIndex = 5;
-                        else if (Input.GetKeyDown(KeyCode.Alpha7)) //7
-                            contactIndex = 6;
-                        else if (Input.GetKeyDown(KeyCode.Alpha8)) //8
+                        //1부터 6으로 아이템 선택 가능
+                        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
+                            Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
+                            Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6)
+                            || Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Alpha8)
+                            || Input.GetKeyDown(KeyCode.Alpha9))
                         {
-                            contactIndex = 7;   
-                        }
-                        else if (Input.GetKeyDown(KeyCode.Alpha9)) //9
-                        {
-                            if (player.PlayerIndex == 3)
+                            int contactIndex = 0;
+                            if (Input.GetKeyDown(KeyCode.Alpha1)) //1
+                                contactIndex = 0;
+                            else if (Input.GetKeyDown(KeyCode.Alpha2)) //2
+                                contactIndex = 1;
+                            else if (Input.GetKeyDown(KeyCode.Alpha3)) //3
+                                contactIndex = 2;
+                            else if (Input.GetKeyDown(KeyCode.Alpha4)) //4
+                                contactIndex = 3;
+                            else if (Input.GetKeyDown(KeyCode.Alpha5)) //5
+                                contactIndex = 4;
+                            else if (Input.GetKeyDown(KeyCode.Alpha6)) //6
+                                contactIndex = 5;
+                            else if (Input.GetKeyDown(KeyCode.Alpha7)) //7
+                                contactIndex = 6;
+                            else if (Input.GetKeyDown(KeyCode.Alpha8)) //8
                             {
-                                contactIndex = 8;       
+                                contactIndex = 7;
                             }
-                        }
-                        
-                        if (contactIndex != selectedIndex)
-                        {
-                            player.ChangeWeaponSound();
-                            selectedIndex = contactIndex;
-                            for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                            else if (Input.GetKeyDown(KeyCode.Alpha9)) //9
                             {
-                                if (i == selectedIndex)
-                                    Selected[i].SetActive(true);
-                                else
-                                    Selected[i].SetActive(false); 
+                                if (player.PlayerIndex == 3)
+                                {
+                                    contactIndex = 8;
+                                }
                             }
-                            check(selectedIndex,false);   
+
+                            if (contactIndex != selectedIndex)
+                            {
+                                player.ChangeWeaponSound();
+                                selectedIndex = contactIndex;
+                                for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
+                                {
+                                    if (i == selectedIndex)
+                                        Selected[i].SetActive(true);
+                                    else
+                                        Selected[i].SetActive(false);
+                                }
+
+                                check(selectedIndex, false);
+                            }
                         }
                     }
 
-                    if (Input.GetKeyDown(KeyCode.Q)) //F키를 길게 눌러 템 버리기
+                    if (Input.GetKeyDown(KeyCode.Q) && player.isPlay) //템 버리기
                     {
                         DiscardItem(false);
-//                        if (time >= discardTime)
-//                        {
-//                            DiscardItem(false);
-//                            time = 0;
-//                        }
-//                        else
-//                        {
-//                            time += Time.deltaTime;   
-//                        }
                     }
-
-//                    if (Input.GetKeyUp(KeyCode.F)) //떼면 시간 초기화
-//                    {
-//                        time = 0;
-//                    }
                 }
 
-                
-                canTem();
+                if(player.isPlay) 
+                    canTem();
             }   
         }
         else

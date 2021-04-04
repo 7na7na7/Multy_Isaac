@@ -116,7 +116,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public bool isDead;
 
     private bool isAspalt = false;
-    private bool isPlay= false;
+    public bool isPlay= false;
     #endregion
 
     #region 내장함수
@@ -227,7 +227,7 @@ if(isPlay)
                     if (!RectTransformUtility.RectangleContainsScreenPoint(panel, Input.mousePosition)&&!RectTransformUtility.RectangleContainsScreenPoint(panel2, Input.mousePosition)) //클릭불가능영역이 아니면
                         {
                             if (Input.GetMouseButtonDown(0) && gun.activeSelf && !isReLoading) //연타하면 더빠르게 쏨
-                            { 
+                            {
                                 if(playerItem.ItemList[playerItem.selectedIndex].type==itemType.Gun)
                                 {
                                     if (leftBullet.bulletCount<currentWeapon.consumeBullet) //쏘는데쏠총알수보다 총알이 적을경우 재장전
@@ -623,20 +623,23 @@ if(isPlay)
             GetComponent<PassiveItem>().StopLader();
             playerItem.Dead();
             gunSetfalse();
+            isDeadFunc();
+            canMove = false; 
+            if(PhotonNetwork.OfflineMode) 
+                DieRPC();
+            else
+                pv.RPC("DieRPC",RpcTarget.All);
+            SetAnimRPC(2);
+            if(PhotonNetwork.OfflineMode) 
+                net.GameOver();
+            else
+                net.GameOver2();
         }
-//        statMgr.Heal(99999);
-//        transform.position = spawnPoint;
-       isDeadFunc();
-        canMove = false; 
-        if(PhotonNetwork.OfflineMode) 
-            DieRPC();
         else
-            pv.RPC("DieRPC",RpcTarget.All);
-        SetAnimRPC(2);
-        if(PhotonNetwork.OfflineMode) 
-            net.GameOver();
-        else
-            net.GameOver2();
+        { 
+            statMgr.Heal(999); 
+            transform.position = Vector3.zero;
+        }
     }
     void isDeadFunc()
     {
@@ -1011,7 +1014,9 @@ if(isPlay)
                 Hit(enemy.playerDmg, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
                 enemy.playerDmg = 0;
             }
-            
+
+            if (other.CompareTag("rantem"))
+                playerItem.ranTem();
         }
     }
 
