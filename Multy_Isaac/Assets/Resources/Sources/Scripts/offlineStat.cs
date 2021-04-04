@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class offlineStat : MonoBehaviour
@@ -32,7 +33,7 @@ public class offlineStat : MonoBehaviour
         }
         hungrySpeed = player.hungrySpeed;
         hungryLessSpeed = player.hungryLessHpSpeed;
-        if(player.isPlay) 
+        if(SceneManager.GetActiveScene().name=="Play") 
             Invoke("canhun",FindObjectOfType<ZombieSpawner>().FirstDelay);
     }
 
@@ -54,7 +55,7 @@ public class offlineStat : MonoBehaviour
                     if (player.rb.velocity != Vector2.zero)
                     {
                         if(player.speedValue()>0) 
-                            stomach.fillAmount -= (player.speedValue()-startSpeed)*2/1000f * Time.deltaTime;
+                            stomach.fillAmount -= (player.speedValue()-startSpeed)*5/1000f * Time.deltaTime;
                     }
                 
                     stomach.fillAmount -= hungrySpeed/1000f * Time.deltaTime;

@@ -204,11 +204,16 @@ if(isPlay)
     {
         if (pv.IsMine)
             {
-                if ( canRank&&rank <= 2 && !isDead)
+
+                if (!PhotonNetwork.OfflineMode)
                 {
-                    canRank = false;
-                   Invoke("isWin",0.5f);
+                    if ( canRank&&rank <= 2 && !isDead)
+                    {
+                        canRank = false;
+                        Invoke("isWin",0.5f);
+                    }        
                 }
+            
                 if (fireTime > 0)
                     fireTime -= Time.deltaTime;
                 
