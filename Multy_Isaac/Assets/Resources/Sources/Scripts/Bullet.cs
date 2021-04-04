@@ -77,8 +77,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         }
         else if (other.gameObject.tag=="Wall")
         {
-            if(!other.GetComponent<BoxCollider2D>().isTrigger) 
-                DestroyWall();
+           DestroyWall();
         }
         else if(other.CompareTag("Slash"))
             DestroyHit();

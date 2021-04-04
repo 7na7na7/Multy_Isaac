@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DelayDestroy : MonoBehaviour
 {
+    public bool isRPCSound = true;
     public string myName;
     public float nuckBackDistance;
     public int damage;
@@ -19,7 +20,7 @@ public class DelayDestroy : MonoBehaviour
     void Start()
     {
         if(GetComponent<SoundManager>()!=null) 
-            GetComponent<SoundManager>().Play(0,true,0.5f);
+            GetComponent<SoundManager>().Play(0,isRPCSound,0.5f);
         Destroy(gameObject,delay);
     }
     

@@ -636,10 +636,22 @@ if(isPlay)
                 net.GameOver2();
         }
         else
-        { 
-            statMgr.Heal(999); 
-            transform.position = Vector3.zero;
+        {
+           StartCoroutine(mainDie()); 
         }
+    }
+
+    IEnumerator mainDie()
+    {
+        gunSetfalse();
+        isDeadFunc();
+        canMove = false;
+        SetAnimRPC(2);
+        yield return new WaitForSeconds(1f);
+        isDeadFunc2();
+        canMove = true;
+        statMgr.Heal(999); 
+        transform.position = Vector3.zero;
     }
     void isDeadFunc()
     {
@@ -656,6 +668,22 @@ if(isPlay)
     void isDeadRPC()
     {
         isDead = true;
+    }
+    void isDeadFunc2()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            isDeadRPC2();
+        }
+        else
+        {
+            pv.RPC("isDeadRPC2",RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    void isDeadRPC2()
+    {
+        isDead = false;
     }
     [PunRPC]
     void DieRPC()
