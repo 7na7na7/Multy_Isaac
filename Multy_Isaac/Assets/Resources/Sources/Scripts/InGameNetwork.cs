@@ -26,8 +26,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public Text rank;
    public Player p;
    public GameObject[] playerPrefabs;
-   public bool isFullScreen;
-   public int ResX, RexY;
    public bool isOffline;
    
    public static InGameNetwork instance; //싱글톤
@@ -68,8 +66,8 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    private void Awake()
    {
       StartCoroutine(delayDestroy());
-      
-      Screen.SetResolution(ResX, RexY, isFullScreen);
+      playerCountSave pc=playerCountSave.instance;
+      Screen.SetResolution((int)pc.resolutions[pc.resolutionIndex].x, (int)pc.resolutions[pc.resolutionIndex].y,pc.isFullScreen==1 ? true:false);
       instance = this;
       if (isOffline)
       {

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class HowTo : MonoBehaviour
 {
-    public GameObject TUTO;
+    private bool isOpen = false;
+    public Animator TUTO;
     public GameObject[] tutorials;
     public GameObject prevBtn;
     public GameObject nextBtn;
@@ -14,14 +15,15 @@ public class HowTo : MonoBehaviour
 
     public void On()
     {
-        if (!TUTO.activeSelf)
+        if (isOpen)
         {
-            TUTO.SetActive(true);
-            set();   
+            TUTO.Play("Close");
+            isOpen = false;
         }
         else
         {
-            TUTO.SetActive(false);
+            TUTO.Play("Open");
+            isOpen = true;
         }
     }
     
