@@ -12,6 +12,7 @@ public class gunSounds
 }
 public class SoundManager : MonoBehaviour
 {
+    private float volumeMultiply;
     public gunSounds[] guns;
     public float minDistance = 8f;
     public float maxDistance = 20f;
@@ -40,17 +41,22 @@ public class SoundManager : MonoBehaviour
            ClipSources[j].playOnAwake = false;
        }
    }
-   
+
+   private void Start()
+   {
+       volumeMultiply = playerCountSave.instance.soundValue;
+   }
+
    public void Play(int clipIndex, bool isRPC, float volume=1f)
    {
        if(!isRPC)
-           PlayRPC(clipIndex,volume);
+           PlayRPC(clipIndex,volume*volumeMultiply);
        else
        {
            if(PhotonNetwork.OfflineMode)
-               PlayRPC(clipIndex,volume);
+               PlayRPC(clipIndex,volume*volumeMultiply);
            else
-               pv.RPC("PlayRPC",RpcTarget.All,clipIndex,volume);
+               pv.RPC("PlayRPC",RpcTarget.All,clipIndex,volume*volumeMultiply);
        }
    }
    
@@ -69,25 +75,25 @@ public class SoundManager : MonoBehaviour
        if (isReload)
        {
            if(!isRPC)
-               PlayGunRPC(clipIndex,guns[clipIndex].sounds.Length-1,volume);
+               PlayGunRPC(clipIndex,guns[clipIndex].sounds.Length-1,volume*volumeMultiply);
            else
            {
                if(PhotonNetwork.OfflineMode)
-                   PlayGunRPC(clipIndex,guns[clipIndex].sounds.Length-1,volume);
+                   PlayGunRPC(clipIndex,guns[clipIndex].sounds.Length-1,volume*volumeMultiply);
                else
-                   pv.RPC("PlayGunRPC",RpcTarget.All,clipIndex,guns[clipIndex].sounds.Length-1,volume);
+                   pv.RPC("PlayGunRPC",RpcTarget.All,clipIndex,guns[clipIndex].sounds.Length-1,volume*volumeMultiply);
            }
        }
        else
        {
            if(!isRPC)
-               PlayGunRPC(clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume);
+               PlayGunRPC(clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume*volumeMultiply);
            else
            {
                if(PhotonNetwork.OfflineMode)
-                   PlayGunRPC(clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume);
+                   PlayGunRPC(clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume*volumeMultiply);
                else
-                   pv.RPC("PlayGunRPC",RpcTarget.All,clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume);
+                   pv.RPC("PlayGunRPC",RpcTarget.All,clipIndex,UnityEngine.Random.Range(0,guns[clipIndex].sounds.Length-1),volume*volumeMultiply);
            }   
        }
    }
