@@ -14,6 +14,7 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   private IEnumerator chaatCor;
    public int dayScore;
    public int zombieScore;
    public int killedZombies=0;
@@ -63,6 +64,30 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       }
       rank.text = p.rank.ToString();
    }
+
+   void ChatOff()
+   {
+      foreach (Text t in ChatText)
+      {
+         t.color=Color.clear;
+      }
+   }
+
+   void ChatOn()
+   {
+      StopCoroutine(chaatCor);
+      chaatCor = chatCor();
+      foreach (Text t in ChatText)
+      {
+         t.color = Color.black;
+      }
+   }
+
+   IEnumerator chatCor()
+   {
+      yield return new WaitForSeconds(10f);
+      ChatOff();
+   }
    private void Awake()
    {
       StartCoroutine(delayDestroy());
@@ -79,7 +104,8 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          Spawn();
       }
-      
+
+      chaatCor = chatCor();
    }
    public void Suicide()
    {
@@ -119,6 +145,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          if (!ChatInput.gameObject.activeSelf)
          {
+            ChatOn();
             ChatInput.gameObject.SetActive(true);
             ChatInput.ActivateInputField();
          }
@@ -195,6 +222,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
     #region 채팅
     public void Send()
     {
+       StartCoroutine(chaatCor);
        if (ChatInput.text == "" || ChatInput.text == null)
        {
           ChatInput.Select();
