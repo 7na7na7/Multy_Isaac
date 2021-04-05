@@ -222,12 +222,12 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public void Register()
    {
-      if(UsernameInput	.text.Length<=0)
+      if(UsernameInput.text.Length<=0)
          PopUpManager.instance.PopUp("Username is NULL",Color.red);
       else
       {
          var request = new RegisterPlayFabUserRequest
-            {Email = EmailInput.text, Password = PasswordInput.text, Username = PasswordInput.text};
+            {Email = EmailInput.text, Password = PasswordInput.text, Username = PasswordInput.text,DisplayName = EmailInput.text};
          PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
       
          LoginPanel.SetActive(false);
@@ -260,6 +260,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    private void OnLoginSuccess(LoginResult result)
    {
+     
       PopUpManager.instance.PopUp("Login Succeed", Color.green);
       
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
@@ -268,12 +269,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
-      
-      //GetAccountInfo();
-      
+
       Connect();
    }
-
+   
    private void OnLoginFailure(PlayFabError error)
    {
       PopUpManager.instance.PopUp(error.ToString(), Color.red);
@@ -300,7 +299,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       logPanel.SetActive(true);
       regiPanel.SetActive(false);
    }
-
+   
    void SetNick(string Nick)
    {
       var request = new UpdateUserDataRequest() {Data = new Dictionary<string, string>() {{"nick", Nick}}};

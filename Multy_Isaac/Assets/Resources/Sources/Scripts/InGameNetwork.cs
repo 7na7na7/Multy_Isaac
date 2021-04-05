@@ -14,6 +14,7 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   private int GetScoreValue;
    public Text highScore;
    private IEnumerator chaatCor;
    public int dayScore;
@@ -59,6 +60,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       {
          LoseOrWin.text = "Win!";
          LoseOrWin.color=Color.yellow;
+         ScoreUpFunc();
       }
       else
       {
@@ -67,7 +69,44 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       }
       rank.text = p.rank.ToString();
    }
+   public void ScoreUpFunc()
+   {
+      StartCoroutine(scoreUpCor());
+   }
+   IEnumerator scoreUpCor()
+   {
+      GetScore();
+      yield return new WaitForSeconds(1f);
+      ScoreUp();
+      print(GetScoreValue+1); 
+   }
+   public void ScoreUp()
+   {
+      PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
+         {
+            Statistics = new List<StatisticUpdate>
+               {new StatisticUpdate{StatisticName = "HighScore",Value =GetScoreValue+1}}
+         }, 
+         (result)=>{},
+         (error)=>{print("점수 저장 실패!");});
+   }
 
+   public void GetScore()
+   {
+      PlayFabClientAPI.GetPlayerStatistics(
+         new GetPlayerStatisticsRequest(),
+         (result) =>
+         {
+            foreach (var eachStat in result.Statistics)
+            {
+               if (eachStat.StatisticName == "HighScore")
+               {
+                  GetScoreValue = eachStat.Value;
+               }
+            }
+         },
+         (error) => {print("값 불러오기 실패");});
+   }
    void ChatOff()
    {
       foreach (Text t in ChatText)
