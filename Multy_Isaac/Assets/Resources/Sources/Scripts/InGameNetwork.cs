@@ -14,6 +14,7 @@ using Hashtable=ExitGames.Client.Photon.Hashtable;
 
 public class InGameNetwork : MonoBehaviourPunCallbacks
 {
+   public Text highScore;
    private IEnumerator chaatCor;
    public int dayScore;
    public int zombieScore;
@@ -46,7 +47,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       int d = FindObjectOfType<TimeManager>().day;
       Day.text = d+" "+(d == 1 ? "Day":"Days");
       killedZombie.text = killedZombies.ToString();
-      score.text = (dayScore * d + zombieScore).ToString();
+      score.text = (dayScore * (d-1) + zombieScore).ToString();
+      playerCountSave.instance.SetHighScore(dayScore * (d-1) + zombieScore);
+      highScore.text = "HighScore - "+playerCountSave.instance.GetHighScore();
    }
 
    public void GameOver2()
