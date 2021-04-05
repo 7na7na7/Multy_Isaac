@@ -58,6 +58,7 @@ public class Bullet : MonoBehaviourPunCallbacks
             {
                 other.GetComponent<Player>().Hit(Dmg,pv.Controller.NickName,nuckBackDistance,transform.position,type);
                 spr.sprite = none;
+                speed = 0;
                DestroyHit();
             }
             else if (other.GetComponent<PhotonView>().IsMine && pv.IsMine)
@@ -66,8 +67,11 @@ public class Bullet : MonoBehaviourPunCallbacks
             }
             else
             {
-                if (!other.GetComponent<Player>().isSuper &&pv.IsMine)
+                if (!other.GetComponent<Player>().isSuper && pv.IsMine)
+                {
                     spr.sprite = none;
+                    speed = 0;
+                }
             }
         }
         else if (other.CompareTag("Enemy"))
