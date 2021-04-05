@@ -71,12 +71,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    }
    public void ScoreUpFunc()
    {
-      StartCoroutine(scoreUpCor());
-   }
-   IEnumerator scoreUpCor()
-   {
-      GetScore();
-      yield return new WaitForSeconds(1f);
       ScoreUp();
       print(GetScoreValue+1); 
    }
@@ -148,6 +142,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       }
 
       chaatCor = chatCor();
+      GetScore();
    }
    public void Suicide()
    {
