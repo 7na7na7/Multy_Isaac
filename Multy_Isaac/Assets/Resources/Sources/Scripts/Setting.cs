@@ -6,12 +6,17 @@ using UnityEngine.UI;
 
 public class Setting : MonoBehaviour
 {
+    public Slider sound;
     public Dropdown dropdown;
     public Animator Anim;
     private bool isOpen = false;
     public GameObject FullScreenToggle;
     private playerCountSave p;
 
+    public void SetSound()
+    {
+        p.SetSound(sound.value);
+    }
     public void On()
     {
         if (isOpen)
@@ -28,6 +33,7 @@ public class Setting : MonoBehaviour
     private void Start()
     {
         p = playerCountSave.instance;
+        sound.value = p.soundValue;
         if (p.isFullScreen == 0)
             FullScreenToggle.SetActive(false);
         dropdown.value = p.resolutionIndex;

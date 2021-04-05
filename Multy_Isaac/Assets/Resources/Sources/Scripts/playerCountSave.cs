@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class playerCountSave : MonoBehaviour
 {
+   public float soundValue;
+   public string soundKey = "soundKey";
    public int isFullScreen = 1;
    public string fullScreenKey = "fullScreenKey";
    public string resolutionKey = "resolutionKey";
@@ -21,6 +23,7 @@ public class playerCountSave : MonoBehaviour
          DontDestroyOnLoad(gameObject);
          resolutionIndex = PlayerPrefs.GetInt(resolutionKey, 0);
          isFullScreen = PlayerPrefs.GetInt(fullScreenKey, 1);
+         soundValue = PlayerPrefs.GetFloat(soundKey, 1f);
       }
       else
       {
@@ -28,6 +31,11 @@ public class playerCountSave : MonoBehaviour
       }
    }
 
+   public void SetSound(float v)
+   {
+      soundValue = v;
+      PlayerPrefs.SetFloat(soundKey,soundValue);
+   }
    public void SetRes(int resIndex)
    {
       resolutionIndex = resIndex;
