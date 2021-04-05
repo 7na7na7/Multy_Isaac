@@ -51,9 +51,7 @@ public class PlayerItem : MonoBehaviour
             if (GetComponent<PhotonView>().IsMine)
             {
                 if(SceneManager.GetActiveScene().name=="Play")
-                    Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);   
-                else
-                    Invoke("StartTem",0.2f);   
+                    Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
             }   
         }
     }
@@ -756,15 +754,17 @@ public class PlayerItem : MonoBehaviour
         }
     }
     
-    public void Dead()
+    public void Dead(bool ismain=false)
     {
         for (int i = 0; i < ItemList.Length; i++)
         {
-            if (ItemList[i].index != 0)
+            if (!ismain)
             {
-                discardRPC(ItemList[i].index,true);
+                if (ItemList[i].index != 0)
+                {
+                    discardRPC(ItemList[i].index,true);
+                }
             }
-            
             ItemList[i].Clear();
         }
     }

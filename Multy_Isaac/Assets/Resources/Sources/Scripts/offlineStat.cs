@@ -45,11 +45,10 @@ public class offlineStat : MonoBehaviour
     {
         if (player != null)
         {
-            if (player.isPlay && canHungry)
+            hp.fillAmount = hpslider.transform.localScale.x/100;
+            hpTxt.text = ((int) (hpslider.transform.localScale.x/100*maxValue)).ToString();
+            if (player.isPlay&&canHungry)
             {
-                hp.fillAmount = hpslider.transform.localScale.x/100;
-                hpTxt.text = ((int) (hpslider.transform.localScale.x/100*maxValue)).ToString();
-
                 if (stomach.fillAmount > 0)
                 {
                     if (player.rb.velocity != Vector2.zero)

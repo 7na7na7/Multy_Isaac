@@ -648,6 +648,7 @@ if(isPlay)
 
     IEnumerator mainDie()
     {
+        playerItem.Dead(true);
         gunSetfalse();
         isDeadFunc();
         canMove = false;
