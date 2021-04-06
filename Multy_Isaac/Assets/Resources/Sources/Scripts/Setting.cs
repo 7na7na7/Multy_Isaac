@@ -30,6 +30,15 @@ public class Setting : MonoBehaviour
             isOpen = true;
         }
     }
+
+    public void Close()
+    {
+        if (isOpen)
+        {
+            Anim.Play("Close");
+            isOpen = false;
+        } 
+    }
     private void Start()
     {
         p = playerCountSave.instance;

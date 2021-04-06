@@ -16,6 +16,9 @@ using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+   public Animator rankingAnim;
+   private bool isRankOpen = false;
+   public GameObject[] rankings;
    public string AppVersion;
    public string myID;
    public int SendRate;
@@ -73,6 +76,28 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       //동기화 빠르게
    }
 
+   public void Rank()
+   {
+      if (isRankOpen)
+      {
+         isRankOpen = false;
+         rankingAnim.Play("Close");
+      }
+      else
+      {
+         isRankOpen = true;
+         rankingAnim.Play("Open");
+      }
+   }
+
+   void CloseRank()
+   {
+      if (isRankOpen)
+      {
+         isRankOpen = false;
+         rankingAnim.Play("Close");
+      }
+   }
    public void RegiBtn()
    {
       logPanel.SetActive(false);
@@ -90,6 +115,30 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       OnConnectedToMaster();
       CreateRoom();
       SceneManager.LoadScene("Play");
+   }
+
+   void GetLeaderBoard()
+   {
+      var request = new GetLeaderboardRequest
+      {
+         StartPosition = 0, StatisticName = "HighScore", MaxResultsCount = 20, ProfileConstraints = new PlayerProfileViewConstraints() {ShowLocations = true,ShowDisplayName = true}
+      };
+      PlayFabClientAPI.GetLeaderboard(request, (result) =>
+      {
+         for (int i = 0; i < rankings.Length; i++)
+         {
+            if (i < result.Leaderboard.Count)
+            {
+               var curBoard = result.Leaderboard[i];
+               rankings[i].transform.GetChild(0).GetComponent<Text>().text = curBoard.Profile.Locations[0].CountryCode.Value+" / "+curBoard.StatValue+"win ["+curBoard.DisplayName+"]";
+            }
+            else
+            {
+               rankings[i].transform.GetChild(0).GetComponent<Text>().text = "None";
+            }
+         }
+      },
+         (error)=>print("리더보드 불러오기 실패!"));
    }
    void Start ()
    {
@@ -227,7 +276,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       else
       {
          var request = new RegisterPlayFabUserRequest
-            {Email = EmailInput.text, Password = PasswordInput.text, Username = PasswordInput.text,DisplayName = EmailInput.text};
+            {Email = EmailInput.text, Password = PasswordInput.text, Username = PasswordInput.text,DisplayName = UsernameInput.text};
          PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
       
          LoginPanel.SetActive(false);
@@ -266,6 +315,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
       myID = result.PlayFabId;
       GetNick();
+      GetLeaderBoard();
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
@@ -302,7 +352,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    
    void SetNick(string Nick)
    {
-      var request = new UpdateUserDataRequest() {Data = new Dictionary<string, string>() {{"nick", Nick}}};
+      var request = new UpdateUserDataRequest()
+      {
+         Data = new Dictionary<string, string>() {{"nick", Nick}}
+      };
       PlayFabClientAPI.UpdateUserData	(request,(result)=>print	("데이터 저장 성공"),(error => print	("데이터 저장 실패")));
    }
 
@@ -440,6 +493,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+       CloseRank();
+       FindObjectOfType<Setting>().Close();
        StartCoroutine(delayDestroy());
        Spawn();
        LobbyPanel.SetActive(false);
