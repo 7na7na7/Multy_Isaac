@@ -71,14 +71,6 @@ public class ZombieSpawner : MonoBehaviour
         yield return new WaitForSeconds(FirstDelay);
         while (true)
         {
-            float rdelay = delay;
-            if (!time.isNight)
-                rdelay *= 1.5f;
-            if (PhotonNetwork.OfflineMode)
-                yield return new WaitForSeconds(rdelay);
-            else
-                yield return new WaitForSeconds(rdelay*1.25f);
-
             Player[] players = FindObjectsOfType<Player>();
             for (int i = 0; i < players.Length; i++)
             {
@@ -87,6 +79,15 @@ public class ZombieSpawner : MonoBehaviour
                 else
                     DaySpawn(players[i].transform.position);
             }
+            
+            float rdelay = delay;
+            if (!time.isNight)
+                rdelay *= 1.5f;
+            if (PhotonNetwork.OfflineMode)
+                yield return new WaitForSeconds(rdelay);
+            else
+                yield return new WaitForSeconds(rdelay*players.Length*1.25f);
+            
         }
     }
 

@@ -207,8 +207,9 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    #region 연결
    public void Disconnect() //연결 끊기
    {
-    
-         if (p.isDead)
+      GameOver2();
+      
+      if (p.isDead)
          {
             PhotonNetwork.LeaveRoom();
             PhotonNetwork.Disconnect();
