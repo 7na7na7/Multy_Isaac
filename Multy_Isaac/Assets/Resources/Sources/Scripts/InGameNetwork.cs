@@ -259,7 +259,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
     #region 채팅
     public void Send()
     {
-       StartCoroutine(chaatCor);
        if (ChatInput.text == "" || ChatInput.text == null)
        {
           ChatInput.Select();
@@ -288,6 +287,8 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
     [PunRPC] // RPC는 플레이어가 속해있는 방 모든 인원에게 전달한다
     void ChatRPC(string msg)
     {
+       ChatOn();
+       StartCoroutine(chaatCor);
        bool isInput = false;
        for (int i = 0; i < ChatText.Length; i++)
           if (ChatText[i].text == "")
