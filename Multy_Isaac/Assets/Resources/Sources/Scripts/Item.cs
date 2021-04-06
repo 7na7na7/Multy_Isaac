@@ -62,6 +62,7 @@ public class tem
 public enum itemType { Gun,Melee,Item,Passive,Usable}
 public class Item : MonoBehaviour
 {
+    private playerCountSave pc;
     public GameObject name;
     public Text txt;
     public int price;
@@ -79,9 +80,18 @@ public class Item : MonoBehaviour
 
     void setName()
     {
-        NameCan = transform.GetChild(2).gameObject; 
-        NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName;
+        NameCan = transform.GetChild(2).gameObject;
+        if(pc.isKor()) 
+            NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName;
+        else
+            NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName2;
     }
+
+    private void Awake()
+    {
+        pc=playerCountSave.instance;
+    }
+
     private void Start()
     {
         Instantiate(name, transform);
