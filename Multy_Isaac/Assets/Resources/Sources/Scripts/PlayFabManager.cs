@@ -16,6 +16,7 @@ using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+   public Text myRank;
    public Animator rankingAnim;
    private bool isRankOpen = false;
    public GameObject[] rankings;
@@ -131,6 +132,8 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
             {
                var curBoard = result.Leaderboard[i];
                rankings[i].transform.GetChild(0).GetComponent<Text>().text = curBoard.Profile.Locations[0].CountryCode.Value+" / "+curBoard.StatValue+"win ["+curBoard.DisplayName+"]";
+               if(curBoard.DisplayName==NickName)
+                  myRank.text="My win count : "+curBoard.StatValue;
             }
             else
             {
