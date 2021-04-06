@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    private playerCountSave pc;
     private bool isOpen = false;
     public Image[] categories;
     public GameObject[] scrollViews;
@@ -37,6 +38,7 @@ public class Invent : MonoBehaviour
     private PlayerItem PlayerItem;
     private void Start()
     {
+        pc=playerCountSave.instance;
         player = transform.parent.gameObject.transform.parent.gameObject.GetComponent<Player>();
         temMgr = FindObjectOfType<TemManager>();
         pause = FindObjectOfType<Pause>();
@@ -250,12 +252,21 @@ public class Invent : MonoBehaviour
                 Small.SetActive(true);
                 SmallItemImg1.sprite = temMgr.GetItemList(element.SmallItemIndex[0]).ItemSprite;
                 SmallItemImg2.sprite = temMgr.GetItemList(element.SmallItemIndex[1]).ItemSprite;
-                SmallItemName1.text = temMgr.GetItemList(element.SmallItemIndex[0]).ItemName;
+                if(pc.isKor()) 
+                    SmallItemName1.text = temMgr.GetItemList(element.SmallItemIndex[0]).ItemName;
+                else
+                    SmallItemName1.text = temMgr.GetItemList(element.SmallItemIndex[0]).ItemName2;
                 SmallType1.text = getType(temMgr.GetItemList(element.SmallItemIndex[0]).type);
-                SmallItemName2.text = temMgr.GetItemList(element.SmallItemIndex[1]).ItemName;
+                if(pc.isKor()) 
+                    SmallItemName2.text = temMgr.GetItemList(element.SmallItemIndex[1]).ItemName;
+                else
+                    SmallItemName2.text = temMgr.GetItemList(element.SmallItemIndex[1]).ItemName2;
                 SmallType2.text = getType(temMgr.GetItemList(element.SmallItemIndex[1]).type);
                 BigItemImg2.sprite = element.ItemSprite;
-                BigItemName2.text = element.ItemName;
+                if(pc.isKor()) 
+                    BigItemName2.text = element.ItemName;
+                else
+                    BigItemName2.text = element.ItemName2;
                 BigType2.text = getType(element.type);
             }
             else
@@ -263,13 +274,25 @@ public class Invent : MonoBehaviour
                 Big.SetActive(true);
                 Small.SetActive(false);
                 BigItemImg.sprite = element.ItemSprite;
-                BigItemName.text = element.ItemName;
+                if (pc.isKor())
+                    BigItemName.text = element.ItemName;
+                else
+                    BigItemName.text = element.ItemName2;
                 BigType.text = getType(element.type);
             }
-            ItemName.text = element.ItemName;
-            ItemDescription.text = element.ItemDescription;
-          
-            WhereGet.text ="획득 경로 : "+ element.WhereGet;
+            if(pc.isKor()) 
+                ItemName.text = element.ItemName;
+            else
+                ItemName.text = element.ItemName2;
+            
+            if(pc.isKor()) 
+                ItemDescription.text = element.ItemDescription;
+            else
+                ItemDescription.text = element.ItemDescription2;
+            if(pc.isKor()) 
+                WhereGet.text ="획득 경로 : "+ element.WhereGet;
+            else
+                WhereGet.text ="Can get at : "+ element.WhereGet2;
         }
     }
 
@@ -278,15 +301,30 @@ public class Invent : MonoBehaviour
         switch (type)
         {
             case itemType.Gun:
-                return "(원거리 무기)";
+                if (pc.isKor())
+                    return "(원거리 무기)";
+                else
+                    return "(Gun)";
             case itemType.Item:
+                if (pc.isKor())
                 return "(재료 아이템)";
+                else
+                return "(Material)";
             case itemType.Melee:
+                if (pc.isKor())
                 return "(근접 무기)";
+                else
+                return "(Melee)";
             case itemType.Passive:
+                if (pc.isKor())
                 return "(패시브 아이템)";
+                else
+                return "(Passive)";
             case itemType.Usable:
+                if (pc.isKor())
                 return "(소모성 아이템)";
+                else
+                return "(Usable)";
             default:
                 return "ERROR";
         }

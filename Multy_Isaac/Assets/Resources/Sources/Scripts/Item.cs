@@ -18,19 +18,24 @@ public class tem
     public int[] CompleteItemIndex; //상위템
     public int index=0;
     public string ItemName="";
+    public string ItemName2="";
     public Sprite ItemSprite=null;
     public itemType type = itemType.Item;
     public string ItemDescription = "";
+    public string ItemDescription2 = "";
     public string WhereGet = "";
+    public string WhereGet2 = "";
     public void Clear()
     {
         weaponIndex = -1;
         CompleteItemIndex=new int[0];
         index = 0;
         ItemName = "";
+        ItemName2 = "";
         ItemSprite = NoneSprite;
         type = itemType.Item;
         ItemDescription="";
+        ItemDescription2="";
     }
     public tem DeepCopy()
     {
@@ -43,10 +48,13 @@ public class tem
         Copytem.CompleteItemIndex = this.CompleteItemIndex;
         Copytem.index = this.index;
         Copytem.ItemName = this.ItemName;
+        Copytem.ItemName2 = this.ItemName2;
         Copytem.ItemSprite = this.ItemSprite;
         Copytem.type = this.type;
         Copytem.ItemDescription = this.ItemDescription;
+        Copytem.ItemDescription2 = this.ItemDescription2;
         Copytem.WhereGet = this.WhereGet;
+        Copytem.WhereGet2 = this.WhereGet2;
 
         return Copytem;
     }

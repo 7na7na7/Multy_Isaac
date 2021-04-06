@@ -124,7 +124,6 @@ public class SteamManager : MonoBehaviour {
 
 		s_EverInitialized = true;
 	}
-
 	// This should only ever get called on first load and after an Assembly reload, You should never Disable the Steamworks Manager yourself.
 	protected virtual void OnEnable() {
 		if (s_instance == null) {

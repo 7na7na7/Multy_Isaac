@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class playerCountSave : MonoBehaviour
 {
+   public int isKorLang = 0;
+   private string languageKey = "langKey";
    public int highscore;
    string highScorekey = "highScoreKey";
    public float soundValue;
@@ -27,6 +29,7 @@ public class playerCountSave : MonoBehaviour
          isFullScreen = PlayerPrefs.GetInt(fullScreenKey, 1);
          soundValue = PlayerPrefs.GetFloat(soundKey, 1f);
          highscore = PlayerPrefs.GetInt(highScorekey, 0);
+         isKorLang = PlayerPrefs.GetInt(languageKey, 0);
       }
       else
       {
@@ -34,6 +37,23 @@ public class playerCountSave : MonoBehaviour
       }
    }
 
+   public bool isKor()
+   {
+      if (isKorLang == 1)
+         return true;
+      else
+         return false;
+   }
+   
+   public void SetLang(bool isKorean)
+   {
+      if (isKorean)
+         isKorLang = 1;
+      else
+         isKorLang = 0;
+      
+      PlayerPrefs.SetInt(languageKey,isKorLang);
+   }
    public int GetHighScore()
    {
       return highscore;

@@ -31,6 +31,15 @@ public class Setting : MonoBehaviour
         }
     }
 
+    public void Kor()
+    {
+        p.SetLang(true);
+    }
+
+    public void Eng()
+    {
+        p.SetLang(false);
+    }
     public void Close()
     {
         if (isOpen)
