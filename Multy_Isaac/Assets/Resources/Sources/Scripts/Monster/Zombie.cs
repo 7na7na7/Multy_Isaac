@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
+    public float dmgUpValue = 0.2f;
     public float bombRad;
     private bool isBombing = false;
     private bool canGo;
@@ -55,7 +56,9 @@ public class Zombie : MonoBehaviour
         if (time.day >= StartDay)
         {
           int r= Random.Range(0, hpUpValue * (time.day-StartDay));
-           if (r > 0)
+          float r2 = (time.day - StartDay) * dmgUpValue;
+          enemy.CollsionDamage += Mathf.FloorToInt(enemy.CollsionDamage * r2);
+          if (r > 0)
                enemy.hp += r;
         }
            
@@ -82,12 +85,12 @@ public class Zombie : MonoBehaviour
 
         if (!PhotonNetwork.OfflineMode)
         {
-            speed += Random.Range(-speedValue, speedValue) * speed; 
+            speed += Random.Range(-speedValue/2, speedValue) * speed; 
             pv.RPC("hpUp",RpcTarget.AllBuffered);
         }
         else
         {
-            speed += Random.Range(-speedValue, speedValue) * speed;
+            speed += Random.Range(-speedValue/2, speedValue) * speed;
             hpUp();
         }
 

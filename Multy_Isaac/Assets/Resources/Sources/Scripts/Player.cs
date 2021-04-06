@@ -1046,7 +1046,7 @@ if(isPlay)
             {
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
                 Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
-                superTick();
+                StartCoroutine(superTick());
             }
 
             if (other.CompareTag("rantem"))
@@ -1064,7 +1064,7 @@ if(isPlay)
                 if (player.passive.spike > 0)
                 {
                     Hit(player.passive.spike * 15, player.pv.Controller.NickName, 0.5f, player.transform.position);
-                    superTick();
+                    StartCoroutine(superTick());
                 }
             }
         }

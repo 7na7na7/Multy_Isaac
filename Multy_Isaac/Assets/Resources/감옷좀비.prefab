@@ -435,8 +435,8 @@ MonoBehaviour:
   fireDamageTick: 0.2
   isDead: 0
   Exclamation: {fileID: 4748071977300609019}
-  nuckBackDistance: 1.5
-  nuckBackTime: 0.3
+  nuckBackDistance: 0
+  nuckBackTime: 0
   nuckBackEase: 6
   DropTem:
   - {fileID: 1130041891365937121, guid: 92624682a3657874a9bf06b8a2316d0f, type: 3}
@@ -447,7 +447,7 @@ MonoBehaviour:
   DropTemPercent: 140000000a000000050000001400000001000000
   hp: 80
   pv: {fileID: 5458050791320017465}
-  CollsionDamage: 15
+  CollsionDamage: 20
   damageDelay: 0.75
   time: 0
   canMove: 1
@@ -466,10 +466,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60395ee72e288994fb5c2d016f5430c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmgUpValue: 0.2
   bombRad: 0
   gopathTime: 0.5
   StartDay: 3
-  hpUpValue: 15
+  hpUpValue: 30
   speedValue: 0.1
   pan1SpeedPercent: 60
   pan2SpeedPercent: 40
