@@ -54,7 +54,7 @@ public class UsableItem : MonoBehaviour
             case 53: //좀비고기
                 if (eat())
                 {
-                offStat.HungryHeal(10);
+                offStat.HungryHeal(9);
                 setHappy();
                 if(statMgr.LoseHp(10))
                     player.Die("식중독");   
@@ -72,7 +72,7 @@ public class UsableItem : MonoBehaviour
             case 57: //컵라면
                 if (eat())
                 {
-                offStat.HungryHeal(20);
+                offStat.HungryHeal(15);
                 setHappy();
                 return true;
                 }
@@ -120,7 +120,7 @@ public class UsableItem : MonoBehaviour
             case 63: //사과
                 if (eat())
                 {
-                offStat.HungryHeal(10);
+                offStat.HungryHeal(8);
                 setHappy();
                 return true;
                 }
@@ -128,7 +128,7 @@ public class UsableItem : MonoBehaviour
             case 64: //포도
                 if (eat())
                 {
-                offStat.HungryHeal(10);
+                offStat.HungryHeal(8);
                 setHappy();
                 return true;
                 }
@@ -262,7 +262,7 @@ public class UsableItem : MonoBehaviour
             case 103: //오이
                 if (eat())
                 {
-                    offStat.HungryHeal(15);
+                    offStat.HungryHeal(8);
                     setHappy();
                     return true;
                 }
@@ -304,7 +304,7 @@ public class UsableItem : MonoBehaviour
             case 113: //감자
                 if (eat())
                 {
-                    offStat.HungryHeal(10);
+                    offStat.HungryHeal(7);
                     setHappy();
                     return true;
                 }
@@ -366,7 +366,7 @@ public class UsableItem : MonoBehaviour
             case 137: //옥수수
                 if (eat())
                 {
-                    offStat.HungryHeal(10);
+                    offStat.HungryHeal(8);
                     setHappy();
                     return true;
                 }
