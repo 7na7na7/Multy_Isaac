@@ -122,7 +122,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    {
       var request = new GetLeaderboardRequest
       {
-         StartPosition = 0, StatisticName = "HighScore", MaxResultsCount = 20, ProfileConstraints = new PlayerProfileViewConstraints() {ShowLocations = true,ShowDisplayName = true}
+         StartPosition = 0, StatisticName = "HighScore", MaxResultsCount = 100, ProfileConstraints = new PlayerProfileViewConstraints() {ShowLocations = true,ShowDisplayName = true}
       };
       PlayFabClientAPI.GetLeaderboard(request, (result) =>
       {
@@ -318,7 +318,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PlayerPrefs.SetString(EamilKey,EmailInput.text);
       myID = result.PlayFabId;
       GetNick();
-      GetLeaderBoard();
+      Invoke("GetLeaderBoard",1.5f);
       EmailInput.text = null;
       PasswordInput.text = null;
       UsernameInput.text = null;
