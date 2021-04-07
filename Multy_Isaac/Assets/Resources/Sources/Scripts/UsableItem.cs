@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class UsableItem : MonoBehaviour
 {
+    
     public int eatCoolTime;
     private int cool = 0;
     private bool canEat = true;
@@ -23,7 +24,7 @@ public class UsableItem : MonoBehaviour
     public GameObject Light;
     public GameObject FireBomb;
     public GameObject Pan1, Pan2;
-    
+    public GameObject NailMarble;
     private void Start()
     {
         player = GetComponent<Player>();
@@ -396,6 +397,13 @@ public class UsableItem : MonoBehaviour
                     return true;
                 }
                 break;
+            case 156: //가시공
+                player.fireSound();
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(NailMarble, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.Instantiate(NailMarble.name, transform.position, Quaternion.identity);
+                return true;
         }
 
         return false;

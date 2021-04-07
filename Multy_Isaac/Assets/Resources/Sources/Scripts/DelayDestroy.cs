@@ -7,6 +7,7 @@ public class DelayDestroy : MonoBehaviour
 {
     public bool isRPCSound = true;
     public string myName;
+    public string myName2;
     public float nuckBackDistance;
     public int damage;
     public float delay;

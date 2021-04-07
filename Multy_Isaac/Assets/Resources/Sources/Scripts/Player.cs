@@ -65,10 +65,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 curPos; 
     public float footCountCut = 10; //10거리마다 발자국소리 재생
     private float footCount; //저장변수
-    private bool isPan1 = false; //나무판인가?
-    private bool isPan2 = false;//철판인가?
-    public int pan1SpeedPercent = 40;
-    public int pan2SpeedPercent = 40;
     public float speed; //속도
     public float savedSpeed; //속도 저장변수
     
@@ -380,12 +376,6 @@ if(isPlay)
                         SetAnimRPC(1);
                     }
 
-                    float PanValue = 1;
-                    if (isPan1)
-                        PanValue = pan1SpeedPercent / 100f;
-                    else if (isPan2)
-                        PanValue = pan2SpeedPercent / 100f;
-                    
                     float is4 = 1;
                     if (PlayerIndex == 4)
                     {
@@ -396,10 +386,10 @@ if(isPlay)
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        PanValue*is4*(isAspalt	? 1.1f : 1),
+                        is4*(isAspalt	? 1.1f : 1),
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                    PanValue*is4* (isAspalt	? 1.1f : 1));
+                    is4* (isAspalt	? 1.1f : 1));
                     
                     anim.SetFloat("WalkSpeed",speedValue());
 
@@ -416,12 +406,6 @@ if(isPlay)
 
     public float speedValue()
     {
-        float PanValue = 1;
-        if (isPan1)
-            PanValue = pan1SpeedPercent / 100f;
-        else if (isPan2)
-            PanValue = pan2SpeedPercent / 100f;
-                    
         float is4 = 1;
         if (PlayerIndex == 4)
         {
@@ -430,7 +414,7 @@ if(isPlay)
         }
 
         return (((speed + speed * (passive.Speed * 0.01f)) * currentWeapon.walkSpeed_P /
-                 100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) * PanValue *
+                 100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1))*
                 is4 * (isAspalt ? 1.1f : 1)) / 4f;
     }
     #endregion
@@ -1059,7 +1043,10 @@ if(isPlay)
             if (other.CompareTag("Explosion")) //폭탄
             {
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
-                Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
+                if(pc.isKor()) 
+                    Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
+                else
+                    Hit(enemy.damage, enemy.myName2,enemy.nuckBackDistance,enemy.transform.position);
                 StartCoroutine(superTick());
             }
 
@@ -1113,16 +1100,15 @@ if(isPlay)
                     isHouse = true;
                 if (other.CompareTag("Aspalt"))
                     isAspalt = true;
-                if (other.CompareTag("Pan1"))
-                    isPan1 = true;
-                if (other.CompareTag("Pan2"))
-                    isPan2 = true;
 
                 if (other.CompareTag("Fire"))
                 {
                     if (fireTime <=0)
                     {
-                        Hit(other.GetComponent<DelayDestroy>().damage, "불꽃", 0, Vector3.zero);
+                        string name = "불꽃";
+                        if (!pc.isKor())
+                            name = "Fire";
+                        Hit(other.GetComponent<DelayDestroy>().damage, name, 0, Vector3.zero);
                         fireTime = fireDamageTick;
                     }
                 }
@@ -1135,10 +1121,6 @@ if(isPlay)
                 isHouse = false;
             if (other.CompareTag("Aspalt"))
                 isAspalt = false;
-            if (other.CompareTag("Pan1"))
-                isPan1 = false;
-            if (other.CompareTag("Pan2"))
-                isPan2 = false;
         }
         #endregion
         public void PassiveOn(int itemIndex)
