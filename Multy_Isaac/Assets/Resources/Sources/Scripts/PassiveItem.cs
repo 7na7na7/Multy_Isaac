@@ -133,7 +133,7 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 40;
                 break;
             case 152: //인형
-                statMgr.armor += 15;
+                statMgr.armor += 17;
                 break;
         }
     }
@@ -230,7 +230,7 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 40;
                 break;
             case 152: //인형
-                statMgr.armor -= 15;
+                statMgr.armor -= 17;
                 break;
         }
     }
