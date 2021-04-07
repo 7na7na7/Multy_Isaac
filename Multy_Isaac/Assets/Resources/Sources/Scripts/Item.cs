@@ -142,7 +142,10 @@ public class Item : MonoBehaviour
     {
         item = temMgr.GetItemList(shopIndexes[temIndex]);
         spr.sprite = item.ItemSprite;
-        NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName;
+        if(pc.isKor()) 
+            NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName;
+        else
+            NameCan.transform.GetChild(0).GetComponent<Text>().text = item.ItemName2;
         price = prices[temIndex];
         txt.text = "X" +price;
     }

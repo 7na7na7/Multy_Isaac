@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerChange : MonoBehaviour
 {
+    private playerCountSave pc;
     public string[] pTxts;
+    public string[] pTxtss;
     public Text pTxt;
     public string[] pTxts2;
+    public string[] pTxtss2;
     public Text pTxt2;
     public int Index = 0;
     public Sprite[] sprites;
@@ -18,8 +22,9 @@ public class PlayerChange : MonoBehaviour
 
     private void Start()
     {
-        playerCountSave.instance.PlayerIndex = PlayerPrefs.GetInt(playerKey, 0);
-      Index = playerCountSave.instance.PlayerIndex;
+        pc=playerCountSave.instance;
+       pc.PlayerIndex = PlayerPrefs.GetInt(playerKey, 0);
+       Index = pc.PlayerIndex;
       mainImg.sprite = sprites[Index];
       if (Index == 0)
       {
@@ -39,9 +44,20 @@ public class PlayerChange : MonoBehaviour
               leftImg.sprite = sprites[Index  -1];   
           }
       }
+    }
 
-      pTxt.text = pTxts[Index];
-      pTxt2.text = pTxts2[Index];
+    private void Update()
+    {
+        if (pc.isKor())
+        {
+            pTxt.text = pTxts[Index];
+            pTxt2.text = pTxts2[Index];   
+        }
+        else
+        {
+            pTxt.text = pTxtss[Index];
+            pTxt2.text = pTxtss2[Index];
+        }
     }
 
     public void Left()
@@ -63,8 +79,7 @@ public class PlayerChange : MonoBehaviour
             rightImg.sprite = sprites[Index + 1];
             leftImg.sprite = sprites[Index  -1];
         }
-        pTxt2.text = pTxts2[Index];
-        pTxt.text = pTxts[Index];
+        
         mainImg.sprite = sprites[Index];
         PlayerPrefs.SetInt(playerKey,Index);
         playerCountSave.instance.PlayerIndex = Index;
@@ -89,8 +104,8 @@ public class PlayerChange : MonoBehaviour
             rightImg.sprite = sprites[Index + 1];
             leftImg.sprite = sprites[Index  -1];
         }
-        pTxt2.text = pTxts2[Index];
-        pTxt.text = pTxts[Index];
+        
+
         mainImg.sprite = sprites[Index]; 
         PlayerPrefs.SetInt(playerKey,Index);
         playerCountSave.instance.PlayerIndex = Index;

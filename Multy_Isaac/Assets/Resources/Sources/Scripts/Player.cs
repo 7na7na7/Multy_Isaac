@@ -22,6 +22,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         common,snow,mushroom,electric
     }
 
+    private string[] ItemTypesEng = new[] {"Material", "Melee", "Gun", "Usable", "Passive"};
+    private string CombineEng = "Combine";
+    public Text[] ItemTypes;
+    public Text CombineText;
+    private playerCountSave pc;
     private bool canRank = false;
     public int rank;
     private InGameNetwork net;
@@ -140,6 +145,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         currentWeapon.walkSpeed_P = 100;
         savedCanvasScale = photonviewCanvas.transform.localScale;
         passive = GetComponent<PassiveItem>();
+        pc=playerCountSave.instance;
+        if (!pc.isKor())
+        {
+            CombineText.text = CombineEng;
+            for (int i = 0; i < ItemTypes.Length; i++)
+            {
+                ItemTypes[i].text = ItemTypesEng[i];
+            }
+        }
         if (SceneManager.GetActiveScene().name == "Play")
         {
             isPlay = true;
