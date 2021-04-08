@@ -170,7 +170,7 @@ public Text VersionText;
 
       if (PhotonNetwork.IsConnected)
       {
-         if(PhotonNetwork.GetPing()<50)
+         if(PhotonNetwork.GetPing()<40)
             pingSpeed.color=Color.green;
          else if(PhotonNetwork.GetPing()<100)
             pingSpeed.color=Color.yellow;
