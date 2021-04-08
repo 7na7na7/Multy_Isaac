@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class offlineStat : MonoBehaviour
 {
+    private StatManager stat;
     public float startSpeed;
     public float maxValue;
     public GameObject hpslider;
@@ -17,11 +18,12 @@ public class offlineStat : MonoBehaviour
     public Text stomachTxt;
     Player player;
     private float one = 0;
-    private int hungryLessSpeed;
-    private int hungrySpeed;
+    private float hungryLessSpeed;
+    private float hungrySpeed;
     private bool canHungry = false;
     private void Awake()
     {
+        stat = GetComponent<StatManager>();
         Player[] players = FindObjectsOfType<Player>();
         foreach (Player p in players)
         {
@@ -75,9 +77,18 @@ public class offlineStat : MonoBehaviour
 
     public void HungryHeal(int value)
     {
+        if (value != 1)
+        {
+            if(player.PlayerIndex==5)
+                stat.JustHeal(value/2);   
+        }
         stomach.fillAmount += value/100f;
     }
 
+    public void JustHungryHeal(int value)
+    {
+        stomach.fillAmount += value/100f;
+    }
     public int getHungry()
     {
         return ((int) (100f * stomach.fillAmount));

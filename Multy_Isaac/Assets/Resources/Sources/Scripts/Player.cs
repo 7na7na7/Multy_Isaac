@@ -69,8 +69,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float savedSpeed; //속도 저장변수
     
     //배고픔
-    public int hungrySpeed;
-    public int hungryLessHpSpeed;
+    public float hungrySpeed;
+    public float hungryLessHpSpeed;
     public GameObject hp;
 
     public PhotonView pv; //포톤뷰
@@ -383,13 +383,16 @@ if(isPlay)
                             is4 = 1.5f;
                     }
 
+                    float AspalValue = 1.1f;
+                    if (PlayerIndex == 1)
+                        AspalValue = 1.3f;
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        is4*(isAspalt	? 1.1f : 1),
+                        is4*(isAspalt	? AspalValue : 1),
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                    is4* (isAspalt	? 1.1f : 1));
+                    is4* (isAspalt	? AspalValue : 1));
                     
                     anim.SetFloat("WalkSpeed",speedValue());
 
@@ -413,9 +416,12 @@ if(isPlay)
                 is4 = 1.5f;
         }
 
+        float aspaltValue = 1.1f;
+        if (PlayerIndex == 1)
+            aspaltValue = 1.3f;
         return (((speed + speed * (passive.Speed * 0.01f)) * currentWeapon.walkSpeed_P /
                  100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1))*
-                is4 * (isAspalt ? 1.1f : 1)) / 4f;
+                is4 * (isAspalt ? aspaltValue : 1)) / 4f;
     }
     #endregion
 

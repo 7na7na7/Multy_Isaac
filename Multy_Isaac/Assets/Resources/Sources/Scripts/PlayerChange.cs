@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerChange : MonoBehaviour
 {
+    public Text pTxt3;
     private playerCountSave pc;
+    public string[] pTxts3;
+    public string[] pTxtss3;
     public string[] pTxts;
     public string[] pTxtss;
     public Text pTxt;
@@ -51,12 +54,14 @@ public class PlayerChange : MonoBehaviour
         if (pc.isKor())
         {
             pTxt.text = pTxts[Index];
-            pTxt2.text = pTxts2[Index];   
+            pTxt2.text = pTxts2[Index];
+            pTxt3.text = pTxts3[Index];
         }
         else
         {
             pTxt.text = pTxtss[Index];
             pTxt2.text = pTxtss2[Index];
+            pTxt3.text = pTxtss3[Index];
         }
     }
 
