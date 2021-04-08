@@ -16,6 +16,7 @@ using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
+public Text VersionText;
    public Text myRank;
    public Animator rankingAnim;
    private bool isRankOpen = false;
@@ -75,6 +76,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SendRate = SendRate;
       PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
+      VersionText.text = "Ver "+AppVersion;
    }
 
    public void Rank()
