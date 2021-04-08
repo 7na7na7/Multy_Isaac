@@ -214,7 +214,32 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       }
       else
       {
-        rigid.DOMove(transform.position + dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(() =>
+        if (nuckBackDistance != 0)
+        {
+          rigid.DOMove(transform.position + dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(() =>
+          {
+            rigid.velocity = savedVel;
+            canMove = true;
+            if (hp <= 0)
+            {
+              Die();
+            }
+            else
+            {
+              if (zombie.zombieIndex == 1 || zombie.zombieIndex == 3 || zombie.zombieIndex == 4)
+              {
+                setAnim(1);
+              }
+              else if (zombie.zombieIndex == 2)
+              {
+                setAnim(0);
+              }
+            }
+            if(zombie.zombieIndex==2)
+              zombie.stopPoison();
+          }); 
+        }
+        else
         {
           rigid.velocity = savedVel;
           canMove = true;
@@ -235,7 +260,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           }
           if(zombie.zombieIndex==2)
             zombie.stopPoison();
-        }); 
+        }
       }
 
       zombie.Detect(15);

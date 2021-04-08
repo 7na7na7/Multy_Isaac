@@ -134,7 +134,7 @@ public class LeftBullet : MonoBehaviour
     }
     public bool MinusBullet(int selectedIndex,int consumeBullet)
     {
-        if (bulletCount <= 0)
+        if (bulletCount < consumeBullet)
         {
             return false;
         }

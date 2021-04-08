@@ -457,6 +457,13 @@ if(isPlay)
         }
         rank=targets.Length+1;
         canRank = true;
+        Button[] btns = FindObjectsOfType<Button>();
+        foreach (Button b in btns)
+        {
+            var navigation = b.navigation;
+            navigation.mode = Navigation.Mode.None;
+            b.navigation = navigation;
+        }
     }
     
     void Slash(bool isDown)

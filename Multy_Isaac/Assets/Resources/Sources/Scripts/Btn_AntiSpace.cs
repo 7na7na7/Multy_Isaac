@@ -35,7 +35,6 @@ public class Btn_AntiSpace : MonoBehaviour
             b.navigation = navigation;
         }
     }
-
     void OnDisable()
     {
         // 델리게이트 체인 제거
