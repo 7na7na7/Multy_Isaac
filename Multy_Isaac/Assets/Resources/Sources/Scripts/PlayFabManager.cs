@@ -181,6 +181,7 @@ public Text VersionText;
       else
       {
          pingSpeed.text = "DisConnected";
+         pingSpeed.color=Color.white;
       }
       if (LoginPanel.activeSelf)
       {
