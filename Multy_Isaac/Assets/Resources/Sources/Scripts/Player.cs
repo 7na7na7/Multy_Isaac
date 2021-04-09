@@ -214,8 +214,9 @@ if(isPlay)
     {
         if (pv.IsMine)
             {
-
-                if (!PhotonNetwork.OfflineMode)
+                if (Time.timeScale != 0)
+                {
+                                 if (!PhotonNetwork.OfflineMode)
                 {
                     if ( canRank&&rank <= 2 && !isDead)
                     {
@@ -335,7 +336,8 @@ if(isPlay)
                  
                 }
                 
-                GetMove(); //이동
+                GetMove(); //이동   
+                }
             }
             else //만약 IsMine이 아니면
             {

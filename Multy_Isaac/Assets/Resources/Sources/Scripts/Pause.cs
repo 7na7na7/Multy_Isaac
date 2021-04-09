@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,11 +32,15 @@ public class Pause : MonoBehaviour
                         {
                             isOpen = false;
                             anim.Play("Close");
+                            if(PhotonNetwork.OfflineMode) 
+                                Time.timeScale = 1;
                         }
                         else
                         {
                             isOpen = true;
                             anim.Play("Open");
+                            if(PhotonNetwork.OfflineMode) 
+                                Time.timeScale = 0;
                         }
 
                     }
@@ -54,6 +59,8 @@ public class Pause : MonoBehaviour
                 {
                     isOpen = false;
                     anim.Play("Close");
+                    if(PhotonNetwork.OfflineMode) 
+                        Time.timeScale = 1;
                 }
 
                 if(canPause) 
