@@ -396,7 +396,10 @@ public Text VersionText;
 
    public override void OnConnectedToMaster() //연결되었을때 
    {
-      PopUpManager.instance.PopUp("서버 연결됨", Color.green);
+    if(playerCountSave.instance.isKor()) 
+       PopUpManager.instance.PopUp("서버 연결됨", Color.green);
+    else
+       PopUpManager.instance.PopUp("Server Connected", Color.green);
       PhotonNetwork.JoinLobby();
    }
 
@@ -417,7 +420,10 @@ public Text VersionText;
 
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {
-      PopUpManager.instance.PopUp("연결 끊어짐", Color.red);
+      if(playerCountSave.instance.isKor()) 
+         PopUpManager.instance.PopUp("연결 끊어짐", Color.red);
+      else
+         PopUpManager.instance.PopUp("Disconnected", Color.red);
       LobbyPanel.SetActive(false);
       RoomPanel.SetActive(false);
       LoadingPanel.SetActive(false);
@@ -614,7 +620,11 @@ public Text VersionText;
           }
           else
           {
-             PopUpManager.instance.PopUp("혼자서는 솔로 모드로 해주세요!",Color.red);
+             if(playerCountSave.instance.isKor()) 
+                PopUpManager.instance.PopUp("혼자서는 솔로 모드로 해주세요!",Color.red);
+             else
+                PopUpManager.instance.PopUp("Play Solo mode when alone!",Color.red);
+             
           }
        }
     }

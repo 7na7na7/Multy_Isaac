@@ -229,7 +229,11 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    }
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {
-      PopUpManager.instance.PopUp("연결 끊어짐", Color.red);
+      if(playerCountSave.instance.isKor()) 
+         PopUpManager.instance.PopUp("연결 끊어짐", Color.red);
+      else
+         PopUpManager.instance.PopUp("Disconnected", Color.red);
+      
       SceneManager.LoadScene("Main");
    }
 

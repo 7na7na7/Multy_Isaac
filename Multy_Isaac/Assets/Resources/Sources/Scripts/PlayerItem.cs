@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerItem : MonoBehaviour
 {
+    private playerCountSave pc;
     public Sprite noneSprite;
     public int[] indexes;
     private tem t = null;
@@ -54,6 +55,7 @@ public class PlayerItem : MonoBehaviour
                     Invoke("StartTem",FindObjectOfType<ZombieSpawner>().FirstDelay);
             }   
         }
+        pc=playerCountSave.instance;
     }
 
     public tem getCurrentTem()
@@ -162,7 +164,10 @@ public class PlayerItem : MonoBehaviour
                             }
                             else
                             {
-                                PopUpManager.instance.PopUp("회복아이템은 "+usable.getCool()+"초 후 재사용 가능", Color.cyan);
+                               if(pc.isKor()) 
+                                   PopUpManager.instance.PopUp("회복아이템은 "+usable.getCool()+"초 후 재사용 가능", Color.cyan);
+                               else
+                                   PopUpManager.instance.PopUp("Can use food "+usable.getCool()+"sec after", Color.cyan);
                             }
                         }
                     }
@@ -190,7 +195,10 @@ public class PlayerItem : MonoBehaviour
                                     }
                                     else
                                     {
-                                        PopUpManager.instance.PopUp("총알이 부족합니다!",Color.red);
+                                        if(pc.isKor()) 
+                                            PopUpManager.instance.PopUp("총알이 부족합니다!",Color.red);
+                                        else
+                                            PopUpManager.instance.PopUp("Lack of Bullet!",Color.red);
                                     }
                                 }
                                 else
@@ -284,8 +292,13 @@ public class PlayerItem : MonoBehaviour
                                     }   
                                 }
 
-                                if(!isGet) 
-                                    PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
+                                if (!isGet)
+                                {
+                                 if(pc.isKor())
+                                     PopUpManager.instance.PopUp("더 이상 주울 수 없습니다!",Color.red);
+                                 else
+                                     PopUpManager.instance.PopUp("Can't pick up item any more!'",Color.red);
+                                }
                                 else
                                     player.GetSound();   
                                 }
@@ -520,7 +533,10 @@ public class PlayerItem : MonoBehaviour
 
                                 if (!isGet)
                                 {
-                                    PopUpManager.instance.PopUp("더 이상 제작할 수 없습니다!",Color.red);
+                                    if(pc.isKor()) 
+                                        PopUpManager.instance.PopUp("더 이상 제작할 수 없습니다!",Color.red);
+                                    else
+                                        PopUpManager.instance.PopUp("Can't Invent any more!",Color.red);
                                 }
                                 else
                                 {

@@ -108,7 +108,6 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 136: //슈트
                 statMgr.armor += 70;
-                Speed -= 15;
                 break;
             case 139: //사슬갑옷
                 statMgr.armor += 40;
@@ -137,6 +136,9 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 153: //다키마쿠라
                 statMgr.armor += 40;
+                break;
+            case 158: //풀바디 아머
+                statMgr.armor += 100;
                 break;
         }
     }
@@ -208,7 +210,6 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 136: //슈트
                 statMgr.armor -= 70;
-                Speed += 15;
                 break;
             case 139: //사슬갑옷
                 statMgr.armor -= 40;
@@ -237,6 +238,9 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 153: //다키마쿠라
                 statMgr.armor -= 40;
+                break;
+            case 158: //풀바디 아머
+                statMgr.armor -= 100;
                 break;
         }
     }

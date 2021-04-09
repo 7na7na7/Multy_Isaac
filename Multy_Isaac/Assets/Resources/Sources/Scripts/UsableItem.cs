@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UsableItem : MonoBehaviour
 {
-    
+    private playerCountSave pc;
     public int eatCoolTime;
     private int cool = 0;
     private bool canEat = true;
@@ -30,6 +30,7 @@ public class UsableItem : MonoBehaviour
         player = GetComponent<Player>();
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
         offStat= transform.GetChild(0).GetComponent<offlineStat>();
+        pc=playerCountSave.instance;
     }
 
     void setHappy()
@@ -57,8 +58,13 @@ public class UsableItem : MonoBehaviour
                 {
                 offStat.HungryHeal(9);
                 setHappy();
-                if(statMgr.LoseHp(10))
-                    player.Die("식중독");   
+                if (statMgr.LoseHp(10))
+                {
+                    if(pc.isKor()) 
+                        player.Die("식중독");      
+                    else
+                        player.Die("Food poisoning");      
+                }
                 return true;
                 }
                 break;

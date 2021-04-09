@@ -214,7 +214,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
       }
       else
       {
-        if (nuckBackDistance != 0)
+        if (nuckBackDistance != 0 && nuckBackTime!=0)
         {
           rigid.DOMove(transform.position + dir * nuckBackDistance, nuckBackTime).SetEase(nuckBackEase).OnComplete(() =>
           {
