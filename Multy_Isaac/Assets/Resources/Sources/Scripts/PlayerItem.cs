@@ -385,6 +385,19 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    public void Swap(int index1, int index2)
+    {
+        if (index1 != index2)
+        {
+            tem tempTem = ItemList[index1].DeepCopy();
+            ItemList[index1] = ItemList[index2].DeepCopy();
+            ItemList[index2] = tempTem;
+            int tempCount = slots[index1].itemCount;
+            slots[index1].itemCount = slots[index2].itemCount;
+            slots[index2].itemCount = tempCount;
+            check(selectedIndex,true);
+        }
+    }
     void canTem()
     {
                       for (int q = 0; q < indexes.Length; q++)
