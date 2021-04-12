@@ -144,10 +144,10 @@ public class TimeManager : MonoBehaviour
                             FindObjectOfType<ShopTem>().Change();
                             pv.RPC("dbdRPC", RpcTarget.All);
                             pv.RPC("timeRPC", RpcTarget.All, time,day);
+                            gases[day-2].SetActive(true);
+                            gases_M[day-2].SetActive(true);
                         }
                     }
-                    gases[day-2].SetActive(true);
-                    gases_M[day-2].SetActive(true);
                 }
             }
 
