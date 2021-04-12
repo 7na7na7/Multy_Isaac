@@ -58,6 +58,7 @@ public class UsableItem : MonoBehaviour
                 {
                 offStat.HungryHeal(9);
                 setHappy();
+                player.hitSound();
                 if (statMgr.LoseHp(10))
                 {
                     if(pc.isKor()) 
@@ -95,7 +96,7 @@ public class UsableItem : MonoBehaviour
             case 59: //물
                 if (eat())
                 {
-                    statMgr.Heal(10);
+                    statMgr.Heal(15);
                     setHappy();
                     return true;
                 }
@@ -103,7 +104,7 @@ public class UsableItem : MonoBehaviour
             case 60: //꿀물
                 if (eat())
                 {
-                statMgr.Heal(15);
+                statMgr.Heal(20);
                 setHappy();
                 return true;
                 }
@@ -111,7 +112,7 @@ public class UsableItem : MonoBehaviour
             case 61: //포도주스
                 if (eat())
                 {
-                    statMgr.Heal(30);
+                    statMgr.Heal(35);
                     setHappy(); 
                     return true;
                 }
@@ -119,7 +120,7 @@ public class UsableItem : MonoBehaviour
             case 62: //사과주스
                 if (eat())
                 {
-                    statMgr.Heal(30);
+                    statMgr.Heal(35);
                 setHappy();
                 return true;
                 }
@@ -168,7 +169,7 @@ public class UsableItem : MonoBehaviour
             case 74: //비타민주사
             if (eat())
             {
-                statMgr.Heal(20);
+                statMgr.Heal(23);
                 setHappy();
                 return true;
             }
@@ -328,7 +329,7 @@ public class UsableItem : MonoBehaviour
             case 115: //꿀단지
                 if (eat())
                 {
-                    statMgr.Heal(30);
+                    statMgr.Heal(25);
                     setHappy();
                     return true;
                 }

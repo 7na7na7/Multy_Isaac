@@ -21,7 +21,8 @@ public class StatManager : MonoBehaviour
         maxValue = GetComponent<offlineStat>().maxValue;
         player = transform.parent.GetComponent<Player>();
     }
-
+    
+    
     public void Heal(int value)
     {
         if(player.PlayerIndex==5)

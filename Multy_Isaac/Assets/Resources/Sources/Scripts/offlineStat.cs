@@ -21,6 +21,15 @@ public class offlineStat : MonoBehaviour
     private float hungryLessSpeed;
     private float hungrySpeed;
     private bool canHungry = false;
+    public void MaxHpUp(int value)
+    {
+        maxValue += value;
+    }
+
+    public void MaxHpDown(int value)
+    {
+        maxValue -= value;
+    }
     private void Awake()
     {
         stat = GetComponent<StatManager>();

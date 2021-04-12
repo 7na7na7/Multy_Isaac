@@ -29,12 +29,14 @@ public class PassiveItem : MonoBehaviour
     public int Speed = 0;
     //기계다리
     public int machineLegCount = 0;
+    private offlineStat offStat;
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         laderCor = LaderCor();
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
         light=transform.GetChild(1).GetComponent<PlayerLight>();
+        offStat=transform.GetChild(0).GetComponent<offlineStat>();
     }
 
     [PunRPC]
@@ -66,7 +68,7 @@ public class PassiveItem : MonoBehaviour
                 Speed += 7;
                 break;
             case 90: //멋진티셔츠
-                statMgr.armor += 25;
+                offStat.MaxHpUp(30);
                 break;
             case 107: //횃불
                 light.lightValue += 0.05f;
@@ -79,7 +81,8 @@ public class PassiveItem : MonoBehaviour
                 Speed += 12;
                 break;
             case 122: //스웨터
-                statMgr.armor += 25;
+                statMgr.armor += 15;
+                offStat.MaxHpUp(15);
                 break;
             case 123: //방탄모
                 statMgr.armor += 35;
@@ -97,7 +100,8 @@ public class PassiveItem : MonoBehaviour
                 machineLegCount++;
                 break;
             case 133: //패딩
-                statMgr.armor += 50;
+                statMgr.armor += 35;
+                offStat.MaxHpUp(35);
                 break;
             case 134: //기름신발
                 statMgr.armor += 5;
@@ -107,7 +111,8 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 20;
                 break;
             case 136: //슈트
-                statMgr.armor += 70;
+                statMgr.armor += 60;
+                offStat.MaxHpUp(30);
                 break;
             case 139: //사슬갑옷
                 statMgr.armor += 40;
@@ -117,7 +122,7 @@ public class PassiveItem : MonoBehaviour
                 Speed += 20;
                 break;
             case 147: //가시갑옷
-                statMgr.armor += 40;
+                statMgr.armor += 50;
                 spike++;
                 if(!PhotonNetwork.OfflineMode)
                     pv.RPC("spikeRPC",RpcTarget.All,spike);
@@ -129,13 +134,14 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 15;
                 break;
             case 151: //방탄조끼
-                statMgr.armor += 40;
+                statMgr.armor += 30;
+                offStat.MaxHpUp(15);
                 break;
             case 152: //인형
-                statMgr.armor += 17;
+                offStat.MaxHpUp(20);
                 break;
             case 153: //다키마쿠라
-                statMgr.armor += 40;
+                offStat.MaxHpUp(50);
                 break;
             case 158: //풀바디 아머
                 statMgr.armor += 100;
@@ -167,7 +173,7 @@ public class PassiveItem : MonoBehaviour
                 Speed -= 7;
                 break;
             case 90:
-                statMgr.armor -= 25;
+                offStat.MaxHpDown(30);
                 break;
             case 107: //횃불
                 light.lightValue -= 0.05f;
@@ -180,7 +186,8 @@ public class PassiveItem : MonoBehaviour
                 Speed -= 12;
                 break;
             case 122: //스웨터
-                statMgr.armor -= 25;
+                statMgr.armor -= 15;
+                offStat.MaxHpDown(15);
                 break;
             case 123: //방탄모
                 statMgr.armor -= 35;
@@ -199,7 +206,8 @@ public class PassiveItem : MonoBehaviour
                 machineLegCount--;
                 break;
             case 133: //패딩
-                statMgr.armor -= 50;
+                statMgr.armor -= 35;
+                offStat.MaxHpDown(35);
                 break;
             case 134: //기름신발
                 statMgr.armor -= 5;
@@ -209,7 +217,8 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 20;
                 break;
             case 136: //슈트
-                statMgr.armor -= 70;
+                statMgr.armor -= 60;
+                offStat.MaxHpDown(30);
                 break;
             case 139: //사슬갑옷
                 statMgr.armor -= 40;
@@ -219,7 +228,7 @@ public class PassiveItem : MonoBehaviour
                 Speed -= 20;
                 break;
             case 147: //가시갑옷
-                statMgr.armor -= 40;
+                statMgr.armor -= 50;
                 spike--;
                 if(!PhotonNetwork.OfflineMode)
                     pv.RPC("spikeRPC",RpcTarget.All,spike);
@@ -231,13 +240,14 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 15;
                 break;
             case 151: //방탄조끼
-                statMgr.armor -= 40;
+                statMgr.armor -= 30;
+                offStat.MaxHpDown(15);
                 break;
             case 152: //인형
-                statMgr.armor -= 17;
+                offStat.MaxHpDown(20);
                 break;
             case 153: //다키마쿠라
-                statMgr.armor -= 40;
+                offStat.MaxHpDown(50);
                 break;
             case 158: //풀바디 아머
                 statMgr.armor -= 100;

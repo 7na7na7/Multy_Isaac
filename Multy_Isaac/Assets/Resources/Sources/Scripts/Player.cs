@@ -735,7 +735,7 @@ if(isPlay)
                     break;
             }
             
-            //StartCoroutine(superTick()); //0.1초 무적
+            hitSound();
 
             if (pos != Vector3.zero)
             {
@@ -801,6 +801,11 @@ if(isPlay)
             }
             footCount = 0;
         }
+    }
+
+    public void hitSound()
+    {
+        sound.Play(13,true,0.5f);
     }
     public void getBulletSound()
     {
