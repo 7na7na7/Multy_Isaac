@@ -11,6 +11,8 @@ using Light2D = UnityEngine.Experimental.Rendering.Universal.Light2D;
 
 public class TimeManager : MonoBehaviour
 {
+    public GameObject[] gases;
+    public GameObject[] gases_M;
     public ZombieSpawner spawner;
     public Text dayText;
     public int day = 1;
@@ -144,6 +146,8 @@ public class TimeManager : MonoBehaviour
                             pv.RPC("timeRPC", RpcTarget.All, time,day);
                         }
                     }
+                    gases[day-2].SetActive(true);
+                    gases_M[day-2].SetActive(true);
                 }
             }
 

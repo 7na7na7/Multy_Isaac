@@ -82,7 +82,7 @@ public class ZombieSpawner : MonoBehaviour
             
             float rdelay = delay;
             if (!time.isNight)
-                rdelay *= 1.5f;
+                rdelay *= 1.75f;
             if (PhotonNetwork.OfflineMode)
                 yield return new WaitForSeconds(rdelay);
             else

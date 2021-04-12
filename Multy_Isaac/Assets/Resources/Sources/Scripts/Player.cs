@@ -39,6 +39,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private TimeManager timeMgr;
     public float fireDamageTick;
     private float fireTime=0;
+    private float gasTime=0;
     public bool isTEST = true;
     private bool isRegen = true;
     public float hpRegenDelay=1f;
@@ -227,6 +228,8 @@ if(isPlay)
             
                 if (fireTime > 0)
                     fireTime -= Time.deltaTime;
+                if (gasTime > 0)
+                    gasTime -= Time.deltaTime;
                 
                 
                 if(time>0)  
@@ -1130,6 +1133,17 @@ if(isPlay)
                             name = "Fire";
                         Hit(other.GetComponent<DelayDestroy>().damage, name, 0, Vector3.zero);
                         fireTime = fireDamageTick;
+                    }
+                }
+                if (other.CompareTag("Gas"))
+                {
+                    if (gasTime <=0)
+                    {
+                        string name = "독가스";
+                        if (!pc.isKor())
+                            name = "Poison Gas";
+                        Hit(1, name, 0, Vector3.zero);
+                        gasTime = 0.3f;
                     }
                 }
             }

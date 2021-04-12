@@ -16,7 +16,7 @@ public class Destroyer : MonoBehaviour
    {
       if (IsoutDestroyer)
       {
-         if(!other.CompareTag("Player")) 
+         if(!other.CompareTag("Player") && !other.CompareTag("Gas")) 
             Destroy(other.gameObject);  
       }
       else
