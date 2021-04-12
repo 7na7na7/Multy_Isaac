@@ -414,27 +414,63 @@ public class PlayerItem : MonoBehaviour
                             if (temMgr.GetItemList(t.SmallItemIndex[0]).index ==
                                 temMgr.GetItemList(t.SmallItemIndex[1]).index) //하위템 두개가 같은재료면
                             {
-                                if (slots[returnCurrentTem(temMgr.GetItemList(t.SmallItemIndex[0]).index)].itemCount >= 2) //2개이상 있으면
+                                if (temMgr.GetItemList(t.SmallItemIndex[0]).type == itemType.Item || temMgr.GetItemList(t.SmallItemIndex[0]).type == itemType.Usable)
                                 {
-                                    foreach (int w in indexes)
+                                    if (slots[returnCurrentTem(temMgr.GetItemList(t.SmallItemIndex[0]).index)].itemCount >= 2) //2개이상 있으면
                                     {
-                                        if (w == t.index)
+                                        foreach (int w in indexes)
                                         {
-                                            cango = false;
-                                        }
-                                    }
-                                    
-                                    if (cango)
-                                    {
-                                        for (int k = 0; k < indexes.Length; k++)
-                                        {
-                                            if (indexes[k] == 0)
+                                            if (w == t.index)
                                             {
-                                                indexes[k] = t.index;
-                                                break;
+                                                cango = false;
+                                            }
+                                        }
+                                    
+                                        if (cango)
+                                        {
+                                            for (int k = 0; k < indexes.Length; k++)
+                                            {
+                                                if (indexes[k] == 0)
+                                                {
+                                                    indexes[k] = t.index;
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
+                                }
+                                else
+                                {
+                                    int a = 0;
+                                 
+                                    foreach (tem temm in ItemList)
+                                    {
+                                        if(temm.index==t.SmallItemIndex[0]) 
+                                            a++;
+                                    }
+                                
+                                    if (a>=2) //2개이상 있으면
+                                    {
+                                        foreach (int w in indexes)
+                                        {
+                                            if (w == t.index)
+                                            {
+                                                cango = false;
+                                            }
+                                        }
+                                    
+                                        if (cango)
+                                        {
+                                            for (int k = 0; k < indexes.Length; k++)
+                                            {
+                                                if (indexes[k] == 0)
+                                                {
+                                                    indexes[k] = t.index;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }   
                                 }
                             }
                             else
