@@ -13,9 +13,8 @@ public class ItemSlot : MonoBehaviour, IDragHandler, IEndDragHandler
     PlayerItem player;
     public int index;
     private Image img;
-    private void Start()
+    private void Awake()
     {
-        startPos = transform.position;
         img = GetComponent<Image>();
         Player[] players = FindObjectsOfType<Player>();
         foreach (Player p in players)
@@ -26,9 +25,13 @@ public class ItemSlot : MonoBehaviour, IDragHandler, IEndDragHandler
                 break;
             }
         }  
+        Invoke("setStartPos",5f);
     }
-    
 
+    void setStartPos()
+    {
+        startPos = transform.position;
+    }
 
     private void Update()
     {
