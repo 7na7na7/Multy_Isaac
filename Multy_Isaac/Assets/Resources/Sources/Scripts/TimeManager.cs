@@ -134,6 +134,7 @@ public class TimeManager : MonoBehaviour
                         day++;
                         FindObjectOfType<ShopTem>().Change();
                        dbdRPC();
+                       gas(day);
                     }
                     else
                     {
@@ -144,8 +145,7 @@ public class TimeManager : MonoBehaviour
                             FindObjectOfType<ShopTem>().Change();
                             pv.RPC("dbdRPC", RpcTarget.All);
                             pv.RPC("timeRPC", RpcTarget.All, time,day);
-                            gases[day-2].SetActive(true);
-                            gases_M[day-2].SetActive(true);
+                            pv.RPC("gas",RpcTarget.All,day);
                         }
                     }
                 }
@@ -172,6 +172,12 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    void gas(int daay)
+    {
+        gases[daay-2].SetActive(true);
+        gases_M[daay-2].SetActive(true);
+    }
     [PunRPC]
     void dbdRPC()
     {
