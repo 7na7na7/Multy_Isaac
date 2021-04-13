@@ -405,6 +405,7 @@ public Text VersionText;
 
    public override void OnJoinedLobby() //로비 들어왔을때
    {
+      Camera.main.transform.position = new Vector3(0, 0, Camera.main.transform.position.z);
       LoginPanel.SetActive(false);
       LoadingPanel.SetActive(false);
       LobbyPanel.SetActive(true);
