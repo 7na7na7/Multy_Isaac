@@ -134,7 +134,7 @@ public class TimeManager : MonoBehaviour
                         day++;
                         FindObjectOfType<ShopTem>().Change();
                        dbdRPC();
-                       gas(day);
+                       //gas(day);
                     }
                     else
                     {
