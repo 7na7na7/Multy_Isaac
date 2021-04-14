@@ -20,9 +20,7 @@ public class Mine : MonoBehaviour
 
     void Explode()
     {
-        if(PhotonNetwork.OfflineMode) 
-            Instantiate(explosion, transform.position, quaternion.identity);
-        else
+        if(!PhotonNetwork.OfflineMode)
         {
             if(PhotonNetwork.IsMasterClient)
                 PhotonNetwork.Instantiate(explosion.name, transform.position, quaternion.identity);
@@ -52,7 +50,15 @@ public class Mine : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                Explode();
+                if (other.GetComponent<PhotonView>().IsMine && GetComponent<PhotonView>().IsMine)
+                {
+                    
+                }
+                else
+                {
+                    Explode();
+                }
+                
             }
         }
     }
