@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 6776660403145809161}
   - component: {fileID: 8421012322627513326}
   - component: {fileID: 2946867005838831218}
+  - component: {fileID: 4424890879032590416}
   m_Layer: 0
-  m_Name: Use_Mine
-  m_TagString: Bullet
+  m_Name: Use_WireTrap
+  m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b2fd7f5e32b12744e8135755ac9a55f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3e293e2a2cc77d4793098de790a0094, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,9 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba8f169f927add4aa8ebf4ed098d4e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMine: 1
+  isMine: 0
   invisibleTime: 1.5
   delay: 0.35
+  canExplode: 0
   explosion: {fileID: 488023865330879624, guid: 5b779cd8403da874f82c7e04d36e076a,
     type: 3}
 --- !u!58 &2946867005838831218
@@ -159,6 +161,25 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0037899613, y: 0}
+  m_Offset: {x: -0.044351816, y: 0.021653732}
   serializedVersion: 2
-  m_Radius: 0.33130124
+  m_Radius: 0.4005765
+--- !u!114 &4424890879032590416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907011692088903090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8a56a5b9e7b594daec049d7847b97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWire: 1
+  isRPCSound: 0
+  myName: "\uC640\uC774\uC5B4 \uD2B8\uB7A9"
+  myName2: Wire Trap
+  nuckBackDistance: 0
+  damage: 20
+  delay: 0

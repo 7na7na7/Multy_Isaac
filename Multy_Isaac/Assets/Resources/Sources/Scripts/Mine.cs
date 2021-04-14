@@ -8,9 +8,10 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
+    public bool isMine = true;
     public float invisibleTime;
     public float delay;
-    private bool canExplode = false;
+    public bool canExplode = false;
     public GameObject explosion;
 
     private void Start()
@@ -44,6 +45,17 @@ public class Mine : MonoBehaviour
         else
             GetComponent<PhotonView>().RPC("can",RpcTarget.All);
     }
+
+    public void DestroyRPC()
+    {
+        GetComponent<PhotonView>().RPC("destroyRPC",RpcTarget.All);
+    }
+
+    [PunRPC]
+    void destroyRPC()
+    {
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (canExplode)
@@ -56,7 +68,10 @@ public class Mine : MonoBehaviour
                 }
                 else
                 {
-                    Explode();
+                    if (isMine)
+                    {
+                        Explode();
+                    }
                 }
                 
             }

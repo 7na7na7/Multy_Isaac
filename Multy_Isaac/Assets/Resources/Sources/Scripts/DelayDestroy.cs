@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DelayDestroy : MonoBehaviour
 {
+    public bool isWire = false;
     public bool isRPCSound = true;
     public string myName;
     public string myName2;
@@ -20,7 +21,8 @@ public class DelayDestroy : MonoBehaviour
     {
         if(GetComponent<SoundManager>()!=null) 
             GetComponent<SoundManager>().Play(0,isRPCSound,0.5f);
-        Destroy(gameObject,delay);
+        if(delay!=0) 
+            Destroy(gameObject,delay);
     }
     
 }

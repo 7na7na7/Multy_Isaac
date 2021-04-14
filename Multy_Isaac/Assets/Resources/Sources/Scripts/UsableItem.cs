@@ -25,6 +25,7 @@ public class UsableItem : MonoBehaviour
     public GameObject FireBomb;
     public GameObject Pan1, Pan2;
     public GameObject NailMarble;
+    public GameObject WireTrap;
     private void Start()
     {
         player = GetComponent<Player>();
@@ -410,6 +411,13 @@ public class UsableItem : MonoBehaviour
                     Instantiate(NailMarble, transform.position, Quaternion.identity);
                 else
                     PhotonNetwork.Instantiate(NailMarble.name, transform.position, Quaternion.identity);
+                return true;
+            case 163: //가시공
+                //player.fireSound();
+                if (PhotonNetwork.OfflineMode)
+                    Instantiate(WireTrap, transform.position, Quaternion.identity);
+                else
+                    PhotonNetwork.Instantiate(WireTrap.name, transform.position, Quaternion.identity);
                 return true;
         }
 

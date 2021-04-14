@@ -1066,11 +1066,25 @@ if(isPlay)
             if (other.CompareTag("Explosion")) //폭탄
             {
                 DelayDestroy enemy = other.GetComponent<DelayDestroy>();
-                if(pc.isKor()) 
-                    Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
+                if (enemy.isWire)
+                {
+                    if (!enemy.gameObject.GetComponent<PhotonView>().IsMine)
+                    {
+                        if(pc.isKor()) 
+                            Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
+                        else
+                            Hit(enemy.damage, enemy.myName2,enemy.nuckBackDistance,enemy.transform.position);   
+                        enemy.gameObject.GetComponent<Mine>().DestroyRPC();
+                    }
+                }
                 else
-                    Hit(enemy.damage, enemy.myName2,enemy.nuckBackDistance,enemy.transform.position);
-                StartCoroutine(superTick());
+                {
+                    if(pc.isKor()) 
+                        Hit(enemy.damage, enemy.myName,enemy.nuckBackDistance,enemy.transform.position);
+                    else
+                        Hit(enemy.damage, enemy.myName2,enemy.nuckBackDistance,enemy.transform.position);
+                    StartCoroutine(superTick());   
+                }
             }
 
             if (other.CompareTag("rantem"))
