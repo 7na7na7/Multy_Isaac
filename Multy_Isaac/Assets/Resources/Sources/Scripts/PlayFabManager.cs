@@ -16,7 +16,19 @@ using Random = UnityEngine.Random;
 
 public class PlayFabManager : MonoBehaviourPunCallbacks
 {
-public Text VersionText;
+
+   class animal
+   {
+      public int hp;
+      public int mp;
+   }
+
+   class human : animal
+   {
+      
+   }
+   
+   public Text VersionText;
    public Text myRank;
    public Animator rankingAnim;
    private bool isRankOpen = false;
@@ -68,6 +80,8 @@ public Text VersionText;
     
    private void Awake()
    {
+
+
       PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString(NameKey,"");
       Screen.SetResolution(startResolution.x,startResolution.y, false);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");

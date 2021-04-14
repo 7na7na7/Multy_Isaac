@@ -146,6 +146,11 @@ public class PassiveItem : MonoBehaviour
             case 158: //풀바디 아머
                 statMgr.armor += 100;
                 break;
+            case 162: //다이아갑옷
+                statMgr.armor += 50;
+                offStat.MaxHpUp(50);
+                Speed += 12;
+                break;
         }
     }
         
@@ -251,6 +256,11 @@ public class PassiveItem : MonoBehaviour
                 break;
             case 158: //풀바디 아머
                 statMgr.armor -= 100;
+                break;
+            case 162: //다이아갑옷
+                statMgr.armor -= 50;
+                Speed -= 12; 
+                offStat.MaxHpDown(50);
                 break;
         }
     }

@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
   m_Layer: 9
-  m_Name: item159
+  m_Name: item162
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,7 +4846,7 @@ Transform:
   m_GameObject: {fileID: 3749522341741181223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449410984}
   - {fileID: 4869776060961844962}
@@ -4893,7 +4893,7 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 4b2837e8a486e544585502e9f5f0cf33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1923a1cbb1ca8c43a84d94908789788, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4928,19 +4928,21 @@ MonoBehaviour:
     weaponIndex: 0
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 
-    CompleteItemIndex: a0000000a1000000a2000000
-    index: 159
-    ItemName: "\uB2E4\uC774\uC544\uBAAC\uB4DC"
-    ItemName2: Diamond
-    ItemSprite: {fileID: 21300000, guid: 4b2837e8a486e544585502e9f5f0cf33, type: 3}
-    type: 2
-    ItemDescription: "\uC544\uB984\uB2F5\uB2E4. \uB2E8\uB2E8\uD558\uB2E4. \uAC00\uBCCD\uB2E4.
-      \uC774\uBCF4\uB2E4 \uC644\uBCBD\uD55C \uBB3C\uC9C8\uC774 \uC788\uC744\uAE4C?"
-    ItemDescription2: Beautiful. Hard. Light. Is there anything more perfect than
-      this?
-    WhereGet: ???
-    WhereGet2: ???
+    SmallItemIndex: 870000009f000000
+    CompleteItemIndex: 
+    index: 162
+    ItemName: "\uB2E4\uC774\uC544\uBAAC\uB4DC \uAC11\uC637"
+    ItemName2: Diamond Armor
+    ItemSprite: {fileID: 21300000, guid: e1923a1cbb1ca8c43a84d94908789788, type: 3}
+    type: 3
+    ItemDescription: "\uC5C4\uCCAD\uB098\uAC8C \uB2E8\uB2E8\uD558\uC9C0\uB9CC, \uD558\uB098\uB3C4
+      \uBB34\uAC81\uC9C0 \uC54A\uB2E4. \uBB58 \uB9DE\uC544\uB3C4 \uBB34\uC2DC\uD560
+      \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4. (\uC774\uB3D9\uC18D\uB3C4 + 12, \uBC29\uC5B4\uB825
+      + 50, \uCD5C\uB300\uCCB4\uB825 +50)"
+    ItemDescription2: It's extremely hard, but it's not heavy at all. I think I can
+      ignore whatever I get hit. (Speed + 12, Defence + 50, MaxHp +50)
+    WhereGet: "\uC81C\uC791"
+    WhereGet2: Invent
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
 --- !u!58 &3749522341741181219
 CircleCollider2D:
