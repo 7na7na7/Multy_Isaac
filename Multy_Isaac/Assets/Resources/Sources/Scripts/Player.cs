@@ -145,7 +145,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         pc=playerCountSave.instance;
         if (!pc.isKor())
         {
-            CombineText.text = CombineEng;
+             CombineText.text = CombineEng;
             for (int i = 0; i < ItemTypes.Length; i++)
             {
                 ItemTypes[i].text = ItemTypesEng[i];
