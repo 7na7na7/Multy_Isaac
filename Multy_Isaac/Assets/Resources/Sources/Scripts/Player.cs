@@ -387,17 +387,18 @@ if(isPlay)
                         if(currentWeapon.consumeBullet==0)
                             is4 = 1.5f;
                     }
-
+                    
+                    float office = 1f + passive.office * 0.5f;
                     float AspalValue = 1.1f;
                     if (PlayerIndex == 1)
                         AspalValue = 1.3f;
                     rb.velocity = new Vector2(
                         (moveDirection.x * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                        is4*(isAspalt	? AspalValue : 1),
+                        is4*(isAspalt	? AspalValue : 1)*(isHouse ? office:1),
                         (moveDirection.y * (speed+speed*(passive.Speed*0.01f)) * (passive.machineLegCount<=0 ? currentWeapon.walkSpeed_P: 100) / 100 *
                          (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1)) *
-                    is4* (isAspalt	? AspalValue : 1));
+                    is4* (isAspalt	? AspalValue : 1)*(isHouse ? office:1));
                     
                     anim.SetFloat("WalkSpeed",speedValue());
 
@@ -421,12 +422,13 @@ if(isPlay)
                 is4 = 1.5f;
         }
 
+        float office = 1f + passive.office * 0.5f;
         float aspaltValue = 1.1f;
         if (PlayerIndex == 1)
             aspaltValue = 1.3f;
         return (((speed + speed * (passive.Speed * 0.01f)) * currentWeapon.walkSpeed_P /
                  100 * (passive.mobileTime >= passive.savedMobileTime ? passive.mobilePer / 100f : 1))*
-                is4 * (isAspalt ? aspaltValue : 1)) / 4f;
+                is4 * (isAspalt ? aspaltValue : 1)*(isHouse ? office:1)) / 4f;
     }
     #endregion
 

@@ -8,6 +8,8 @@ using UnityEngine;
 public class PassiveItem : MonoBehaviour
 {
     private PhotonView pv;
+
+    public int office = 0;
     //가시갑옥
     public int spike = 0;
     //레이더
@@ -147,9 +149,14 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor += 100;
                 break;
             case 162: //다이아갑옷
-                statMgr.armor += 50;
-                offStat.MaxHpUp(50);
+                statMgr.armor += 40;
+                offStat.MaxHpUp(40);
                 Speed += 12;
+                break;
+            case 164: //오핏스룩
+                offStat.MaxHpUp(35);
+                Speed += 20;
+                office++;
                 break;
         }
     }
@@ -258,9 +265,14 @@ public class PassiveItem : MonoBehaviour
                 statMgr.armor -= 100;
                 break;
             case 162: //다이아갑옷
-                statMgr.armor -= 50;
+                statMgr.armor -= 40;
                 Speed -= 12; 
-                offStat.MaxHpDown(50);
+                offStat.MaxHpDown(40);
+                break;
+            case 164: //오핏스룩
+                offStat.MaxHpDown(35);
+                Speed -= 20;
+                office--;
                 break;
         }
     }
