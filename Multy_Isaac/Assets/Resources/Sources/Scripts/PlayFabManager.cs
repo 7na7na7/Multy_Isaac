@@ -226,7 +226,10 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 //         if(Input.GetKeyDown(KeyCode.Escape)) 
 //            Disconnect();
          
-         LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ (PhotonNetwork.CountOfPlayers-PhotonNetwork.CountOfPlayersInRooms)) + "명";
+         if(playerCountSave.instance.isKor()) 
+            LobbyInfoText.text = ("접속자 "+PhotonNetwork.CountOfPlayers+"명 / 로비 "+ (PhotonNetwork.CountOfPlayers-PhotonNetwork.CountOfPlayersInRooms)) + "명";
+         else
+            LobbyInfoText.text = (PhotonNetwork.CountOfPlayers+" Player is Online / "+ (PhotonNetwork.CountOfPlayers-PhotonNetwork.CountOfPlayersInRooms)) + " In Lobby";
       }
 
       if (RoomPanel.activeSelf)
@@ -544,20 +547,31 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
        //RoomRenewal();
-       ChatRPC("<color=green>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
+       if(playerCountSave.instance.isKor()) 
+          ChatRPC("<color=green>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
+       else
+          ChatRPC("<color=green>" + newPlayer.NickName + " Entered Room</color>");
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
        //RoomRenewal();
-       ChatRPC("<color=red>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
+       if(playerCountSave.instance.isKor()) 
+          ChatRPC("<color=red>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
+       else
+          ChatRPC("<color=red>" + otherPlayer.NickName + " Outed</color>");
     }
 
     void RoomRenewal()
     {
         ListText.text = "";
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-            ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+"\n";
+        {
+           if(playerCountSave.instance.isKor()) 
+              ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+"\n"; 
+           else
+              ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(Master)" :"")+"\n";  
+        }
         //" - "+PhotonNetwork.PlayerList[i].GetPing()+"ms"+
         RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " - " + PhotonNetwork.CurrentRoom.PlayerCount+ " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
     }

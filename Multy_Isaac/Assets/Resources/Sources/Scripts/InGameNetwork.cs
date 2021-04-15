@@ -150,7 +150,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    }
    private void Update()
    {
-      if (PhotonNetwork.IsConnected)
+      if (!PhotonNetwork.OfflineMode)
       {
          if(PhotonNetwork.GetPing()<50)
             pingSpeed.color=Color.green;
@@ -251,13 +251,21 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
        //RoomRenewal();
-       ChatRPC("<color=green>" + newPlayer.NickName + "님이 게임에 참가했습니다.</color>");
+       if(playerCountSave.instance.isKor()) 
+          ChatRPC("<color=green>" + newPlayer.NickName + "님이 게임에 참가했습니다.</color>");
+       else
+          ChatRPC("<color=green>" + newPlayer.NickName + " Entered Game.</color>");
+       
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
        //RoomRenewal();
-       ChatRPC("<color=red>" + otherPlayer.NickName + "님이 게임에서 나갔습니다.</color>");
+       if(playerCountSave.instance.isKor()) 
+          ChatRPC("<color=red>" + otherPlayer.NickName + "님이 게임에서 나갔습니다.</color>");
+       else
+          ChatRPC("<color=red>" + otherPlayer.NickName + " Outed.</color>");
+       
     }
     
     #endregion
