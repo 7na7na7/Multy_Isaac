@@ -215,6 +215,8 @@ if(isPlay)
     {
         if (pv.IsMine)
             {
+             
+                    
                 if (Time.timeScale != 0)
                 {
                                  if (!PhotonNetwork.OfflineMode)
