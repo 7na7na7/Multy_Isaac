@@ -667,6 +667,7 @@ public class PlayerItem : MonoBehaviour
                                 }
                                 else
                                 {
+                                    SteamAchieveemnt.instance.SetAchievement("create");
                                     selectedIndex = select;
                                     for (int i = 0; i < Selected.Length; i++) //현재 인텍스에만 선택창 달아줌
                                     {
