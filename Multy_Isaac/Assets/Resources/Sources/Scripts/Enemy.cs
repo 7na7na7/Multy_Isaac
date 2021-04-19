@@ -355,6 +355,7 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
           }
         }
       }
+      playerCountSave.instance.ZombieKill();
       zombie.StopAllCor();
       transform.GetChild(0).gameObject.SetActive(true);
       transform.GetChild(0).transform.parent = null;

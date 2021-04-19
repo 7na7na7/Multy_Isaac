@@ -58,6 +58,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       GameOverPanel2.SetActive(true);
       if (p.rank == 1)
       {
+         SteamAchieveemnt.instance.SetAchievement("win");
          LoseOrWin.text = "Win!";
          LoseOrWin.color=Color.yellow;
          ScoreUpFunc();

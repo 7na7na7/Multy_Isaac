@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class playerCountSave : MonoBehaviour
 {
+   private string killedZombie = "killedZombie";
+   private int killedZombieCount;
    public int isKorLang = 0;
    private string languageKey = "langKey";
    public int highscore;
@@ -30,6 +32,7 @@ public class playerCountSave : MonoBehaviour
          soundValue = PlayerPrefs.GetFloat(soundKey, 1f);
          highscore = PlayerPrefs.GetInt(highScorekey, 0);
          isKorLang = PlayerPrefs.GetInt(languageKey, 0);
+         killedZombieCount = PlayerPrefs.GetInt(killedZombie, 0);
       }
       else
       {
@@ -37,6 +40,23 @@ public class playerCountSave : MonoBehaviour
       }
    }
 
+   public void ZombieKill()
+   {
+      killedZombieCount++;
+      PlayerPrefs.SetInt(killedZombie,killedZombieCount);
+      if (killedZombieCount > 10)
+      {
+         SteamAchieveemnt.instance.SetAchievement("kill1");
+      }
+      if (killedZombieCount > 50)
+      {
+         SteamAchieveemnt.instance.SetAchievement("kill2");
+      }
+      if (killedZombieCount > 150)
+      {
+         SteamAchieveemnt.instance.SetAchievement("kill3");
+      }
+   }
    public bool isKor()
    {
       if (isKorLang == 1)

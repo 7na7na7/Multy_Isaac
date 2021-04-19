@@ -148,6 +148,8 @@ public class TimeManager : MonoBehaviour
                             pv.RPC("gas",RpcTarget.All,day);
                         }
                     }
+                    if(day>=4)
+                        SteamAchieveemnt.instance.SetAchievement("survivor");
                 }
             }
 
