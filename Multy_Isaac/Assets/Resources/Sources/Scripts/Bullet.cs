@@ -40,6 +40,11 @@ public class Bullet : MonoBehaviourPunCallbacks
             transform.localScale+=Vector3.one*Time.deltaTime*7f;
             speed -= Time.deltaTime*1.5f;
         }
+
+        if (type == Player.bulletType.shot)
+        {
+            speed-=Time.deltaTime*25f;
+        }
     }
 
     IEnumerator snowDmgUpCor()

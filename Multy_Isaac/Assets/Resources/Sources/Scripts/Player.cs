@@ -19,7 +19,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public enum  bulletType
     {
-        common,snow,mushroom,electric
+        common,snow,mushroom,electric,shot
     }
 
     private string[] ItemTypesEng = new[] {"Material", "Melee", "Gun", "Usable", "Passive"};
