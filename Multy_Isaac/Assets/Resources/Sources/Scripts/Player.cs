@@ -1135,7 +1135,7 @@ if(isPlay)
 
     private void OnTriggerStay2D(Collider2D other)
         {
-            if (pv.IsMine)
+            if (pv.IsMine && isPlay)
             {
                 if (other.CompareTag("HouseTile"))
                     isHouse = true;
