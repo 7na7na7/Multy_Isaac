@@ -13,7 +13,7 @@ public class Dic : MonoBehaviour
     private void Start()
     {
         //if(SceneManager.GetActiveScene().name=="Play") 
-            Invoke("set",3f);
+            Invoke("set",2f);
     }
 
     void set()

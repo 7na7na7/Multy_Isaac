@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.0075f);
             Dmg++;
         }
     }

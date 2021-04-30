@@ -21,8 +21,10 @@ public class Tree : MonoBehaviour
     public Transform tr;
     public float isSuperTime = 0.3f;
     private float time = 0;
+    private Vector2 firstScale;
     private void Start()
     {
+        firstScale = transform.localScale;
         sound = GetComponent<SoundManager>();
         pv = GetComponent<PhotonView>();
         temMgr = FindObjectOfType<TemManager>();
@@ -69,9 +71,9 @@ public class Tree : MonoBehaviour
     void Hit(int value,int randomValue, bool isRandomTem)
     {
         GetComponent<FlashWhite>().Flash();
-                transform.DOScale(new Vector3(1.6f,1.6f), 0.15f).OnComplete(() =>
+                transform.DOScale(firstScale+firstScale/15, 0.15f).OnComplete(() =>
                 {
-                    transform.DOScale(new Vector3(1.5f,1.5f), 0.15f);
+                    transform.DOScale(firstScale, 0.15f);
                 });   
                 if (hp-value > 0)
                     hp -= value;

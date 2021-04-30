@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Invent : MonoBehaviour
 {
+    public bool isLobby = false;
     private playerCountSave pc;
     private bool isOpen = false;
     public Image[] categories;
@@ -39,7 +40,8 @@ public class Invent : MonoBehaviour
     private void Start()
     {
         pc=playerCountSave.instance;
-        player = transform.parent.gameObject.transform.parent.gameObject.GetComponent<Player>();
+        if(!isLobby) 
+            player = transform.parent.gameObject.transform.parent.gameObject.GetComponent<Player>();
         temMgr = FindObjectOfType<TemManager>();
         pause = FindObjectOfType<Pause>();
         anim = GetComponent<Animator>();
@@ -52,7 +54,7 @@ public class Invent : MonoBehaviour
                 break;
             }
         }
-
+        
         BigType = BigItemName.transform.GetChild(0).GetComponent<Text>();
         BigType2 = BigItemName2.transform.GetChild(0).GetComponent<Text>();
         SmallType1 = SmallItemName1.transform.GetChild(0).GetComponent<Text>();
@@ -82,16 +84,26 @@ public class Invent : MonoBehaviour
     public void DicOpen()
     {
         dicBtn.SetActive(false);
-        XBtn.SetActive(true);
+        if(!isLobby) 
+            XBtn.SetActive(true);
         Dic.SetActive(true);
         Com.SetActive(false);
     }
     
     public void DicClose()
     {
-        dicBtn.SetActive(true);
-        XBtn.SetActive(false);
-        Com.SetActive(true);
+        if (isLobby)
+        {
+            dicBtn.SetActive(true);
+            Com.SetActive(true);
+        }
+        else
+        {
+            dicBtn.SetActive(true);
+            XBtn.SetActive(false);
+            Com.SetActive(true);
+        }
+      
     }
     public void Close()
     {
@@ -108,9 +120,12 @@ public class Invent : MonoBehaviour
     {
         if(element!=null)
         {
+            if (isLobby)
+                return;
+            
             if(Input.GetKeyDown(KeyCode.Escape))
                 Close();
-
+            
             if (element.SmallItemIndex.Length != 0)
             {
                 if (PlayerItem.GetItemArray(element.SmallItemIndex[0]).index == PlayerItem.GetItemArray(element.SmallItemIndex[1]).index) //둘이 똑같은템 조합이면
@@ -196,16 +211,19 @@ public class Invent : MonoBehaviour
     }
     public void Open(tem taaaaam)
     {
-        if (XBtn.activeSelf)
-            XBtn.SetActive(false);
+        if (!isLobby)
+        {
+            if (XBtn.activeSelf)
+                XBtn.SetActive(false);
+            if(player.isPlay) 
+                pause.canPause = false;
+        }
         if(!dicBtn.activeSelf)
             dicBtn.SetActive(true);
-        if(Dic.activeSelf) 
-            Dic.SetActive(false);
         if(!Com.activeSelf)
             Com.SetActive(true);
-        if(player.isPlay) 
-            pause.canPause = false;
+        if(Dic.activeSelf) 
+            Dic.SetActive(false);
         element = taaaaam;
         isOpen = true;
         anim.Play("InvenOpen");

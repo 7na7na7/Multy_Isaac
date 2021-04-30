@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Setting : MonoBehaviour
@@ -34,11 +35,13 @@ public class Setting : MonoBehaviour
     public void Kor()
     {
         p.SetLang(true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Eng()
     {
         p.SetLang(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void Close()
     {
