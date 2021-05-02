@@ -7,7 +7,7 @@ using UnityEngine;
 public class UsableItem : MonoBehaviour
 {
     private playerCountSave pc;
-    public int eatCoolTime;
+    private int eatCoolTime = 1;
     private int cool = 0;
     private bool canEat = true;
     public Animator happy;

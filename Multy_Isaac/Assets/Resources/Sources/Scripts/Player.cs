@@ -126,8 +126,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         timeMgr = FindObjectOfType<TimeManager>();
         temMgr = FindObjectOfType<TemManager>();
-        nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
-        nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
+        
         if (PhotonNetwork.OfflineMode)
             nickname.text = PlayerPrefs.GetString("NameKey", "Player");
         anim = GetComponent<Animator>();
@@ -213,6 +212,9 @@ if(isPlay)
     }
     private void Update()
     {
+        nickname.text = pv.IsMine ? PhotonNetwork.NickName : pv.Owner.NickName; //닉네임 설정, 자기 닉네임이 아니면 상대 닉네임으로
+        nickname.color = pv.IsMine ? Color.green : Color.red; //닉네임 색깔 설정, 자기 닉네임이면 초록색, 아니면 빨강색
+        
         if (pv.IsMine)
             {
              
@@ -744,7 +746,7 @@ if(isPlay)
             
             hitSound();
 
-            if (pos != Vector3.zero)
+            if (pos != Vector3.zero&& nuckBackDistance!=0)
             {
                 Vector3 dir = (transform.position - pos).normalized;
                 canMove = false;

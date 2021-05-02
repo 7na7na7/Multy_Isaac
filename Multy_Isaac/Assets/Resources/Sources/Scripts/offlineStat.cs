@@ -65,7 +65,7 @@ public class offlineStat : MonoBehaviour
                     if (player.rb.velocity != Vector2.zero)
                     {
                         if(player.speedValue()>0) 
-                            stomach.fillAmount -= (player.speedValue()-startSpeed)*5/1000f * Time.deltaTime;
+                            stomach.fillAmount -= (player.speedValue()-startSpeed)*4/1000f * Time.deltaTime;
                     }
                 
                     stomach.fillAmount -= hungrySpeed/1000f * Time.deltaTime;
