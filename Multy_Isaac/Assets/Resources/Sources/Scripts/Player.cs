@@ -122,6 +122,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region 내장함수
+
+    private void OnApplicationQuit()
+    {
+        net.Disconnect();
+    }
+
     private void Start()
     {
         timeMgr = FindObjectOfType<TimeManager>();

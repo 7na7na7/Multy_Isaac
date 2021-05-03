@@ -20,9 +20,13 @@ public class DelayDestroy : MonoBehaviour
     void Start()
     {
         if(GetComponent<SoundManager>()!=null) 
-            GetComponent<SoundManager>().Play(0,isRPCSound,0.5f);
+            Invoke("a",0.005f);
         if(delay!=0) 
             Destroy(gameObject,delay);
     }
-    
+
+    void a()
+    {
+        GetComponent<SoundManager>().Play(0,isRPCSound,0.5f);
+    }
 }
