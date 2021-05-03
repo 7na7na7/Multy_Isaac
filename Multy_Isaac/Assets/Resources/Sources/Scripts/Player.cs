@@ -122,12 +122,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region 내장함수
-
-    private void OnApplicationQuit()
-    {
-        net.Disconnect();
-    }
-
+//    private void OnApplicationQuit()
+//    {
+//        Die(PhotonNetwork.NickName);
+//    }
     private void Start()
     {
         timeMgr = FindObjectOfType<TimeManager>();
@@ -637,7 +635,7 @@ if(isPlay)
         yield return new WaitForSeconds(0.1f);
         speed = savedSpeed;
     }
-    
+
     public void Die(string AttackerName) //죽을때 공격한사람 이름을 받아 로그띄울때 씀
     {
         if (isPlay)
@@ -645,7 +643,7 @@ if(isPlay)
             if (AttackerName==PhotonNetwork.NickName)
             {
                 InGameNetwork.instance.PV.RPC("ChatRPC", RpcTarget.All, 
-                    nickname.text+"<color=red> Suicided </color>");   
+                    PhotonNetwork.NickName+"<color=red> Suicided </color>");   
             }
             else
             {

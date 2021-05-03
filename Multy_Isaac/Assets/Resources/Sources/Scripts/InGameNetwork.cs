@@ -206,6 +206,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    
    
    #region 연결
+   
    public void Disconnect() //연결 끊기
    {
       if(!PhotonNetwork.OfflineMode) 
@@ -261,14 +262,24 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-       //RoomRenewal();
+       FindObjectOfType<PlayerItem>().Dead();
+       if(p.isPlay) 
+          PV.RPC("DieRPC",RpcTarget.All);
        if(playerCountSave.instance.isKor()) 
           ChatRPC("<color=red>" + otherPlayer.NickName + "님이 게임에서 나갔습니다.</color>");
        else
           ChatRPC("<color=red>" + otherPlayer.NickName + " Outed.</color>");
        
     }
-    
+    [PunRPC]
+    void DieRPC()
+    {
+       Player[] players = FindObjectsOfType<Player>();
+       foreach (Player p in players)
+       {
+          p.rank--;
+       }
+    }
     #endregion
 
     #region 채팅
