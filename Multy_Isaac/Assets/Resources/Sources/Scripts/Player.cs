@@ -122,10 +122,12 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region 내장함수
-//    private void OnApplicationQuit()
-//    {
-//        Die(PhotonNetwork.NickName);
-//    }
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Start()
     {
         timeMgr = FindObjectOfType<TimeManager>();
@@ -134,7 +136,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.OfflineMode)
             nickname.text = PlayerPrefs.GetString("NameKey", "Player");
         anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
         localScaleX = transform.localScale.x;
         canvasLocalScaleX = canvasRect.localScale.x;
 
@@ -352,10 +353,10 @@ if(isPlay)
             }
             else //만약 IsMine이 아니면
             {
-                if ((transform.position - curPos).sqrMagnitude >= 100) //너무 많이 떨어져 있으면 순간이동
-                    transform.position = curPos;
-                else //조금 떨어져 있으면 Lerp로 자연스럽게 위치 동기화
-                    transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+//                if ((transform.position - curPos).sqrMagnitude >= 100) //너무 많이 떨어져 있으면 순간이동
+//                    transform.position = curPos;
+//                else //조금 떨어져 있으면 Lerp로 자연스럽게 위치 동기화
+//                    transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
 
                 if (isPlay)
                 {
@@ -418,6 +419,11 @@ if(isPlay)
                     rb.velocity = Vector2.zero;
                 }
             }
+        }
+
+        if (!pv.IsMine)
+        {
+            rb.position = Vector3.MoveTowards(rb.position, curPos, Time.fixedDeltaTime);
         }
     }
 
@@ -933,7 +939,8 @@ if(isPlay)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.position);
+            stream.SendNext(rb.position);
+            stream.SendNext(rb.velocity);
             stream.SendNext(angle);
             stream.SendNext(moveDirection);
             stream.SendNext(transform.localScale);
@@ -944,7 +951,12 @@ if(isPlay)
         }
         else
         {
-            curPos = (Vector3) stream.ReceiveNext();
+            curPos = (Vector2) stream.ReceiveNext();
+            rb.velocity = (Vector2) stream.ReceiveNext();
+            
+            float lag = Mathf.Abs((float) (PhotonNetwork.Time - info.timestamp));
+            curPos += ((Vector3)rb.velocity * lag);
+            
             angle = (float) stream.ReceiveNext();
             moveDirection = (Vector2) stream.ReceiveNext();
             transform.localScale = (Vector3) stream.ReceiveNext();
