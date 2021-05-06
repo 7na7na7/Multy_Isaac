@@ -423,7 +423,11 @@ if(isPlay)
 
         if (!pv.IsMine)
         {
-            rb.position = Vector3.MoveTowards(rb.position, curPos, Time.fixedDeltaTime);
+                            if ((transform.position - curPos).sqrMagnitude >= 100) //너무 많이 떨어져 있으면 순간이동
+                    transform.position = curPos;
+                else //조금 떨어져 있으면 Lerp로 자연스럽게 위치 동기화
+                    transform.position = Vector3.Lerp(transform.position, curPos, Time.fixedDeltaTime * 10);
+            //rb.position = Vector3.MoveTowards(rb.position, curPos, Time.fixedDeltaTime);
         }
     }
 
