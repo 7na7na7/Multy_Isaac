@@ -417,7 +417,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        PopUpManager.instance.PopUp("서버 연결됨", Color.green);
     else
        PopUpManager.instance.PopUp("Server Connected", Color.green);
-      PhotonNetwork.JoinLobby();
+    PhotonNetwork.JoinLobby();
    }
 
    public override void OnJoinedLobby() //로비 들어왔을때
@@ -564,15 +564,22 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
     void RoomRenewal()
     {
-        ListText.text = "";
+       Hashtable PlayerCustomProps = new Hashtable();
+
+       ListText.text = "";
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
+           PlayerCustomProps["Ping"] = PhotonNetwork.GetPing();
+           if(PhotonNetwork.PlayerList[i].NickName==PhotonNetwork.NickName)
+              PhotonNetwork.PlayerList[i].SetCustomProperties(PlayerCustomProps);  
+           
+
            if(playerCountSave.instance.isKor()) 
-              ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+"\n"; 
+              ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(방장)" :"")+" - "+PhotonNetwork.PlayerList[i].CustomProperties["Ping"]+"ms"+"\n"; 
            else
-              ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(Master)" :"")+"\n";  
+              ListText.text += PhotonNetwork.PlayerList[i].NickName + (PhotonNetwork.PlayerList[i].IsMasterClient==true ? "(Master)" :"")+" - "+PhotonNetwork.PlayerList[i].CustomProperties["Ping"]+"ms"+"\n";  
         }
-        //" - "+PhotonNetwork.PlayerList[i].GetPing()+"ms"+
+
         RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " - " + PhotonNetwork.CurrentRoom.PlayerCount+ " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
     #endregion

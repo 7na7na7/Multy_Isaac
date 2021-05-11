@@ -224,7 +224,12 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          }
       
    }
-
+   public void GoMain() //연결 끊기
+   {
+      PhotonNetwork.LeaveRoom();
+         PhotonNetwork.Disconnect();
+         SceneManager.LoadScene("Main");
+   }
    public void Die()
    {
       
@@ -262,9 +267,12 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
+       if (p.isPlay)
+       {
+          DieRPC();
+       }
+
        FindObjectOfType<PlayerItem>().Dead();
-       if(p.isPlay) 
-          PV.RPC("DieRPC",RpcTarget.All);
        if(playerCountSave.instance.isKor()) 
           ChatRPC("<color=red>" + otherPlayer.NickName + "님이 게임에서 나갔습니다.</color>");
        else

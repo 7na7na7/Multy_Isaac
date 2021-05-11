@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HowTo : MonoBehaviour
 {
+    private string howtoKey = "howtoKey";
     private bool isOpen = false;
     public Animator TUTO;
     public GameObject[] tutorials;
@@ -12,7 +13,19 @@ public class HowTo : MonoBehaviour
     public GameObject nextBtn;
     public int Index = 0;
 
+    private void Start()
+    {
+      Invoke("ss",0.5f);
+    }
 
+    void ss()
+    {
+        if (PlayerPrefs.GetInt(howtoKey, 0) == 0)
+        {
+            On();
+            PlayerPrefs.SetInt(howtoKey,1);
+        }
+    }
     public void On()
     {
         if (isOpen)

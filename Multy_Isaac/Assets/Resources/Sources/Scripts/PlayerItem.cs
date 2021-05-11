@@ -146,7 +146,7 @@ public class PlayerItem : MonoBehaviour
                         ItemBoxes[i].sprite = NullSprite;
                 }
 
-                if (Input.GetMouseButtonDown(1)) //우클릭으로 템조합하기
+                if (Input.GetKeyDown(KeyCode.Space)) //우클릭으로 템조합하기
                 {
                     invent.OpenIfCan(ItemList[selectedIndex]);
                 }
@@ -172,7 +172,7 @@ public class PlayerItem : MonoBehaviour
                         }
                     }
                     
-                    if (Input.GetKeyDown(KeyCode.Space)) //스페이스바로 줍기
+                    if (Input.GetMouseButtonDown(1)) //스페이스바로 줍기
                     {
                         Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, itemRadious, itemLayer);
 
