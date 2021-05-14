@@ -7,23 +7,36 @@ using UnityEngine;
 
 public class FireBomb : MonoBehaviour
 {
+    public PhotonView pv;
     public GameObject fire;
     public Ease easeType;
     private Camera cam;
     public float rotateSpeed;
-    private void Start()
+    public void ON()
     {
-        cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        transform.DOMove((Vector2)cam.ScreenToWorldPoint(Input.mousePosition), 0.75f).SetEase(easeType).OnComplete(()=>
-            {
-                if(PhotonNetwork.OfflineMode) 
-                    Instantiate(fire,transform.position,Quaternion.identity);
-                else 
-                    PhotonNetwork.Instantiate(fire.name,transform.position,Quaternion.identity);
-                Destroy(gameObject);
-            });   
+        if (PhotonNetwork.OfflineMode)
+        {
+            cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+            moveRPC((Vector2)cam.ScreenToWorldPoint(Input.mousePosition));
+        }
+        else
+        {
+            cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+            pv.RPC("moveRPC",RpcTarget.All,(Vector2)cam.ScreenToWorldPoint(Input.mousePosition));
+        }
     }
 
+    [PunRPC]
+    void moveRPC(Vector2 pos)
+    {
+        //cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        transform.DOMove(pos, 0.75f).SetEase(easeType).OnComplete(()=>
+        {
+            if(PhotonNetwork.IsMasterClient) 
+                PhotonNetwork.Instantiate(fire.name,transform.position,Quaternion.identity);
+            Destroy(gameObject);
+        });    
+    }
     void Update()
     {
         transform.eulerAngles=new Vector3(0,0,transform.eulerAngles.z+rotateSpeed*Time.deltaTime);

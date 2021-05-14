@@ -198,9 +198,16 @@ public class UsableItem : MonoBehaviour
             case 79: //화염병
                 player.fireSound();
                 if (PhotonNetwork.OfflineMode)
-                    Instantiate(FireBomb, transform.position, Quaternion.identity);
+                {
+                   GameObject g= Instantiate(FireBomb, transform.position, Quaternion.identity);
+                   g.GetComponent<FireBomb>().ON();
+                }
                 else
-                    PhotonNetwork.Instantiate(FireBomb.name, transform.position, Quaternion.identity);
+            {
+                GameObject g=PhotonNetwork.Instantiate(FireBomb.name, transform.position, Quaternion.identity);
+                g.GetComponent<FireBomb>().ON();
+            }
+                   
                 return true;
             case 80: //사과식초
                 if (eat())
@@ -408,9 +415,15 @@ public class UsableItem : MonoBehaviour
             case 156: //가시공
                 player.fireSound();
                 if (PhotonNetwork.OfflineMode)
-                    Instantiate(NailMarble, transform.position, Quaternion.identity);
+                {
+                    GameObject g= Instantiate(NailMarble, transform.position, Quaternion.identity);
+                    g.GetComponent<NailMarble>().ON();
+                }
                 else
-                    PhotonNetwork.Instantiate(NailMarble.name, transform.position, Quaternion.identity);
+                {
+                    GameObject g=PhotonNetwork.Instantiate(NailMarble.name, transform.position, Quaternion.identity);
+                    g.GetComponent<NailMarble>().ON();
+                }
                 return true;
             case 163: //가시공
                 //player.fireSound();
