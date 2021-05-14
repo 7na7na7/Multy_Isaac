@@ -217,8 +217,13 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
          }  
          
          //엔터키로 로그인
-         if(Input.GetKeyDown(KeyCode.Return))
-            LogIn();
+         if (Input.GetKeyDown(KeyCode.Return))
+         {
+            if(logPanel.activeSelf) 
+               LogIn();  
+            else
+               Register();
+         }
       }
 
       if (LobbyPanel.activeSelf)
@@ -299,7 +304,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       else
       {
          var request = new RegisterPlayFabUserRequest
-            {Email = EmailInput.text, Password = PasswordInput.text, Username = PasswordInput.text,DisplayName = UsernameInput.text};
+            {Email = EmailInput.text, Password = PasswordInput.text, Username = UsernameInput.text,DisplayName = UsernameInput.text};
          PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
       
          LoginPanel.SetActive(false);
