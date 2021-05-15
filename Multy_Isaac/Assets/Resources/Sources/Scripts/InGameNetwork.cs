@@ -27,7 +27,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    public GameObject GameOverPanel2;
    public Text LoseOrWin;
    public Text rank;
-   public Player p;
+   public Player pl;
    public GameObject[] playerPrefabs;
    public bool isOffline;
    
@@ -53,10 +53,13 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       highScore.text = "HighScore - "+playerCountSave.instance.GetHighScore();
    }
 
-   public void GameOver2()
+   public void GameOver2(int rankk)
    {
+      pl.rb.velocity=Vector2.zero;
+      pl.rb.bodyType = RigidbodyType2D.Static;
       GameOverPanel2.SetActive(true);
-      if (p.rank == 1)
+      GameOverPanel2.SetActive(true);
+      if (rankk == 1)
       {
          SteamAchieveemnt.instance.SetAchievement("win");
          LoseOrWin.text = "Win!";
@@ -68,7 +71,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          LoseOrWin.text = "Lose...";  
          LoseOrWin.color=Color.red;
       }
-      rank.text = p.rank.ToString();
+      rank.text = rankk.ToString();
    }
    public void ScoreUpFunc()
    {
@@ -147,7 +150,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    }
    public void Suicide()
    {
-      p.Die(PhotonNetwork.NickName);
+      pl.Die(PhotonNetwork.NickName);
    }
    private void Update()
    {
@@ -209,10 +212,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    
    public void Disconnect() //연결 끊기
    {
-      if(!PhotonNetwork.OfflineMode) 
-         GameOver2();
-      
-      if (p.isDead)
+      if (pl.isDead)
          {
             PhotonNetwork.LeaveRoom();
             PhotonNetwork.Disconnect();
@@ -229,10 +229,6 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
       PhotonNetwork.LeaveRoom();
          PhotonNetwork.Disconnect();
          SceneManager.LoadScene("Main");
-   }
-   public void Die()
-   {
-      
    }
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {
@@ -267,26 +263,11 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-       if (p.isPlay)
-       {
-          DieRPC();
-       }
-
-       FindObjectOfType<PlayerItem>().Dead();
        if(playerCountSave.instance.isKor()) 
           ChatRPC("<color=red>" + otherPlayer.NickName + "님이 게임에서 나갔습니다.</color>");
        else
           ChatRPC("<color=red>" + otherPlayer.NickName + " Outed.</color>");
        
-    }
-    [PunRPC]
-    void DieRPC()
-    {
-       Player[] players = FindObjectsOfType<Player>();
-       foreach (Player p in players)
-       {
-          p.rank--;
-       }
     }
     #endregion
 

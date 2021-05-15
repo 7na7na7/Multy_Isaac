@@ -28,7 +28,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public Text CombineText;
     private playerCountSave pc;
     private bool canRank = false;
-    public int rank;
+ 
     private InGameNetwork net;
     public int PlayerIndex = 0;
     private string[] AnimNames = new[] {"Idle","Walk","Die" };
@@ -206,14 +206,27 @@ if(isPlay)
 
     void isWin()
     {
-        if (rank <= 2 && !isDead)
+        if (!isDead)
         {
+            int remainPlayerCount = 0;
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (Player pp in players)
+            {
+                if (!pp.isDead)
+                    remainPlayerCount++;
+            }
+            
             isSuper = true;
             isDead = true;
             canMove = false;
-            rank--;
-            net.GameOver2();
+            net.GameOver2(remainPlayerCount);
         }
+    }
+
+    IEnumerator isWinCor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isWin();
     }
     private void Update()
     {
@@ -228,10 +241,21 @@ if(isPlay)
                 {
                                  if (!PhotonNetwork.OfflineMode)
                 {
-                    if ( canRank&&rank <= 2 && !isDead)
+                    if ( canRank&& !isDead)
                     {
-                        canRank = false;
-                        Invoke("isWin",0.5f);
+                        int remainPlayerCount = 0;
+                        Player[] players = FindObjectsOfType<Player>();
+                        foreach (Player pp in players)
+                        {
+                            if (!pp.isDead)
+                                remainPlayerCount++;
+                        }
+
+                        if (remainPlayerCount == 1)
+                        {
+                            canRank = false;
+                            StartCoroutine(isWinCor());
+                        }
                     }        
                 }
             
@@ -469,7 +493,7 @@ if(isPlay)
     {
         FindObjectOfType<Pause>().player = this;
             net=FindObjectOfType<InGameNetwork>();
-        net.p = this;
+        net.pl = this;
         GetComponent<CapsuleCollider2D>().isTrigger = false;
         canMove = true;
         Destroy(GameObject.Find("LoadingPanel"));
@@ -480,7 +504,6 @@ if(isPlay)
             if (target.GetComponent<PhotonView>().IsMine)
                 target.target = gameObject;
         }
-        rank=targets.Length+1;
         canRank = true;
         Button[] btns = FindObjectsOfType<Button>();
         foreach (Button b in btns)
@@ -674,7 +697,16 @@ if(isPlay)
             if(PhotonNetwork.OfflineMode) 
                 net.GameOver();
             else
-                net.GameOver2();
+            {
+                int remainPlayerCount = 1;
+                Player[] players = FindObjectsOfType<Player>();
+                foreach (Player pp in players)
+                {
+                    if (!pp.isDead)
+                        remainPlayerCount++;
+                }
+                net.GameOver2(remainPlayerCount);
+            }
         }
         else
         {
@@ -727,14 +759,10 @@ if(isPlay)
     {
         isDead = false;
     }
+
     [PunRPC]
     void DieRPC()
     {
-        Player[] players = FindObjectsOfType<Player>();
-        foreach (Player p in players)
-        {
-            p.rank--;
-        }
         rb.velocity=Vector2.zero;
         rb.bodyType = RigidbodyType2D.Static;
         Destroy(GetComponent<BoxCollider2D>());
