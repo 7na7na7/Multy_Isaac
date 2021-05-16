@@ -247,7 +247,10 @@ public class UsableItem : MonoBehaviour
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(Mine, transform.position, Quaternion.identity);
                 else
-                    PhotonNetwork.Instantiate(Mine.name, transform.position, Quaternion.identity);
+                {
+                    GameObject a;
+                    a=PhotonNetwork.Instantiate(Mine.name, transform.position, Quaternion.identity);   
+                }
                 return true;
                 break;
             case 100: //과일세트

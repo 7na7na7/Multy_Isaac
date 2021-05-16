@@ -25,11 +25,7 @@ public class offlineStat : MonoBehaviour
     {
         maxValue += value;
     }
-
-    public void MaxHpDown(int value)
-    {
-        maxValue -= value;
-    }
+    
     private void Awake()
     {
         stat = GetComponent<StatManager>();

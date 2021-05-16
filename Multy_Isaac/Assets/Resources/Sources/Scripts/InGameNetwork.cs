@@ -55,6 +55,7 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
 
    public void GameOver2(int rankk)
    {
+      pl.SetAnimRPC(0);
       pl.rb.velocity=Vector2.zero;
       pl.rb.bodyType = RigidbodyType2D.Static;
       GameOverPanel2.SetActive(true);

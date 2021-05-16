@@ -1023,7 +1023,7 @@ if(isPlay)
         gun.SetActive(true);
     }
 
-    void SetAnimRPC(byte animName)
+    public void SetAnimRPC(byte animName)
     {
         if (PhotonNetwork.OfflineMode)
         {

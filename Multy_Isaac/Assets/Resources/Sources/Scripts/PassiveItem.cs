@@ -10,35 +10,44 @@ public class PassiveItem : MonoBehaviour
     private PhotonView pv;
 
     public int office = 0;
+
     //가시갑옥
     public int spike = 0;
+
     //레이더
     public float laderRad = 10;
     private IEnumerator laderCor;
     public ParticleSystem laderParticle;
     private int laderCount = 0;
-    
+
     private StatManager statMgr;
+
     private PlayerLight light;
+
     //기동신
     private int mobile;
-    public float mobileTime= 0;
-    public int mobilePer=100;
-    public float savedMobileTime=5;
+    public float mobileTime = 0;
+    public int mobilePer = 100;
+
+    public float savedMobileTime = 5;
+
     //소음기
     public int Silence = 0;
+
     //신발등 이동속도
     public int Speed = 0;
+
     //기계다리
     public int machineLegCount = 0;
     private offlineStat offStat;
+
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         laderCor = LaderCor();
         statMgr = transform.GetChild(0).GetComponent<StatManager>();
-        light=transform.GetChild(1).GetComponent<PlayerLight>();
-        offStat=transform.GetChild(0).GetComponent<offlineStat>();
+        light = transform.GetChild(1).GetComponent<PlayerLight>();
+        offStat = transform.GetChild(0).GetComponent<offlineStat>();
     }
 
     [PunRPC]
@@ -46,235 +55,162 @@ public class PassiveItem : MonoBehaviour
     {
         spike = v;
     }
-    public void PassiveOn(int itemIndex)
+
+    public void Passive(int index,bool isOn)
     {
-        switch (itemIndex)
+        if (index == 43) //기동신
         {
-            case 43: //기동신
-                mobilePer += 30;
-                break;
-            case 48: //양말
-                Speed += 7;
-                break;
-            case 49: //스타킹
-                Speed += 17;
-                break;
-            case 81: //소음기
-                Silence++;
-                break;
-            case 82://티셔츠
-                statMgr.armor += 10;
-                break;
-            case 83: //신발
-                statMgr.armor += 5;
-                Speed += 7;
-                break;
-            case 90: //멋진티셔츠
-                offStat.MaxHpUp(30);
-                break;
-            case 107: //횃불
-                light.lightValue += 0.05f;
+            mobilePer += isOn ? 30 : -30;
+        }
+        else if (index == 48) //양말
+        {
+            Speed += isOn ? 7 : -7;
+        }
+        else if (index == 49) //스타킹
+        {
+            Speed += isOn ? 17 : -17;
+        }
+        else if (index == 81) //소음기
+        {
+            Silence += isOn ? 1 : -1;
+        }
+        else if (index == 82) //티셔츠
+        {
+            offStat.MaxHpUp(isOn?10:-10);
+        }
+        else if (index == 83) //신발
+        {
+            Speed += isOn ? 8 : -8;
+        }
+        else if (index == 90) //멋진티셔츠
+        {
+            offStat.MaxHpUp(isOn ? 30 : -30);
+        }
+        else if (index == 107) //횃불
+        {
+            light.lightValue += isOn ? 0.075f : -0.075f;
+            if(isOn)
                 light.torchOn();
-                break;
-            case 119: //안전모
-                statMgr.armor += 10;
-                break;
-            case 120: //목발
-                Speed += 12;
-                break;
-            case 122: //스웨터
-                statMgr.armor += 15;
-                offStat.MaxHpUp(15);
-                break;
-            case 123: //방탄모
-                statMgr.armor += 35;
-                break;
-            case 125: //목도리
-                statMgr.armor += 20;
-                break;
-            case 126: //레이더
+            else
+                light.torchOff();
+        }
+        else if (index == 119) //안전모
+        {
+            offStat.MaxHpUp(isOn ? 8 : -8);
+        }
+        else if (index == 120) //목발
+        {
+            Speed += isOn ? 12 : -12;
+        }
+        else if (index == 122) //스웨터
+        {
+            offStat.MaxHpUp(isOn ? 25 : -25);
+        }
+        else if (index == 123) //방탄모
+        {
+            offStat.MaxHpUp(isOn ? 40 : -40);
+        }
+        else if (index == 125) //목도리
+        {
+            offStat.MaxHpUp(isOn ? 25 : -25);
+        }
+        else if (index == 126) //레이더
+        {
+            if (isOn)
+            {
                 StartCoroutine(laderCor);
                 laderCount++;
-                break;
-            case 127: //기계다리
-                statMgr.armor += 10;
-                Speed += 15;
-                machineLegCount++;
-                break;
-            case 133: //패딩
-                statMgr.armor += 35;
-                offStat.MaxHpUp(35);
-                break;
-            case 134: //기름신발
-                statMgr.armor += 5;
-                Speed += 14;
-                break;
-            case 135: //셔츠
-                statMgr.armor += 20;
-                break;
-            case 136: //슈트
-                statMgr.armor += 60;
-                offStat.MaxHpUp(30);
-                break;
-            case 139: //사슬갑옷
-                statMgr.armor += 40;
-                break;
-            case 146: //체인레깅스
-                statMgr.armor += 20;
-                Speed += 20;
-                break;
-            case 147: //가시갑옷
-                statMgr.armor += 50;
-                spike++;
-                if(!PhotonNetwork.OfflineMode)
-                    pv.RPC("spikeRPC",RpcTarget.All,spike);
-                break;
-            case 149: //찢어진스타킹
-                Speed += 27;
-                break;
-            case 150: //경찰조끼
-                statMgr.armor += 15;
-                break;
-            case 151: //방탄조끼
-                statMgr.armor += 30;
-                offStat.MaxHpUp(15);
-                break;
-            case 152: //인형
-                offStat.MaxHpUp(20);
-                break;
-            case 153: //다키마쿠라
-                offStat.MaxHpUp(50);
-                break;
-            case 158: //풀바디 아머
-                statMgr.armor += 100;
-                break;
-            case 162: //다이아갑옷
-                statMgr.armor += 40;
-                offStat.MaxHpUp(40);
-                Speed += 12;
-                break;
-            case 164: //오핏스룩
-                offStat.MaxHpUp(35);
-                Speed += 20;
-                office++;
-                break;
+            }
+            else
+            {
+                laderCount--;
+                if(laderCount<=0) 
+                    StopCoroutine(laderCor);
+            }
         }
+        else if (index == 127) //기계다리
+        {
+            offStat.MaxHpUp(isOn?15:-15);
+            Speed += isOn ? 15 : -15;
+            machineLegCount += isOn ? 1 : -1;
+        }
+        else if (index == 133) //패딩
+        {
+            offStat.MaxHpUp(isOn ? 60 : -60);
+        }
+        else if (index == 134) //기름신발
+        {
+            Speed += isOn ? 16 : -16;
+        }
+        else if (index == 135) //셔츠
+        {
+            offStat.MaxHpUp(isOn?30:-30);
+        }
+        else if (index == 136) //슈트
+        {
+            offStat.MaxHpUp(isOn?75:-75);
+        }
+        else if (index == 139) //사슬갑옷
+        {
+            offStat.MaxHpUp(isOn?45:-45);
+        }
+        else if (index == 146) //체인레깅스
+        {
+            offStat.MaxHpUp(isOn?25:-25);
+            Speed += isOn ? 20 : -20;
+        }
+        else if (index == 147) //가시갑옷
+        {
+            offStat.MaxHpUp(isOn?45:-45);
+            spike += isOn ? 1 : -1;
+            if(!PhotonNetwork.OfflineMode)
+                pv.RPC("spikeRPC",RpcTarget.All,spike);
+        }
+        else if (index==149) //찢어진스타킹
+        {
+            Speed += isOn ? 27 : -27;
+        }
+        else if (index == 150) //경찰조끼
+        {
+            offStat.MaxHpUp(isOn?15:-15);
+        }
+        else if (index == 151) //방탄조끼
+        {
+            offStat.MaxHpUp(isOn?40:-40);
+        }
+        else if (index == 152) //인형
+        {
+            offStat.MaxHpUp(isOn?30:-30);
+        }
+        else if (index == 153) //다키마쿠라
+        {
+            offStat.MaxHpUp(isOn?50:-50);
+        }
+        else if (index == 158) //풀바디아머
+        {
+            offStat.MaxHpUp(isOn?100:-100);
+        }
+        else if (index == 162) //다이아갑옷
+        {
+            offStat.MaxHpUp(isOn?55:-55);
+            Speed += isOn ? 12 : -12;
+        }
+        else if (index == 164) //오피스룩
+        {
+            offStat.MaxHpUp(isOn?40:-40);
+            Speed += isOn ? 20 : -20;
+            office += isOn ? 1 : -1;
+        }
+    }
+    
+    public void PassiveOn(int itemIndex)
+    { 
+        Passive(itemIndex,true);
     }
         
     public void PassiveOff(int itemIndex)
     {
-        switch (itemIndex)
-        {
-            case 43:
-                mobilePer -= 30;
-                break;
-            case 48:
-                Speed -= 7;
-                break;
-            case 49:
-                Speed -= 17;
-                break;
-            case 81:
-                Silence--;
-                break;
-            case 82:
-                statMgr.armor -= 10;
-                break;
-            case 83:
-                statMgr.armor -= 5;
-                Speed -= 7;
-                break;
-            case 90:
-                offStat.MaxHpDown(30);
-                break;
-            case 107: //횃불
-                light.lightValue -= 0.05f;
-                light.torchOff();
-                break;
-            case 119: //안전모
-                statMgr.armor -= 10;
-                break;
-            case 120: //목발
-                Speed -= 12;
-                break;
-            case 122: //스웨터
-                statMgr.armor -= 15;
-                offStat.MaxHpDown(15);
-                break;
-            case 123: //방탄모
-                statMgr.armor -= 35;
-                break;
-            case 125: //목도리
-                statMgr.armor -= 20;
-                break;
-            case 126: //레이더
-                laderCount--;
-                if(laderCount<=0) 
-                    StopCoroutine(laderCor);
-                break;
-            case 127: //기계다리
-                statMgr.armor -= 10;
-                Speed -= 15;
-                machineLegCount--;
-                break;
-            case 133: //패딩
-                statMgr.armor -= 35;
-                offStat.MaxHpDown(35);
-                break;
-            case 134: //기름신발
-                statMgr.armor -= 5;
-                Speed -= 14;
-                break;
-            case 135: //셔츠
-                statMgr.armor -= 20;
-                break;
-            case 136: //슈트
-                statMgr.armor -= 60;
-                offStat.MaxHpDown(30);
-                break;
-            case 139: //사슬갑옷
-                statMgr.armor -= 40;
-                break;
-            case 146: //체인레깅스
-                statMgr.armor -= 20;
-                Speed -= 20;
-                break;
-            case 147: //가시갑옷
-                statMgr.armor -= 50;
-                spike--;
-                if(!PhotonNetwork.OfflineMode)
-                    pv.RPC("spikeRPC",RpcTarget.All,spike);
-                break;
-            case 149: //찢어진스타킹
-                Speed -= 27;
-                break;
-            case 150: //경찰조끼
-                statMgr.armor -= 15;
-                break;
-            case 151: //방탄조끼
-                statMgr.armor -= 30;
-                offStat.MaxHpDown(15);
-                break;
-            case 152: //인형
-                offStat.MaxHpDown(20);
-                break;
-            case 153: //다키마쿠라
-                offStat.MaxHpDown(50);
-                break;
-            case 158: //풀바디 아머
-                statMgr.armor -= 100;
-                break;
-            case 162: //다이아갑옷
-                statMgr.armor -= 40;
-                Speed -= 12; 
-                offStat.MaxHpDown(40);
-                break;
-            case 164: //오핏스룩
-                offStat.MaxHpDown(35);
-                Speed -= 20;
-                office--;
-                break;
-        }
+        Passive(itemIndex,false);
     }
 
     public void StopLader()

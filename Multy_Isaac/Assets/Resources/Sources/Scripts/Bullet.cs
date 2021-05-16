@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviourPunCallbacks
 
         if (type == Player.bulletType.shot)
         {
-            speed-=Time.deltaTime*25f;
+            speed-=Time.deltaTime*35f;
         }
     }
 
