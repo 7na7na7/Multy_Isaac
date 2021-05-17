@@ -20,7 +20,7 @@ public class PassiveItem : MonoBehaviour
     public float laderRad = 10;
     private IEnumerator laderCor;
     public ParticleSystem laderParticle;
-    private int laderCount = 0;
+    public int laderCount = 0;
 
     private StatManager statMgr;
 

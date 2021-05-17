@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class MinimapPlayer : MonoBehaviour
 {
+    private Player[] players;
     private PhotonView pv;
     private TimeManager time;
     public GameObject target;
@@ -35,6 +36,18 @@ public class MinimapPlayer : MonoBehaviour
             {
                 if (time.isNight)
                 {
+                    players = FindObjectsOfType<Player>();
+                    foreach (Player p in players)
+                    {
+                        if (p.GetComponent<PhotonView>().IsMine)
+                        {
+                            if (p.passive.laderCount > 0)
+                            {
+                                GetComponent<SpriteRenderer>().color = Color.white;
+                                return;
+                            }
+                        }
+                    }
                     GetComponent<SpriteRenderer>().color=Color.clear;
                 }
                 else

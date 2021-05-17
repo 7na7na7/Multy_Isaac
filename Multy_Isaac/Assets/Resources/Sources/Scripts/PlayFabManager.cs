@@ -80,8 +80,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     
    private void Awake()
    {
-
-
       PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString(NameKey,"");
       Screen.SetResolution(startResolution.x,startResolution.y, false);
       EmailInput.text = PlayerPrefs.GetString(EamilKey, "");
@@ -393,6 +391,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PlayFabClientAPI.GetUserData(request, (result) =>
       {
          NickName=result.Data["nick"].Value;
+         print("B");
+         PhotonNetwork.LocalPlayer.NickName = NickName;
+         PhotonNetwork.NickName = NickName;
          PlayerPrefs.SetString(NameKey,NickName);
       },(error) => print	("데이터 저장 실패"));
     
@@ -433,7 +434,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       LobbyPanel.SetActive(true);
       RoomPanel.SetActive(false);
       titleImg.SetActive(true);
-      PhotonNetwork.LocalPlayer.NickName = NickName;
+    
       myList.Clear();
    }
    public void Disconnect() //연결 끊기

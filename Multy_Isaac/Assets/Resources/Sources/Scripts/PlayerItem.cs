@@ -828,7 +828,10 @@ public class PlayerItem : MonoBehaviour
             {
                 if (ItemList[i].index != 0)
                 {
-                    discardRPC(ItemList[i].index,true);
+                    for (int j = 0; j < ItemList[i].Count; j++)
+                    {
+                        discardRPC(ItemList[i].index,true);   
+                    }
                 }
             }
             ItemList[i].Clear();
