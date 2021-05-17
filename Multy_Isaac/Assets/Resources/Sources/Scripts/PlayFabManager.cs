@@ -551,6 +551,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
     
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
+       FindObjectOfType<Player>().DoorSound();
        //RoomRenewal();
        if(playerCountSave.instance.isKor()) 
           ChatRPC("<color=green>" + newPlayer.NickName + "님이 참가하셨습니다</color>");

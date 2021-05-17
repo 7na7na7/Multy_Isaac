@@ -575,6 +575,7 @@ if(isPlay)
                     }
                 }
             }   
+            PhotonNetwork.SendAllOutgoingCommands();
         }
     }
 
@@ -659,6 +660,7 @@ if(isPlay)
             {
                 speed = savedSpeed;
             }
+            PhotonNetwork.SendAllOutgoingCommands();
         }
     }
     
@@ -895,6 +897,10 @@ if(isPlay)
     public void CombineSound()
     {
         sound.Play(3,false,0.5f);
+    }
+    public void DoorSound()
+    {
+        sound.Play(14,false,1f);
     }
     public void eatSound()
     {
