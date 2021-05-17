@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 3749522341741181219}
   - component: {fileID: 3749522341741181245}
   m_Layer: 9
-  m_Name: item158
+  m_Name: item165
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,10 +4846,10 @@ Transform:
   m_GameObject: {fileID: 3749522341741181223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 449410984}
-  - {fileID: 4869776060961844962}
+  - {fileID: 8469713305035361376}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4893,12 +4893,12 @@ SpriteRenderer:
   m_SortingLayerID: 128337273
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: d27415069a336e8429915244cb364dd5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a2c974b4cac22d458a3250d97ad8640, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.23, y: 0.38}
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4924,22 +4924,22 @@ MonoBehaviour:
   isShopTem: 0
   Index: 0
   item:
-    Count: 1
+    Count: 30
     weaponIndex: 0
     NoneSprite: {fileID: 21300000, guid: da1d61c394c2cf64897f0f101c2515bd, type: 3}
     canSee: 1
-    SmallItemIndex: 970000007b000000
+    SmallItemIndex: 3600000036000000
     CompleteItemIndex: 
-    index: 158
-    ItemName: "\uD480\uBC14\uB514 \uC544\uBA38"
-    ItemName2: Full-Body Armor
-    ItemSprite: {fileID: 21300000, guid: d27415069a336e8429915244cb364dd5, type: 3}
-    type: 3
-    ItemDescription: "\uCD5C\uAC15\uC758 \uAC11\uC637. \uC880 \uBB34\uAC81\uAE34
-      \uD558\uC9C0\uB9CC, \uADF8 \uBB34\uC5C7\uB3C4 \uB6AB\uC9C0 \uBABB\uD560 \uAC83
-      \uAC19\uB2E4. (\uC774\uB3D9\uC18D\uB3C4 -15, \uCD5C\uB300\uCCB4\uB825 +150)"
-    ItemDescription2: Strongest armor, a bit heavy, but I don't think anything will
-      penetrate it. (Speed -15, MaxHp +150)
+    index: 165
+    ItemName: "\uD22C\uCC99\uC6A9 \uB2E8\uB3C4"
+    ItemName2: Throwing dagger
+    ItemSprite: {fileID: 21300000, guid: 3a2c974b4cac22d458a3250d97ad8640, type: 3}
+    type: 4
+    ItemDescription: "\uCEE4\uC11C \uBC29\uD5A5\uC73C\uB85C \uB0A0\uCE74\uB85C\uC6B4
+      \uB2E8\uB3C4\uB97C \uB0A0\uB824 \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4. (\uB370\uBBF8\uC9C0
+      17, 30\uAC1C)"
+    ItemDescription2: Throw a sharp dagger in the direction of the cursor to damage
+      it. (Damage 17, amount 30)
     WhereGet: "\uC81C\uC791"
     WhereGet2: Invent
   outlineMat: {fileID: 2100000, guid: d2db29a302745e8459e3032c6eb32c9b, type: 2}
@@ -4958,7 +4958,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!50 &3749522341741181245
 Rigidbody2D:
   serializedVersion: 4
@@ -4980,7 +4980,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &6160867055047779158
+--- !u!1 &4817635938234282624
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4988,24 +4988,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4869776060961844962}
+  - component: {fileID: 8469713305035361376}
   m_Layer: 9
-  m_Name: bulletPos
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4869776060961844962
+  m_IsActive: 0
+--- !u!4 &8469713305035361376
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6160867055047779158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 4817635938234282624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3749522341741181216}
   m_RootOrder: 1

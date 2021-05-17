@@ -23,6 +23,8 @@ public class Bullet : MonoBehaviourPunCallbacks
     {
         Invoke("DestroyWall",DestroyTime);
         spr = GetComponent<SpriteRenderer>();
+        if (spr == null)
+            spr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         savedLocalScale = transform.localScale;
         transform.localScale=Vector3.zero;
         transform.DOScale(savedLocalScale, 0.1f);

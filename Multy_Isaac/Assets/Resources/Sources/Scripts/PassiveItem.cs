@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PassiveItem : MonoBehaviour
 {
+    public int dakimakura=0;
+    public int padding = 0;
     private PhotonView pv;
 
     public int office = 0;
@@ -136,7 +138,8 @@ public class PassiveItem : MonoBehaviour
         }
         else if (index == 133) //패딩
         {
-            offStat.MaxHpUp(isOn ? 60 : -60);
+            offStat.MaxHpUp(isOn ? 55 : -55);
+            padding += isOn ? 1 : -1;
         }
         else if (index == 134) //기름신발
         {
@@ -180,15 +183,17 @@ public class PassiveItem : MonoBehaviour
         }
         else if (index == 152) //인형
         {
-            offStat.MaxHpUp(isOn?30:-30);
+            offStat.MaxHpUp(isOn?25:-25);
         }
         else if (index == 153) //다키마쿠라
         {
-            offStat.MaxHpUp(isOn?50:-50);
+            offStat.MaxHpUp(isOn?35:-35);
+            dakimakura += isOn ? 1 : -1; 
         }
         else if (index == 158) //풀바디아머
         {
-            offStat.MaxHpUp(isOn?100:-100);
+            offStat.MaxHpUp(isOn?150:-150);
+            Speed += isOn ? -15 : 15;
         }
         else if (index == 162) //다이아갑옷
         {

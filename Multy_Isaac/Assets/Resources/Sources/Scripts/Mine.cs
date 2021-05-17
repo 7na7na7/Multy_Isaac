@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
+    public Player p;
     public bool isMine = true;
     public float invisibleTime;
     public float delay;
@@ -19,13 +20,10 @@ public class Mine : MonoBehaviour
         StartCoroutine(mineCor());
     }
 
-    void Explode()
+    [PunRPC]
+    void ExplodeRPC()
     {
-        if(!PhotonNetwork.OfflineMode)
-        {
-            if(PhotonNetwork.IsMasterClient)
-                PhotonNetwork.Instantiate(explosion.name, transform.position, quaternion.identity);
-        }
+        Instantiate(explosion, transform.position, quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -62,18 +60,17 @@ public class Mine : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                if (other.GetComponent<PhotonView>().IsMine && GetComponent<PhotonView>().IsMine)
+                if (other.GetComponent<PhotonView>().IsMine)
                 {
-                    
-                }
-                else
-                {
-                    if (isMine)
+                    if (p==null)
                     {
-                        Explode();
+                        if (isMine)
+                        {
+                            GetComponent<PhotonView>().RPC("ExplodeRPC",RpcTarget.All);
+                        }
                     }
                 }
-                
+
             }
         }
     }

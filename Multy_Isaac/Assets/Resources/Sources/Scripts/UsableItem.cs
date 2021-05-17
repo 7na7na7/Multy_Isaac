@@ -26,6 +26,7 @@ public class UsableItem : MonoBehaviour
     public GameObject Pan1, Pan2;
     public GameObject NailMarble;
     public GameObject WireTrap;
+    public GameObject ThrowingDagger;
     private void Start()
     {
         player = GetComponent<Player>();
@@ -249,7 +250,8 @@ public class UsableItem : MonoBehaviour
                 else
                 {
                     GameObject a;
-                    a=PhotonNetwork.Instantiate(Mine.name, transform.position, Quaternion.identity);   
+                    a=PhotonNetwork.Instantiate(Mine.name, transform.position, Quaternion.identity);
+                    a.GetComponent<Mine>().p = GetComponent<Player>();
                 }
                 return true;
                 break;
@@ -428,12 +430,25 @@ public class UsableItem : MonoBehaviour
                     g.GetComponent<NailMarble>().ON();
                 }
                 return true;
-            case 163: //가시공
+            case 163: //와이어트랩
                 //player.fireSound();
                 if (PhotonNetwork.OfflineMode)
                     Instantiate(WireTrap, transform.position, Quaternion.identity);
                 else
                     PhotonNetwork.Instantiate(WireTrap.name, transform.position, Quaternion.identity);
+                return true;
+            case 165: //투척용단도
+                player.fireSound();
+                if (PhotonNetwork.OfflineMode)
+                {
+                    GameObject g= Instantiate(ThrowingDagger, transform.position, Quaternion.identity);
+                    g.GetComponent<NailMarble>().ON();
+                }
+                else
+                {
+                    GameObject g=PhotonNetwork.Instantiate(ThrowingDagger.name, transform.position, Quaternion.identity);
+                    g.GetComponent<NailMarble>().ON();
+                }
                 return true;
         }
 

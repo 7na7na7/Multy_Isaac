@@ -480,7 +480,7 @@ if(isPlay)
     {
         while (true)
         {
-            yield return new WaitForSeconds(hpRegenDelay);
+            yield return new WaitForSeconds(passive.dakimakura>0 ? hpRegenDelay/2f:hpRegenDelay);
             if(offStat.getHungry()>hpRegenCut && !isDead) 
                 statMgr.Heal(1);
         }
@@ -770,6 +770,8 @@ if(isPlay)
     }
     public void Hit(int Damage,string HitName,float nuckBackDistance,Vector3 pos=default(Vector3),bulletType type=bulletType.common) //공격받을때 공격한사람 이름도 받음
     {
+        if (passive.padding > 0)
+            nuckBackDistance = 0;
         if (!isSuper&&pv.IsMine && !isDead && !SUPERRRRRRR)
         {
             switch (type)
