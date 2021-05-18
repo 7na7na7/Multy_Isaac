@@ -89,6 +89,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
       VersionText.text = "Ver "+AppVersion;
+      
+      if(SceneManager.GetActiveScene().name=="Main2")
+         RoomRenewal();
    }
 
    public void Rank()
