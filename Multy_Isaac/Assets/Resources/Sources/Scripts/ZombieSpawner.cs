@@ -15,6 +15,7 @@ public class ZombieSpawner : MonoBehaviour
     public Transform randomMin, randomMax;
     public float delay;
     public float[] delays;
+    public float[] delays_M;
     public GameObject[] zombies;
     public int[] Days;
     public int[] Indexes;
@@ -25,7 +26,10 @@ public class ZombieSpawner : MonoBehaviour
 
     public void DaybyDay(int day)
     {
-        delay = delays[day - 1];
+        if(PhotonNetwork.OfflineMode) 
+            delay = delays[day - 1];
+        else
+            delay = delays_M[day - 1];
         for (int i = 0; i < Days.Length; i++)
         {
             if (Days[i] == day)
@@ -82,12 +86,9 @@ public class ZombieSpawner : MonoBehaviour
             
             float rdelay = delay;
             if (!time.isNight)
-                rdelay *= 1.75f;
-            if (PhotonNetwork.OfflineMode)
-                yield return new WaitForSeconds(rdelay);
-            else
-                yield return new WaitForSeconds(rdelay*players.Length*1.25f);
+                rdelay *= 2f;
             
+            yield return new WaitForSeconds(rdelay);
         }
     }
 
