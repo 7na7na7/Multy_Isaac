@@ -218,7 +218,10 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          {
             PhotonNetwork.LeaveRoom();
             //PhotonNetwork.Disconnect();
-            SceneManager.LoadScene("Main2");
+            if(PhotonNetwork.OfflineMode)
+               SceneManager.LoadScene("Main");
+            else
+               SceneManager.LoadScene("Main2");
          }
          else
          {
@@ -230,8 +233,10 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
    {
       PhotonNetwork.LeaveRoom();
          //PhotonNetwork.Disconnect();
-         SceneManager.LoadScene("Main2");
-      
+         if(PhotonNetwork.OfflineMode)
+            SceneManager.LoadScene("Main");
+         else
+            SceneManager.LoadScene("Main2");
    }
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {
