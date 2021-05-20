@@ -25,12 +25,21 @@ public class CameraManager : MonoBehaviour
         {
             if (PhotonNetwork.OfflineMode)
             {
-                GameObject t=Instantiate(minimapHeads[FindObjectOfType<playerCountSave>().PlayerIndex], transform.position, Quaternion.identity);
+                GameObject t=null;
+                if(SceneManager.GetActiveScene().name!="Tutorial") 
+                    t=Instantiate(minimapHeads[FindObjectOfType<playerCountSave>().PlayerIndex], transform.position, Quaternion.identity);
+                else
+                    t=Instantiate(minimapHeads[0], transform.position, Quaternion.identity);
                 target = t;
             }
             else
             {
-                GameObject t=PhotonNetwork.Instantiate("MiniHead"+FindObjectOfType<playerCountSave>().PlayerIndex, transform.position, Quaternion.identity);
+                GameObject t=null;
+                if(SceneManager.GetActiveScene().name!="Tutorial") 
+                    t=PhotonNetwork.Instantiate("MiniHead"+FindObjectOfType<playerCountSave>().PlayerIndex, transform.position, Quaternion.identity);
+                else
+                    t=PhotonNetwork.Instantiate("MiniHead"+'0', transform.position, Quaternion.identity);
+                
                 target = t;
             }   
         }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HowTo : MonoBehaviour
 {
@@ -28,6 +30,10 @@ public class HowTo : MonoBehaviour
     }
     public void On()
     {
+        PhotonNetwork.OfflineMode = true;
+        FindObjectOfType<PlayFabManager>().OnConnectedToMaster();
+        FindObjectOfType<PlayFabManager>().CreateRoom();
+        SceneManager.LoadScene("Tutorial");
         if (isOpen)
         {
             TUTO.Play("Close");

@@ -130,6 +130,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
+        if(SceneManager.GetActiveScene().name=="Tutorial")
+            GameObject.Find("FAST").GetComponent<Image>().color=Color.white;
         timeMgr = FindObjectOfType<TimeManager>();
         temMgr = FindObjectOfType<TemManager>();
         
@@ -155,7 +157,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 ItemTypes[i].text = ItemTypesEng[i];
             }
         }
-        if (SceneManager.GetActiveScene().name == "Play")
+        if (SceneManager.GetActiveScene().name != "Main")
         {
             isPlay = true;
         }
@@ -174,7 +176,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 if(isPlay)
 {
             GetComponent<CapsuleCollider2D>().isTrigger = true;
-                if (!isTEST)
+                if (!isTEST && SceneManager.GetActiveScene().name!="Tutorial")
                 {
                     Invoke("aspaltSet",FindObjectOfType<RoomTemplates>().delay);
                     Invoke("setCam",FindObjectOfType<ZombieSpawner>().FirstDelay+0.5f);   

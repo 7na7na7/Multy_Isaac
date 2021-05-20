@@ -340,12 +340,18 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
     public void Spawn()
     {
        if (isOffline)
-       {
-          Instantiate(playerPrefabs[FindObjectOfType<playerCountSave>().PlayerIndex], Vector3.zero, quaternion.identity);  
+       { 
+          if(SceneManager.GetActiveScene().name!="Tutorial") 
+             Instantiate(playerPrefabs[FindObjectOfType<playerCountSave>().PlayerIndex], Vector3.zero, quaternion.identity);
+          else
+             Instantiate(playerPrefabs[0], new Vector3(0,5,0), quaternion.identity);
        }
        else
        {
-          PhotonNetwork.Instantiate("Player"+FindObjectOfType<playerCountSave>().PlayerIndex, Vector3.zero, quaternion.identity);  
+          if(SceneManager.GetActiveScene().name!="Tutorial") 
+             PhotonNetwork.Instantiate("Player"+FindObjectOfType<playerCountSave>().PlayerIndex, Vector3.zero, quaternion.identity);  
+          else
+             PhotonNetwork.Instantiate("Player"+0, new Vector3(0,5,0), quaternion.identity);  
        }
     }
 

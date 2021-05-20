@@ -6,6 +6,7 @@ using DG.Tweening;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.LWRP;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Light2D = UnityEngine.Experimental.Rendering.Universal.Light2D;
 
@@ -32,9 +33,13 @@ public class TimeManager : MonoBehaviour
     {
         pv = GetComponent<PhotonView>();
         globalLight = GetComponent<Light2D>();
-        StartCoroutine(cor());
+        
         maxTime = dayTime + dayToNightTime + nightTime + nightToDayTime;
-        spawner.DaybyDay(day);
+        if (SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            StartCoroutine(cor());
+            spawner.DaybyDay(day);
+        }
     }
 
     private void Update()

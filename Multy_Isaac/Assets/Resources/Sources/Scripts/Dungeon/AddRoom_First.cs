@@ -6,6 +6,7 @@ using Pathfinding;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class AddRoom_First : MonoBehaviour
@@ -31,15 +32,18 @@ public class AddRoom_First : MonoBehaviour
 
   void set()
   {
-      proc = FindObjectOfType<Procedural>();
-      templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-      for (int i = 0; i < objects.Length; i++)
+      if (SceneManager.GetActiveScene().name != "Tutorial")
       {
-          for (int j = 0; j < counts[i]; j++)
+          proc = FindObjectOfType<Procedural>();
+          templates=GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+          for (int i = 0; i < objects.Length; i++)
           {
-              float delay=proc.getCount();
-              StartCoroutine(SetRoom(templates.firstDelay + delay, i));
-          }
+              for (int j = 0; j < counts[i]; j++)
+              {
+                  float delay=proc.getCount();
+                  StartCoroutine(SetRoom(templates.firstDelay + delay, i));
+              }
+          }   
       }
   }
  

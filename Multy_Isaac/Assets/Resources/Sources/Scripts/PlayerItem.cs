@@ -223,11 +223,10 @@ public class PlayerItem : MonoBehaviour
                                             slots[i].itemCount++;
                                         
                                             check(i,false);
-
                                             if (!it.isShopTem)
                                             {
-                                                temMgr.delTem(it.Index); 
-                                                Destroy(item);   
+                                                temMgr.delTem(it.Index);
+                                                Destroy(item.gameObject);
                                             }
                                             else
                                             {
@@ -252,7 +251,7 @@ public class PlayerItem : MonoBehaviour
                                                 if (!it.isShopTem)
                                                 {
                                                     temMgr.delTem(it.Index);
-                                                    Destroy(item);  
+                                                    Destroy(item.gameObject);  
                                                 }
                                                 else
                                                 {
@@ -281,7 +280,7 @@ public class PlayerItem : MonoBehaviour
                                             if (!it.isShopTem)
                                             {
                                                 temMgr.delTem(it.Index);
-                                                Destroy(item);  
+                                                Destroy(item.gameObject);  
                                             }
                                             else
                                             {

@@ -20,7 +20,7 @@ public class Park : MonoBehaviour
 
    private void Start()
    {
-       Invoke("set",1f);
+       Invoke("set",.3f);
    }
 
    private void set()
