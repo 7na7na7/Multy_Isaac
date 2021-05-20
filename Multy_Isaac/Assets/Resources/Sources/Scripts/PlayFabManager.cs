@@ -539,6 +539,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
        LobbyPanel.SetActive(false);
        RoomPanel.SetActive(true);
        titleImg.SetActive(false);
+       LoginPanel.SetActive(false);
        //RoomRenewal();
        ChatInput.text = "";
        for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
