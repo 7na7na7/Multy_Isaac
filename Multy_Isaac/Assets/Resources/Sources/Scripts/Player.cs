@@ -359,14 +359,17 @@ if(isPlay)
                             //월드포지션은 절대, 카메라와 플레이어 포지션은 변할 수 있다!!!!!!!
                             //MousePosition2.y -= 0.25f; //오차조정을 위한 코드
                             angle = Mathf.Atan2(MousePosition2.y, MousePosition2.x) * Mathf.Rad2Deg;
-                            
+
+                            int swordValue = 0;
+                            if (currentWeapon.weaponIndex == 130)
+                                swordValue = -45;
                             if (Mathf.Abs(angle) > 90&&transform.localScale.x==localScaleX*-1) 
                             {
-                                gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle);
+                                gun.transform.rotation = Quaternion.Euler(180, 0f, -1*angle+swordValue);
                             } //총 로컬스케일 플레이어와 맞춰주기
                             else
                             {
-                                gun.transform.rotation = Quaternion.Euler(0, 0f, angle);
+                                gun.transform.rotation = Quaternion.Euler(0, 0f, angle+swordValue);
                             }   
                         }
                  
