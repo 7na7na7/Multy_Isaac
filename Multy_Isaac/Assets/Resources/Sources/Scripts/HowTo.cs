@@ -30,19 +30,11 @@ public class HowTo : MonoBehaviour
     }
     public void On()
     {
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.OfflineMode = true;
-            FindObjectOfType<PlayFabManager>().CreateRoom();
-            SceneManager.LoadScene("Tutorial");    
-        }
-        else
-        {
-            PhotonNetwork.OfflineMode = true;
+        PhotonNetwork.OfflineMode = true;
             FindObjectOfType<PlayFabManager>().OnConnectedToMaster();
             FindObjectOfType<PlayFabManager>().CreateRoom();
             SceneManager.LoadScene("Tutorial");
-        }
+        
 //        if (isOpen)
 //        {
 //            TUTO.Play("Close");
