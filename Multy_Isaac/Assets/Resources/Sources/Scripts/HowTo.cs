@@ -20,21 +20,29 @@ public class HowTo : MonoBehaviour
       ss();
     }
 
-    void ss()
+    void ss() 
     {
         if (PlayerPrefs.GetInt(howtoKey, 0) == 0)
         {
-            print("A");
             On();
             PlayerPrefs.SetInt(howtoKey,1);
         }
     }
     public void On()
     {
-        PhotonNetwork.OfflineMode = true;
-        FindObjectOfType<PlayFabManager>().OnConnectedToMaster();
-        FindObjectOfType<PlayFabManager>().CreateRoom();
-        SceneManager.LoadScene("Tutorial");
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.OfflineMode = true;
+            FindObjectOfType<PlayFabManager>().CreateRoom();
+            SceneManager.LoadScene("Tutorial");    
+        }
+        else
+        {
+            PhotonNetwork.OfflineMode = true;
+            FindObjectOfType<PlayFabManager>().OnConnectedToMaster();
+            FindObjectOfType<PlayFabManager>().CreateRoom();
+            SceneManager.LoadScene("Tutorial");
+        }
 //        if (isOpen)
 //        {
 //            TUTO.Play("Close");
