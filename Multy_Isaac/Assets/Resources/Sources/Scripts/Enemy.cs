@@ -80,12 +80,16 @@ public class Enemy : MonoBehaviour //PunCallbacks, IPunObservable
     Exclamation.Play("Close");
   }
 
+  private void Awake()
+  {
+    localX = transform.localScale.x * -1;
+  }
+
   private void Start()
   {
     rigid = GetComponent<Rigidbody2D>();
     flashwhite = GetComponent<FlashWhite>();
     anim = GetComponent<Animator>();
-    localX = transform.localScale.x * -1;
     seeker = GetComponent<Seeker>();
     temMgr = FindObjectOfType<TemManager>();
     zombie = GetComponent<Zombie>();

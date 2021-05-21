@@ -33,7 +33,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    public Animator rankingAnim;
    private bool isRankOpen = false;
    public GameObject[] rankings;
-   public string AppVersion;
    public string myID;
    public int SendRate;
    public int SerializationRate;
@@ -88,12 +87,9 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SendRate = SendRate;
       PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
-      VersionText.text = "Ver "+AppVersion;
-      
       if(SceneManager.GetActiveScene().name=="Main2")
          RoomRenewal();
    }
-
    public void Rank()
    {
       if (isRankOpen)
@@ -162,6 +158,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
    }
    void Start ()
    {
+      VersionText.text = "Ver " + playerCountSave.instance.AppVersion;
       DefaultPool pool = PhotonNetwork.PrefabPool as DefaultPool;
       if (pool != null && this.Prefabs != null)
       {
@@ -415,7 +412,7 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
 
    public void Connect() //연결
    {
-      PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = AppVersion;
+      PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = playerCountSave.instance.AppVersion;
       PhotonNetwork.AutomaticallySyncScene = true; //씬동기화
       PhotonNetwork.ConnectUsingSettings();
    }

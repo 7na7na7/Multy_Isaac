@@ -157,7 +157,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 ItemTypes[i].text = ItemTypesEng[i];
             }
         }
-        if (SceneManager.GetActiveScene().name != "Main")
+        if (SceneManager.GetActiveScene().name == "Play" ||SceneManager.GetActiveScene().name == "Tutorial" )
         {
             isPlay = true;
         }

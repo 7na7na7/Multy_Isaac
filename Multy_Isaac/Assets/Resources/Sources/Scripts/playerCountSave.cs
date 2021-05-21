@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class playerCountSave : MonoBehaviour
 {
+   public string AppVersion;
    private string killedZombie = "killedZombie";
    private int killedZombieCount;
    public int isKorLang = 0;

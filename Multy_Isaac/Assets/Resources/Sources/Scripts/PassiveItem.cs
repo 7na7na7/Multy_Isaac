@@ -62,7 +62,7 @@ public class PassiveItem : MonoBehaviour
     {
         if (index == 43) //기동신
         {
-            mobilePer += isOn ? 30 : -30;
+            mobilePer += isOn ? 50 : -50;
         }
         else if (index == 48) //양말
         {
