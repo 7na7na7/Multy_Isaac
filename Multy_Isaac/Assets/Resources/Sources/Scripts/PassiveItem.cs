@@ -98,7 +98,7 @@ public class PassiveItem : MonoBehaviour
         }
         else if (index == 119) //안전모
         {
-            offStat.MaxHpUp(isOn ? 8 : -8);
+            offStat.MaxHpUp(isOn ? 12 : -12);
         }
         else if (index == 120) //목발
         {
