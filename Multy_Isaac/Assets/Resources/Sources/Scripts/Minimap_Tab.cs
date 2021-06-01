@@ -10,9 +10,9 @@ public class Minimap_Tab : MonoBehaviour
         public float smallSize;
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Tab))
+            if(Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("MAP"))))
                 Open();
-            if(Input.GetKeyUp(KeyCode.Tab))
+            if(Input.GetKeyUp((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("MAP"))))
                 Close();
         }
 

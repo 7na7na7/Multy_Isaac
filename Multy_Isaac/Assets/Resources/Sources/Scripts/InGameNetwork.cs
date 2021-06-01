@@ -221,7 +221,12 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
             if(PhotonNetwork.OfflineMode)
                SceneManager.LoadScene("Main");
             else
-               SceneManager.LoadScene("Main2");
+            {
+               SceneManager.LoadScene("Main");
+               FindObjectOfType<PlayFabManager>().RoomRenewal();
+               FindObjectOfType<PlayFabManager>().main2();
+            }
+            
          }
          else
          {
@@ -236,7 +241,12 @@ public class InGameNetwork : MonoBehaviourPunCallbacks
          if(PhotonNetwork.OfflineMode)
             SceneManager.LoadScene("Main");
          else
-            SceneManager.LoadScene("Main2");
+         {
+            SceneManager.LoadScene("Main");
+            FindObjectOfType<PlayFabManager>().RoomRenewal();
+            FindObjectOfType<PlayFabManager>().main2();
+         }
+         
    }
    public override void OnDisconnected(DisconnectCause cause) //연결 끊어졌을 때
    {

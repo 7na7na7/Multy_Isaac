@@ -14,6 +14,10 @@ public class Setting : MonoBehaviour
     public GameObject FullScreenToggle;
     private playerCountSave p;
 
+    public void setkey(int n)
+    {
+        FindObjectOfType<KeySettings>().ChangeKey(n);
+    }
     public void SetSound()
     {
         p.SetSound(sound.value);

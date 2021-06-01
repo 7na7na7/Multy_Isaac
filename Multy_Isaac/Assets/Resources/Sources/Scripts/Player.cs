@@ -322,7 +322,7 @@ if(isPlay)
                             }
                         }
                         
-                        if (Input.GetKeyDown(KeyCode.R) && gun.activeSelf && leftBullet.isBulletMax()==false&& !isReLoading&&leftBullet.canReload()) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
+                        if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("RELOAD"))) && gun.activeSelf && leftBullet.isBulletMax()==false&& !isReLoading&&leftBullet.canReload()) //총 착용중이고, 총알이 꽉차지 않았고, R키를 눌렀을 시 재장전
                         {
                             if(PhotonNetwork.OfflineMode)
                                     ReLoad(leftBullet.reLoadTime);
@@ -843,8 +843,25 @@ if(isPlay)
     {
 //        if(Input.GetKeyDown(KeyCode.Return))
 //            rb.velocity=Vector2.zero;
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+
+        float moveX=0;
+        float moveY=0;
+if(Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("UP"))))
+{
+    moveY += 1f;
+}
+if(Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("DOWN"))))
+{
+    moveY -= 1f;
+}
+if(Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("LEFT"))))
+{
+    moveX -= 1f;
+}
+if(Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("RIGHT"))))
+{
+    moveX += 1f;
+}
             
         moveDirection = new Vector2(moveX, moveY).normalized; //대각선 이동 정규화
         if (canMove)

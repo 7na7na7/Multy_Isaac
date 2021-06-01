@@ -87,8 +87,6 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
       PhotonNetwork.SendRate = SendRate;
       PhotonNetwork.SerializationRate = SerializationRate;
       //동기화 빠르게
-      if(SceneManager.GetActiveScene().name=="Main2")
-         RoomRenewal();
    }
    public void Rank()
    {
@@ -570,7 +568,12 @@ public class PlayFabManager : MonoBehaviourPunCallbacks
           ChatRPC("<color=red>" + otherPlayer.NickName + " Outed</color>");
     }
 
-    void RoomRenewal()
+    public void main2()
+    {
+       LoginPanel.SetActive(false);
+       LobbyPanel.SetActive(true);
+    }
+    public void RoomRenewal()
     {
        Hashtable PlayerCustomProps = new Hashtable();
 

@@ -146,13 +146,13 @@ public class PlayerItem : MonoBehaviour
                         ItemBoxes[i].sprite = NullSprite;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space)) //우클릭으로 템조합하기
+                if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("COMBINE")))) //우클릭으로 템조합하기
                 {
                     invent.OpenIfCan(ItemList[selectedIndex]);
                 }
                 if (player.canMove) //움직일 수 있는 상태에서만 입력 가능
                 {
-                    if (Input.GetKeyDown(KeyCode.E)) //아이템 사용
+                    if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("USE")))) //아이템 사용
                     {
                         if (ItemList[selectedIndex].type == itemType.Usable)
                         {
@@ -360,7 +360,7 @@ public class PlayerItem : MonoBehaviour
                         }
                     }
 
-                    if (Input.GetKeyDown(KeyCode.Q) && player.isPlay) //템 버리기
+                    if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString("DROP"))) && player.isPlay) //템 버리기
                     {
                         DiscardItem(false);
                     }
