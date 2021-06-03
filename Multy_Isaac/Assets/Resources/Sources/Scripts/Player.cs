@@ -312,8 +312,6 @@ if(isPlay)
                                 {
                                     if (leftBullet.bulletCount>=currentWeapon.consumeBullet)
                                         ShotGun(false);
-                                    else
-                                        speed = savedSpeed;
                                 }
                                 else if (playerItem.ItemList[playerItem.selectedIndex].type == itemType.Melee)
                                 {
