@@ -404,7 +404,8 @@ public class UsableItem : MonoBehaviour
             case 140: //옥수수식빵
                 if (eat())
                 {
-                    offStat.HungryHeal(20);
+                    offStat.HungryHeal(12);
+                    statMgr.Heal(16);
                     setHappy();
                     return true;
                 }
@@ -450,6 +451,16 @@ public class UsableItem : MonoBehaviour
                     g.GetComponent<NailMarble>().ON();
                 }
                 return true;
+               case 166: //회오리감자
+                            if (eat())
+                            {
+                                offStat.HungryHeal(20);
+                                statMgr.Heal(10);
+                                setHappy();
+                                return true;
+                            }
+
+                            break;
         }
 
         return false;
