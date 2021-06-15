@@ -483,7 +483,7 @@ if(isPlay)
     {
         while (true)
         {
-            yield return new WaitForSeconds(passive.dakimakura>0 ? hpRegenDelay/passive.dakimakura+1:hpRegenDelay);
+            yield return new WaitForSeconds(passive.dakimakura>0 ? hpRegenDelay/(passive.dakimakura+1f):hpRegenDelay);
             if(offStat.getHungry()>hpRegenCut && !isDead) 
                 statMgr.Heal(1);
         }

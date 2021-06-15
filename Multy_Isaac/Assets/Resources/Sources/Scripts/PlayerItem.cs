@@ -187,10 +187,13 @@ public class PlayerItem : MonoBehaviour
                                 bool canGo = false;
                                 if (it.isShopTem)
                                 {
-                                    if (player.leftBullet.GetedBulletCount() >= it.price)
+                                    int price = it.price;
+                                    if (player.PlayerIndex == 8)
+                                        price = price / 2;
+                                    if (player.leftBullet.GetedBulletCount() >= price)
                                     {
                                         canGo = true;
-                                        player.leftBullet.GetBulletMinus(it.price);
+                                        player.leftBullet.GetBulletMinus(price);
                                         player.purchaseSound();
                                     }
                                     else
